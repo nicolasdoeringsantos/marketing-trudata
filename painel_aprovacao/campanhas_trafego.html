@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Campanhas de Tráfego Hiperlocal — Meta & Google Ads TruData</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { azure: '#0070f3', dark: '#0b0f19', card: '#131b2e', emerald: '#10b981', rose: '#f43f5e' }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased p-4 sm:p-6 lg:p-8 flex flex-col">
+
+  <!-- TOPO DE NAVEGAÇÃO -->
+  <header class="max-w-6xl mx-auto w-full flex items-center justify-between gap-4 mb-6 flex-wrap">
+    <div class="flex items-center gap-3">
+      <div class="h-10 w-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xl border border-blue-500/30">
+        🎯
+      </div>
+      <div>
+        <h1 class="text-xl font-black font-display text-white">Gerador de Campanhas de Tráfego Hiperlocal</h1>
+        <p class="text-xs text-slate-400">Anúncios de Alta Conversão para Meta Ads & Google Ads em Sarandi e Raio de 100km no RS</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="index.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        ← Hub Central
+      </a>
+      <a href="radar" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        📡 Radar de Clientes
+      </a>
+      <button onclick="copiarTudo()" class="text-xs px-3 py-2 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-500 transition">
+        📋 Copiar Estrutura Completa
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto w-full space-y-6 flex-1">
+
+    <!-- SELETOR DE CONFIGURAÇÃO DE CAMPANHA -->
+    <div class="glass rounded-2xl p-5 border border-slate-800 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 flex-wrap gap-2">
+        <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+          <span>⚙️</span> Parâmetros de Segmentação Geográfica e Nicho
+        </span>
+        <span class="text-xs text-emerald-400 font-mono font-bold">Público Estimado: 4.500 a 12.000 Lojistas</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nicho / Segmento do Comércio</label>
+          <select id="selNicho" onchange="atualizarCampanha()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white font-bold outline-none">
+            <option value="supermercados">Supermercados, Mercados e Mercearias</option>
+            <option value="autopecas">Autopeças, Motopeças e Oficinas</option>
+            <option value="construcao">Materiais de Construção & Ferragens</option>
+            <option value="moda">Varejo de Moda, Confecções e Calçados</option>
+            <option value="contabilidade">Escritórios de Contabilidade (Parceiros)</option>
+            <option value="migracao">Geral: Troca de Sistema Legado (Migração 48h)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Raio Geográfico de Veiculação</label>
+          <select id="selRaio" onchange="atualizarCampanha()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
+            <option value="30">Raio de 30km (Sarandi, Rondinha, Constantina, Barra Funda)</option>
+            <option value="100" selected>Raio de 100km (Passo Fundo, Carazinho, Palmeira, Marau)</option>
+            <option value="estado">Todo o Norte do Rio Grande do Sul</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Objetivo da Campanha</label>
+          <select id="selObjetivo" onchange="atualizarCampanha()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
+            <option value="whatsapp">Mensagens Diretas no WhatsApp (Mais Recomendado)</option>
+            <option value="lead">Geração de Cadastro / Visita Presencial</option>
+            <option value="trafego">Tráfego para Landing Page Especializada</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREVIEWS DOS ANÚNCIOS (META ADS FEED & STORIES + GOOGLE SEARCH) -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- ANÚNCIO 1: META ADS (FACEBOOK & INSTAGRAM) -->
+      <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-blue-400 font-black">f</span>
+            <span class="text-pink-400 font-black">📷</span>
+            <span class="text-xs font-bold text-white uppercase tracking-wider">Meta Ads (Feed & Reels)</span>
+          </div>
+          <button onclick="copiarTexto(document.getElementById('txtCopyMeta').innerText)" class="text-xs text-brand-azure hover:underline font-bold">
+            Copiar Texto
+          </button>
+        </div>
+
+        <!-- MOCKUP VISUAL META ADS -->
+        <div class="bg-slate-950 rounded-xl p-4 border border-slate-800/80 space-y-3 text-xs">
+          <div class="flex items-center gap-2.5">
+            <div class="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs">
+              TD
+            </div>
+            <div>
+              <div class="font-bold text-white leading-tight">TruData ERP · Hansen Software</div>
+              <div class="text-[10px] text-slate-400">Patrocinado · Sarandi e região · 🌐</div>
+            </div>
+          </div>
+
+          <div id="txtCopyMeta" class="text-slate-200 font-sans leading-relaxed whitespace-pre-wrap select-all"></div>
+
+          <!-- BANNER DO ANÚNCIO -->
+          <div id="boxCriativoMeta" class="rounded-lg p-5 bg-gradient-to-br from-blue-900/40 via-slate-900 to-slate-950 border border-slate-700/50 space-y-2">
+            <span class="text-[10px] uppercase font-bold text-emerald-400 block tracking-wider" id="txtTagCriativo">
+              ✓ SUPORTE 100% HUMANO EM SARANDI/RS
+            </span>
+            <div class="text-base font-black text-white font-display" id="txtTituloCriativo">
+              Fim das Filas no Caixa de Sábado
+            </div>
+            <p class="text-[11px] text-slate-300" id="txtSubCriativo">
+              Sistema com contingência offline blindada: emite NFC-e em 3.1s mesmo sem internet.
+            </p>
+          </div>
+
+          <!-- BOTÃO DO ANÚNCIO -->
+          <div class="p-3 bg-slate-900 rounded-lg flex items-center justify-between border border-slate-800">
+            <div>
+              <span class="text-[9px] text-slate-400 uppercase block">tru-data.com.br</span>
+              <span class="font-bold text-white text-xs" id="txtCtaTituloMeta">Agende uma Demonstração Sem Custo</span>
+            </div>
+            <span class="px-3 py-1.5 bg-emerald-600 text-white rounded font-bold text-xs">
+              Enviar Mensagem
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANÚNCIO 2: GOOGLE SEARCH ADS -->
+      <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-amber-400 font-black">G</span>
+            <span class="text-xs font-bold text-white uppercase tracking-wider">Google Search Ads (Palavras-Chave de Fundo)</span>
+          </div>
+          <button onclick="copiarTexto(document.getElementById('boxGoogleAds').innerText)" class="text-xs text-brand-azure hover:underline font-bold">
+            Copiar Texto
+          </button>
+        </div>
+
+        <!-- MOCKUP GOOGLE SEARCH -->
+        <div id="boxGoogleAds" class="bg-slate-950 rounded-xl p-4 border border-slate-800/80 space-y-3 text-xs">
+          <div>
+            <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
+              <span class="font-bold text-white">Anúncio</span> · 
+              <span class="text-slate-300">https://www.trudata.com.br/sistema-erp</span>
+            </div>
+            <a href="#" class="text-base font-bold text-blue-400 hover:underline block mt-1" id="txtGoogleHeadline">
+              Sistema ERP Comercial em Sarandi | Suporte Presencial em 2h
+            </a>
+            <p class="text-slate-300 text-xs mt-1 leading-relaxed" id="txtGoogleDesc">
+              Troque de sistema em 48h sem perder cadastros. Integração com balanças Toledo, leitor 2D e emissão de NFC-e sem internet. Fale com a equipe Hansen Software!
+            </p>
+          </div>
+
+          <!-- EXTENSÕES DE ANÚNCIO (SITELINKS) -->
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800 text-[11px]">
+            <div class="p-2 rounded bg-slate-900 border border-slate-800">
+              <span class="font-bold text-blue-400 block">Migração em 48 Horas</span>
+              <span class="text-slate-400 text-[10px]">Importamos dados do sistema antigo sem custo.</span>
+            </div>
+            <div class="p-2 rounded bg-slate-900 border border-slate-800">
+              <span class="font-bold text-blue-400 block">Atendimento Presencial</span>
+              <span class="text-slate-400 text-[10px]">Técnicos em Sarandi e cidades vizinhas.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PALAVRAS-CHAVE RECOMENDADAS -->
+        <div class="space-y-1 text-xs">
+          <span class="font-bold text-slate-400 uppercase text-[10px]">Palavras-Chave de Alta Intenção (Fundo de Funil):</span>
+          <div id="boxPalavrasChave" class="p-3 bg-slate-950 rounded-lg font-mono text-[11px] text-emerald-400 border border-slate-800 leading-relaxed select-all">
+            "sistema erp sarandi", "sistema para mercado passo fundo", "sistema emissor nfce rs", "trocar de sistema comercial", "software frente de caixa balança toledo"
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GERADOR DE LINK COM UTM TRACKING -->
+    <div class="glass rounded-2xl p-6 border border-slate-800 space-y-3">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+          <span>🔗</span> Link Final Rastreável com Parâmetros UTM
+        </h3>
+        <button onclick="copiarTexto(document.getElementById('inLinkUtm').value)" class="text-xs px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-bold transition">
+          Copiar Link com UTM
+        </button>
+      </div>
+      <input type="text" id="inLinkUtm" readonly class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs font-mono text-emerald-400 outline-none select-all">
+      <p class="text-[11px] text-slate-400">
+        Este link identifica com precisão qual canal, nicho e cidade gerou o clique para mensurar o CAC no painel de Analytics.
+      </p>
+    </div>
+
+  </main>
+
+  <script>
+    const campanhasPorNicho = {
+      supermercados: {
+        metaCopy: `Empresário de Sarandi e região Norte do RS: o seu caixa de mercado trava bem na hora do rush de sábado?\n\nChega de filas intermináveis e dor de cabeça com sistemas que param quando a internet oscila. O TruData ERP foi feito para o comércio real:\n\n✓ Integração nativa com Balanças Toledo (MGV6) e Filizola\n✓ Emissão de NFC-e em 3.1 segundos por cliente\n✓ Contingência Offline Blindada: continua vendendo normalmente sem internet\n✓ Suporte presencial de verdade com equipe aqui de Sarandi/RS\n\nMigramos todos os seus cadastros de produtos e clientes em até 48 horas sem parar sua loja.\n\n👇 Toque no botão e receba um diagnóstico gratuito da sua frente de caixa!`,
+        tag: '✓ HOMOLOGADO BALANÇAS TOLEDO MGV6',
+        tituloCriativo: 'Fim das Filas no Caixa do Seu Supermercado',
+        subCriativo: 'Passagem ultrarrápida, pesagem automática e emissão sem depender de internet.',
+        ctaMeta: 'Diagnóstico Gratuito de Frente de Caixa',
+        googleHeadline: 'Sistema para Supermercados no RS | Balança Toledo & Frente Ágil',
+        googleDesc: 'Fim das filas no caixa. Sistema homologado Toledo MGV6 e Filizola. Emissão de NFC-e em 3.1s mesmo sem internet. Suporte presencial em Sarandi. Agende uma visita!',
+        keywords: '"sistema para supermercado sarandi", "sistema supermercado passo fundo", "software pdv balança toledo", "frente de caixa rápida mercado", "sistema mercearia rs"'
+      },
+      autopecas: {
+        metaCopy: `Quantos minutos o seu vendedor perde procurando uma peça no sistema enquanto o cliente espera no balcão?\n\nPara autopeças e motopeças no RS, velocidade e precisão de estoque são tudo. O TruData ERP resolve o caos:\n\n✓ Localização instantânea por código original de montadora e código de barras\n✓ Controle inteligente de estoque com curva ABC e alertas de reposição\n✓ Emissão de NF-e e NFC-e com NCMs e regras de ICMS-ST 100% corretas\n✓ Atendimento 100% humano no telefone em menos de 2 minutos\n\nDescubra por que dezenas de lojas de peças da região já confiam na Hansen Software há 25 anos.\n\n👇 Fale com nosso consultor no WhatsApp e agende uma demonstração!`,
+        tag: '✓ LOCALIZAÇÃO POR CÓDIGO DE MONTADORA',
+        tituloCriativo: 'Agilidade Total no Balcão de Autopeças',
+        subCriativo: 'Estoque rigoroso, NCMs automáticos e fim do sumiço de peças.',
+        ctaMeta: 'Solicitar Demonstração para Autopeças',
+        googleHeadline: 'Sistema ERP para Autopeças no RS | Busca por Código de Montadora',
+        googleDesc: 'Controle de milhares de itens com facilidade. Encontre a peça pelo código original em 1 segundo. NCM e ICMS-ST automáticos. Equipe local em Sarandi/RS. Saiba mais!',
+        keywords: '"sistema para autopecas sarandi", "software loja de pecas rs", "sistema autopeças passo fundo", "gestao de estoque autopecas", "emissor nfe auto peças"'
+      },
+      construcao: {
+        metaCopy: `Materiais de construção e ferragens exigem controle de estoque pesado: vendas no balcão, entregas parceladas e orçamentos rápidos.\n\nO TruData ERP simplifica a rotina da sua loja:\n\n✓ Orçamentos rápidos enviados no WhatsApp do pedreiro ou cliente com 1 clique\n✓ Controle de entrega futura e baixa de estoque somente no despacho\n✓ Emissão fiscal descomplicada e integração com maquininhas de cartão\n✓ Equipe de suporte presencial no Norte do RS em até 2 horas\n\nModernize a gestão da sua loja com quem entende o comércio do interior.\n\n👇 Toque abaixo e converse com nosso especialista!`,
+        tag: '✓ CONTROLE DE ENTREGAS & ORÇAMENTOS RÁPIDOS',
+        tituloCriativo: 'Gestão Descomplicada para Materiais de Construção',
+        subCriativo: 'Venda rápida no balcão, entregas parciais e orçamentos direto no WhatsApp.',
+        ctaMeta: 'Testar TruData em Materiais de Construção',
+        googleHeadline: 'Sistema para Materiais de Construção | Orçamentos e Entregas RS',
+        googleDesc: 'Controle de balcão, orçamentos no WhatsApp e gestão de entregas. Sistema ERP com suporte presencial em Sarandi e região. Agende uma demonstração sem compromisso!',
+        keywords: '"sistema para materiais de construcao", "software ferragens sarandi", "sistema loja ferragens passo fundo", "controle estoque materiais construcao rs"'
+      },
+      moda: {
+        metaCopy: `Controlar grade de cores, tamanhos e trocas de roupas ou calçados não precisa ser um pesadelo.\n\nO TruData ERP oferece a solução perfeita para lojas de moda e confecções no RS:\n\n✓ Cadastro simplificado por grade (tamanho/cor) e etiquetas com código de barras\n✓ Crediário próprio com controle de cobrança automática no Pix\n✓ Frente de caixa elegante e emissão fiscal imediata\n✓ Suporte atencioso de gente da região, sem robôs\n\nVeja como simplificar sua loja hoje mesmo.\n\n👇 Toque no botão e ganhe uma demonstração sem compromisso!`,
+        tag: '✓ GRADE INTELIGENTE DE TAMANHOS & CORES',
+        tituloCriativo: 'Sua Loja de Roupas e Calçados Sob Controle',
+        subCriativo: 'Grade ágil, crediário próprio com lembrete Pix e frente de caixa descomplicada.',
+        ctaMeta: 'Ver TruData para Lojas de Moda',
+        googleHeadline: 'Sistema para Lojas de Roupas e Calçados | Grade e Crediário RS',
+        googleDesc: 'Controle de grade por cor e tamanho. Crediário próprio e emissão rápida de NFC-e. Hansen Software há 25 anos no Norte do RS. Solicite uma visita comercial!',
+        keywords: '"sistema loja de roupas sarandi", "software loja calcados rs", "sistema confecções passo fundo", "crediario loja de roupas sistema"'
+      },
+      contabilidade: {
+        metaCopy: `Atenção contadores de Sarandi e região Norte/RS: cansado de virar noites corrigindo XMLs corrompidos e notas fiscais com NCM errado de clientes?\n\nO TruData ERP é o maior aliado do seu escritório contábil:\n\n✓ Fechamento de mês em 1 clique: exportação limpa do SPED Fiscal e Sintegra\n✓ Bloqueio preventivo de notas com tributação ou NCMs inválidos no caixa\n✓ Conformidade antecipada com as diretrizes da Reforma Tributária 2026\n✓ Suporte técnico direto com o lojista, poupando o tempo da sua equipe\n\nFaça uma parceria técnica com a Hansen Software e garanta tranquilidade na sua rotina fiscal.\n\n👇 Entre em contato para conhecer nosso canal contábil exclusivo!`,
+        tag: '✓ SPED FISCAL E SINTEGRA 100% VALIDADOS',
+        tituloCriativo: 'Elimine o Retrabalho Fiscal no Seu Escritório Contábil',
+        subCriativo: 'Arquivos SPED sem erro, suporte presencial aos clientes e conformidade 2026.',
+        ctaMeta: 'Conhecer Canal de Parceria Contábil',
+        googleHeadline: 'Sistema ERP Integrado com a Contabilidade | SPED Sem Erros RS',
+        googleDesc: 'Acabe com o retrabalho de notas fiscais corrompidas. O TruData ERP gera arquivos SPED e Sintegra 100% validados pela SEFAZ-RS. Conheça as vantagens para contadores!',
+        keywords: '"sistema compativel sped fiscal", "software erp contabilidade rs", "sistema comercial homologado sefaz rs", "parceria erp escritorios contabeis"'
+      },
+      migracao: {
+        metaCopy: `O suporte do seu sistema atual não atende o telefone ou você está cansado de falar com robôs e chatbots?\n\nTroque para o TruData ERP em até 48 horas com Migração Blindada:\n\n✓ Migração Gratuita de Cadastros: não perca seus clientes nem produtos\n✓ Atendimento 100% Humano: equipe técnica em Sarandi/RS no telefone em menos de 2 minutos\n✓ SLA Presencial de 2 horas em caso de falha crítica na região\n✓ Sem surpresas nem reajustes abusivos na mensalidade\n\nMais de 300 empresas no Rio Grande do Sul já fizeram essa escolha.\n\n👇 Toque no botão e fale com quem está perto de você!`,
+        tag: '✓ MIGRAÇÃO EM 48H SEM PARAR A LOJA',
+        tituloCriativo: 'Cansado do Suporte Distante do Seu Sistema?',
+        subCriativo: 'Migração blindada sem perda de dados e equipe técnica presencial em Sarandi.',
+        ctaMeta: 'Fazer Migração Sem Custo de Adesão',
+        googleHeadline: 'Troque de Sistema Comercial em 48h | Suporte Presencial RS',
+        googleDesc: 'Migração blindada sem parar sua loja. Importamos clientes e estoque do seu sistema antigo de graça. Equipe humana em Sarandi e região. Fale conosco!',
+        keywords: '"trocar de sistema comercial", "melhor sistema erp comercio rs", "sistema frente de caixa sarandi", "suporte presencial erp rs", "sistema comercial sem internet"'
+      }
+    };
+
+    function atualizarCampanha() {
+      const nicho = document.getElementById('selNicho').value;
+      const raio = document.getElementById('selRaio').value;
+      const obj = document.getElementById('selObjetivo').value;
+
+      const dados = campanhasPorNicho[nicho] || campanhasPorNicho.supermercados;
+
+      document.getElementById('txtCopyMeta').innerText = dados.metaCopy;
+      document.getElementById('txtTagCriativo').innerText = dados.tag;
+      document.getElementById('txtTituloCriativo').innerText = dados.tituloCriativo;
+      document.getElementById('txtSubCriativo').innerText = dados.subCriativo;
+      document.getElementById('txtCtaTituloMeta').innerText = dados.ctaMeta;
+
+      document.getElementById('txtGoogleHeadline').innerText = dados.googleHeadline;
+      document.getElementById('txtGoogleDesc').innerText = dados.googleDesc;
+      document.getElementById('boxPalavrasChave').innerText = dados.keywords;
+
+      // Montar Link UTM
+      const baseUrl = 'https://www.trudata.com.br';
+      const path = nicho === 'supermercados' ? '/mercados' : (nicho === 'contabilidade' ? '/dossie-contador' : '/');
+      const link = `${baseUrl}${path}?utm_source=meta_ads&utm_medium=cpc&utm_campaign=${nicho}_raio${raio}km&utm_content=${obj}`;
+      document.getElementById('inLinkUtm').value = link;
+    }
+
+    function copiarTexto(texto) {
+      navigator.clipboard.writeText(texto);
+      alert('Texto copiado com sucesso para a área de transferência!');
+    }
+
+    function copiarTudo() {
+      const copy = document.getElementById('txtCopyMeta').innerText;
+      const link = document.getElementById('inLinkUtm').value;
+      const textTotal = `=== ESTRUTURA DE ANÚNCIO TRUDATA ADS ===\n\n${copy}\n\nLink do Anúncio: ${link}`;
+      copiarTexto(textTotal);
+    }
+
+    atualizarCampanha();
+  </script>
+</body>
+</html>

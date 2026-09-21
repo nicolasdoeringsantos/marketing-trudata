@@ -1,0 +1,47 @@
+{
+  "name": "TruData ERP — Cockpit Executivo de Vendas & Operações",
+  "short_name": "TruData Cockpit",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#070b14",
+  "theme_color": "#009fe3",
+  "orientation": "any",
+  "description": "Suíte Comercial 360° da TruData ERP (Hansen Software - Sarandi/RS) com suporte a modo offline na estrada.",
+  "icons": [
+    {
+      "src": "/trudata_suporte_sarandi_1789497393778.jpg",
+      "sizes": "192x192 512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Check-up 15 Min",
+      "short_name": "Check-up",
+      "description": "Diagnóstico de Frente de Caixa e Laudo A4",
+      "url": "/checkup_loja.html",
+      "icons": [{ "src": "/trudata_suporte_sarandi_1789497393778.jpg", "sizes": "192x192" }]
+    },
+    {
+      "name": "Fechador de Bolso",
+      "short_name": "Fast-Close",
+      "description": "Fechador Mobile com Pix Sicredi e Assinatura Touch",
+      "url": "/fechamento_rapido.html",
+      "icons": [{ "src": "/trudata_suporte_sarandi_1789497393778.jpg", "sizes": "192x192" }]
+    },
+    {
+      "name": "Prova Social RS",
+      "short_name": "Prova Social",
+      "description": "Mural de Áudios e Cases de Sucesso do RS",
+      "url": "/prova_social_regional.html",
+      "icons": [{ "src": "/trudata_suporte_sarandi_1789497393778.jpg", "sizes": "192x192" }]
+    },
+    {
+      "name": "CRM Pipeline",
+      "short_name": "CRM",
+      "description": "Kanban de Prospecção e Vendas",
+      "url": "/crm.html",
+      "icons": [{ "src": "/trudata_suporte_sarandi_1789497393778.jpg", "sizes": "192x192" }]
+    }
+  ]
+}

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termo de Parceria Técnica & Comercial — TruData ERP & Contabilidade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cinzel:wght@600;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #070b14;
+      --card-bg: #0f172a;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #009fe3;
+      --primary-glow: rgba(0, 159, 227, 0.25);
+      --purple: #a855f7;
+      --emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .brand-title span {
+      color: var(--purple);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: 0.6rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .btn-secondary:hover {
+      background: #334155;
+      color: #fff;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff;
+    }
+
+    /* GRID WORKSPACE */
+    .workspace {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 1.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* FORM CARD */
+    .form-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .panel-header h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-input, .form-select {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 0.55rem;
+      padding: 0.65rem 0.85rem;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+    }
+
+    .badge-info-box {
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      border-radius: 0.75rem;
+      padding: 0.85rem 1rem;
+      font-size: 0.78rem;
+      color: #e9d5ff;
+      line-height: 1.45;
+    }
+
+    /* DOCUMENTO A4 PARA IMPRESSÃO */
+    .sheet-wrapper {
+      display: flex;
+      justify-content: center;
+      background: #1e293b;
+      padding: 2rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid var(--card-border);
+      overflow-x: auto;
+    }
+
+    .sheet-a4 {
+      width: 210mm;
+      min-height: 297mm;
+      background: #ffffff;
+      color: #1a202c;
+      padding: 18mm 18mm 16mm 18mm;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-family: 'Merriweather', serif;
+    }
+
+    /* CABEÇALHO DO TERMO */
+    .sheet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #0f172a;
+      margin-bottom: 16px;
+    }
+
+    .sheet-brand-left {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .sheet-brand-title {
+      font-size: 19px;
+      font-weight: 900;
+      color: #0b1329;
+      letter-spacing: -0.5px;
+    }
+
+    .sheet-brand-title span {
+      color: #009fe3;
+    }
+
+    .sheet-brand-sub {
+      font-size: 9.5px;
+      color: #475569;
+      font-weight: 600;
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sheet-stamp-right {
+      text-align: right;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .stamp-pill {
+      display: inline-block;
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sheet-doc-title {
+      text-align: center;
+      margin: 14px 0 18px 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .sheet-doc-title h2 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sheet-doc-title p {
+      font-size: 10px;
+      color: #64748b;
+      margin-top: 3px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+    }
+
+    /* PREÂMBULO E QUALIFICAÇÃO */
+    .parties-box {
+      font-size: 10.5px;
+      line-height: 1.55;
+      text-align: justify;
+      color: #1e293b;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+    }
+
+    .parties-box strong {
+      color: #0f172a;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* CLÁUSULAS */
+    .clauses-body {
+      font-size: 10.5px;
+      line-height: 1.55;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .clause-item h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 3px;
+    }
+
+    .clause-item p {
+      text-align: justify;
+      color: #334155;
+    }
+
+    .clause-highlight {
+      background: #eff6ff;
+      border-left: 3px solid #0284c7;
+      padding: 6px 10px;
+      margin-top: 4px;
+      border-radius: 0 4px 4px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: #0369a1;
+    }
+
+    /* ÁREA DE ASSINATURAS */
+    .signatures-section {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid #e2e8f0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .sig-date {
+      text-align: center;
+      font-size: 10px;
+      color: #475569;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    .sig-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      text-align: center;
+    }
+
+    .sig-line {
+      border-top: 1px solid #0f172a;
+      padding-top: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .sig-sub {
+      font-size: 9px;
+      color: #64748b;
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    /* RODAPÉ DO DOCUMENTO */
+    .sheet-footer {
+      border-top: 1px solid #cbd5e1;
+      padding-top: 8px;
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8px;
+      color: #94a3b8;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ESTILOS ESPECÍFICOS DE IMPRESSÃO */
+    @media print {
+      body {
+        background: transparent !important;
+        padding: 0 !important;
+      }
+      .top-bar, .form-panel, .sheet-wrapper {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      .top-bar, .form-panel {
+        display: none !important;
+      }
+      .sheet-wrapper {
+        margin: 0 !important;
+        width: 100% !important;
+      }
+      .sheet-a4 {
+        box-shadow: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        min-height: 100% !important;
+        page-break-after: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- BARRA SUPERIOR -->
+    <header class="top-bar">
+      <div class="brand-title">
+        <span>🏛️</span>
+        <div>
+          TRUDATA <span>PARCERIA CONTÁBIL</span>
+          <p style="font-size:0.75rem; color:var(--text-muted); font-weight:400;">
+            Gerador de Termo de Parceria & Homologação Técnica A4
+          </p>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <a href="contadores.html" class="btn btn-secondary">← Voltar aos Contadores</a>
+        <a href="crm.html" class="btn btn-secondary">💼 CRM Pipeline</a>
+        <button onclick="copiarMensagemWhatsApp()" class="btn btn-secondary" title="Copiar mensagem formal para envio no WhatsApp">
+          💬 Copiar Texto WhatsApp
+        </button>
+        <button onclick="enviarWhatsApp()" class="btn btn-emerald" id="btn-wpp-direct">
+          🚀 Abrir WhatsApp do Sócio
+        </button>
+        <button onclick="window.print()" class="btn btn-primary">
+          🖨️ Imprimir / Salvar em PDF
+        </button>
+      </div>
+    </header>
+
+    <!-- WORKSPACE -->
+    <div class="workspace">
+
+      <!-- PAINEL DE CONTROLE / DADOS DO ESCRITÓRIO -->
+      <div class="form-panel">
+        <div class="panel-header">
+          <h3>⚙️ Dados do Escritório Parceiro</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);">
+            Selecione uma contabilidade auditada ou edite os dados
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Selecionar Contabilidade Auditada (150km)</label>
+          <select id="sel-escritorios" class="form-select" onchange="selecionarEscritorioPorId(this.value)">
+            <option value="">-- Carregando escritórios da base... --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Nome Fantasia do Escritório</label>
+          <input type="text" id="ipt-nome" class="form-input" oninput="atualizarDocumento()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Razão Social Oficial</label>
+          <input type="text" id="ipt-razao" class="form-input" oninput="atualizarDocumento()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">CNPJ (Receita Federal)</label>
+          <input type="text" id="ipt-cnpj" class="form-input" oninput="atualizarDocumento()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Endereço Completo</label>
+          <input type="text" id="ipt-endereco" class="form-input" oninput="atualizarDocumento()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Cidade / UF</label>
+          <input type="text" id="ipt-cidade" class="form-input" oninput="atualizarDocumento()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Sócio / Contabilista Responsável (Decisor)</label>
+          <input type="text" id="ipt-decisor" class="form-input" oninput="atualizarDocumento()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Telefone / WhatsApp</label>
+          <input type="text" id="ipt-telefone" class="form-input" oninput="atualizarDocumento()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Comissão Recorrente Acordada</label>
+          <select id="sel-comissao" class="form-select" onchange="atualizarDocumento()">
+            <option value="15%" selected>15% Mensal Recorrente (Padrão Ouro)</option>
+            <option value="20%">20% Mensal Recorrente (Grandes Carteiras > 100 clientes)</option>
+            <option value="10%">10% Mensal Recorrente</option>
+          </select>
+        </div>
+
+        <div class="badge-info-box">
+          ✨ <strong>Vantagens para o Escritório:</strong>
+          <ul style="margin-left: 1.1rem; margin-top: 0.3rem;">
+            <li>Licença 100% gratuita do Modo Escritório TruData;</li>
+            <li>Eliminação de cobrança manual de XMLs/SPED;</li>
+            <li>Canal de suporte técnico prioritário por WhatsApp;</li>
+            <li>Renda recorrente passiva para a contabilidade.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FOLHA A4 TIMBRADA DO TERMO -->
+      <div class="sheet-wrapper">
+        <div class="sheet-a4" id="sheet-termo">
+
+          <div>
+            <!-- CABEÇALHO -->
+            <div class="sheet-header">
+              <div class="sheet-brand-left">
+                <div class="sheet-brand-title">TRU<span>DATA</span> ERP</div>
+                <div class="sheet-brand-sub">Hansen Software LTDA · Sarandi - RS · CNPJ 00.000.000/0001-00</div>
+              </div>
+              <div class="sheet-stamp-right">
+                <span class="stamp-pill">Homologação & Parceria</span>
+                <div style="font-size:9px; color:#64748b; margin-top:3px;" id="doc-ref-code">REF: TRU-PARC-2026/01</div>
+              </div>
+            </div>
+
+            <!-- TÍTULO -->
+            <div class="sheet-doc-title">
+              <h2>Termo de Parceria Estratégica & Cooperação Técnica</h2>
+              <p>Programa de Integração Fiscal e Alavancagem para Escritórios de Contabilidade</p>
+            </div>
+
+            <!-- QUALIFICAÇÃO DAS PARTES -->
+            <div class="parties-box">
+              De um lado, <strong>HANSEN SOFTWARE LTDA (TRUDATA ERP)</strong>, com matriz em Sarandi - RS, desenvolvedora de soluções de gestão fiscal e empresarial. De outro lado, como <strong>ESCRITÓRIO CONTÁBIL PARCEIRO</strong>:
+              <br><br>
+              <strong>Razão Social:</strong> <span id="lbl-razao">Adcon Auditoria e Contabilidade LTDA</span><br>
+              <strong>Nome Fantasia:</strong> <span id="lbl-nome">Adcon Auditoria e Contabilidade</span> · <strong>CNPJ:</strong> <span id="lbl-cnpj">02.457.435/0001-95</span><br>
+              <strong>Endereço:</strong> <span id="lbl-endereco">Av. Flores da Cunha, 1200</span> — <span id="lbl-cidade">Carazinho - RS</span><br>
+              <strong>Responsável Técnico / Decisor:</strong> <span id="lbl-decisor">Marcio Schussler</span>
+            </div>
+
+            <!-- CLÁUSULAS FORMALIZADAS -->
+            <div class="clauses-body">
+              <div class="clause-item">
+                <h4>Cláusula 1ª — Do Objeto e Finalidade</h4>
+                <p>
+                  O presente termo formaliza a cooperação técnica e comercial entre a <strong>TRUDATA ERP</strong> e o <strong>ESCRITÓRIO CONTÁBIL PARCEIRO</strong>, visando eliminar o retrabalho na apuração fiscal, padronizar a escrituração e estreitar a integração contábil dos contribuintes e lojistas atendidos na região.
+                </p>
+              </div>
+
+              <div class="clause-item">
+                <h4>Cláusula 2ª — Benefícios Exclusivos do Escritório Parceiro</h4>
+                <p>
+                  A TRUDATA concede, sem qualquer custo de aquisição ou mensalidade:
+                  (a) <strong>Acesso irrestrito ao Modo Escritório Multiempresa</strong> no ERP Web, permitindo ao analista contábil navegar entre todas as empresas clientes com 2 cliques;
+                  (b) <strong>Entrega automatizada todo dia 1º</strong> de todos os arquivos fiscais (XMLs de NF-e, NFC-e, NFS-e e SPED Fiscal EFD ICMS/IPI) em formato limpo, pré-validado e auditado;
+                  (c) <strong>Módulo de Devolução Fiscal Automática</strong> por espelhamento instantâneo de XMLs de compra e venda.
+                </p>
+              </div>
+
+              <div class="clause-item">
+                <h4>Cláusula 3ª — Comissionamento e Bonificação Recorrente</h4>
+                <p>
+                  A TRUDATA repassará ao Escritório Parceiro o percentual de <strong id="lbl-comissao-val">15% (quinze por cento)</strong> sobre o valor líquido das mensalidades recebidas de cada novo cliente indicado pelo escritório ou que venha a adotar o ecossistema TruData ERP.
+                </p>
+                <div class="clause-highlight">
+                  💡 Bonificação vitalícia enquanto a empresa indicada mantiver o contrato ativo com a TruData ERP, repassada via PIX/TED mensalmente.
+                </div>
+              </div>
+
+              <div class="clause-item">
+                <h4>Cláusula 4ª — Suporte Técnico e Fiscal de Alta Prioridade (SLA)</h4>
+                <p>
+                  Os analistas do Escritório Parceiro disporão de <strong>Linha Direta de Suporte Fiscal por WhatsApp</strong> com técnicos seniores da matriz em Sarandi - RS, assegurando esclarecimento ágil de parametrizações de CST, CFOP, regimes tributários e contingências da SEFAZ-RS.
+                </p>
+              </div>
+
+              <div class="clause-item">
+                <h4>Cláusula 5ª — Confidencialidade e Proteção de Dados (LGPD)</h4>
+                <p>
+                  As partes comprometem-se à mais estrita confidencialidade sobre dados econômicos, tributários e cadastrais de clientes comuns, em conformidade com a Lei Federal nº 13.709/2018 (LGPD).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ASSINATURAS -->
+          <div class="signatures-section">
+            <div class="sig-date" id="lbl-data-extenso">
+              Sarandi - RS, 21 de setembro de 2026.
+            </div>
+
+            <div class="sig-grid">
+              <div>
+                <div class="sig-line">HANSEN SOFTWARE LTDA (TRUDATA ERP)</div>
+                <div class="sig-sub">Diretoria de Expansão & Soluções Fiscais</div>
+              </div>
+              <div>
+                <div class="sig-line" id="sig-escritorio-nome">ADCON AUDITORIA E CONTABILIDADE</div>
+                <div class="sig-sub" id="sig-decisor-nome">Marcio Schussler · Contador Responsável</div>
+              </div>
+            </div>
+
+            <div class="sheet-footer">
+              <span>TruData ERP — Sistema de Gestão Empresarial Web & Emissor Fiscal Homologado SEFAZ-RS</span>
+              <span>Documento emitido digitalmente · Sarandi / RS</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    let ESCRITORIOS_BASE = [];
+
+    // Formata a data atual por extenso em português
+    function obterDataExtenso(cidade) {
+      const hoje = new Date();
+      const meses = [
+        "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+        "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+      ];
+      const cid = cidade || "Sarandi";
+      return `${cid} - RS, ${hoje.getDate()} de ${meses[hoje.getMonth()]} de ${hoje.getFullYear()}.`;
+    }
+
+    // Carrega contabilidades da API do servidor
+    async function inicializar() {
+      try {
+        const res = await fetch('/api/prospectar?raio=150&segmento=Escritórios%20de%20Contabilidade');
+        if (res.ok) {
+          const data = await res.json();
+          ESCRITORIOS_BASE = data.clientes || [];
+          popularSelectEscritorios(ESCRITORIOS_BASE);
+          
+          // Verifica se há parâmetros na URL
+          const params = new URLSearchParams(window.location.search);
+          const nomeParam = params.get('nome');
+          const cnpjParam = params.get('cnpj');
+
+          if (cnpjParam || nomeParam) {
+            preencherCamposPorParams(params);
+          } else if (ESCRITORIOS_BASE.length > 0) {
+            selecionarEscritorioPorId(ESCRITORIOS_BASE[0].id || 0);
+          }
+        }
+      } catch (err) {
+        console.error("Erro ao carregar contabilidades:", err);
+      }
+    }
+
+    function popularSelectEscritorios(lista) {
+      const sel = document.getElementById('sel-escritorios');
+      sel.innerHTML = '<option value="">-- Selecione uma contabilidade da região --</option>';
+      
+      lista.forEach((item, index) => {
+        const opt = document.createElement('option');
+        opt.value = item.id || index;
+        opt.innerText = `${item.nome} (${item.cidade} - RS)`;
+        sel.appendChild(opt);
+      });
+    }
+
+    function selecionarEscritorioPorId(id) {
+      const esc = ESCRITORIOS_BASE.find(e => (e.id && e.id == id) || e.cnpj == id);
+      if (!esc) return;
+
+      document.getElementById('ipt-nome').value = esc.nome || '';
+      document.getElementById('ipt-razao').value = esc.razao_social || esc.nome || '';
+      document.getElementById('ipt-cnpj').value = esc.cnpj || '';
+      document.getElementById('ipt-endereco').value = `${esc.endereco || ''}${esc.bairro ? ', ' + esc.bairro : ''}`;
+      document.getElementById('ipt-cidade').value = esc.cidade ? `${esc.cidade} - RS` : 'Sarandi - RS';
+      document.getElementById('ipt-decisor').value = esc.decisor || 'Diretoria Contábil';
+      document.getElementById('ipt-telefone').value = esc.whatsapp || esc.telefone || '';
+
+      atualizarDocumento();
+    }
+
+    function preencherCamposPorParams(params) {
+      document.getElementById('ipt-nome').value = params.get('nome') || '';
+      document.getElementById('ipt-razao').value = params.get('razao') || params.get('nome') || '';
+      document.getElementById('ipt-cnpj').value = params.get('cnpj') || '';
+      document.getElementById('ipt-endereco').value = params.get('endereco') || '';
+      document.getElementById('ipt-cidade').value = params.get('cidade') || 'Sarandi - RS';
+      document.getElementById('ipt-decisor').value = params.get('decisor') || 'Diretoria Contábil';
+      document.getElementById('ipt-telefone').value = params.get('telefone') || '';
+
+      atualizarDocumento();
+    }
+
+    function atualizarDocumento() {
+      const nome = document.getElementById('ipt-nome').value || 'Nome do Escritório';
+      const razao = document.getElementById('ipt-razao').value || nome;
+      const cnpj = document.getElementById('ipt-cnpj').value || '00.000.000/0001-00';
+      const endereco = document.getElementById('ipt-endereco').value || 'Endereço';
+      const cidade = document.getElementById('ipt-cidade').value || 'Sarandi - RS';
+      const decisor = document.getElementById('ipt-decisor').value || 'Diretoria';
+      const comissao = document.getElementById('sel-comissao').value;
+      const telefone = document.getElementById('ipt-telefone').value;
+
+      document.getElementById('lbl-nome').innerText = nome;
+      document.getElementById('lbl-razao').innerText = razao;
+      document.getElementById('lbl-cnpj').innerText = cnpj;
+      document.getElementById('lbl-endereco').innerText = endereco;
+      document.getElementById('lbl-cidade').innerText = cidade;
+      document.getElementById('lbl-decisor').innerText = decisor;
+      document.getElementById('lbl-comissao-val').innerText = `${comissao} (${comissao === '15%' ? 'quinze por cento' : (comissao === '20%' ? 'vinte por cento' : 'dez por cento')})`;
+
+      document.getElementById('sig-escritorio-nome').innerText = razao.toUpperCase();
+      document.getElementById('sig-decisor-nome').innerText = `${decisor} · Titular Responsável`;
+
+      const cidadePura = cidade.replace(' - RS', '').replace('-RS', '').trim();
+      document.getElementById('lbl-data-extenso').innerText = obterDataExtenso(cidadePura);
+
+      // Código de referência do documento
+      const refCode = `REF: TRU-CONT-${cnpj.replace(/\D/g, '').substring(0, 8)}-2026`;
+      document.getElementById('doc-ref-code').innerText = refCode;
+
+      // Atualiza link de envio no WhatsApp
+      const primeiroNome = decisor.split(' ')[0] || 'Contador(a)';
+      const msgWhatsApp = `Olá, ${primeiroNome}! Tudo bem? Aqui é da equipe TruData ERP (Hansen Software, de Sarandi-RS).\n\nEmitimos o *Termo de Parceria Estratégica & Homologação Técnica* para a *${nome}*:\n• Acesso 100% gratuito ao Modo Escritório Multiempresa;\n• Comissão recorrente de ${comissao} sobre clientes indicados;\n• Fechamento e exportação automática de SPED/XMLs todo dia 1º.\n\nPodemos revisar os termos e dar início nesta semana?`;
+      
+      const numLimpo = telefone.replace(/\D/g, '');
+      const btnWpp = document.getElementById('btn-wpp-direct');
+      if (numLimpo) {
+        btnWpp.onclick = () => window.open(`https://wa.me/55${numLimpo}?text=${encodeURIComponent(msgWhatsApp)}`, '_blank');
+      } else {
+        btnWpp.onclick = () => alert('Por favor, informe o telefone do escritório.');
+      }
+    }
+
+    function copiarMensagemWhatsApp() {
+      const decisor = document.getElementById('ipt-decisor').value || 'Contador(a)';
+      const nome = document.getElementById('ipt-nome').value || 'seu escritório';
+      const comissao = document.getElementById('sel-comissao').value;
+      const primeiroNome = decisor.split(' ')[0];
+
+      const texto = `Olá, ${primeiroNome}! Tudo bem? Aqui é da equipe TruData ERP (Hansen Software, de Sarandi-RS).\n\nEmitimos o *Termo de Parceria Estratégica & Homologação Técnica* para a *${nome}*:\n• Acesso 100% gratuito ao Modo Escritório Multiempresa;\n• Comissão recorrente de ${comissao} sobre clientes indicados;\n• Fechamento e exportação automática de SPED/XMLs todo dia 1º.\n\nPodemos revisar os termos e dar início nesta semana?`;
+
+      navigator.clipboard.writeText(texto).then(() => {
+        alert('Mensagem copiada para a área de transferência com sucesso!');
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', inicializar);
+  </script>
+</body>
+</html>

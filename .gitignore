@@ -1,0 +1,24 @@
+# Logs
+*.log
+servidor.log
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+
+# Sistema Operacional & Arquivos temporários
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+
+# IDEs
+.vscode/
+.idea/

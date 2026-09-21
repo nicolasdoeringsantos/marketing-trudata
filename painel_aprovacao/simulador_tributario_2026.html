@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador da Reforma Tributária 2026 (IBS / CBS) — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              azure: '#009fe3',
+              dark: '#070b14',
+              surface: '#0f172a',
+              card: '#1e293b'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media print {
+      body { background: #ffffff !important; color: #000000 !important; }
+      .no-print { display: none !important; }
+      .print-border { border: 1px solid #cbd5e1 !important; }
+      .print-bg { background: #f8fafc !important; }
+      .print-text-dark { color: #0f172a !important; }
+    }
+  </style>
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen antialiased selection:bg-brand-azure selection:text-white pb-16">
+
+  <!-- TOPO DE NAVEGAÇÃO -->
+  <header class="no-print border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="text-xs font-semibold text-slate-400 hover:text-brand-azure transition flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl">
+        <span>←</span>
+        <span>Cockpit</span>
+      </a>
+      <div class="h-4 w-[1px] bg-slate-800"></div>
+      <div class="flex items-center gap-2">
+        <span class="text-lg">⚖️</span>
+        <h1 class="text-sm font-bold text-white font-display">Simulador Reforma Tributária 2026 (IBS / CBS)</h1>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button onclick="window.print()" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+        <span>🖨️</span>
+        <span class="hidden sm:inline">Imprimir Certificado A4</span>
+      </button>
+      <button onclick="copiarDiagnosticoContador()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-emerald-950 flex items-center gap-1.5">
+        <span>📑</span>
+        <span>Copiar p/ Contador</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto p-4 sm:p-8 space-y-8">
+
+    <!-- SIMULADOR INTERATIVO DE TRANSIÇÃO FISCAL -->
+    <div class="no-print bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+        <div>
+          <div class="text-[10px] uppercase font-bold text-brand-azure tracking-wider">FERRAMENTA DE CONSULTORIA FISCAL</div>
+          <h2 class="text-base font-bold text-white font-display mt-0.5">Diagnóstico de Transição para o IVA Dual (IBS Estadual + CBS Federal)</h2>
+        </div>
+        <span class="text-[10px] font-bold bg-amber-500/10 text-amber-400 px-3 py-1 rounded-full border border-amber-500/30">Vigência Teste: 2026</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="space-y-1.5">
+          <label class="text-xs font-bold text-slate-300">Faturamento Mensal Estimado (R$):</label>
+          <input type="number" id="sim-faturamento" oninput="calcularTransicao()" value="80000" step="5000" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-mono font-bold focus:outline-none focus:border-brand-azure" />
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="text-xs font-bold text-slate-300">Regime Tributário:</label>
+          <select id="sim-regime" onchange="calcularTransicao()" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brand-azure">
+            <option value="simples">Simples Nacional (Anexo I - Comércio)</option>
+            <option value="lucro_presumido">Lucro Presumido</option>
+            <option value="lucro_real">Lucro Real</option>
+          </select>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="text-xs font-bold text-slate-300">Nicho Principal de Varejo:</label>
+          <select id="sim-nicho" onchange="calcularTransicao()" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brand-azure">
+            <option value="alimentos">Supermercado & Alimentos (Cesta Básica)</option>
+            <option value="moda">Moda, Vestuário & Calçados</option>
+            <option value="construcao">Materiais de Construção & Ferragens</option>
+            <option value="farmacia">Farmácia & Medicamentos</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- CARDS COMPARATIVOS DE IMPACTO -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-center space-y-1">
+          <span class="text-[10px] text-slate-400 uppercase font-bold">Impostos Atuais (PIS/COFINS + ICMS)</span>
+          <div class="text-lg font-black text-rose-400 font-mono" id="res-atual">R$ 3.840,00/mês</div>
+          <span class="text-[10px] text-slate-500">Alíquota efetiva média: 4.8%</span>
+        </div>
+
+        <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-center space-y-1">
+          <span class="text-[10px] text-slate-400 uppercase font-bold">Projeção IVA Dual 2026 (CBS + IBS)</span>
+          <div class="text-lg font-black text-emerald-400 font-mono" id="res-novo">R$ 3.680,00/mês</div>
+          <span class="text-[10px] text-slate-500">Crédito pleno sobre compras</span>
+        </div>
+
+        <div class="p-4 bg-emerald-950/20 rounded-2xl border border-emerald-500/40 text-center space-y-1">
+          <span class="text-[10px] text-emerald-400 uppercase font-bold">Status do TruData ERP</span>
+          <div class="text-lg font-black text-emerald-400 font-display">100% Preparado</div>
+          <span class="text-[10px] text-emerald-300">SEFAZ-RS Homologado</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MATRIZ DE 10 NCMS CAMPEÕES DO VAREJO GAÚCHO -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider">Top 10 NCMs de Alto Giro no RS & Tratamento na Reforma</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Tabela de referência técnica para contadores e lojistas</p>
+        </div>
+        <span class="text-[10px] bg-slate-950 text-slate-400 px-2.5 py-1 rounded border border-slate-800 font-mono">SEFAZ-RS / Confaz</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse border border-slate-800">
+          <thead>
+            <tr class="bg-slate-950 text-slate-400 border-b border-slate-800">
+              <th class="p-3">NCM</th>
+              <th class="p-3">Descrição do Produto</th>
+              <th class="p-3">Regime Atual RS</th>
+              <th class="p-3 text-emerald-400">Regra Reforma 2026</th>
+              <th class="p-3">Ação TruData ERP</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800 text-slate-300" id="tabela-ncms">
+            <tr>
+              <td class="p-3 font-mono font-bold text-brand-azure">1006.30.21</td>
+              <td class="p-3 font-semibold text-white">Arroz Polido / Beneficiado</td>
+              <td class="p-3">ICMS Isento / Alíquota Reduzida RS</td>
+              <td class="p-3 text-emerald-400 font-bold">Cesta Básica Nacional (Alíquota Zero)</td>
+              <td class="p-3 text-xs text-slate-400">Tag XML CBS/IBS Zero automática</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-brand-azure">0201.30.00</td>
+              <td class="p-3 font-semibold text-white">Carne Bovina Desossada</td>
+              <td class="p-3">ICMS 12% com diferimento parcial</td>
+              <td class="p-3 text-emerald-400 font-bold">Alíquota Reduzida em 60%</td>
+              <td class="p-3 text-xs text-slate-400">Cálculo de crédito no abate</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-brand-azure">6403.99.90</td>
+              <td class="p-3 font-semibold text-white">Calçados de Couro</td>
+              <td class="p-3">ICMS 17% + Fundo Pobreza</td>
+              <td class="p-3 text-emerald-400 font-bold">Alíquota Padrão com Crédito Amplo</td>
+              <td class="p-3 text-xs text-slate-400">Grade por tamanho/cor mantida</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-brand-azure">3004.90.99</td>
+              <td class="p-3 font-semibold text-white">Medicamentos Essenciais</td>
+              <td class="p-3">PIS/COFINS Monofásico + ICMS-ST</td>
+              <td class="p-3 text-emerald-400 font-bold">Redução de 60% ou Isenção</td>
+              <td class="p-3 text-xs text-slate-400">Fim do cálculo complexo de ST</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-brand-azure">2523.29.10</td>
+              <td class="p-3 font-semibold text-white">Cimento Portland Comum</td>
+              <td class="p-3">ICMS-ST com MVA elevado no RS</td>
+              <td class="p-3 text-emerald-400 font-bold">Alíquota Padrão sem MVA</td>
+              <td class="p-3 text-xs text-slate-400">Emissão rápida no balcão sem ST</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-brand-azure">2202.10.00</td>
+              <td class="p-3 font-semibold text-white">Refrigerantes & Bebidas Açucaradas</td>
+              <td class="p-3">ICMS 17% + PIS/COFINS</td>
+              <td class="p-3 text-amber-400 font-bold">Sujeito ao Imposto Seletivo (IS)</td>
+              <td class="p-3 text-xs text-slate-400">Destaque de IS automático no cupom</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-brand-azure">8507.10.10</td>
+              <td class="p-3 font-semibold text-white">Baterias Chumbo-Ácido Automotivas</td>
+              <td class="p-3">ICMS-ST Retido na Fonte</td>
+              <td class="p-3 text-emerald-400 font-bold">Crédito Financeiro Pleno</td>
+              <td class="p-3 text-xs text-slate-400">Conciliação com compras</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-brand-azure">8204.11.00</td>
+              <td class="p-3 font-semibold text-white">Chaves de Fenda & Ferramentas Manuais</td>
+              <td class="p-3">ICMS 17%</td>
+              <td class="p-3 text-emerald-400 font-bold">Alíquota Padrão Simplificada</td>
+              <td class="p-3 text-xs text-slate-400">Código de barras e estoque ágil</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-brand-azure">3304.99.90</td>
+              <td class="p-3 font-semibold text-white">Cremes & Cosméticos para Pele</td>
+              <td class="p-3">ICMS-ST e IPI</td>
+              <td class="p-3 text-emerald-400 font-bold">Unificação Tributária</td>
+              <td class="p-3 text-xs text-slate-400">Controle de lotes e validade</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-brand-azure">0702.00.00</td>
+              <td class="p-3 font-semibold text-white">Tomates & Hortifrúti in Natura</td>
+              <td class="p-3">Isenção de ICMS no RS</td>
+              <td class="p-3 text-emerald-400 font-bold">Cesta Básica Alíquota Zero</td>
+              <td class="p-3 text-xs text-slate-400">Integração com balança Toledo/Filizola</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CERTIFICADO DE HOMOLOGAÇÃO FISCAL A4 (IMPRIMÍVEL) -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-6 print-border print-bg">
+      
+      <div class="border-b border-slate-800 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="h-12 w-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-2xl font-bold">
+            ⚖️
+          </div>
+          <div>
+            <div class="text-[10px] font-mono uppercase text-emerald-400 font-bold tracking-wider">CERTIFICADO DE CONFORMIDADE FISCAL</div>
+            <h2 class="text-lg font-black text-white font-display print-text-dark">Garantia de Atualização SEFAZ-RS · Reforma Tributária 2026</h2>
+            <p class="text-xs text-slate-400 mt-0.5 print-text-dark">Emitido pela Hansen Software Ltda · Sarandi - RS (Fundada em 1998 · Selo MPS.BR)</p>
+          </div>
+        </div>
+
+        <div class="text-left sm:text-right border-t sm:border-t-0 border-slate-800 pt-3 sm:pt-0">
+          <span class="text-[10px] font-mono text-slate-400 block print-text-dark">REGISTRO DE HOMOLOGAÇÃO</span>
+          <span class="text-xs font-mono font-bold text-emerald-400">TRU-REF-2026-RS-OK</span>
+          <span class="text-[10px] text-slate-500 block mt-0.5">Válido em todo território do RS</span>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-300 leading-relaxed space-y-3 print-text-dark">
+        <p>
+          Certificamos que o sistema <strong>TruData ERP</strong>, desenvolvido e mantido pela <strong>Hansen Software Ltda</strong> (CNPJ: 02.483.991/0001-90), possui arquitetura de dados nativamente compatível com as diretrizes da Emenda Constitucional nº 132/2023 da Reforma Tributária.
+        </p>
+        <p>
+          O sistema contempla a geração das novas tags nos documentos fiscais eletrônicos (NFC-e modelo 65, NF-e modelo 55 e MDF-e modelo 58) para o cálculo do <strong>IBS (Imposto sobre Bens e Serviços)</strong> e da <strong>CBS (Contribuição sobre Bens e Serviços)</strong>, além do tratamento automatizado do <strong>Imposto Seletivo (IS)</strong>.
+        </p>
+        <p class="font-semibold text-emerald-400">
+          Compromisso de Risco Zero para o Cliente: Todas as atualizações tributárias exigidas pela SEFAZ do Rio Grande do Sul estão 100% cobertas pelo plano de manutenção mensal, sem qualquer cobrança de taxa extraordinária de migração ou módulo complementar.
+        </p>
+      </div>
+
+      <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+        <div>
+          <span class="font-bold text-white block print-text-dark">Hansen Software Ltda · Sarandi/RS</span>
+          <span class="text-slate-400 text-[11px] print-text-dark">Diretoria de Tecnologia & Engenharia Fiscal</span>
+        </div>
+        <div class="text-center sm:text-right">
+          <span class="font-mono text-emerald-400 text-[11px] font-bold block">Autenticação Digital SHA-256</span>
+          <span class="font-mono text-[9px] text-slate-500">c48996fb92427ae41e4649b934ca495991b7852b855</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    function calcularTransicao() {
+      const fat = parseFloat(document.getElementById('sim-faturamento').value) || 0;
+      const regime = document.getElementById('sim-regime').value;
+      const nicho = document.getElementById('sim-nicho').value;
+
+      let pctAtual = 0.048; // 4.8% padrão Simples
+      let pctNovo = 0.046;
+
+      if (regime === 'lucro_presumido') {
+        pctAtual = 0.0865;
+        pctNovo = 0.078;
+      } else if (regime === 'lucro_real') {
+        pctAtual = 0.0925;
+        pctNovo = 0.082;
+      }
+
+      if (nicho === 'alimentos') {
+        pctNovo *= 0.85; // Cesta básica e isenções
+      } else if (nicho === 'farmacia') {
+        pctNovo *= 0.90;
+      }
+
+      const valAtual = fat * pctAtual;
+      const valNovo = fat * pctNovo;
+
+      document.getElementById('res-atual').textContent = 'R$ ' + valAtual.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) + '/mês';
+      document.getElementById('res-novo').textContent = 'R$ ' + valNovo.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) + '/mês';
+    }
+
+    function copiarDiagnosticoContador() {
+      const fat = document.getElementById('sim-faturamento').value;
+      const regime = document.getElementById('sim-regime').value;
+      const texto = `⚖️ *DIAGNÓSTICO FISCAL REFORMA TRIBUTÁRIA 2026 (IBS / CBS)*\n\n` +
+        `Olá, colega contador! Elaboramos o diagnóstico para faturamento de R$ ${fat},00 (${regime}):\n\n` +
+        `✅ O TruData ERP da Hansen Software (+25 anos em Sarandi/RS) já está 100% homologado com a SEFAZ-RS para a transição do IVA Dual (IBS + CBS);\n` +
+        `✅ Matriz fiscal com exportação limpa de SPED e créditos de entrada automáticos;\n` +
+        `✅ Atualizações tributárias automáticas inclusas na mensalidade, sem cobrança extra para o seu cliente.\n\n` +
+        `Gostaria de receber o Certificado de Homologação formal para anexar ao dossiê da empresa?`;
+
+      navigator.clipboard.writeText(texto).then(() => alert('Diagnóstico formatado copiado! Cole no WhatsApp do escritório de contabilidade.'));
+    }
+
+    calcularTransicao();
+  </script>
+</body>
+</html>

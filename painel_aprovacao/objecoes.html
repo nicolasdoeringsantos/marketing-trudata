@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oráculo de Objeções 2.0 & Modo Batalha — TruData ERP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        },
+                        dark: {
+                            950: '#060911',
+                            900: '#0b0f19',
+                            800: '#131b2e',
+                            700: '#1e293b',
+                            600: '#334155',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #070a13;
+            color: #f1f5f9;
+        }
+        .glass-card {
+            background: rgba(19, 27, 46, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-16">
+
+    <!-- Top Navigation Bar -->
+    <header class="border-b border-slate-800 bg-dark-900/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="/index.html" class="flex items-center space-x-2 text-slate-300 hover:text-white transition">
+                    <span class="text-xl font-black bg-gradient-to-r from-emerald-400 to-amber-300 bg-clip-text text-transparent">TruData ERP</span>
+                    <span class="text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-semibold">Oráculo 2.0</span>
+                </a>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm">
+                <button onclick="alternarModoBatalha()" id="btn-toggle-batalha" class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-extrabold shadow-lg shadow-amber-950/40 transition flex items-center gap-1.5">
+                    <span>⚔️ Modo Batalha</span>
+                </button>
+                <a href="/fechamento-rapido" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition">⚡ Fechador</a>
+                <a href="/prova-social" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition">🌟 Casos RS</a>
+                <a href="/crm" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition">📊 CRM</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+
+        <!-- MODO BATALHA COMERCIAL (FLASHCARD INTERATIVO) -->
+        <div id="secao-batalha" class="hidden mb-12 bg-gradient-to-br from-amber-950/40 via-dark-900 to-dark-950 p-6 sm:p-10 rounded-3xl border-2 border-amber-500/50 shadow-2xl relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-amber-500/20 pb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Simulador de Pitch & Treinamento SDR</span>
+                    <h2 class="text-2xl font-black text-white">⚔️ Arena de Batalha Comercial</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="bg-dark-950 px-4 py-2 rounded-xl border border-slate-800 text-center">
+                        <span class="text-[10px] text-slate-400 block uppercase font-bold">Pontuação</span>
+                        <span id="placar-batalha" class="text-lg font-black text-amber-400">0 pts</span>
+                    </div>
+                    <button onclick="proximaBatalha()" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs rounded-xl transition shadow-lg shadow-amber-950">
+                        Próxima Objeção ➔
+                    </button>
+                    <button onclick="alternarModoBatalha()" class="text-slate-400 hover:text-white text-xs font-semibold px-2">
+                        Fechar ✕
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card Central da Batalha -->
+            <div class="max-w-3xl mx-auto text-center py-4">
+                <span class="text-xs uppercase font-extrabold px-3 py-1 rounded-full bg-red-500/10 text-red-400 border border-red-500/30 inline-block mb-3" id="batalha-cat">
+                    Objeção de Preço
+                </span>
+                <h3 class="text-xl sm:text-2xl font-black text-white mb-4 leading-relaxed" id="batalha-pergunta">
+                    "Achei a mensalidade do TruData acima do que eu gostaria de pagar."
+                </h3>
+                <p class="text-xs text-slate-400 italic mb-6" id="batalha-psicologia">
+                    O cliente foca no desembolso imediato em vez de enxergar o prejuízo diário de caixas lentos e erros fiscais.
+                </p>
+
+                <!-- Área de Revelação -->
+                <div id="batalha-revelada" class="hidden text-left bg-dark-950 p-6 rounded-2xl border border-amber-500/30 mb-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs font-bold uppercase text-emerald-400">Script Recomendado:</span>
+                        <button onclick="falarScriptAtual()" class="text-xs text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1">
+                            <span>🔊 Ouvir Resposta</span>
+                        </button>
+                    </div>
+                    <div class="text-xs sm:text-sm text-slate-200 leading-relaxed font-mono whitespace-pre-wrap" id="batalha-script"></div>
+                </div>
+
+                <div class="flex justify-center gap-3" id="batalha-acoes-iniciais">
+                    <button onclick="revelarRespostaBatalha()" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm rounded-xl transition shadow-lg shadow-emerald-950">
+                        💡 Revelar Script Perfeito & Argumentação
+                    </button>
+                </div>
+
+                <div class="hidden justify-center gap-3" id="batalha-acoes-avaliacao">
+                    <button onclick="pontuarBatalha(true)" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition">
+                        ✓ Acertei o Argumento (+10 pts)
+                    </button>
+                    <button onclick="pontuarBatalha(false)" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs rounded-xl border border-slate-700 transition">
+                        ↻ Preciso Praticar Mais
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Header Normal -->
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-4">
+                <span>⚡ Base de Conhecimento Comercial de Alta Conversão</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                Oráculo de Objeções 2.0
+            </h1>
+            <p class="mt-3 text-base sm:text-lg text-slate-400">
+                12 respostas matadoras prontas para quebrar resistências no varejo do Rio Grande do Sul. Copie o script, ouça a fala sintetizada e envie no WhatsApp em 1 clique.
+            </p>
+        </div>
+
+        <!-- Barra de Busca e Filtros -->
+        <div class="glass-card p-4 rounded-2xl mb-8 flex flex-col md:flex-row items-center justify-between gap-4 border border-slate-800">
+            <div class="relative w-full md:w-96">
+                <input type="text" id="search-box" oninput="filtrarCards()" placeholder="🔍 Buscar objeção (ex: nuvem, caro, contador, internet)..." class="w-full bg-dark-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white outline-none focus:border-emerald-500">
+            </div>
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto" id="filter-buttons">
+                <button onclick="setFiltro('todos', this)" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-500 text-black transition">Todas (12)</button>
+                <button onclick="setFiltro('medo', this)" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Medo de Migração</button>
+                <button onclick="setFiltro('preco', this)" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Preço / Mensalidade</button>
+                <button onclick="setFiltro('concorrencia', this)" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Nuvem / Concorrência</button>
+                <button onclick="setFiltro('fiscal', this)" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Fiscal / Reforma</button>
+                <button onclick="setFiltro('operacional', this)" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Operacional / Equipe</button>
+            </div>
+        </div>
+
+        <!-- Grade com os 12 Cards de Objeções -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="objections-grid">
+
+            <!-- 1. Travamento no Sábado -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="medo">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">MEDO DE MIGRAÇÃO</span>
+                        <button onclick="falarTexto('script-1')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"Trocar de sistema dá dor de cabeça e vai travar minha loja no sábado."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Medo Oculto:</strong> Perder vendas, formar filas quilométricas e estressar caixas.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-1">Compreendo perfeitamente o seu receio! Travar o caixa em dia de loja cheia é o maior pesadelo de qualquer lojista.
+
+É exatamente por isso que nós criamos o protocolo de Migração Blindada TruData:
+1. Nós importamos todo o seu cadastro de produtos, clientes e saldos em ambiente de teste prévio.
+2. Treinamos seus operadores antes da virada oficial.
+3. A virada acontece no domingo ou após o fechamento, e nossa equipe técnica de Sarandi acompanha o seu primeiro dia de vendas de prontidão.
+
+Seu caixa não para nem 1 minuto. Quer que eu te mostre como fizemos isso em mercados e lojas aqui da nossa região?</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-1')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-1')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Concorrência Web / Nuvem -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="concorrencia">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CONCORRÊNCIA NUVEM</span>
+                        <button onclick="falarTexto('script-2')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"Estou vendo um sistema nacional em nuvem que é famoso de SP."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Ilusão:</strong> Achar que marca de TV atende rápido quando a internet cair no interior do RS.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-2">Esses sistemas de TV têm um marketing forte, mas aqui no interior do RS a realidade da loja é diferente:
+
+1. Se a internet oscilar, o sistema 100% web trava seu caixa e você não consegue emitir NFC-e. O TruData opera em contingência off-line e sincroniza quando a rede volta.
+2. Quando você precisa de suporte nesses sistemas, você cai num robô de WhatsApp ou abre chamado que demora 48h.
+3. Na TruData (Hansen Software, fundada em 1998 em Sarandi), o atendimento é 100% humano direto por telefone em menos de 2 minutos.
+
+Vale mais uma marca famosa de São Paulo ou um parceiro sólido do seu lado no RS que atende o telefone na hora que o caixa aperta?</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-2')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-2')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. Preço / Mensalidade -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="preco">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">PREÇO / MENSALIDADE</span>
+                        <button onclick="falarTexto('script-3')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"Achei a mensalidade um pouco acima do que eu gostaria de pagar."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Foco no Desembolso:</strong> Não calcula o custo das horas perdidas com erros e suporte ausente.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-3">Entendo sua preocupação com custos, especialmente nos dias de hoje! 
+
+Mas me permita fazer uma conta rápida com você:
+A diferença na mensalidade dá menos de R$ 6,00 por dia. 
+
+Agora imagine:
+- 1 autuação da SEFAZ por erro de NCM/ICMS-ST custa no mínimo R$ 2.000,00.
+- 1 hora de PDV travado no sábado de movimento faz você perder clientes para o concorrente da esquina.
+- Ficar 2 horas esperando atendimento de um robô no suporte custa o tempo precioso dos seus funcionários.
+
+O TruData não é uma despesa, é o seguro de tranquilidade da sua loja. Você prefere economizar R$ 6 por dia ou ter a certeza de que sua operação nunca vai parar?</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-3')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-3')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. Reforma Tributária 2026 -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="fiscal">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">REFORMA TRIBUTÁRIA</span>
+                        <button onclick="falarTexto('script-4')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"Vou esperar a Reforma Tributária entrar em vigor para decidir trocar."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Procrastinação de Risco:</strong> Deixar para última hora com base de produtos desorganizada.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-4">Esperar pode ser uma armadilha perigosa para o seu comércio! 
+
+A transição da Reforma Tributária exige que toda a sua base de produtos (NCMs, alíquotas e parametrizações) esteja 100% limpa antes da virada das regras do IBS e CBS.
+
+Se você tentar trocar de ERP em cima da hora:
+1. As empresas de software estarão sobrecarregadas e as filas de implantação serão enormes.
+2. Seu cadastro desorganizado fará sua loja pagar imposto duplicado.
+
+Quem migra agora para o TruData já entra com a matriz fiscal auditada e transição automática garantida. Vamos antecipar para sua loja ficar blindada e tranquila?</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-4')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-4')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. Acomodação Operacional -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="operacional">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">EQUIPE / ROTINA</span>
+                        <button onclick="falarTexto('script-5')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"O sistema é ruim, mas a equipe já se acostumou com as gambiarras."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Zona de Conforto:</strong> Síndrome do 'ruim com ele, pior sem ele'. Medo de retreinar.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-5">Isso é muito comum! A equipe se acostuma com as 'gambiarras' do sistema antigo para a rotina andar.
+
+Só que isso custa muito caro no final do mês:
+- Seus colaboradores perdem tempo com retrabalho e conferência manual.
+- Seus clientes esperam em filas lentas no caixa.
+- Você, como gestor, não consegue confiar nos números do estoque e do fluxo de caixa.
+
+O TruData foi projetado com foco em usabilidade simples e intuitiva. Em menos de 2 horas de treinamento, qualquer operador domina o sistema com muito mais agilidade que o antigo. Seus funcionários vão te agradecer por facilitar a vida deles!</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-5')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-5')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. Prisão Contratual / Fidelidade -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="concorrencia">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">FIDELIDADE ATUAL</span>
+                        <button onclick="falarTexto('script-6')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"Ainda tenho meses de fidelidade no contrato do sistema atual."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Prisão Contratual:</strong> O lojista teme a multa rescisória do concorrente.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-6">Muitas empresas usam contratos leoninos exatamente para prender o lojista insatisfeito.
+
+Podemos resolver isso de forma inteligente:
+1. Nossa equipe analisa seu contrato para verificar se falhas recorrentes de suporte ou descumprimento de SLA dão causa para rescisão sem multa.
+2. Caso ainda haja meses pendentes, nós concedemos uma Carência Compensatória no TruData correspondente ao período final, para sua loja já migrar e parar de sofrer hoje mesmo sem pagar mensalidade dobrada.
+
+Não deixe sua loja refém de um sistema defasado. Vamos avaliar seu caso em 10 minutos?</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-6')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-6')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 7. Internet Instável no Interior -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="operacional">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">INTERNET / OFFLINE</span>
+                        <button onclick="falarTexto('script-7')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"A internet aqui na cidade cai direto, não posso depender de nuvem."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Pavor de Parada:</strong> Temporais e quedas de fibra comuns no interior do RS.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-7">Você tem toda razão! No interior do Rio Grande do Sul, depender de um sistema 100% online é um tiro no pé.
+
+É por isso que a arquitetura do TruData é HÍBRIDA:
+- Seu ponto de venda (PDV) roda com banco de dados local no computador do caixa.
+- Se a fibra romper ou der temporal, o caixa continua passando compras e emitindo cupons em contingência offline normalmente.
+- Assim que a internet volta, o sistema sincroniza tudo com a nuvem e com a SEFAZ de forma 100% invisível.
+
+Sua loja não para de vender por causa de internet nunca. Quer ver uma simulação disso funcionando na prática?</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-7')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-7')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 8. "Meu Contador Cuida de Tudo" -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="fiscal">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">PAPEL DO CONTADOR</span>
+                        <button onclick="falarTexto('script-8')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"Meu contador disse que cuida de tudo e que não preciso de ERP."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Confusão de Papéis:</strong> O contador apura impostos, mas não cuida do estoque nem da margem.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-8">Seu contador é fundamental para a saúde contábil da sua empresa, mas ele cuida do retroativo (o que já aconteceu no mês passado).
+
+O TruData cuida do presente e do futuro da sua loja:
+- O contador não avisa se um funcionário deu desconto errado no balcão hoje.
+- O contador não impede que você compre mercadoria que já está encalhada no estoque.
+- O contador não controla o crediário e quem está devendo para você na cidade.
+
+Inclusive, os melhores contadores da nossa região recomendam o TruData porque nós enviamos os arquivos fiscais e SPED 100% redondos todo dia 1º, eliminando retrabalho contábil. Quer que eu fale com seu contador para alinhar?</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-8')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-8')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 9. Licença Pirata / Sem Mensalidade -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="preco">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SEM MENSALIDADE</span>
+                        <button onclick="falarTexto('script-9')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"Prefiro comprar um sistema sem mensalidade de pagamento único."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Falsa Economia:</strong> Sistemas sem mensalidade são descontinuados na primeira mudança da SEFAZ.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-9">Essa ideia parece tentadora no início, mas no Brasil ela se torna uma armadilha fatal para o comércio:
+
+1. A legislação fiscal muda todo mês (SEFAZ-RS, regras de NFC-e, PIX no PDV e agora a Reforma Tributária). Software sem mensalidade não tem equipe atualizando o código. Quando a SEFAZ bloqueia a emissão, sua loja é multada e você é forçado a começar do zero.
+2. Quando o computador do caixa queimar ou der pau no banco de dados, quem vai restaurar seu backup? A empresa que te vendeu licença única já desapareceu.
+
+A mensalidade do TruData garante atualização contínua, suporte por técnicos locais e seguro total contra autuações fiscais. É a garantia de que sua loja nunca fica na mão!</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-9')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-9')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 10. Caderninho / Planilha -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="operacional">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">CADERNO / PLANILHA</span>
+                        <button onclick="falarTexto('script-10')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"Minha loja é pequena, eu controlo tudo no caderninho e planilha."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Cegueira Financeira:</strong> A loja sangra em furtos invisíveis, perdas de estoque e juros.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-10">O caderninho funcionou muito bem no começo da loja, e honramos todo lojista que construiu seu negócio assim!
+
+Porém, conforme a loja gira, o controle manual cobra um preço invisível altíssimo:
+- Você não sabe com exatidão sua margem líquida real por produto.
+- Fica impossível saber se há mercadoria sumindo no estoque ou vencendo no fundo da prateleira.
+- Se você não estiver dentro da loja, a operação simplesmente não anda.
+
+O TruData não complica sua rotina: ele te dá a liberdade de ver o caixa no celular de onde você estiver e protege o lucro que você sua tanto para conquistar. Vamos fazer um teste de 15 minutos sem compromisso?</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-10')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-10')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 11. "Não tenho tempo para cadastrar produtos agora" -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="medo">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">FALTA DE TEMPO</span>
+                        <button onclick="falarTexto('script-11')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"Não tenho tempo para cadastrar produtos e fazer implantação agora."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Sobrecarga:</strong> O lojista acha que terá que digitar produto por produto à mão à noite.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-11">Fique 100% tranquilo, você não vai precisar digitar nada à mão!
+
+Nós cuidamos de todo o trabalho pesado para você:
+1. Nossa equipe extrai os dados do seu sistema atual ou puxa direto das suas notas fiscais de compra (XML) na SEFAZ.
+2. Em menos de 24 horas, todo o seu cadastro de produtos, códigos de barras, preços e fornecedores entra pronto no TruData.
+3. Seus operadores só precisam acompanhar o treinamento rápido de 1 hora.
+
+Você cuida das suas vendas e nós fazemos o sistema rodar redondo. Posso agendar a extração para esta semana?</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-11')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-11')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 12. "Já fomos enganados por empresa que sumiu" -->
+            <div class="obj-card glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-cat="medo">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">TRAUMA PASSADO</span>
+                        <button onclick="falarTexto('script-12')" class="text-xs text-slate-400 hover:text-emerald-400 transition" title="Ouvir Resposta">🔊 Ouvir</button>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2 leading-snug">"Já fomos enganados por outra empresa de software que sumiu."</h3>
+                    <div class="p-2.5 rounded-lg bg-dark-950 border border-slate-800/80 text-[11px] text-amber-300/90 mb-3">
+                        <strong>Trauma Comercial:</strong> Vendedor forasteiro promete mundos e fundos e o suporte abandona.
+                    </div>
+                    <div class="p-3 rounded-xl bg-dark-950 border border-slate-800 text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap mb-4 max-h-48 overflow-y-auto" id="script-12">Infelizmente vemos isso acontecer com frequência com representantes que passam pela cidade vendendo sistemas de fora e nunca mais aparecem.
+
+Com a Hansen Software a realidade é o oposto:
+- Estamos sediados em Sarandi - RS desde 1998 (são 26 anos ininterruptos com sede própria e CNPJ 02.483.991/0001-90).
+- Atendemos centenas de comércios na mesma rua da sua loja e nas cidades vizinhas.
+- Oferecemos o Certificado Oficial de Risco Zero de 30 Dias: se não gostar, devolvemos 100% do seu dinheiro.
+- Se o problema não for resolvido por telefone, nós colocamos o técnico no carro e vamos até o balcão da sua loja em até 2 horas.
+
+Nós somos seus vizinhos no RS, não uma voz anônima do outro lado do país. Vamos tomar um café aqui ou na sua loja para você nos conhecer?</div>
+                </div>
+                <div class="space-y-2 pt-3 border-t border-slate-800">
+                    <button onclick="copiarScript('script-12')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-700">
+                        📋 Copiar Script
+                    </button>
+                    <button onclick="enviarWhatsApp('script-12')" class="w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+                        💬 Enviar no WhatsApp
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-emerald-500 text-black font-bold px-5 py-3 rounded-xl shadow-2xl hidden z-50 text-sm">
+        Script copiado para o WhatsApp!
+    </div>
+
+    <script>
+        let filtroAtual = 'todos';
+        let placar = 0;
+        let indiceBatalhaAtual = 0;
+
+        const bancoBatalha = [
+            {
+                cat: 'Medo de Migração',
+                pergunta: '"Trocar de sistema dá muita dor de cabeça e vai travar minha loja no sábado."',
+                psicologia: 'Medo profundo de perder vendas em dia de pico e estressar caixas.',
+                scriptId: 'script-1'
+            },
+            {
+                cat: 'Concorrência Nuvem',
+                pergunta: '"Estou vendo um sistema nacional em nuvem que é muito famoso de SP."',
+                psicologia: 'Ilusão de marca de TV vs realidade de internet oscilante no interior do RS.',
+                scriptId: 'script-2'
+            },
+            {
+                cat: 'Preço / Mensalidade',
+                pergunta: '"Achei a mensalidade um pouco acima do que eu gostaria de pagar."',
+                psicologia: 'Compara preço absoluto de R$ 6/dia em vez de calcular multas fiscais de R$ 2.000.',
+                scriptId: 'script-3'
+            },
+            {
+                cat: 'Reforma Tributária',
+                pergunta: '"Vou esperar a Reforma Tributária entrar em vigor para decidir trocar."',
+                psicologia: 'Procrastinação perigosa que leva a filas de espera e bitributação de estoques.',
+                scriptId: 'script-4'
+            },
+            {
+                cat: 'Internet / Offline',
+                pergunta: '"A internet aqui na cidade cai direto, não posso depender de nuvem."',
+                psicologia: 'Pavor de temporal paralisar a frente de caixa.',
+                scriptId: 'script-7'
+            },
+            {
+                cat: 'Papel do Contador',
+                pergunta: '"Meu contador disse que cuida de tudo e que não preciso de ERP."',
+                psicologia: 'Confusão entre apuração de impostos e gestão de margem e estoque diário.',
+                scriptId: 'script-8'
+            },
+            {
+                cat: 'Sem Mensalidade',
+                pergunta: '"Prefiro comprar um sistema sem mensalidade de pagamento único."',
+                psicologia: 'Falsa economia: o software vira sucata na primeira mudança fiscal da SEFAZ.',
+                scriptId: 'script-9'
+            },
+            {
+                cat: 'Trauma Passado',
+                pergunta: '"Já fomos enganados por outra empresa de software que sumiu."',
+                psicologia: 'Trauma de representante forasteiro que abandona a loja pós-venda.',
+                scriptId: 'script-12'
+            }
+        ];
+
+        function setFiltro(cat, btn) {
+            filtroAtual = cat;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-emerald-500', 'text-black');
+                b.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            btn.classList.remove('bg-slate-800', 'text-slate-300');
+            btn.classList.add('bg-emerald-500', 'text-black');
+            filtrarCards();
+        }
+
+        function filtrarCards() {
+            const query = document.getElementById('search-box').value.toLowerCase();
+            const cards = document.querySelectorAll('.obj-card');
+
+            cards.forEach(card => {
+                const cat = card.getAttribute('data-cat');
+                const texto = card.innerText.toLowerCase();
+
+                const bateCat = (filtroAtual === 'todos' || cat === filtroAtual);
+                const bateQuery = texto.includes(query);
+
+                if (bateCat && bateQuery) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function copiarScript(id) {
+            const txt = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                mostrarToast('Script copiado com sucesso!');
+            });
+        }
+
+        function enviarWhatsApp(id) {
+            const txt = document.getElementById(id).innerText;
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(txt)}`;
+            window.open(url, '_blank');
+        }
+
+        function falarTexto(id) {
+            const txt = document.getElementById(id).innerText;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utter = new SpeechSynthesisUtterance(txt);
+                utter.lang = 'pt-BR';
+                utter.rate = 1.05;
+                window.speechSynthesis.speak(utter);
+            } else {
+                alert('Síntese de voz não suportada neste navegador.');
+            }
+        }
+
+        // Modo Batalha
+        function alternarModoBatalha() {
+            const sec = document.getElementById('secao-batalha');
+            sec.classList.toggle('hidden');
+            if (!sec.classList.contains('hidden')) {
+                carregarPerguntaBatalha(0);
+                sec.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function carregarPerguntaBatalha(idx) {
+            indiceBatalhaAtual = idx % bancoBatalha.length;
+            const item = bancoBatalha[indiceBatalhaAtual];
+
+            document.getElementById('batalha-cat').innerText = item.cat;
+            document.getElementById('batalha-pergunta').innerText = item.pergunta;
+            document.getElementById('batalha-psicologia').innerText = item.psicologia;
+
+            const scriptEl = document.getElementById(item.scriptId);
+            document.getElementById('batalha-script').innerText = scriptEl ? scriptEl.innerText : '';
+
+            document.getElementById('batalha-revelada').classList.add('hidden');
+            document.getElementById('batalha-acoes-iniciais').classList.remove('hidden');
+            document.getElementById('batalha-acoes-avaliacao').classList.add('hidden');
+        }
+
+        function revelarRespostaBatalha() {
+            document.getElementById('batalha-revelada').classList.remove('hidden');
+            document.getElementById('batalha-acoes-iniciais').classList.add('hidden');
+            document.getElementById('batalha-acoes-avaliacao').classList.remove('hidden');
+        }
+
+        function falarScriptAtual() {
+            const txt = document.getElementById('batalha-script').innerText;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utter = new SpeechSynthesisUtterance(txt);
+                utter.lang = 'pt-BR';
+                utter.rate = 1.05;
+                window.speechSynthesis.speak(utter);
+            }
+        }
+
+        function pontuarBatalha(acertou) {
+            if (acertou) {
+                placar += 10;
+                mostrarToast('Excelente! +10 pontos no placar comercial.');
+            }
+            document.getElementById('placar-batalha').innerText = `${placar} pts`;
+            proximaBatalha();
+        }
+
+        function proximaBatalha() {
+            carregarPerguntaBatalha(indiceBatalhaAtual + 1);
+        }
+
+        function mostrarToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+    </script>
+</body>
+</html>

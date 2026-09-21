@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Carrosséis 9:16 Verticais | TruData Media Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#8b5cf6',
+                            fuchsia: '#d946ef',
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-headline { font-family: 'Bebas Neue', sans-serif; }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .story-ratio {
+            aspect-ratio: 9 / 16;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-40 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="/" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-fuchsia-500 animate-pulse"></span>
+                    <span class="font-bold text-lg text-white">Tru<span class="text-fuchsia-400">Media</span></span>
+                    <span class="text-xs px-2 py-0.5 rounded bg-fuchsia-500/20 text-fuchsia-300 font-semibold border border-fuchsia-500/30">Pilar 4: Mídia 9:16</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-slate-400 hidden sm:inline">Formatos: Instagram Stories, TikTok &amp; Status WhatsApp</span>
+                <button onclick="copiarConteudoSlide()" class="px-3.5 py-1.5 rounded-lg bg-fuchsia-600 hover:bg-fuchsia-500 text-xs font-bold text-white flex items-center gap-1.5 shadow-lg shadow-fuchsia-900/30 transition-all">
+                    <i class="fa-solid fa-copy"></i> Copiar Copy do Slide
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <!-- Título -->
+        <div class="mb-8">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/20 text-xs font-medium mb-3">
+                <i class="fa-solid fa-mobile-screen-button"></i> Fábrica de Criativos Verticais de Alto Impacto
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                Gerador de Stories &amp; Carrosséis 9:16
+            </h1>
+            <p class="text-slate-400 text-sm mt-1 max-w-3xl">
+                Crie sequências narrativas com padrão visual de alta conversão para o varejo gaúcho: ganchos visuais, dores de caixa, ofertas irresistíveis e chamadas de ação para o WhatsApp.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- Painel de Controle (Esquerda) -->
+            <div class="lg:col-span-6 space-y-6">
+                <!-- Seletor de Modelo e Slide -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-fuchsia-400"></i> Editor de Slides do Story
+                        </h2>
+                        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-lg border border-slate-800 text-xs">
+                            <button onclick="selecionarSlide(0)" id="tabSlide0" class="px-2.5 py-1 rounded bg-fuchsia-600 text-white font-bold">Slide 1: Gancho</button>
+                            <button onclick="selecionarSlide(1)" id="tabSlide1" class="px-2.5 py-1 rounded text-slate-400 hover:text-white font-bold">Slide 2: Dor</button>
+                            <button onclick="selecionarSlide(2)" id="tabSlide2" class="px-2.5 py-1 rounded text-slate-400 hover:text-white font-bold">Slide 3: Solução</button>
+                            <button onclick="selecionarSlide(3)" id="tabSlide3" class="px-2.5 py-1 rounded text-slate-400 hover:text-white font-bold">Slide 4: Oferta</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Nicho Comercial / Segmento RS</label>
+                            <select id="selNicho" onchange="aplicarPresetNicho()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-fuchsia-500 focus:outline-none">
+                                <option value="varejo_geral">Mercados &amp; Minimercados de Bairro RS</option>
+                                <option value="acougue">Açougue &amp; Casa de Carnes (Cortes Nobres &amp; Churrasco)</option>
+                                <option value="petshop">Pet Shops &amp; Agropecuárias do Interior</option>
+                                <option value="auto">Autopeças &amp; Oficinas Mecânicas</option>
+                                <option value="material">Materiais de Construção &amp; Ferragens</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Paleta Visual &amp; Tema</label>
+                            <div class="grid grid-cols-4 gap-2">
+                                <button onclick="setPaleta('neon')" id="paletaNeon" class="p-2 rounded-lg border-2 border-fuchsia-500 bg-slate-900 text-[11px] font-bold text-center text-white">
+                                    <span class="block w-full h-2 rounded bg-gradient-to-r from-fuchsia-500 to-cyan-400 mb-1"></span>
+                                    Cyber Neon
+                                </button>
+                                <button onclick="setPaleta('varejo')" id="paletaVarejo" class="p-2 rounded-lg border border-slate-700 bg-slate-900 text-[11px] font-bold text-center text-slate-300">
+                                    <span class="block w-full h-2 rounded bg-gradient-to-r from-amber-500 to-rose-600 mb-1"></span>
+                                    Varejo Quente
+                                </button>
+                                <button onclick="setPaleta('corporativo')" id="paletaCorp" class="p-2 rounded-lg border border-slate-700 bg-slate-900 text-[11px] font-bold text-center text-slate-300">
+                                    <span class="block w-full h-2 rounded bg-gradient-to-r from-emerald-500 to-blue-600 mb-1"></span>
+                                    Fintech RS
+                                </button>
+                                <button onclick="setPaleta('dark')" id="paletaDark" class="p-2 rounded-lg border border-slate-700 bg-slate-900 text-[11px] font-bold text-center text-slate-300">
+                                    <span class="block w-full h-2 rounded bg-gradient-to-r from-slate-600 to-slate-900 mb-1"></span>
+                                    Dark Minimal
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Selo / Tag Superior</label>
+                            <input type="text" id="inpTag" oninput="atualizarPreview()" value="ALERTA PARA COMERCIANTES DO RS" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-fuchsia-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Headline Principal (Impacto)</label>
+                            <textarea id="inpHeadline" oninput="atualizarPreview()" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-fuchsia-500 focus:outline-none font-bold">SEU CAIXA TRAVOU NO SÁBADO À TARDE?</textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Texto de Apoio / Argumento</label>
+                            <textarea id="inpTexto" oninput="atualizarPreview()" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-300 focus:border-fuchsia-500 focus:outline-none">Enquanto o suporte do seu sistema antigo só atende na segunda-feira, a fila dobra e os clientes desistem da compra.</textarea>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Destaque / Métrica / Valor</label>
+                                <input type="text" id="inpDestaque" oninput="atualizarPreview()" value="-R$ 1.840,00 DE PREJUÍZO" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-rose-400 font-bold focus:border-fuchsia-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Texto do Botão / CTA</label>
+                                <input type="text" id="inpCta" oninput="atualizarPreview()" value="Arraste para cima ou Chame no Whats" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-fuchsia-500 focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dicas de Roteiro de Tráfego -->
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-xs space-y-3">
+                    <h3 class="font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-400"></i> Roteiro de Tráfego Pago (Meta Ads RS)
+                    </h3>
+                    <p class="text-slate-400">
+                        Veicule este conjunto de 4 stories como anúncio em formato Carrossel ou Stories Sequenciais geolocalizados em cidades com mais de 30 mil habitantes (ex: Passo Fundo, Bento Gonçalves, Pelotas, Santa Maria).
+                    </p>
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-slate-300 font-mono">
+                        <span>Tempo de retenção médio estimado:</span>
+                        <span class="text-fuchsia-400 font-bold">14.8 segundos (88% retenção)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna Preview Smartphone (Direita) -->
+            <div class="lg:col-span-6 flex flex-col items-center">
+                <!-- Mockup de Smartphone com proporção 9:16 -->
+                <div class="relative w-full max-w-[340px] rounded-[44px] p-3.5 bg-slate-900 border-4 border-slate-700 shadow-2xl shadow-fuchsia-950/40">
+                    <!-- Notch superior -->
+                    <div class="absolute top-5 left-1/2 -translate-x-1/2 w-28 h-4 bg-slate-950 rounded-full z-30 flex items-center justify-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-slate-800"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+                    </div>
+
+                    <!-- Tela do Story (9:16) -->
+                    <div id="storyScreen" class="w-full story-ratio rounded-[36px] overflow-hidden relative flex flex-col justify-between p-6 bg-slate-950 transition-colors duration-300">
+                        <!-- Barras de Progresso dos Stories no topo -->
+                        <div class="relative z-20 flex gap-1 w-full pt-4">
+                            <div class="h-1 flex-1 rounded-full bg-white/30 overflow-hidden"><div id="bar0" class="h-full bg-white w-full"></div></div>
+                            <div class="h-1 flex-1 rounded-full bg-white/30 overflow-hidden"><div id="bar1" class="h-full bg-white w-0"></div></div>
+                            <div class="h-1 flex-1 rounded-full bg-white/30 overflow-hidden"><div id="bar2" class="h-full bg-white w-0"></div></div>
+                            <div class="h-1 flex-1 rounded-full bg-white/30 overflow-hidden"><div id="bar3" class="h-full bg-white w-0"></div></div>
+                        </div>
+
+                        <!-- Topo do Perfil -->
+                        <div class="relative z-20 flex items-center justify-between mt-3">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-fuchsia-600 flex items-center justify-center text-white font-black text-xs border border-white/20">
+                                    TD
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white flex items-center gap-1">
+                                        trudata.tecnologia <i class="fa-solid fa-circle-check text-cyan-400 text-[10px]"></i>
+                                    </p>
+                                    <p class="text-[10px] text-white/60">Patrocinado · Rio Grande do Sul</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-ellipsis text-white/70 text-sm"></i>
+                        </div>
+
+                        <!-- Conteúdo Central do Slide -->
+                        <div class="relative z-20 my-auto py-4 space-y-4">
+                            <!-- Tag / Selo -->
+                            <div>
+                                <span id="prevTag" class="inline-block px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/40">
+                                    ALERTA PARA COMERCIANTES DO RS
+                                </span>
+                            </div>
+
+                            <!-- Headline Principal -->
+                            <h2 id="prevHeadline" class="text-2xl font-black text-white leading-tight uppercase font-headline tracking-wide">
+                                SEU CAIXA TRAVOU NO SÁBADO À TARDE?
+                            </h2>
+
+                            <!-- Destaque / Caixa Visual -->
+                            <div id="prevBoxDestaque" class="p-3.5 rounded-xl bg-rose-500/20 border border-rose-500/40">
+                                <p id="prevDestaque" class="text-base font-extrabold text-rose-300 text-center uppercase tracking-wide">
+                                    -R$ 1.840,00 DE PREJUÍZO
+                                </p>
+                            </div>
+
+                            <!-- Texto de Apoio -->
+                            <p id="prevTexto" class="text-xs text-slate-200 leading-relaxed font-medium">
+                                Enquanto o suporte do seu sistema antigo só atende na segunda-feira, a fila dobra e os clientes desistem da compra.
+                            </p>
+                        </div>
+
+                        <!-- Rodapé & CTA -->
+                        <div class="relative z-20 space-y-3 pb-2">
+                            <div id="prevCtaBtn" class="w-full py-2.5 rounded-xl bg-white text-slate-950 font-black text-xs text-center flex items-center justify-center gap-2 shadow-lg cursor-pointer">
+                                <span id="prevCta">Arraste para cima ou Chame no Whats</span>
+                                <i class="fa-solid fa-arrow-up text-xs animate-bounce"></i>
+                            </div>
+                            <div class="flex items-center justify-center gap-1 text-[9px] text-white/50">
+                                <i class="fa-solid fa-shield-halved"></i> TruData ERP · Suporte Gaúcho de Segunda a Sábado
+                            </div>
+                        </div>
+
+                        <!-- Overlay de Fundo Decorativo -->
+                        <div id="bgOverlay" class="absolute inset-0 z-10 bg-gradient-to-b from-slate-950/80 via-purple-950/40 to-slate-950/95 pointer-events-none"></div>
+                    </div>
+                </div>
+
+                <!-- Controles Rápidos Abaixo do Celular -->
+                <div class="flex items-center gap-3 mt-4">
+                    <button onclick="voltarSlide()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700">
+                        <i class="fa-solid fa-chevron-left mr-1"></i> Anterior
+                    </button>
+                    <span id="lblSlideAtual" class="text-xs font-mono text-slate-400">Slide 1 de 4</span>
+                    <button onclick="avancarSlide()" class="px-4 py-2 rounded-xl bg-fuchsia-600 hover:bg-fuchsia-500 text-xs font-bold text-white shadow-lg">
+                        Próximo <i class="fa-solid fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        let paletaAtual = 'neon';
+
+        const slidesData = [
+            {
+                tag: 'ALERTA PARA COMERCIANTES DO RS',
+                headline: 'SEU CAIXA TRAVOU NO SÁBADO À TARDE?',
+                destaque: '-R$ 1.840,00 DE PREJUÍZO EM VENDAS',
+                texto: 'Enquanto o suporte do seu sistema antigo só atende na segunda-feira em São Paulo, sua fila dobra e o cliente vai para o concorrente.',
+                cta: 'Veja como evitar isso no próximo slide'
+            },
+            {
+                tag: 'O CUSTO DO SUPORTE LENTO',
+                headline: 'CHATBOT QUE NÃO RESOLVE NADA',
+                destaque: 'FILA NO BALCÃO = CLIENTE BRAVO',
+                texto: 'Você já passou 40 minutos esperando na linha para liberar uma nota fiscal travada na SEFAZ? O varejo não pode esperar.',
+                cta: 'Conheça o suporte que atende em 60s'
+            },
+            {
+                tag: 'A SOLUÇÃO DEFINITIVA TRUDATA',
+                headline: 'SISTEMA QUE NÃO DEIXA O CAIXA PARAR',
+                destaque: 'MODO CONTINGÊNCIA OFFLINE NATIVO',
+                texto: 'Caiu a internet? O TruData continua vendendo normalmente e emite a NFC-e assim que a rede voltar, sem travar seu operador.',
+                cta: 'Clique para falar com consultor RS'
+            },
+            {
+                tag: 'OFERTA ESPECIAL ESTE MÊS',
+                headline: 'MIGRAÇÃO DE DADOS GRATUITA',
+                destaque: 'CADASTROS DE CLIENTES & PRODUTOS SALVOS',
+                texto: 'Trocamos seu sistema sem você perder 1 centavo de histórico. Implantação presencial em até 48h na sua cidade.',
+                cta: 'Chamar no WhatsApp Agora'
+            }
+        ];
+
+        function selecionarSlide(idx) {
+            salvarDadosSlideAtual();
+            slideIndex = idx;
+            carregarDadosSlide(idx);
+            atualizarBarrasProgresso();
+        }
+
+        function salvarDadosSlideAtual() {
+            slidesData[slideIndex] = {
+                tag: document.getElementById('inpTag').value,
+                headline: document.getElementById('inpHeadline').value,
+                destaque: document.getElementById('inpDestaque').value,
+                texto: document.getElementById('inpTexto').value,
+                cta: document.getElementById('inpCta').value
+            };
+        }
+
+        function carregarDadosSlide(idx) {
+            const data = slidesData[idx];
+            document.getElementById('inpTag').value = data.tag;
+            document.getElementById('inpHeadline').value = data.headline;
+            document.getElementById('inpDestaque').value = data.destaque;
+            document.getElementById('inpTexto').value = data.texto;
+            document.getElementById('inpCta').value = data.cta;
+
+            // Atualiza botões
+            for (let i = 0; i < 4; i++) {
+                const btn = document.getElementById('tabSlide' + i);
+                if (i === idx) {
+                    btn.className = 'px-2.5 py-1 rounded bg-fuchsia-600 text-white font-bold';
+                } else {
+                    btn.className = 'px-2.5 py-1 rounded text-slate-400 hover:text-white font-bold';
+                }
+            }
+
+            document.getElementById('lblSlideAtual').innerText = `Slide ${idx + 1} de 4`;
+            atualizarPreview();
+        }
+
+        function atualizarBarrasProgresso() {
+            for (let i = 0; i < 4; i++) {
+                const bar = document.getElementById('bar' + i);
+                if (i <= slideIndex) {
+                    bar.style.width = '100%';
+                } else {
+                    bar.style.width = '0%';
+                }
+            }
+        }
+
+        function voltarSlide() {
+            if (slideIndex > 0) selecionarSlide(slideIndex - 1);
+        }
+
+        function avancarSlide() {
+            if (slideIndex < 3) selecionarSlide(slideIndex + 1);
+        }
+
+        function atualizarPreview() {
+            document.getElementById('prevTag').innerText = document.getElementById('inpTag').value;
+            document.getElementById('prevHeadline').innerText = document.getElementById('inpHeadline').value;
+            document.getElementById('prevDestaque').innerText = document.getElementById('inpDestaque').value;
+            document.getElementById('prevTexto').innerText = document.getElementById('inpTexto').value;
+            document.getElementById('prevCta').innerText = document.getElementById('inpCta').value;
+        }
+
+        function setPaleta(tipo) {
+            paletaAtual = tipo;
+            const screen = document.getElementById('storyScreen');
+            const bgOverlay = document.getElementById('bgOverlay');
+            const prevBox = document.getElementById('prevBoxDestaque');
+            const ctaBtn = document.getElementById('prevCtaBtn');
+
+            // Reset borders
+            ['paletaNeon', 'paletaVarejo', 'paletaCorp', 'paletaDark'].forEach(id => {
+                document.getElementById(id).classList.remove('border-2', 'border-fuchsia-500');
+                document.getElementById(id).classList.add('border', 'border-slate-700');
+            });
+
+            if (tipo === 'neon') {
+                document.getElementById('paletaNeon').classList.add('border-2', 'border-fuchsia-500');
+                screen.className = 'w-full story-ratio rounded-[36px] overflow-hidden relative flex flex-col justify-between p-6 bg-slate-950';
+                bgOverlay.className = 'absolute inset-0 z-10 bg-gradient-to-b from-slate-950/80 via-purple-950/40 to-slate-950/95 pointer-events-none';
+                prevBox.className = 'p-3.5 rounded-xl bg-rose-500/20 border border-rose-500/40';
+                ctaBtn.className = 'w-full py-2.5 rounded-xl bg-white text-slate-950 font-black text-xs text-center flex items-center justify-center gap-2 shadow-lg';
+            } else if (tipo === 'varejo') {
+                document.getElementById('paletaVarejo').classList.add('border-2', 'border-fuchsia-500');
+                screen.className = 'w-full story-ratio rounded-[36px] overflow-hidden relative flex flex-col justify-between p-6 bg-amber-950';
+                bgOverlay.className = 'absolute inset-0 z-10 bg-gradient-to-b from-slate-950/80 via-amber-950/50 to-rose-950/90 pointer-events-none';
+                prevBox.className = 'p-3.5 rounded-xl bg-amber-500/25 border border-amber-500/50';
+                ctaBtn.className = 'w-full py-2.5 rounded-xl bg-amber-400 text-slate-950 font-black text-xs text-center flex items-center justify-center gap-2 shadow-lg';
+            } else if (tipo === 'corporativo') {
+                document.getElementById('paletaCorp').classList.add('border-2', 'border-fuchsia-500');
+                screen.className = 'w-full story-ratio rounded-[36px] overflow-hidden relative flex flex-col justify-between p-6 bg-slate-900';
+                bgOverlay.className = 'absolute inset-0 z-10 bg-gradient-to-b from-slate-950/90 via-emerald-950/40 to-blue-950/90 pointer-events-none';
+                prevBox.className = 'p-3.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40';
+                ctaBtn.className = 'w-full py-2.5 rounded-xl bg-emerald-500 text-white font-black text-xs text-center flex items-center justify-center gap-2 shadow-lg';
+            } else if (tipo === 'dark') {
+                document.getElementById('paletaDark').classList.add('border-2', 'border-fuchsia-500');
+                screen.className = 'w-full story-ratio rounded-[36px] overflow-hidden relative flex flex-col justify-between p-6 bg-black';
+                bgOverlay.className = 'absolute inset-0 z-10 bg-gradient-to-b from-black/80 via-slate-900/60 to-black/95 pointer-events-none';
+                prevBox.className = 'p-3.5 rounded-xl bg-slate-800/80 border border-slate-700';
+                ctaBtn.className = 'w-full py-2.5 rounded-xl bg-slate-200 text-black font-black text-xs text-center flex items-center justify-center gap-2 shadow-lg';
+            }
+        }
+
+        function aplicarPresetNicho() {
+            const nicho = document.getElementById('selNicho').value;
+            if (nicho === 'acougue') {
+                slidesData[0] = {
+                    tag: 'AÇOUGUES & CASAS DE CARNES RS',
+                    headline: 'PESAGEM LENTA NO BALCÃO TRAVA A FILA DO CHURRASCO?',
+                    destaque: 'INTEGRAÇÃO BALANÇA TOLEDO EM 0.2s',
+                    texto: 'No domingo de manhã ninguém quer ficar esperando a etiqueta ler. TruData sincroniza cortes e tara instantaneamente.',
+                    cta: 'Veja como acelerar seu açougue'
+                };
+            } else if (nicho === 'petshop') {
+                slidesData[0] = {
+                    tag: 'PET SHOPS & AGROPECUÁRIAS',
+                    headline: 'VENDA DE RAÇÃO A GRANEL DANDO FURO DE ESTOQUE?',
+                    destaque: 'BAIXA AUTOMÁTICA EM QUILO E SACO',
+                    texto: 'Controle vacinas, agendamentos de banho e tosa e notas fiscais com suporte gaúcho direto no WhatsApp.',
+                    cta: 'Agende uma demonstração gratuita'
+                };
+            } else if (nicho === 'auto') {
+                slidesData[0] = {
+                    tag: 'AUTOPEÇAS & OFICINAS RS',
+                    headline: 'PERDENDO VENDAS POR FALTA DE CÓDIGO NCM?',
+                    destaque: 'AUDITOR FISCAL DE AUTOPEÇAS INTEGRADO',
+                    texto: 'Consulte mais de 120 mil peças com tributação de ICMS-ST já validada para o Rio Grande do Sul.',
+                    cta: 'Blindar Minha Autopeça'
+                };
+            } else if (nicho === 'material') {
+                slidesData[0] = {
+                    tag: 'MATERIAIS DE CONSTRUÇÃO & FERRAGENS',
+                    headline: 'ORÇAMENTOS DEMORADOS PERDEM OBRAS',
+                    destaque: 'EMISSÃO DE NOTA FISCAL EM 3 CLIQUEs',
+                    texto: 'Venda cimento, tijolo e ferramentas com limite de crédito liberado na hora para o mestre de obras.',
+                    cta: 'Conhecer TruData Materiais'
+                };
+            }
+            carregarDadosSlide(0);
+        }
+
+        function copiarConteudoSlide() {
+            salvarDadosSlideAtual();
+            const s = slidesData[slideIndex];
+            const texto = `*STORY 9:16 - TRUDATA MARKETING*\n\n` +
+                          `📌 [TAG]: ${s.tag}\n` +
+                          `⚡ [HEADLINE]: ${s.headline}\n` +
+                          `🔥 [DESTAQUE]: ${s.destaque}\n` +
+                          `📖 [ARGUMENTO]: ${s.texto}\n` +
+                          `👉 [CHAMADA DE AÇÃO]: ${s.cta}`;
+            navigator.clipboard.writeText(texto).then(() => {
+                alert('Conteúdo e copy do slide 9:16 copiados com sucesso!');
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            carregarDadosSlide(0);
+        });
+    </script>
+</body>
+</html>

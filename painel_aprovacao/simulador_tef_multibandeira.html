@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador TEF Multibandeira vs POS Avulso — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
+    .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between">
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition">
+          ←
+        </a>
+        <div class="flex items-center gap-2.5">
+          <div class="h-9 w-9 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center text-lg">
+            💳
+          </div>
+          <div>
+            <h1 class="text-sm font-bold text-white font-display flex items-center gap-2">
+              Simulador TEF Multibandeira vs POS Avulso
+              <span class="text-[10px] bg-cyan-500/20 text-cyan-300 font-extrabold px-2 py-0.5 rounded border border-cyan-500/30">Conciliação Sicredi</span>
+            </h1>
+            <p class="text-[11px] text-slate-400">Economia real eliminando aluguel de maquininhas e erros de digitação</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="copiarPropostaTEF()" class="px-3.5 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold rounded-xl transition shadow-md shadow-cyan-950 flex items-center gap-1.5">
+          <span>Copiar Proposta TEF</span>
+          <span>📋</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Painel Esquerdo: Configuração dos Terminais Atuais -->
+      <div class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
+        <div class="border-b border-slate-800 pb-4">
+          <h2 class="text-base font-bold text-white font-display">Estrutura Atual de Meios de Pagamento</h2>
+          <p class="text-xs text-slate-400 mt-1">Informe a quantidade de maquininhas e o volume de vendas no cartão</p>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="text-xs font-bold text-slate-300 block mb-1">Número de Maquininhas POS Avulsas</label>
+            <input type="number" id="tef-qtd-pos" value="3" min="1" max="15" oninput="calcularTEF()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-cyan-500" />
+            <span class="text-[10px] text-slate-500 mt-1 block">Ex: 1 Cielo + 1 Rede + 1 PagSeguro / Stone</span>
+          </div>
+
+          <div>
+            <label class="text-xs font-bold text-slate-300 block mb-1">Aluguel Médio por Maquininha (R$/mês)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-2 text-xs text-slate-500">R$</span>
+              <input type="number" id="tef-aluguel-pos" value="119.90" step="5" oninput="calcularTEF()" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-cyan-500" />
+            </div>
+          </div>
+
+          <div>
+            <label class="text-xs font-bold text-slate-300 block mb-1">Faturamento Mensal em Cartões (R$)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-2 text-xs text-slate-500">R$</span>
+              <input type="number" id="tef-fat-cartoes" value="95000" step="5000" oninput="calcularTEF()" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-cyan-500" />
+            </div>
+          </div>
+
+          <div>
+            <label class="text-xs font-bold text-slate-300 block mb-1">Divergências Estimadas por Digitação Manual (%)</label>
+            <input type="range" id="tef-divergencia" min="0.1" max="2.0" step="0.1" value="0.5" oninput="document.getElementById('label-divergencia').textContent = this.value + '%'; calcularTEF();" class="w-full accent-cyan-500" />
+            <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+              <span>0.1%</span>
+              <span id="label-divergencia" class="font-bold text-cyan-400">0.5%</span>
+              <span>2.0%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-2 text-xs text-slate-300">
+          <div class="font-bold text-white flex items-center gap-1.5">
+            <span>🛡️</span> Vantagens Exclusivas TEF TruData:
+          </div>
+          <ul class="space-y-1 text-[11px] text-slate-400 list-disc list-inside leading-relaxed">
+            <li>Acionamento automático do PinPad pelo PDV sem digitação manual de valor.</li>
+            <li>O cupom NFC-e só sai se a transação for autorizada pelo adquirente.</li>
+            <li>Conciliação eletrônica automática de taxas direto com a conta Sicredi.</li>
+            <li>Zero filas de bobina: o comprovante do cartão sai junto no cupom fiscal de 80mm.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Painel Direito: Resultados e Comparativo Financeiro -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-slate-900 border border-rose-500/30 p-5 rounded-2xl shadow-lg">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-rose-400 block mb-1">Custo com Aluguel POS</span>
+            <div class="text-2xl font-black text-rose-400 font-display" id="tef-res-aluguel">R$ 4.316,40</div>
+            <span class="text-[11px] text-slate-500 mt-1 block">Por ano com maquininhas</span>
+          </div>
+
+          <div class="bg-slate-900 border border-amber-500/30 p-5 rounded-2xl shadow-lg">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-400 block mb-1">Perdas por Digitação Errada</span>
+            <div class="text-2xl font-black text-amber-400 font-display" id="tef-res-erros">R$ 5.700,00</div>
+            <span class="text-[11px] text-slate-500 mt-1 block">Passar valor a menos / ano</span>
+          </div>
+
+          <div class="bg-slate-900 border border-cyan-500/30 p-5 rounded-2xl shadow-lg">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-cyan-400 block mb-1">Economia Anual TEF TruData</span>
+            <div class="text-2xl font-black text-cyan-400 font-display" id="tef-res-economia">R$ 10.016,40</div>
+            <span class="text-[11px] text-slate-500 mt-1 block">Dinheiro que fica no caixa</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+          <h3 class="text-sm font-bold text-white font-display flex items-center justify-between">
+            <span>Quadro Comparativo: Caixa com POS vs Caixa com TEF TruData</span>
+            <span class="text-xs text-cyan-400 font-bold bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/20">Operação Blindada</span>
+          </h3>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left">
+              <thead>
+                <tr class="border-b border-slate-800 text-slate-400">
+                  <th class="py-2.5">Critério de Caixa</th>
+                  <th class="py-2.5 text-rose-400">Maquininhas POS Avulsas</th>
+                  <th class="py-2.5 text-cyan-400 font-bold">TEF Integrado TruData ERP</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                <tr>
+                  <td class="py-2 font-medium">Tempo por Atendimento</td>
+                  <td class="py-2 text-rose-300">45 a 60 segundos</td>
+                  <td class="py-2 text-cyan-300 font-bold">12 a 18 segundos</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Risco de Digitação Incorreta</td>
+                  <td class="py-2 text-rose-300">Alto (operador digita manualmente)</td>
+                  <td class="py-2 text-cyan-300 font-bold">Zero (valor enviado pelo PDV)</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Troca de Bobina de Papel</td>
+                  <td class="py-2 text-rose-300">2 bobinas separadas por venda</td>
+                  <td class="py-2 text-cyan-300 font-bold">1 bobina única 80mm no caixa</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Conciliação com Conta Bancária</td>
+                  <td class="py-2 text-rose-300">Manual (conferir extrato por extrato)</td>
+                  <td class="py-2 text-cyan-300 font-bold">Automática via API Sicredi</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="border-t border-slate-800/80 bg-slate-900/40 py-4 px-6 text-center text-xs text-slate-500">
+    TruData ERP · Hansen Software Ltda · Sarandi - RS · TEF Multibandeira Homologado
+  </footer>
+
+  <script>
+    function calcularTEF() {
+      const qtdPos = parseFloat(document.getElementById('tef-qtd-pos').value) || 1;
+      const aluguelPos = parseFloat(document.getElementById('tef-aluguel-pos').value) || 0;
+      const fatCartoes = parseFloat(document.getElementById('tef-fat-cartoes').value) || 0;
+      const pctDivergencia = (parseFloat(document.getElementById('tef-divergencia').value) || 0.5) / 100;
+
+      const aluguelAno = qtdPos * aluguelPos * 12;
+      const errosAno = fatCartoes * pctDivergencia * 12;
+      const economiaTotal = aluguelAno + errosAno;
+
+      document.getElementById('tef-res-aluguel').textContent = 'R$ ' + aluguelAno.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('tef-res-erros').textContent = 'R$ ' + errosAno.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('tef-res-economia').textContent = 'R$ ' + economiaTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function copiarPropostaTEF() {
+      const aluguel = document.getElementById('tef-res-aluguel').textContent;
+      const erros = document.getElementById('tef-res-erros').textContent;
+      const eco = document.getElementById('tef-res-economia').textContent;
+      const texto = `💳 ESTUDO DE ECONOMIA TEF TRUDATA ERP\n\nIdentificamos que a sua operação gasta ${aluguel} por ano em aluguel de maquininhas e perde cerca de ${erros} em erros de digitação e fraudes.\n\nCom o TEF Integrado do TruData ERP (acionamento direto pelo PDV, conciliação Sicredi e cupom unificado), a sua economia anual projetada é de ${eco}!\n\nVamos agendar uma demonstração no seu caixa?`;
+      navigator.clipboard.writeText(texto).then(() => {
+        alert("Proposta copiada para o WhatsApp!");
+      });
+    }
+
+    calcularTEF();
+  </script>
+</body>
+</html>

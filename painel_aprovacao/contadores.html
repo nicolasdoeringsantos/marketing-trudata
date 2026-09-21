@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hub de Contabilidades & Multiplicadores B2B — TruData ERP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #009fe3;
+      --primary-hover: #0284c7;
+      --primary-glow: rgba(0, 159, 227, 0.35);
+      --bg: #070b14;
+      --card-bg: #0f172a;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(0, 159, 227, 0.25);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.3);
+      --purple: #a855f7;
+      --purple-glow: rgba(168, 85, 247, 0.3);
+      --gold: #f59e0b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 1.5rem;
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(0, 159, 227, 0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1540px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .icon-badge {
+      width: 54px;
+      height: 54px;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(0, 159, 227, 0.25));
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      box-shadow: 0 0 25px var(--purple-glow);
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-title span {
+      background: linear-gradient(135deg, #c084fc, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.15rem;
+      border-radius: 0.65rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .btn-secondary:hover {
+      background: #334155;
+      color: #fff;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      color: #fff;
+      box-shadow: 0 4px 15px var(--purple-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+    }
+
+    /* HERO STRATEGY BANNER */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 27, 75, 0.8));
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-banner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .hero-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* CALCULADORA DE ALAVANCAGEM */
+    .calculator-box {
+      background: rgba(10, 15, 30, 0.85);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .calc-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .slider-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .slider-val {
+      color: #c084fc;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: #a855f7;
+      height: 6px;
+      border-radius: 4px;
+      background: #1e293b;
+      cursor: pointer;
+    }
+
+    .calc-results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .calc-result-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .calc-result-lbl {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .calc-result-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* 4 PILARES DA PARCERIA */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .pillar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 1.4rem;
+      transition: all 0.2s ease;
+    }
+    .pillar-card:hover {
+      border-color: rgba(168, 85, 247, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .pillar-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .pillar-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* FILTROS E TOOLBAR DE ESCRITÓRIOS */
+    .toolbar-contadores {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 1rem 1.25rem;
+      border-radius: 1rem;
+    }
+
+    .search-input {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 0.6rem;
+      padding: 0.6rem 0.9rem;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      min-width: 280px;
+    }
+    .search-input:focus {
+      border-color: #a855f7;
+    }
+
+    /* GRID DE ESCRITÓRIOS CONTÁBEIS */
+    .contadores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .contador-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.1rem;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      position: relative;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .contador-card:hover {
+      border-color: rgba(168, 85, 247, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(168, 85, 247, 0.15);
+    }
+
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .badge-multiplier-pill {
+      background: rgba(168, 85, 247, 0.2);
+      color: #d8b4fe;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-dist {
+      background: rgba(0, 159, 227, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(0, 159, 227, 0.3);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.4rem;
+    }
+
+    .contador-nome {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 0.35rem;
+    }
+
+    .contador-razao {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .contador-details {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 0.75rem;
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      color: #cbd5e1;
+    }
+
+    .detail-item strong {
+      color: #fff;
+    }
+
+    .card-actions-bar {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      padding-top: 0.6rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0.45rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-card-wpp {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .btn-card-dossie {
+      background: rgba(168, 85, 247, 0.2);
+      color: #d8b4fe;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+
+    .btn-card-parceria {
+      background: rgba(0, 159, 227, 0.2);
+      color: #38bdf8;
+      border: 1px solid rgba(0, 159, 227, 0.4);
+    }
+
+    /* CADÊNCIA DE WHATSAPP */
+    .cadencia-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .cadencia-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .cadencia-card {
+      background: rgba(9, 13, 22, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0.85rem;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .cadencia-step-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #c084fc;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .cadencia-text {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.85rem;
+      border-radius: 0.6rem;
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      font-family: monospace;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0f172a;
+      border: 1px solid #10b981;
+      color: #fff;
+      padding: 0.85rem 1.25rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      z-index: 100;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    /* MODAL DO ROTEIRIZADOR */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    .modal-box {
+      background: #0f172a;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      border-radius: 1.25rem;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.95);
+    }
+    .modal-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .circuit-card {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color 0.2s;
+    }
+    .circuit-card:hover {
+      border-color: rgba(168, 85, 247, 0.5);
+    }
+    .circuit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .circuit-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .circuit-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(168, 85, 247, 0.2);
+      color: #d8b4fe;
+      border: 1px solid rgba(168, 85, 247, 0.35);
+    }
+    .circuit-stops {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+    }
+    .circuit-stop-pill {
+      background: rgba(255,255,255,0.06);
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.4rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="brand-section">
+        <div class="icon-badge">🏛️</div>
+        <div>
+          <h1 class="brand-title">TRU<span>DATA</span> CONTABILIDADES</h1>
+          <p style="font-size:0.85rem; color:var(--text-muted);">
+            Hub de Alavancagem B2B2B · Homologação de Escritórios Contábeis no Norte/Noroeste Gaúcho
+          </p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="radar_clientes.html" class="btn btn-secondary">🛰️ Radar B2B</a>
+        <a href="crm.html" class="btn btn-secondary">💼 CRM Pipeline</a>
+        <a href="termo_parceria_contabil.html" target="_blank" class="btn btn-secondary" style="color:#fbbf24; border-color:rgba(251,191,36,0.4);">
+          📜 Termo Parceria A4 ↗
+        </a>
+        <button onclick="focarRoteiroLigacao()" class="btn" style="background:linear-gradient(135deg, #0284c7, #2563eb); color:#fff; font-weight:800; border:2px solid #38bdf8; box-shadow:0 0 16px rgba(56,189,248,0.5); font-size:0.82rem; padding:0.45rem 1rem;" title="Rolar direto para o texto do roteiro de ligação na tela">
+          🎙️ TEXTO DA LIGAÇÃO (NICOLAS)
+        </button>
+        <button onclick="abrirModalRoteirizador()" class="btn btn-primary" title="Traçar circuitos rodoviários para visitas a campo">
+          🚗 Roteirizador de Visitas
+        </button>
+        <button onclick="enviarTodasContabilidadesAoCRM()" class="btn btn-emerald" id="btn-bulk-crm-cont" title="Importar os 72 escritórios ao CRM Pipeline">
+          📥 Enviar ao CRM (<span id="count-bulk-badge">72</span>)
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO & CALCULADORA -->
+    <section class="hero-banner">
+      <div>
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+          <span style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(168,85,247,0.15); border:1px solid rgba(168,85,247,0.4); padding:0.25rem 0.75rem; border-radius:999px; font-size:0.75rem; color:#d8b4fe; font-weight:700;">
+            ⚡ Canal Estratégico de Maior ROI da Hansen Software
+          </span>
+          <span style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); padding:0.25rem 0.75rem; border-radius:999px; font-size:0.75rem; color:#34d399; font-weight:700;">
+            🛡️ Base Auditada: 72 Escritórios Reais RS · 28 Sites Ativos Comprovados · 44 Sem Website · 0 Fictícios
+          </span>
+        </div>
+        <h2 class="hero-title">
+          1 Escritório Parceiro = <span style="color:#c084fc;">40 a 90 Novos Clientes</span> no Varejo Regional.
+        </h2>
+        <p class="hero-desc">
+          O comerciante raramente troca de ERP sozinho, mas adota no mesmo dia quando o <strong>seu contador de confiança</strong> recomenda. Ao resolver as dores fiscais do escritório contábil (fechamento pontual, zero retrabalho de devoluções e troca de empresa em 2 cliques), a TruData se torna o sistema padrão de toda a carteira de clientes do escritório.
+        </p>
+        <div class="hero-pills">
+          <span class="hero-pill">🔑 Multiempresa em 1 login</span>
+          <span class="hero-pill">📄 Devolução Fiscal por XML</span>
+          <span class="hero-pill">💰 Honorários Automáticos no Sicredi</span>
+          <span class="hero-pill">🤝 Comissões Recorrentes de Parceria</span>
+        </div>
+      </div>
+
+      <!-- CALCULADORA DE ALAVANCAGEM -->
+      <div class="calculator-box">
+        <div class="calc-title">
+          <span>🧮</span> Simulador de Alavancagem B2B2B
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Escritórios Parceiros Homologados:</span>
+            <span class="slider-val" id="val-escritorios">5 escritórios</span>
+          </div>
+          <input type="range" id="rng-escritorios" min="1" max="25" value="5" oninput="recalcularSimulacao()">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Média de Clientes Varejo por Escritório:</span>
+            <span class="slider-val" id="val-clientes">25 empresas</span>
+          </div>
+          <input type="range" id="rng-clientes" min="10" max="60" value="25" step="5" oninput="recalcularSimulacao()">
+        </div>
+
+        <div class="calc-results-grid">
+          <div class="calc-result-item">
+            <span class="calc-result-lbl">Novos Clientes</span>
+            <span class="calc-result-val" id="res-total-clientes" style="color:#38bdf8;">125</span>
+          </div>
+          <div class="calc-result-item">
+            <span class="calc-result-lbl">MRR Estimado</span>
+            <span class="calc-result-val" id="res-mrr" style="color:#34d399;">R$ 31.125</span>
+          </div>
+          <div class="calc-result-item">
+            <span class="calc-result-lbl">Comissão Parceiros</span>
+            <span class="calc-result-val" id="res-comissao" style="color:#c084fc;">R$ 4.668</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OS 4 PILARES DE VALOR PARA O CONTADOR -->
+    <section class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon">🔑</div>
+        <h3 class="pillar-title">1. Modo Escritório Multiempresa</h3>
+        <p class="pillar-desc">
+          O analista do escritório transita entre todos os clientes pelo seletor no topo da tela em 2 cliques. Chega de deslogar da SEFAZ, trocar de abas ou decorar dezenas de senhas.
+        </p>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-icon">🔄</div>
+        <h3 class="pillar-title">2. Devolução Fiscal por XML</h3>
+        <p class="pillar-desc">
+          Basta subir o XML da nota que o sistema valida na SEFAZ-RS, monta a devolução (compra ou venda) e espelha os tributos sem bagunçar o estoque ou financeiro do cliente.
+        </p>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-icon">🗂️</div>
+        <h3 class="pillar-title">3. Fechamento Mensal no Piloto</h3>
+        <p class="pillar-desc">
+          Todos os XMLs de NF-e, NFC-e, NFS-e e arquivos SPED EFD são organizados em pasta ZIP única ou exportados direto para o sistema contábil (Domínio, Questor, etc.) todo dia 1º.
+        </p>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-icon">💰</div>
+        <h3 class="pillar-title">4. Honorários do Escritório no PIX</h3>
+        <p class="pillar-desc">
+          O escritório cadastra os contratos uma vez e a TruData emite as NFS-e em lote, gera boletos/PIX no Sicredi e roda a régua de cobrança automática por WhatsApp para evitar inadimplência.
+        </p>
+      </div>
+    </section>
+
+    <!-- TOOLBAR DOS ESCRITÓRIOS -->
+    <div class="toolbar-contadores">
+      <div>
+        <h2 style="font-size:1.15rem; font-weight:800; color:#fff;" id="titulo-toolbar-cont">
+          Escritórios Contábeis Auditados na Região (Raio 150 km)
+        </h2>
+        <span style="font-size:0.75rem; color:var(--text-muted);" id="subtitulo-toolbar-cont">
+          Carregando escritórios reais e ativos...
+        </span>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+        <input type="text" id="txt-busca-cont" class="search-input" placeholder="🔍 Buscar por escritório, cidade ou sócio..." oninput="filtrarContabilidades()">
+        
+        <select id="sel-filtro-cidade" class="search-input" style="min-width:180px;" onchange="filtrarContabilidades()">
+          <option value="todas" selected>🏙️ Todas as Cidades</option>
+          <option value="Sarandi">Sarandi - RS</option>
+          <option value="Passo Fundo">Passo Fundo - RS</option>
+          <option value="Carazinho">Carazinho - RS</option>
+          <option value="Marau">Marau - RS</option>
+          <option value="Palmeira das Missões">Palmeira das Missões - RS</option>
+          <option value="Erechim">Erechim - RS</option>
+          <option value="Frederico Westphalen">Frederico Westphalen - RS</option>
+          <option value="Tapejara">Tapejara - RS</option>
+          <option value="Ronda Alta">Ronda Alta - RS</option>
+          <option value="Constantina">Constantina - RS</option>
+        </select>
+
+        <select id="sel-filtro-site" class="search-input" style="min-width:190px;" onchange="filtrarContabilidades()">
+          <option value="todos" selected>🌐 Todos os Status Web (72)</option>
+          <option value="com_site">✅ Com Website Verificado (28)</option>
+          <option value="sem_site">📵 Sem Website Oficial (44)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- SEÇÃO TELEPROMPTER ABERTA NA TELA (ROTEIRO DE LIGAÇÃO DO NICOLAS) -->
+    <section id="secao-roteiro-ligacao" style="background: linear-gradient(180deg, #091326 0%, #060b17 100%); border: 2px solid #38bdf8; border-radius: 1.25rem; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 10px 40px rgba(56, 189, 248, 0.2);">
+      
+      <!-- CABEÇALHO DO TELEPROMPTER -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.25rem; border-bottom:1px solid rgba(56,189,248,0.25); padding-bottom:1rem;">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <div style="background:#0284c7; color:#fff; font-size:1.5rem; width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 15px rgba(56,189,248,0.5);">
+            🎙️
+          </div>
+          <div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span style="background:rgba(56,189,248,0.2); color:#38bdf8; font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:999px; border:1px solid rgba(56,189,248,0.4); text-transform:uppercase;">
+                Texto Pronto na Tela
+              </span>
+              <span id="badge-alvo-ligacao" style="background:rgba(168,85,247,0.2); color:#d8b4fe; font-size:0.7rem; font-weight:700; padding:2px 8px; border-radius:999px; border:1px solid rgba(168,85,247,0.4);">
+                📍 Alvo: Escritório Contábil Geral (ou clique num card abaixo)
+              </span>
+            </div>
+            <h2 style="font-size:1.3rem; font-weight:800; color:#fff; margin-top:0.2rem;">
+              Roteiro de Cold Call (45s) — Nicolas (Hansen Software)
+            </h2>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+          <button onclick="copiarRoteiroTela()" class="btn btn-primary" style="background:#0284c7; border:none; font-size:0.82rem; padding:0.5rem 1rem; font-weight:700;" title="Copiar todo o texto falado para a área de transferência">
+            📋 Copiar Texto Completo
+          </button>
+          <button onclick="abrirModalGuiaLigacao()" class="btn btn-secondary" style="font-size:0.82rem; padding:0.5rem 1rem; color:#fbbf24; border-color:rgba(251,191,36,0.4);" title="Abrir respostas para objeções no telefone">
+            🥊 Ver Objeções & Respostas
+          </button>
+        </div>
+      </div>
+
+      <!-- OS 4 BLOCOS DO PITCH LADO A LADO / GRADE -->
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem;">
+        
+        <!-- PASSO 1 -->
+        <div style="background:#0f172a; border:1px solid rgba(56,189,248,0.3); border-radius:0.9rem; padding:1rem; border-top:4px solid #38bdf8;">
+          <div style="font-size:0.7rem; font-weight:800; color:#38bdf8; text-transform:uppercase; margin-bottom:0.4rem;">
+            1. Apresentação Regional
+          </div>
+          <p id="fala-passo-1" style="font-size:0.92rem; color:#f8fafc; line-height:1.45; margin:0;">
+            "Bom dia / Boa tarde! Tudo bem? Aqui quem fala é o <strong>Nicolas</strong>, trabalho na <strong>Hansen Software</strong>, aqui do ladinho de vocês em <strong>Sarandi</strong>."
+          </p>
+        </div>
+
+        <!-- PASSO 2 -->
+        <div style="background:#0f172a; border:1px solid rgba(251,191,36,0.3); border-radius:0.9rem; padding:1rem; border-top:4px solid #fbbf24;">
+          <div style="font-size:0.7rem; font-weight:800; color:#fbbf24; text-transform:uppercase; margin-bottom:0.4rem;">
+            2. Pergunta Diagnóstica (Rotina)
+          </div>
+          <p id="fala-passo-2" style="font-size:0.92rem; color:#f8fafc; line-height:1.45; margin:0;">
+            "<span id="nome-contador-fala">Contador(a)</span>, uma pergunta bem rápida da sua rotina prática: <em>como você emite nota hoje e faz notas para clientes que pedem socorro no escritório?</em>"
+          </p>
+          <span style="font-size:0.7rem; color:#94a3b8; display:block; margin-top:0.4rem;">⏸️ <em>Faça silêncio e ouça o desabafo (10s).</em></span>
+        </div>
+
+        <!-- PASSO 3 -->
+        <div style="background:#0f172a; border:1px solid rgba(192,132,252,0.3); border-radius:0.9rem; padding:1rem; border-top:4px solid #c084fc;">
+          <div style="font-size:0.7rem; font-weight:800; color:#c084fc; text-transform:uppercase; margin-bottom:0.4rem;">
+            3. Solução em 2 Cliques
+          </div>
+          <p id="fala-passo-3" style="font-size:0.92rem; color:#f8fafc; line-height:1.45; margin:0;">
+            "Nós temos um sistema que permite <strong>tirar notas para vários clientes no mesmo local</strong>: com <strong>2 cliques você já está emitindo notas para outro cliente</strong>, sem deslogar da SEFAZ e sem travar."
+          </p>
+        </div>
+
+        <!-- PASSO 4 -->
+        <div style="background:#0f172a; border:1px solid rgba(52,211,153,0.3); border-radius:0.9rem; padding:1rem; border-top:4px solid #34d399;">
+          <div style="font-size:0.7rem; font-weight:800; color:#34d399; text-transform:uppercase; margin-bottom:0.4rem;">
+            4. CTA 10 Minutos & Opção Dupla
+          </div>
+          <p id="fala-passo-4" style="font-size:0.92rem; color:#f8fafc; line-height:1.45; margin:0;">
+            "<strong>Quando podemos fazer uma reunião rápida de demonstração? Te prometo que não passa de 10 minutos!</strong><br>
+            Fica melhor para você amanhã às <strong>10h</strong> ou às <strong>14h30</strong>?"
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GRID DE ESCRITÓRIOS -->
+    <div class="contadores-grid" id="grid-contadores">
+      <!-- Inserido dinamicamente via JS -->
+    </div>
+
+    <!-- CADÊNCIA DE 3 TOQUES PRONTA -->
+    <section class="cadencia-section">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <span style="font-size:0.75rem; font-weight:800; color:#c084fc; text-transform:uppercase;">Playbook Comercial</span>
+          <h2 style="font-size:1.25rem; font-weight:800; color:#fff; margin-top:0.2rem;">Cadência de 3 Toques para WhatsApp de Contadores</h2>
+        </div>
+        <a href="dossie_contador.html" target="_blank" class="btn btn-secondary" style="font-size:0.78rem;">
+          📄 Ver Dossiê Completo para Contadores ↗
+        </a>
+      </div>
+
+      <div class="cadencia-grid">
+        <!-- Toque 1 -->
+        <div class="cadencia-card">
+          <div>
+            <span class="cadencia-step-badge">Dia 1 · Abertura Consultiva</span>
+            <h4 style="font-size:0.95rem; font-weight:800; color:#fff; margin:0.4rem 0;">Apresentação do Modo Escritório</h4>
+            <div class="cadencia-text" id="cadencia-msg-1">
+Olá, [Nome]! Tudo bem? Aqui é da equipe TruData (Hansen Software, de Sarandi).
+
+Desenvolvemos no nosso ERP Web uma função chamada Modo Escritório: troca de cliente em 2 cliques sem deslogar da SEFAZ e envio de todos os XMLs e SPED sem atrasos todo dia 1º.
+
+Criamos uma proposta de parceria com benefícios fiscais e comissão para o escritório: https://trudata.com.br/para-contadores
+
+Faz sentido conversarmos 5 minutinhos nesta semana?
+            </div>
+          </div>
+          <button class="btn btn-secondary" style="width:100%; font-size:0.75rem; justify-content:center;" onclick="copiarTexto(document.getElementById('cadencia-msg-1').innerText, 'Toque 1 copiado!')">
+            📋 Copiar Mensagem (Toque 1)
+          </button>
+        </div>
+
+        <!-- Toque 2 -->
+        <div class="cadencia-card">
+          <div>
+            <span class="cadencia-step-badge">Dia 4 · Prova de Tempo</span>
+            <h4 style="font-size:0.95rem; font-weight:800; color:#fff; margin:0.4rem 0;">Eliminação de Retrabalho Fiscal</h4>
+            <div class="cadencia-text" id="cadencia-msg-2">
+Oi, [Nome]! Passando rápido para compartilhar:
+
+Os analistas fiscais que atendem nossos clientes relatam economizar mais de 3 horas por semana por não precisarem cobrar arquivos XML nem corrigir notas rejeitadas no fechamento do mês.
+
+Se quiser, dou um pulo aí no escritório para tomarmos um café ou te mostro em 10 minutos pelo Meet.
+            </div>
+          </div>
+          <button class="btn btn-secondary" style="width:100%; font-size:0.75rem; justify-content:center;" onclick="copiarTexto(document.getElementById('cadencia-msg-2').innerText, 'Toque 2 copiado!')">
+            📋 Copiar Mensagem (Toque 2)
+          </button>
+        </div>
+
+        <!-- Toque 3 -->
+        <div class="cadencia-card">
+          <div>
+            <span class="cadencia-step-badge">Dia 8 · Convite Café / Demonstração</span>
+            <h4 style="font-size:0.95rem; font-weight:800; color:#fff; margin:0.4rem 0;">Agendamento de Demonstração</h4>
+            <div class="cadencia-text" id="cadencia-msg-3">
+Olá, [Nome]! Imagino que a rotina esteja corrida com o fechamento contábil.
+
+Quinta ou sexta-feira pela manhã você teria 10 minutinhos livres? Posso passar aí para te entregar o Dossiê Técnico de Conformidade SEFAZ da TruData e ver como podemos apoiar seus clientes lojistas.
+            </div>
+          </div>
+          <button class="btn btn-secondary" style="width:100%; font-size:0.75rem; justify-content:center;" onclick="copiarTexto(document.getElementById('cadencia-msg-3').innerText, 'Toque 3 copiado!')">
+            📋 Copiar Mensagem (Toque 3)
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">
+    <span>✅</span>
+    <span id="toast-text">Ação executada com sucesso!</span>
+  </div>
+
+  <script>
+    let CONTABILIDADES_LISTA = [];
+
+    // Recalcula o simulador de alavancagem comercial
+    function recalcularSimulacao() {
+      const esc = parseInt(document.getElementById('rng-escritorios').value);
+      const cli = parseInt(document.getElementById('rng-clientes').value);
+
+      document.getElementById('val-escritorios').innerText = `${esc} escritório${esc > 1 ? 's' : ''}`;
+      document.getElementById('val-clientes').innerText = `${cli} empresa${cli > 1 ? 's' : ''}`;
+
+      const totalClientes = esc * cli;
+      const mrr = totalClientes * 249; // Ticket médio R$ 249/mês
+      const comissao = mrr * 0.15; // 15% de comissão de parceria
+
+      document.getElementById('res-total-clientes').innerText = totalClientes;
+      document.getElementById('res-mrr').innerText = `R$ ${mrr.toLocaleString('pt-BR')}`;
+      document.getElementById('res-comissao').innerText = `R$ ${Math.round(comissao).toLocaleString('pt-BR')}`;
+    }
+
+    // Carrega contabilidades da base oficial do servidor
+    async function carregarContabilidades() {
+      try {
+        const r = await fetch('/api/prospectar?raio=150&segmento=Escritórios%20de%20Contabilidade');
+        if (r.ok) {
+          const data = await r.json();
+          CONTABILIDADES_LISTA = data.clientes || [];
+          popularCidadesFiltro(CONTABILIDADES_LISTA);
+          atualizarCabecalho(CONTABILIDADES_LISTA.length, CONTABILIDADES_LISTA.length);
+          renderizarContabilidades(CONTABILIDADES_LISTA);
+        }
+      } catch (e) {
+        console.error('Erro ao carregar contabilidades:', e);
+      }
+    }
+
+    function popularCidadesFiltro(lista) {
+      const sel = document.getElementById('sel-filtro-cidade');
+      const contagemPorCidade = {};
+      lista.forEach(item => {
+        const c = item.cidade || 'Outra';
+        contagemPorCidade[c] = (contagemPorCidade[c] || 0) + 1;
+      });
+
+      const cidadesOrdenadas = Object.keys(contagemPorCidade).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+      
+      let html = `<option value="todas" selected>🏙️ Todas as Cidades (${lista.length})</option>`;
+      cidadesOrdenadas.forEach(c => {
+        html += `<option value="${c}">${c} - RS (${contagemPorCidade[c]})</option>`;
+      });
+      sel.innerHTML = html;
+    }
+
+    function atualizarCabecalho(exibidos, total) {
+      const sub = document.getElementById('subtitulo-toolbar-cont');
+      if (sub) {
+        if (exibidos === total) {
+          sub.innerHTML = `<strong>${total} escritórios contábeis ativos</strong> auditados em 24 municípios num raio de 150 km de Sarandi`;
+        } else {
+          sub.innerHTML = `Exibindo <strong>${exibidos}</strong> de <strong>${total}</strong> escritórios ativos`;
+        }
+      }
+    }
+
+    function renderizarContabilidades(lista) {
+      const grid = document.getElementById('grid-contadores');
+      grid.innerHTML = '';
+
+      if (lista.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align:center; padding:3rem; background:#0f172a; border-radius:1rem; border:1px solid var(--card-border);">
+            <div style="font-size:2.5rem; margin-bottom:0.5rem;">🔍</div>
+            <h3 style="font-size:1.1rem; font-weight:800; color:#fff;">Nenhum escritório contábil encontrado com este filtro</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">Tente selecionar 'Todas as Cidades' ou limpar a busca textual.</p>
+          </div>
+        `;
+        return;
+      }
+
+      lista.forEach(item => {
+        const primeiroNomeDecisor = (item.decisor || 'Contador(a)').split(' ')[0];
+        const clientesEstimados = item.clientes_estimados || (item.cidade === 'Passo Fundo' ? 120 : (item.cidade === 'Sarandi' ? 70 : 50));
+        
+        const msgWpp = `Olá, ${primeiroNomeDecisor}! Tudo bem? Aqui é da TruData ERP (Hansen Software, de Sarandi-RS).\n\nDesenvolvemos o *Modo Escritório* no nosso ERP Web sob medida para eliminar o retrabalho contábil da ${item.nome}:\n• Troca de empresas em 2 cliques sem deslogar na SEFAZ;\n• Validação e devolução fiscal automática por XML;\n• Envio automático de todos os XMLs e SPED sem atrasos todo dia 1º.\n\nPreparamos uma proposta de parceria e homologação para o seu escritório. Faz sentido conversarmos 5 minutinhos nesta semana?`;
+        const linkWpp = item.whatsapp ? `https://wa.me/${item.whatsapp}?text=${encodeURIComponent(msgWpp)}` : '#';
+
+        const card = document.createElement('div');
+        card.className = 'contador-card';
+
+        card.innerHTML = `
+          <div>
+            <div class="card-top-row">
+              <span class="badge-multiplier-pill">
+                🏛️ Multiplicador: ~${clientesEstimados} clientes
+              </span>
+              <span class="badge-dist">📍 ${item.distancia_km || 0} km</span>
+            </div>
+
+            <div class="contador-nome">${item.nome}</div>
+            <div class="contador-razao">${item.razao_social || ''} · <strong style="color:#38bdf8;">CNPJ:</strong> ${item.cnpj}</div>
+          </div>
+
+          <div class="contador-details">
+            <div class="detail-item">
+              <span>🏢</span>
+              <span><strong>${item.endereco}</strong>, ${item.bairro} — ${item.cidade}/RS</span>
+            </div>
+            <div class="detail-item">
+              <span>👤</span>
+              <span>Sócio(a) Decisor(a): <strong>${item.decisor || 'Diretoria Contábil'}</strong></span>
+            </div>
+            <div class="detail-item">
+              <span>📞</span>
+              <span>Telefone: <strong style="color:#34d399;">${item.telefone || 'Não informado'}</strong></span>
+            </div>
+            <div class="detail-item">
+              <span>✉️</span>
+              <span>E-mail: <strong style="color:#38bdf8;">${item.email || 'Não informado'}</strong></span>
+            </div>
+            <div class="detail-item">
+              <span>🌐</span>
+              <span>Website: ${item.tem_site && item.site && item.site !== 'Não possui site' && !item.site.includes('gmail.com') && !item.site.includes('annex.com.br') ? `
+                <a href="${item.site}" target="_blank" style="color:#38bdf8; text-decoration:none; font-weight:700; display:inline-flex; align-items:center; gap:4px; background:rgba(56,189,248,0.1); padding:2px 8px; border-radius:6px; border:1px solid rgba(56,189,248,0.3);" title="Abrir site oficial verificado">
+                  ${item.site.replace(/^https?:\/\//, '').replace(/\/$/, '')} ↗
+                </a>
+                <span style="font-size:0.65rem; background:rgba(16,185,129,0.15); color:#34d399; padding:2px 6px; border-radius:4px; font-weight:800; border:1px solid rgba(16,185,129,0.3);">✓ Site Verificado</span>
+              ` : `
+                <span style="color:#94a3b8; font-size:0.75rem; display:inline-flex; align-items:center; gap:4px; background:rgba(255,255,255,0.04); padding:2px 8px; border-radius:6px; border:1px dashed rgba(255,255,255,0.1);">
+                  📵 Sem website oficial (contato direto fone/WhatsApp)
+                </span>
+              `}</span>
+            </div>
+          </div>
+
+          <div class="card-actions-bar">
+            <button onclick="personalizarRoteiroPara('${(item.nome || '').replace(/'/g, "\\'")}', '${(item.decisor || '').replace(/'/g, "\\'")}', '${item.cidade}')" class="btn-card" style="background:#0284c7; color:#fff; font-weight:800; border:1px solid #38bdf8;" title="Ver texto de ligação calibrado para este escritório">
+              📞 Roteiro
+            </button>
+            ${item.whatsapp ? `
+            <a href="${linkWpp}" target="_blank" class="btn-card btn-card-wpp" title="Enviar Proposta de Parceria no WhatsApp">
+              💬 WhatsApp
+            </a>` : `
+            <a href="tel:${item.telefone || ''}" class="btn-card btn-card-wpp" style="background:#334155;">
+              📞 Ligar
+            </a>`}
+            <a href="termo_parceria_contabil.html?nome=${encodeURIComponent(item.nome)}&razao=${encodeURIComponent(item.razao_social || item.nome)}&cnpj=${encodeURIComponent(item.cnpj)}&cidade=${encodeURIComponent(item.cidade)}&decisor=${encodeURIComponent(item.decisor || '')}&endereco=${encodeURIComponent(item.endereco || '')}&telefone=${encodeURIComponent(item.whatsapp || item.telefone || '')}&email=${encodeURIComponent(item.email || '')}" target="_blank" class="btn-card" style="background:#4c1d95; color:#e9d5ff; border:1px solid #8b5cf6;" title="Emitir Termo de Parceria e Homologação Técnica A4">
+              📜 Termo A4
+            </a>
+            <button onclick="adicionarContadorAoCRM('${item.id || item.cnpj}')" class="btn-card" id="btn-crm-${(item.id || item.cnpj).replace(/\D/g, '')}" style="background:#1e293b; color:#38bdf8; border:1px solid rgba(56,189,248,0.3);" title="Importar Escritório para o Pipeline do CRM">
+              📥 + CRM
+            </button>
+            ${item.email && item.email.includes('@') ? `
+            <button onclick="dispararEmailContador('${item.id || item.cnpj}')" class="btn-card" style="background:#0284c7; color:#fff;" title="Disparar Proposta de Parceria por E-mail">
+              ✉️ E-mail
+            </button>` : ''}
+            <a href="dossie_contador.html" target="_blank" class="btn-card btn-card-dossie" title="Abrir Dossiê Técnico para Contadores">
+              📄 Dossiê
+            </a>
+            <a href="copiloto_vendas.html?cliente=${encodeURIComponent(item.nome)}&cidade=${encodeURIComponent(item.cidade)}&segmento=Contabilidade&decisor=${encodeURIComponent(item.decisor || '')}&telefone=${encodeURIComponent(item.whatsapp || item.telefone || '')}" target="_blank" class="btn-card" style="background:rgba(255,255,255,0.08); color:#fff;" title="Abrir no Copiloto IA de Vendas">
+              🧠
+            </a>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function filtrarContabilidades() {
+      const termo = document.getElementById('txt-busca-cont').value.toLowerCase().trim();
+      const cidade = document.getElementById('sel-filtro-cidade').value;
+      const filtroSite = document.getElementById('sel-filtro-site') ? document.getElementById('sel-filtro-site').value : 'todos';
+
+      const filtrados = CONTABILIDADES_LISTA.filter(c => {
+        const atendeCidade = (cidade === 'todas') || (c.cidade && c.cidade.toLowerCase() === cidade.toLowerCase());
+        const atendeSite = (filtroSite === 'todos') 
+          || (filtroSite === 'com_site' && c.tem_site && c.site && c.site !== 'Não possui site') 
+          || (filtroSite === 'sem_site' && (!c.tem_site || !c.site || c.site === 'Não possui site'));
+        const texto = `${c.nome} ${c.razao_social} ${c.cidade} ${c.endereco} ${c.decisor} ${c.email} ${c.telefone}`.toLowerCase();
+        const atendeTermo = !termo || texto.includes(termo);
+        return atendeCidade && atendeSite && atendeTermo;
+      });
+
+      atualizarCabecalho(filtrados.length, CONTABILIDADES_LISTA.length);
+      renderizarContabilidades(filtrados);
+    }
+
+    // Adiciona um escritório específico ao CRM Pipeline
+    async function adicionarContadorAoCRM(idOuCnpj) {
+      const esc = CONTABILIDADES_LISTA.find(c => (c.id && c.id == idOuCnpj) || c.cnpj == idOuCnpj);
+      if (!esc) return;
+
+      const payload = {
+        empresa: esc.nome,
+        nome: esc.decisor || 'Diretoria Contábil',
+        cidade: `${esc.cidade} - RS`,
+        segmento: "Escritórios de Contabilidade",
+        telefone: esc.whatsapp || esc.telefone,
+        email: esc.email || "",
+        caixas: 1,
+        origem: "Canal Parceiro Contábil (150km)",
+        fase: "novo",
+        notas: `Escritório com ~${esc.clientes_estimados || 70} clientes na carteira. CNPJ: ${esc.cnpj}. Endereço: ${esc.endereco}, ${esc.bairro}`
+      };
+
+      try {
+        const res = await fetch('/api/importar_prospect_crm', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.sucesso) {
+          mostrarToast(`✅ ${esc.nome} adicionado ao CRM com sucesso!`);
+          const btnId = `btn-crm-${(esc.id || esc.cnpj).replace(/\D/g, '')}`;
+          const btn = document.getElementById(btnId);
+          if (btn) {
+            btn.style.background = '#059669';
+            btn.style.color = '#fff';
+            btn.innerText = '✓ No CRM';
+          }
+        } else {
+          mostrarToast(`ℹ️ ${data.resultado || 'Já cadastrado no CRM'}`);
+        }
+      } catch (err) {
+        console.error(err);
+        mostrarToast('Erro ao conectar ao servidor CRM.');
+      }
+    }
+
+    // Envia todas as contabilidades da lista filtrada para o CRM
+    async function enviarTodasContabilidadesAoCRM() {
+      if (!confirm(`Deseja importar todos os ${CONTABILIDADES_LISTA.length} escritórios de contabilidade diretamente para o pipeline do CRM?`)) {
+        return;
+      }
+
+      const listaPayload = CONTABILIDADES_LISTA.map(esc => ({
+        empresa: esc.nome,
+        nome: esc.decisor || 'Diretoria Contábil',
+        cidade: `${esc.cidade} - RS`,
+        segmento: "Escritórios de Contabilidade",
+        telefone: esc.whatsapp || esc.telefone,
+        email: esc.email || "",
+        caixas: 1,
+        origem: "Canal Parceiro Contábil (150km)",
+        fase: "novo",
+        notas: `Escritório parceiro (~${esc.clientes_estimados || 70} empresas). CNPJ: ${esc.cnpj}.`
+      }));
+
+      mostrarToast(`⏳ Enviando ${listaPayload.length} escritórios ao CRM...`);
+
+      try {
+        const res = await fetch('/api/importar_prospect_crm', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(listaPayload)
+        });
+        const data = await res.json();
+        if (data.sucesso) {
+          mostrarToast(`🎉 ${data.total_adicionados} escritórios importados com sucesso para o CRM!`);
+          const badge = document.getElementById('count-bulk-badge');
+          if (badge) badge.innerText = 'Importados';
+        }
+      } catch (err) {
+        console.error(err);
+        mostrarToast('Erro ao importar contabilidades em lote.');
+      }
+    }
+
+    // Dispara proposta de parceria por e-mail com 1 clique
+    async function dispararEmailContador(idOuCnpj) {
+      const esc = CONTABILIDADES_LISTA.find(c => (c.id && c.id == idOuCnpj) || c.cnpj == idOuCnpj);
+      if (!esc || !esc.email) {
+        alert('Este escritório não possui e-mail cadastrado.');
+        return;
+      }
+
+      if (!confirm(`Enviar Proposta de Parceria Estratégica oficial para ${esc.nome} (${esc.email})?`)) {
+        return;
+      }
+
+      mostrarToast(`📤 Enviando proposta para ${esc.email}...`);
+
+      try {
+        const res = await fetch('/api/enviar_proposta_email', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            destinatario: esc.email,
+            cliente: esc.nome,
+            cidade: esc.cidade,
+            segmento: "Escritórios de Contabilidade",
+            decisor: esc.decisor || "Contador Responsável",
+            caixas: 1,
+            cnpj: esc.cnpj,
+            telefone: esc.whatsapp || esc.telefone
+          })
+        });
+        const data = await res.json();
+        if (data.sucesso) {
+          mostrarToast(`✅ Proposta enviada com sucesso para ${esc.email}!`);
+        } else {
+          mostrarToast(`Erro: ${data.erro || 'Falha no envio do e-mail'}`);
+        }
+      } catch (err) {
+        console.error(err);
+        mostrarToast('Erro ao comunicar com o servidor de e-mails.');
+      }
+    }
+
+    // MODAL DO ROTEIRIZADOR DE VISITAS
+    function abrirModalRoteirizador() {
+      document.getElementById('modal-roteirizador').classList.add('active');
+    }
+
+    function fecharModalRoteirizador() {
+      document.getElementById('modal-roteirizador').classList.remove('active');
+    }
+
+    function abrirRotaGoogleMaps(circuitoId) {
+      let cidadesRota = [];
+      if (circuitoId === 1) {
+        cidadesRota = ["Sarandi RS", "Carazinho RS", "Não-Me-Toque RS", "Passo Fundo RS", "Sarandi RS"];
+      } else if (circuitoId === 2) {
+        cidadesRota = ["Sarandi RS", "Ronda Alta RS", "Constantina RS", "Palmeira das Missões RS", "Sarandi RS"];
+      } else if (circuitoId === 3) {
+        cidadesRota = ["Sarandi RS", "Tapejara RS", "Getúlio Vargas RS", "Erechim RS", "Sarandi RS"];
+      } else if (circuitoId === 4) {
+        cidadesRota = ["Sarandi RS", "Panambi RS", "Ibirubá RS", "Cruz Alta RS", "Ijuí RS", "Santo Ângelo RS"];
+      }
+
+      const origem = encodeURIComponent(cidadesRota[0]);
+      const destino = encodeURIComponent(cidadesRota[cidadesRota.length - 1]);
+      const waypoints = cidadesRota.slice(1, -1).map(c => encodeURIComponent(c)).join('|');
+
+      const url = `https://www.google.com/maps/dir/?api=1&origin=${origem}&destination=${destino}&waypoints=${waypoints}&travelmode=driving`;
+      window.open(url, '_blank');
+    }
+
+    function copiarTexto(txt, msg) {
+      navigator.clipboard.writeText(txt).then(() => {
+        mostrarToast(msg || 'Texto copiado para a área de transferência!');
+      });
+    }
+
+    function mostrarToast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toast-text').innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // MODAL DO MINI GUIA DE LIGAÇÕES (NICOLAS)
+    function abrirModalGuiaLigacao() {
+      document.getElementById('modal-guia-ligacao').classList.add('active');
+    }
+    function fecharModalGuiaLigacao() {
+      document.getElementById('modal-guia-ligacao').classList.remove('active');
+    }
+
+    // ROLA A TELA E DESTACA O TELEPROMPTER DE LIGAÇÃO
+    function focarRoteiroLigacao() {
+      const sec = document.getElementById('secao-roteiro-ligacao');
+      if (sec) {
+        sec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        sec.style.transition = 'all 0.4s ease';
+        sec.style.borderColor = '#34d399';
+        sec.style.boxShadow = '0 0 35px rgba(52, 211, 153, 0.6)';
+        setTimeout(() => {
+          sec.style.borderColor = '#38bdf8';
+          sec.style.boxShadow = '0 10px 40px rgba(56, 189, 248, 0.2)';
+        }, 1500);
+      }
+    }
+
+    // PERSONALIZA O TEXTO DA LIGAÇÃO PARA O ESCRITÓRIO ESPECÍFICO
+    function personalizarRoteiroPara(empresa, decisor, cidade) {
+      const badge = document.getElementById('badge-alvo-ligacao');
+      const fala2 = document.getElementById('fala-passo-2');
+
+      const primeiroNome = (decisor && decisor !== 'Diretoria Contábil' && decisor !== 'Diretoria') ? decisor.split(' ')[0] : 'Contador(a)';
+
+      if (badge) {
+        badge.innerHTML = `🎯 Alvo: <strong>${empresa}</strong> (${cidade}) · Sócio(a): <strong>${decisor || 'Diretoria'}</strong>`;
+        badge.style.background = 'rgba(52, 211, 153, 0.25)';
+        badge.style.color = '#34d399';
+        badge.style.borderColor = '#34d399';
+      }
+
+      if (fala2) {
+        fala2.innerHTML = `"${primeiroNome}, uma pergunta bem rápida da rotina da <strong>${empresa}</strong>: <em>como é que vocês emitem nota hoje e fazem notas para os clientes que pedem socorro aí no escritório?</em>"`;
+      }
+
+      focarRoteiroLigacao();
+      mostrarToast(`Texto da ligação calibrado para: ${empresa}!`);
+    }
+
+    // COPIA TODO O TEXTO DO TELEPROMPTER DA TELA
+    function copiarRoteiroTela() {
+      const p1 = document.getElementById('fala-passo-1').innerText;
+      const p2 = document.getElementById('fala-passo-2').innerText;
+      const p3 = document.getElementById('fala-passo-3').innerText;
+      const p4 = document.getElementById('fala-passo-4').innerText;
+
+      const fullText = `1. ABERTURA REGIONAL:\n${p1}\n\n2. PERGUNTA DIAGNÓSTICA:\n${p2}\n\n3. GANCHO MULTIEMPRESA (2 CLIQUES):\n${p3}\n\n4. CTA 10 MINUTOS:\n${p4}`;
+      copiarTexto(fullText, 'Roteiro de Ligação copiado com sucesso!');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      recalcularSimulacao();
+      carregarContabilidades();
+    });
+  </script>
+
+  <!-- MODAL ROTEIRIZADOR TÁTICO DE VISITAS A CONTADORES -->
+  <div class="modal-backdrop" id="modal-roteirizador" onclick="if(event.target === this) fecharModalRoteirizador()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <span style="font-size:1.4rem;">🚗</span>
+          <div>
+            <h3 style="font-size:1.1rem; font-weight:800; color:#fff;">Roteirizador Tático a Campo — Visitas a Contabilidades</h3>
+            <p style="font-size:0.75rem; color:var(--text-muted);">Circuitos rodoviários otimizados partindo da matriz em Sarandi - RS</p>
+          </div>
+        </div>
+        <button onclick="fecharModalRoteirizador()" class="btn btn-secondary" style="padding:0.4rem 0.8rem;">✕ Fechar</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Circuito 1 -->
+        <div class="circuit-card">
+          <div class="circuit-header">
+            <div class="circuit-title">
+              <span>🛣️ Circuito 1: Eixo BR-386 & Planalto Médio (Sul)</span>
+            </div>
+            <span class="circuit-badge">18 Escritórios · ~110 km</span>
+          </div>
+          <div class="circuit-stops">
+            <span class="circuit-stop-pill">📍 Sarandi (Partida)</span> ➔
+            <span class="circuit-stop-pill">🏢 Carazinho (10 escritórios)</span> ➔
+            <span class="circuit-stop-pill">🏢 Não-Me-Toque (1 escritório)</span> ➔
+            <span class="circuit-stop-pill">🏢 Passo Fundo (7 escritórios)</span> ➔
+            <span class="circuit-stop-pill">📍 Sarandi (Retorno)</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.3rem; flex-wrap:wrap; gap:0.5rem;">
+            <span style="font-size:0.75rem; color:#94a3b8;">Maior polo de alavancagem comissionável: ~1.450 clientes comissíveis.</span>
+            <button onclick="abrirRotaGoogleMaps(1)" class="btn btn-primary" style="font-size:0.78rem;">
+              🗺️ Abrir Circuito 1 no Google Maps ↗
+            </button>
+          </div>
+        </div>
+
+        <!-- Circuito 2 -->
+        <div class="circuit-card">
+          <div class="circuit-header">
+            <div class="circuit-title">
+              <span>🛣️ Circuito 2: Eixo RS-404 & Missões (Oeste)</span>
+            </div>
+            <span class="circuit-badge">11 Escritórios · ~95 km</span>
+          </div>
+          <div class="circuit-stops">
+            <span class="circuit-stop-pill">📍 Sarandi</span> ➔
+            <span class="circuit-stop-pill">🏢 Ronda Alta (3 escritórios)</span> ➔
+            <span class="circuit-stop-pill">🏢 Constantina (3 escritórios)</span> ➔
+            <span class="circuit-stop-pill">🏢 Palmeira das Missões (5 escritórios)</span> ➔
+            <span class="circuit-stop-pill">📍 Sarandi</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.3rem; flex-wrap:wrap; gap:0.5rem;">
+            <span style="font-size:0.75rem; color:#94a3b8;">Circuito de proximidade imediata: forte penetração agropecuária e comércio local.</span>
+            <button onclick="abrirRotaGoogleMaps(2)" class="btn btn-primary" style="font-size:0.78rem;">
+              🗺️ Abrir Circuito 2 no Google Maps ↗
+            </button>
+          </div>
+        </div>
+
+        <!-- Circuito 3 -->
+        <div class="circuit-card">
+          <div class="circuit-header">
+            <div class="circuit-title">
+              <span>🛣️ Circuito 3: Eixo RS-324 & Alto Uruguai (Norte)</span>
+            </div>
+            <span class="circuit-badge">10 Escritórios · ~130 km</span>
+          </div>
+          <div class="circuit-stops">
+            <span class="circuit-stop-pill">📍 Sarandi</span> ➔
+            <span class="circuit-stop-pill">🏢 Tapejara (4 escritórios)</span> ➔
+            <span class="circuit-stop-pill">🏢 Getúlio Vargas (1 escritório)</span> ➔
+            <span class="circuit-stop-pill">🏢 Erechim (5 escritórios)</span> ➔
+            <span class="circuit-stop-pill">📍 Sarandi</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.3rem; flex-wrap:wrap; gap:0.5rem;">
+            <span style="font-size:0.75rem; color:#94a3b8;">Região industrial e comercial de alta escala e faturamento expressivo.</span>
+            <button onclick="abrirRotaGoogleMaps(3)" class="btn btn-primary" style="font-size:0.78rem;">
+              🗺️ Abrir Circuito 3 no Google Maps ↗
+            </button>
+          </div>
+        </div>
+
+        <!-- Circuito 4 -->
+        <div class="circuit-card">
+          <div class="circuit-header">
+            <div class="circuit-title">
+              <span>🛣️ Circuito 4: Eixo Alto Jacuí & Missões Ampliado (Raio 150km)</span>
+            </div>
+            <span class="circuit-badge">16 Escritórios · Expedição Regional</span>
+          </div>
+          <div class="circuit-stops">
+            <span class="circuit-stop-pill">📍 Sarandi</span> ➔
+            <span class="circuit-stop-pill">🏢 Panambi (2)</span> ➔
+            <span class="circuit-stop-pill">🏢 Ibirubá (2)</span> ➔
+            <span class="circuit-stop-pill">🏢 Cruz Alta (2)</span> ➔
+            <span class="circuit-stop-pill">🏢 Ijuí (1)</span> ➔
+            <span class="circuit-stop-pill">🏢 Santo Ângelo (2)</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.3rem; flex-wrap:wrap; gap:0.5rem;">
+            <span style="font-size:0.75rem; color:#94a3b8;">Cidades estratégicas com grandes redes varejistas e cooperativas agroindustriais.</span>
+            <button onclick="abrirRotaGoogleMaps(4)" class="btn btn-primary" style="font-size:0.78rem;">
+              🗺️ Abrir Circuito 4 no Google Maps ↗
+            </button>
+          </div>
+        </div>
+
+  <!-- MODAL MINI GUIA DE LIGAÇÕES (NICOLAS - HANSEN SOFTWARE) -->
+  <div class="modal-backdrop" id="modal-guia-ligacao" onclick="if(event.target === this) fecharModalGuiaLigacao()">
+    <div class="modal-box" style="max-width:850px; border-color:rgba(56,189,248,0.5);">
+      <div class="modal-header" style="background:#090d16; border-bottom:1px solid rgba(56,189,248,0.2);">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <span style="font-size:1.6rem; background:rgba(56,189,248,0.15); padding:0.4rem; border-radius:0.5rem; border:1px solid rgba(56,189,248,0.3);">📞</span>
+          <div>
+            <h3 style="font-size:1.15rem; font-weight:800; color:#fff;">Mini Guia de Ligações & Cold Call — Nicolas (Hansen Software)</h3>
+            <p style="font-size:0.75rem; color:#94a3b8;">Script de alta conversão para cidades próximas (Passo Fundo, Carazinho, Marau, Sarandi, etc.)</p>
+          </div>
+        </div>
+        <button onclick="fecharModalGuiaLigacao()" class="btn btn-secondary" style="padding:0.4rem 0.8rem;">✕ Fechar</button>
+      </div>
+
+      <div class="modal-body" style="background:#0b1120;">
+        
+        <!-- PITCH PRINCIPAL (45 SEGUNDOS) -->
+        <div style="background:rgba(56,189,248,0.05); border:1px solid rgba(56,189,248,0.3); border-radius:1rem; padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <span style="font-size:0.8rem; font-weight:800; color:#38bdf8; text-transform:uppercase; letter-spacing:0.05em;">
+              ⚡ Script Mestre: Cold Call Direta ao Contador (45s)
+            </span>
+            <button onclick="copiarTexto('Bom dia / Boa tarde! Tudo bem? Aqui quem fala é o Nicolas, trabalho na Hansen Software, aqui do ladinho de vocês em Sarandi.\n\nUma pergunta bem rápida da sua rotina: como você emite nota hoje e faz notas para clientes que pedem socorro no escritório?\n\nA gente desenvolveu um sistema que permite tirar notas para vários clientes no mesmo local: com 2 cliques você já troca de empresa e já está emitindo a nota de outro cliente, sem deslogar da SEFAZ e sem travar.\n\nQuando podemos fazer uma reunião rápida de demonstração? Te prometo que não passa de 10 minutos! Fica melhor para você amanhã às 10h ou às 14h30?', 'Script de Ligação copiado!')" class="btn btn-secondary" style="font-size:0.72rem; padding:0.25rem 0.6rem; color:#38bdf8; border-color:rgba(56,189,248,0.4);">
+              📋 Copiar Fala Completa
+            </button>
+          </div>
+
+          <!-- BLOCO 1: ABERTURA + REGIONAL -->
+          <div style="background:#0f172a; border-radius:0.75rem; padding:0.9rem; margin-bottom:0.6rem; border-left:3px solid #38bdf8;">
+            <div style="font-size:0.7rem; font-weight:800; color:#94a3b8; margin-bottom:0.25rem;">1. APRESENTAÇÃO + ALAVANCA REGIONAL</div>
+            <p style="font-size:0.95rem; color:#f1f5f9; line-height:1.45; margin:0;">
+              "Bom dia / Boa tarde! Tudo bem? Aqui quem fala é o <strong>Nicolas</strong>, trabalho na <strong>Hansen Software</strong>, aqui do ladinho de vocês em <strong>Sarandi</strong>."
+            </p>
+          </div>
+
+          <!-- BLOCO 2: PERGUNTA DIAGNÓSTICA -->
+          <div style="background:#0f172a; border-radius:0.75rem; padding:0.9rem; margin-bottom:0.6rem; border-left:3px solid #fbbf24;">
+            <div style="font-size:0.7rem; font-weight:800; color:#fbbf24; margin-bottom:0.25rem;">2. PERGUNTA DE ROTINA (GERA REFLEXÃO E DESABAFO)</div>
+            <p style="font-size:0.95rem; color:#f1f5f9; line-height:1.45; margin:0;">
+              "<strong>[Nome do Contador]</strong>, uma pergunta bem rápida da sua rotina prática: <em>como é que vocês emitem nota hoje e fazem notas para os clientes que pedem socorro aí no escritório?</em>"
+            </p>
+            <span style="font-size:0.72rem; color:#94a3b8; display:block; margin-top:0.4rem;">⏸️ <em>Faça silêncio e deixe o contador responder em 10 a 15 segundos (ele vai relatar a dor do emissor gratuito, senhas e lentidão).</em></span>
+          </div>
+
+          <!-- BLOCO 3: PROPOSTA DE VALOR MULTIEMPRESA -->
+          <div style="background:#0f172a; border-radius:0.75rem; padding:0.9rem; margin-bottom:0.6rem; border-left:3px solid #a855f7;">
+            <div style="font-size:0.7rem; font-weight:800; color:#c084fc; margin-bottom:0.25rem;">3. A SOLUÇÃO EM 2 CLIQUES (GANCHO IRRESTÍVEL)</div>
+            <p style="font-size:0.95rem; color:#f1f5f9; line-height:1.45; margin:0;">
+              "Pois é, exatamente por isso que estou te ligando! A gente desenvolveu um sistema que permite <strong>tirar notas para vários clientes no mesmo local</strong>: com <strong>2 cliques você já troca de empresa e já está emitindo a nota do outro cliente</strong>, sem precisar deslogar da SEFAZ, sem travar navegador e sem senhas perdidas."
+            </p>
+          </div>
+
+          <!-- BLOCO 4: CTA DE BAIXO COMPROMISSO -->
+          <div style="background:#0f172a; border-radius:0.75rem; padding:0.9rem; border-left:3px solid #34d399;">
+            <div style="font-size:0.7rem; font-weight:800; color:#34d399; margin-bottom:0.25rem;">4. CTA DIRETO COM PROMESSA DE 10 MINUTOS & OPÇÃO DUPLA</div>
+            <p style="font-size:0.95rem; color:#f1f5f9; line-height:1.45; margin:0;">
+              "Quando podemos fazer uma reunião rápida de demonstração? <strong>Te prometo que não passa de 10 minutos!</strong><br>
+              Fica melhor para você amanhã pela manhã, às <strong>10h</strong>, ou no início da tarde, às <strong>14h30</strong>?"
+            </p>
+          </div>
+        </div>
+
+        <!-- QUEBRA DE OBJEÇÕES NO TELEFONE -->
+        <div>
+          <span style="font-size:0.8rem; font-weight:800; color:#fff; text-transform:uppercase; display:block; margin-bottom:0.6rem;">
+            🥊 Respostas Rápidas para as Objeções Mais Comuns:
+          </span>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:0.75rem;">
+            
+            <div style="background:#0f172a; border:1px solid var(--card-border); border-radius:0.75rem; padding:0.85rem;">
+              <div style="font-weight:800; font-size:0.82rem; color:#f87171; margin-bottom:0.3rem;">❌ "Estou sem tempo / muito ocupado"</div>
+              <p style="font-size:0.8rem; color:#cbd5e1; line-height:1.4; margin:0;">
+                "Imagino perfeitamente, rotina fiscal é corrida! É justamente para <strong>economizar horas do seu time</strong> que estou ligando. São <strong>só 10 minutinhos contados no relógio</strong>. Prefere amanhã no início do dia às 8h30 ou no fim da tarde às 17h?"
+              </p>
+            </div>
+
+            <div style="background:#0f172a; border:1px solid var(--card-border); border-radius:0.75rem; padding:0.85rem;">
+              <div style="font-weight:800; font-size:0.82rem; color:#f87171; margin-bottom:0.3rem;">❌ "Já usamos outro sistema (Domínio/Questor)"</div>
+              <p style="font-size:0.8rem; color:#cbd5e1; line-height:1.4; margin:0;">
+                "Perfeito! A Hansen <strong>não substitui</strong> o seu sistema contábil, ela <strong>alimenta ele</strong>. A gente resolve a dor do comércio na ponta e aquelas notas avulsas de clientes que travam seu suporte. Deixa eu te mostrar os 2 cliques em 10 minutos?"
+              </p>
+            </div>
+
+            <div style="background:#0f172a; border:1px solid var(--card-border); border-radius:0.75rem; padding:0.85rem;">
+              <div style="font-weight:800; font-size:0.82rem; color:#f87171; margin-bottom:0.3rem;">❌ "Manda por e-mail ou WhatsApp que eu olho"</div>
+              <p style="font-size:0.8rem; color:#cbd5e1; line-height:1.4; margin:0;">
+                "Mando agora mesmo! Qual é seu Whats direto? Show! Como na tela é muito mais rápido de ver a troca em 2 cliques funcionando: <strong>posso te dar um toque rápido amanhã às 14h só para abrir e te mostrar em 5 minutos?</strong>"
+              </p>
+            </div>
+
+            <div style="background:#0f172a; border:1px solid var(--card-border); border-radius:0.75rem; padding:0.85rem;">
+              <div style="font-weight:800; font-size:0.82rem; color:#f87171; margin-bottom:0.3rem;">❌ "Quanto custa?"</div>
+              <p style="font-size:0.8rem; color:#cbd5e1; line-height:1.4; margin:0;">
+                "Para o escritório contábil o modelo é de <strong>homologação de parceria técnica com custo zero e comissão recorrente</strong>, onde vocês economizam retrabalho e ainda ganham com a carteira. Por isso vale os 10 minutinhos. Marcamos amanhã às 10h?"
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- DICA DE OURO -->
+        <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:0.75rem; padding:0.85rem; display:flex; align-items:center; gap:0.75rem;">
+          <span style="font-size:1.4rem;">💡</span>
+          <span style="font-size:0.8rem; color:#d1fae5; line-height:1.4;">
+            <strong>Dica prática do Nicolas:</strong> Mantenha a energia alta, fale em pé se possível e sorria na ligação. Ao citar que a Hansen Software é de Sarandi (pertinho da cidade deles), o cliente se sente seguro por não ser uma multinacional distante de São Paulo.
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+

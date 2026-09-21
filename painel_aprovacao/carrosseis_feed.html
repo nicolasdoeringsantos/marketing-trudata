@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrosséis para Feed (1080x1350 - 4:5) | TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              azure: '#009fe3',
+              dark: '#06121a',
+              teal: '#0a2333',
+              mint: '#34d399',
+              lightmint: '#5eead4'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #06121a; color: #f8fafc; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+  </style>
+</head>
+<body class="min-h-screen bg-[#06121a] text-slate-100 antialiased selection:bg-brand-mint selection:text-slate-950 pb-20">
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2.5 text-slate-300 hover:text-white transition">
+          <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-400 flex items-center justify-center font-black text-slate-950 text-base shadow-lg shadow-teal-950/50">
+            T
+          </div>
+          <div>
+            <span class="font-display font-bold text-white text-base tracking-tight">TruData ERP</span>
+            <span class="hidden sm:inline-block text-[10px] text-teal-300 font-semibold ml-2 px-2 py-0.5 rounded-full bg-teal-500/10 border border-teal-500/20">Carrosséis Feed (4:5)</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          ← Voltar ao Hub
+        </a>
+        <a href="stories.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-teal-300 border border-teal-500/30 transition flex items-center gap-1.5">
+          📱 Stories (9:16)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6 text-center space-y-3">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-teal-500/10 text-teal-300 border border-teal-500/30">
+      📸 Formato Otimizado para Salvamentos & Compartilhamentos
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold font-display text-white tracking-tight">
+      Carrosséis Oficiais de Feed (1080x1350px — Proporção 4:5)
+    </h1>
+    <p class="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
+      Desenvolvidos sob o rigoroso <strong>Padrão Visual Mestre Trudata</strong>: fundo azul-petróleo escuro sólido, gradiente central sutil, traço minimalista branco e verde-menta, sem fotos e sem 3D.
+    </p>
+  </section>
+
+  <!-- SELETOR DE CARROSSEL -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+
+    <!-- ABAS DOS 5 CARROSSÉIS -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar">
+      <button onclick="selecionarCarrossel(0, this)" class="btn-aba-carr shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition bg-gradient-to-r from-teal-500/20 to-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-lg shadow-emerald-950/50">
+        1. Reforma Tributária (IBS/CBS)
+      </button>
+      <button onclick="selecionarCarrossel(1, this)" class="btn-aba-carr shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800">
+        2. O Custo dos Robôs no Suporte
+      </button>
+      <button onclick="selecionarCarrossel(2, this)" class="btn-aba-carr shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800">
+        3. Frente de Caixa & TEF Veloz
+      </button>
+      <button onclick="selecionarCarrossel(3, this)" class="btn-aba-carr shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800">
+        4. Parceria com Contabilidades
+      </button>
+      <button onclick="selecionarCarrossel(4, this)" class="btn-aba-carr shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800">
+        5. Migração 'Zero Dia Parado'
+      </button>
+    </div>
+
+    <!-- ÁREA DE VISUALIZAÇÃO INTERATIVA DO CARROSSEL -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+
+      <!-- Informações do Carrossel Ativo -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <span id="carr-tag" class="text-[10px] font-bold text-teal-300 uppercase tracking-wider px-2.5 py-1 rounded bg-teal-500/10 border border-teal-500/20">
+            Tributário & Compliance
+          </span>
+          <h2 id="carr-titulo" class="text-xl sm:text-2xl font-bold font-display text-white mt-2">
+            Reforma Tributária: 3 Armadilhas no Caixa da Sua Loja em 2026
+          </h2>
+          <p id="carr-desc" class="text-xs text-slate-400 mt-1">
+            Carrossel educativo em 5 lâminas explicando o impacto do IBS/CBS e como o TruData previne autuações.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="baixarSlideAtualPNG()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-md shadow-emerald-950/50 flex items-center gap-1.5">
+            🖼️ Baixar Slide PNG HD
+          </button>
+          <button onclick="copiarLegendaCarrossel()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+            📋 Copiar Legenda Completa
+          </button>
+        </div>
+      </div>
+
+      <!-- PLAYER DO SLIDE (4:5 — 1080x1350) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+        <!-- Visualizador Central (Proporção 4:5) -->
+        <div class="lg:col-span-6 flex flex-col items-center">
+          <div class="relative w-full max-w-[360px] aspect-[4/5] bg-[#06121a] rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-800 p-2 group flex items-center justify-center">
+            <!-- SVG Dinâmico Renderizado -->
+            <div id="svg-slide-container" class="w-full h-full flex items-center justify-center">
+              <!-- SVG inserido via JS -->
+            </div>
+
+            <!-- Botões de navegação sobrepostos -->
+            <button onclick="voltarSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-slate-950/80 hover:bg-slate-900 text-white border border-slate-700 flex items-center justify-center transition shadow-xl" title="Slide Anterior">
+              ←
+            </button>
+            <button onclick="avancarSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-slate-950/80 hover:bg-slate-900 text-white border border-slate-700 flex items-center justify-center transition shadow-xl" title="Próximo Slide">
+              →
+            </button>
+          </div>
+
+          <!-- Indicador de Lâminas (Dots) -->
+          <div class="flex items-center gap-2 mt-4" id="dots-container">
+            <!-- Dots via JS -->
+          </div>
+        </div>
+
+        <!-- Painel Lateral de Detalhes da Lâmina & Roteiro -->
+        <div class="lg:col-span-6 space-y-4">
+          <div class="bg-slate-950/70 border border-slate-800 p-5 rounded-2xl space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+              <span id="slide-numero-badge" class="text-xs font-bold text-emerald-400">Lâmina 1 de 5 · Capa</span>
+              <span class="text-[11px] text-slate-500 font-mono">1080x1350 (4:5)</span>
+            </div>
+            <div>
+              <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Objetivo do Slide:</h4>
+              <p id="slide-objetivo" class="text-xs text-slate-200 mt-1 leading-relaxed">
+                Prender a atenção do lojista com um gancho forte sobre multas e a Reforma Tributária.
+              </p>
+            </div>
+            <div>
+              <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Texto do Slide:</h4>
+              <div id="slide-texto-detalhe" class="text-xs text-teal-300 font-medium mt-1 bg-slate-900 p-3 rounded-xl border border-slate-800/80">
+                Título em destaque
+              </div>
+            </div>
+          </div>
+
+          <!-- Legenda Formatada para Redes -->
+          <div class="bg-slate-950/70 border border-slate-800 p-5 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">📝 Legenda do Instagram</span>
+              <button onclick="copiarLegendaCarrossel()" class="text-xs text-emerald-400 hover:underline">Copiar</button>
+            </div>
+            <pre id="texto-legenda-carr" class="text-xs text-slate-300 font-sans whitespace-pre-wrap max-h-36 overflow-y-auto custom-scrollbar bg-slate-900 p-3 rounded-xl border border-slate-800/80 leading-relaxed select-all">Carregando legenda...</pre>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- TOAST -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-slate-900 border border-emerald-500 text-white px-5 py-3 rounded-xl shadow-2xl">
+    <span id="toast-icon">✅</span>
+    <span id="toast-msg" class="text-sm font-medium">Ação realizada!</span>
+  </div>
+
+  <script>
+    // DADOS DOS 5 CARROSSÉIS
+    const CARROSSEIS = [
+      {
+        id: 'reforma',
+        categoria: 'Tributário & Compliance',
+        titulo: 'Reforma Tributária: 3 Armadilhas no Caixa em 2026',
+        desc: 'Carrossel educativo em 5 lâminas explicando o impacto do IBS/CBS e como o TruData previne autuações.',
+        legenda: `Você sabia que a Reforma Tributária já começa a impactar o seu caixa em 2026 com o período de transição do IBS e CBS?\n\nArrasta para o lado ➡️ e confira as 3 maiores armadilhas que o comércio do RS vai enfrentar se não parametrizar o sistema a tempo:\n\n1️⃣ Cálculo duplo de impostos no mesmo cupom fiscal;\n2️⃣ Rejeição de notas por NCM e benefícios defasados na SEFAZ;\n3️⃣ Fechamento caótico que vai sobrecarregar sua contabilidade.\n\nNo TruData ERP, o motor fiscal já é atualizado preventivamente para garantir segurança total para a sua empresa.\n\n📲 Quer auditar a situação do seu emissor fiscal? Fale com a equipe de Sarandi-RS no link da bio ou (54) 99696-6175.\n\n#ReformaTributaria #TruDataERP #IBS #CBS #GestaoFiscal #SarandiRS #ComercioGaucho`,
+        slides: [
+          {
+            num: 1,
+            tipo: 'Capa / Gancho',
+            objetivo: 'Despertar urgência imediata com a Reforma Tributária.',
+            titulo: 'REFORMA TRIBUTÁRIA',
+            subtitulo: '3 Armadilhas no Caixa da Sua Loja em 2026',
+            detalhe: 'O que o seu contador não vai conseguir salvar de última hora se o seu sistema for antigo.',
+            icone: 'fiscal'
+          },
+          {
+            num: 2,
+            tipo: 'Armadilha 1',
+            objetivo: 'Explicar a convivência do modelo antigo com o novo.',
+            titulo: 'O CÁLCULO PARALELO',
+            subtitulo: 'IBS e CBS calculados no mesmo cupom fiscal',
+            detalhe: 'Durante a transição, seu PDV precisará destacar os novos tributos sem travar a velocidade de emissão.',
+            icone: 'porcentagem'
+          },
+          {
+            num: 3,
+            tipo: 'Armadilha 2',
+            objetivo: 'Alertar sobre as rejeições da SEFAZ.',
+            titulo: 'REJEIÇÃO DE NOTAS',
+            subtitulo: 'Tabelas de NCM e ICMS-ST desatualizadas',
+            detalhe: 'A SEFAZ-RS bloqueia notas com códigos inválidos. Erro no cadastro de produto = fila parada no caixa.',
+            icone: 'alerta'
+          },
+          {
+            num: 4,
+            tipo: 'A Solução',
+            objetivo: 'Apresentar a blindagem nativa do TruData.',
+            titulo: 'PORTA ÚNICA FISCAL',
+            subtitulo: 'Auditoria automática antes do envio',
+            detalhe: 'O TruData valida cada item e impede o envio de notas com inconsistência tributária.',
+            icone: 'escudo'
+          },
+          {
+            num: 5,
+            tipo: 'Chamada para Ação',
+            objetivo: 'Direcionar para o suporte e comercial em Sarandi.',
+            titulo: 'BLINDE SUA EMPRESA',
+            subtitulo: 'Fale com a Hansen Software em Sarandi-RS',
+            detalhe: '+25 anos de estrada e suporte 100% humano para o comércio gaúcho. Salve este post!',
+            icone: 'check'
+          }
+        ]
+      },
+      {
+        id: 'robos',
+        categoria: 'Atendimento & Suporte',
+        titulo: 'O Custo Oculto dos Robôs no Suporte Técnico',
+        desc: 'Por que o atendimento automatizado custa clientes e vendas no varejo físico.',
+        legenda: `Quando a fila do caixa começa a crescer em pleno sábado de manhã, a última coisa que você tem tempo é de conversar com um robô.\n\n"Digite 1 para suporte, digite 2 para financeiro, aguarde um atendente em até 72 horas..." ❌\n\nEnquanto isso, clientes desistem das compras e vão embora.\n\nNa TruData ERP, acreditamos que tecnologia de ponta anda de mãos dadas com respeito humano. Aqui nosso suporte é 100% humano, no telefone e WhatsApp, direto da nossa sede em Sarandi - RS.\n\n👉 Arrasta para o lado e veja a diferença prática no seu dia a dia.\n\n#SuporteHumano #TruDataERP #SarandiRS #VarejoSemRobos #AtendimentoDeVerdade`,
+        slides: [
+          {
+            num: 1,
+            tipo: 'Capa / Gancho',
+            objetivo: 'Identificação imediata com a frustração do suporte robótico.',
+            titulo: 'O CUSTO DOS ROBÔS',
+            subtitulo: 'Você ainda aceita falar com chatbot no pico do caixa?',
+            detalhe: 'O perigo invisível de colocar a operação da sua loja na mão de tickets frios.',
+            icone: 'robo'
+          },
+          {
+            num: 2,
+            tipo: 'O Cenário de Crise',
+            objetivo: 'Descrever o momento do pico com caixa travado.',
+            titulo: 'SÁBADO, 11H DA MANHÃ',
+            subtitulo: 'A loja cheia e o leitor parou de responder',
+            detalhe: 'O operador nervoso, a fila crescendo e a frustração do cliente que tem pressa.',
+            icone: 'relogio'
+          },
+          {
+            num: 3,
+            tipo: 'A Realidade Multinacional',
+            objetivo: 'Mostrar o descaso das big techs distantes.',
+            titulo: 'TICKET DE 72 HORAS',
+            subtitulo: 'O suporte distante que não conhece o seu negócio',
+            detalhe: 'Empresas sem sede no RS que tratam o seu comércio como apenas mais um número de contrato.',
+            icone: 'alerta'
+          },
+          {
+            num: 4,
+            tipo: 'O Diferencial TruData',
+            objetivo: 'Apresentar a proximidade de Sarandi-RS.',
+            titulo: 'GENTE DE VERDADE',
+            subtitulo: 'Suporte por fone e WhatsApp em Sarandi-RS',
+            detalhe: 'Especialistas que entendem de comércio e resolvem seu chamado na hora, sem robôs.',
+            icone: 'suporte'
+          },
+          {
+            num: 5,
+            tipo: 'Chamada para Ação',
+            objetivo: 'Convidar para a experiência humana da Hansen.',
+            titulo: 'TRANQUILIDADE OPERACIONAL',
+            subtitulo: 'Venha para o TruData ERP',
+            detalhe: '+25 anos de tradição cuidando do comércio do Rio Grande do Sul.',
+            icone: 'check'
+          }
+        ]
+      },
+      {
+        id: 'caixa',
+        categoria: 'PDV & Eficiência',
+        titulo: 'Frente de Caixa Rápida: O Segredo dos Mercados sem Fila',
+        desc: 'Como a autorização em 3s e o TEF direto eliminam gargalos operacionais.',
+        legenda: `Fila no caixa não é apenas sinal de loja cheia: muitas vezes é sinal de sistema lento e processo manual arrastado!\n\nVocê sabia que redigitar o valor da venda na maquininha avulsa custa de 15 a 20 segundos por cliente? Multiplique isso por 300 clientes no sábado!\n\nCom o TruData ERP:\n⚡ NFC-e autorizada em 3 segundos;\n💳 TEF integrado acionando a maquininha na hora sem digitação;\n📶 Contingência offline que não trava a fila se a internet oscilar.\n\n👉 Arrasta para o lado e descubra como acelerar o seu balcão!\n\n#PDVRapido #TruDataERP #FrenteDeCaixa #TEFIntegrado #SupermercadosRS`,
+        slides: [
+          {
+            num: 1,
+            tipo: 'Capa / Gancho',
+            objetivo: 'Promessa de agilidade e fim das filas.',
+            titulo: 'FRENTE DE CAIXA ÁGIL',
+            subtitulo: 'O Segredo dos Mercados que Não Fazem Fila',
+            detalhe: 'Por que a tecnologia do PDV define o faturamento nos horários de pico.',
+            icone: 'pdv'
+          },
+          {
+            num: 2,
+            tipo: 'O Gargalo Oculto',
+            objetivo: 'Evidenciar o erro da maquininha avulsa.',
+            titulo: 'A ARMADILHA DO CARTÃO',
+            subtitulo: '15 a 20 segundos perdidos a cada cliente',
+            detalhe: 'Digitar o valor na mão gera fila, erro de troco e falta de conciliação no fim do dia.',
+            icone: 'cartao'
+          },
+          {
+            num: 3,
+            tipo: 'A Velocidade TruData',
+            objetivo: 'Destacar a emissão em 3 segundos.',
+            titulo: 'NFC-e EM 3 SEGUNDOS',
+            subtitulo: 'Comunicação ultraleve com a SEFAZ-RS',
+            detalhe: 'O cupom fiscal imprime voando e o cliente sai satisfeito com a agilidade.',
+            icone: 'raio'
+          },
+          {
+            num: 4,
+            tipo: 'A Blindagem Offline',
+            objetivo: 'Tranquilidade mesmo sem internet.',
+            titulo: 'CONTINGÊNCIA OFFLINE',
+            subtitulo: 'Sua loja continua vendendo sem parar',
+            detalhe: 'Se o provedor oscilar, o sistema grava em contingência e autoriza depois.',
+            icone: 'wifi'
+          },
+          {
+            num: 5,
+            tipo: 'Chamada para Ação',
+            objetivo: 'Demonstração no balcão do lojista.',
+            titulo: 'TESTE NA SUA LOJA',
+            subtitulo: 'Agende uma demonstração prática em Sarandi',
+            detalhe: 'Veja a velocidade do PDV TruData no seu próprio balcão.',
+            icone: 'check'
+          }
+        ]
+      },
+      {
+        id: 'contadores',
+        categoria: 'Parceria Contábil',
+        titulo: 'Por Que Contadores Recomendam o TruData ERP?',
+        desc: 'A harmonia entre a rotina do comércio e o fechamento do escritório contábil.',
+        legenda: `O dia 1º de cada mês não precisa ser um pesadelo de notas fiscais com erro e XMLs faltando!\n\nEscritórios contábeis de todo o RS recomendam o TruData ERP porque criamos o software pensando na rotina de quem fecha o balanço:\n\n📑 Modo Escritório para troca rápida de empresa;\n🔍 SPED Fiscal e EFD Contribuições sem inconsistências;\n⚖️ Novas regras do IBS e CBS já estruturadas para a Reforma Tributária.\n\nMenos retrabalho para o contador, mais segurança para o comerciante.\n\n👉 Compartilhe este post com o seu contador!\n\n#DiaDoContador #ContabilidadeConsultiva #TruDataERP #SPEDFiscal #SarandiRS`,
+        slides: [
+          {
+            num: 1,
+            tipo: 'Capa / Gancho',
+            objetivo: 'Foco na parceria comerciante x contador.',
+            titulo: 'PARCERIA CONTÁBIL',
+            subtitulo: 'Por Que Contadores Recomendam a TruData?',
+            detalhe: 'Como eliminar o estresse do fechamento mensal e do envio de XMLs.',
+            icone: 'contabil'
+          },
+          {
+            num: 2,
+            tipo: 'A Dor do Contador',
+            objetivo: 'Relatar o sofrimento do SPED com erros.',
+            titulo: 'O PESADELO DO RETRABALHO',
+            subtitulo: 'Horas perdidas corrigindo CST e NCM errado',
+            detalhe: 'Quando o sistema do lojista emite errado, quem paga a conta é a equipe contábil.',
+            icone: 'alerta'
+          },
+          {
+            num: 3,
+            tipo: 'O Modo Escritório',
+            objetivo: 'Apresentar a facilidade para o escritório.',
+            titulo: 'MODO ESCRITÓRIO',
+            subtitulo: 'Troca de empresa em apenas 2 cliques',
+            detalhe: 'O contador acessa os arquivos fiscais diretamente, sem depender de e-mails manuais.',
+            icone: 'pasta'
+          },
+          {
+            num: 4,
+            tipo: 'A Blindagem Fiscal',
+            objetivo: 'Arquivos 100% auditados.',
+            titulo: 'SPED 100% VALIDADO',
+            subtitulo: 'Exportações limpas e compatíveis com SEFAZ',
+            detalhe: 'Tributação de monofásicos e ICMS-ST conferida antes da transmissão.',
+            icone: 'escudo'
+          },
+          {
+            num: 5,
+            tipo: 'Chamada para Ação',
+            objetivo: 'Convidar contabilidades para parceria.',
+            titulo: 'CLUBE DO CONTADOR',
+            subtitulo: 'Seja um escritório parceiro TruData',
+            detalhe: 'Suporte técnico direto e benefícios exclusivos para contadores do RS.',
+            icone: 'check'
+          }
+        ]
+      },
+      {
+        id: 'migracao',
+        categoria: 'Migração & Onboarding',
+        titulo: 'Troca Segura: O Método Zero Dia Parado',
+        desc: 'Como mudar de ERP sem perder cadastros e sem interromper as vendas.',
+        legenda: `O maior medo de quem quer trocar de sistema é: "Vou perder meus cadastros? Meu estoque vai zerar? Minha loja vai ficar sem emitir nota?"\n\nNa Hansen Software, desenvolvemos a metodologia ZERO DIA PARADO:\n\n1️⃣ Puxamos clientes e produtos diretamente dos XMLs das notas dos últimos 90 dias (zero digitação manual);\n2️⃣ Validamos as regras fiscais com o seu contador;\n3️⃣ Treinamos os operadores em 15 minutos em ambiente de simulação;\n4️⃣ Virada de chave supervisionada no horário mais tranquilo.\n\nSua loja continua vendendo normalmente durante todo o processo.\n\n👉 Arrasta para o lado e veja como é simples migrar para o TruData!\n\n#ZeroDiaParado #TruDataERP #MigracaoSegura #GestaoComercial #SarandiRS`,
+        slides: [
+          {
+            num: 1,
+            tipo: 'Capa / Gancho',
+            objetivo: 'Eliminar o medo da troca de ERP.',
+            titulo: 'MIGRAÇÃO SEGURA',
+            subtitulo: 'O Método Zero Dia Parado da TruData',
+            detalhe: 'A verdade sobre como mudar de ERP sem perder clientes e sem parar o caixa.',
+            icone: 'migracao'
+          },
+          {
+            num: 2,
+            tipo: 'O Fim da Digitação',
+            objetivo: 'Explicar a extração por XML.',
+            titulo: 'ZERO DIGITAÇÃO MANUAL',
+            subtitulo: 'Cadastros puxados direto dos XMLs da SEFAZ',
+            detalhe: 'Produtos, NCMs, códigos de barras e clientes importados em lote com 100% de precisão.',
+            icone: 'xml'
+          },
+          {
+            num: 3,
+            tipo: 'O Treinamento Ágil',
+            objetivo: 'Mostrar a facilidade de uso.',
+            titulo: 'TREINO EM 15 MINUTOS',
+            subtitulo: 'Simulação com os caixas antes da virada',
+            detalhe: 'Interface intuitiva que os operadores aprendem no mesmo dia sem dificuldade.',
+            icone: 'treino'
+          },
+          {
+            num: 4,
+            tipo: 'A Virada Assistida',
+            objetivo: 'Garantia de suporte no primeiro dia.',
+            titulo: 'VIRADA SUPERVISIONADA',
+            subtitulo: 'Técnico de plantão no primeiro dia de pico',
+            detalhe: 'Acompanhamento prioritário de Sarandi-RS para garantir tranquilidade absoluta.',
+            icone: 'suporte'
+          },
+          {
+            num: 5,
+            tipo: 'Chamada para Ação',
+            objetivo: 'Convidar para simular a migração.',
+            titulo: 'FAÇA SUA SIMULAÇÃO',
+            subtitulo: 'Descubra o cronograma da sua loja',
+            detalhe: 'Acesse o Simulador de Transição Segura TruData e agende sua migração.',
+            icone: 'check'
+          }
+        ]
+      }
+    ];
+
+    let carrosselIdxAtual = 0;
+    let slideIdxAtual = 0;
+
+    // Gerador de SVG em proporção 4:5 (1080x1350)
+    function gerarSvgSlide(slide, totalSlides) {
+      // Ícones lineares minimalistas SVG
+      const iconesMap = {
+        fiscal: `<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><path d="M9 15h6" /><path d="M9 11h6" />`,
+        porcentagem: `<circle cx="65" cy="65" r="15" /><circle cx="135" cy="135" r="15" /><line x1="140" y1="60" x2="60" y2="140" stroke-width="8" />`,
+        alerta: `<path d="M102 20L190 180H14L102 20Z" /><line x1="102" y1="80" x2="102" y2="130" stroke-width="8" /><circle cx="102" cy="155" r="5" />`,
+        escudo: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" />`,
+        check: `<circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" />`,
+        robo: `<rect x="3" y="11" width="18" height="10" rx="2" /><circle cx="12" cy="5" r="2" /><path d="M12 7v4" /><line x1="8" y1="16" x2="8.01" y2="16" /><line x1="16" y1="16" x2="16.01" y2="16" />`,
+        relogio: `<circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />`,
+        suporte: `<path d="M3 18v-6a9 9 0 0 1 18 0v6" /><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />`,
+        pdv: `<rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /><path d="M6 8h4" />`,
+        cartao: `<rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" />`,
+        raio: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />`,
+        wifi: `<path d="M5 12.55a11 11 0 0 1 14.08 0" /><path d="M1.42 9a16 16 0 0 1 21.16 0" /><path d="M8.53 16.11a6 6 0 0 1 6.95 0" /><line x1="12" y1="20" x2="12.01" y2="20" />`,
+        contabil: `<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />`,
+        pasta: `<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />`,
+        migracao: `<path d="M17 1l4 4-4 4" /><path d="M3 11V9a4 4 0 0 1 4-4h14" /><path d="M7 23l-4-4 4-4" /><path d="M21 13v2a4 4 0 0 1-4 4H3" />`,
+        xml: `<polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />`,
+        treino: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />`
+      };
+
+      const pathIcone = iconesMap[slide.icone] || iconesMap['check'];
+      const isViewBoxSmall = !['porcentagem', 'alerta'].includes(slide.icone);
+      const viewBoxStr = isViewBoxSmall ? "0 0 24 24" : "0 0 200 200";
+
+      return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="100%" height="100%" class="w-full h-full">
+          <defs>
+            <radialGradient id="gradCentralCarr" cx="50%" cy="45%" r="65%">
+              <stop offset="0%" stop-color="#0e2a3b"/>
+              <stop offset="60%" stop-color="#071722"/>
+              <stop offset="100%" stop-color="#050e16"/>
+            </radialGradient>
+            <linearGradient id="gradAcento" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#34d399"/>
+              <stop offset="100%" stop-color="#5eead4"/>
+            </linearGradient>
+          </defs>
+
+          <!-- FUNDO AZUL-PETRÓLEO SÓLIDO COM GRADIENTE SUAVE -->
+          <rect width="1080" height="1350" fill="url(#gradCentralCarr)" />
+
+          <!-- MOLDURA SUAVE E LINHAS GUIA CORPORATIVAS -->
+          <rect x="50" y="50" width="980" height="1250" rx="36" fill="none" stroke="#16384c" stroke-width="2" opacity="0.6"/>
+
+          <!-- CABEÇALHO DA LÂMINA -->
+          <text x="90" y="120" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="24" fill="#34d399" letter-spacing="3">TRUDATA ERP</text>
+          <text x="990" y="120" text-anchor="end" font-family="'Inter', sans-serif" font-weight="700" font-size="22" fill="#64748b">${slide.num} / ${totalSlides}</text>
+
+          <!-- ÍCONE MINIMALISTA CENTRALIZADO NO TERÇO SUPERIOR -->
+          <g transform="translate(540, 420)">
+            <!-- Círculo de Luz Suave -->
+            <circle cx="0" cy="0" r="140" fill="#0d3246" opacity="0.4" />
+            <circle cx="0" cy="0" r="110" fill="none" stroke="#1b4962" stroke-width="2" opacity="0.6"/>
+
+            <!-- Ícone Linear -->
+            <g transform="translate(-65, -65) scale(5.5)" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              ${pathIcone}
+            </g>
+          </g>
+
+          <!-- TÍTULO BOLD GEOMÉTRICO (BRANCO) -->
+          <text x="540" y="750" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="44" fill="#ffffff" letter-spacing="1">
+            ${slide.titulo}
+          </text>
+
+          <!-- SUBTÍTULO / GANCHO (VERDE-MENTA) -->
+          <text x="540" y="820" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="700" font-size="28" fill="#34d399">
+            ${slide.subtitulo}
+          </text>
+
+          <!-- LINHA DIVISÓRIA SUTIL -->
+          <line x1="440" y1="870" x2="640" y2="870" stroke="#34d399" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+
+          <!-- DETALHE / EXPLICAÇÃO (BRANCO 80%) -->
+          <text x="540" y="930" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="400" font-size="25" fill="#cbd5e1" opacity="0.85">
+            ${slide.detalhe}
+          </text>
+
+          <!-- RODAPÉ: LOGOTIPO & ARRASTA PARA O LADO -->
+          <g transform="translate(540, 1210)">
+            <text x="0" y="0" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="26" fill="#ffffff" letter-spacing="3">Trudata</text>
+            <text x="0" y="30" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="600" font-size="16" fill="#64748b">
+              ${slide.num < totalSlides ? 'Arrasta para o lado ➔' : 'Hansen Software · Sarandi - RS'}
+            </text>
+          </g>
+        </svg>
+      `;
+    }
+
+    function renderizarCarrossel() {
+      const carr = CARROSSEIS[carrosselIdxAtual];
+      const slide = carr.slides[slideIdxAtual];
+
+      // Atualiza textos
+      document.getElementById('carr-tag').textContent = carr.categoria;
+      document.getElementById('carr-titulo').textContent = carr.titulo;
+      document.getElementById('carr-desc').textContent = carr.desc;
+      document.getElementById('texto-legenda-carr').textContent = carr.legenda;
+
+      document.getElementById('slide-numero-badge').textContent = `Lâmina ${slide.num} de ${carr.slides.length} · ${slide.tipo}`;
+      document.getElementById('slide-objetivo').textContent = slide.objetivo;
+      document.getElementById('slide-texto-detalhe').textContent = `"${slide.titulo}" — ${slide.subtitulo}`;
+
+      // Renderiza SVG
+      const container = document.getElementById('svg-slide-container');
+      container.innerHTML = gerarSvgSlide(slide, carr.slides.length);
+
+      // Renderiza Dots
+      const dotsContainer = document.getElementById('dots-container');
+      dotsContainer.innerHTML = carr.slides.map((s, idx) => `
+        <button onclick="irParaSlide(${idx})" class="h-2 rounded-full transition-all duration-300 ${idx === slideIdxAtual ? 'w-6 bg-emerald-400' : 'w-2 bg-slate-700 hover:bg-slate-500'}"></button>
+      `).join('');
+    }
+
+    function selecionarCarrossel(idx, btn) {
+      carrosselIdxAtual = idx;
+      slideIdxAtual = 0;
+      document.querySelectorAll('.btn-aba-carr').forEach(b => {
+        b.className = 'btn-aba-carr shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800';
+      });
+      btn.className = 'btn-aba-carr shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition bg-gradient-to-r from-teal-500/20 to-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-lg shadow-emerald-950/50';
+      renderizarCarrossel();
+    }
+
+    function avancarSlide() {
+      const carr = CARROSSEIS[carrosselIdxAtual];
+      if (slideIdxAtual < carr.slides.length - 1) {
+        slideIdxAtual++;
+        renderizarCarrossel();
+      } else {
+        slideIdxAtual = 0;
+        renderizarCarrossel();
+      }
+    }
+
+    function voltarSlide() {
+      const carr = CARROSSEIS[carrosselIdxAtual];
+      if (slideIdxAtual > 0) {
+        slideIdxAtual--;
+        renderizarCarrossel();
+      } else {
+        slideIdxAtual = carr.slides.length - 1;
+        renderizarCarrossel();
+      }
+    }
+
+    function irParaSlide(idx) {
+      slideIdxAtual = idx;
+      renderizarCarrossel();
+    }
+
+    function copiarLegendaCarrossel() {
+      const carr = CARROSSEIS[carrosselIdxAtual];
+      navigator.clipboard.writeText(carr.legenda).then(() => {
+        mostrarToast('Legenda copiada para o Instagram!');
+      });
+    }
+
+    function baixarSlideAtualPNG() {
+      mostrarToast('Renderizando lâmina em PNG 1080x1350 HD... ⏳');
+      const carr = CARROSSEIS[carrosselIdxAtual];
+      const slide = carr.slides[slideIdxAtual];
+      const svgCode = gerarSvgSlide(slide, carr.slides.length);
+
+      const blob = new Blob([svgCode], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1080;
+        canvas.height = 1350;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, 1080, 1350);
+
+        canvas.toBlob((pngBlob) => {
+          if (pngBlob) {
+            const pngUrl = URL.createObjectURL(pngBlob);
+            const a = document.createElement('a');
+            a.href = pngUrl;
+            a.download = `trudata_carrossel_${carr.id}_lamina_${slide.num}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(pngUrl);
+            mostrarToast('Download da lâmina concluído!');
+          }
+        }, 'image/png');
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+    }
+
+    function mostrarToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    // Teclado
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') avancarSlide();
+      else if (e.key === 'ArrowLeft') voltarSlide();
+    });
+
+    // Inicialização
+    renderizarCarrossel();
+  </script>
+</body>
+</html>

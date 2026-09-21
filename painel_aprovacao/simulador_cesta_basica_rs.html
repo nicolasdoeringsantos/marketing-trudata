@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador Cesta Básica RS & Reforma 2026 — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
+    .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between">
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition">
+          ←
+        </a>
+        <div class="flex items-center gap-2.5">
+          <div class="h-9 w-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-lg">
+            🥖
+          </div>
+          <div>
+            <h1 class="text-sm font-bold text-white font-display flex items-center gap-2">
+              Simulador Cesta Básica Gaúcha & Reforma 2026
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 font-extrabold px-2 py-0.5 rounded border border-emerald-500/30">Decreto RS vs IVA Dual</span>
+            </h1>
+            <p class="text-[11px] text-slate-400">Parametrização de isenções e alíquotas zero para supermercados e mercearias</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="copiarTabelaNCM()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-md shadow-emerald-950 flex items-center gap-1.5">
+          <span>Copiar Tabela NCMs</span>
+          <span>📋</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
+
+    <!-- RESUMO DAS REGRAS -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-2">
+        <span class="text-[10px] font-extrabold uppercase text-slate-400">Regra Vigente RS</span>
+        <h3 class="text-sm font-bold text-white font-display">Decreto Estadual de Alimentos</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Cesta básica estadual possui carga reduzida de ICMS (isenção parcial ou alíquota efetiva de 7%).
+        </p>
+      </div>
+
+      <div class="bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-5 shadow-lg space-y-2">
+        <span class="text-[10px] font-extrabold uppercase text-emerald-400">Transição Reforma 2026</span>
+        <h3 class="text-sm font-bold text-emerald-300 font-display">Cesta Básica Nacional (Alíquota Zero)</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Itens essenciais terão 0% de IBS e 0% de CBS com crédito amplo mantido na ponta atacadista e varejista.
+        </p>
+      </div>
+
+      <div class="bg-slate-900/90 border border-sky-500/30 rounded-2xl p-5 shadow-lg space-y-2">
+        <span class="text-[10px] font-extrabold uppercase text-sky-400">Diferencial TruData</span>
+        <h3 class="text-sm font-bold text-sky-300 font-display">Atualização Automática na Nuvem</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          O lojista não precisa alterar alíquota item por item: o motor fiscal atualiza os NCMs automaticamente.
+        </p>
+      </div>
+    </div>
+
+    <!-- TABELA DOS ITENS DA CESTA BÁSICA -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h2 class="text-xs font-bold text-white uppercase tracking-wider font-display">Itens da Cesta Básica Homologados no TruData ERP</h2>
+        <span class="text-xs text-slate-500">100% em conformidade com a SEFAZ-RS</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left">
+          <thead>
+            <tr class="border-b border-slate-800 text-slate-400">
+              <th class="py-3">NCM</th>
+              <th class="py-3">Produto / Categoria</th>
+              <th class="py-3">Regra RS Atual</th>
+              <th class="py-3">Reforma 2026 (IBS / CBS)</th>
+              <th class="py-3 text-right">Status TruData</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60 text-slate-300">
+            <tr>
+              <td class="py-3 font-mono text-emerald-400 font-bold">1006.30.21</td>
+              <td class="py-3 font-medium text-white">Arroz Polido Parboilizado Tipo 1 RS</td>
+              <td class="py-3 text-slate-300">Isenção Parcial ICMS RS</td>
+              <td class="py-3 text-emerald-300 font-bold">Alíquota Zero (0% IBS + 0% CBS)</td>
+              <td class="py-3 text-right text-emerald-400">Parametrizado ✅</td>
+            </tr>
+            <tr>
+              <td class="py-3 font-mono text-emerald-400 font-bold">0713.33.99</td>
+              <td class="py-3 font-medium text-white">Feijão Preto Comum Gaúcho</td>
+              <td class="py-3 text-slate-300">Isenção ICMS RS</td>
+              <td class="py-3 text-emerald-300 font-bold">Alíquota Zero (0% IBS + 0% CBS)</td>
+              <td class="py-3 text-right text-emerald-400">Parametrizado ✅</td>
+            </tr>
+            <tr>
+              <td class="py-3 font-mono text-emerald-400 font-bold">0201.20.00</td>
+              <td class="py-3 font-medium text-white">Carnes Bovinas Resfriadas de Açougue</td>
+              <td class="py-3 text-slate-300">Redução de Base de Cálculo</td>
+              <td class="py-3 text-emerald-300 font-bold">Cesta Nacional (Alíquota Zero)</td>
+              <td class="py-3 text-right text-emerald-400">Parametrizado ✅</td>
+            </tr>
+            <tr>
+              <td class="py-3 font-mono text-emerald-400 font-bold">0401.20.10</td>
+              <td class="py-3 font-medium text-white">Leite Pasteurizado UHT Integral</td>
+              <td class="py-3 text-slate-300">Cesta Básica RS</td>
+              <td class="py-3 text-emerald-300 font-bold">Alíquota Zero (0% IBS + 0% CBS)</td>
+              <td class="py-3 text-right text-emerald-400">Parametrizado ✅</td>
+            </tr>
+            <tr>
+              <td class="py-3 font-mono text-emerald-400 font-bold">1905.90.90</td>
+              <td class="py-3 font-medium text-white">Pão Francês Tradicional (até 65g)</td>
+              <td class="py-3 text-slate-300">Isento no Varejo RS</td>
+              <td class="py-3 text-emerald-300 font-bold">Cesta Básica Nacional</td>
+              <td class="py-3 text-right text-emerald-400">Parametrizado ✅</td>
+            </tr>
+            <tr>
+              <td class="py-3 font-mono text-emerald-400 font-bold">1507.90.11</td>
+              <td class="py-3 font-medium text-white">Óleo de Soja Refinado 900ml</td>
+              <td class="py-3 text-slate-300">Alíquota Efetiva 7%</td>
+              <td class="py-3 text-emerald-300 font-bold">Cesta Básica Estendida (Redução 60%)</td>
+              <td class="py-3 text-right text-emerald-400">Parametrizado ✅</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-slate-800/80 bg-slate-900/40 py-4 px-6 text-center text-xs text-slate-500">
+    TruData ERP · Hansen Software Ltda · Sarandi - RS · Simulador Cesta Básica RS
+  </footer>
+
+  <script>
+    function copiarTabelaNCM() {
+      const txt = `🥖 CESTA BÁSICA GAÚCHA & REFORMA 2026 (TRUDATA ERP)\n\n- 1006.30.21: Arroz Polido Parboilizado RS -> Alíquota Zero (IBS/CBS)\n- 0713.33.99: Feijão Preto Comum -> Alíquota Zero\n- 0201.20.00: Carnes Bovinas Açougue -> Alíquota Zero\n- 0401.20.10: Leite UHT Integral -> Alíquota Zero\n- 1905.90.90: Pão Francês Tradicional -> Alíquota Zero\n\nTodos os NCMs já vêm pré-parametrizados no TruData ERP sem risco de erro no caixa.`;
+      navigator.clipboard.writeText(txt).then(() => {
+        alert("Tabela de NCMs copiada para a área de transferência!");
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programas de Fidelidade & Cashback — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' } },
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col">
+
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
+        ← Voltar ao Hub Central
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-300 font-display">Módulo Fidelidade & Cashback</span>
+        <span class="text-[10px] bg-amber-500/20 text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-500/30">Retenção de Clientes</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
+    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl border border-amber-500/30">
+          🎁
+        </div>
+        <div>
+          <h1 class="text-2xl font-black font-display text-white">Simulador de Cashback & Fidelização no Caixa</h1>
+          <p class="text-xs text-slate-400">Configure a regra de retorno financeiro para incentivar seus clientes a voltarem na sua loja todo mês.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1">Valor da Compra no Caixa (R$):</label>
+          <input type="number" id="fid-compra" value="180" oninput="calcularFidelidade()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white font-mono" />
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1">% de Cashback Concedido:</label>
+          <input type="number" id="fid-cashback" value="5" min="1" max="50" oninput="calcularFidelidade()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white font-mono" />
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1">Validade do Crédito (Dias):</label>
+          <input type="number" id="fid-validade" value="30" oninput="calcularFidelidade()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white font-mono" />
+        </div>
+      </div>
+
+      <!-- SIMULAÇÃO DO CUPOM FISCAL -->
+      <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Impressão no Rodapé do Cupom NFC-e:</span>
+        
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 space-y-1 select-all">
+          <p>--------------------------------------------------</p>
+          <p class="font-bold text-amber-400">🎉 PARABÉNS! VOCÊ GANHOU CASHBACK TRUDATA</p>
+          <p>Valor creditado nesta compra: <strong class="text-white" id="cupom-credito">R$ 9,00</strong></p>
+          <p>Válido para usar na próxima compra até: <strong class="text-white" id="cupom-validade">16/10/2026</strong></p>
+          <p>Identifique seu CPF no caixa para resgatar!</p>
+          <p>--------------------------------------------------</p>
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-900">
+          <span>✓ Controle automático por CPF direto no PDV sem cartões magnéticos extras.</span>
+          <button onclick="alert('Regra de fidelidade configurada para demonstração!')" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl transition">
+            Testar no PDV
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function calcularFidelidade() {
+      const compra = parseFloat(document.getElementById('fid-compra').value) || 0;
+      const cb = parseFloat(document.getElementById('fid-cashback').value) || 0;
+      const val = parseInt(document.getElementById('fid-validade').value) || 30;
+
+      const credito = compra * (cb / 100);
+      const dataExp = new Date();
+      dataExp.setDate(dataExp.getDate() + val);
+
+      document.getElementById('cupom-credito').textContent = 'R$ ' + credito.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      document.getElementById('cupom-validade').textContent = dataExp.toLocaleDateString('pt-BR');
+    }
+
+    calcularFidelidade();
+  </script>
+</body>
+</html>

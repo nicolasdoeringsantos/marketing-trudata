@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo Interativo de Módulos & Recursos — TruData ERP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --navy: #0f172a;
+      --bg: #0b0f19;
+      --card-bg: #1e293b;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 1.5rem; }
+
+    .header { max-width: 1400px; margin: 0 auto 2rem auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .brand-title { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; }
+    .brand-title span { color: #3b82f6; }
+    .btn-top { background: #334155; color: #fff; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 700; }
+
+    .layout-modulos {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 950px) { .layout-modulos { grid-template-columns: 1fr; } }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .modulo-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .modulo-card:hover { border-color: rgba(37,99,235,0.5); transform: translateY(-2px); }
+    .modulo-card.selected { border-color: #3b82f6; background: #172554; box-shadow: 0 0 20px rgba(59,130,246,0.2); }
+
+    .mod-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .mod-icon { font-size: 2rem; }
+    .mod-check { width: 22px; height: 22px; border-radius: 6px; border: 2px solid #64748b; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 900; }
+    .modulo-card.selected .mod-check { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+    .mod-title { font-size: 1.15rem; font-weight: 800; color: #fff; margin-top: 0.5rem; }
+    .mod-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+    .mod-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .mod-tag { background: rgba(255,255,255,0.05); font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 0.3rem; color: #94a3b8; }
+
+    /* PAINEL FIXO DE PROPOSTA */
+    .summary-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      position: sticky;
+      top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .list-selecionados { display: flex; flex-direction: column; gap: 0.5rem; max-height: 250px; overflow-y: auto; }
+    .item-sel { font-size: 0.8rem; color: #cbd5e1; display: flex; align-items: center; gap: 0.4rem; }
+
+    .btn-wpp-pacote { background: #25D366; color: #fff; text-decoration: none; padding: 0.85rem; border-radius: 0.5rem; font-weight: 800; font-size: 0.9rem; text-align: center; display: block; transition: background 0.2s; }
+    .btn-wpp-pacote:hover { background: #16a34a; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <div class="brand-title">📚 CATÁLOGO DE MÓDULOS TRUDATA ERP</div>
+      <p style="font-size:0.85rem; color:var(--text-muted);">Vitrine de Recursos Homologados — Selecione os módulos para montar a solução ideal</p>
+    </div>
+    <div style="display:flex; gap:0.5rem;">
+      <a href="index.html" class="btn-top">← Painel Geral</a>
+      <a href="gerador_proposta.html" class="btn-top" style="background:#0d9488;">📄 Abrir Gerador de Proposta</a>
+    </div>
+  </div>
+
+  <div class="layout-modulos">
+    <!-- GRID DE MÓDULOS -->
+    <div class="grid-cards" id="gridModulos">
+      <!-- MÓDULO 1 -->
+      <div class="modulo-card selected" onclick="toggleModulo(this, 'Frente de Caixa (PDV Ágil)', 'Emissão de NFC-e em 3s e contingência offline blindada.')">
+        <div class="mod-top">
+          <div class="mod-icon">⚡</div>
+          <div class="mod-check">✓</div>
+        </div>
+        <div>
+          <div class="mod-title">Frente de Caixa (PDV Ágil)</div>
+          <p class="mod-desc">Emissão ultrarrápida de cupons fiscais sem dependência de internet. Se a conexão cair, a loja continua vendendo.</p>
+        </div>
+        <div class="mod-tags">
+          <span class="mod-tag">NFC-e</span>
+          <span class="mod-tag">Contingência Offline</span>
+          <span class="mod-tag">Balança Integrada</span>
+        </div>
+      </div>
+
+      <!-- MÓDULO 2 -->
+      <div class="modulo-card selected" onclick="toggleModulo(this, 'Estoque & Entrada por XML', 'Importação instantânea do fornecedor e recálculo de custo.')">
+        <div class="mod-top">
+          <div class="mod-icon">📦</div>
+          <div class="mod-check">✓</div>
+        </div>
+        <div>
+          <div class="mod-title">Controle de Estoque & XML</div>
+          <p class="mod-desc">Importe as notas dos fornecedores em segundos. Atualiza estoque, calcula impostos e sugere margem de lucro.</p>
+        </div>
+        <div class="mod-tags">
+          <span class="mod-tag">Entrada XML</span>
+          <span class="mod-tag">Curva ABC</span>
+          <span class="mod-tag">Inventário Móvel</span>
+        </div>
+      </div>
+
+      <!-- MÓDULO 3 -->
+      <div class="modulo-card selected" onclick="toggleModulo(this, 'Motor Fiscal SEFAZ/RS', 'SPED Fiscal, Sintegra e parametrização tributária estadual.')">
+        <div class="mod-top">
+          <div class="mod-icon">🏛️</div>
+          <div class="mod-check">✓</div>
+        </div>
+        <div>
+          <div class="mod-title">Motor Fiscal SEFAZ/RS</div>
+          <p class="mod-desc">Adequado às exigências tributárias do Rio Grande do Sul: SPED Fiscal, Sintegra, DeSTDA e transição da Reforma Tributária.</p>
+        </div>
+        <div class="mod-tags">
+          <span class="mod-tag">SPED Fiscal</span>
+          <span class="mod-tag">NF-e 55</span>
+          <span class="mod-tag">DIFAL Automático</span>
+        </div>
+      </div>
+
+      <!-- MÓDULO 4 -->
+      <div class="modulo-card" onclick="toggleModulo(this, 'TruData Moda (Grade Matriz)', 'Grade por cor e tamanho com impressão de etiquetas térmicas.')">
+        <div class="mod-top">
+          <div class="mod-icon">👗</div>
+          <div class="mod-check">✓</div>
+        </div>
+        <div>
+          <div class="mod-title">TruData Moda (Grade Matriz)</div>
+          <p class="mod-desc">Especial para confecções e calçados: matriz de cor x tamanho, emissão de etiquetas com código de barras e condicional.</p>
+        </div>
+        <div class="mod-tags">
+          <span class="mod-tag">Grade Cor/Tam</span>
+          <span class="mod-tag">Etiquetas Zebra/Argox</span>
+          <span class="mod-tag">Malinha/Condicional</span>
+        </div>
+      </div>
+
+      <!-- MÓDULO 5 -->
+      <div class="modulo-card" onclick="toggleModulo(this, 'TruData Farma (SNGPC)', 'Controle de lotes, validades e transmissão automática Anvisa.')">
+        <div class="mod-top">
+          <div class="mod-icon">💊</div>
+          <div class="mod-check">✓</div>
+        </div>
+        <div>
+          <div class="mod-title">TruData Farma (SNGPC)</div>
+          <p class="mod-desc">Para farmácias e drogarias: medicamentos controlados, alerta preventivo de lotes a vencer e convênios PBM.</p>
+        </div>
+        <div class="mod-tags">
+          <span class="mod-tag">SNGPC Anvisa</span>
+          <span class="mod-tag">Controle de Lotes</span>
+          <span class="mod-tag">Integração PBM</span>
+        </div>
+      </div>
+
+      <!-- MÓDULO 6 -->
+      <div class="modulo-card selected" onclick="toggleModulo(this, 'Financeiro & TEF Integrado', 'Conciliação automática de cartões e DRE gerencial.')">
+        <div class="mod-top">
+          <div class="mod-icon">💳</div>
+          <div class="mod-check">✓</div>
+        </div>
+        <div>
+          <div class="mod-title">Financeiro & Conciliação TEF</div>
+          <p class="mod-desc">O valor vai direto do PDV para o PinPad sem digitação avulsa. DRE em tempo real, contas a pagar, receber e sangrias.</p>
+        </div>
+        <div class="mod-tags">
+          <span class="mod-tag">TEF Multi-Adquirente</span>
+          <span class="mod-tag">DRE em Tempo Real</span>
+          <span class="mod-tag">Fechamento Cego</span>
+        </div>
+      </div>
+
+      <!-- MÓDULO 7 -->
+      <div class="modulo-card" onclick="toggleModulo(this, 'Força de Vendas & Mobile', 'Aplicativo de pedidos para vendedores externos.')">
+        <div class="mod-top">
+          <div class="mod-icon">📱</div>
+          <div class="mod-check">✓</div>
+        </div>
+        <div>
+          <div class="mod-title">Força de Vendas Mobile</div>
+          <p class="mod-desc">Aplicativo para representantes e vendedores externos tirarem pedidos na rua, com sincronização automática com a matriz.</p>
+        </div>
+        <div class="mod-tags">
+          <span class="mod-tag">App Android</span>
+          <span class="mod-tag">Catálogo Digital</span>
+          <span class="mod-tag">Vendas na Rota</span>
+        </div>
+      </div>
+
+      <!-- MÓDULO 8 -->
+      <div class="modulo-card" onclick="toggleModulo(this, 'Modo Escritório Contábil', 'Portal exclusivo para o contador baixar XMLs sem incomodar o lojista.')">
+        <div class="mod-top">
+          <div class="mod-icon">🤝</div>
+          <div class="mod-check">✓</div>
+        </div>
+        <div>
+          <div class="mod-title">Modo Escritório Contábil</div>
+          <p class="mod-desc">Canal direto com o escritório de contabilidade para download de arquivos fiscais auditados sem atrasos no fechamento.</p>
+        </div>
+        <div class="mod-tags">
+          <span class="mod-tag">Portal Contador</span>
+          <span class="mod-tag">Zero Atrasos</span>
+          <span class="mod-tag">Parceria Técnica</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAINEL FIXO DE RESUMO -->
+    <div class="summary-card">
+      <h3 style="font-size:1.1rem; font-weight:800; color:#fff;">📋 Pacote Selecionado</h3>
+      <p style="font-size:0.8rem; color:var(--text-muted);">Módulos marcados para a solução do cliente:</p>
+
+      <div class="list-selecionados" id="listaSel"></div>
+
+      <div style="border-top:1px solid var(--border); pt:1rem; margin-top:0.5rem;">
+        <span style="font-size:0.75rem; color:#60a5fa; font-weight:700;">Diferencial Garantido:</span>
+        <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.25rem;">🧑‍💼 Suporte 100% humano em Sarandi/RS sem robôs + Selo de Qualidade MPS.BR.</p>
+      </div>
+
+      <a id="btnWhatsAppPacote" href="#" target="_blank" class="btn-wpp-pacote">
+        📲 Enviar Pacote no WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <script>
+    let MODULOS_SELECIONADOS = [
+      { nome: "Frente de Caixa (PDV Ágil)", desc: "Emissão de NFC-e em 3s e contingência offline blindada." },
+      { nome: "Estoque & Entrada por XML", desc: "Importação instantânea do fornecedor e recálculo de custo." },
+      { nome: "Motor Fiscal SEFAZ/RS", desc: "SPED Fiscal, Sintegra e parametrização tributária estadual." },
+      { nome: "Financeiro & TEF Integrado", desc: "Conciliação automática de cartões e DRE gerencial." }
+    ];
+
+    function toggleModulo(card, nome, desc) {
+      const idx = MODULOS_SELECIONADOS.findIndex(m => m.nome === nome);
+      if (idx >= 0) {
+        MODULOS_SELECIONADOS.splice(idx, 1);
+        card.classList.remove('selected');
+      } else {
+        MODULOS_SELECIONADOS.push({ nome, desc });
+        card.classList.add('selected');
+      }
+      atualizarResumo();
+    }
+
+    function atualizarResumo() {
+      const lista = document.getElementById('listaSel');
+      lista.innerHTML = '';
+
+      MODULOS_SELECIONADOS.forEach(m => {
+        const item = document.createElement('div');
+        item.className = 'item-sel';
+        item.innerHTML = `<span>✅</span> <strong>${m.nome}</strong>`;
+        lista.appendChild(item);
+      });
+
+      const nomesFormatados = MODULOS_SELECIONADOS.map(m => `• ${m.nome}`).join('%0A');
+      const msg = `Olá! Montei um pacote personalizado do TruData ERP para sua empresa:%0A%0A${nomesFormatados}%0A%0ATodos contam com suporte 100% humano direto de Sarandi/RS e emissão sem internet. Podemos agendar 15 minutos para ver na prática?`;
+
+      document.getElementById('btnWhatsAppPacote').href = `https://wa.me/555433612650?text=${msg}`;
+    }
+
+    atualizarResumo();
+  </script>
+</body>
+</html>

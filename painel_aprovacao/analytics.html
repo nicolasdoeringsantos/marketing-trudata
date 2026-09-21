@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TruData Analytics — Dashboard Executivo B2B</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { azure: '#0070f3', dark: '#0b0f19', card: '#131b2e', emerald: '#10b981', rose: '#f43f5e' }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .chart-box { position: relative; height: 260px; width: 100%; }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased p-4 sm:p-6 lg:p-8 flex flex-col">
+
+  <!-- TOPO DE NAVEGAÇÃO -->
+  <header class="max-w-7xl mx-auto w-full flex items-center justify-between gap-4 mb-6 flex-wrap">
+    <div class="flex items-center gap-3">
+      <div class="h-10 w-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xl border border-blue-500/30">
+        📊
+      </div>
+      <div>
+        <h1 class="text-xl font-black font-display text-white">TruData Analytics & Business Intelligence</h1>
+        <p class="text-xs text-slate-400">Cockpit Estratégico de Receita Recorrente, Eficiência de Aquisição e Funil Regional</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="index.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        ← Hub Central
+      </a>
+      <a href="crm.html" class="text-xs px-3 py-2 rounded-lg bg-emerald-900/40 text-emerald-300 border border-emerald-700/50 hover:bg-emerald-900 transition flex items-center gap-1">
+        💼 Ver CRM Kanban
+      </a>
+      <a href="health-score" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        🩺 Health Score Base
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto w-full space-y-6 flex-1">
+
+    <!-- KPI CARDS EXECUTIVOS (FINANCEIROS E CRESCIMENTO) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3.5">
+      
+      <!-- MRR -->
+      <div class="glass rounded-2xl p-4 border border-slate-800 space-y-1">
+        <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">MRR Consolidado</span>
+        <div class="text-2xl font-black text-emerald-400 font-display">R$ 120.910</div>
+        <span class="text-[10px] text-emerald-300 font-semibold flex items-center gap-1">
+          ↑ +R$ 6.910 no pipeline ativo
+        </span>
+      </div>
+
+      <!-- ARR -->
+      <div class="glass rounded-2xl p-4 border border-slate-800 space-y-1">
+        <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">ARR Projetado</span>
+        <div class="text-2xl font-black text-white font-display">R$ 1.45M</div>
+        <span class="text-[10px] text-slate-400">Receita anual contratual</span>
+      </div>
+
+      <!-- CLIENTES ATIVOS -->
+      <div class="glass rounded-2xl p-4 border border-slate-800 space-y-1">
+        <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Clientes Ativos</span>
+        <div class="text-2xl font-black text-blue-400 font-display">308</div>
+        <span class="text-[10px] text-blue-300 font-semibold">99.4% adimplência</span>
+      </div>
+
+      <!-- CAC MÉDIO -->
+      <div class="glass rounded-2xl p-4 border border-slate-800 space-y-1">
+        <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">CAC Médio</span>
+        <div class="text-2xl font-black text-white font-display">R$ 420</div>
+        <span class="text-[10px] text-slate-400">Custo aquisição de campo</span>
+      </div>
+
+      <!-- LTV MÉDIO -->
+      <div class="glass rounded-2xl p-4 border border-slate-800 space-y-1">
+        <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">LTV Médio</span>
+        <div class="text-2xl font-black text-purple-400 font-display">R$ 16.200</div>
+        <span class="text-[10px] text-purple-300 font-semibold">3.5 anos permanência</span>
+      </div>
+
+      <!-- LTV / CAC RATIO -->
+      <div class="glass rounded-2xl p-4 border border-slate-800 space-y-1">
+        <span class="text-[10px] uppercase font-bold text-emerald-400 block tracking-wider">LTV / CAC Ratio</span>
+        <div class="text-2xl font-black text-emerald-400 font-display">38.5x</div>
+        <span class="text-[10px] text-slate-400">Benchmark excelente (&gt;3x)</span>
+      </div>
+
+    </div>
+
+    <!-- GRID DE GRÁFICOS ANALÍTICOS (4 CARDS) -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- GRÁFICO 1: FUNIL DE VENDAS B2B EM TEMPO REAL -->
+      <div class="glass rounded-3xl p-6 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span>🎯</span> Funil Comercial B2B (Conversão de Campo)
+            </h2>
+            <p class="text-xs text-slate-400">Da prospecção no Radar de Sarandi até a implantação em 48h.</p>
+          </div>
+          <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">
+            Taxa Final: 18.2%
+          </span>
+        </div>
+        <div class="chart-box">
+          <canvas id="chartFunilVendas"></canvas>
+        </div>
+      </div>
+
+      <!-- GRÁFICO 2: PENETRAÇÃO GEOGRÁFICA REGIONAL NO RS -->
+      <div class="glass rounded-3xl p-6 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span>📍</span> Penetração por Polo Regional (Lojas Ativas)
+            </h2>
+            <p class="text-xs text-slate-400">Distribuição física de clientes em Sarandi e cidades em um raio de 100km.</p>
+          </div>
+          <span class="text-xs font-mono font-bold text-blue-400 bg-blue-500/10 px-2 py-1 rounded">
+            Sarandi: 36.4%
+          </span>
+        </div>
+        <div class="chart-box">
+          <canvas id="chartPenetracaoGeo"></canvas>
+        </div>
+      </div>
+
+      <!-- GRÁFICO 3: EVOLUÇÃO DE MRR E COHORT DE RETENÇÃO -->
+      <div class="glass rounded-3xl p-6 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span>📈</span> Crescimento de Receita Recorrente (MRR R$)
+            </h2>
+            <p class="text-xs text-slate-400">Trajetória dos últimos 12 meses com retenção líquida positiva.</p>
+          </div>
+          <span class="text-xs font-mono font-bold text-purple-400 bg-purple-500/10 px-2 py-1 rounded">
+            +31.8% a.a.
+          </span>
+        </div>
+        <div class="chart-box">
+          <canvas id="chartEvolucaoMRR"></canvas>
+        </div>
+      </div>
+
+      <!-- GRÁFICO 4: MIX POR SEGMENTO DO VAREJO -->
+      <div class="glass rounded-3xl p-6 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span>🛒</span> Mix da Base de Clientes por Segmento
+            </h2>
+            <p class="text-xs text-slate-400">Supermercados, autopeças, materiais de construção e lojas em geral.</p>
+          </div>
+          <span class="text-xs font-mono font-bold text-amber-400 bg-amber-500/10 px-2 py-1 rounded">
+            Liderança: Mercados
+          </span>
+        </div>
+        <div class="chart-box">
+          <canvas id="chartMixSegmentos"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TABELA EXECUTIVA DO PIPELINE DE CONTAS PILOTO -->
+    <div class="glass rounded-3xl p-6 border border-slate-800 space-y-4">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <span>💼</span> Contas em Negociação Ativa no Pipeline
+          </h2>
+          <p class="text-xs text-slate-400">Monitoramento dos 20 alvos prioritários em raio de 30km de Sarandi.</p>
+        </div>
+        <a href="crm.html" class="text-xs text-brand-azure hover:underline font-bold">
+          Ver Quadro Completo no CRM →
+        </a>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left">
+          <thead class="text-[10px] text-slate-400 uppercase bg-slate-900/80 border-b border-slate-800">
+            <tr>
+              <th class="p-3">Empresa</th>
+              <th class="p-3">Cidade</th>
+              <th class="p-3">Fase no Pipeline</th>
+              <th class="p-3">PDVs</th>
+              <th class="p-3">MRR Estimado</th>
+              <th class="p-3">Lead Score</th>
+              <th class="p-3 text-right">Próxima Ação</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60 text-slate-300">
+            <tr class="hover:bg-slate-900/40 transition">
+              <td class="p-3 font-bold text-white">Supermercado Sarandi LTDA</td>
+              <td class="p-3">Sarandi - RS</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-bold text-[10px]">Demonstração</span></td>
+              <td class="p-3 font-mono">4 caixas</td>
+              <td class="p-3 font-bold text-emerald-400">R$ 647,00/mês</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">98 pts</span></td>
+              <td class="p-3 text-right"><a href="proposta-online?cliente=Supermercado%20Sarandi&cidade=Sarandi&pdvs=4&mrr=647" class="text-brand-azure hover:underline">Gerar Proposta</a></td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition">
+              <td class="p-3 font-bold text-white">Casa das Tintas Sarandi</td>
+              <td class="p-3">Sarandi - RS</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold text-[10px]">Proposta Enviada</span></td>
+              <td class="p-3 font-mono">2 caixas</td>
+              <td class="p-3 font-bold text-emerald-400">R$ 469,00/mês</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">92 pts</span></td>
+              <td class="p-3 text-right"><a href="contratos" class="text-brand-azure hover:underline">Emitir Contrato</a></td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition">
+              <td class="p-3 font-bold text-white">Auto Peças Sarandiense</td>
+              <td class="p-3">Sarandi - RS</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold text-[10px]">Contato SDR</span></td>
+              <td class="p-3 font-mono">3 caixas</td>
+              <td class="p-3 font-bold text-emerald-400">R$ 558,00/mês</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">89 pts</span></td>
+              <td class="p-3 text-right"><a href="cadencia-sdr" class="text-brand-azure hover:underline">Touch 2 WhatsApp</a></td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition">
+              <td class="p-3 font-bold text-white">Mercado Popular Constantina</td>
+              <td class="p-3">Constantina - RS</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-bold text-[10px]">Demonstração</span></td>
+              <td class="p-3 font-mono">2 caixas</td>
+              <td class="p-3 font-bold text-emerald-400">R$ 469,00/mês</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">86 pts</span></td>
+              <td class="p-3 text-right"><a href="tco-roi" class="text-brand-azure hover:underline">Apresentar TCO</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+
+    // 1. Gráfico Funil Comercial B2B (Horizontal Bar)
+    const ctxFunil = document.getElementById('chartFunilVendas').getContext('2d');
+    new Chart(ctxFunil, {
+      type: 'bar',
+      data: {
+        labels: ['Mapeados no Radar', 'Cadência SDR Contatada', 'Demonstração Agendada', 'Proposta com TCO', 'Contrato Fechado'],
+        datasets: [{
+          data: [180, 84, 38, 22, 12],
+          backgroundColor: ['#3b82f6', '#0ea5e9', '#a855f7', '#f59e0b', '#10b981'],
+          borderRadius: 8,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => ` ${ctx.raw} empresas` } }
+        },
+        scales: {
+          x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+          y: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold', size: 11 } } }
+        }
+      }
+    });
+
+    // 2. Gráfico de Penetração Geográfica (Doughnut)
+    const ctxGeo = document.getElementById('chartPenetracaoGeo').getContext('2d');
+    new Chart(ctxGeo, {
+      type: 'doughnut',
+      data: {
+        labels: ['Sarandi (Sede)', 'Passo Fundo', 'Carazinho', 'Constantina', 'Ronda Alta', 'Palmeira das Missões', 'Outros'],
+        datasets: [{
+          data: [112, 48, 34, 28, 24, 22, 40],
+          backgroundColor: ['#2563eb', '#38bdf8', '#a855f7', '#10b981', '#f59e0b', '#f43f5e', '#64748b'],
+          borderWidth: 2,
+          borderColor: '#0b0f19'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'right', labels: { boxWidth: 10, padding: 10, color: '#cbd5e1', font: { size: 10 } } }
+        }
+      }
+    });
+
+    // 3. Gráfico Evolução de MRR (Line com Gradiente)
+    const ctxMRR = document.getElementById('chartEvolucaoMRR').getContext('2d');
+    new Chart(ctxMRR, {
+      type: 'line',
+      data: {
+        labels: ['Out/25', 'Nov/25', 'Dez/25', 'Jan/26', 'Fev/26', 'Mar/26', 'Abr/26', 'Mai/26', 'Jun/26', 'Jul/26', 'Ago/26', 'Set/26'],
+        datasets: [{
+          label: 'MRR Consolidado (R$)',
+          data: [92000, 94500, 96800, 99000, 102000, 105400, 108900, 112000, 114800, 117200, 119500, 120910],
+          borderColor: '#10b981',
+          backgroundColor: 'rgba(16, 185, 129, 0.1)',
+          fill: true,
+          tension: 0.35,
+          borderWidth: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => ` R$ ${ctx.raw.toLocaleString('pt-BR')}`
+            }
+          }
+        },
+        scales: {
+          x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+          y: {
+            grid: { color: 'rgba(255,255,255,0.05)' },
+            ticks: {
+              color: '#94a3b8',
+              callback: (v) => 'R$ ' + (v / 1000).toFixed(0) + 'k'
+            }
+          }
+        }
+      }
+    });
+
+    // 4. Gráfico Mix de Segmentos (Polar Area / Bar)
+    const ctxMix = document.getElementById('chartMixSegmentos').getContext('2d');
+    new Chart(ctxMix, {
+      type: 'bar',
+      data: {
+        labels: ['Supermercados & Mercados', 'Autopeças & Oficinas', 'Materiais de Construção', 'Lojas de Moda & Calçados', 'Atacados & Distribuidores', 'Outros'],
+        datasets: [{
+          data: [118, 64, 46, 42, 24, 14],
+          backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#a855f7', '#06b6d4', '#64748b'],
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 9 } } },
+          y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copiloto de Vendas B2B TruData — Base Real Regional</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { azure: '#009fe3', hover: '#0284c7', dark: '#080c14', card: '#111827', accent: '#a855f7' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .tab-active { background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(0, 159, 227, 0.25)); border-color: #a855f7; color: #fff; font-weight: 700; }
+    .tab-inactive { background: rgba(15, 23, 42, 0.6); border-color: rgba(255, 255, 255, 0.08); color: #94a3b8; }
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+      background: #064e3b; border: 1px solid #10b981; color: #d1fae5;
+      padding: 0.85rem 1.25rem; border-radius: 0.75rem; font-size: 0.85rem; font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); opacity: 0; transform: translateY(20px);
+      transition: all 0.25s ease;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col">
+
+  <div id="toast" class="toast">Texto copiado para a área de transferência!</div>
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-2">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition font-medium">
+          ← Hub Central
+        </a>
+        <span class="text-slate-700">|</span>
+        <a href="radar_clientes.html" class="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition font-medium">
+          🛰️ Radar de Clientes (Raio 100km)
+        </a>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-200 font-display">Copiloto Comercial IA</span>
+        <span class="text-[10px] bg-purple-500/20 text-purple-300 font-bold px-2.5 py-0.5 rounded-full border border-purple-500/30">
+          600 Clientes Reais Mapeados
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
+    
+    <!-- BARRA SUPERIOR DE BUSCA & AUTOCOMPLETE -->
+    <div class="glass rounded-2xl p-5 shadow-2xl border border-slate-800">
+      <div class="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+        <div class="space-y-1 flex-1 w-full">
+          <label class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            🔍 Selecionar Empresa Alvo (Busca na Base Real de 600 Empresas):
+          </label>
+          <div class="relative">
+            <input 
+              type="text" 
+              id="input-busca-empresa" 
+              placeholder="Digite o nome da empresa, cidade ou CNPJ (ex: Cotrisoja, Farmácia, Sarandi)..." 
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              oninput="buscarAutocomplete(this.value)"
+              autocomplete="off"
+            />
+            <div id="lista-autocomplete" class="absolute left-0 right-0 top-full mt-1 bg-slate-900 border border-slate-700 rounded-xl max-h-60 overflow-y-auto z-50 shadow-2xl hidden">
+              <!-- Itens do autocomplete -->
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 w-full md:w-auto pt-2 md:pt-5">
+          <button onclick="limparSelecao()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-xl font-medium transition">
+            Limpar
+          </button>
+          <a id="link-proposta-direta" href="gerador_proposta.html" target="_blank" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-lg shadow-cyan-600/20">
+            📄 Abrir Proposta A4
+          </a>
+        </div>
+      </div>
+
+      <!-- DADOS DO CLIENTE ATIVO -->
+      <div id="painel-dados-cliente" class="mt-4 pt-4 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 text-xs">
+        <div>
+          <span class="text-[10px] text-slate-500 block uppercase font-mono">Empresa</span>
+          <span id="txt-empresa" class="font-bold text-white truncate block">Supermercado Exemplo</span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-500 block uppercase font-mono">Decisor (QSA)</span>
+          <span id="txt-decisor" class="font-semibold text-purple-300 truncate block">Carlos da Silva</span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-500 block uppercase font-mono">Cidade / Distância</span>
+          <span id="txt-cidade" class="font-semibold text-slate-200 truncate block">Sarandi - RS (0 km)</span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-500 block uppercase font-mono">Segmento</span>
+          <span id="txt-segmento" class="font-semibold text-emerald-400 truncate block">Supermercados</span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-500 block uppercase font-mono">Telefone</span>
+          <span id="txt-telefone" class="font-mono text-slate-300 truncate block">(54) 3361-0000</span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-500 block uppercase font-mono">CNPJ / Sintegra</span>
+          <div class="flex items-center gap-1.5">
+            <span id="txt-cnpj" class="font-mono text-[11px] text-slate-400 truncate">00.000.000/0001-00</span>
+            <button onclick="auditarSintegraAtual()" title="Auditar no Sintegra-RS" class="text-[10px] text-cyan-400 hover:text-cyan-300">🔍</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS DE FERRAMENTAS DO COPILOTO -->
+    <div class="space-y-4">
+      <div class="flex gap-2 border-b border-slate-800 pb-2 overflow-x-auto">
+        <button id="tab-btn-coldcall" onclick="trocarAba('coldcall')" class="tab-active px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition border">
+          📞 1. Cold Call 60s (Telefônico)
+        </button>
+        <button id="tab-btn-whatsapp" onclick="trocarAba('whatsapp')" class="tab-inactive px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition border">
+          📲 2. Abordagem WhatsApp
+        </button>
+        <button id="tab-btn-objecoes" onclick="trocarAba('objecoes')" class="tab-inactive px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition border">
+          🛡️ 3. Quebrador de Objeções
+        </button>
+        <button id="tab-btn-email" onclick="trocarAba('email')" class="tab-inactive px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition border">
+          📬 4. Follow-up por E-mail
+        </button>
+        <button id="tab-btn-simulador" onclick="trocarAba('simulador')" class="tab-inactive px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition border">
+          🎯 5. Simulador de Negociação & Pitch
+        </button>
+      </div>
+
+      <!-- ABA 1: COLD CALL 60 SEGUNDOS -->
+      <div id="aba-coldcall" class="space-y-4">
+        <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
+                <span>📞</span> Roteiro de Ligação de Alta Conversão (60 Segundos)
+              </h2>
+              <p class="text-xs text-slate-400">Desenvolvido para superar secretárias/atendentes e prender a atenção do sócio/diretor imediatamente.</p>
+            </div>
+            <button onclick="copiarConteudo('script-coldcall')" class="text-xs text-purple-400 hover:text-purple-300 font-bold flex items-center gap-1">
+              📋 Copiar Roteiro
+            </button>
+          </div>
+
+          <div id="script-coldcall" class="bg-slate-950 p-5 rounded-xl border border-slate-800 text-xs leading-relaxed space-y-4 font-mono text-slate-200">
+            <!-- Gerado dinamicamente -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 2: WHATSAPP COM BOTÃO DIRETO -->
+      <div id="aba-whatsapp" class="space-y-4 hidden">
+        <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
+                <span>📲</span> Mensagem Direta para o WhatsApp do Decisor
+              </h2>
+              <p class="text-xs text-slate-400">Texto formatado com dor operacional específica, ancoragem de proximidade (Sarandi-RS) e chamada clara.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="copiarConteudo('script-whatsapp')" class="text-xs text-cyan-400 hover:text-cyan-300 font-bold">
+                📋 Copiar
+              </button>
+              <button onclick="dispararWhatsApp()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-lg shadow-emerald-600/20">
+                🚀 Enviar no WhatsApp Agora
+              </button>
+            </div>
+          </div>
+
+          <div id="script-whatsapp" class="bg-slate-950 p-5 rounded-xl border border-emerald-500/30 text-xs leading-relaxed font-mono text-slate-200 whitespace-pre-wrap">
+            <!-- Gerado dinamicamente -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 3: QUEBRADOR DE OBJEÇÕES -->
+      <div id="aba-objecoes" class="space-y-4 hidden">
+        <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
+          <div>
+            <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
+              <span>🛡️</span> Respostas Imbatíveis para as 4 Maiores Objeções do Lojista Gaúcho
+            </h2>
+            <p class="text-xs text-slate-400">Como conduzir quando o lojista tenta desligar ou diz que já está atendido.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+              <span class="text-xs font-bold text-red-400 block font-display">Objeção 1: "Já tenho sistema e não quero dor de cabeça."</span>
+              <p class="text-xs text-slate-300 leading-relaxed font-mono" id="obj-1">
+                "Compreendo perfeitamente, [Decisor]. Não estou te ligando para você trocar nada agora. A maioria dos nossos clientes em [Cidade] também já usavam outro sistema, mas tinham medo de quando a internet caísse num sábado ou o suporte deixasse esperando em robô. A TruData tem contingência 100% offline e nosso suporte atende de Sarandi em 5 minutos. Me permita só te mandar um comparativo de 2 minutos no WhatsApp?"
+              </p>
+              <button onclick="copiarTexto(document.getElementById('obj-1').innerText)" class="text-[11px] text-cyan-400 hover:underline">📋 Copiar Resposta</button>
+            </div>
+
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+              <span class="text-xs font-bold text-red-400 block font-display">Objeção 2: "Mudar de sistema dá muito trabalho e perco meu histórico."</span>
+              <p class="text-xs text-slate-300 leading-relaxed font-mono" id="obj-2">
+                "Esse é o maior receio de quem já passou por migração ruim, [Decisor]. Na TruData fazemos a importação completa do seu estoque, clientes, fornecedores e contas a receber direto do banco do seu sistema anterior. Sua loja encerra com o antigo na sexta e abre na segunda já operando com a gente, sem perder 1 centavo de histórico."
+              </p>
+              <button onclick="copiarTexto(document.getElementById('obj-2').innerText)" class="text-[11px] text-cyan-400 hover:underline">📋 Copiar Resposta</button>
+            </div>
+
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+              <span class="text-xs font-bold text-red-400 block font-display">Objeção 3: "Vocês são de onde? O suporte é perto?"</span>
+              <p class="text-xs text-slate-300 leading-relaxed font-mono" id="obj-3">
+                "Nossa sede matriz fica em Sarandi/RS, a apenas [Distancia] de [Cidade]! Temos mais de 25 anos de mercado no Norte do RS. Enquanto os grandes softwares de São Paulo te colocam numa fila de espera de inteligência artificial de 2 horas, o nosso time atende por telefone direto e se precisar vai até sua loja."
+              </p>
+              <button onclick="copiarTexto(document.getElementById('obj-3').innerText)" class="text-[11px] text-cyan-400 hover:underline">📋 Copiar Resposta</button>
+            </div>
+
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+              <span class="text-xs font-bold text-red-400 block font-display">Objeção 4: "O meu sistema atual é muito barato / pago baratinho."</span>
+              <p class="text-xs text-slate-300 leading-relaxed font-mono" id="obj-4">
+                "O barato sai muito caro quando o caixa trava na hora do pico ou quando o contador te cobra multas da SEFAZ por erro de SPED ou tributação monofásica que o sistema não tratou. Nosso valor se paga sozinho só eliminando bitributação indevida e garantindo que cada caixa passe 3x mais clientes por minuto."
+              </p>
+              <button onclick="copiarTexto(document.getElementById('obj-4').innerText)" class="text-[11px] text-cyan-400 hover:underline">📋 Copiar Resposta</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 4: FOLLOW-UP POR E-MAIL -->
+      <div id="aba-email" class="space-y-4 hidden">
+        <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
+                <span>📬</span> E-mail Executivo de Follow-up Pós-Contato
+              </h2>
+              <p class="text-xs text-slate-400">Envie após a ligação ou conversa de WhatsApp para formalizar a proposta de valor.</p>
+            </div>
+            <button onclick="copiarConteudo('script-email')" class="text-xs text-cyan-400 hover:text-cyan-300 font-bold">
+              📋 Copiar Assunto & Corpo
+            </button>
+          </div>
+
+          <div id="script-email" class="bg-slate-950 p-5 rounded-xl border border-slate-800 text-xs leading-relaxed font-mono text-slate-200 whitespace-pre-wrap">
+            <!-- Gerado dinamicamente -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 5: SIMULADOR DE NEGOCIAÇÃO & ROLE-PLAY -->
+      <div id="aba-simulador" class="space-y-4 hidden">
+        <div class="glass rounded-2xl p-6 border border-slate-800 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/80 pb-4">
+            <div>
+              <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
+                <span>🎯</span> Treinador Interativo de Pitch Comercial (Role-Play)
+              </h2>
+              <p class="text-xs text-slate-400">Simule a resposta do vendedor para as 4 objeções mais duras dos comerciantes gaúchos e receba nota e diagnóstico de gatilhos mentais.</p>
+            </div>
+            <span class="text-[11px] bg-purple-500/20 text-purple-300 font-mono font-bold px-3 py-1 rounded-full border border-purple-500/30 w-fit">
+              IA de Análise de Gatilhos
+            </span>
+          </div>
+
+          <!-- SELETOR DE CENÁRIO -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <label class="text-xs font-bold text-slate-300">Escolha o Cenário / Objeção do Lojista:</label>
+              <select id="sim-cenario-select" onchange="carregarCenarioSimulador()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
+                <option value="queda_internet">1. "A internet cai direto no sábado, tenho pavor de caixa travado"</option>
+                <option value="contador_indicou">2. "Meu contador indicou outro sistema da capital e disse para não trocar"</option>
+                <option value="operadoras_antigas">3. "Minhas operadoras de caixa são mais velhas e não aprendem sistema novo"</option>
+                <option value="sistema_pago_15anos">4. "Já uso o mesmo software há 15 anos, está pago e não quero mexer"</option>
+              </select>
+            </div>
+            <div class="bg-slate-950 p-3.5 rounded-xl border border-red-500/30 flex flex-col justify-center">
+              <span class="text-[10px] uppercase font-mono font-bold text-red-400">Fala Real do Lojista:</span>
+              <p id="sim-fala-lojista" class="text-xs text-slate-200 mt-1 italic font-serif">
+                "A internet aqui na cidade cai direto em dia de chuva ou sábado à tarde. Se o sistema parar com 15 clientes na fila com compras no carrinho, perco o cliente para sempre. Não posso arriscar colocar sistema novo."
+              </p>
+            </div>
+          </div>
+
+          <!-- ÁREA DO PITCH DO VENDEDOR -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-300">Como você responderia a este lojista? (Digite seu pitch abaixo):</label>
+              <button onclick="carregarExemploPitch()" class="text-xs text-cyan-400 hover:text-cyan-300 font-medium">
+                💡 Carregar Resposta Exemplo
+              </button>
+            </div>
+            <textarea id="sim-pitch-input" rows="4" placeholder="Ex: Entendo perfeitamente, seu Carlos! É exatamente por isso que a TruData foi desenvolvida com contingência 100% offline nativa..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 font-mono leading-relaxed"></textarea>
+            
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[11px] text-slate-500">Dica: Use gatilhos de proximidade (Sarandi-RS), contingência offline, segurança fiscal e transição segura.</span>
+              <button onclick="avaliarPitchComercial()" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-lg shadow-purple-600/30">
+                ⚡ Avaliar Meu Pitch
+              </button>
+            </div>
+          </div>
+
+          <!-- RESULTADO DA AVALIAÇÃO -->
+          <div id="sim-feedback-box" class="hidden space-y-4 pt-4 border-t border-slate-800">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+              <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 text-center">
+                <span class="text-[10px] uppercase font-mono text-slate-400 block">Nota do Pitch</span>
+                <span id="sim-score-total" class="text-2xl font-black font-display text-emerald-400">92/100</span>
+                <span id="sim-score-nivel" class="text-[10px] font-bold text-slate-400 block mt-0.5">Alto Poder de Fechamento</span>
+              </div>
+              <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] uppercase font-mono text-slate-400 block">Gatilho Proximidade</span>
+                <span id="sim-gatilho-proximidade" class="text-xs font-bold text-cyan-400 flex items-center gap-1 mt-1">✅ Presente (Sarandi-RS)</span>
+              </div>
+              <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] uppercase font-mono text-slate-400 block">Gatilho Contingência</span>
+                <span id="sim-gatilho-offline" class="text-xs font-bold text-amber-400 flex items-center gap-1 mt-1">✅ Offline Enfatizado</span>
+              </div>
+              <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] uppercase font-mono text-slate-400 block">Gatilho Transição/Fiscal</span>
+                <span id="sim-gatilho-fiscal" class="text-xs font-bold text-purple-400 flex items-center gap-1 mt-1">✅ Suporte & Segurança</span>
+              </div>
+            </div>
+
+            <!-- DIAGNÓSTICO & RESPOSTA DE OURO -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                <span class="text-xs font-bold text-slate-200 block">📊 Análise do Instrutor Comercial:</span>
+                <p id="sim-analise-texto" class="text-xs text-slate-300 leading-relaxed font-sans"></p>
+              </div>
+              <div class="bg-slate-950 p-4 rounded-xl border border-purple-500/30 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-purple-300">⭐ Resposta Padrão Ouro TruData (Script Recomendado):</span>
+                  <button onclick="copiarConteudo('sim-script-ouro')" class="text-[11px] text-purple-400 hover:text-purple-300 font-bold">📋 Copiar</button>
+                </div>
+                <p id="sim-script-ouro" class="text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap"></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // ESTADO DO CLIENTE ATIVO
+    let CLIENTE_ATUAL = {
+      nome: "Supermercado Cotrisoja",
+      decisor: "Diretoria e Gerência",
+      cidade: "Sarandi",
+      distancia: "0 km",
+      segmento: "Supermercados & Mercearias",
+      telefone: "5433611000",
+      cnpj: "87.842.148/0001-83",
+      email: "contato@cotrisoja.com.br",
+      pdvs: 4
+    };
+
+    let debounceTimer;
+
+    function mostrarToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    function copiarTexto(txt) {
+      navigator.clipboard.writeText(txt).then(() => mostrarToast('Texto copiado com sucesso!'));
+    }
+
+    function copiarConteudo(idElemento) {
+      const el = document.getElementById(idElemento);
+      copiarTexto(el.innerText || el.textContent);
+    }
+
+    function auditarSintegraAtual() {
+      const cnpjNum = CLIENTE_ATUAL.cnpj.replace(/\D/g, '');
+      copiarTexto(CLIENTE_ATUAL.cnpj);
+      mostrarToast(`CNPJ ${CLIENTE_ATUAL.cnpj} copiado! Abrindo Sintegra-RS...`);
+      setTimeout(() => {
+        window.open('https://dfe-portal.svrs.rs.gov.br/NFE/CCC', '_blank');
+      }, 400);
+    }
+
+    function trocarAba(aba) {
+      const abas = ['coldcall', 'whatsapp', 'objecoes', 'email', 'simulador'];
+      abas.forEach(a => {
+        const btn = document.getElementById(`tab-btn-${a}`);
+        const div = document.getElementById(`aba-${a}`);
+        if (!btn || !div) return;
+        if (a === aba) {
+          btn.className = "tab-active px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition border";
+          div.classList.remove('hidden');
+        } else {
+          btn.className = "tab-inactive px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition border";
+          div.classList.add('hidden');
+        }
+      });
+    }
+
+    // BASE DE DADOS DO SIMULADOR DE NEGOCIAÇÃO (ROLE-PLAY)
+    const CENARIOS_SIMULADOR = {
+      queda_internet: {
+        fala: '"A internet aqui na cidade cai direto em dia de chuva ou sábado à tarde. Se o sistema parar com 15 clientes na fila com compras no carrinho, perco o cliente para sempre. Não posso arriscar colocar sistema novo."',
+        exemploPitch: "Compreendo perfeitamente, [Decisor]! Esse é justamente o maior terror de quem usa sistemas 100% em nuvem de fora do Estado. Na TruData ERP, o PDV opera com contingência offline nativa: se o sinal cair no sábado, o caixa continua bipando os produtos e emitindo NFC-e sem travar 1 segundo sequer. Quando a internet voltar, tudo sincroniza sozinho com a SEFAZ. Além disso, nossa sede fica em Sarandi, a [Distancia] daqui, e qualquer suporte é resolvido por telefone ou presencialmente em minutos. Quer que eu faça uma demonstração de 5 minutos do PDV funcionando desconectado?",
+        scriptOuro: `Compreendo perfeitamente, [Decisor]! Esse é o maior pavor de qualquer comerciante no sábado de movimento.\n\nNa TruData ERP, o caixa opera com Contingência Offline Nativa: se a conexão cair ou a fibra romper, seu caixa continua registrando compras e emitindo cupons fiscais sem travar nem 1 segundo.\n\nAssim que o sinal restabelece, as notas são enviadas automaticamente para a SEFAZ-RS sem você precisar fazer nada. Nossa matriz é aqui em Sarandi-RS, a [Distancia] da sua loja, então você nunca fica na mão de robôs de fora do Estado.`
+      },
+      contador_indicou: {
+        fala: '"O meu contador de confiança disse para eu não mexer em sistema porque ele já tem o layout configurado no escritório dele, ou para colocar o software parceiro dele."',
+        exemploPitch: "Perfeito, [Decisor]. Nós respeitamos 100% o trabalho do seu contador e temos profunda parceria com os escritórios do Norte do RS há mais de 25 anos. O sistema do seu contador continuará exatamente o mesmo (Domínio, Questor, WK, etc.). A TruData possui o 'Portal do Contador Integrado', onde no dia 1º de cada mês ele baixa todos os XMLs, SPED e Sintegra em 1 clique, sem precisar te ligar pedindo arquivos. O lojista ganha velocidade de caixa e o contador ganha arquivos 100% auditados e sem inconsistências fiscais.",
+        scriptOuro: `Perfeito, [Decisor]! Respeitamos e valorizamos muito a parceria com a contabilidade.\n\nO que acontece é que a TruData não concorre com o sistema contábil dele: nós integramos 100% com o software do seu escritório (Domínio, Questor, WK).\n\nCriamos o Portal do Contador TruData onde no dia 1º de cada mês ele baixa todos os XMLs, SPED Fiscal e Sintegra em 1 único clique, sem te incomodar. Inclusive, podemos ligar juntos para o seu contador e mostrar o layout para ele aprovar antes de qualquer decisão.`
+      },
+      operadoras_antigas: {
+        fala: '"Minhas operadoras de caixa já têm mais de 45 anos, trabalham comigo há 10 anos e têm pavor de tela nova. Se mudar o sistema, elas entram em pânico e a loja para."',
+        exemploPitch: "Esse cuidado com a sua equipe é exemplar, [Decisor]. Nossa interface de PDV foi desenhada exatamente para simplificar o operador: tela limpa, atalhos intuitivos no teclado e leitor rápido, sem menus confusos. Além do mais, nossa equipe de Sarandi faz o treinamento presencial acompanhando o primeiro dia de operação lado a lado das suas caixas até elas dominarem com total segurança. Se tiver qualquer dúvida, ligam para o suporte local de Sarandi e falam com uma pessoa de verdade na hora.",
+        scriptOuro: `Esse cuidado com suas colaboradoras é o segredo do sucesso do seu negócio, [Decisor].\n\nNossa tela de PDV foi construída especificamente para ser intuitiva e sem complicação: são poucos atalhos no teclado, leitor rápido e telas limpas.\n\nMais importante ainda: nós fazemos treinamento prático e nossa equipe técnica acompanha o primeiro dia da virada lado a lado com suas operadoras de caixa. Elas aprendem em menos de 40 minutos e ganham confiança imediatamente.`
+      },
+      sistema_pago_15anos: {
+        fala: '"Já uso o mesmo software há 15 anos. A tela é feia em DOS/Delphi, mas está pago e não pago quase nada de mensalidade. Por que eu trocaria agora?"',
+        exemploPitch: "Entendo o ponto de vista financeiro, [Decisor]. Mas o sistema antigo muitas vezes custa caro sem você perceber: a cada ano a SEFAZ-RS atualiza regras fiscais, tabelas de ICMS-ST e PIS/COFINS monofásicos. Sistemas legados não recalculam isso automaticamente, fazendo você pagar imposto duplicado no Simples Nacional todo mês. Além disso, se o computador queimar, um software de 15 anos não tem backup em nuvem moderno nem TEF integrado. Nossa mensalidade se paga sozinha apenas na economia de impostos e na velocidade dos caixas.",
+        scriptOuro: `Entendo perfeitamente, [Decisor]. Quando algo funciona há anos, a gente tem receio de mexer.\n\nMas a verdade é que sistemas legados de 15 anos não foram pensados para a legislação atual da SEFAZ-RS, PIX dinâmico e conciliação automática de cartões.\n\nCom a TruData você ganha:\n1) Eliminação de bitributação de ICMS-ST e PIS monofásico (economizando até milhares de reais por ano no Simples);\n2) Backup seguro automático sem risco de perder dados se a máquina queimar;\n3) Transição 100% segura: migramos todo seu cadastro anterior sem perda de histórico.`
+      }
+    };
+
+    function carregarCenarioSimulador() {
+      const cenarioKey = document.getElementById('sim-cenario-select').value;
+      const cenario = CENARIOS_SIMULADOR[cenarioKey];
+      if (!cenario) return;
+
+      const falaComCliente = cenario.fala
+        .replace(/\[Decisor\]/g, CLIENTE_ATUAL.decisor.split(' ')[0] || 'Lojista')
+        .replace(/\[Cidade\]/g, CLIENTE_ATUAL.cidade)
+        .replace(/\[Distancia\]/g, CLIENTE_ATUAL.distancia);
+
+      document.getElementById('sim-fala-lojista').innerText = falaComCliente;
+      document.getElementById('sim-feedback-box').classList.add('hidden');
+    }
+
+    function carregarExemploPitch() {
+      const cenarioKey = document.getElementById('sim-cenario-select').value;
+      const cenario = CENARIOS_SIMULADOR[cenarioKey];
+      if (!cenario) return;
+
+      const pitchPreenchido = cenario.exemploPitch
+        .replace(/\[Decisor\]/g, CLIENTE_ATUAL.decisor.split(' ')[0] || 'Lojista')
+        .replace(/\[Cidade\]/g, CLIENTE_ATUAL.cidade)
+        .replace(/\[Distancia\]/g, CLIENTE_ATUAL.distancia);
+
+      document.getElementById('sim-pitch-input').value = pitchPreenchido;
+    }
+
+    function avaliarPitchComercial() {
+      const pitch = (document.getElementById('sim-pitch-input').value || '').trim().toLowerCase();
+      const cenarioKey = document.getElementById('sim-cenario-select').value;
+      const cenario = CENARIOS_SIMULADOR[cenarioKey];
+
+      if (pitch.length < 20) {
+        alert('Por favor, digite seu argumento ou clique em "💡 Carregar Resposta Exemplo" para testar!');
+        return;
+      }
+
+      // Verificação de Gatilhos
+      const temProximidade = /sarandi|passo fundo|presencial|visita|local|aqui perto|km|sede|humano|telefone|minutos/.test(pitch);
+      const temOffline = /offline|conting|sábado|sabado|internet|queda|conexão|conexao|fila|trava|bipando/.test(pitch);
+      const temFiscalTrans = /fiscal|contador|sefaz|sped|sintegra|imposto|monof|bitribut|treinamento|migra|banco|histórico|historico/.test(pitch);
+
+      let score = 50;
+      if (temProximidade) score += 20;
+      if (temOffline) score += 15;
+      if (temFiscalTrans) score += 15;
+
+      // Penalidades ou Bônus por tamanho e empatia
+      if (pitch.includes('compreendo') || pitch.includes('entendo') || pitch.includes('perfeito') || pitch.includes('respeito')) {
+        score = Math.min(100, score + 5);
+      }
+      if (pitch.length > 250) {
+        score = Math.min(100, score + 5);
+      }
+
+      // Atualiza interface
+      const box = document.getElementById('sim-feedback-box');
+      box.classList.remove('hidden');
+
+      const elScore = document.getElementById('sim-score-total');
+      elScore.innerText = `${score}/100`;
+      elScore.className = score >= 85 ? "text-2xl font-black font-display text-emerald-400" : (score >= 70 ? "text-2xl font-black font-display text-amber-400" : "text-2xl font-black font-display text-red-400");
+
+      const elNivel = document.getElementById('sim-score-nivel');
+      elNivel.innerText = score >= 85 ? "Alto Poder de Fechamento" : (score >= 70 ? "Bom Pitch (Pode Reforçar Gatilhos)" : "Pitch Fraco / Risco de Rejeição");
+
+      // Badges
+      document.getElementById('sim-gatilho-proximidade').innerHTML = temProximidade ? '✅ Presente (Sarandi/Local)' : '⚠️ Ausente (Citar Sarandi-RS)';
+      document.getElementById('sim-gatilho-proximidade').className = temProximidade ? 'text-xs font-bold text-cyan-400 flex items-center gap-1 mt-1' : 'text-xs font-bold text-slate-400 flex items-center gap-1 mt-1';
+
+      document.getElementById('sim-gatilho-offline').innerHTML = temOffline ? '✅ Contingência Enfatizada' : '⚠️ Ausente (Citar Venda Offline)';
+      document.getElementById('sim-gatilho-offline').className = temOffline ? 'text-xs font-bold text-amber-400 flex items-center gap-1 mt-1' : 'text-xs font-bold text-slate-400 flex items-center gap-1 mt-1';
+
+      document.getElementById('sim-gatilho-fiscal').innerHTML = temFiscalTrans ? '✅ Segurança & Suporte Ativo' : '⚠️ Ausente (Citar Fiscal/Transição)';
+      document.getElementById('sim-gatilho-fiscal').className = temFiscalTrans ? 'text-xs font-bold text-purple-400 flex items-center gap-1 mt-1' : 'text-xs font-bold text-slate-400 flex items-center gap-1 mt-1';
+
+      // Análise
+      let analise = "";
+      if (score >= 85) {
+        analise = "Excelente resposta! Você acolheu a objeção com empatia, neutralizou o medo com garantias técnicas objetivas (contingência e suporte local) e manteve o foco na tranquilidade operacional do lojista.";
+      } else if (score >= 70) {
+        analise = "Boa resposta, mas você pode aumentar sua taxa de conversão ancorando a proximidade física de Sarandi-RS e a facilidade da migração de dados sem perda de histórico.";
+      } else {
+        analise = "O lojista ainda pode resistir. Procure começar validando a dor dele ('Compreendo seu receio...') e utilize argumentos irrefutáveis como o PDV offline que não trava e a visita presencial do time de Sarandi.";
+      }
+      document.getElementById('sim-analise-texto').innerText = analise;
+
+      // Script Ouro
+      const scriptOuroPersonalizado = cenario.scriptOuro
+        .replace(/\[Decisor\]/g, CLIENTE_ATUAL.decisor.split(' ')[0] || 'Lojista')
+        .replace(/\[Cidade\]/g, CLIENTE_ATUAL.cidade)
+        .replace(/\[Distancia\]/g, CLIENTE_ATUAL.distancia);
+      document.getElementById('sim-script-ouro').innerText = scriptOuroPersonalizado;
+
+      box.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function buscarAutocomplete(termo) {
+      clearTimeout(debounceTimer);
+      const lista = document.getElementById('lista-autocomplete');
+      if (!termo || termo.trim().length < 2) {
+        lista.classList.add('hidden');
+        return;
+      }
+
+      debounceTimer = setTimeout(() => {
+        fetch(`/api/clientes_real_autocomplete?q=${encodeURIComponent(termo)}`)
+          .then(r => r.json())
+          .then(data => {
+            const listaEmpresas = data.clientes || data.empresas || [];
+            if (listaEmpresas.length === 0) {
+              lista.innerHTML = '<div class="p-3 text-xs text-slate-400">Nenhuma empresa encontrada na base.</div>';
+              lista.classList.remove('hidden');
+              return;
+            }
+
+            lista.innerHTML = listaEmpresas.map(emp => `
+              <div 
+                onclick="selecionarEmpresa('${encodeURIComponent(JSON.stringify(emp))}')"
+                class="p-2.5 hover:bg-slate-800 border-b border-slate-800/60 cursor-pointer text-xs flex items-center justify-between"
+              >
+                <div>
+                  <strong class="text-white">${emp.nome}</strong>
+                  <span class="text-slate-400 block text-[11px]">${emp.cidade} - RS · ${emp.segmento}</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-purple-400 font-mono text-[11px] block">${emp.cnpj}</span>
+                  <span class="text-[10px] text-slate-500">${emp.distancia_km} km de Sarandi</span>
+                </div>
+              </div>
+            `).join('');
+            lista.classList.remove('hidden');
+          })
+          .catch(() => lista.classList.add('hidden'));
+      }, 250);
+    }
+
+    function selecionarEmpresa(empEncoded) {
+      const emp = JSON.parse(decodeURIComponent(empEncoded));
+      document.getElementById('lista-autocomplete').classList.add('hidden');
+      document.getElementById('input-busca-empresa').value = emp.nome;
+
+      CLIENTE_ATUAL = {
+        nome: emp.nome,
+        decisor: emp.decisor || 'Diretoria / Responsável',
+        cidade: emp.cidade || 'RS',
+        distancia: emp.distancia_km ? `${emp.distancia_km} km` : 'Região de Sarandi',
+        segmento: emp.segmento || 'Comércio Geral',
+        telefone: emp.telefone || '',
+        cnpj: emp.cnpj || 'Sob Consulta',
+        email: emp.email || '',
+        pdvs: emp.pdvs_estimados || 2
+      };
+
+      atualizarInterface();
+    }
+
+    function limparSelecao() {
+      document.getElementById('input-busca-empresa').value = '';
+      document.getElementById('lista-autocomplete').classList.add('hidden');
+    }
+
+    function dispararWhatsApp() {
+      const fone = CLIENTE_ATUAL.telefone.replace(/\D/g, '');
+      const msg = encodeURIComponent(document.getElementById('script-whatsapp').innerText);
+      const url = fone ? `https://wa.me/55${fone}?text=${msg}` : `https://wa.me/?text=${msg}`;
+      window.open(url, '_blank');
+    }
+
+    function atualizarInterface() {
+      // Atualiza painel dados
+      document.getElementById('txt-empresa').innerText = CLIENTE_ATUAL.nome;
+      document.getElementById('txt-decisor').innerText = CLIENTE_ATUAL.decisor;
+      document.getElementById('txt-cidade').innerText = `${CLIENTE_ATUAL.cidade} - RS (${CLIENTE_ATUAL.distancia})`;
+      document.getElementById('txt-segmento').innerText = CLIENTE_ATUAL.segmento;
+      document.getElementById('txt-telefone').innerText = CLIENTE_ATUAL.telefone || 'Não informado';
+      document.getElementById('txt-cnpj').innerText = CLIENTE_ATUAL.cnpj;
+
+      // Atualiza link da proposta
+      const paramsProp = new URLSearchParams({
+        cliente: CLIENTE_ATUAL.nome,
+        cidade: CLIENTE_ATUAL.cidade,
+        segmento: CLIENTE_ATUAL.segmento,
+        decisor: CLIENTE_ATUAL.decisor,
+        telefone: CLIENTE_ATUAL.telefone,
+        cnpj: CLIENTE_ATUAL.cnpj,
+        caixas: CLIENTE_ATUAL.pdvs,
+        email: CLIENTE_ATUAL.email
+      });
+      document.getElementById('link-proposta-direta').href = `gerador_proposta.html?${paramsProp.toString()}`;
+
+      // 1. Roteiro Cold Call
+      const primeiroNome = CLIENTE_ATUAL.decisor.split(' ')[0] || 'responsável';
+      document.getElementById('script-coldcall').innerHTML = `
+<span class="text-purple-400 font-bold">PASSO 1: SUPERANDO A SECRETÁRIA / BALCÃO (15 segundos)</span>
+"Olá, bom dia! Por favor, o <strong>${CLIENTE_ATUAL.decisor}</strong> está na loja?
+Aqui é da TruData Tecnologia de Sarandi. Ele nos pediu um contato sobre a emissão fiscal e contingência dos caixas aí de <strong>${CLIENTE_ATUAL.cidade}</strong>."
+
+<span class="text-purple-400 font-bold">PASSO 2: GANCHO DIRETO COM O DECISOR (30 segundos)</span>
+"Olá, <strong>${primeiroNome}</strong>! Tudo bem? Aqui é da Hansen Software / TruData ERP, empresa de software há 25 anos sediada em Sarandi, bem pertinho de vocês em <strong>${CLIENTE_ATUAL.cidade}</strong>.
+
+Estou te ligando rápido porque acompanhamos o movimento de <strong>${CLIENTE_ATUAL.nome}</strong> no segmento de <strong>${CLIENTE_ATUAL.segmento}</strong>.
+Sabemos que o maior pesadelo do seu setor é caixa lento e internet instável no horário de pico, deixando cliente irritado na fila.
+
+Nosso sistema emite o cupom fiscal em 3 segundos, funciona 100% offline se a internet cair e nosso suporte atende direto por telefone sem robôs."
+
+<span class="text-purple-400 font-bold">PASSO 3: FECHAMENTO & PRÓXIMO PASSO (15 segundos)</span>
+"Consigo te apresentar em 10 minutos na tela do seu computador amanhã às 14h, ou prefere que eu envie uma prévia rápida no seu WhatsApp?"
+      `;
+
+      // 2. Roteiro WhatsApp
+      document.getElementById('script-whatsapp').innerText = 
+`Olá, ${primeiroNome}! Tudo bem? 🤝
+
+Sou consultor comercial da TruData ERP (Hansen Software), sediada em Sarandi/RS, a apenas ${CLIENTE_ATUAL.distancia} de ${CLIENTE_ATUAL.cidade}.
+
+Analisando a operação de *${CLIENTE_ATUAL.nome}* no segmento de *${CLIENTE_ATUAL.segmento}*, preparamos uma solução sob medida para otimizar seus ${CLIENTE_ATUAL.pdvs} ponto(s) de venda:
+
+✅ Emissão de NFC-e autorizada em 3 segundos (sem filas no caixa)
+✅ Modo Contingência Offline: seus caixas continuam vendendo normalmente mesmo se o sinal de internet oscilar
+✅ Suporte 100% humano direto da nossa matriz no Norte do RS (atendimento rápido sem filas de robôs)
+✅ Fechamento fiscal 100% sem dor de cabeça com seu escritório de contabilidade
+
+Podemos agendar uma demonstração rápida de 10 minutos nesta semana para você conhecer a ferramenta na prática?`;
+
+      // 3. Objeções atualizadas com dados da cidade e distância
+      document.getElementById('obj-1').innerText = 
+        `"Compreendo perfeitamente, ${primeiroNome}. Não estou te ligando para você trocar nada agora. A maioria dos nossos clientes em ${CLIENTE_ATUAL.cidade} também já usavam outro sistema, mas tinham medo de quando a internet caísse num sábado ou o suporte deixasse esperando em robô. A TruData tem contingência 100% offline e nosso suporte atende de Sarandi em 5 minutos. Me permita só te mandar um comparativo de 2 minutos no WhatsApp?"`;
+
+      document.getElementById('obj-3').innerText = 
+        `"Nossa sede matriz fica em Sarandi/RS, a apenas ${CLIENTE_ATUAL.distancia} de ${CLIENTE_ATUAL.cidade}! Temos mais de 25 anos de mercado no Norte do RS. Enquanto os grandes softwares de São Paulo te colocam numa fila de espera de inteligência artificial de 2 horas, o nosso time atende por telefone direto e se precisar vai até sua loja."`;
+
+      // 4. E-mail de Follow-up
+      document.getElementById('script-email').innerText = 
+`Assunto: Proposta de Modernização Tecnológica — TruData ERP para ${CLIENTE_ATUAL.nome} (${CLIENTE_ATUAL.cidade}-RS)
+
+Prezado(a) ${CLIENTE_ATUAL.decisor},
+
+Foi um prazer conversar com a equipe de ${CLIENTE_ATUAL.nome}.
+
+Conforme conversamos, a TruData ERP (Hansen Software LTDA, sediada em Sarandi/RS há mais de 25 anos) desenvolveu soluções específicas para a rotina de ${CLIENTE_ATUAL.segmento}.
+
+Destaques da proposta para sua operação:
+1. Agilidade Extrema no PDV: redução drástica de filas com emissão autorizada em 3 segundos.
+2. Segurança Fiscal Ininterrupta: funcionamento 100% offline em caso de falha de conexão na região de ${CLIENTE_ATUAL.cidade}.
+3. Suporte Local Humanizado: técnicos que conhecem a realidade regional do RS e atendem sem robôs.
+4. Integração Contábil Direta: envio mensal de SPED e arquivos fiscais sem retrabalho.
+
+Ficamos à disposição para a demonstração prática agendada.
+
+Atenciosamente,
+
+Equipe Comercial TruData ERP
+Hansen Software LTDA · Sarandi - RS
+Telefone / WhatsApp: (54) 3361-2650
+CNPJ: 02.784.846/0001-80`;
+
+      // Atualiza o cenário do simulador de negociação
+      if (typeof carregarCenarioSimulador === 'function') {
+        carregarCenarioSimulador();
+      }
+    }
+
+    // CARREGAR PARÂMETROS DA URL SE HOUVER
+    window.addEventListener('DOMContentLoaded', () => {
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('cliente') || p.get('nome')) {
+        CLIENTE_ATUAL.nome = p.get('cliente') || p.get('nome');
+      }
+      if (p.get('cidade')) CLIENTE_ATUAL.cidade = p.get('cidade');
+      if (p.get('segmento')) CLIENTE_ATUAL.segmento = p.get('segmento');
+      if (p.get('decisor')) CLIENTE_ATUAL.decisor = p.get('decisor');
+      if (p.get('telefone')) CLIENTE_ATUAL.telefone = p.get('telefone');
+      if (p.get('cnpj')) CLIENTE_ATUAL.cnpj = p.get('cnpj');
+      if (p.get('distancia')) CLIENTE_ATUAL.distancia = p.get('distancia');
+      if (p.get('email')) CLIENTE_ATUAL.email = p.get('email');
+      if (p.get('caixas')) CLIENTE_ATUAL.pdvs = p.get('caixas');
+
+      if (p.get('cliente')) {
+        document.getElementById('input-busca-empresa').value = CLIENTE_ATUAL.nome;
+      }
+
+      atualizarInterface();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+[
+  {
+    "id": "mail-1789738883",
+    "data": "18/09/2026 10:41:23",
+    "destinatario": "farmacia.vidaesaude@sarandi.far.br",
+    "cliente": "Farmácia Vida & Saúde",
+    "cidade": "Sarandi",
+    "segmento": "Farmácias & Drogarias",
+    "decisor": "Dr. Juliano Bortolini (Farmacêutico)",
+    "caixas": 3,
+    "site": "Não possui site",
+    "assunto": "Proposta Comercial TruData ERP — Farmácia Vida & Saúde (Sarandi-RS)",
+    "status": "Registrado & Pronto para Envio",
+    "sucesso": true
+  },
+  {
+    "id": "mail-1789738881",
+    "data": "18/09/2026 10:41:21",
+    "destinatario": "atendimento@casaeletricailuminacaoled.com.br",
+    "cliente": "Casa Elétrica & Iluminação LED - Sarandi",
+    "cidade": "Sarandi",
+    "segmento": "Materiais de Construção",
+    "decisor": "Milton Sebben",
+    "caixas": 2,
+    "site": "https://www.casaeletricailuminacaoled.com.br",
+    "assunto": "Proposta Comercial TruData ERP — Casa Elétrica & Iluminação LED - Sarandi (Sarandi-RS)",
+    "status": "Registrado & Pronto para Envio",
+    "sucesso": true
+  },
+  {
+    "id": "mail-1789736095",
+    "data": "18/09/2026 09:54:55",
+    "destinatario": "gerente@supermercadopaulinho.com.br",
+    "cliente": "Supermercado Paulinho",
+    "cidade": "Sarandi",
+    "segmento": "Supermercados & Mercearias",
+    "decisor": "Paulinho da Silva",
+    "caixas": 3,
+    "assunto": "Proposta Comercial TruData ERP — Supermercado Paulinho (Sarandi-RS)",
+    "status": "Registrado & Pronto para Envio",
+    "sucesso": true
+  },
+  {
+    "id": "mail-1789735868",
+    "data": "18/09/2026 09:51:08",
+    "destinatario": "mercado.teste@exemplo.com.br",
+    "cliente": "Mercado Modelo Passo Fundo",
+    "cidade": "Passo Fundo",
+    "segmento": "Supermercados & Mercearias",
+    "decisor": "Sr. Marcos",
+    "caixas": 4,
+    "assunto": "Proposta Comercial TruData ERP — Mercado Modelo Passo Fundo (Passo Fundo-RS)",
+    "status": "Registrado & Pronto para Envio",
+    "sucesso": true
+  },
+  {
+    "id": "mail-1789735682",
+    "data": "18/09/2026 09:48:02",
+    "destinatario": "contato@padariapaoquente.com.br",
+    "cliente": "Padaria Pão Quente",
+    "cidade": "Sarandi",
+    "segmento": "Padarias & Gastronomia",
+    "decisor": "Cláudia Bertoncello",
+    "caixas": 1,
+    "assunto": "Proposta Comercial TruData ERP — Padaria Pão Quente (Sarandi-RS)",
+    "status": "Registrado & Pronto para Envio",
+    "sucesso": true
+  }
+]

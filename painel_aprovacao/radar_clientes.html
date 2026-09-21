@@ -1,0 +1,3659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TruData Radar B2B — Prospecção Geográfica em Raio de 100km</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Leaflet CSS & JS para Mapa Geográfico Interativo -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    :root {
+      --primary: #009fe3;
+      --primary-hover: #0284c7;
+      --primary-glow: rgba(0, 159, 227, 0.35);
+      --bg: #070b14;
+      --card-bg: #0f172a;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(0, 159, 227, 0.25);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.3);
+      --accent: #6366f1;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 1.5rem;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 159, 227, 0.07) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.07) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1540px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .radar-icon-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(0, 159, 227, 0.2), rgba(99, 102, 241, 0.2));
+      border: 1px solid rgba(0, 159, 227, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      box-shadow: 0 0 25px var(--primary-glow);
+      position: relative;
+    }
+
+    .radar-icon-badge::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 1.1rem;
+      border: 1px solid var(--primary);
+      opacity: 0.4;
+      animation: pulseRadar 2.5s infinite;
+    }
+
+    @keyframes pulseRadar {
+      0% { transform: scale(1); opacity: 0.6; }
+      70% { transform: scale(1.15); opacity: 0; }
+      100% { transform: scale(1.15); opacity: 0; }
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-title span {
+      background: linear-gradient(135deg, #009fe3, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.15rem;
+      border-radius: 0.65rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .btn-secondary:hover {
+      background: #334155;
+      color: #fff;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #009fe3, #0284c7);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(0, 159, 227, 0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 159, 227, 0.5);
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+    }
+    .btn-emerald:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    /* RADAR DASHBOARD GRID */
+    .dashboard-top {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-top {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .radar-scope {
+        transform: scale(0.75);
+      }
+      .radar-screen-wrap {
+        min-height: 380px;
+        height: 390px;
+      }
+    }
+
+    /* PAINEL DE CONTROLE DE BUSCA */
+    .control-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-label .val-badge {
+      color: var(--primary);
+      background: rgba(0, 159, 227, 0.15);
+      padding: 0.15rem 0.5rem;
+      border-radius: 0.4rem;
+      font-family: monospace;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .form-input, .form-select {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 0.6rem;
+      padding: 0.7rem 0.9rem;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .range-slider-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .slider-presets {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.3rem;
+    }
+
+    .btn-preset {
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #94a3b8;
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-preset:hover, .btn-preset.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .range-input {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #1e293b;
+      border-radius: 4px;
+      outline: none;
+    }
+    .range-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 0 12px var(--primary);
+      border: 2px solid #fff;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+    }
+
+    .checkbox-row input {
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+    }
+
+    /* VISUAL RADAR CARD & HUD */
+    .radar-visual-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      gap: 1.25rem;
+    }
+
+    .radar-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.85rem;
+      z-index: 2;
+    }
+
+    .stat-box {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: 0.85rem;
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .stat-value.glow-blue { color: #38bdf8; text-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+    .stat-value.glow-green { color: #34d399; text-shadow: 0 0 15px rgba(52, 211, 153, 0.4); }
+    .stat-value.glow-purple { color: #c084fc; text-shadow: 0 0 15px rgba(192, 132, 252, 0.4); }
+    .stat-value.glow-amber { color: #fbbf24; text-shadow: 0 0 15px rgba(251, 191, 36, 0.4); }
+    .stat-value.glow-cyan { color: #06b6d4; text-shadow: 0 0 15px rgba(6, 182, 212, 0.4); }
+
+    /* RADAR SCREEN WRAP & HUD CONTAINER */
+    .radar-screen-wrap {
+      min-height: 480px;
+      height: 490px;
+      position: relative;
+      background: radial-gradient(circle at center, #091322 0%, #030712 85%, #02050b 100%);
+      border-radius: 1rem;
+      border: 1px solid rgba(0, 159, 227, 0.35);
+      box-shadow: inset 0 0 50px rgba(0, 159, 227, 0.08), 0 8px 32px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Grade de radar tático em background */
+    .radar-grid-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(circle at center, transparent 0, transparent 200px, rgba(0, 159, 227, 0.03) 201px),
+        linear-gradient(rgba(0, 159, 227, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 159, 227, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 30px 30px, 30px 30px;
+    }
+
+    /* HUD Overlay Top Bar */
+    .radar-hud-header {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .radar-hud-telemetry {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      background: rgba(10, 18, 33, 0.85);
+      border: 1px solid rgba(0, 159, 227, 0.3);
+      backdrop-filter: blur(8px);
+      padding: 6px 12px;
+      border-radius: 8px;
+      pointer-events: auto;
+    }
+
+    .hud-status-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #34d399;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hud-status-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulseGreen 1.5s infinite;
+    }
+    @keyframes pulseGreen {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .hud-detail-line {
+      font-size: 0.72rem;
+      font-family: 'Courier New', monospace;
+      color: #94a3b8;
+    }
+    .hud-detail-line strong {
+      color: #38bdf8;
+    }
+
+    .radar-hud-controls {
+      display: flex;
+      gap: 6px;
+      pointer-events: auto;
+    }
+
+    .radar-control-btn {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .radar-control-btn:hover {
+      background: #1e293b;
+      color: #38bdf8;
+      border-color: #38bdf8;
+    }
+    .radar-control-btn.active {
+      background: rgba(0, 159, 227, 0.2);
+      border-color: #009fe3;
+      color: #38bdf8;
+    }
+
+    /* O DISPLAY CIRCULAR CENTRAL DO RADAR */
+    .radar-scope {
+      width: 410px;
+      height: 410px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    /* Anel de transferidor / bússola graduada exterior */
+    .radar-compass-ring {
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 159, 227, 0.3);
+      pointer-events: none;
+    }
+
+    .compass-mark {
+      position: absolute;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: rgba(56, 189, 248, 0.85);
+      text-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
+    }
+    .mark-n { top: -22px; left: 50%; transform: translateX(-50%); }
+    .mark-s { bottom: -22px; left: 50%; transform: translateX(-50%); }
+    .mark-e { right: -26px; top: 50%; transform: translateY(-50%); }
+    .mark-w { left: -26px; top: 50%; transform: translateY(-50%); }
+
+    /* Radar Concentric Rings (Raios calibrados) */
+    .radar-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(0, 159, 227, 0.22);
+      pointer-events: none;
+    }
+    .ring-25 { width: 102px; height: 102px; }
+    .ring-50 { width: 205px; height: 205px; }
+    .ring-75 { width: 307px; height: 307px; }
+    .ring-100 { 
+      width: 410px; 
+      height: 410px; 
+      border-style: solid; 
+      border-color: rgba(0, 159, 227, 0.45);
+      box-shadow: 0 0 25px rgba(0, 159, 227, 0.15), inset 0 0 20px rgba(0, 159, 227, 0.08);
+    }
+
+    /* Rótulos dos anéis em KM */
+    .ring-tag {
+      position: absolute;
+      left: 50%;
+      transform: translateX(4px);
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: rgba(56, 189, 248, 0.65);
+      background: rgba(8, 17, 34, 0.7);
+      padding: 1px 4px;
+      border-radius: 3px;
+      pointer-events: none;
+    }
+    .tag-25 { top: calc(50% - 51px); }
+    .tag-50 { top: calc(50% - 102px); }
+    .tag-75 { top: calc(50% - 153px); }
+    .tag-100 { top: calc(50% - 205px); }
+
+    /* Eixos cardeais X e Y */
+    .radar-axis-x {
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 159, 227, 0.35) 20%, rgba(0, 159, 227, 0.35) 80%, transparent);
+      pointer-events: none;
+    }
+    .radar-axis-y {
+      position: absolute;
+      height: 100%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(0, 159, 227, 0.35) 20%, rgba(0, 159, 227, 0.35) 80%, transparent);
+      pointer-events: none;
+    }
+
+    /* Eixos diagonais a 45 graus sutis */
+    .radar-axis-diag1 {
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: rgba(0, 159, 227, 0.1);
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+    .radar-axis-diag2 {
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: rgba(0, 159, 227, 0.1);
+      transform: rotate(-45deg);
+      pointer-events: none;
+    }
+
+    /* FEIXE DE VARREDURA DO RADAR */
+    .radar-beam {
+      position: absolute;
+      width: 410px;
+      height: 410px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(0, 159, 227, 0.45) 0deg, rgba(0, 159, 227, 0.08) 35deg, transparent 40deg, transparent 360deg);
+      animation: sweepRadar 5s linear infinite;
+      pointer-events: none;
+      z-index: 8;
+    }
+
+    .radar-beam.paused {
+      animation-play-state: paused;
+      opacity: 0.3;
+    }
+
+    .radar-beam::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 50%;
+      background: linear-gradient(180deg, #38bdf8 0%, rgba(56, 189, 248, 0.3) 100%);
+      box-shadow: 0 0 10px #38bdf8;
+      transform-origin: bottom center;
+    }
+
+    @keyframes sweepRadar {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* PONTO CENTRAL: SEDE SARANDI - RS */
+    .radar-center-blip {
+      width: 12px;
+      height: 12px;
+      background: #38bdf8;
+      border-radius: 50%;
+      z-index: 15;
+      box-shadow: 0 0 15px #38bdf8, 0 0 30px #0284c7;
+      position: relative;
+    }
+
+    .radar-center-blip::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid #38bdf8;
+      animation: pulseBeacon 2s infinite;
+    }
+
+    @keyframes pulseBeacon {
+      0% { transform: scale(0.6); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* CAMADA DE BLIPS DOS CLIENTES MAPEADOS */
+    .radar-blips-layer {
+      position: absolute;
+      width: 410px;
+      height: 410px;
+      border-radius: 50%;
+      z-index: 12;
+      pointer-events: none;
+    }
+
+    .radar-blip {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: auto;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 14;
+    }
+
+    .radar-blip:hover {
+      transform: translate(-50%, -50%) scale(2.4);
+      z-index: 30;
+    }
+
+    /* Cores dos Blips por Nicho */
+    .radar-blip.nicho-supermercados {
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+    .radar-blip.nicho-autopecas {
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+    }
+    .radar-blip.nicho-farmacias {
+      background: #c084fc;
+      box-shadow: 0 0 8px #c084fc;
+    }
+    .radar-blip.nicho-materiais {
+      background: #fb923c;
+      box-shadow: 0 0 8px #fb923c;
+    }
+    .radar-blip.nicho-moda {
+      background: #f472b6;
+      box-shadow: 0 0 8px #f472b6;
+    }
+    .radar-blip.nicho-padarias {
+      background: #facc15;
+      box-shadow: 0 0 8px #facc15;
+    }
+    .radar-blip.nicho-geral {
+      background: #06b6d4;
+      box-shadow: 0 0 8px #06b6d4;
+    }
+
+    .radar-blip.lit {
+      box-shadow: 0 0 16px #fff, 0 0 25px currentColor;
+      filter: brightness(1.7);
+    }
+
+    /* TOOLTIP FLUTUANTE HUD DO BLIP */
+    .radar-tooltip {
+      position: absolute;
+      display: none;
+      background: rgba(10, 16, 28, 0.95);
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 20px rgba(0, 159, 227, 0.4);
+      backdrop-filter: blur(12px);
+      padding: 0.65rem 0.85rem;
+      border-radius: 0.65rem;
+      font-size: 0.75rem;
+      color: #fff;
+      pointer-events: none;
+      z-index: 50;
+      width: 240px;
+      transform: translate(-50%, -120%);
+      transition: opacity 0.15s ease;
+    }
+    .radar-tooltip.visible {
+      display: block;
+    }
+
+    /* LEGENDA NO RODAPÉ DO RADAR */
+    .radar-hud-footer {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .radar-legend {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 18, 33, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+      pointer-events: auto;
+      font-size: 0.68rem;
+      color: #94a3b8;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+
+    .blip-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.25rem 0.65rem;
+      border-radius: 0.45rem;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      pointer-events: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    /* LEADS TOOLBAR & LIST */
+    .toolbar-leads {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .toolbar-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .results-count {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .results-badge {
+      background: rgba(0, 159, 227, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(0, 159, 227, 0.3);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .bulk-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* LEADS GRID CARDS */
+    .leads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .lead-prospect-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.1rem;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .lead-prospect-card:hover {
+      border-color: var(--card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .lead-prospect-card.selected {
+      border-color: var(--primary);
+      background: #0f1c36;
+      box-shadow: 0 0 20px rgba(0, 159, 227, 0.25);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .card-badges {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-segmento {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.4rem;
+      border: 1px solid;
+    }
+
+    .seg-supermercados { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
+    .seg-moda { background: rgba(236, 72, 153, 0.15); color: #f472b6; border-color: rgba(236, 72, 153, 0.3); }
+    .seg-farmacias { background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
+    .seg-autopecas { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3); }
+    .seg-materiais { background: rgba(14, 165, 233, 0.15); color: #38bdf8; border-color: rgba(14, 165, 233, 0.3); }
+    .seg-contabilidade { background: rgba(99, 102, 241, 0.15); color: #818cf8; border-color: rgba(99, 102, 241, 0.3); }
+    .seg-padarias { background: rgba(249, 115, 22, 0.15); color: #fb923c; border-color: rgba(249, 115, 22, 0.3); }
+    .seg-petshops { background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border-color: rgba(20, 184, 166, 0.3); }
+    .seg-celulares { background: rgba(6, 182, 212, 0.15); color: #22d3ee; border-color: rgba(6, 182, 212, 0.3); }
+    .seg-bazares { background: rgba(234, 179, 8, 0.15); color: #facc15; border-color: rgba(234, 179, 8, 0.3); }
+    .seg-bebidas { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3); }
+    .seg-oticas { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border-color: rgba(139, 92, 246, 0.3); }
+    .seg-moveis { background: rgba(217, 119, 6, 0.15); color: #f59e0b; border-color: rgba(217, 119, 6, 0.3); }
+    .seg-saloes { background: rgba(244, 63, 94, 0.15); color: #fb7185; border-color: rgba(244, 63, 94, 0.3); }
+    .seg-academias { background: rgba(239, 68, 68, 0.15); color: #f87171; border-color: rgba(239, 68, 68, 0.3); }
+    .seg-limpeza { background: rgba(52, 211, 153, 0.15); color: #6ee7b7; border-color: rgba(52, 211, 153, 0.3); }
+    .seg-geral { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border-color: rgba(148, 163, 184, 0.3); }
+
+    .badge-distancia {
+      background: #1e293b;
+      color: #cbd5e1;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .badge-distancia.perto {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .badge-lead-score {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 0.18rem 0.55rem;
+      border-radius: 0.4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .badge-lead-score.score-alto {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.5);
+    }
+    .badge-lead-score.score-medio {
+      background: rgba(0, 159, 227, 0.2);
+      color: #38bdf8;
+      border: 1px solid rgba(0, 159, 227, 0.4);
+    }
+    .badge-lead-score.score-baixo {
+      background: rgba(148, 163, 184, 0.15);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .card-check {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .lead-nome-comercial {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+      margin-top: 0.4rem;
+    }
+
+    .lead-razao {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .lead-details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      background: rgba(0,0,0,0.25);
+      padding: 0.85rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .detail-icon {
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .detail-text {
+      flex: 1;
+      word-break: break-word;
+    }
+
+    .email-highlight {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    .phone-highlight {
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    .card-footer-actions {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-action-card {
+      flex: 1;
+      padding: 0.5rem 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      transition: all 0.15s;
+    }
+
+    .btn-wpp {
+      background: #15803d;
+      color: #fff;
+    }
+    .btn-wpp:hover {
+      background: #16a34a;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+
+    .btn-email-action {
+      background: #0284c7;
+      color: #fff;
+    }
+    .btn-email-action:hover {
+      background: #0369a1;
+    }
+
+    .btn-crm-action {
+      background: #334155;
+      color: #fff;
+    }
+    .btn-crm-action:hover {
+      background: #475569;
+    }
+
+    .btn-crm-action.added {
+      background: #059669;
+      color: #fff;
+      cursor: default;
+    }
+
+    .btn-prop-action {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #fff;
+    }
+    .btn-prop-action:hover {
+      background: #4338ca;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-maps-action {
+      background: rgba(255,255,255,0.08);
+      color: #cbd5e1;
+      flex: 0 0 auto;
+      padding: 0.5rem 0.7rem;
+    }
+    .btn-maps-action:hover {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast-msg {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #10b981;
+      color: #fff;
+      padding: 0.85rem 1.4rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      z-index: 10000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toast-msg.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* TABELA ALTERNATIVA */
+    .view-table-wrap {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      overflow-x: auto;
+    }
+
+    .leads-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      text-align: left;
+    }
+
+    .leads-table th {
+      background: #090d16;
+      padding: 0.85rem 1rem;
+      color: var(--text-muted);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .leads-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      vertical-align: middle;
+    }
+
+    /* MODAIS PROFISSIONAIS */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 11, 20, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      animation: fadeIn 0.2s ease;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-box {
+      background: #0f172a;
+      border: 1px solid rgba(0, 159, 227, 0.35);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 159, 227, 0.2);
+      border-radius: 1.25rem;
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.8);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-close-modal {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: #94a3b8;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .btn-close-modal:hover {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+    .modal-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .modal-footer {
+      padding: 1.2rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(15, 23, 42, 0.8);
+      flex-wrap: wrap;
+    }
+    .lead-info-banner {
+      background: linear-gradient(135deg, rgba(0, 159, 227, 0.12), rgba(99, 102, 241, 0.12));
+      border: 1px solid rgba(0, 159, 227, 0.3);
+      border-radius: 0.75rem;
+      padding: 1rem 1.2rem;
+    }
+    .lead-banner-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+    .lead-banner-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .preview-box {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .preview-pill {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin: 0.15rem;
+    }
+
+    /* MAPA INTERATIVO LEAFLET */
+    #view-mapa {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      margin-bottom: 2rem;
+    }
+    #mapa-geografico-real {
+      height: 580px;
+      width: 100%;
+      background: #090d16;
+    }
+    .leaflet-popup-content-wrapper {
+      background: #0f172a !important;
+      color: #f8fafc !important;
+      border: 1px solid rgba(0, 159, 227, 0.4) !important;
+      border-radius: 0.85rem !important;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6) !important;
+    }
+    .leaflet-popup-tip {
+      background: #0f172a !important;
+    }
+
+    /* SELETOR DE STATUS DO LEAD */
+    .status-lead-select {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #f8fafc;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.3rem 0.5rem;
+      border-radius: 0.45rem;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .status-lead-select:focus {
+      border-color: var(--primary);
+    }
+    .status-lead-select.status-novo { color: #38bdf8; border-color: rgba(56, 189, 248, 0.4); }
+    .status-lead-select.status-contatado_whatsapp { color: #34d399; border-color: rgba(52, 211, 153, 0.4); }
+    .status-lead-select.status-email_enviado { color: #fbbf24; border-color: rgba(251, 191, 36, 0.4); }
+    .status-lead-select.status-demo_agendada { color: #c084fc; border-color: rgba(192, 132, 252, 0.4); }
+    .status-lead-select.status-fechado { color: #10b981; border-color: #10b981; background: rgba(16, 185, 129, 0.2); }
+    .status-lead-select.status-perdido { color: #f87171; border-color: rgba(239, 68, 68, 0.4); }
+
+    /* RADAR MODE TABS (CLIENTES GERAIS vs ESCRITÓRIOS DE CONTABILIDADE) */
+    .radar-mode-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 0.4rem;
+      width: fit-content;
+      max-width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .mode-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.65rem 1.25rem;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .mode-tab:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .mode-tab.active {
+      background: linear-gradient(135deg, #009fe3, #0284c7);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(0, 159, 227, 0.35);
+    }
+
+    .tab-badge-multiplier {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* BANNER DE EFEITO MULTIPLICADOR B2B2B */
+    .banner-multiplier-contadores {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(16, 185, 129, 0.12));
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: 1.25rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-multiplier-contadores.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .multiplier-stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .multiplier-stat-pill {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0.85rem;
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HEADER SUPERIOR -->
+    <header class="header">
+      <div class="brand-section">
+        <div class="radar-icon-badge">🛰️</div>
+        <div>
+          <h1 class="brand-title">TRU<span>DATA</span> RADAR B2B</h1>
+          <p style="font-size:0.85rem; color:var(--text-muted);">
+            Prospecção Ativa em Raio Geográfico de 100 km · Sarandi e Norte/Noroeste Gaúcho
+          </p>
+          <div style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); padding:0.25rem 0.75rem; border-radius:999px; font-size:0.75rem; color:#34d399; margin-top:0.35rem;">
+            <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#10b981;"></span>
+            <strong>Dados 100% Reais & Ativos</strong> · Receita Federal & Sintegra-RS (SEFAZ) · Zero Fictícios
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="index.html" class="btn btn-secondary">← Painel Geral</a>
+        <a href="crm.html" class="btn btn-secondary">💼 CRM Pipeline</a>
+        <button onclick="filtrarTopScore()" class="btn btn-secondary" style="border-color:#f59e0b; color:#fbbf24; font-weight:800;" title="Filtrar os 50 estabelecimentos com maior pontuação algorítmica">🔥 Top 50 Lead Score</button>
+        <button onclick="abrirModalConfigSMTP()" class="btn btn-secondary" title="Configurar envio de e-mails (Gmail / Outlook / SMTP)">⚙️ Config E-mail</button>
+        <button onclick="abrirModalHistoricoEmails()" class="btn btn-secondary" title="Ver propostas enviadas">📬 E-mails Enviados</button>
+        <button onclick="exportarCSV()" class="btn btn-primary">📊 Exportar Planilha (CSV)</button>
+        <button onclick="importarSelecionadosAoCRM()" class="btn btn-emerald" id="btn-bulk-crm">
+          📥 Enviar ao CRM (<span id="count-sel">0</span>)
+        </button>
+      </div>
+    </header>
+
+    <!-- ABAS ESTRATÉGICAS DO RADAR -->
+    <div class="radar-mode-tabs">
+      <button type="button" class="mode-tab active" id="tab-mode-todos" onclick="alternarModoRadar('todos')">
+        🏪 Todos os Estabelecimentos (Varejo & Serviços)
+      </button>
+      <button type="button" class="mode-tab" id="tab-mode-contadores" onclick="alternarModoRadar('contadores')">
+        📑 Escritórios de Contabilidade <span class="tab-badge-multiplier">⚡ Canal Multiplicador B2B2B</span>
+      </button>
+      <a href="contadores.html" class="mode-tab" style="color:#c084fc; border: 1px solid rgba(192,132,252,0.3);" title="Abrir Central Estratégica Completa de Contabilidades">
+        🏛️ Central Completa de Contadores ↗
+      </a>
+    </div>
+
+    <!-- BANNER DE ALAVANCAGEM B2B2B (ESCRITÓRIOS DE CONTABILIDADE) -->
+    <div class="banner-multiplier-contadores" id="banner-contadores">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.35rem;">
+            <span style="font-size:1.4rem;">🏛️</span>
+            <h3 style="font-size:1.15rem; font-weight:800; color:#fff;">Estratégia de Canal: Escritórios de Contabilidade como Multiplicadores</h3>
+          </div>
+          <p style="font-size:0.85rem; color:#cbd5e1; max-width:850px; line-height:1.45;">
+            Contadores são o canal de maior alavancagem comercial para a TruData ERP. Cada escritório contábil gerencia de <strong>40 a 90 empresas ativas</strong>. Fechar 1 parceria técnica ou homologação traz dezenas de comércios e prestadores em efeito cascata.
+          </p>
+        </div>
+
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <a href="dossie_contador.html" target="_blank" class="btn btn-secondary" style="border-color:rgba(192,132,252,0.4); color:#c084fc; font-size:0.75rem; padding:0.45rem 0.85rem;">
+            📄 Dossiê Técnico SEFAZ ↗
+          </a>
+          <a href="parceiros.html" target="_blank" class="btn btn-secondary" style="border-color:rgba(16,185,129,0.4); color:#34d399; font-size:0.75rem; padding:0.45rem 0.85rem;">
+            🤝 Clube de Parcerias & Comissões ↗
+          </a>
+          <a href="portal_contador_xml.html" target="_blank" class="btn btn-secondary" style="border-color:rgba(56,189,248,0.4); color:#38bdf8; font-size:0.75rem; padding:0.45rem 0.85rem;">
+            🗂️ Portal XML Automático ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="multiplier-stats-row">
+        <div class="multiplier-stat-pill">
+          <span style="font-size:0.68rem; color:#94a3b8; font-weight:700; text-transform:uppercase;">Escritórios Mapeados</span>
+          <span style="font-size:1.5rem; font-weight:800; color:#38bdf8;" id="mult-escritorios">17</span>
+        </div>
+        <div class="multiplier-stat-pill">
+          <span style="font-size:0.68rem; color:#94a3b8; font-weight:700; text-transform:uppercase;">Potencial de Clientes</span>
+          <span style="font-size:1.5rem; font-weight:800; color:#34d399;" id="mult-clientes">~1.100 CNPJs</span>
+        </div>
+        <div class="multiplier-stat-pill">
+          <span style="font-size:0.68rem; color:#94a3b8; font-weight:700; text-transform:uppercase;">Diferencial Vencedor</span>
+          <span style="font-size:0.9rem; font-weight:800; color:#fbbf24;">Troca de Empresa em 2 Cliques</span>
+        </div>
+        <div class="multiplier-stat-pill">
+          <span style="font-size:0.68rem; color:#94a3b8; font-weight:700; text-transform:uppercase;">Fechamento Mensal</span>
+          <span style="font-size:0.9rem; font-weight:800; color:#c084fc;">XMLs automáticos sem cobrar cliente</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD TOP (CONTROLES + VISUAL RADAR) -->
+    <div class="dashboard-top">
+
+      <!-- PAINEL DE CONTROLE DE BUSCA -->
+      <div class="control-panel">
+        <div class="panel-title">
+          <span>🎯</span> Parâmetros de Varredura
+        </div>
+
+        <!-- Ponto Central -->
+        <div class="form-group">
+          <label class="form-label">
+            <span>Ponto Central (Sede / Polo)</span>
+          </label>
+          <select id="sel-origem" class="form-select" onchange="executarBusca()">
+            <option value="Sarandi" selected>📍 Sarandi - RS (Matriz TruData)</option>
+            <option value="Passo Fundo">Passo Fundo - RS</option>
+            <option value="Carazinho">Carazinho - RS</option>
+            <option value="Marau">Marau - RS</option>
+            <option value="Palmeira das Missões">Palmeira das Missões - RS</option>
+            <option value="Erechim">Erechim - RS</option>
+            <option value="Frederico Westphalen">Frederico Westphalen - RS</option>
+            <option value="Tapejara">Tapejara - RS</option>
+            <option value="Não-Me-Toque">Não-Me-Toque - RS</option>
+            <option value="Panambi">Panambi - RS</option>
+            <option value="Getúlio Vargas">Getúlio Vargas - RS</option>
+            <option value="Ibirubá">Ibirubá - RS</option>
+            <option value="Tapera">Tapera - RS</option>
+            <option value="Espumoso">Espumoso - RS</option>
+            <option value="Nonoai">Nonoai - RS</option>
+            <option value="Seberi">Seberi - RS</option>
+            <option value="Sananduva">Sananduva - RS</option>
+            <option value="Casca">Casca - RS</option>
+            <option value="Constantina">Constantina - RS</option>
+            <option value="Ronda Alta">Ronda Alta - RS</option>
+            <option value="Rondinha">Rondinha - RS</option>
+            <option value="Chapada">Chapada - RS</option>
+            <option value="Barra Funda">Barra Funda - RS</option>
+            <option value="Nova Boa Vista">Nova Boa Vista - RS</option>
+            <option value="Três Palmeiras">Três Palmeiras - RS</option>
+          </select>
+        </div>
+
+        <!-- Filtro por Cidade Alvo Específica -->
+        <div class="form-group">
+          <label class="form-label">
+            <span>Filtrar por Cidade Específica</span>
+          </label>
+          <select id="sel-cidade" class="form-select" onchange="executarBusca()">
+            <option value="todas" selected>🏙️ Todas as Cidades no Perímetro</option>
+            <option value="Sarandi">📍 Sarandi - RS</option>
+            <option value="Passo Fundo">Passo Fundo - RS</option>
+            <option value="Carazinho">Carazinho - RS</option>
+            <option value="Marau">Marau - RS</option>
+            <option value="Palmeira das Missões">Palmeira das Missões - RS</option>
+            <option value="Erechim">Erechim - RS</option>
+            <option value="Frederico Westphalen">Frederico Westphalen - RS</option>
+            <option value="Tapejara">Tapejara - RS</option>
+            <option value="Não-Me-Toque">Não-Me-Toque - RS</option>
+            <option value="Panambi">Panambi - RS</option>
+            <option value="Getúlio Vargas">Getúlio Vargas - RS</option>
+            <option value="Ibirubá">Ibirubá - RS</option>
+            <option value="Tapera">Tapera - RS</option>
+            <option value="Espumoso">Espumoso - RS</option>
+            <option value="Soledade">Soledade - RS</option>
+            <option value="Cruz Alta">Cruz Alta - RS</option>
+            <option value="Ijuí">Ijuí - RS</option>
+            <option value="Santo Ângelo">Santo Ângelo - RS</option>
+            <option value="Sananduva">Sananduva - RS</option>
+            <option value="Nonoai">Nonoai - RS</option>
+            <option value="Seberi">Seberi - RS</option>
+            <option value="Casca">Casca - RS</option>
+            <option value="Constantina">Constantina - RS</option>
+            <option value="Ronda Alta">Ronda Alta - RS</option>
+            <option value="Rondinha">Rondinha - RS</option>
+            <option value="Chapada">Chapada - RS</option>
+            <option value="Barra Funda">Barra Funda - RS</option>
+            <option value="Nova Boa Vista">Nova Boa Vista - RS</option>
+            <option value="Três Palmeiras">Três Palmeiras - RS</option>
+            <option value="Pontão">Pontão - RS</option>
+            <option value="Camargo">Camargo - RS</option>
+          </select>
+        </div>
+
+        <!-- Critério de Ordenação Inteligente -->
+        <div class="form-group">
+          <label class="form-label">
+            <span>Critério de Ordenação</span>
+          </label>
+          <select id="sel-ordenacao" class="form-select" onchange="executarBusca()">
+            <option value="distancia" selected>📍 Mais Próximos de Sarandi (km)</option>
+            <option value="score">🔥 Maior Lead Score (0 a 100)</option>
+            <option value="nome">🏢 Nome da Empresa (A - Z)</option>
+            <option value="pdvs">🛒 Maior Quantidade de PDVs (Caixas)</option>
+            <option value="cidade">🌆 Cidade Alfabética (A - Z)</option>
+          </select>
+        </div>
+
+        <!-- Controle de Raio em KM -->
+        <div class="form-group range-slider-wrap">
+          <div class="form-label">
+            <span>Raio de Busca</span>
+            <span class="val-badge" id="lbl-raio">100 km</span>
+          </div>
+          <input type="range" id="rng-raio" class="range-input" min="10" max="150" value="100" step="5" oninput="atualizarSlider(this.value)" onchange="executarBusca()">
+          
+          <div class="slider-presets">
+            <button type="button" class="btn-preset" onclick="setPresetRaio(25)">25 km</button>
+            <button type="button" class="btn-preset" onclick="setPresetRaio(50)">50 km</button>
+            <button type="button" class="btn-preset active" onclick="setPresetRaio(100)">100 km</button>
+            <button type="button" class="btn-preset" onclick="setPresetRaio(150)">150 km</button>
+          </div>
+        </div>
+
+        <!-- Segmento / Nicho -->
+        <div class="form-group">
+          <label class="form-label">Nicho de Negócio</label>
+          <select id="sel-segmento" class="form-select" onchange="executarBusca()">
+            <option value="todos" selected>🏢 Todos os Nichos (Pequenos e Médios Negócios)</option>
+            <option value="Supermercados & Mercearias">🛒 Supermercados, Minimercados & Fruteiras</option>
+            <option value="Autopeças & Oficinas">🔧 Autopeças, Oficinas & Mecânicas</option>
+            <option value="Materiais de Construção">🧱 Materiais de Construção & Ferragens</option>
+            <option value="Farmácias & Drogarias">💊 Farmácias & Drogarias</option>
+            <option value="Lojas de Roupas & Calçados">👗 Lojas de Roupas, Calçados & Confecções</option>
+            <option value="Padarias & Gastronomia">🥐 Padarias, Confeitarias & Gastronomia</option>
+            <option value="Pet Shops & Agropecuárias">🐾 Pet Shops, Veterinárias & Agropecuárias</option>
+            <option value="Celulares & Informática">📱 Celulares & Informática</option>
+            <option value="Papelarias & Bazares">📚 Papelarias & Bazares (1,99)</option>
+            <option value="Distribuidoras de Bebidas & Gás">🍻 Distribuidoras de Bebidas & Gás</option>
+            <option value="Óticas & Joalherias">👓 Óticas & Joalherias</option>
+            <option value="Móveis & Decoração">🛋️ Móveis & Decoração</option>
+            <option value="Escritórios de Contabilidade">📑 Escritórios de Contabilidade</option>
+            <option value="Construção Civil & Engenharia">🏗️ Construção Civil & Engenharia</option>
+            <option value="Indústrias & Metalúrgicas">🏭 Indústrias & Metalúrgicas</option>
+            <option value="Transporte & Logística">🚚 Transporte & Logística</option>
+            <option value="Prestação de Serviços & Varejo">💼 Prestação de Serviços & Varejo Regional</option>
+          </select>
+        </div>
+
+        <!-- Porte / PDVs -->
+        <div class="form-group">
+          <label class="form-label">Porte do Negócio (Caixas / PDVs)</label>
+          <select id="sel-porte" class="form-select" onchange="executarBusca()">
+            <option value="todos" selected>🏪 Todos os Portes (Micro a Redes)</option>
+            <option value="pequeno">🏪 1 Caixa (Micro & Pequeno Negócio / MEI)</option>
+            <option value="medio">🏬 2 a 4 Caixas (Médio Porte)</option>
+            <option value="grande">🛒 5+ Caixas (Grande Porte / Redes)</option>
+          </select>
+        </div>
+
+        <!-- Presença Web / Site -->
+        <div class="form-group">
+          <label class="form-label">Presença na Web / Site Oficial</label>
+          <select id="sel-site" class="form-select" onchange="executarBusca()">
+            <option value="todos" selected>🌐 Todos (Com e Sem Site)</option>
+            <option value="com_site">💻 Possui Site Oficial</option>
+            <option value="sem_site">🎯 Não Possui Site (Oportunidade Catálogo Digital)</option>
+          </select>
+        </div>
+
+        <!-- Busca Textual -->
+        <div class="form-group">
+          <label class="form-label">Buscar por Palavra-chave</label>
+          <input type="text" id="txt-termo" class="form-input" placeholder="Ex: nome, rua, cidade, site, decisor..." oninput="filtrarInstantaneo()">
+        </div>
+
+        <!-- Toggles de Canais -->
+        <div style="display:flex; flex-direction:column; gap:0.6rem; padding-top:0.4rem;">
+          <label class="checkbox-row">
+            <input type="checkbox" id="chk-email" onchange="executarBusca()">
+            <span>Apenas estabelecimentos com <strong>E-mail</strong></span>
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" id="chk-telefone" onchange="executarBusca()">
+            <span>Apenas estabelecimentos com <strong>Telefone/WhatsApp</strong></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- RADAR VISUAL & CARDS DE ESTATÍSTICA -->
+      <div class="radar-visual-card">
+        <div class="radar-stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Clientes Mapeados</span>
+            <span class="stat-value glow-blue" id="stat-total">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Cidades no Perímetro</span>
+            <span class="stat-value glow-purple" id="stat-cidades">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Com WhatsApp</span>
+            <span class="stat-value glow-green" id="stat-wpp">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Com E-mail</span>
+            <span class="stat-value glow-amber" id="stat-email">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Com Site</span>
+            <span class="stat-value glow-cyan" id="stat-site">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">PDVs Estimados</span>
+            <span class="stat-value" id="stat-pdvs" style="color:#f87171;">0</span>
+          </div>
+        </div>
+
+        <!-- RADAR ANIMADO & HUD TÁTICO -->
+        <div class="radar-screen-wrap" id="radar-screen-container">
+          <div class="radar-grid-bg"></div>
+
+          <!-- HUD TOP BAR -->
+          <div class="radar-hud-header">
+            <div class="radar-hud-telemetry">
+              <span class="hud-status-badge">Varredura Ativa</span>
+              <span class="hud-detail-line">ALCANCE: <strong id="hud-raio-val">100 KM</strong> · ALVOS: <strong id="hud-total-alvos">0</strong></span>
+              <span class="hud-detail-line">ORIGEM: <strong id="hud-origem-val">SARANDI - RS</strong></span>
+            </div>
+
+            <div class="radar-hud-controls">
+              <button type="button" class="radar-control-btn" id="btn-toggle-sweep" onclick="alternarVarreduraRadar()" title="Pausar / Retomar varredura">
+                ⏸️ Varrendo
+              </button>
+              <button type="button" class="radar-control-btn" onclick="filtrarTopScore()" title="Destacar estabelecimentos com maior pontuação">
+                🔥 Top Score
+              </button>
+            </div>
+          </div>
+
+          <!-- DISPLAY CIRCULAR DO RADAR (SEM CORTE NAS BORDAS) -->
+          <div class="radar-scope" id="radar-scope">
+            <div class="radar-compass-ring">
+              <span class="compass-mark mark-n">N · 000°</span>
+              <span class="compass-mark mark-s">S · 180°</span>
+              <span class="compass-mark mark-e">L · 090°</span>
+              <span class="compass-mark mark-w">O · 270°</span>
+            </div>
+
+            <div class="radar-ring ring-25"></div>
+            <span class="ring-tag tag-25" id="tag-dist-25">25km</span>
+
+            <div class="radar-ring ring-50"></div>
+            <span class="ring-tag tag-50" id="tag-dist-50">50km</span>
+
+            <div class="radar-ring ring-75"></div>
+            <span class="ring-tag tag-75" id="tag-dist-75">75km</span>
+
+            <div class="radar-ring ring-100"></div>
+            <span class="ring-tag tag-100" id="tag-dist-100">100km</span>
+
+            <div class="radar-axis-x"></div>
+            <div class="radar-axis-y"></div>
+            <div class="radar-axis-diag1"></div>
+            <div class="radar-axis-diag2"></div>
+
+            <div class="radar-beam" id="radar-beam-el"></div>
+
+            <!-- Camada dinâmica de blips dos clientes -->
+            <div class="radar-blips-layer" id="radar-blips-layer"></div>
+
+            <!-- Ponto central da Sede -->
+            <div class="radar-center-blip" title="Matriz TruData (Hansen Software) - Sarandi/RS"></div>
+          </div>
+
+          <!-- TOOLTIP DO RADAR -->
+          <div class="radar-tooltip" id="radar-tooltip"></div>
+
+          <!-- HUD FOOTER BAR -->
+          <div class="radar-hud-footer">
+            <div class="radar-legend">
+              <span><span class="legend-dot" style="background:#10b981;"></span>Supermercados</span>
+              <span><span class="legend-dot" style="background:#38bdf8;"></span>Autopeças</span>
+              <span><span class="legend-dot" style="background:#c084fc;"></span>Farmácias</span>
+              <span><span class="legend-dot" style="background:#fb923c;"></span>Construção</span>
+              <span><span class="legend-dot" style="background:#f472b6;"></span>Moda</span>
+            </div>
+
+            <div class="blip-label" id="blip-centro-lbl">Sede: Sarandi - RS</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TOOLBAR DOS LEADS -->
+    <div class="toolbar-leads">
+      <div class="toolbar-info">
+        <h2 class="results-count">Oportunidades Comerciais</h2>
+        <span class="results-badge" id="badge-filtro-ativo">Raio: 100 km · Sarandi-RS</span>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+        <button onclick="copiarTelefonesVisiveis()" class="btn btn-secondary" style="font-size:0.75rem; padding:0.4rem 0.8rem; border:1px solid rgba(16,185,129,0.3); color:#34d399;" title="Copiar todos os telefones/WhatsApps visíveis para lista de transmissão ou cadência comercial">
+          📋 Copiar Telefones (Lista)
+        </button>
+
+        <button onclick="roteirizarVisitasSelecionadas()" id="btn-rota-visitas" class="btn btn-secondary" style="font-size:0.75rem; padding:0.4rem 0.8rem; border:1px solid rgba(56,189,248,0.4); color:#38bdf8; display:none; align-items:center; gap:0.3rem;" title="Traçar rota multiponto otimizada no Google Maps com saída da matriz em Sarandi-RS">
+          🚗 Rota de Visitas (<span id="count-rota">0</span>)
+        </button>
+
+        <label class="checkbox-row" style="margin-right:0.5rem;">
+          <input type="checkbox" id="chk-selecionar-todos" onchange="alternarSelecionarTodos(this.checked)">
+          <span>Selecionar Todos</span>
+        </label>
+
+        <div style="display:inline-flex; background:#1e293b; border-radius:0.5rem; padding:0.2rem; border:1px solid rgba(255,255,255,0.06);">
+          <button onclick="alternarVisualizacao('grid')" id="btn-view-grid" style="background:#009fe3; color:#fff; border:none; padding:0.35rem 0.75rem; border-radius:0.4rem; cursor:pointer; font-weight:700; font-size:0.75rem;">Cards</button>
+          <button onclick="alternarVisualizacao('mapa')" id="btn-view-mapa" style="background:transparent; color:#94a3b8; border:none; padding:0.35rem 0.75rem; border-radius:0.4rem; cursor:pointer; font-weight:700; font-size:0.75rem;">🗺️ Mapa Interativo</button>
+          <button onclick="alternarVisualizacao('tabela')" id="btn-view-table" style="background:transparent; color:#94a3b8; border:none; padding:0.35rem 0.75rem; border-radius:0.4rem; cursor:pointer; font-weight:700; font-size:0.75rem;">Tabela</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTAINER MAPA INTERATIVO (LEAFLET COM SATÉLITE & TÁTICO DARK) -->
+    <div id="view-mapa" style="display:none; margin-bottom:1.5rem; border-radius:1rem; overflow:hidden; border:1px solid rgba(0, 159, 227, 0.25); box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+      <div style="padding:0.75rem 1.25rem; background:#0f172a; border-bottom:1px solid var(--card-border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+        <div style="font-size:0.85rem; color:#fff; font-weight:700; display:flex; align-items:center; gap:0.5rem;">
+          <span>🛰️</span>
+          <span>Mapa Tático Regional — <strong id="mapa-pin-count" style="color:#38bdf8;">0</strong> empresas no raio</span>
+          <span style="font-size:0.7rem; background:rgba(0,159,227,0.15); color:#38bdf8; border:1px solid rgba(0,159,227,0.3); padding:2px 8px; border-radius:999px; font-weight:800;">Pinos SVG Iluminados por Nicho</span>
+        </div>
+        
+        <!-- Alternador de Estilo do Mapa -->
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <div style="display:inline-flex; background:#0b0f19; border:1px solid rgba(255,255,255,0.1); border-radius:0.5rem; padding:2px;">
+            <button type="button" onclick="trocarCamadaMapa('dark')" id="btn-layer-dark" style="background:#009fe3; color:#fff; border:none; padding:4px 10px; border-radius:4px; font-size:0.72rem; font-weight:700; cursor:pointer;">🗺️ Tático Dark</button>
+            <button type="button" onclick="trocarCamadaMapa('satellite')" id="btn-layer-sat" style="background:transparent; color:#94a3b8; border:none; padding:4px 10px; border-radius:4px; font-size:0.72rem; font-weight:700; cursor:pointer;">🛰️ Satélite HD</button>
+            <button type="button" onclick="trocarCamadaMapa('osm')" id="btn-layer-osm" style="background:transparent; color:#94a3b8; border:none; padding:4px 10px; border-radius:4px; font-size:0.72rem; font-weight:700; cursor:pointer;">🧭 Ruas Padrão</button>
+          </div>
+          <div style="font-size:0.75rem; color:#10b981; display:flex; align-items:center; gap:0.3rem; background:rgba(16,185,129,0.1); padding:4px 8px; border-radius:6px; border:1px solid rgba(16,185,129,0.2);">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#10b981;"></span>
+            Sede: Sarandi - RS
+          </div>
+        </div>
+      </div>
+      <div id="mapa-geografico-real" style="height:580px; width:100%; background:#090d16;"></div>
+    </div>
+
+    <!-- CONTAINER DE RESULTADOS (GRID DE CARDS) -->
+    <div id="leads-grid" class="leads-grid">
+      <!-- Cards gerados dinamicamente -->
+    </div>
+
+    <!-- CONTAINER DE RESULTADOS (TABELA) -->
+    <div id="view-tabela" class="view-table-wrap">
+      <table class="leads-table">
+        <thead>
+          <tr>
+            <th width="40"><input type="checkbox" onchange="alternarSelecionarTodos(this.checked)"></th>
+            <th>Empresa / Razão Social</th>
+            <th>Segmento</th>
+            <th>Cidade & Distância</th>
+            <th>Endereço Completo</th>
+            <th>Telefone / WhatsApp</th>
+            <th>E-mail</th>
+            <th>Site Oficial</th>
+            <th>Decisor / PDVs</th>
+            <th width="120">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="leads-table-body">
+          <!-- Linhas geradas dinamicamente -->
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- TOAST DE NOTIFICAÇÃO -->
+  <div id="toast" class="toast-msg">
+    <span>✅</span>
+    <span id="toast-text">Ação executada com sucesso!</span>
+  </div>
+
+  <script>
+    let CLIENTES_TODOS = [];
+    let CLIENTES_FILTRADOS = [];
+    let SELECIONADOS = new Set();
+    let LEADS_NO_CRM = new Set();
+    let STATUS_LEADS_MAP = {};
+    let MAPA_LEAFLET = null;
+    let MARCADORES_LEAFLET = [];
+
+    // Carrega status dos leads do CRM para sincronização visual nos cards e mapa
+    async function carregarStatusLeads() {
+      try {
+        const r = await fetch('/api/status_leads_radar');
+        if (r.ok) {
+          const data = await r.json();
+          if (data.sucesso && data.status) {
+            STATUS_LEADS_MAP = data.status;
+          }
+        }
+      } catch (e) {
+        console.warn('Não foi possível carregar status dos leads:', e);
+      }
+    }
+
+    // Inicia carregando leads já existentes no CRM para marcar os cards
+    async function carregarLeadsExistentesNoCRM() {
+      try {
+        const r = await fetch('/api/leads');
+        if (r.ok) {
+          const leads = await r.json();
+          leads.forEach(l => {
+            if (l.empresa) LEADS_NO_CRM.add(l.empresa.trim().toLowerCase());
+            if (l.cnpj) LEADS_NO_CRM.add(l.cnpj.trim());
+          });
+        }
+      } catch (e) {
+        console.warn('Não foi possível sincronizar CRM local:', e);
+      }
+      await carregarStatusLeads();
+    }
+
+    let LIMITE_EXIBICAO = 60;
+    let MODO_RADAR_ATUAL = 'todos';
+
+    // Alterna entre visão geral de clientes e modo focado em Escritórios Contábeis
+    function alternarModoRadar(modo) {
+      MODO_RADAR_ATUAL = modo;
+      const tabTodos = document.getElementById('tab-mode-todos');
+      const tabCont = document.getElementById('tab-mode-contadores');
+      const banner = document.getElementById('banner-contadores');
+      const selSeg = document.getElementById('sel-segmento');
+
+      if (modo === 'contadores') {
+        if (tabTodos) tabTodos.classList.remove('active');
+        if (tabCont) tabCont.classList.add('active');
+        if (banner) banner.classList.add('active');
+        if (selSeg) selSeg.value = 'Escritórios de Contabilidade';
+        mostrarToast('📑 Modo Contadores Ativado: Mapeando escritórios e multiplicadores B2B!');
+      } else {
+        if (tabTodos) tabTodos.classList.add('active');
+        if (tabCont) tabCont.classList.remove('active');
+        if (banner) banner.classList.remove('active');
+        if (selSeg) selSeg.value = 'todos';
+        mostrarToast('🏪 Modo Geral: Exibindo todos os segmentos de comércio e serviços.');
+      }
+      executarBusca();
+    }
+
+    // Executa a busca através da API do servidor
+    async function executarBusca() {
+      const origem = document.getElementById('sel-origem').value;
+      const raio = document.getElementById('rng-raio').value;
+      const segmento = document.getElementById('sel-segmento').value;
+      const cidade = document.getElementById('sel-cidade') ? document.getElementById('sel-cidade').value : 'todas';
+      const ordenacao = document.getElementById('sel-ordenacao') ? document.getElementById('sel-ordenacao').value : 'distancia';
+      const porte = document.getElementById('sel-porte').value;
+      const site = document.getElementById('sel-site').value;
+      const apenasEmail = document.getElementById('chk-email').checked;
+      const apenasTelefone = document.getElementById('chk-telefone').checked;
+      const termo = document.getElementById('txt-termo').value.trim();
+
+      LIMITE_EXIBICAO = 60;
+      document.getElementById('blip-centro-lbl').innerText = `Sede: ${origem} - RS`;
+      const descCidade = cidade && cidade !== 'todas' ? ` · Cidade: ${cidade}` : '';
+      document.getElementById('badge-filtro-ativo').innerText = `Raio: ${raio} km · Origem: ${origem} - RS${descCidade}`;
+
+      try {
+        const params = new URLSearchParams({
+          origem,
+          raio,
+          segmento,
+          cidade,
+          ordenacao,
+          porte,
+          site,
+          termo,
+          apenas_email: apenasEmail,
+          apenas_telefone: apenasTelefone
+        });
+
+        const r = await fetch(`/api/prospectar?${params.toString()}`);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+
+        CLIENTES_TODOS = data.clientes || [];
+        CLIENTES_FILTRADOS = [...CLIENTES_TODOS];
+        SELECIONADOS.clear();
+        document.getElementById('chk-selecionar-todos').checked = false;
+        atualizarContadorSelecionados();
+
+        atualizarEstatisticas(CLIENTES_FILTRADOS);
+        renderizarRadarBlips(CLIENTES_FILTRADOS, origem, raio);
+        renderizarLeads(CLIENTES_FILTRADOS);
+        atualizarMapaLeaflet(CLIENTES_FILTRADOS);
+      } catch (e) {
+        console.error('Erro ao buscar clientes:', e);
+        mostrarToast('Erro ao consultar motor de busca geográfica.');
+      }
+    }
+
+    // BASE GEOGRÁFICA REGIONAL PARA CALIBRAÇÃO POLAR DO RADAR (SARANDI-RS E POLOS)
+    const COORDENADAS_CIDADES = {
+      "sarandi": { lat: -27.9439, lon: -52.9247 },
+      "rondinha": { lat: -27.8286, lon: -52.9094 },
+      "barra funda": { lat: -27.9214, lon: -53.0394 },
+      "nova boa vista": { lat: -27.9897, lon: -53.0239 },
+      "constantina": { lat: -27.7319, lon: -52.9964 },
+      "ronda alta": { lat: -27.7778, lon: -52.8083 },
+      "chapada": { lat: -28.0531, lon: -53.0678 },
+      "três palmeiras": { lat: -27.6539, lon: -52.8528 },
+      "tres palmeiras": { lat: -27.6539, lon: -52.8528 },
+      "pontão": { lat: -28.0578, lon: -52.6789 },
+      "pontao": { lat: -28.0578, lon: -52.6789 },
+      "carazinho": { lat: -28.2839, lon: -52.7858 },
+      "palmeira das missões": { lat: -27.8989, lon: -53.3136 },
+      "palmeira das missoes": { lat: -27.8989, lon: -53.3136 },
+      "passo fundo": { lat: -28.2612, lon: -52.4083 },
+      "marau": { lat: -28.4489, lon: -52.2000 },
+      "tapejara": { lat: -28.0683, lon: -52.0139 },
+      "erechim": { lat: -27.6339, lon: -52.2739 },
+      "frederico westphalen": { lat: -27.3592, lon: -53.3944 },
+      "getúlio vargas": { lat: -27.8906, lon: -52.2278 },
+      "getulio vargas": { lat: -27.8906, lon: -52.2278 },
+      "ibirubá": { lat: -28.6275, lon: -53.0900 },
+      "ibiruba": { lat: -28.6275, lon: -53.0900 },
+      "tapera": { lat: -28.5000, lon: -52.8700 },
+      "espumoso": { lat: -28.7247, lon: -52.8500 },
+      "nonoai": { lat: -27.3622, lon: -52.7711 },
+      "seberi": { lat: -27.4800, lon: -53.4000 },
+      "sananduva": { lat: -27.9497, lon: -51.8067 },
+      "casca": { lat: -28.5600, lon: -51.9700 },
+      "não-me-toque": { lat: -28.4597, lon: -52.8214 },
+      "nao-me-toque": { lat: -28.4597, lon: -52.8214 },
+      "panambi": { lat: -28.2925, lon: -53.5017 }
+    };
+
+    let RADAR_VARRENDO = true;
+
+    function alternarVarreduraRadar() {
+      RADAR_VARRENDO = !RADAR_VARRENDO;
+      const beam = document.getElementById('radar-beam-el');
+      const btn = document.getElementById('btn-toggle-sweep');
+      if (beam) {
+        if (RADAR_VARRENDO) {
+          beam.classList.remove('paused');
+          if (btn) btn.innerHTML = '⏸️ Varrendo';
+        } else {
+          beam.classList.add('paused');
+          if (btn) btn.innerHTML = '▶️ Retomar';
+        }
+      }
+    }
+
+    // Renderiza Blips interativos dos estabelecimentos no Radar polar 360°
+    function renderizarRadarBlips(lista, origem, raioMaxKm) {
+      const layer = document.getElementById('radar-blips-layer');
+      const tooltip = document.getElementById('radar-tooltip');
+      const scope = document.getElementById('radar-scope');
+      if (!layer || !scope) return;
+
+      layer.innerHTML = '';
+      const raioFloat = parseFloat(raioMaxKm) || 100;
+
+      // Atualiza telemetria no HUD
+      const elRaio = document.getElementById('hud-raio-val');
+      const elAlvos = document.getElementById('hud-total-alvos');
+      const elOrigem = document.getElementById('hud-origem-val');
+      if (elRaio) elRaio.innerText = `${raioFloat} KM`;
+      if (elAlvos) elAlvos.innerText = lista.length;
+      if (elOrigem) elOrigem.innerText = `${origem.toUpperCase()} - RS`;
+
+      // Atualiza marcas de escala em km nos anéis concêntricos
+      const t25 = document.getElementById('tag-dist-25');
+      const t50 = document.getElementById('tag-dist-50');
+      const t75 = document.getElementById('tag-dist-75');
+      const t100 = document.getElementById('tag-dist-100');
+      if (t25) t25.innerText = `${Math.round(raioFloat * 0.25)}km`;
+      if (t50) t50.innerText = `${Math.round(raioFloat * 0.50)}km`;
+      if (t75) t75.innerText = `${Math.round(raioFloat * 0.75)}km`;
+      if (t100) t100.innerText = `${raioFloat}km`;
+
+      const origKey = (origem || 'sarandi').toLowerCase().trim();
+      const coordOrig = COORDENADAS_CIDADES[origKey] || COORDENADAS_CIDADES['sarandi'];
+
+      const centerX = 205;
+      const centerY = 205;
+      const maxRadiusPx = 195; // Raio máximo útil no display de 410px
+
+      // Exibe até 140 estabelecimentos no radar para clareza e beleza visual
+      const alvosVisiveis = lista.slice(0, 140);
+
+      alvosVisiveis.forEach((item, idx) => {
+        let lat = null;
+        let lon = null;
+
+        if (item.lat !== undefined && item.lon !== undefined && item.lat !== null) {
+          lat = parseFloat(item.lat);
+          lon = parseFloat(item.lon);
+        } else {
+          const cidKey = (item.cidade || '').toLowerCase().trim();
+          const baseCid = COORDENADAS_CIDADES[cidKey] || coordOrig;
+          const hashId = (item.id || item.nome || '').split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + idx;
+          const jitterLat = ((hashId % 19) - 9) * 0.0035;
+          const jitterLon = (((hashId * 3) % 23) - 11) * 0.0035;
+          lat = baseCid.lat + jitterLat;
+          lon = baseCid.lon + jitterLon;
+        }
+
+        const dLat = lat - coordOrig.lat;
+        const cosLat = Math.cos(coordOrig.lat * Math.PI / 180);
+        const dLon = (lon - coordOrig.lon) * cosLat;
+        const angleRad = Math.atan2(dLon, -dLat);
+        const angleDeg = ((angleRad * 180 / Math.PI) + 360) % 360;
+
+        const distKm = parseFloat(item.distancia_km !== undefined ? item.distancia_km : 5);
+        const rRatio = Math.min(0.98, Math.max(0.06, distKm / Math.max(raioFloat, 1)));
+        const rPx = rRatio * maxRadiusPx;
+
+        const x = centerX + rPx * Math.sin(angleRad);
+        const y = centerY - rPx * Math.cos(angleRad);
+
+        let segClass = 'nicho-geral';
+        const seg = (item.segmento || '').toLowerCase();
+        if (seg.includes('supermercado') || seg.includes('mercearia')) segClass = 'nicho-supermercados';
+        else if (seg.includes('peça') || seg.includes('oficina') || seg.includes('auto') || seg.includes('moto')) segClass = 'nicho-autopecas';
+        else if (seg.includes('farmácia') || seg.includes('drogaria')) segClass = 'nicho-farmacias';
+        else if (seg.includes('construção') || seg.includes('ferrag')) segClass = 'nicho-materiais';
+        else if (seg.includes('moda') || seg.includes('roupa') || seg.includes('confecç')) segClass = 'nicho-moda';
+        else if (seg.includes('padaria') || seg.includes('gastronomia')) segClass = 'nicho-padarias';
+
+        const blip = document.createElement('div');
+        blip.className = `radar-blip ${segClass}`;
+        blip.style.left = `${x.toFixed(1)}px`;
+        blip.style.top = `${y.toFixed(1)}px`;
+        blip.dataset.id = item.id;
+        blip.dataset.angle = angleDeg.toFixed(1);
+
+        // Eventos de Tooltip e Interação
+        blip.addEventListener('mouseenter', () => {
+          blip.classList.add('lit');
+          if (tooltip) {
+            const score = item.lead_score !== undefined ? item.lead_score : calcularLeadScoreFallback(item);
+            tooltip.innerHTML = `
+              <div style="font-weight:800; color:#38bdf8; font-size:0.85rem; margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                ${item.nome}
+              </div>
+              <div style="font-size:0.72rem; color:#94a3b8; margin-bottom:5px;">
+                📍 ${item.cidade || 'RS'} · <strong>${item.distancia_km || 0} km</strong> da matriz
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; font-size:0.7rem;">
+                <span style="color:#cbd5e1;">Segmento:</span>
+                <span style="color:#fff; font-weight:700;">${item.segmento || 'Comércio'}</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; font-size:0.7rem;">
+                <span style="color:#cbd5e1;">Lead Score:</span>
+                <span style="color:#34d399; font-weight:800;">🔥 ${score}/100</span>
+              </div>
+              ${item.decisor ? `<div style="font-size:0.68rem; color:#94a3b8; border-top:1px dashed rgba(255,255,255,0.1); padding-top:4px;">👤 Sócio: ${item.decisor}</div>` : ''}
+              <div style="margin-top:5px; font-size:0.65rem; color:#38bdf8; text-align:center; font-weight:700;">
+                Clique para abrir detalhes no painel ↓
+              </div>
+            `;
+
+            const containerRect = document.getElementById('radar-screen-container').getBoundingClientRect();
+            const blipRect = blip.getBoundingClientRect();
+            const relX = blipRect.left - containerRect.left + 5;
+            const relY = blipRect.top - containerRect.top - 10;
+
+            tooltip.style.left = `${relX}px`;
+            tooltip.style.top = `${relY}px`;
+            tooltip.classList.add('visible');
+          }
+        });
+
+        blip.addEventListener('mouseleave', () => {
+          blip.classList.remove('lit');
+          if (tooltip) tooltip.classList.remove('visible');
+        });
+
+        blip.addEventListener('click', () => {
+          const card = document.getElementById(`card-${item.id}`);
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.style.transition = 'all 0.4s ease';
+            card.style.boxShadow = '0 0 35px rgba(0, 159, 227, 0.9)';
+            card.style.borderColor = '#009fe3';
+            setTimeout(() => {
+              card.style.boxShadow = '';
+              card.style.borderColor = '';
+            }, 2500);
+          }
+        });
+
+        layer.appendChild(blip);
+      });
+    }
+
+    // Algoritmo de Lead Scoring B2B Regional (0 a 100)
+    function calcularLeadScoreFallback(item) {
+      let score = 0;
+      const cid = (item.cidade || '').toLowerCase();
+      const dist = parseFloat(item.distancia_km || 999);
+      if (cid.includes('sarandi') || dist === 0) score += 30;
+      else if (dist <= 30) score += 20;
+      else if (dist <= 60) score += 10;
+      else score += 5;
+
+      const seg = (item.segmento || '').toLowerCase();
+      if (seg.includes('supermercado') || seg.includes('mercearia') || seg.includes('peça') || seg.includes('auto') || seg.includes('construção') || seg.includes('ferrag')) {
+        score += 30;
+      } else if (seg.includes('moda') || seg.includes('confecç') || seg.includes('farmácia') || seg.includes('ótica') || seg.includes('drogaria')) {
+        score += 20;
+      } else {
+        score += 10;
+      }
+
+      if (item.decisor && item.decisor.trim().length > 3 && !item.decisor.toLowerCase().includes('não informado')) score += 15;
+      if (item.whatsapp || item.telefone) score += 10;
+      if (item.email && item.email.includes('@')) score += 5;
+
+      const pdvs = parseInt(item.pdvs_estimados || 1);
+      const porte = (item.porte || '').toUpperCase();
+      if (pdvs >= 3 || porte === 'DEMAIS') score += 10;
+      else if (pdvs >= 2) score += 5;
+
+      return Math.min(100, score);
+    }
+
+    // Filtra instantaneamente os 50 estabelecimentos com maior pontuação
+    function filtrarTopScore() {
+      LIMITE_EXIBICAO = 50;
+      CLIENTES_TODOS.forEach(c => {
+        if (c.lead_score === undefined) c.lead_score = calcularLeadScoreFallback(c);
+      });
+      CLIENTES_FILTRADOS = [...CLIENTES_TODOS].sort((a, b) => (b.lead_score || 0) - (a.lead_score || 0)).slice(0, 50);
+      
+      mostrarToast(`🔥 Exibindo os 50 estabelecimentos com maior Score de Conversão B2B!`);
+      atualizarEstatisticas(CLIENTES_FILTRADOS);
+      renderizarRadarBlips(CLIENTES_FILTRADOS, document.getElementById('sel-origem').value, document.getElementById('rng-raio').value);
+      renderizarLeads(CLIENTES_FILTRADOS);
+      atualizarMapaLeaflet(CLIENTES_FILTRADOS);
+    }
+
+    // Filtragem instantânea via input textual sem nova requisição HTTP
+    function filtrarInstantaneo() {
+      const termo = document.getElementById('txt-termo').value.toLowerCase().trim();
+      LIMITE_EXIBICAO = 60;
+      if (!termo) {
+        CLIENTES_FILTRADOS = [...CLIENTES_TODOS];
+      } else {
+        CLIENTES_FILTRADOS = CLIENTES_TODOS.filter(c => {
+          const texto = `${c.nome} ${c.razao_social} ${c.cidade} ${c.endereco} ${c.bairro} ${c.segmento} ${c.decisor} ${c.email} ${c.telefone} ${c.site || ''} ${c.status_site || ''} ${c.notas || ''}`.toLowerCase();
+          return texto.includes(termo);
+        });
+      }
+      atualizarEstatisticas(CLIENTES_FILTRADOS);
+      renderizarRadarBlips(CLIENTES_FILTRADOS, document.getElementById('sel-origem').value, document.getElementById('rng-raio').value);
+      renderizarLeads(CLIENTES_FILTRADOS);
+    }
+
+    function atualizarSlider(val) {
+      document.getElementById('lbl-raio').innerText = `${val} km`;
+      // Atualiza estado visual dos botões de preset
+      document.querySelectorAll('.btn-preset').forEach(b => {
+        if (b.innerText === `${val} km`) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+    }
+
+    function setPresetRaio(km) {
+      document.getElementById('rng-raio').value = km;
+      atualizarSlider(km);
+      executarBusca();
+    }
+
+    function getSegmentClass(seg) {
+      const s = (seg || '').toLowerCase();
+      if (s.includes('padaria') || s.includes('gastronomia')) return 'seg-padarias';
+      if (s.includes('pet') || s.includes('agro')) return 'seg-petshops';
+      if (s.includes('celular') || s.includes('informática')) return 'seg-celulares';
+      if (s.includes('bazar') || s.includes('papelaria')) return 'seg-bazares';
+      if (s.includes('bebida') || s.includes('gás')) return 'seg-bebidas';
+      if (s.includes('ótica') || s.includes('otica') || s.includes('joia')) return 'seg-oticas';
+      if (s.includes('móve') || s.includes('decor')) return 'seg-moveis';
+      if (s.includes('salão') || s.includes('barbearia') || s.includes('estética')) return 'seg-saloes';
+      if (s.includes('academia') || s.includes('esporte')) return 'seg-academias';
+      if (s.includes('limpeza') || s.includes('lavanderia')) return 'seg-limpeza';
+      if (s.includes('supermercado') || s.includes('mercearia')) return 'seg-supermercados';
+      if (s.includes('moda') || s.includes('confecç')) return 'seg-moda';
+      if (s.includes('farmácia') || s.includes('drogaria')) return 'seg-farmacias';
+      if (s.includes('peça') || s.includes('oficina') || s.includes('auto') || s.includes('moto')) return 'seg-autopecas';
+      if (s.includes('construção') || s.includes('ferrag')) return 'seg-materiais';
+      if (s.includes('contabil')) return 'seg-contabilidade';
+      return 'seg-geral';
+    }
+
+    function atualizarEstatisticas(lista) {
+      const total = lista.length;
+      const cidades = new Set(lista.map(c => c.cidade)).size;
+      const comWpp = lista.filter(c => c.whatsapp).length;
+      const comEmail = lista.filter(c => c.email && c.email.includes('@')).length;
+      const comSite = lista.filter(c => c.tem_site).length;
+      const totalPdvs = lista.reduce((acc, c) => acc + (parseInt(c.pdvs_estimados) || 1), 0);
+
+      document.getElementById('stat-total').innerText = total;
+      document.getElementById('stat-cidades').innerText = cidades;
+      document.getElementById('stat-wpp').innerText = comWpp;
+      document.getElementById('stat-email').innerText = comEmail;
+      document.getElementById('stat-site').innerText = comSite;
+      document.getElementById('stat-pdvs').innerText = totalPdvs;
+
+      // Atualiza banner de contadores se estiver no modo contabilidade ou na busca
+      const contabs = lista.filter(c => (c.segmento || '').toLowerCase().includes('contabil'));
+      const elMultEsc = document.getElementById('mult-escritorios');
+      const elMultCli = document.getElementById('mult-clientes');
+      if (elMultEsc && elMultCli) {
+        const numEsc = contabs.length > 0 ? contabs.length : (CLIENTES_TODOS.filter(c => (c.segmento || '').toLowerCase().includes('contabil')).length || 17);
+        elMultEsc.innerText = numEsc;
+        elMultCli.innerText = `~${numEsc * 65} CNPJs`;
+      }
+    }
+
+    function renderizarLeads(lista) {
+      const grid = document.getElementById('leads-grid');
+      const tableBody = document.getElementById('leads-table-body');
+      grid.innerHTML = '';
+      tableBody.innerHTML = '';
+
+      // Remove botão carregar mais existente se houver
+      const existingBtn = document.getElementById('carregar-mais-wrap');
+      if (existingBtn) existingBtn.remove();
+
+      if (lista.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align:center; padding:3rem; background:#0f172a; border-radius:1rem; border:1px solid var(--card-border);">
+            <div style="font-size:2.5rem; margin-bottom:0.5rem;">🔍</div>
+            <h3 style="font-size:1.1rem; font-weight:800; color:#fff;">Nenhum estabelecimento encontrado neste perímetro</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">Tente expandir o raio de busca ou remover os filtros de e-mail/site/segmento.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const itensVisiveis = lista.slice(0, LIMITE_EXIBICAO);
+
+      itensVisiveis.forEach(item => {
+        const segClass = getSegmentClass(item.segmento);
+        const jaNoCRM = LEADS_NO_CRM.has(item.nome.trim().toLowerCase()) || (item.cnpj && LEADS_NO_CRM.has(item.cnpj.trim()));
+        const isSelected = SELECIONADOS.has(item.id);
+        const distClass = item.distancia_km <= 25 ? 'perto' : '';
+        const statusAtual = (item.cnpj && STATUS_LEADS_MAP[item.cnpj.trim()]) || STATUS_LEADS_MAP[item.nome.trim().toLowerCase()] || (jaNoCRM ? 'contatado_whatsapp' : 'novo');
+        const score = item.lead_score !== undefined ? item.lead_score : calcularLeadScoreFallback(item);
+        item.lead_score = score;
+        const scoreClass = score >= 80 ? 'score-alto' : (score >= 60 ? 'score-medio' : 'score-baixo');
+        const scoreIcon = score >= 80 ? '🔥' : (score >= 60 ? '⚡' : '📊');
+
+        const isContabilidade = (item.segmento || '').toLowerCase().includes('contabil');
+        const badgeMultiplicador = isContabilidade ? `
+          <span style="background:rgba(168,85,247,0.25); color:#d8b4fe; border:1px solid rgba(168,85,247,0.5); font-size:0.68rem; font-weight:800; padding:0.18rem 0.5rem; border-radius:0.4rem;">
+            🏛️ Multiplicador B2B (~${item.clientes_estimados || 65} empresas)
+          </span>` : '';
+
+        // WhatsApp com copy especializada para contadores
+        let linkWppFinal = item.link_whatsapp;
+        if (isContabilidade && item.whatsapp) {
+          const primeiroNomeDec = (item.decisor || 'Contador(a)').split(' ')[0];
+          const msgContador = `Olá, ${primeiroNomeDec}! Tudo bem? Aqui é da TruData ERP (Hansen Software, de Sarandi-RS).\n\nDesenvolvemos o *Modo Escritório* no nosso ERP Web para eliminar o retrabalho contábil da ${item.nome}:\n• Troca de empresas em 2 cliques sem deslogar na SEFAZ;\n• Validação e devolução fiscal automática por XML;\n• Envio automático de todos os XMLs/SPED todo dia 1º sem precisar cobrar o cliente.\n\nPreparamos uma proposta de parceria com comissão recorrente e facilidades fiscais para o seu escritório. Faz sentido conversarmos 5 minutinhos nesta semana?`;
+          linkWppFinal = `https://wa.me/${item.whatsapp}?text=${encodeURIComponent(msgContador)}`;
+        }
+
+        // Card Grid
+        const card = document.createElement('div');
+        card.className = `lead-prospect-card ${isSelected ? 'selected' : ''} ${isContabilidade ? 'card-contabilidade-destaque' : ''}`;
+        card.id = `card-${item.id}`;
+
+        card.innerHTML = `
+          <div>
+            <div class="card-top">
+              <div class="card-badges">
+                <span class="badge-lead-score ${scoreClass}">
+                  ${scoreIcon} Score: ${score}/100
+                </span>
+                <span class="badge-segmento ${segClass}">${item.segmento}</span>
+                ${badgeMultiplicador}
+                <span class="badge-distancia ${distClass}">📍 ${item.distancia_km} km</span>
+                <span style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.35); font-size:0.68rem; font-weight:700; padding:0.18rem 0.5rem; border-radius:0.4rem; display:inline-flex; align-items:center; gap:4px;">
+                  <span style="width:6px; height:6px; border-radius:50%; background:#10b981;"></span> Sintegra-RS: Ativa
+                </span>
+              </div>
+              <input type="checkbox" class="card-check" ${isSelected ? 'checked' : ''} onchange="toggleSelecao('${item.id}', this.checked)">
+            </div>
+
+            <div class="lead-nome-comercial">${item.nome}</div>
+            <div class="lead-razao">${item.razao_social || ''} · <strong style="color:#38bdf8;">CNPJ:</strong> <a href="javascript:void(0)" onclick="auditarSintegra('${item.cnpj}')" style="color:#38bdf8; text-decoration:underline; font-weight:700;" title="Copiar CNPJ e Consultar no Sintegra-RS / SEFAZ">${item.cnpj} ↗</a></div>
+          </div>
+
+          <div class="lead-details-list">
+            <div class="detail-row">
+              <span class="detail-icon">🏢</span>
+              <span class="detail-text"><strong>${item.endereco}</strong>, ${item.bairro} — ${item.cidade}/${item.uf} (CEP: ${item.cep || ''})</span>
+            </div>
+            ${item.cnae_codigo ? `
+            <div class="detail-row">
+              <span class="detail-icon">📋</span>
+              <span class="detail-text">CNAE Fiscal: <strong>${item.cnae_codigo}</strong> — <span style="font-size:0.75rem; color:#94a3b8;">${item.cnae_descricao || item.segmento}</span></span>
+            </div>` : ''}
+            <div class="detail-row">
+              <span class="detail-icon">📞</span>
+              <span class="detail-text">
+                <a href="tel:${item.whatsapp || ''}" class="phone-highlight" style="text-decoration:none;">${item.telefone || 'Não informado'}</a>
+              </span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-icon">✉️</span>
+              <span class="detail-text">
+                ${item.email ? `<a href="${item.link_email}" class="email-highlight" style="text-decoration:none;">${item.email}</a> <span style="font-size:0.7rem; color:#94a3b8;">(${item.tipo_email || 'Oficial'})</span>` : '<span style="color:#64748b; font-style:italic;">E-mail não informado</span>'}
+              </span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-icon">🌐</span>
+              <span class="detail-text">
+                ${item.tem_site 
+                  ? `<a href="${item.site}" target="_blank" class="email-highlight" style="text-decoration:underline; font-weight:700;">${item.site}</a> <span style="font-size:0.7rem; background:rgba(56,189,248,0.18); color:#38bdf8; padding:1px 6px; border-radius:4px; margin-left:4px; font-weight:700; border:1px solid rgba(56,189,248,0.3);">✓ Site Ativo</span>` 
+                  : `<span style="color:#ef4444; font-weight:700;">❌ Não possui site</span> <span style="font-size:0.75rem; color:#f59e0b; margin-left:4px;">(Oportunidade Catálogo Digital TruData)</span>`}
+              </span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-icon">👤</span>
+              <span class="detail-text">Sócio(a) Decisor(a) QSA: <strong>${item.decisor || 'Diretoria Comercial'}</strong> · Porte: <strong>${item.porte || 'ME'} (${isContabilidade ? `~${item.clientes_estimados || 65} clientes atendidos` : (item.pdvs_estimados || 1) + ' PDVs'})</strong></span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.35rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.08);">
+              <span style="font-size:0.72rem; color:var(--text-muted); font-weight:700;">Status do Lead no CRM:</span>
+              <select id="sel-status-${item.id}" class="status-lead-select status-${statusAtual}" onchange="alterarStatusLead('${item.id}', this.value)">
+                <option value="novo" ${statusAtual === 'novo' ? 'selected' : ''}>🆕 Novo Lead</option>
+                <option value="contatado_whatsapp" ${statusAtual === 'contatado_whatsapp' ? 'selected' : ''}>💬 Contatado WhatsApp</option>
+                <option value="email_enviado" ${statusAtual === 'email_enviado' ? 'selected' : ''}>✉️ E-mail Enviado</option>
+                <option value="demo_agendada" ${statusAtual === 'demo_agendada' ? 'selected' : ''}>📅 Demo Agendada</option>
+                <option value="fechado" ${statusAtual === 'fechado' ? 'selected' : ''}>🏆 Fechado (Cliente)</option>
+                <option value="perdido" ${statusAtual === 'perdido' ? 'selected' : ''}>❌ Perdido / Sem Interesse</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card-footer-actions">
+            <a href="${linkWppFinal}" target="_blank" class="btn-action-card btn-wpp" title="${isContabilidade ? 'Abordar Contador no WhatsApp com proposta de parceria' : 'Abordar no WhatsApp com mensagem personalizada'}">
+              💬 ${isContabilidade ? 'WhatsApp Parceiro' : 'WhatsApp'}
+            </a>
+            <button onclick="abrirModalEnvioEmail('${item.id}')" class="btn-action-card btn-email-action" title="Disparar Proposta Comercial por E-mail com 1 Clique">
+              ⚡ ${item.email ? 'E-mail 1-Clique' : 'Enviar E-mail'}
+            </button>
+            ${isContabilidade ? `
+            <a href="dossie_contador.html" target="_blank" class="btn-action-card" style="background:rgba(192,132,252,0.22); color:#d8b4fe; border:1px solid rgba(192,132,252,0.4);" title="Abrir Dossiê Técnico para Contadores">
+              📄 Dossiê Fiscal
+            </a>
+            <a href="parceiros.html" target="_blank" class="btn-action-card" style="background:rgba(16,185,129,0.22); color:#6ee7b7; border:1px solid rgba(16,185,129,0.4);" title="Clube do Contador & Comissões">
+              🤝 Clube Parceiros
+            </a>
+            <a href="portal_contador_xml.html" target="_blank" class="btn-action-card" style="background:rgba(56,189,248,0.22); color:#7dd3fc; border:1px solid rgba(56,189,248,0.4);" title="Portal XML / SPED em Lote">
+              🗂️ Portal XML
+            </a>
+            ` : ''}
+            <button onclick="auditarSintegra('${item.cnpj}')" class="btn-action-card" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.3); flex:0 0 auto; padding:0.5rem 0.6rem;" title="Copiar CNPJ limpo e abrir SEFAZ-RS / CCC Sintegra">
+              🔍 Sintegra
+            </button>
+            ${item.tem_site ? `
+            <a href="${item.site}" target="_blank" class="btn-action-card" style="background:#0284c7; color:#fff;" title="Visitar site oficial da empresa">
+              🌐 Site
+            </a>` : `
+            <span class="btn-action-card" style="background:rgba(239,68,68,0.12); color:#fca5a5; border:1px dashed rgba(239,68,68,0.35); cursor:default;" title="Não possui site - Oferecer Catálogo Integrado TruData">
+              ❌ Sem Site
+            </span>`}
+            <a href="copiloto_vendas.html?cliente=${encodeURIComponent(item.nome)}&cidade=${encodeURIComponent(item.cidade)}&segmento=${encodeURIComponent(item.segmento)}&caixas=${encodeURIComponent(item.pdvs_estimados || 1)}&cnpj=${encodeURIComponent(item.cnpj || '')}&decisor=${encodeURIComponent(item.decisor || '')}&telefone=${encodeURIComponent(item.whatsapp || item.telefone || '')}&email=${encodeURIComponent(item.email || '')}&distancia=${encodeURIComponent(item.distancia_km ? item.distancia_km + ' km' : '')}" target="_blank" class="btn-action-card" style="background:rgba(168,85,247,0.2); color:#d8b4fe; border:1px solid rgba(168,85,247,0.4);" title="Abrir no Copiloto IA de Vendas (Cold Call, WhatsApp, Objeções)">
+              🧠 Copiloto
+            </a>
+            <a href="gerador_proposta.html?cliente=${encodeURIComponent(item.nome)}&cidade=${encodeURIComponent(item.cidade)}&segmento=${encodeURIComponent(item.segmento)}&caixas=${encodeURIComponent(item.pdvs_estimados || 1)}&cnpj=${encodeURIComponent(item.cnpj || '')}&decisor=${encodeURIComponent(item.decisor || '')}&telefone=${encodeURIComponent(item.whatsapp || item.telefone || '')}&endereco=${encodeURIComponent(item.endereco || '')}&email=${encodeURIComponent(item.email || '')}" target="_blank" class="btn-action-card btn-prop-action" title="Gerar Proposta Comercial B2B personalizada">
+              📄 Proposta
+            </a>
+            <button onclick="abrirStreetView(${item.lat || 'null'}, ${item.lon || 'null'}, '${(item.nome || '').replace(/'/g, "\\'")}', '${(item.endereco || '').replace(/'/g, "\\'")}', '${item.cidade}')" class="btn-action-card" style="background:rgba(234,179,8,0.15); color:#facc15; border:1px solid rgba(234,179,8,0.3);" title="Ver Fachada da Loja no Google Street View">
+              👁️ Fachada
+            </button>
+            <button onclick="adicionarLeadAoCRM('${item.id}')" id="btn-crm-${item.id}" class="btn-action-card btn-crm-action ${jaNoCRM ? 'added' : ''}" title="Inserir diretamente no Pipeline de Vendas">
+              ${jaNoCRM ? '✅ No CRM' : '📥 Ao CRM'}
+            </button>
+            <a href="${item.link_maps}" target="_blank" class="btn-action-card btn-maps-action" title="Abrir no Google Maps">
+              🗺️
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+
+        // Linha da Tabela
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><input type="checkbox" ${isSelected ? 'checked' : ''} onchange="toggleSelecao('${item.id}', this.checked)"></td>
+          <td>
+            <div style="font-weight:700; color:#fff;">${item.nome}</div>
+            <div style="font-size:0.7rem; color:var(--text-muted);">${item.razao_social || ''}</div>
+            <div style="font-size:0.72rem; margin-top:2px;">
+              <a href="javascript:void(0)" onclick="auditarSintegra('${item.cnpj}')" style="color:#38bdf8; text-decoration:none; font-weight:700;" title="Copiar CNPJ e Verificar no Sintegra-RS">
+                <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#10b981; margin-right:3px;"></span>
+                ${item.cnpj || ''} ↗
+              </a>
+            </div>
+          </td>
+          <td>
+            <span class="badge-segmento ${segClass}">${item.segmento}</span>
+            <div style="margin-top:4px;">
+              <span class="badge-lead-score ${scoreClass}">
+                ${scoreIcon} ${score} pts
+              </span>
+            </div>
+          </td>
+          <td>
+            <div style="font-weight:700;">${item.cidade}/${item.uf}</div>
+            <span class="badge-distancia ${distClass}">📍 ${item.distancia_km} km</span>
+          </td>
+          <td>${item.endereco}, ${item.bairro}</td>
+          <td>
+            <a href="${item.link_whatsapp}" target="_blank" class="phone-highlight" style="text-decoration:none; display:inline-flex; align-items:center; gap:0.25rem;">
+              💬 ${item.telefone}
+            </a>
+          </td>
+          <td>
+            ${item.email ? `<span class="email-highlight" style="cursor:pointer;" onclick="abrirModalEnvioEmail('${item.id}')" title="Clique para disparar proposta por e-mail">✉️ ${item.email}</span>` : `<button onclick="abrirModalEnvioEmail('${item.id}')" style="background:transparent; border:1px dashed #475569; color:#94a3b8; padding:2px 6px; border-radius:4px; font-size:0.7rem; cursor:pointer;">+ Enviar Proposta</button>`}
+          </td>
+          <td>
+            ${item.tem_site 
+              ? `<a href="${item.site}" target="_blank" style="color:#38bdf8; text-decoration:none; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:3px;">🌐 Link ↗</a>` 
+              : `<span style="color:#ef4444; font-size:0.75rem; font-weight:700;">❌ Não possui site</span>`}
+          </td>
+          <td>
+            <div style="font-weight:700; color:#fff;">${item.decisor}</div>
+            <div style="font-size:0.7rem; color:var(--text-muted);">${item.porte || 'ME'} (${item.pdvs_estimados || 1} PDV)</div>
+            <select class="status-lead-select status-${statusAtual}" style="margin-top:3px; font-size:0.65rem;" onchange="alterarStatusLead('${item.id}', this.value)">
+              <option value="novo" ${statusAtual === 'novo' ? 'selected' : ''}>🆕 Novo</option>
+              <option value="contatado_whatsapp" ${statusAtual === 'contatado_whatsapp' ? 'selected' : ''}>💬 Contatado</option>
+              <option value="email_enviado" ${statusAtual === 'email_enviado' ? 'selected' : ''}>✉️ E-mail</option>
+              <option value="demo_agendada" ${statusAtual === 'demo_agendada' ? 'selected' : ''}>📅 Demo</option>
+              <option value="fechado" ${statusAtual === 'fechado' ? 'selected' : ''}>🏆 Fechado</option>
+              <option value="perdido" ${statusAtual === 'perdido' ? 'selected' : ''}>❌ Perdido</option>
+            </select>
+          </td>
+          <td>
+            <div style="display:flex; gap:0.25rem;">
+              <a href="copiloto_vendas.html?cliente=${encodeURIComponent(item.nome)}&cidade=${encodeURIComponent(item.cidade)}&segmento=${encodeURIComponent(item.segmento)}&caixas=${encodeURIComponent(item.pdvs_estimados || 1)}&cnpj=${encodeURIComponent(item.cnpj || '')}&decisor=${encodeURIComponent(item.decisor || '')}&telefone=${encodeURIComponent(item.whatsapp || item.telefone || '')}&email=${encodeURIComponent(item.email || '')}&distancia=${encodeURIComponent(item.distancia_km ? item.distancia_km + ' km' : '')}" target="_blank" class="btn-action-card" style="padding:0.35rem 0.45rem; font-size:0.7rem; background:rgba(168,85,247,0.2); color:#d8b4fe; border:1px solid rgba(168,85,247,0.4);" title="Copiloto IA">
+                🧠
+              </a>
+              <button onclick="abrirModalEnvioEmail('${item.id}')" class="btn-action-card btn-email-action" style="padding:0.35rem 0.5rem; font-size:0.7rem;" title="Disparar Proposta por E-mail">
+                ⚡ E-mail
+              </button>
+              <button onclick="auditarSintegra('${item.cnpj}')" class="btn-action-card" style="padding:0.35rem 0.45rem; font-size:0.7rem; background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Auditar Sintegra-RS">
+                🔍
+              </button>
+              <button onclick="abrirStreetView(${item.lat || 'null'}, ${item.lon || 'null'}, '${(item.nome || '').replace(/'/g, "\\'")}', '${(item.endereco || '').replace(/'/g, "\\'")}', '${item.cidade}')" class="btn-action-card" style="padding:0.35rem 0.45rem; font-size:0.7rem; background:rgba(234,179,8,0.15); color:#facc15; border:1px solid rgba(234,179,8,0.3);" title="Ver Fachada no Google Street View">
+                👁️
+              </button>
+              <a href="gerador_proposta.html?cliente=${encodeURIComponent(item.nome)}&cidade=${encodeURIComponent(item.cidade)}&segmento=${encodeURIComponent(item.segmento)}&caixas=${encodeURIComponent(item.pdvs_estimados || 1)}&cnpj=${encodeURIComponent(item.cnpj || '')}&decisor=${encodeURIComponent(item.decisor || '')}&telefone=${encodeURIComponent(item.whatsapp || item.telefone || '')}&endereco=${encodeURIComponent(item.endereco || '')}&email=${encodeURIComponent(item.email || '')}" target="_blank" class="btn-action-card btn-prop-action" style="padding:0.35rem 0.5rem; font-size:0.7rem;" title="Gerar Proposta B2B">
+                📄
+              </a>
+              <button onclick="adicionarLeadAoCRM('${item.id}')" class="btn-action-card btn-crm-action ${jaNoCRM ? 'added' : ''}" style="padding:0.35rem 0.5rem; font-size:0.7rem;">
+                ${jaNoCRM ? '✅' : '📥'}
+              </button>
+              <a href="${item.link_maps}" target="_blank" class="btn-action-card btn-maps-action" style="padding:0.35rem 0.5rem; font-size:0.7rem;">
+                🗺️
+              </a>
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+      // Se houver mais itens a carregar, exibe botão no final
+      if (lista.length > LIMITE_EXIBICAO) {
+        const wrap = document.createElement('div');
+        wrap.id = 'carregar-mais-wrap';
+        wrap.style.cssText = 'text-align:center; padding:1.5rem 0; grid-column:1/-1; width:100%;';
+        wrap.innerHTML = `
+          <button onclick="carregarMaisLeads()" class="btn btn-primary" style="padding:0.85rem 2.25rem; font-size:0.95rem; box-shadow: 0 4px 20px rgba(0, 159, 227, 0.4);">
+            📥 Carregar Mais 60 Clientes (Exibindo ${itensVisiveis.length} de ${lista.length} estabelecimentos)
+          </button>
+        `;
+        grid.parentNode.appendChild(wrap);
+      }
+    }
+
+    function carregarMaisLeads() {
+      LIMITE_EXIBICAO += 60;
+      renderizarLeads(CLIENTES_FILTRADOS);
+    }
+
+    function toggleSelecao(id, checked) {
+      if (checked) SELECIONADOS.add(id);
+      else SELECIONADOS.delete(id);
+
+      const card = document.getElementById(`card-${id}`);
+      if (card) {
+        if (checked) card.classList.add('selected');
+        else card.classList.remove('selected');
+      }
+
+      atualizarContadorSelecionados();
+    }
+
+    function alternarSelecionarTodos(checked) {
+      CLIENTES_FILTRADOS.forEach(c => {
+        if (checked) SELECIONADOS.add(c.id);
+        else SELECIONADOS.delete(c.id);
+      });
+      atualizarContadorSelecionados();
+      renderizarLeads(CLIENTES_FILTRADOS);
+    }
+
+    function atualizarContadorSelecionados() {
+      const count = SELECIONADOS.size;
+      const countSelEl = document.getElementById('count-sel');
+      if (countSelEl) countSelEl.innerText = count;
+
+      const btnBulk = document.getElementById('btn-bulk-crm');
+      if (btnBulk) {
+        btnBulk.style.display = count > 0 ? 'inline-flex' : 'none';
+      }
+
+      const btnRota = document.getElementById('btn-rota-visitas');
+      if (btnRota) {
+        const countRotaEl = document.getElementById('count-rota');
+        if (countRotaEl) countRotaEl.innerText = count;
+        btnRota.style.display = count > 0 ? 'inline-flex' : 'none';
+      }
+    }
+
+    async function roteirizarVisitasSelecionadas() {
+      if (SELECIONADOS.size === 0) {
+        mostrarToast('Selecione pelo menos 1 estabelecimento para traçar a rota.');
+        return;
+      }
+      const listaParaRota = CLIENTES_TODOS.filter(c => SELECIONADOS.has(c.id));
+      try {
+        const r = await fetch('/api/gerar_rota_maps', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            origem: 'Sarandi, RS',
+            clientes: listaParaRota.map(c => ({
+              nome: c.nome,
+              endereco: c.endereco,
+              cidade: c.cidade,
+              lat: c.lat,
+              lon: c.lon
+            })),
+            retornar_origem: true
+          })
+        });
+        const res = await r.json();
+        if (res.sucesso && res.rota_url) {
+          mostrarToast(`🚗 Rota gerada com ${listaParaRota.length} parada(s)! Abrindo Google Maps...`);
+          window.open(res.rota_url, '_blank');
+        } else {
+          mostrarToast('Não foi possível gerar a rota.');
+        }
+      } catch (e) {
+        console.error('Erro ao gerar rota:', e);
+        mostrarToast('Falha ao conectar com o serviço de rotas.');
+      }
+    }
+
+    function abrirStreetView(lat, lon, nome, endereco, cidade) {
+      let url = '';
+      if (lat && lon) {
+        url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lon}`;
+      } else {
+        url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(nome + ' ' + endereco + ' ' + cidade + ' RS')}`;
+      }
+      window.open(url, '_blank');
+    }
+
+    async function adicionarLeadAoCRM(id) {
+      const lead = CLIENTES_TODOS.find(c => c.id === id);
+      if (!lead) return;
+
+      const btn = document.getElementById(`btn-crm-${id}`);
+      if (btn) btn.innerText = 'Enviando...';
+
+      try {
+        const r = await fetch('/api/importar_prospect_crm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(lead)
+        });
+
+        const res = await r.json();
+        if (res.sucesso) {
+          LEADS_NO_CRM.add(lead.nome.trim().toLowerCase());
+          if (lead.cnpj) LEADS_NO_CRM.add(lead.cnpj.trim());
+          if (btn) {
+            btn.innerText = '✅ No CRM';
+            btn.classList.add('added');
+          }
+          mostrarToast(`🎉 "${lead.nome}" adicionado com sucesso ao CRM Kanban!`);
+        } else {
+          mostrarToast(`Aviso: ${res.resultado || 'Lead já presente no CRM'}`);
+          if (btn) btn.innerText = '✅ No CRM';
+        }
+      } catch (e) {
+        console.error('Erro ao enviar lead para CRM:', e);
+        mostrarToast('Erro de conexão ao salvar lead no CRM.');
+        if (btn) btn.innerText = '📥 Ao CRM';
+      }
+    }
+
+    async function importarSelecionadosAoCRM() {
+      if (SELECIONADOS.size === 0) {
+        mostrarToast('Selecione pelo menos um estabelecimento para enviar ao CRM.');
+        return;
+      }
+
+      const listaParaEnviar = CLIENTES_TODOS.filter(c => SELECIONADOS.has(c.id));
+      const btn = document.getElementById('btn-bulk-crm');
+      btn.innerText = 'Enviando...';
+
+      try {
+        const r = await fetch('/api/importar_prospect_crm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(listaParaEnviar)
+        });
+
+        const res = await r.json();
+        if (res.sucesso) {
+          mostrarToast(`🎉 ${res.total_adicionados} lead(s) adicionado(s) com sucesso ao CRM!`);
+          listaParaEnviar.forEach(c => {
+            LEADS_NO_CRM.add(c.nome.trim().toLowerCase());
+            if (c.cnpj) LEADS_NO_CRM.add(c.cnpj.trim());
+          });
+          SELECIONADOS.clear();
+          atualizarContadorSelecionados();
+          renderizarLeads(CLIENTES_FILTRADOS);
+        }
+      } catch (e) {
+        console.error('Erro ao importar lote:', e);
+        mostrarToast('Erro ao importar lote para o CRM.');
+      } finally {
+        btn.innerHTML = `📥 Enviar ao CRM (<span id="count-sel">0</span>)`;
+      }
+    }
+
+    function exportarCSV() {
+      const origem = document.getElementById('sel-origem').value;
+      const raio = document.getElementById('rng-raio').value;
+      const segmento = document.getElementById('sel-segmento').value;
+      const cidade = document.getElementById('sel-cidade') ? document.getElementById('sel-cidade').value : 'todas';
+      const ordenacao = document.getElementById('sel-ordenacao') ? document.getElementById('sel-ordenacao').value : 'distancia';
+      const porte = document.getElementById('sel-porte').value;
+      const site = document.getElementById('sel-site').value;
+      const apenasEmail = document.getElementById('chk-email').checked;
+      const apenasTelefone = document.getElementById('chk-telefone').checked;
+      const termo = document.getElementById('txt-termo').value.trim();
+
+      const params = new URLSearchParams({
+        origem,
+        raio,
+        segmento,
+        cidade,
+        ordenacao,
+        porte,
+        site,
+        termo,
+        apenas_email: apenasEmail,
+        apenas_telefone: apenasTelefone
+      });
+
+      mostrarToast('📥 Baixando planilha Excel / CSV dos clientes...');
+      window.location.href = `/api/exportar_prospects_csv?${params.toString()}`;
+    }
+
+    // Copiar telefones/WhatsApps para lista de transmissão
+    function copiarTelefonesVisiveis() {
+      const telefones = [];
+      CLIENTES_FILTRADOS.forEach(c => {
+        const tel = (c.whatsapp || c.telefone || '').replace(/\D/g, '');
+        if (tel && tel.length >= 8) {
+          telefones.push(tel.startsWith('55') ? tel : `55${tel}`);
+        }
+      });
+
+      if (telefones.length === 0) {
+        mostrarToast('Nenhum número de telefone encontrado na lista atual.');
+        return;
+      }
+
+      const texto = telefones.join('\n');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(texto).then(() => {
+          mostrarToast(`📋 ${telefones.length} telefones copiados para lista de transmissão!`);
+        });
+      } else {
+        mostrarToast(`Encontrados ${telefones.length} telefones.`);
+      }
+    }
+
+    // Auditoria rápida no Sintegra-RS / SEFAZ CCC
+    function auditarSintegra(cnpj) {
+      const cnpjLimpo = (cnpj || '').replace(/\D/g, '');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(cnpjLimpo).catch(() => {});
+      }
+      mostrarToast(`📋 CNPJ ${cnpjLimpo} copiado! Abrindo consulta SEFAZ-RS...`);
+      window.open('https://dfe-portal.svrs.rs.gov.br/NFE/CCC', '_blank');
+    }
+
+    // Altera o status do lead diretamente no card do Radar sincronizando com o CRM
+    async function alterarStatusLead(id, novoStatus) {
+      const item = CLIENTES_TODOS.find(c => c.id === id);
+      if (!item) return;
+
+      const sel = document.getElementById(`sel-status-${id}`);
+      if (sel) {
+        sel.className = `status-lead-select status-${novoStatus}`;
+      }
+
+      try {
+        const r = await fetch('/api/atualizar_status_lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            cnpj: item.cnpj || '',
+            empresa: item.nome,
+            fase: novoStatus,
+            decisor: item.decisor || '',
+            telefone: item.whatsapp || item.telefone || '',
+            email: item.email || '',
+            cidade: item.cidade,
+            segmento: item.segmento,
+            caixas: item.pdvs_estimados || 1,
+            notas: `Status atualizado diretamente via Radar B2B.`
+          })
+        });
+
+        const res = await r.json();
+        if (res.sucesso) {
+          if (item.cnpj) STATUS_LEADS_MAP[item.cnpj.trim()] = novoStatus;
+          STATUS_LEADS_MAP[item.nome.trim().toLowerCase()] = novoStatus;
+          LEADS_NO_CRM.add(item.nome.trim().toLowerCase());
+          if (item.cnpj) LEADS_NO_CRM.add(item.cnpj.trim());
+          
+          const btnCrm = document.getElementById(`btn-crm-${id}`);
+          if (btnCrm) {
+            btnCrm.innerText = '✅ No CRM';
+            btnCrm.classList.add('added');
+          }
+          mostrarToast(`Status de "${item.nome}" atualizado: ${novoStatus.toUpperCase()}`);
+        }
+      } catch (e) {
+        console.error('Erro ao atualizar status do lead:', e);
+        mostrarToast('Erro ao sincronizar status com CRM.');
+      }
+    }
+
+    // Sistema de Camadas do Mapa Leaflet
+    let CAMADA_ATUAL_LEAFLET = null;
+    let TIPO_CAMADA_LEAFLET = 'dark'; // 'dark', 'satellite', 'osm'
+
+    function obterTileLayer(tipo) {
+      if (tipo === 'satellite') {
+        return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+          maxZoom: 19,
+          attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+      } else if (tipo === 'osm') {
+        return L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+      } else {
+        // Padrão: CartoDB Dark Matter (Estética Tática Dark Enterprise)
+        return L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          maxZoom: 19,
+          subdomains: 'abcd',
+          attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a> | TruData ERP'
+        });
+      }
+    }
+
+    function trocarCamadaMapa(tipo) {
+      if (!MAPA_LEAFLET) return;
+      TIPO_CAMADA_LEAFLET = tipo;
+
+      if (CAMADA_ATUAL_LEAFLET) {
+        MAPA_LEAFLET.removeLayer(CAMADA_ATUAL_LEAFLET);
+      }
+
+      CAMADA_ATUAL_LEAFLET = obterTileLayer(tipo);
+      CAMADA_ATUAL_LEAFLET.addTo(MAPA_LEAFLET);
+
+      // Atualiza botões
+      const btnDark = document.getElementById('btn-layer-dark');
+      const btnSat = document.getElementById('btn-layer-sat');
+      const btnOsm = document.getElementById('btn-layer-osm');
+      if (btnDark) { btnDark.style.background = tipo === 'dark' ? '#009fe3' : 'transparent'; btnDark.style.color = tipo === 'dark' ? '#fff' : '#94a3b8'; }
+      if (btnSat) { btnSat.style.background = tipo === 'satellite' ? '#009fe3' : 'transparent'; btnSat.style.color = tipo === 'satellite' ? '#fff' : '#94a3b8'; }
+      if (btnOsm) { btnOsm.style.background = tipo === 'osm' ? '#009fe3' : 'transparent'; btnOsm.style.color = tipo === 'osm' ? '#fff' : '#94a3b8'; }
+    }
+
+    // Inicialização do Mapa Geográfico Leaflet
+    function inicializarMapaLeaflet() {
+      if (MAPA_LEAFLET) return;
+      const container = document.getElementById('mapa-geografico-real');
+      if (!container) return;
+
+      // Centro padrão: Sarandi - RS
+      MAPA_LEAFLET = L.map('mapa-geografico-real', {
+        zoomControl: true,
+        scrollWheelZoom: true
+      }).setView([-27.9439, -52.9247], 9);
+
+      // Adiciona camada tática escura por padrão
+      CAMADA_ATUAL_LEAFLET = obterTileLayer(TIPO_CAMADA_LEAFLET);
+      CAMADA_ATUAL_LEAFLET.addTo(MAPA_LEAFLET);
+
+      // Pin Matriz TruData (Sarandi - RS) com design pulse
+      const iconeSede = L.divIcon({
+        className: 'pin-sede-trudata-custom',
+        html: `
+          <div style="position:relative; width:44px; height:44px; display:flex; align-items:center; justify-content:center;">
+            <div style="position:absolute; width:44px; height:44px; border-radius:50%; background:rgba(0,159,227,0.4); animation:pingSede 2s cubic-bezier(0,0,0.2,1) infinite;"></div>
+            <div style="position:relative; z-index:2; background:linear-gradient(135deg,#009fe3,#0284c7); color:#fff; border:2.5px solid #fff; border-radius:50%; width:34px; height:34px; display:flex; align-items:center; justify-content:center; font-size:16px; box-shadow:0 0 20px #009fe3;">🏢</div>
+          </div>
+          <style>
+            @keyframes pingSede {
+              75%, 100% { transform: scale(1.6); opacity: 0; }
+            }
+          </style>
+        `,
+        iconSize: [44, 44],
+        iconAnchor: [22, 22]
+      });
+      L.marker([-27.9439, -52.9247], { icon: iconeSede, zIndexOffset: 1000 })
+        .addTo(MAPA_LEAFLET)
+        .bindPopup(`
+          <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:260px; padding:6px; color:#fff;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span style="font-size:22px;">🏢</span>
+              <div>
+                <strong style="color:#38bdf8; font-size:14px; display:block;">TruData ERP · Hansen Software</strong>
+                <span style="font-size:11px; color:#94a3b8;">Matriz Tecnológica · Fundada em 1998</span>
+              </div>
+            </div>
+            <p style="font-size:11px; color:#cbd5e1; line-height:1.4; margin-bottom:8px;">
+              📍 Av. Expedicionário, 1140, Centro, <strong>Sarandi - RS</strong><br>
+              ⚡ Base do Suporte Técnico 100% Local e Raio Tático de 100km.
+            </p>
+            <div style="display:flex; gap:6px;">
+              <a href="https://www.google.com/maps/search/?api=1&query=Hansen+Software+Sarandi+RS" target="_blank" style="background:#009fe3; color:#fff; text-decoration:none; padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700;">Ver no Google Maps ↗</a>
+            </div>
+          </div>
+        `);
+    }
+
+    function atualizarMapaLeaflet(lista) {
+      if (!MAPA_LEAFLET) inicializarMapaLeaflet();
+      if (!MAPA_LEAFLET) return;
+
+      // Limpa marcadores anteriores
+      MARCADORES_LEAFLET.forEach(m => MAPA_LEAFLET.removeLayer(m));
+      MARCADORES_LEAFLET = [];
+
+      const pinCountElem = document.getElementById('mapa-pin-count');
+      if (pinCountElem) pinCountElem.innerText = lista.length;
+
+      // Configuração de cores e ícones fluorecentes por nicho
+      const configNichos = {
+        'contabil': { cor: '#818cf8', icone: '📑', label: 'Contabilidade' },
+        'supermercado': { cor: '#10b981', icone: '🛒', label: 'Supermercado' },
+        'mercearia': { cor: '#10b981', icone: '🛒', label: 'Mercearia' },
+        'moda': { cor: '#ec4899', icone: '👗', label: 'Moda/Vestuário' },
+        'roupa': { cor: '#ec4899', icone: '👗', label: 'Moda/Vestuário' },
+        'farmacia': { cor: '#c084fc', icone: '💊', label: 'Farmácia' },
+        'drogaria': { cor: '#c084fc', icone: '💊', label: 'Farmácia' },
+        'autopeca': { cor: '#f59e0b', icone: '🔧', label: 'Autopeças' },
+        'oficina': { cor: '#f59e0b', icone: '🔧', label: 'Oficina/Auto' },
+        'construcao': { cor: '#0ea5e9', icone: '🏗️', label: 'Construção' },
+        'ferrag': { cor: '#0ea5e9', icone: '🏗️', label: 'Ferragens' },
+        'padaria': { cor: '#f97316', icone: '🥖', label: 'Padaria' },
+        'pet': { cor: '#14b8a6', icone: '🐾', label: 'Pet/Agro' }
+      };
+
+      lista.forEach(item => {
+        if (!item.lat || !item.lon) return;
+
+        let cor = '#009fe3';
+        let icone = '🏬';
+        const seg = (item.segmento || '').toLowerCase();
+        for (const [k, v] of Object.entries(configNichos)) {
+          if (seg.includes(k)) { 
+            cor = v.cor; 
+            icone = v.icone; 
+            break; 
+          }
+        }
+
+        const score = item.lead_score !== undefined ? item.lead_score : (typeof calcularLeadScoreFallback === 'function' ? calcularLeadScoreFallback(item) : 75);
+
+        // Pino Teardrop SVG Fluorescente Moderno
+        const pinoSvg = `
+          <div style="position:relative; width:28px; height:36px; cursor:pointer; filter:drop-shadow(0 2px 8px ${cor}88); transition:transform 0.15s ease;" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'">
+            <svg width="28" height="36" viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 0C6.268 0 0 6.268 0 14C0 24.5 14 36 14 36C14 36 28 24.5 28 14C28 6.268 21.732 0 14 0Z" fill="${cor}"/>
+              <circle cx="14" cy="14" r="11" fill="#0f172a" stroke="#ffffff" stroke-width="1.5"/>
+            </svg>
+            <div style="position:absolute; top:4px; left:0; width:28px; height:20px; display:flex; align-items:center; justify-content:center; font-size:12px; pointer-events:none;">
+              ${icone}
+            </div>
+          </div>
+        `;
+
+        const customIcon = L.divIcon({
+          className: 'pin-nicho-svg',
+          html: pinoSvg,
+          iconSize: [28, 36],
+          iconAnchor: [14, 36],
+          popupAnchor: [0, -32]
+        });
+
+        const m = L.marker([item.lat, item.lon], { icon: customIcon }).addTo(MAPA_LEAFLET);
+        
+        const popupHtml = `
+          <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:270px; padding:4px; color:#fff;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:4px;">
+              <div style="font-weight:800; font-size:0.95rem; color:#fff; line-height:1.2;">${item.nome}</div>
+              <span style="background:${cor}25; color:${cor}; border:1px solid ${cor}50; font-size:0.65rem; font-weight:800; padding:2px 6px; border-radius:6px; white-space:nowrap;">
+                ${icone} ${item.segmento}
+              </span>
+            </div>
+
+            <div style="font-size:0.75rem; color:#94a3b8; margin-bottom:6px;">
+              📍 <strong>${item.cidade}-RS</strong> (${item.distancia_km} km da matriz) · Lead Score: <strong style="color:#34d399;">🔥 ${score}/100</strong>
+            </div>
+
+            <div style="font-size:0.74rem; color:#cbd5e1; background:rgba(15,23,42,0.8); border:1px solid rgba(255,255,255,0.08); padding:8px; border-radius:8px; margin-bottom:8px; line-height:1.4;">
+              <div>🏢 CNPJ: <strong style="color:#38bdf8;">${item.cnpj}</strong></div>
+              <div>👤 Decisor: <strong>${item.decisor || 'Diretoria'}</strong> (${item.pdvs_estimados || 1} PDVs)</div>
+              <div>📫 ${item.endereco}</div>
+            </div>
+
+            <div style="display:flex; gap:5px; flex-wrap:wrap;">
+              <button onclick="abrirStreetView(${item.lat || 'null'}, ${item.lon || 'null'}, '${(item.nome || '').replace(/'/g, "\\'")}', '${(item.endereco || '').replace(/'/g, "\\'")}', '${item.cidade}')" style="background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; border:none; padding:5px 9px; border-radius:6px; font-size:0.75rem; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:3px;" title="Ver Fachada no Google Street View">
+                <span>👁️</span> Fachada Street View
+              </button>
+              <a href="${item.link_whatsapp}" target="_blank" style="background:#16a34a; color:#fff; text-decoration:none; padding:5px 9px; border-radius:6px; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:3px;">
+                <span>💬</span> WhatsApp
+              </a>
+              <button onclick="abrirModalEnvioEmail('${item.id}')" style="background:#0284c7; color:#fff; border:none; padding:5px 9px; border-radius:6px; font-size:0.75rem; font-weight:700; cursor:pointer;">
+                ⚡ Proposta E-mail
+              </button>
+            </div>
+          </div>
+        `;
+        m.bindPopup(popupHtml);
+        MARCADORES_LEAFLET.push(m);
+      });
+    }
+
+    function alternarVisualizacao(tipo) {
+      const grid = document.getElementById('leads-grid');
+      const table = document.getElementById('view-tabela');
+      const mapa = document.getElementById('view-mapa');
+      const btnGrid = document.getElementById('btn-view-grid');
+      const btnTable = document.getElementById('btn-view-table');
+      const btnMapa = document.getElementById('btn-view-mapa');
+
+      grid.style.display = 'none';
+      table.style.display = 'none';
+      mapa.style.display = 'none';
+      btnGrid.style.background = 'transparent'; btnGrid.style.color = '#94a3b8';
+      btnTable.style.background = 'transparent'; btnTable.style.color = '#94a3b8';
+      btnMapa.style.background = 'transparent'; btnMapa.style.color = '#94a3b8';
+
+      if (tipo === 'grid') {
+        grid.style.display = 'grid';
+        btnGrid.style.background = '#009fe3';
+        btnGrid.style.color = '#fff';
+      } else if (tipo === 'mapa') {
+        mapa.style.display = 'block';
+        btnMapa.style.background = '#009fe3';
+        btnMapa.style.color = '#fff';
+        setTimeout(() => {
+          if (!MAPA_LEAFLET) inicializarMapaLeaflet();
+          atualizarMapaLeaflet(CLIENTES_FILTRADOS);
+          if (MAPA_LEAFLET) MAPA_LEAFLET.invalidateSize();
+        }, 150);
+      } else {
+        table.style.display = 'block';
+        btnTable.style.background = '#009fe3';
+        btnTable.style.color = '#fff';
+      }
+    }
+
+    function mostrarToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    // ==========================================
+    // GESTÃO DE E-MAILS B2B COM 1 CLIQUE (SMTP / AUTO) COM 3 TEMPLATES
+    // ==========================================
+    let LEAD_SELECIONADO_EMAIL = null;
+
+    const TEMPLATES_EMAIL = {
+      contingencia: {
+        nome: "1. Gestão Fiscal & Contingência Offline no Sábado (Varejo Pesado)",
+        assunto: (cli, cid) => `Proposta Comercial TruData ERP — ${cli} (${cid}-RS)`,
+        modulos: ["⚡ PDV Frente de Caixa Rápido", "📑 Contingência Offline NFC-e", "💳 TEF Integrado", "🤝 Suporte Humano Sarandi-RS", "📊 Gestão Fiscal SPED"],
+        corpo: (decisor, cli, cid, site, tem_site) => {
+          const destaqueWeb = (tem_site && site && site !== 'Não possui site')
+            ? `- Integração omnichannel com seu site (${site}) e e-commerce;\n`
+            : `- Catálogo digital com pedidos no WhatsApp e Pix para seus clientes;\n`;
+          return `Olá ${decisor},\n\n` +
+            `Segue a apresentação e proposta da TruData ERP (Hansen Software) para a ${cli} em ${cid}-RS.\n` +
+            `Somos especialistas no varejo gaúcho há 25 anos com matriz em Sarandi-RS.\n\n` +
+            `Destaques para sua operação:\n` +
+            `- Contingência fiscal offline para nunca travar o caixa no sábado;\n` +
+            destaqueWeb +
+            `- Suporte telefônico 100% humanizado direto de Sarandi;\n` +
+            `- Módulos integrados de estoque, balanças, TEF e contabilidade.\n\n` +
+            `Podemos agendar uma demonstração de 15 minutos na sua loja?\n\n` +
+            `Atenciosamente,\nEquipe Comercial TruData ERP\nSarandi-RS | Fone: (54) 3361-2650`;
+        }
+      },
+      catalogo: {
+        nome: "2. Especial Pequenos Negócios: Catálogo Digital + PDV Ágil + Pix",
+        assunto: (cli, cid) => `Catálogo Digital & Gestão Ágil para ${cli} — TruData ERP`,
+        modulos: ["🌐 Catálogo Digital no WhatsApp", "💳 Pix Dinâmico no Balcão", "⚡ PDV Simplificado Rápido", "📦 Controle de Estoque Fácil", "📱 Suporte WhatsApp Direto"],
+        corpo: (decisor, cli, cid, site, tem_site) => {
+          return `Olá ${decisor},\n\n` +
+            `Preparamos uma solução exclusiva da TruData ERP focada no crescimento da ${cli} em ${cid}-RS.\n\n` +
+            `Destaques desta versão:\n` +
+            `- Catálogo digital com pedidos automáticos direto no WhatsApp da loja;\n` +
+            `- Emissão de cupom fiscal em 3 segundos e recebimento no Pix e Cartão sem complicação;\n` +
+            `- Controle de produtos, preços e vendas na palma da mão;\n` +
+            `- Investimento acessível e suporte próximo de Sarandi.\n\n` +
+            `Gostaria de ver uma prévia do catálogo funcionando para a ${cli}?\n\n` +
+            `Atenciosamente,\nEquipe Comercial TruData ERP\nSarandi-RS | Fone: (54) 3361-2650`;
+        }
+      },
+      migracao: {
+        nome: "3. Migração Sem Trauma: Troca de Sistema Antigo (Suporte Humano de Sarandi)",
+        assunto: (cli, cid) => `Migração de Sistema sem Trauma para ${cli} — TruData ERP Sarandi`,
+        modulos: ["🛡️ Migração Gratuita de Dados e Clientes", "📞 Atendimento Telefônico sem Robôs", "⚡ PDV Blindado sem Travamentos", "📑 SPED Fiscal 100% Homologado", "🤝 Treinamento Prático Local"],
+        corpo: (decisor, cli, cid, site, tem_site) => {
+          return `Olá ${decisor},\n\n` +
+            `Sabemos que trocar de sistema de gestão dá receio pelo medo de perder dados ou ficar sem suporte nos momentos de pico.\n` +
+            `Na TruData (matriz em Sarandi-RS há 25 anos), nossa equipe técnica realiza a migração completa do seu cadastro de produtos, clientes e saldos sem parar o seu atendimento.\n\n` +
+            `Por que lojistas da região migram para a TruData:\n` +
+            `- Suporte técnico por telefone atendido em menos de 15 minutos por quem entende o comércio gaúcho;\n` +
+            `- Caixa offline que não trava quando a internet oscila;\n` +
+            `- Módulos completos sem pegadinhas de cobranças extras.\n\n` +
+            `Podemos conversar nesta semana para avaliar a transição segura da ${cli}?\n\n` +
+            `Atenciosamente,\nEquipe Comercial TruData ERP\nSarandi-RS | Fone: (54) 3361-2650`;
+        }
+      }
+    };
+
+    const MODULOS_NICHO_RESUMO = {
+      "Supermercados & Mercearias": ["⚡ PDV Frente de Caixa Rápido", "⚖️ Balanças Toledo/Filizola", "💳 TEF Integrado", "📑 NFC-e Offline", "📦 WMS & Ruptura"],
+      "Padarias & Gastronomia": ["🥐 Comandas Eletrônicas", "⚖️ Integração Balança e Peso", "📦 Ficha Técnica & Ingredientes", "⚡ PDV Balcão", "📑 Fiscal Rápido"],
+      "Pet Shops & Agropecuárias": ["🐾 Agendamento Banho & Tosa", "💉 Controle de Vacinas & Lotes", "📦 Ração Fracionada & Sacaria", "⚡ PDV Ágil", "📑 Emissão Fiscal"],
+      "Celulares, Informática & Assistência": ["📱 Ordem de Serviço (OS)", "🔍 Rastreamento por IMEI/Série", "📑 Termo de Garantia", "⚡ PDV Balcão", "📦 Controle de Peças"],
+      "Papelarias, Bazares & Variedades": ["📚 Grade Múltipla de Cores/Tamanhos", "🏷️ Leitor Código de Barras", "⚡ Caixa Rápido", "📦 Sugestão de Compras", "📑 NFC-e Instantânea"],
+      "Distribuidoras de Bebidas & Gás": ["🍻 Controle de Vasilhames & Cascos", "🚚 Roteirização de Entregas", "⚡ PDV Rápido", "📑 Emissão NF-e/NFC-e", "💳 Conciliação TEF"],
+      "Óticas & Joalherias": ["👓 Prescrições Oftalmológicas", "💎 Controle de Ouro & Joias", "🏷️ Etiquetas Especiais Jóias", "⚡ Carnê & Crediário", "📑 Fiscal"],
+      "Autopeças, Moto Peças & Mecânicas": ["🔩 Busca por Aplicação/Ano", "🔧 Ordem de Serviço Mecânica", "⚡ Balcão Rápido", "📦 Estoque Múltiplos Fabricantes", "📑 NF-e/NFC-e"],
+      "Materiais de Construção": ["🧱 Venda em Metros/M²/Fração", "🚚 Controle de Cargas & Romaneio", "📑 NFe/NFCe", "💳 TEF Balcão", "📦 Almoxarifado"],
+      "Lojas de Confecções & Moda": ["👗 Grade Completa Cor & Tamanho", "🏷️ Etiquetas Código de Barras", "⚡ Carnê da Loja / Crediário", "💳 TEF Integrado", "📑 Fiscal"],
+      "Farmácias & Drogarias": ["💊 Validação SNGPC e Lotes", "⚡ Caixa Rápido", "📑 NFC-e Instantânea", "📦 Curva ABC Medicamentos", "🤝 Suporte Local"],
+      "Comércio Geral": ["⚡ PDV Rápido Offline", "📑 NFC-e Instantânea", "📦 Controle de Estoque", "🤝 Suporte de Sarandi", "📊 Relatórios Financeiros"]
+    };
+
+    function trocarTemplateEmail() {
+      if (!LEAD_SELECIONADO_EMAIL) return;
+      const tplKey = document.getElementById('modal-select-template').value || 'contingencia';
+      const tpl = TEMPLATES_EMAIL[tplKey] || TEMPLATES_EMAIL.contingencia;
+
+      document.getElementById('modal-input-assunto').value = tpl.assunto(LEAD_SELECIONADO_EMAIL.nome, LEAD_SELECIONADO_EMAIL.cidade);
+
+      const modContainer = document.getElementById('modal-modulos-preview');
+      modContainer.innerHTML = '';
+      tpl.modulos.forEach(m => {
+        const pill = document.createElement('span');
+        pill.className = 'preview-pill';
+        pill.innerText = m;
+        modContainer.appendChild(pill);
+      });
+    }
+
+    function abrirModalEnvioEmail(id) {
+      const item = CLIENTES_TODOS.find(c => c.id === id);
+      if (!item) return;
+
+      LEAD_SELECIONADO_EMAIL = item;
+      document.getElementById('modal-email-lead-id').value = item.id;
+      document.getElementById('modal-lead-nome').innerText = item.nome;
+      document.getElementById('modal-lead-cidade').innerText = `${item.cidade} - ${item.uf}`;
+      document.getElementById('modal-lead-segmento').innerText = item.segmento;
+      document.getElementById('modal-lead-decisor').innerText = item.decisor || 'Gerência Comercial';
+      document.getElementById('modal-lead-caixas').innerText = `${item.pdvs_estimados || 1} PDV(s)`;
+      const siteElem = document.getElementById('modal-lead-site');
+      if (siteElem) {
+        siteElem.innerHTML = item.tem_site 
+          ? `<a href="${item.site}" target="_blank" style="color:#38bdf8; text-decoration:underline;">${item.site}</a>` 
+          : `<span style="color:#ef4444;">Não possui site</span>`;
+      }
+
+      const inputEmail = document.getElementById('modal-input-email');
+      inputEmail.value = item.email || '';
+      document.getElementById('lbl-status-destinatario').innerText = item.email ? '✓ E-mail Coletado pelo Radar' : 'Preencha o e-mail do contato';
+
+      document.getElementById('modal-input-decisor').value = item.decisor || 'Responsável Comercial';
+      
+      const tplSelect = document.getElementById('modal-select-template');
+      if (tplSelect) tplSelect.value = 'contingencia';
+      trocarTemplateEmail();
+
+      const fb = document.getElementById('modal-email-feedback');
+      fb.style.display = 'none';
+      fb.innerHTML = '';
+
+      const btnDisparo = document.getElementById('btn-executar-disparo');
+      btnDisparo.disabled = false;
+      btnDisparo.innerHTML = '🚀 Disparar Proposta Imediatamente';
+
+      document.getElementById('modal-disparo-email').classList.add('active');
+    }
+
+    function fecharModalEnvioEmail() {
+      document.getElementById('modal-disparo-email').classList.remove('active');
+    }
+
+    async function dispararEmailModal() {
+      if (!LEAD_SELECIONADO_EMAIL) return;
+
+      const email = document.getElementById('modal-input-email').value.trim();
+      const decisor = document.getElementById('modal-input-decisor').value.trim();
+      const assunto = document.getElementById('modal-input-assunto').value.trim();
+      const tplKey = document.getElementById('modal-select-template') ? document.getElementById('modal-select-template').value : 'contingencia';
+
+      if (!email || !email.includes('@')) {
+        alert('Por favor, informe um endereço de e-mail válido para o envio da proposta.');
+        document.getElementById('modal-input-email').focus();
+        return;
+      }
+
+      const btnDisparo = document.getElementById('btn-executar-disparo');
+      btnDisparo.disabled = true;
+      btnDisparo.innerHTML = '⏳ Enviando Proposta...';
+
+      const fb = document.getElementById('modal-email-feedback');
+      fb.style.display = 'block';
+      fb.style.background = 'rgba(0, 159, 227, 0.15)';
+      fb.style.color = '#38bdf8';
+      fb.style.border = '1px solid rgba(0, 159, 227, 0.3)';
+      fb.innerHTML = 'Conectando e gerando proposta comercial executiva em HTML...';
+
+      try {
+        const r = await fetch('/api/enviar_proposta_email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            destinatario: email,
+            cliente: LEAD_SELECIONADO_EMAIL.nome,
+            cidade: LEAD_SELECIONADO_EMAIL.cidade,
+            segmento: LEAD_SELECIONADO_EMAIL.segmento,
+            decisor: decisor,
+            caixas: LEAD_SELECIONADO_EMAIL.pdvs_estimados || 1,
+            cnpj: LEAD_SELECIONADO_EMAIL.cnpj || '',
+            telefone: LEAD_SELECIONADO_EMAIL.whatsapp || LEAD_SELECIONADO_EMAIL.telefone || '',
+            site: LEAD_SELECIONADO_EMAIL.site || '',
+            tem_site: LEAD_SELECIONADO_EMAIL.tem_site || false,
+            assunto: assunto,
+            template: tplKey
+          })
+        });
+
+        const res = await r.json();
+
+        if (res.sucesso) {
+          fb.style.background = 'rgba(16, 185, 129, 0.2)';
+          fb.style.color = '#34d399';
+          fb.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          fb.innerHTML = `
+            <div><strong>🎉 Proposta gerada e despachada com sucesso!</strong></div>
+            <div style="font-size:0.8rem; margin-top:0.3rem;">${res.mensagem}</div>
+            <div style="margin-top:0.6rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <a href="${res.link_gmail}" target="_blank" class="btn btn-secondary" style="font-size:0.75rem; padding:0.4rem 0.8rem;">
+                🌐 Abrir cópia no Gmail Web
+              </a>
+              <a href="${res.link_mailto}" class="btn btn-secondary" style="font-size:0.75rem; padding:0.4rem 0.8rem;">
+                ✉️ Abrir no Outlook / Mailto
+              </a>
+            </div>
+          `;
+          btnDisparo.innerHTML = '✅ Proposta Enviada!';
+
+          // Atualiza dados locais
+          LEADS_NO_CRM.add(LEAD_SELECIONADO_EMAIL.nome.trim().toLowerCase());
+          if (LEAD_SELECIONADO_EMAIL.cnpj) LEADS_NO_CRM.add(LEAD_SELECIONADO_EMAIL.cnpj.trim());
+          
+          const btnCrm = document.getElementById(`btn-crm-${LEAD_SELECIONADO_EMAIL.id}`);
+          if (btnCrm) {
+            btnCrm.innerText = '✅ No CRM';
+            btnCrm.classList.add('added');
+          }
+
+          mostrarToast(`✉️ Proposta enviada para ${email}! Registrado no CRM.`);
+        } else {
+          fb.style.background = 'rgba(239, 68, 68, 0.2)';
+          fb.style.color = '#f87171';
+          fb.style.border = '1px solid rgba(239, 68, 68, 0.4)';
+          fb.innerHTML = `⚠️ Erro ao enviar: ${res.erro || res.mensagem || 'Falha no disparo'}`;
+          btnDisparo.disabled = false;
+          btnDisparo.innerHTML = 'Tentar Novamente 🚀';
+        }
+      } catch (err) {
+        console.error('Erro ao enviar e-mail:', err);
+        fb.style.background = 'rgba(239, 68, 68, 0.2)';
+        fb.style.color = '#f87171';
+        fb.style.border = '1px solid rgba(239, 68, 68, 0.4)';
+        fb.innerHTML = `⚠️ Erro de conexão com o servidor local.`;
+        btnDisparo.disabled = false;
+        btnDisparo.innerHTML = 'Tentar Novamente 🚀';
+      }
+    }
+
+    function abrirGmailWebDireto() {
+      if (!LEAD_SELECIONADO_EMAIL) return;
+      const email = document.getElementById('modal-input-email').value.trim();
+      const decisor = document.getElementById('modal-input-decisor').value.trim();
+      const assunto = encodeURIComponent(document.getElementById('modal-input-assunto').value.trim());
+      const tplKey = document.getElementById('modal-select-template') ? document.getElementById('modal-select-template').value : 'contingencia';
+      const tpl = TEMPLATES_EMAIL[tplKey] || TEMPLATES_EMAIL.contingencia;
+
+      const corpoTexto = tpl.corpo(decisor, LEAD_SELECIONADO_EMAIL.nome, LEAD_SELECIONADO_EMAIL.cidade, LEAD_SELECIONADO_EMAIL.site, LEAD_SELECIONADO_EMAIL.tem_site);
+      const corpo = encodeURIComponent(corpoTexto);
+
+      const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${assunto}&body=${corpo}`;
+      window.open(url, '_blank');
+    }
+
+    // CONFIGURAÇÕES DE E-MAIL / SMTP
+    async function abrirModalConfigSMTP() {
+      document.getElementById('modal-config-smtp').classList.add('active');
+      const fb = document.getElementById('cfg-smtp-feedback');
+      fb.style.display = 'none';
+
+      try {
+        const r = await fetch('/api/config_email');
+        const cfg = await r.json();
+        document.getElementById('cfg-modo').value = cfg.modo || 'automatico';
+        document.getElementById('cfg-host').value = cfg.smtp_host || 'smtp.gmail.com';
+        document.getElementById('cfg-port').value = cfg.smtp_port || 587;
+        document.getElementById('cfg-tls').value = cfg.smtp_port == 465 ? 'ssl' : 'tls';
+        document.getElementById('cfg-user').value = cfg.usuario || '';
+        document.getElementById('cfg-pass').value = cfg.senha_configurada ? '••••••••' : '';
+        document.getElementById('cfg-remetente-nome').value = cfg.remetente_nome || 'TruData ERP (Hansen Software)';
+        document.getElementById('cfg-remetente-email').value = cfg.remetente_email || 'comercial@trudata.com.br';
+      } catch (e) {
+        console.error('Erro ao carregar configurações de e-mail:', e);
+      }
+    }
+
+    function fecharModalConfigSMTP() {
+      document.getElementById('modal-config-smtp').classList.remove('active');
+    }
+
+    async function salvarConfigSMTP() {
+      const modo = document.getElementById('cfg-modo').value;
+      const smtp_host = document.getElementById('cfg-host').value.trim();
+      const smtp_port = parseInt(document.getElementById('cfg-port').value) || 587;
+      const usar_tls = document.getElementById('cfg-tls').value === 'tls';
+      const usuario = document.getElementById('cfg-user').value.trim();
+      const senha = document.getElementById('cfg-pass').value;
+      const remetente_nome = document.getElementById('cfg-remetente-nome').value.trim();
+      const remetente_email = document.getElementById('cfg-remetente-email').value.trim();
+
+      const fb = document.getElementById('cfg-smtp-feedback');
+      fb.style.display = 'block';
+      fb.style.background = 'rgba(0, 159, 227, 0.15)';
+      fb.style.color = '#38bdf8';
+      fb.innerHTML = 'Salvando credenciais com segurança...';
+
+      try {
+        const r = await fetch('/api/config_email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            modo,
+            smtp_host,
+            smtp_port,
+            usar_tls,
+            usuario,
+            senha,
+            remetente_nome,
+            remetente_email
+          })
+        });
+
+        const res = await r.json();
+        if (res.sucesso) {
+          fb.style.background = 'rgba(16, 185, 129, 0.2)';
+          fb.style.color = '#34d399';
+          fb.innerHTML = '✅ Configurações salvas com sucesso no servidor TruData!';
+          mostrarToast('⚙️ Configurações de e-mail atualizadas.');
+          setTimeout(() => fecharModalConfigSMTP(), 1500);
+        } else {
+          fb.style.background = 'rgba(239, 68, 68, 0.2)';
+          fb.style.color = '#f87171';
+          fb.innerHTML = `⚠️ Erro ao salvar: ${res.erro}`;
+        }
+      } catch (e) {
+        fb.style.background = 'rgba(239, 68, 68, 0.2)';
+        fb.style.color = '#f87171';
+        fb.innerHTML = '⚠️ Erro de conexão ao salvar configurações.';
+      }
+    }
+
+    // HISTÓRICO DE E-MAILS
+    async function abrirModalHistoricoEmails() {
+      document.getElementById('modal-historico-emails').classList.add('active');
+      await carregarHistoricoEmails();
+    }
+
+    function fecharModalHistoricoEmails() {
+      document.getElementById('modal-historico-emails').classList.remove('active');
+    }
+
+    async function carregarHistoricoEmails() {
+      const tbody = document.getElementById('tbody-historico-emails');
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#94a3b8; padding:2rem;">Carregando histórico...</td></tr>';
+
+      try {
+        const r = await fetch('/api/historico_emails');
+        const lista = await r.json();
+
+        if (!lista || lista.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#64748b; padding:2rem;">Nenhum e-mail disparado ainda. Use o botão "⚡ E-mail 1-Clique" para enviar sua primeira proposta!</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = '';
+        lista.slice().reverse().forEach(item => {
+          const tr = document.createElement('tr');
+          const isSucesso = item.sucesso;
+          tr.innerHTML = `
+            <td style="color:#94a3b8; font-size:0.75rem;">${item.data}</td>
+            <td><strong style="color:#fff;">${item.cliente}</strong><br><span style="font-size:0.7rem; color:var(--text-muted);">${item.cidade || ''}</span></td>
+            <td><span class="email-highlight">${item.destinatario}</span></td>
+            <td><span class="badge-segmento">${item.segmento || 'Comércio'}</span></td>
+            <td><span style="color:${isSucesso ? '#34d399' : '#f87171'}; font-weight:700;">● ${item.status}</span></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (e) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#f87171; padding:1.5rem;">Erro ao carregar histórico.</td></tr>';
+      }
+    }
+
+    // Inicialização ao carregar página
+    window.addEventListener('DOMContentLoaded', async () => {
+      await carregarLeadsExistentesNoCRM();
+      
+      // Suporte a modo via URL query param (?modo=contadores)
+      const urlParams = new URLSearchParams(window.location.search);
+      const modoParam = urlParams.get('modo');
+      if (modoParam === 'contadores' || modoParam === 'contabilidade') {
+        alternarModoRadar('contadores');
+      } else {
+        executarBusca();
+      }
+    });
+  </script>
+
+  <!-- MODAL DISPARAR PROPOSTA POR E-MAIL COM 1 CLIQUE -->
+  <div id="modal-disparo-email" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>⚡</span> Disparar Proposta Comercial por E-mail (1 Clique)
+        </div>
+        <button class="btn-close-modal" onclick="fecharModalEnvioEmail()">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="modal-email-lead-id">
+        <div class="lead-info-banner">
+          <div class="lead-banner-title" id="modal-lead-nome">Supermercado Bela Vista</div>
+          <div class="lead-banner-meta">
+            <span>📍 <strong id="modal-lead-cidade">Passo Fundo - RS</strong></span>
+            <span>📦 <strong id="modal-lead-segmento">Supermercados & Mercearias</strong></span>
+            <span>👤 A/C: <strong id="modal-lead-decisor">Diretoria Comercial</strong></span>
+            <span>🛒 Caixas: <strong id="modal-lead-caixas">3 PDVs</strong></span>
+            <span>🌐 Site: <strong id="modal-lead-site">-</strong></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span>E-mail do Destinatário *</span>
+            <span style="font-size:0.75rem; color:var(--primary);" id="lbl-status-destinatario">Preenchimento Automático</span>
+          </label>
+          <input type="email" id="modal-input-email" class="form-input" placeholder="exemplo@empresa.com.br" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span>Estratégia / Modelo da Proposta</span>
+            <span style="font-size:0.75rem; color:var(--primary);">3 Opções de Conversão</span>
+          </label>
+          <select id="modal-select-template" class="form-select" onchange="trocarTemplateEmail()">
+            <option value="contingencia" selected>1. Gestão Fiscal & Contingência Offline no Sábado (Varejo Pesado)</option>
+            <option value="catalogo">2. Especial Pequenos Negócios: Catálogo Digital + PDV Ágil + Pix</option>
+            <option value="migracao">3. Migração Sem Trauma: Troca de Sistema Antigo (Suporte Humano de Sarandi)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Nome do Decisor / Responsável</label>
+          <input type="text" id="modal-input-decisor" class="form-input" placeholder="Ex: Cláudia Bertoncello">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Assunto do E-mail</label>
+          <input type="text" id="modal-input-assunto" class="form-input">
+        </div>
+
+        <div class="preview-box">
+          <div style="font-weight:700; color:#fff; margin-bottom:0.4rem; display:flex; align-items:center; gap:0.4rem;">
+            <span>🛡️</span> Resumo Executivo Incluído no E-mail Oficial:
+          </div>
+          <p style="margin-bottom:0.5rem; font-size:0.8rem; color:#94a3b8;">
+            O e-mail contém proposta formatada em HTML executivo TruData, com a tabela de módulos adaptada especificamente ao segmento do lojista:
+          </p>
+          <div id="modal-modulos-preview">
+            <span class="preview-pill">⚡ PDV Offline Contingência</span>
+            <span class="preview-pill">📑 NFC-e / NF-e Instantânea</span>
+            <span class="preview-pill">🤝 Suporte Matriz Sarandi-RS</span>
+            <span class="preview-pill">📊 Gestão Fiscal & Contábil</span>
+          </div>
+        </div>
+
+        <div id="modal-email-feedback" style="display:none; padding:0.8rem; border-radius:0.6rem; font-size:0.85rem; font-weight:600;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="fecharModalEnvioEmail()">Cancelar</button>
+        <button type="button" class="btn btn-secondary" id="btn-modal-gmail" onclick="abrirGmailWebDireto()" title="Abrir no Gmail Web com o texto pronto">
+          🌐 Abrir no Gmail Web
+        </button>
+        <button type="button" class="btn btn-emerald" id="btn-executar-disparo" onclick="dispararEmailModal()" style="padding:0.75rem 1.4rem;">
+          🚀 Disparar Proposta Imediatamente
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CONFIGURAÇÃO SMTP / E-MAIL -->
+  <div id="modal-config-smtp" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>⚙️</span> Configurações de E-mail & Servidor SMTP
+        </div>
+        <button class="btn-close-modal" onclick="fecharModalConfigSMTP()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.85rem; color:var(--text-muted);">
+          Configure sua conta de e-mail corporativo ou Gmail/Outlook para enviar propostas diretamente aos clientes com 1 clique.
+        </p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label class="form-label">Modo de Envio</label>
+            <select id="cfg-modo" class="form-select">
+              <option value="automatico">Automático / Assistido (Sem Senha Obrigatória)</option>
+              <option value="smtp">Disparo Real via Servidor SMTP</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Servidor SMTP (Host)</label>
+            <input type="text" id="cfg-host" class="form-input" placeholder="smtp.gmail.com">
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label class="form-label">Porta SMTP</label>
+            <input type="number" id="cfg-port" class="form-input" placeholder="587" value="587">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Segurança TLS / SSL</label>
+            <select id="cfg-tls" class="form-select">
+              <option value="tls" selected>STARTTLS (Porta 587 - Padrão)</option>
+              <option value="ssl">SSL / TLS (Porta 465)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label class="form-label">Usuário SMTP (E-mail de Login)</label>
+            <input type="email" id="cfg-user" class="form-input" placeholder="comercial@trudata.com.br">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Senha / Senha de App</label>
+            <input type="password" id="cfg-pass" class="form-input" placeholder="••••••••">
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label class="form-label">Nome de Exibição do Remetente</label>
+            <input type="text" id="cfg-remetente-nome" class="form-input" placeholder="TruData ERP (Hansen Software)">
+          </div>
+          <div class="form-group">
+            <label class="form-label">E-mail Remetente (From)</label>
+            <input type="email" id="cfg-remetente-email" class="form-input" placeholder="comercial@trudata.com.br">
+          </div>
+        </div>
+
+        <div class="preview-box" style="font-size:0.75rem; color:#94a3b8;">
+          <strong style="color:#60a5fa;">💡 Dicas Rápidas de Provedores:</strong><br>
+          • <strong>Gmail / Google Workspace:</strong> Host: <code style="color:#fff;">smtp.gmail.com</code> · Porta: <code style="color:#fff;">587</code> · Gere uma "Senha de App" nas configurações de segurança da conta Google.<br>
+          • <strong>Microsoft 365 / Outlook:</strong> Host: <code style="color:#fff;">smtp.office365.com</code> · Porta: <code style="color:#fff;">587</code>.<br>
+          • <strong>Locaweb / Hostinger / cPanel:</strong> Use as credenciais da sua hospedagem oficial (porta 587 ou 465).
+        </div>
+
+        <div id="cfg-smtp-feedback" style="display:none; padding:0.8rem; border-radius:0.6rem; font-size:0.85rem; font-weight:600;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="fecharModalConfigSMTP()">Fechar</button>
+        <button type="button" class="btn btn-primary" onclick="salvarConfigSMTP()">💾 Salvar Configurações</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL HISTÓRICO DE E-MAILS DISPARADOS -->
+  <div id="modal-historico-emails" class="modal-backdrop">
+    <div class="modal-box" style="max-width:850px;">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>📬</span> Histórico de Propostas Enviadas por E-mail
+        </div>
+        <button class="btn-close-modal" onclick="fecharModalHistoricoEmails()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.85rem; color:var(--text-muted);">Registro de envios com status de entrega e timestamps:</span>
+          <button class="btn btn-secondary" style="padding:0.35rem 0.75rem; font-size:0.75rem;" onclick="carregarHistoricoEmails()">🔄 Atualizar</button>
+        </div>
+        <div style="overflow-x:auto; border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem;">
+          <table class="leads-table" id="tabela-historico-emails">
+            <thead>
+              <tr>
+                <th>Data/Hora</th>
+                <th>Cliente / Empresa</th>
+                <th>Destinatário</th>
+                <th>Segmento</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-historico-emails">
+              <tr><td colspan="5" style="text-align:center; color:#94a3b8; padding:2rem;">Carregando histórico...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="fecharModalHistoricoEmails()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

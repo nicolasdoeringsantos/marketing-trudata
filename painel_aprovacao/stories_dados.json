@@ -1,0 +1,202 @@
+[
+  {
+    "id": "story_01",
+    "titulo": "Sábado de loja lotada e caixa voando",
+    "funcionalidade": "PDV Ultrarrápido & NFC-e em 3s",
+    "categoria": "caixa",
+    "enquete": "Sua fila de caixa trava nos sábados? [Trava direto 😭] vs [Aqui voa! ⚡]",
+    "formato": "9:16",
+    "cta": "Responda este Story para demonstração na sua loja",
+    "texto": "Sábado de loja cheia e seu caixa voando sem travar! 🚀 Com o PDV TruData ERP, sua NFC-e é emitida em 3 segundos. Sem filas e sem estresse para seus operadores. Peça sua demo: (54) 3361-2345"
+  },
+  {
+    "id": "story_02",
+    "titulo": "A internet caiu? A sua venda NÃO para!",
+    "funcionalidade": "Contingência Offline Blindada",
+    "categoria": "caixa",
+    "enquete": "Já perdeu vendas por queda de internet? [Já perdi... 😤] vs [Nunca mais! 🙌]",
+    "formato": "9:16",
+    "cta": "Chega de loja parada! Fale com nossa equipe em Sarandi/RS",
+    "texto": "A internet caiu no seu bairro? Não perca nenhuma venda! 🔌 O TruData ERP continua vendendo normalmente em contingência offline e transmite suas notas fiscais automaticamente assim que o sinal voltar: (54) 3361-2345"
+  },
+  {
+    "id": "story_03",
+    "titulo": "Acabe com o sumiço de peças no estoque!",
+    "funcionalidade": "Grade de Confecções Cor x Tamanho",
+    "categoria": "gestao",
+    "enquete": "Seu estoque bate 100% no fim do mês? [Falta peça 🤦‍♂️] vs [100% em dia ✅]",
+    "formato": "9:16",
+    "cta": "Peça uma apresentação de controle de grade",
+    "texto": "Acabe com o pesadelo de procurar peça no estoque e não achar! 👗📦 Com a Grade Cor x Tamanho do TruData ERP, você tem controle total de roupas, calçados e confecções em tempo real: (54) 3361-2345"
+  },
+  {
+    "id": "story_04",
+    "titulo": "Seu contador sofre no fim do mês?",
+    "funcionalidade": "SPED Fiscal & EFD Contribuições sem Erros",
+    "categoria": "fiscal",
+    "enquete": "O fechamento fiscal dá dor de cabeça? [Muito estresse 🥵] vs [É super suave 🧘]",
+    "formato": "9:16",
+    "cta": "Contador feliz, empresa blindada",
+    "texto": "Fechamento de mês sem correria e sem estresse com o contador! 📂 O TruData ERP gera o SPED Fiscal e EFD Contribuições 100% validados, com amarração de NCM, CEST e CFOP direto na entrada do XML: (54) 3361-2345"
+  },
+  {
+    "id": "story_05",
+    "titulo": "Você paga PIS/COFINS duas vezes?",
+    "funcionalidade": "Segregação Automática de Monofásicos",
+    "categoria": "fiscal",
+    "enquete": "Sua empresa audita os monofásicos? [Não sabia 😱] vs [Auditamos sim 🧐]",
+    "formato": "9:16",
+    "cta": "Economize tributos de forma legal",
+    "texto": "Atenção comerciante: você pode estar pagando imposto duplicado todo mês! ⚠️💸 Produtos monofásicos (bebidas, cosméticos e remédios) têm alíquota zero de PIS/COFINS na revenda. O TruData faz a segregação no caixa: (54) 3361-2345"
+  },
+  {
+    "id": "story_06",
+    "titulo": "Sua loja deu lucro real este mês?",
+    "funcionalidade": "Financeiro Completo & DRE Gerencial",
+    "categoria": "gestao",
+    "enquete": "Você sabe exatamente seu lucro líquido? [Mais ou menos 🤔] vs [Na ponta do lápis! 📈]",
+    "formato": "9:16",
+    "cta": "Controle seu dinheiro com precisão",
+    "texto": "Vender muito não é sinônimo de lucro! Você sabe para onde vai cada centavo da sua loja? 📊💰 Com o Financeiro e DRE Gerencial do TruData ERP, você tem previsão de fluxo de caixa e relatórios precisos: (54) 3361-2345"
+  },
+  {
+    "id": "story_07",
+    "titulo": "Zero erro de digitação no cartão!",
+    "funcionalidade": "TEF Integrado ao PDV",
+    "categoria": "caixa",
+    "enquete": "Já teve diferença no fechamento de cartão? [Várias vezes 🤦‍♀️] vs [Aqui bate 100% 🎯]",
+    "formato": "9:16",
+    "cta": "Modernize seus checkouts com TEF",
+    "texto": "Chega de operador errando vírgula ou valor na maquininha avulsa! 💳⚡ Com o TEF integrado ao TruData ERP, o valor passa automático do caixa para o cartão. Menos fila, conciliação 100% e zero prejuízo: (54) 3361-2345"
+  },
+  {
+    "id": "story_08",
+    "titulo": "Compre na hora certa sem dinheiro parado!",
+    "funcionalidade": "Compras Inteligentes & Giro de Estoque",
+    "categoria": "gestao",
+    "enquete": "Tem mercadoria encalhada no seu depósito? [Infelizmente sim 📦] vs [Giro afiado! 🔄]",
+    "formato": "9:16",
+    "cta": "Gerencie seu estoque com inteligência",
+    "texto": "Estoque parado é dinheiro mofando na prateleira! 📦🛒 O Módulo de Compras do TruData ERP analisa seu histórico de vendas e sugere cotações certeiras com base no giro real da loja: (54) 3361-2345"
+  },
+  {
+    "id": "story_09",
+    "titulo": "Sua empresa na palma da mão em tempo real",
+    "funcionalidade": "Dashboard BI & Indicadores Visuais",
+    "categoria": "gestao",
+    "enquete": "Você toma decisões com dados ou no feeling? [No feeling 🎲] vs [Com dados! 📊]",
+    "formato": "9:16",
+    "cta": "Decida com dados e inteligência",
+    "texto": "Como está o faturamento da sua loja hoje? E qual vendedor lidera as metas? 📱📈 Com o Dashboard BI do TruData ERP, você tem indicadores visuais claros e em tempo real no seu celular ou computador: (54) 3361-2345"
+  },
+  {
+    "id": "story_10",
+    "titulo": "Vendedores externos emitindo pedidos na rua",
+    "funcionalidade": "Força de Vendas Externa (App Mobile)",
+    "categoria": "caixa",
+    "enquete": "Sua equipe externa ainda anota em papel? [No papel ainda 📝] vs [100% no app 📲]",
+    "formato": "9:16",
+    "cta": "Acelere suas vendas externas",
+    "texto": "Chega de talão de pedidos em papel e retrabalho de digitação no escritório! 🛵💼 Com a Força de Vendas do TruData ERP, seu consultor tira pedidos no tablet ou smartphone direto no cliente, mesmo sem internet: (54) 3361-2345"
+  },
+  {
+    "id": "story_11",
+    "titulo": "Medicamentos controlados e SNGPC sem estresse",
+    "funcionalidade": "SNGPC Anvisa & Lotes/Validade",
+    "categoria": "fiscal",
+    "enquete": "O envio do SNGPC na sua farmácia é tranquilo? [Dá trabalho 🥵] vs [Tranquilo! 💊]",
+    "formato": "9:16",
+    "cta": "Conformidade e tranquilidade na farmácia",
+    "texto": "Sua farmácia opera com controle rigoroso da Anvisa? 💊🏥 O módulo Farma do TruData ERP faz o controle automático de lotes, datas de validade e transmissão descomplicada do SNGPC: (54) 3361-2345"
+  },
+  {
+    "id": "story_12",
+    "titulo": "Açougue, padaria e checkout sincronizados",
+    "funcionalidade": "Balanças Homologadas (Toledo & Filizola)",
+    "categoria": "caixa",
+    "enquete": "Sua balança comunica sem falhas com o sistema? [Às vezes falha 😕] vs [Funciona 100% ⚡]",
+    "formato": "9:16",
+    "cta": "Agilize o checkout do seu supermercado",
+    "texto": "Supermercado ágil precisa de balanças integradas sem falhas! 🥩🍞⚖️ O TruData ERP comunica diretamente com balanças de checkout e etiquetadoras Toledo (Prix 3, 4, 5 e 6), Filizola e Urano: (54) 3361-2345"
+  },
+  {
+    "id": "story_13",
+    "titulo": "Sua loja está pronta para o CBS & IBS 2026?",
+    "funcionalidade": "Simulador da Reforma Tributária 2026",
+    "categoria": "fiscal",
+    "enquete": "Já começou a preparar seu sistema fiscal? [Ainda não 😬] vs [Já me preparando! 🚀]",
+    "formato": "9:16",
+    "cta": "Conheça nosso simulador tributário",
+    "texto": "A Reforma Tributária vai transformar o comércio brasileiro em 2026! 🏛️⚖️ Quem deixar para a última hora vai enfrentar filas e riscos de multas. O TruData ERP já está com o motor de IBS/CBS pronto: (54) 3361-2345"
+  },
+  {
+    "id": "story_14",
+    "titulo": "Cansado de falar com robô quando o caixa aperta?",
+    "funcionalidade": "Suporte 100% Humano Direto de Sarandi",
+    "categoria": "diferenciais",
+    "enquete": "Você prefere falar com robô ou com gente? [Robô jamais! 😡] vs [Pessoas de verdade ❤️]",
+    "formato": "9:16",
+    "cta": "Venha para o suporte humano",
+    "texto": "Você liga para o suporte do seu sistema e cai num robô de opções infinitas? 🤖❌ Na TruData ERP (Hansen Software - Sarandi/RS), o suporte é 100% HUMANO por telefone e WhatsApp. Você fala direto com quem resolve em minutos: (54) 3361-2345"
+  },
+  {
+    "id": "story_15",
+    "titulo": "Troque de sistema em 48h sem travar sua loja!",
+    "funcionalidade": "Protocolo de Migração Blindada",
+    "categoria": "diferenciais",
+    "enquete": "Tem medo de trocar de ERP e parar a loja? [Tenho receio 😰] vs [Quero migrar! 🚀]",
+    "formato": "9:16",
+    "cta": "Troque de ERP com segurança",
+    "texto": "Medo de trocar de sistema e sua loja parar no dia de movimento? ⏱️🚀 Com o protocolo de Migração Blindada da TruData, importamos todo o seu histórico de dados em ambiente seguro. A virada é feita sem travar seus caixas: (54) 3361-2345"
+  },
+  {
+    "id": "story_16",
+    "titulo": "O ERP que os escritórios contábeis amam indicar",
+    "funcionalidade": "Clube do Contador & Bonificação",
+    "categoria": "diferenciais",
+    "enquete": "Seu contador já conhece o TruData ERP? [Vou apresentar 📲] vs [Já recomenda! 🌟]",
+    "formato": "9:16",
+    "cta": "Cadastre seu escritório parceiro",
+    "texto": "Atenção Contadores do Rio Grande do Sul: simplifiquem o fechamento fiscal dos seus clientes! 🏛️🤝 O TruData ERP oferece canal direto para escritórios de contabilidade e bonificação por indicação ativa: (54) 3361-2345"
+  },
+  {
+    "id": "story_17",
+    "titulo": "Chega de reajuste abusivo e taxas surpresa!",
+    "funcionalidade": "TCO Transparente & Preço Justo",
+    "categoria": "diferenciais",
+    "enquete": "Seu sistema atual reajustou a mensalidade? [Reajustou muito 📈] vs [Aqui é estável ⚖️]",
+    "formato": "9:16",
+    "cta": "Simule seu TCO gratuito",
+    "texto": "Todo ano é o mesmo susto com reajustes abusivos no contrato do seu ERP? 🛑💰 No TruData ERP, o contrato é claro, sem taxas ocultas e reajustado apenas pelo IPCA. Faça as contas e economize milhares de reais em 3 anos: (54) 3361-2345"
+  },
+  {
+    "id": "story_18",
+    "titulo": "Produtividade máxima com Ctrl + K",
+    "funcionalidade": "Central Command Bar Universal",
+    "categoria": "caixa",
+    "enquete": "Você gosta de usar atalhos rápidos? [Amo atalhos ⌨️] vs [Uso mais o mouse 🖱️]",
+    "formato": "9:16",
+    "cta": "Experimente a agilidade do TruData",
+    "texto": "Navegue no seu sistema na velocidade do pensamento! ⚡⌨️ Com o atalho universal Ctrl + K no TruData ERP, você acessa qualquer tela, módulo ou relatório em milissegundos. Menos cliques, mais produtividade: (54) 3361-2345"
+  },
+  {
+    "id": "story_19",
+    "titulo": "Sua equipe treinada e operando em menos de 2h!",
+    "funcionalidade": "Treinamento Rápido & Interface Intuitiva",
+    "categoria": "diferenciais",
+    "enquete": "Demora para treinar novos funcionários? [Demora semanas 😩] vs [Aqui é rápido! 🎯]",
+    "formato": "9:16",
+    "cta": "Facilite a vida da sua equipe",
+    "texto": "Contratou operador de caixa novo e perde dias ensinando telas complicadas? ⏱️🎓 O TruData ERP é tão simples e intuitivo que em menos de 2 horas qualquer pessoa já está emitindo notas com segurança: (54) 3361-2345"
+  },
+  {
+    "id": "story_20",
+    "titulo": "Segurança de quem está há 25 anos no RS",
+    "funcionalidade": "Solidez, Selo MPS.BR e Sede em Sarandi",
+    "categoria": "diferenciais",
+    "enquete": "Sua empresa prefere parceiro local ou distante? [Parceiro local 🤝] vs [Tanto faz 🤷]",
+    "formato": "9:16",
+    "cta": "Solidez e confiança no RS",
+    "texto": "Não coloque o coração da sua loja na mão de startups que mudam de dono todo ano! 🏢🏆 A Hansen Software desenvolve o TruData ERP há mais de 25 anos em Sarandi - RS, com certificação MPS.BR e mais de 300 clientes ativos: (54) 3361-2345"
+  }
+]

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Série Cliente em Destaque — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              azure: '#009fe3',
+              cyan: '#169fdb',
+              dark: '#070c18',
+              card: '#0f172a',
+              border: '#1e293b',
+              emerald: '#10b981',
+              gold: '#f59e0b'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased selection:bg-brand-azure selection:text-white pb-20">
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold text-sm transition">←</a>
+        <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-slate-950 font-black text-lg shadow-lg shadow-amber-500/20">
+          🌟
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-display font-black text-lg text-white">Série "Cliente em Destaque"</h1>
+            <span class="text-[10px] uppercase font-bold tracking-wider bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/30">Voz do Comércio Real</span>
+          </div>
+          <p class="text-xs text-slate-400">Hansen Software · Homenagens a parceiros com +10 a 25 anos de estrada no RS</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="teleprompter.html" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+          🎬 Abrir Roteiro no Teleprompter
+        </a>
+        <a href="https://business.facebook.com/latest/composer" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white transition shadow-lg shadow-blue-600/20 flex items-center gap-1.5">
+          🚀 Meta Business Suite
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- COLUNA DA ESQUERDA: CONTROLES E FORMULÁRIO -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <h2 class="text-sm font-bold text-white font-display flex items-center gap-2">
+              <span>✍️</span> Parâmetros da Homenagem
+            </h2>
+            <button onclick="carregarExemploAleatorio()" class="text-xs text-brand-azure hover:underline font-semibold">
+              🎲 Sortear Exemplo Real
+            </button>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Nome Fantasia do Estabelecimento:</label>
+              <input type="text" id="inp-nome" value="Supermercado Sarandi" oninput="atualizarCanvasETexto()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-brand-azure focus:outline-none" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Cidade / UF:</label>
+                <input type="text" id="inp-cidade" value="Sarandi / RS" oninput="atualizarCanvasETexto()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-brand-azure focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Anos de Parceria:</label>
+                <input type="text" id="inp-anos" value="14 Anos" oninput="atualizarCanvasETexto()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-brand-azure focus:outline-none" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Nome do Proprietário / Gestor:</label>
+                <input type="text" id="inp-dono" value="Sr. Roberto Vicari" oninput="atualizarCanvasETexto()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-brand-azure focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Segmento / Ramo:</label>
+                <select id="inp-ramo" onchange="atualizarCanvasETexto()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-brand-azure focus:outline-none">
+                  <option value="Supermercado & Alimentos">Supermercado & Alimentos</option>
+                  <option value="Moda, Calçados & Confecções">Moda & Confecções</option>
+                  <option value="Peças Automotivas & Mecânica">Peças Automotivas & Mecânica</option>
+                  <option value="Materiais de Construção">Materiais de Construção</option>
+                  <option value="Agropecuária & Rações">Agropecuária & Rações</option>
+                  <option value="Farmácia & Drogarias">Farmácia & Drogarias</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Depoimento Central / Frase de Impacto:</label>
+              <textarea id="inp-frase" rows="3" oninput="atualizarCanvasETexto()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-brand-azure focus:outline-none leading-relaxed">"Sábado de manhã com a loja lotada, a gente não pode nem pensar em fila travando. Com o TruData, nossos 4 caixas rodam lisos e o suporte tá sempre aqui em Sarandi pra qualquer apoio."</textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Estatística de Autoridade:</label>
+                <input type="text" id="inp-estatistica" value="+850.000 Cupons Emitidos" oninput="atualizarCanvasETexto()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-brand-azure focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Formato do Card:</label>
+                <select id="inp-formato" onchange="atualizarFormatoCanvas()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-brand-azure focus:outline-none font-bold">
+                  <option value="feed">Feed Instagram (1:1 · 1080x1080)</option>
+                  <option value="stories">Stories / Reels (9:16 · 1080x1920)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-slate-800 flex gap-3">
+            <button onclick="baixarCanvasPNG()" class="flex-1 bg-gradient-to-r from-amber-500 to-orange-600 hover:brightness-110 text-slate-950 font-black py-3 rounded-xl text-xs transition shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2">
+              <span>📥</span> Baixar Card em PNG HD
+            </button>
+          </div>
+        </div>
+
+        <!-- BOX LEGENDA COPIA E COLA -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span>📋</span> Legenda Pronta para Redes
+            </h3>
+            <button onclick="copiarLegendaCliente()" class="text-xs bg-slate-800 hover:bg-slate-700 text-brand-azure px-3 py-1 rounded-lg font-bold transition flex items-center gap-1">
+              <span id="btn-copiar-legenda-txt">Copiar Legenda</span>
+            </button>
+          </div>
+
+          <textarea id="texto-legenda-gerada" readonly rows="8" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-300 font-mono leading-relaxed resize-none focus:outline-none"></textarea>
+        </div>
+
+      </div>
+
+      <!-- COLUNA DA DIREITA: PREVIEW DO CANVAS INTERATIVO -->
+      <div class="lg:col-span-7 space-y-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl text-center">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+              <span>🎨</span> Preview em Alta Resolução (Render Real)
+            </span>
+            <span id="label-resolucao" class="text-xs font-mono bg-slate-950 border border-slate-800 text-amber-400 px-2.5 py-0.5 rounded-full font-bold">1080 × 1080 px</span>
+          </div>
+
+          <div class="flex items-center justify-center overflow-hidden rounded-2xl bg-slate-950 p-2 border border-slate-800/80">
+            <canvas id="cardCanvas" class="max-w-full max-h-[620px] rounded-xl shadow-2xl transition-all duration-300"></canvas>
+          </div>
+
+          <p class="text-[11px] text-slate-500 mt-3">
+            Arte gerada diretamente em resolução ultra-nítida no padrão da marca TruData (Hansen Software).
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const EXEMPLOS_REAIS = [
+      {
+        nome: "Supermercado Sarandi",
+        cidade: "Sarandi / RS",
+        anos: "14 Anos",
+        dono: "Sr. Roberto Vicari",
+        ramo: "Supermercado & Alimentos",
+        frase: '"Sábado de manhã com a loja lotada, a gente não pode nem pensar em fila travando. Com o TruData, nossos 4 caixas rodam lisos e o suporte tá sempre aqui em Sarandi pra qualquer apoio."',
+        estatistica: "+850.000 Cupons Emitidos"
+      },
+      {
+        nome: "Casa das Tintas & Construção",
+        cidade: "Carazinho / RS",
+        anos: "11 Anos",
+        dono: "Sr. Valdir Oliveira",
+        ramo: "Materiais de Construção",
+        frase: '"Antes a gente sofria para amarrar entrega futura e não furar o estoque do pátio. O TruData organizou nosso faturamento e o inventário fecha certinho no fim do mês."',
+        estatistica: "+3.200 Pedidos Entregues"
+      },
+      {
+        nome: "Auto Peças Sarandiense",
+        cidade: "Sarandi / RS",
+        anos: "18 Anos",
+        dono: "Marcos & Família",
+        ramo: "Peças Automotivas & Mecânica",
+        frase: '"No balcão de peças, o cliente não quer esperar. A busca de aplicação cruzada no TruData é instantânea e a emissão de nota não dá um erro na SEFAZ."',
+        estatistica: "+45.000 Itens em Grade"
+      },
+      {
+        nome: "Lojas Catarinense Moda",
+        cidade: "Sarandi / RS",
+        anos: "9 Anos",
+        dono: "Dona Maria Helena",
+        ramo: "Moda, Calçados & Confecções",
+        frase: '"O controle de grade por cor e tamanho e a impressão de carnês de crediário no balcão fizeram nossa loja dobrar o faturamento sem perder o controle dos recebíveis."',
+        estatistica: "Zero Inadimplência Oculta"
+      }
+    ];
+
+    function carregarExemploAleatorio() {
+      const ex = EXEMPLOS_REAIS[Math.floor(Math.random() * EXEMPLOS_REAIS.length)];
+      document.getElementById('inp-nome').value = ex.nome;
+      document.getElementById('inp-cidade').value = ex.cidade;
+      document.getElementById('inp-anos').value = ex.anos;
+      document.getElementById('inp-dono').value = ex.dono;
+      document.getElementById('inp-ramo').value = ex.ramo;
+      document.getElementById('inp-frase').value = ex.frase;
+      document.getElementById('inp-estatistica').value = ex.estatistica;
+      atualizarCanvasETexto();
+    }
+
+    function atualizarFormatoCanvas() {
+      const formato = document.getElementById('inp-formato').value;
+      const labelRes = document.getElementById('label-resolucao');
+      if (formato === 'feed') {
+        labelRes.textContent = "1080 × 1080 px";
+      } else {
+        labelRes.textContent = "1080 × 1920 px";
+      }
+      atualizarCanvasETexto();
+    }
+
+    function atualizarCanvasETexto() {
+      const nome = document.getElementById('inp-nome').value;
+      const cidade = document.getElementById('inp-cidade').value;
+      const anos = document.getElementById('inp-anos').value;
+      const dono = document.getElementById('inp-dono').value;
+      const ramo = document.getElementById('inp-ramo').value;
+      const frase = document.getElementById('inp-frase').value;
+      const estatistica = document.getElementById('inp-estatistica').value;
+      const formato = document.getElementById('inp-formato').value;
+
+      // 1. Atualizar Legenda
+      const legenda = `⭐ CLIENTE EM DESTAQUE: A FORÇA DO COMÉRCIO REAL DO RS!\n\n` +
+        `"${frase}"\n\n` +
+        `Hoje celebramos a trajetória do ${nome}, sob liderança de ${dono}, aqui em ${cidade}. ` +
+        `São ${anos} de parceria contínua com a Hansen Software!\n\n` +
+        `No segmento de ${ramo}, velocidade de checkout, controle rigoroso de estoque e suporte humano próximo não são luxo — são a garantia de portas abertas faturando.\n\n` +
+        `🏆 Indicador de Confiança: ${estatistica} com estabilidade e suporte 100% gaúcho.\n\n` +
+        `Obrigado pela confiança de sempre! Quem constrói a história do TruData ERP são empresários corajosos como vocês.\n\n` +
+        `👉 Quer levar essa mesma solidez e tranquilidade para o caixa da sua loja? Fale com nossa equipe em Sarandi pelo WhatsApp: (54) 3361-2650 ou acesse o link na bio.\n\n` +
+        `#ClienteEmDestaque #TruDataERP #HansenSoftware #ComércioGaúcho #SarandiRS #${cidade.split('/')[0].trim().replace(/\s+/g, '')} #VarejoForte #GestãoEmpresarial`;
+
+      document.getElementById('texto-legenda-gerada').value = legenda;
+
+      // 2. Renderizar no Canvas
+      renderizarCardNoCanvas(nome, cidade, anos, dono, ramo, frase, estatistica, formato);
+    }
+
+    function renderizarCardNoCanvas(nome, cidade, anos, dono, ramo, frase, estatistica, formato) {
+      const canvas = document.getElementById('cardCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const isStories = (formato === 'stories');
+      const W = 1080;
+      const H = isStories ? 1920 : 1080;
+
+      canvas.width = W;
+      canvas.height = H;
+
+      // Fundo Gradiente Corporativo Nobre (Azul Petróleo / Deep Navy)
+      const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+      bgGrad.addColorStop(0, '#060a14');
+      bgGrad.addColorStop(0.5, '#0b1329');
+      bgGrad.addColorStop(1, '#081020');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Moldura Sutil com Brilho Neon
+      ctx.strokeStyle = 'rgba(14, 165, 233, 0.25)';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(30, 30, W - 60, H - 60);
+
+      // Topo: Marca TruData ERP & Hansen Software
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 32px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('TRUDATA ERP', 70, isStories ? 130 : 90);
+
+      ctx.fillStyle = '#00d2ff';
+      ctx.font = '700 16px "Inter", sans-serif';
+      ctx.fillText('HANSEN SOFTWARE · SARANDI/RS · MPS.BR', 70, isStories ? 160 : 118);
+
+      // Badge: "SÉRIE CLIENTE EM DESTAQUE"
+      const badgeY = isStories ? 250 : 180;
+      ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 2;
+      roundRect(ctx, 70, badgeY, 390, 48, 12, true, true);
+
+      ctx.fillStyle = '#fbbf24';
+      ctx.font = '900 18px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('⭐ SÉRIE CLIENTE EM DESTAQUE', 92, badgeY + 31);
+
+      // Badge de Anos de Parceria (Topo Direita)
+      const anosBadgeW = 260;
+      const anosBadgeX = W - 70 - anosBadgeW;
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+      ctx.strokeStyle = '#10b981';
+      ctx.lineWidth = 2;
+      roundRect(ctx, anosBadgeX, isStories ? 120 : 80, anosBadgeW, 52, 12, true, true);
+
+      ctx.fillStyle = '#34d399';
+      ctx.font = '900 19px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(`🛡️ ${anos} JUNTOS`, anosBadgeX + (anosBadgeW / 2), isStories ? 153 : 113);
+
+      // Título Principal: Nome da Empresa
+      const titleY = isStories ? 390 : 290;
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 56px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(nome, 70, titleY);
+
+      // Subtítulo: Cidade e Ramo
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '600 24px "Inter", sans-serif';
+      ctx.fillText(`📍 ${cidade}   •   🏬 ${ramo}`, 70, titleY + 45);
+
+      // Card Central do Depoimento
+      const cardDepY = isStories ? 520 : 390;
+      const cardDepH = isStories ? 580 : 370;
+      
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.2)';
+      ctx.lineWidth = 2;
+      roundRect(ctx, 70, cardDepY, W - 140, cardDepH, 24, true, true);
+
+      // Aspas Decorativas
+      ctx.fillStyle = 'rgba(14, 165, 233, 0.25)';
+      ctx.font = '900 110px "Merriweather", serif';
+      ctx.fillText('“', 105, cardDepY + 105);
+
+      // Texto da Frase quebrando linhas
+      ctx.fillStyle = '#f8fafc';
+      ctx.font = isStories ? 'italic 500 32px "Inter", sans-serif' : 'italic 500 28px "Inter", sans-serif';
+      const maxTextWidth = W - 240;
+      wrapText(ctx, frase, 110, cardDepY + (isStories ? 160 : 130), maxTextWidth, isStories ? 52 : 44);
+
+      // Assinatura do Lojista
+      const assY = cardDepY + cardDepH - 50;
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '800 24px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(`— ${dono}`, 110, assY);
+
+      ctx.fillStyle = '#64748b';
+      ctx.font = '600 18px "Inter", sans-serif';
+      ctx.fillText(`Proprietário · ${nome}`, 110, assY + 28);
+
+      // Bloco de Estatística de Autoridade
+      const statY = isStories ? 1160 : 810;
+      const statH = 140;
+      const statGrad = ctx.createLinearGradient(70, statY, W - 70, statY);
+      statGrad.addColorStop(0, 'rgba(14, 165, 233, 0.15)');
+      statGrad.addColorStop(1, 'rgba(16, 185, 129, 0.15)');
+      ctx.fillStyle = statGrad;
+      ctx.strokeStyle = '#0ea5e9';
+      ctx.lineWidth = 2;
+      roundRect(ctx, 70, statY, W - 140, statH, 20, true, true);
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '700 18px "Inter", sans-serif';
+      ctx.fillText('INDICADOR REAL DE CONFIANÇA & ESCALA', 110, statY + 45);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 42px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(estatistica, 110, statY + 100);
+
+      // Rodapé: Chamada de Ação e Proximidade de Sarandi
+      const rodapeY = isStories ? 1800 : 1010;
+      ctx.fillStyle = '#64748b';
+      ctx.font = '600 20px "Inter", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Solidez e suporte presencial no Norte do RS desde 1998 · Fale com quem conhece o seu comércio.', W / 2, rodapeY);
+
+      ctx.fillStyle = '#00d2ff';
+      ctx.font = '800 22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('📞 WhatsApp Suporte & Vendas: (54) 3361-2650  •  trudata.com.br', W / 2, rodapeY + 34);
+    }
+
+    function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      if (fill) ctx.fill();
+      if (stroke) ctx.stroke();
+    }
+
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+      const words = text.split(' ');
+      let line = '';
+      for(let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        const testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+          ctx.fillText(line, x, y);
+          line = words[n] + ' ';
+          y += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, x, y);
+    }
+
+    function copiarLegendaCliente() {
+      const texto = document.getElementById('texto-legenda-gerada').value;
+      navigator.clipboard.writeText(texto).then(() => {
+        const btnTxt = document.getElementById('btn-copiar-legenda-txt');
+        btnTxt.textContent = "✓ Copiado!";
+        setTimeout(() => btnTxt.textContent = "Copiar Legenda", 2500);
+      });
+    }
+
+    function baixarCanvasPNG() {
+      const canvas = document.getElementById('cardCanvas');
+      const nome = document.getElementById('inp-nome').value.toLowerCase().replace(/\s+/g, '_');
+      const formato = document.getElementById('inp-formato').value;
+      const link = document.createElement('a');
+      link.download = `cliente_destaque_${nome}_${formato}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      atualizarCanvasETexto();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TruData Moda & Calçados — Controle de Grade, Etiquetas e Crediário</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ec4899;
+      --primary-gradient: linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%);
+      --navy: #0f172a;
+      --bg: #0b0f19;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+    
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .brand { font-size: 1.5rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+    .brand span { color: #f472b6; }
+    .badge-mps { background: rgba(236,72,153,0.2); border: 1px solid var(--primary); color: #f472b6; font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 9999px; font-weight: 700; }
+    
+    .btn-wpp { background: #25D366; color: #fff; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; box-shadow: 0 4px 20px rgba(37,211,102,0.3); }
+    .btn-wpp:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(37,211,102,0.5); }
+    
+    .hero { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; text-align: center; }
+    .hero-tag { display: inline-block; background: rgba(236,72,153,0.15); border: 1px solid var(--primary); color: #f472b6; padding: 0.35rem 1rem; border-radius: 9999px; font-weight: 700; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+    .hero h1 span { background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 760px; margin: 0 auto 2.5rem auto; }
+    
+    .grid-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; backdrop-filter: blur(12px); transition: border-color 0.2s, transform 0.2s; }
+    .card:hover { border-color: rgba(236,72,153,0.5); transform: translateY(-4px); }
+    .card-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .card h3 { font-size: 1.3rem; margin-bottom: 0.75rem; font-weight: 700; }
+    .card p { color: var(--text-muted); font-size: 0.95rem; }
+    
+    .banner-grade { background: linear-gradient(90deg, #1e1b4b 0%, #1e293b 100%); border: 1px solid rgba(236,72,153,0.3); border-left: 5px solid var(--primary); border-radius: 1rem; max-width: 1200px; margin: 3rem auto; padding: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+    .banner-grade h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .banner-grade p { color: var(--text-muted); max-width: 650px; }
+    
+    .cta-final { background: radial-gradient(circle at center, rgba(236,72,153,0.15) 0%, transparent 70%); text-align: center; padding: 5rem 2rem; margin-top: 4rem; border-top: 1px solid var(--border); }
+    .cta-final h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .cta-final p { color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem auto; }
+    
+    .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      TRU<span>DATA</span> MODA
+      <span class="badge-mps">MPS.BR Nível G</span>
+    </a>
+    <a href="https://wa.me/555433612650?text=Ol%C3%A1%21+Gostaria+de+conhecer+o+TruData+Moda+e+Cal%C3%A7ados." target="_blank" class="btn-wpp">
+      💬 Falar com Especialista
+    </a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">👗 Especial para Lojas de Roupas, Calçados & Acessórios</div>
+    <h1>Adeus Confusão de Grade: <span>Controle Total de Cores e Tamanhos</span></h1>
+    <p>Nunca mais passe pela vergonha de ter uma peça no sistema mas não encontrar na arara. O TruData organiza grade bidimensional, imprime etiquetas com código de barras e gerencia seu crediário sem complicações.</p>
+    <a href="https://wa.me/555433612650?text=Ol%C3%A1%2C+tenho+uma+loja+de+roupas%2Fcal%C3%A7ados+e+quero+conhecer+o+TruData+Moda." target="_blank" class="btn-wpp" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
+      📲 Agendar Demonstração Prática
+    </a>
+  </section>
+
+  <div class="banner-grade">
+    <div>
+      <h2>Grade Matriz Inteligente (Cor x Tamanho) 🏷️</h2>
+      <p>Cadastre um modelo uma única vez e o TruData gera todas as variações de cores (Azul, Preto, Branco) e tamanhos (P, M, G, GG ou 34 a 44) instantaneamente, gerando etiquetas de gôndola e código de barras individuais com 1 clique.</p>
+    </div>
+    <div>
+      <a href="https://wa.me/555433612650?text=Quero+ver+como+funciona+o+cadastro+de+grade+de+moda+no+TruData." target="_blank" class="btn-wpp" style="background:#db2777;">
+        ✨ Conhecer a Grade
+      </a>
+    </div>
+  </div>
+
+  <section class="grid-features">
+    <div class="card">
+      <div class="card-icon">🏷️</div>
+      <h3>Emissão Rápida de Etiquetas</h3>
+      <p>Imprima etiquetas com código de barras, descrição, cor, tamanho e preço nas impressoras térmicas mais usadas do mercado (Argox, Zebra, Elgin).</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <h3>Trocas e Devoluções em Segundos</h3>
+      <p>Troca rápida no balcão: o sistema gera o vale-troca ou estorna a peça direto para o estoque da cor e tamanho exatos sem travar o caixa.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>Condicional & Malinha de Roupas</h3>
+      <p>Controle com precisão os produtos que saem para prova na casa do cliente (condicional), com emissão de comprovante e aviso de devolução.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💳</div>
+      <h3>Crediário Próprio & Carnês</h3>
+      <p>Gerencie o crediário da loja com cálculo automático de juros, envio de lembrete de parcelas e consulta rápida de histórico do cliente.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">👗</div>
+      <h3>Comissão de Vendedoras</h3>
+      <p>Relatório automático de comissões por colaboradora na hora do fechamento da folha, evitando desconfianças e planilhas paralelas.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📞</div>
+      <h3>Suporte Humano Sem Espera</h3>
+      <p>Dúvida no fechamento do caixa no sábado à tarde? Fale na hora com a equipe da Hansen Software em Sarandi/RS sem robôs.</p>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <h2>Leve a Sua Loja de Moda para o Próximo Nível</h2>
+    <p>Organize suas araras, zere os furos de estoque e venda mais com o apoio de quem conhece o comércio gaúcho há 25 anos.</p>
+    <a href="https://wa.me/555433612650?text=Quero+marcar+uma+conversa+sobre+o+sistema+de+moda+da+TruData." target="_blank" class="btn-wpp" style="font-size: 1.15rem; padding: 1.1rem 2.8rem;">
+      💬 Agendar Conversa pelo WhatsApp
+    </a>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 Hansen Software LTDA — Desenvolvedora TruData ERP · Sarandi - RS</p>
+    <p>Telefone: (54) 3361-2650 · Certificação de Qualidade de Software MPS.BR Nível G</p>
+  </footer>
+
+</body>
+</html>

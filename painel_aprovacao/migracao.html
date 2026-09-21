@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador de Migração Segura — Zero Dia Parado | TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              azure: '#009fe3',
+              dark: '#06121a',
+              teal: '#0d3246',
+              mint: '#34d399',
+              lightmint: '#5eead4'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #06121a; color: #f8fafc; }
+    @media print {
+      body { background-color: #ffffff !important; color: #0f172a !important; }
+      .no-print { display: none !important; }
+      .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; color: #0f172a !important; background: #ffffff !important; }
+      .print-text-dark { color: #0f172a !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#06121a] text-slate-100 antialiased selection:bg-brand-mint selection:text-slate-950 pb-20">
+
+  <!-- TOPO / HEADER -->
+  <header class="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-md sticky top-0 z-40 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2.5 text-slate-300 hover:text-white transition">
+          <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-400 flex items-center justify-center font-black text-slate-950 text-base shadow-lg shadow-teal-950/50">
+            T
+          </div>
+          <div>
+            <span class="font-display font-bold text-white text-base tracking-tight">TruData ERP</span>
+            <span class="hidden sm:inline-block text-[10px] text-teal-300 font-semibold ml-2 px-2 py-0.5 rounded-full bg-teal-500/10 border border-teal-500/20">Hansen Software · Sarandi/RS</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          ← Voltar ao Hub
+        </a>
+        <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-teal-300 border border-teal-500/30 flex items-center gap-1.5 transition">
+          🖨️ Imprimir Plano A4
+        </button>
+        <a href="https://wa.me/5554996966175?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20sobre%20a%20migra%C3%A7%C3%A3o%20sem%20parar%20minha%20loja%20com%20o%20TruData%20ERP" target="_blank" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-lg shadow-emerald-950/50 flex items-center gap-1.5">
+          📲 Falar com Especialista
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative pt-10 pb-8 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 mb-4 shadow-sm">
+      <span>🛡️ Garantia Oficial Hansen Software (Desde 1998)</span>
+    </div>
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-white tracking-tight leading-tight">
+      Simulador de Transição Segura:<br>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Zero Dia Parado no seu Comércio</span>
+    </h1>
+    <p class="mt-4 text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+      Trocar de ERP não precisa ser um pesadelo. Descubra em menos de 1 minuto como migramos todos os seus cadastros, produtos e regras fiscais <strong>direto pelos XMLs da SEFAZ</strong>, sem redigitação e com a sua loja vendendo normalmente.
+    </p>
+  </section>
+
+  <!-- FORMULÁRIO DO SIMULADOR (INTERATIVO) -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+
+    <!-- PASSO 1: SISTEMA ATUAL -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+        <div class="h-8 w-8 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-sm border border-teal-500/30">1</div>
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-white font-display">Qual sistema sua empresa utiliza atualmente?</h2>
+          <p class="text-xs text-slate-400">Selecione para mapearmos a rota automática de extração de dados</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="grade-sistemas">
+        <button onclick="selecionarSistema('Hiper', this)" class="btn-sistema p-4 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-teal-500/50 text-left transition group">
+          <div class="text-xs font-bold text-white group-hover:text-teal-300">Hiper / Linx</div>
+          <div class="text-[11px] text-slate-400 mt-1">Varejo & PDV</div>
+        </button>
+        <button onclick="selecionarSistema('Bling', this)" class="btn-sistema p-4 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-teal-500/50 text-left transition group">
+          <div class="text-xs font-bold text-white group-hover:text-teal-300">Bling / Tiny</div>
+          <div class="text-[11px] text-slate-400 mt-1">Nuvem / E-commerce</div>
+        </button>
+        <button onclick="selecionarSistema('Totvs', this)" class="btn-sistema p-4 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-teal-500/50 text-left transition group">
+          <div class="text-xs font-bold text-white group-hover:text-teal-300">Totvs / Microvix</div>
+          <div class="text-[11px] text-slate-400 mt-1">Franquias & Redes</div>
+        </button>
+        <button onclick="selecionarSistema('SysPDV', this)" class="btn-sistema p-4 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-teal-500/50 text-left transition group">
+          <div class="text-xs font-bold text-white group-hover:text-teal-300">SysPDV / VR / Arius</div>
+          <div class="text-[11px] text-slate-400 mt-1">Supermercados</div>
+        </button>
+        <button onclick="selecionarSistema('DigiSat', this)" class="btn-sistema p-4 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-teal-500/50 text-left transition group">
+          <div class="text-xs font-bold text-white group-hover:text-teal-300">DigiSat / Compufour</div>
+          <div class="text-[11px] text-slate-400 mt-1">Comércio Regional</div>
+        </button>
+        <button onclick="selecionarSistema('Triers', this)" class="btn-sistema p-4 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-teal-500/50 text-left transition group">
+          <div class="text-xs font-bold text-white group-hover:text-teal-300">Trier / Big / Alpha</div>
+          <div class="text-[11px] text-slate-400 mt-1">Drogarias (SNGPC)</div>
+        </button>
+        <button onclick="selecionarSistema('Excel', this)" class="btn-sistema p-4 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-teal-500/50 text-left transition group">
+          <div class="text-xs font-bold text-white group-hover:text-teal-300">Planilhas Excel</div>
+          <div class="text-[11px] text-slate-400 mt-1">Controle Manual</div>
+        </button>
+        <button onclick="selecionarSistema('Outro', this)" class="btn-sistema p-4 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-teal-500/50 text-left transition group">
+          <div class="text-xs font-bold text-white group-hover:text-teal-300">Outro ERP / Antigo</div>
+          <div class="text-[11px] text-slate-400 mt-1">Desenvolvimento Local</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- PASSO 2: SEGMENTO & PORTE -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+        <div class="h-8 w-8 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-sm border border-teal-500/30">2</div>
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-white font-display">Segmento e Volume Operacional</h2>
+          <p class="text-xs text-slate-400">Calculamos o tempo exato de virada e a estrutura de suporte necessária</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Segmento de Atuação:</label>
+          <select id="select-segmento" onchange="atualizarPlano()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-teal-400 focus:outline-none">
+            <option value="Supermercado / Mercearia">Supermercado / Mercearia (Foco: Balança & TEF)</option>
+            <option value="Drogaria / Farmácia">Drogaria / Farmácia (Foco: SNGPC, PBM & Lotes)</option>
+            <option value="Moda, Calçados & Confecções">Moda, Calçados & Confecções (Foco: Grade & Carnê)</option>
+            <option value="Oficina & Autopeças">Oficina & Autopeças (Foco: O.S. & Peças)</option>
+            <option value="Comércio em Geral & Varejo" selected>Comércio em Geral & Varejo (Foco: Caixa Ágil)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Quantidade de Caixas (PDVs):</label>
+          <select id="select-caixas" onchange="atualizarPlano()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-teal-400 focus:outline-none">
+            <option value="1">1 Caixa (Balcão Rápido)</option>
+            <option value="2 a 3" selected>2 a 3 Caixas (Fluxo Médio)</option>
+            <option value="4 a 6">4 a 6 Caixas (Supermercado / Alto Fluxo)</option>
+            <option value="Mais de 6">Mais de 6 Caixas (Multi-PDV / Rede)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Volume de Produtos Cadastrados:</label>
+          <select id="select-skus" onchange="atualizarPlano()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-teal-400 focus:outline-none">
+            <option value="Até 1.000 itens">Até 1.000 itens</option>
+            <option value="1.000 a 5.000 itens" selected>1.000 a 5.000 itens</option>
+            <option value="5.000 a 20.000 itens">5.000 a 20.000 itens (Mercado/Farmácia)</option>
+            <option value="Mais de 20.000 itens">Mais de 20.000 itens (Grande Porte)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASSO 3: GARGALOS E MOTIVOS DA TROCA -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+        <div class="h-8 w-8 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-sm border border-teal-500/30">3</div>
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-white font-display">O que mais te incomoda no seu sistema atual?</h2>
+          <p class="text-xs text-slate-400">Selecione para priorizarmos a blindagem no seu onboarding</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <label class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 cursor-pointer">
+          <input type="checkbox" checked onchange="atualizarPlano()" class="check-dor mt-1 h-4 w-4 rounded accent-teal-500" value="Suporte robótico que demora horas ou dias para responder" />
+          <span class="text-xs text-slate-300"><strong>Suporte Fraco:</strong> Falar com robôs, abrir tickets demorados e ficar sem ajuda na hora do pico.</span>
+        </label>
+        <label class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 cursor-pointer">
+          <input type="checkbox" checked onchange="atualizarPlano()" class="check-dor mt-1 h-4 w-4 rounded accent-teal-500" value="Caixa lento ou que trava quando oscila a internet" />
+          <span class="text-xs text-slate-300"><strong>Lentidão no Caixa:</strong> Trava ou não emite nota fiscal quando a internet cai ou oscila.</span>
+        </label>
+        <label class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 cursor-pointer">
+          <input type="checkbox" checked onchange="atualizarPlano()" class="check-dor mt-1 h-4 w-4 rounded accent-teal-500" value="Contador reclamando de erros no SPED e fechamento confuso" />
+          <span class="text-xs text-slate-300"><strong>Problemas Contábeis:</strong> Contador reclama de notas sem XML, SPED desconfigurado e retrabalho fiscal.</span>
+        </label>
+        <label class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 cursor-pointer">
+          <input type="checkbox" onchange="atualizarPlano()" class="check-dor mt-1 h-4 w-4 rounded accent-teal-500" value="Maquininhas avulsas e falta de conciliação TEF" />
+          <span class="text-xs text-slate-300"><strong>Erros de Cartão:</strong> Operador precisa digitar o valor na maquininha na mão (risco de troco errado).</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- RESULTADO: PLANO PERSONALIZADO ZERO DIA PARADO -->
+    <div id="resultado-plano" class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-emerald-500/50 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 print-card">
+      
+      <!-- Cabeçalho do Plano -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-800/80 pb-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 mb-2">
+            ✓ Certificação de Transição Segura
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-display text-white">Plano de Migração TruData ERP</h2>
+          <p class="text-xs sm:text-sm text-slate-300 mt-1">
+            Transição programada de: <strong id="plano-sistema-nome" class="text-emerald-400">Hiper / Linx</strong> → <strong class="text-teal-300">TruData ERP</strong>
+          </p>
+        </div>
+
+        <div class="bg-slate-950/80 border border-slate-800 p-4 rounded-2xl flex items-center gap-4 text-center sm:text-left">
+          <div class="h-12 w-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl font-bold border border-emerald-500/30 shrink-0">
+            ⏱️
+          </div>
+          <div>
+            <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Tempo Estimado de Virada</div>
+            <div id="plano-tempo" class="text-base sm:text-lg font-bold text-white font-display">24 a 48 Horas</div>
+            <div class="text-[10px] text-emerald-400 font-semibold">Loja operando 100% durante o processo</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AS 4 ETAPAS DA MIGRAÇÃO (TIMELINE) -->
+      <div class="space-y-4">
+        <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider">Metodologia Homologada: 4 Passos Sem Parar o Caixa</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- ETAPA 1 -->
+          <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Passo 1 · Diagnóstico & Extração</span>
+              <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono">Zero Digitação</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Leitura de XMLs das Notas Fiscais</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Puxamos clientes, fornecedores, produtos, NCMs e códigos de barras diretamente dos XMLs autorizados na SEFAZ dos últimos 90 dias. Você não perde nem 1 cadastro e não precisa digitar nada do zero.
+            </p>
+          </div>
+
+          <!-- ETAPA 2 -->
+          <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider">Passo 2 · Saneamento Fiscal</span>
+              <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono">SEFAZ-RS / IBS / CBS</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Parametrização com a Contabilidade</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Nossa equipe técnica valida as regras tributárias diretamente com o seu escritório contábil: ICMS-ST, PIS/COFINS monofásicos e o novo motor da Reforma Tributária.
+            </p>
+          </div>
+
+          <!-- ETAPA 3 -->
+          <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Passo 3 · Treinamento dos Caixas</span>
+              <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono">15 a 20 Minutos</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Simulação Prática em Ambiente Homologado</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Seus operadores praticam abertura, suprimento, leitor de código de barras, TEF e sangria antes de ligar a produção. A interface do TruData é intuitiva e reduz erros humanos em 95%.
+            </p>
+          </div>
+
+          <!-- ETAPA 4 -->
+          <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Passo 4 · A Virada de Chave</span>
+              <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono">Técnico Dedicado</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Acompanhamento no Primeiro Dia de Pico</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              A virada é agendada para o horário de fechamento ou menor fluxo. No dia seguinte, nossa equipe de suporte em Sarandi fica de plantão prioritário direto no fone e WhatsApp sem filas.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TERMO DE GARANTIA FORMAL -->
+      <div class="bg-emerald-950/20 border border-emerald-500/30 rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-400 text-base">🛡️</span>
+            <span class="font-bold text-white text-sm">Compromisso Ético TruData ERP</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed max-w-2xl">
+            Se durante a fase de implantação sua operação registrar qualquer interrupção comercial por falha do nosso cronograma, garantimos suporte técnico presencial/remoto de contingência imediata até a normalização completa.
+          </p>
+        </div>
+        <div class="shrink-0 text-right">
+          <div class="text-[10px] text-slate-400">Sede Própria: Sarandi - RS</div>
+          <div class="text-xs font-bold text-emerald-300">Hansen Software LTDA · 25+ Anos</div>
+        </div>
+      </div>
+
+      <!-- BOTÕES DE AÇÃO -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-800 no-print">
+        <button onclick="copiarResumoWhatsApp()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700 transition flex items-center gap-2">
+          📋 Copiar Resumo para WhatsApp
+        </button>
+
+        <div class="flex items-center gap-3">
+          <button onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-teal-300 border border-teal-500/30 transition flex items-center gap-2">
+            📄 Baixar Proposta em PDF
+          </button>
+          <a id="btn-whatsapp-cta" href="https://wa.me/5554996966175" target="_blank" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-xs font-bold text-white transition shadow-xl shadow-emerald-950/50 flex items-center gap-2">
+            <span>📲 Agendar Migração com a Equipe de Sarandi</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- TOAST DE NOTIFICAÇÃO -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-slate-900 border border-teal-500 text-white px-5 py-3 rounded-xl shadow-2xl">
+    <span id="toast-icon">✅</span>
+    <span id="toast-msg" class="text-sm font-medium">Copiado com sucesso!</span>
+  </div>
+
+  <script>
+    let sistemaSelecionado = 'Hiper';
+
+    function selecionarSistema(nome, btn) {
+      sistemaSelecionado = nome;
+      document.querySelectorAll('.btn-sistema').forEach(b => {
+        b.classList.remove('border-emerald-500', 'bg-teal-950/30', 'shadow-lg');
+        b.classList.add('border-slate-800', 'bg-slate-950/60');
+      });
+      btn.classList.remove('border-slate-800', 'bg-slate-950/60');
+      btn.classList.add('border-emerald-500', 'bg-teal-950/30', 'shadow-lg');
+      atualizarPlano();
+    }
+
+    function atualizarPlano() {
+      const segmento = document.getElementById('select-segmento').value;
+      const caixas = document.getElementById('select-caixas').value;
+      const skus = document.getElementById('select-skus').value;
+
+      document.getElementById('plano-sistema-nome').textContent = sistemaSelecionado;
+
+      let tempo = '24 a 48 Horas';
+      if (caixas === '1') tempo = 'Até 24 Horas';
+      else if (caixas === '4 a 6' || caixas === 'Mais de 6') tempo = '48 a 72 Horas (Faseada)';
+
+      document.getElementById('plano-tempo').textContent = tempo;
+
+      // Atualiza link de WhatsApp com mensagem personalizada
+      const textoWa = `Olá! Simulei a migração segura da minha empresa (${segmento}, ${caixas} caixas, saindo do sistema ${sistemaSelecionado}) para o TruData ERP com a garantia Zero Dia Parado. Gostaria de agendar a análise dos nossos XMLs com a equipe de Sarandi-RS.`;
+      const linkWa = `https://wa.me/5554996966175?text=${encodeURIComponent(textoWa)}`;
+      document.getElementById('btn-whatsapp-cta').href = linkWa;
+    }
+
+    function copiarResumoWhatsApp() {
+      const segmento = document.getElementById('select-segmento').value;
+      const caixas = document.getElementById('select-caixas').value;
+      const tempo = document.getElementById('plano-tempo').textContent;
+
+      const texto = `🛡️ *PLANO DE TRANSIÇÃO SEGURA TRUDATA ERP (ZERO DIA PARADO)*\n` +
+        `• *Origem:* Sistema ${sistemaSelecionado} ➜ TruData ERP\n` +
+        `• *Segmento:* ${segmento}\n` +
+        `• *Estrutura:* ${caixas} caixas (PDVs)\n` +
+        `• *Prazo Estimado de Virada:* ${tempo} (Loja vendendo 100%)\n\n` +
+        `*COMO MUDAMOS SEM PARAR O SEU CAIXA:*\n` +
+        `1. Importação direta de produtos e clientes via XMLs da SEFAZ (Zero redigitação);\n` +
+        `2. Parametrização tributária alinhada com seu contador (SPED + IBS/CBS);\n` +
+        `3. Treinamento prático de 15 minutos com os caixas antes da virada;\n` +
+        `4. Plantão de suporte humano direto de Sarandi/RS no primeiro dia.\n\n` +
+        `📲 Fale com a Hansen Software: (54) 99696-6175 | Sarandi - RS`;
+
+      navigator.clipboard.writeText(texto).then(() => {
+        mostrarToast('Resumo do plano copiado para o WhatsApp!');
+      });
+    }
+
+    function mostrarToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    // Inicialização
+    atualizarPlano();
+  </script>
+</body>
+</html>

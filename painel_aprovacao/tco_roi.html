@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparador de TCO & ROI Executivo — TruData ERP vs Concorrentes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { azure: '#0070f3', dark: '#0b0f19', card: '#131b2e', emerald: '#10b981', rose: '#f43f5e' }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    @media print {
+      body { background-color: #fff !important; color: #000 !important; }
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      .glass { background: #fff !important; border: 1px solid #ddd !important; box-shadow: none !important; }
+      .chart-container { max-height: 260px !important; }
+    }
+    .print-only { display: none; }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased p-4 sm:p-6 lg:p-8">
+
+  <!-- TOPO DE NAVEGAÇÃO -->
+  <header class="max-w-6xl mx-auto flex items-center justify-between gap-4 mb-6 no-print flex-wrap">
+    <div class="flex items-center gap-3">
+      <div class="h-10 w-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xl border border-emerald-500/30">
+        💰
+      </div>
+      <div>
+        <h1 class="text-xl font-black font-display text-white">Calculadora Executiva de TCO & ROI B2B</h1>
+        <p class="text-xs text-slate-400">Custo Total de Propriedade em 36 Meses: TruData ERP vs Concorrentes</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="index.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        ← Hub Central
+      </a>
+      <a href="migracao-concorrentes" class="text-xs px-3 py-2 rounded-lg bg-indigo-900/50 text-indigo-300 border border-indigo-700/50 hover:bg-indigo-900 transition">
+        🛡️ Migração Blindada
+      </a>
+      <button onclick="window.print()" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 transition flex items-center gap-1">
+        🖨️ Imprimir Laudo A4
+      </button>
+      <a id="btnWppTop" href="#" target="_blank" class="text-xs px-4 py-2 rounded-lg bg-emerald-600 text-white font-bold hover:bg-emerald-500 transition flex items-center gap-1.5 shadow-lg shadow-emerald-600/20">
+        📲 Enviar no WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <!-- LAUDO IMPRESSO CABEÇALHO -->
+  <div class="print-only mb-6 border-b pb-4 text-black">
+    <div class="flex justify-between items-start">
+      <div>
+        <h1 class="text-2xl font-bold font-display">HANSEN SOFTWARE — TRUDATA ERP</h1>
+        <p class="text-xs text-gray-600">CNPJ: 02.483.991/0001-90 · Av. Expedicionário, Sarandi - RS · Tel: (54) 3361-2650</p>
+        <p class="text-xs font-semibold text-gray-800 mt-1">ESTUDO COMPARATIVO DE CUSTO TOTAL DE PROPRIEDADE (TCO) & RETORNO DE INVESTIMENTO (ROI)</p>
+      </div>
+      <div class="text-right">
+        <span class="text-xs bg-gray-200 px-2 py-1 rounded font-bold">Certificação MPS.BR Nível G</span>
+        <p class="text-[10px] text-gray-500 mt-1" id="printDataHoje"></p>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto space-y-6">
+
+    <!-- SELETOR DE PRESETS E CLIENTES -->
+    <div class="glass rounded-2xl p-5 border border-slate-800 space-y-4 no-print">
+      <div class="flex items-center justify-between flex-wrap gap-2 border-b border-slate-800/80 pb-3">
+        <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+          <span>🎯</span> Parâmetros de Simulação
+        </span>
+        <div class="flex items-center gap-2">
+          <label class="text-xs text-slate-400">Cliente Alvo da Região:</label>
+          <select id="selAlvo" onchange="carregarAlvo()" class="bg-slate-900 text-xs text-slate-200 border border-slate-700 rounded-lg px-2.5 py-1.5 focus:border-brand-azure outline-none">
+            <option value="">-- Selecione ou Digite Manualmente --</option>
+            <option value="Supermercado Sarandi LTDA|Sarandi|Supermercado|4">Supermercado Sarandi LTDA (Sarandi - 4 PDVs)</option>
+            <option value="Casa das Tintas Sarandi|Sarandi|Varejo Geral|2">Casa das Tintas Sarandi (Sarandi - 2 PDVs)</option>
+            <option value="Auto Peças Sarandiense|Sarandi|Autopeças|3">Auto Peças Sarandiense (Sarandi - 3 PDVs)</option>
+            <option value="Mercado Popular Constantina|Constantina|Supermercado|2">Mercado Popular Constantina (Constantina - 2 PDVs)</option>
+            <option value="Ferragens do Vale|Ronda Alta|Materiais de Construção|2">Ferragens do Vale (Ronda Alta - 2 PDVs)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nome da Empresa</label>
+          <input type="text" id="inNomeCliente" value="Mercado Modelo RS" oninput="calcularTCO()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:border-brand-azure outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Sistema Atual do Cliente</label>
+          <select id="selConcorrente" onchange="aplicarPresetConcorrente()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:border-brand-azure outline-none">
+            <option value="hiper">Hiper / Linx Varejo</option>
+            <option value="totvs">Totvs Varejo</option>
+            <option value="bling">Bling (com módulos extras)</option>
+            <option value="syspdv">SysPDV / Casa Magalhães</option>
+            <option value="digisat">DigiSat Sistema</option>
+            <option value="personalizado">Personalizado...</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Qtd. de Caixas (PDVs)</label>
+          <input type="number" id="inPDVs" value="3" min="1" max="25" oninput="calcularTCO()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:border-brand-azure outline-none font-bold">
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Mensalidade Atual (R$)</label>
+          <input type="number" id="inMensalidadeConc" value="590" oninput="calcularTCO()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:border-brand-azure outline-none font-bold text-rose-400">
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Plano TruData Sugerido</label>
+          <select id="selPlanoTru" onchange="aplicarPlanoTru()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-emerald-400 font-bold focus:border-brand-azure outline-none">
+            <option value="280">Básico (R$ 280/mês)</option>
+            <option value="380" selected>Profissional (R$ 380/mês)</option>
+            <option value="580">Enterprise (R$ 580/mês)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- CUSTOS OCULTOS EXPANSÍVEIS -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-800/60">
+        <div>
+          <label class="block text-[10px] text-slate-400 mb-1">Taxa de Adesão / Implantação Concorrente (R$)</label>
+          <input type="number" id="inSetupConc" value="1800" oninput="calcularTCO()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-300">
+        </div>
+        <div>
+          <label class="block text-[10px] text-slate-400 mb-1">Custo Oculto Mensal (Chamados extras/módulos) (R$)</label>
+          <input type="number" id="inOcultoConc" value="120" oninput="calcularTCO()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-300">
+        </div>
+        <div>
+          <label class="block text-[10px] text-slate-400 mb-1">Perda Estimada com Queda de Internet/mês (R$)</label>
+          <input type="number" id="inQuedaConc" value="250" oninput="calcularTCO()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-300">
+        </div>
+      </div>
+    </div>
+
+    <!-- BANNER DE DESTAQUE: ECONOMIA TOTAL E PAYBACK -->
+    <div class="bg-gradient-to-r from-emerald-950/60 via-slate-900 to-slate-950 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+        <div class="space-y-2">
+          <span class="text-xs font-extrabold text-emerald-400 tracking-wider uppercase bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+            ✓ Economia Direta Comprovada em 36 Meses
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-black font-display text-white">
+            Economia de <span id="txtEconomiaTotal" class="text-emerald-400">R$ 21.480,00</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+            Ao migrar para o TruData ERP, o lojista elimina taxas abusivas de implantação, reajustes ocultos e prejuízos com caixas travados em dias de sábado sem internet.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full lg:w-auto">
+          <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl text-center">
+            <span class="text-[10px] text-slate-400 uppercase font-bold block">Payback do Setup</span>
+            <span id="txtPaybackMeses" class="text-xl font-black text-emerald-400 font-display">0 Dias</span>
+            <span class="text-[9px] text-slate-500 block">Migração Isenta</span>
+          </div>
+          <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl text-center">
+            <span class="text-[10px] text-slate-400 uppercase font-bold block">Economia Anual</span>
+            <span id="txtEconomiaAnual" class="text-xl font-black text-white font-display">R$ 7.160</span>
+            <span class="text-[9px] text-slate-500 block">R$ 596/mês poupados</span>
+          </div>
+          <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl text-center col-span-2 sm:col-span-1">
+            <span class="text-[10px] text-slate-400 uppercase font-bold block">Retorno (ROI)</span>
+            <span id="txtROI" class="text-xl font-black text-blue-400 font-display">+184%</span>
+            <span class="text-[9px] text-slate-500 block">Eficiência de Capital</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARDS COMPARATIVOS LADO A LADO -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- CONCORRENTE -->
+      <div class="glass rounded-2xl p-6 border-t-4 border-t-rose-500 space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[10px] font-bold text-rose-400 uppercase tracking-wider">Cenário Atual (Concorrente)</span>
+            <h3 id="txtNomeConc" class="text-lg font-black text-white font-display">Hiper / Linx Varejo</h3>
+          </div>
+          <span class="text-xs bg-rose-500/10 text-rose-400 px-2 py-1 rounded font-bold border border-rose-500/20">Suporte Remoto Distante</span>
+        </div>
+
+        <div class="space-y-1">
+          <span class="text-[10px] text-slate-400 uppercase">Custo Total de Propriedade (3 Anos):</span>
+          <div id="txtTotalConc" class="text-3xl font-black text-rose-400 font-display">R$ 38.280,00</div>
+          <span class="text-[11px] text-slate-400">Inclui reajustes previstos pelo IGP-M/IPCA + 10% a.a.</span>
+        </div>
+
+        <div class="space-y-2.5 pt-3 border-t border-slate-800/80 text-xs">
+          <div class="flex justify-between py-1 border-b border-slate-800/40">
+            <span class="text-slate-400">Mensalidades acumuladas (36m):</span>
+            <span id="txtMensAcumConc" class="font-bold text-slate-200">R$ 26.280,00</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-800/40">
+            <span class="text-slate-400">Taxa de adesão / implantação inicial:</span>
+            <span id="txtAdesaoConcOut" class="font-bold text-slate-200">R$ 1.800,00</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-800/40">
+            <span class="text-slate-400">Horas extras de suporte & chamados pagos:</span>
+            <span id="txtExtrasConcOut" class="font-bold text-slate-200">R$ 4.320,00</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-800/40">
+            <span class="text-slate-400">Prejuízo com caixas parados (sem internet):</span>
+            <span id="txtQuedasConcOut" class="font-bold text-rose-400">R$ 9.000,00</span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span class="text-slate-400">SLA de Atendimento Presencial:</span>
+            <span class="font-bold text-rose-400">Inexistente (Apenas Chat)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRUDATA ERP -->
+      <div class="glass rounded-2xl p-6 border-t-4 border-t-emerald-500 space-y-4 bg-gradient-to-b from-emerald-950/20 to-slate-900">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Cenário Otimizado (TruData ERP)</span>
+            <h3 class="text-lg font-black text-white font-display">TruData ERP · Hansen Software</h3>
+          </div>
+          <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded font-bold border border-emerald-500/20">SLA 2h Presencial RS</span>
+        </div>
+
+        <div class="space-y-1">
+          <span class="text-[10px] text-slate-400 uppercase">Custo Total de Propriedade (3 Anos):</span>
+          <div id="txtTotalTru" class="text-3xl font-black text-emerald-400 font-display">R$ 16.800,00</div>
+          <span class="text-[11px] text-slate-400">Transparência total sem surpresas nem letras miúdas</span>
+        </div>
+
+        <div class="space-y-2.5 pt-3 border-t border-slate-800/80 text-xs">
+          <div class="flex justify-between py-1 border-b border-slate-800/40">
+            <span class="text-slate-400">Mensalidades acumuladas (36m com caixas):</span>
+            <span id="txtMensAcumTru" class="font-bold text-slate-200">R$ 16.800,00</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-800/40">
+            <span class="text-slate-400">Taxa de migração de dados de concorrente:</span>
+            <span class="font-bold text-emerald-400">ISENTA (R$ 0,00)</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-800/40">
+            <span class="text-slate-400">Suporte 100% humano sem limite de horas:</span>
+            <span class="font-bold text-emerald-400">INCLUSO (R$ 0,00)</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-800/40">
+            <span class="text-slate-400">Contingência Offline Blindada (NFC-e):</span>
+            <span class="font-bold text-emerald-400">RISCO ZERO (R$ 0,00)</span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span class="text-slate-400">Garantia Contratual Presencial:</span>
+            <span class="font-bold text-emerald-400">Até 2 Horas em Sarandi/30km</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRÁFICO DE EVOLUÇÃO ACUMULADA (36 MESES) -->
+    <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <span>📈</span> Curva de Custos Acumulados (Mês 1 ao Mês 36)
+        </h3>
+        <span class="text-xs text-slate-400">Valores em Reais (R$)</span>
+      </div>
+      <div class="chart-container relative h-72 w-full">
+        <canvas id="chartTCO"></canvas>
+      </div>
+    </div>
+
+    <!-- TABELA EXECUTIVA PARA IMPRESSÃO / LAUDO -->
+    <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
+      <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+        <span>📄</span> Resumo do Parecer Financeiro
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left">
+          <thead class="text-[10px] text-slate-400 uppercase bg-slate-900/80 border-b border-slate-800">
+            <tr>
+              <th class="p-3">Indicador</th>
+              <th class="p-3">Sistema Concorrente</th>
+              <th class="p-3 text-emerald-400">TruData ERP</th>
+              <th class="p-3 text-right">Vantagem Lojista</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60 text-slate-300">
+            <tr>
+              <td class="p-3 font-semibold">Custo Médio Mensal Efetivo</td>
+              <td class="p-3 text-rose-300" id="tdEfetivoConc">R$ 1.063/mês</td>
+              <td class="p-3 text-emerald-400 font-bold" id="tdEfetivoTru">R$ 469/mês</td>
+              <td class="p-3 text-right font-bold text-emerald-400" id="tdDifEfetivo">-55% por mês</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold">Custo de Adesão / Migração</td>
+              <td class="p-3 text-rose-300" id="tdAdesaoConc">R$ 1.800,00</td>
+              <td class="p-3 text-emerald-400 font-bold">R$ 0,00 (Cortesia Hansen)</td>
+              <td class="p-3 text-right font-bold text-emerald-400" id="tdDifAdesao">Economia de R$ 1.800</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold">Impacto no Caixa em 3 Anos</td>
+              <td class="p-3 text-rose-300 font-bold" id="tdTotalConc">R$ 38.280,00</td>
+              <td class="p-3 text-emerald-400 font-bold" id="tdTotalTru">R$ 16.800,00</td>
+              <td class="p-3 text-right font-extrabold text-emerald-400" id="tdDifTotal">+R$ 21.480 no bolso</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold">Atendimento e Suporte</td>
+              <td class="p-3 text-slate-400">Call center ou IA de outra capital</td>
+              <td class="p-3 text-emerald-400 font-bold">Equipe presencial de Sarandi/RS</td>
+              <td class="p-3 text-right font-bold text-emerald-400">Segurança de Bairro</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RODAPÉ DE AÇÕES -->
+    <div class="flex items-center justify-between gap-4 p-4 rounded-xl bg-slate-900/60 border border-slate-800 no-print flex-wrap">
+      <div class="text-xs text-slate-400">
+        Pronto para apresentar? Imprima o laudo executivo ou envie o resumo direto no WhatsApp do decisor.
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold transition">
+          🖨️ Imprimir Parecer A4
+        </button>
+        <a id="btnWppBottom" href="#" target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-black transition flex items-center gap-2 shadow-lg shadow-emerald-600/30">
+          📲 Enviar Parecer no WhatsApp do Lojista
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const presetsConcorrentes = {
+      hiper: { nome: 'Hiper / Linx Varejo', mensal: 590, setup: 1800, oculto: 120, queda: 250 },
+      totvs: { nome: 'Totvs Varejo Moda/Alimentação', mensal: 1100, setup: 4500, oculto: 280, queda: 300 },
+      bling: { nome: 'Bling (com módulos e app loja)', mensal: 390, setup: 600, oculto: 220, queda: 450 },
+      syspdv: { nome: 'SysPDV / Casa Magalhães', mensal: 680, setup: 2200, oculto: 150, queda: 200 },
+      digisat: { nome: 'DigiSat Sistema Comercial', mensal: 490, setup: 1500, oculto: 110, queda: 220 },
+      personalizado: { nome: 'Sistema Concorrente Personalizado', mensal: 500, setup: 1500, oculto: 100, queda: 200 }
+    };
+
+    let chartInstance = null;
+
+    function formatMoeda(val) {
+      return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function aplicarPresetConcorrente() {
+      const concKey = document.getElementById('selConcorrente').value;
+      const data = presetsConcorrentes[concKey] || presetsConcorrentes.hiper;
+      document.getElementById('inMensalidadeConc').value = data.mensal;
+      document.getElementById('inSetupConc').value = data.setup;
+      document.getElementById('inOcultoConc').value = data.oculto;
+      document.getElementById('inQuedaConc').value = data.queda;
+      calcularTCO();
+    }
+
+    function aplicarPlanoTru() {
+      calcularTCO();
+    }
+
+    function carregarAlvo() {
+      const val = document.getElementById('selAlvo').value;
+      if (!val) return;
+      const [nome, cidade, seg, pdvs] = val.split('|');
+      document.getElementById('inNomeCliente').value = nome;
+      document.getElementById('inPDVs').value = pdvs;
+      calcularTCO();
+    }
+
+    function calcularTCO() {
+      const nomeCliente = document.getElementById('inNomeCliente').value || 'Cliente Varejo';
+      const concKey = document.getElementById('selConcorrente').value;
+      const nomeConc = presetsConcorrentes[concKey]?.nome || 'Sistema Concorrente';
+      document.getElementById('txtNomeConc').innerText = nomeConc;
+
+      const pdvs = parseInt(document.getElementById('inPDVs').value) || 1;
+      const mensConc = parseFloat(document.getElementById('inMensalidadeConc').value) || 0;
+      const setupConc = parseFloat(document.getElementById('inSetupConc').value) || 0;
+      const ocultoConc = parseFloat(document.getElementById('inOcultoConc').value) || 0;
+      const quedaConc = parseFloat(document.getElementById('inQuedaConc').value) || 0;
+
+      const planoBaseTru = parseFloat(document.getElementById('selPlanoTru').value) || 380;
+      // Adicional por PDV extra (+R$ 89 a partir do 2º PDV)
+      const pdvsExtras = Math.max(0, pdvs - 1);
+      const mensalidadeTruEfetiva = planoBaseTru + (pdvsExtras * 89);
+
+      // Projeção Concorrente com reajuste anual de 10%
+      const concAno1 = (mensConc + ocultoConc + quedaConc) * 12;
+      const concAno2 = ((mensConc * 1.10) + ocultoConc + quedaConc) * 12;
+      const concAno3 = ((mensConc * 1.21) + ocultoConc + quedaConc) * 12;
+      const totalConc3Anos = concAno1 + concAno2 + concAno3 + setupConc;
+      const mensAcumConc = concAno1 + concAno2 + concAno3;
+
+      // Projeção TruData (Sem reajuste abusivo, R$ 0 setup, R$ 0 quedas, R$ 0 extras)
+      const totalTru3Anos = mensalidadeTruEfetiva * 36;
+
+      const economia3Anos = Math.max(0, totalConc3Anos - totalTru3Anos);
+      const economiaAnual = economia3Anos / 3;
+      const roiPercent = Math.round((economia3Anos / totalTru3Anos) * 100);
+
+      // Atualização dos Textos
+      document.getElementById('txtEconomiaTotal').innerText = formatMoeda(economia3Anos);
+      document.getElementById('txtEconomiaAnual').innerText = formatMoeda(economiaAnual);
+      document.getElementById('txtROI').innerText = `+${roiPercent}%`;
+
+      document.getElementById('txtTotalConc').innerText = formatMoeda(totalConc3Anos);
+      document.getElementById('txtMensAcumConc').innerText = formatMoeda(mensAcumConc);
+      document.getElementById('txtAdesaoConcOut').innerText = formatMoeda(setupConc);
+      document.getElementById('txtExtrasConcOut').innerText = formatMoeda(ocultoConc * 36);
+      document.getElementById('txtQuedasConcOut').innerText = formatMoeda(quedaConc * 36);
+
+      document.getElementById('txtTotalTru').innerText = formatMoeda(totalTru3Anos);
+      document.getElementById('txtMensAcumTru').innerText = `${formatMoeda(totalTru3Anos)} (${formatMoeda(mensalidadeTruEfetiva)}/mês)`;
+
+      // Tabela Parecer
+      document.getElementById('tdEfetivoConc').innerText = `${formatMoeda((totalConc3Anos / 36))}/mês`;
+      document.getElementById('tdEfetivoTru').innerText = `${formatMoeda(mensalidadeTruEfetiva)}/mês`;
+      document.getElementById('tdDifEfetivo').innerText = `-${Math.round((1 - (mensalidadeTruEfetiva / (totalConc3Anos / 36))) * 100)}% por mês`;
+
+      document.getElementById('tdAdesaoConc').innerText = formatMoeda(setupConc);
+      document.getElementById('tdDifAdesao').innerText = `Economia de ${formatMoeda(setupConc)}`;
+
+      document.getElementById('tdTotalConc').innerText = formatMoeda(totalConc3Anos);
+      document.getElementById('tdTotalTru').innerText = formatMoeda(totalTru3Anos);
+      document.getElementById('tdDifTotal').innerText = `+${formatMoeda(economia3Anos)} no caixa`;
+
+      document.getElementById('printDataHoje').innerText = `Emissão: ${new Date().toLocaleDateString('pt-BR')}`;
+
+      // Atualizar Gráfico de 36 Meses
+      renderGraficoTCO(setupConc, mensConc, ocultoConc, quedaConc, mensalidadeTruEfetiva);
+
+      // WhatsApp Mensagem
+      const msgWpp = `*Estudo Executivo de TCO & ROI — ${nomeCliente}*%0A` +
+        `Olá! Preparamos um comparativo financeiro de Custo Total de Propriedade do sistema de gestão para a sua loja:%0A%0A` +
+        `🔴 *Custo estimado com ${nomeConc} (36 meses):* ${formatMoeda(totalConc3Anos)}%0A` +
+        `• Mensalidades c/ reajustes + taxas extras: ${formatMoeda(mensAcumConc)}%0A` +
+        `• Setup de Implantação: ${formatMoeda(setupConc)}%0A%0A` +
+        `🟢 *Custo com TruData ERP (36 meses):* ${formatMoeda(totalTru3Anos)}%0A` +
+        `• Mensalidade Fixa com ${pdvs} PDVs: ${formatMoeda(mensalidadeTruEfetiva)}/mês%0A` +
+        `• Taxa de Migração de Dados: *R$ 0,00 (Isenta)*%0A` +
+        `• Suporte Presencial Sarandi (SLA 2h): *Incluso*%0A%0A` +
+        `💰 *Economia líquida para o seu caixa:* *${formatMoeda(economia3Anos)}* (+${roiPercent}% de retorno)%0A%0A` +
+        `Podemos agendar um café de 15 minutos para demonstrar a migração sem parar o seu faturamento?`;
+
+      const linkWpp = `https://wa.me/555433612650?text=${msgWpp}`;
+      document.getElementById('btnWppTop').href = linkWpp;
+      document.getElementById('btnWppBottom').href = linkWpp;
+    }
+
+    function renderGraficoTCO(setupConc, mensConc, ocultoConc, quedaConc, mensTru) {
+      const labels = ['Mês 1', 'Mês 6', 'Mês 12', 'Mês 18', 'Mês 24', 'Mês 30', 'Mês 36'];
+      const pontosConc = [];
+      const pontosTru = [];
+
+      const meses = [1, 6, 12, 18, 24, 30, 36];
+      meses.forEach(m => {
+        let concCusto = setupConc;
+        for (let i = 1; i <= m; i++) {
+          const fatorReajuste = i <= 12 ? 1.0 : (i <= 24 ? 1.10 : 1.21);
+          concCusto += (mensConc * fatorReajuste) + ocultoConc + quedaConc;
+        }
+        pontosConc.push(Math.round(concCusto));
+        pontosTru.push(Math.round(mensTru * m));
+      });
+
+      const ctx = document.getElementById('chartTCO').getContext('2d');
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Custo Acumulado Concorrente (R$)',
+              data: pontosConc,
+              borderColor: '#f43f5e',
+              backgroundColor: 'rgba(244, 63, 94, 0.1)',
+              borderWidth: 3,
+              tension: 0.3,
+              fill: true
+            },
+            {
+              label: 'Custo Acumulado TruData ERP (R$)',
+              data: pontosTru,
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.1)',
+              borderWidth: 3,
+              tension: 0.3,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: { color: '#cbd5e1', font: { family: 'Plus Jakarta Sans', size: 11, weight: 'bold' } }
+            },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ` ${ctx.dataset.label}: ${formatMoeda(ctx.raw)}`
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              ticks: { color: '#94a3b8', font: { size: 10 } }
+            },
+            y: {
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              ticks: {
+                color: '#94a3b8',
+                callback: (v) => 'R$ ' + (v / 1000).toFixed(0) + 'k'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Inicialização
+    aplicarPresetConcorrente();
+  </script>
+</body>
+</html>

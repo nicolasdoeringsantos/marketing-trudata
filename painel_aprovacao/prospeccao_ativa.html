@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TruData — Cockpit de Prospecção Ativa & Campo (Top 20 Alvos)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary: #009fe3;
+      --primary-hover: #0284c7;
+      --bg: #070b14;
+      --card-bg: #0f172a;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    h1, h2, h3, .font-heading { font-family: 'Outfit', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); }
+    .badge-seg { font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 9999px; }
+    .seg-supermercado { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .seg-farmacia { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .seg-autopecas { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .seg-materiais { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff !important; color: #000 !important; }
+      .print-card { border: 1px solid #ccc !important; color: #000 !important; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+  <!-- TOPO & NAVEGAÇÃO -->
+  <div class="max-w-7xl mx-auto mb-6 flex flex-wrap items-center justify-between gap-4 no-print border-b border-slate-800/80 pb-6">
+    <div class="flex items-center gap-3">
+      <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-2xl shadow-lg shadow-sky-500/20">
+        🎯
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-sky-400 bg-sky-950/60 px-2.5 py-0.5 rounded-full border border-sky-800/50">Operação Comercial Raio 30km</span>
+          <span class="text-xs text-slate-400">Sarandi · Carazinho · Ronda Alta · Constantina</span>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-extrabold text-white">Cockpit de Prospecção Ativa & Campo</h1>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2.5 flex-wrap">
+      <button onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-2">
+        🖨️ Imprimir Dossiê
+      </button>
+      <a href="radar_clientes.html" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-2">
+        🛰️ Radar Completo (600)
+      </a>
+      <a href="crm.html" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-emerald-600/20 transition flex items-center gap-2">
+        💼 Abrir CRM Kanban
+      </a>
+      <a href="index.html" class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white text-xs font-bold rounded-xl transition">
+        ← Hub
+      </a>
+    </div>
+  </div>
+
+  <!-- FAIXA DE MÉTRICAS DO LOTE PILOTO -->
+  <div class="max-w-7xl mx-auto mb-6 grid grid-cols-2 md:grid-cols-5 gap-3.5 no-print">
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Total de Alvos Piloto</span>
+      <span class="text-2xl font-black text-white" id="kpi-total">20</span>
+      <span class="text-[10px] text-slate-500 block mt-0.5">100% no raio de 25km</span>
+    </div>
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-sky-400 block mb-1">PDVs / Checkouts</span>
+      <span class="text-2xl font-black text-sky-400" id="kpi-pdvs">51</span>
+      <span class="text-[10px] text-slate-500 block mt-0.5">Caixas em negociação</span>
+    </div>
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400 block mb-1">MRR Potencial</span>
+      <span class="text-2xl font-black text-emerald-400" id="kpi-mrr">R$ 5.760</span>
+      <span class="text-[10px] text-slate-500 block mt-0.5">Recorrência mensal/mês</span>
+    </div>
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-400 block mb-1">Setup / Implantação</span>
+      <span class="text-2xl font-black text-indigo-400" id="kpi-setup">R$ 11.650</span>
+      <span class="text-[10px] text-slate-500 block mt-0.5">Taxa de adesão inicial</span>
+    </div>
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-amber-400 block mb-1">Valor Anual (LTV-1)</span>
+      <span class="text-2xl font-black text-amber-400" id="kpi-anual">R$ 80.770</span>
+      <span class="text-[10px] text-slate-500 block mt-0.5">MRR × 12 + Setup</span>
+    </div>
+  </div>
+
+  <!-- BARRA DE AÇÕES EM LOTE & ROTEIRO DE VISITA -->
+  <div class="max-w-7xl mx-auto mb-6 bg-gradient-to-r from-sky-950/60 via-slate-900/80 to-indigo-950/60 border border-sky-800/40 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 no-print">
+    <div class="flex items-center gap-3">
+      <input type="checkbox" id="chk-selecionar-todos" onchange="toggleTodos(this.checked)" class="w-4 h-4 rounded border-slate-700 bg-slate-800 text-sky-500 focus:ring-0 cursor-pointer">
+      <div>
+        <strong class="text-white text-sm block">Ações em Lote de Campo</strong>
+        <span class="text-xs text-slate-400" id="txt-selecionados">0 selecionado(s)</span>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2.5 flex-wrap">
+      <button onclick="gerarRotaSelecionados()" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs rounded-xl shadow-md shadow-sky-600/20 transition flex items-center gap-2">
+        🚗 Gerar Rota Otimizada no Maps
+      </button>
+      <button onclick="copiarTelefonesLista()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+        📋 Copiar WhatsApps
+      </button>
+      <select id="filtro-nicho" onchange="filtrarTabela()" class="bg-slate-900 text-xs text-slate-200 font-bold px-3 py-2 rounded-xl border border-slate-700 focus:outline-none">
+        <option value="todos">Todos os Segmentos</option>
+        <option value="Supermercados & Mercearias">Supermercados</option>
+        <option value="Farmácias & Drogarias">Farmácias</option>
+        <option value="Autopeças & Oficinas">Autopeças</option>
+        <option value="Materiais de Construção">Materiais de Construção</option>
+      </select>
+      <select id="filtro-cidade" onchange="filtrarTabela()" class="bg-slate-900 text-xs text-slate-200 font-bold px-3 py-2 rounded-xl border border-slate-700 focus:outline-none">
+        <option value="todas">Todas as Cidades</option>
+        <option value="Sarandi">Sarandi</option>
+        <option value="Nova Boa Vista">Nova Boa Vista</option>
+        <option value="Barra Funda">Barra Funda</option>
+        <option value="Rondinha">Rondinha</option>
+        <option value="Chapada">Chapada</option>
+        <option value="Ronda Alta">Ronda Alta</option>
+        <option value="Constantina">Constantina</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- TABELA / CARDS DOS ALVOS -->
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 gap-4" id="container-alvos">
+      <!-- Injetado dinamicamente via JS -->
+    </div>
+  </div>
+
+  <script>
+    let ALVOS = [];
+    const SELECIONADOS = new Set();
+
+    async function carregarAlvos() {
+      try {
+        const res = await fetch('alvos_prioritarios_piloto.json');
+        ALVOS = await res.json();
+        atualizarKPIs(ALVOS);
+        renderizarAlvos(ALVOS);
+      } catch (err) {
+        console.error("Erro ao carregar alvos:", err);
+      }
+    }
+
+    function getSegmentClass(seg) {
+      if (seg.includes('Supermercados')) return 'seg-supermercado';
+      if (seg.includes('Farmácias')) return 'seg-farmacia';
+      if (seg.includes('Autopeças')) return 'seg-autopecas';
+      return 'seg-materiais';
+    }
+
+    function atualizarKPIs(lista) {
+      const total = lista.length;
+      const pdvs = lista.reduce((acc, a) => acc + (parseInt(a.pdvs_estimados) || 1), 0);
+      const mrr = lista.reduce((acc, a) => acc + (180 + (Math.max(1, parseInt(a.pdvs_estimados) || 1) - 1) * 60), 0);
+      const setup = lista.reduce((acc, a) => acc + (350 + (Math.max(1, parseInt(a.pdvs_estimados) || 1) - 1) * 150), 0);
+      const anual = (mrr * 12) + setup;
+
+      document.getElementById('kpi-total').innerText = total;
+      document.getElementById('kpi-pdvs').innerText = pdvs;
+      document.getElementById('kpi-mrr').innerText = `R$ ${mrr.toLocaleString('pt-BR')}`;
+      document.getElementById('kpi-setup').innerText = `R$ ${setup.toLocaleString('pt-BR')}`;
+      document.getElementById('kpi-anual').innerText = `R$ ${anual.toLocaleString('pt-BR')}`;
+    }
+
+    function renderizarAlvos(lista) {
+      const container = document.getElementById('container-alvos');
+      container.innerHTML = '';
+
+      lista.forEach((a, idx) => {
+        const isSelected = SELECIONADOS.has(a.id);
+        const pdvs = parseInt(a.pdvs_estimados) || 1;
+        const mrr = 180 + (pdvs - 1) * 60;
+        const foneLimpo = (a.whatsapp || a.telefone || '').replace(/\D/g, '');
+
+        const card = document.createElement('div');
+        card.className = `bg-slate-900/85 border ${isSelected ? 'border-sky-500 shadow-lg shadow-sky-500/10' : 'border-slate-800'} rounded-2xl p-5 transition hover:border-slate-700 print-card`;
+        
+        card.innerHTML = `
+          <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+            <div class="flex items-start gap-3">
+              <input type="checkbox" ${isSelected ? 'checked' : ''} onchange="toggleSelecao('${a.id}', this.checked)" class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-800 text-sky-500 focus:ring-0 cursor-pointer no-print">
+              <div>
+                <div class="flex items-center gap-2 flex-wrap mb-1">
+                  <span class="text-xs font-mono font-bold text-slate-400">#${String(idx + 1).padStart(2, '0')}</span>
+                  <span class="badge-seg ${getSegmentClass(a.segmento)}">${a.segmento}</span>
+                  <span class="text-[11px] font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded-md">${a.sintegra_status || 'ATIVA'}</span>
+                  <span class="text-[11px] font-bold text-sky-400 bg-sky-950/60 border border-sky-800/40 px-2 py-0.5 rounded-md">📍 ${a.distancia_km} km de Sarandi</span>
+                </div>
+                <h2 class="text-lg md:text-xl font-black text-white">${a.nome}</h2>
+                <div class="text-xs text-slate-400 flex flex-wrap gap-x-3 gap-y-1 mt-0.5">
+                  <span>🏢 ${a.razao_social}</span>
+                  <span>📑 CNPJ: <strong class="text-slate-300">${a.cnpj}</strong></span>
+                  <span>📍 ${a.endereco} - ${a.cidade}/RS</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block">Potencial MRR</span>
+              <span class="text-xl font-black text-emerald-400">R$ ${mrr}/mês</span>
+              <span class="text-[11px] text-slate-400 block">${pdvs} PDV(s) homologados</span>
+            </div>
+          </div>
+
+          <!-- DETALHES & DECISOR -->
+          <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3 mb-4 grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs">
+            <div>
+              <span class="text-slate-500 block text-[10px] uppercase font-bold">Sócio(a) Decisor(a) (QSA):</span>
+              <strong class="text-slate-200 text-xs">👤 ${a.decisor || 'Diretoria Comercial'}</strong>
+            </div>
+            <div>
+              <span class="text-slate-500 block text-[10px] uppercase font-bold">Atividade Principal (CNAE):</span>
+              <span class="text-slate-300 text-xs truncate block" title="${a.cnae_descricao}">${a.cnae_codigo} - ${a.cnae_descricao}</span>
+            </div>
+            <div>
+              <span class="text-slate-500 block text-[10px] uppercase font-bold">Presença Web & Contato:</span>
+              <span class="text-slate-300 text-xs">${a.tem_site ? `<a href="${a.site}" target="_blank" class="text-sky-400 underline font-bold">🌐 ${a.site}</a>` : '<span class="text-amber-400 font-semibold">❌ Não possui site (Oportunidade Catálogo)</span>'}</span>
+            </div>
+          </div>
+
+          <!-- BOTÕES DE AÇÃO RÁPIDA -->
+          <div class="flex items-center gap-2 flex-wrap pt-2 border-t border-slate-800/60 no-print">
+            <a href="gerador_proposta.html?cliente=${encodeURIComponent(a.nome)}&cidade=${encodeURIComponent(a.cidade)}&segmento=${encodeURIComponent(a.segmento)}&caixas=${encodeURIComponent(pdvs)}&cnpj=${encodeURIComponent(a.cnpj)}&decisor=${encodeURIComponent(a.decisor)}&telefone=${encodeURIComponent(foneLimpo)}&endereco=${encodeURIComponent(a.endereco)}&email=${encodeURIComponent(a.email || '')}" target="_blank" class="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs rounded-lg transition flex items-center gap-1.5 shadow-sm">
+              📄 Proposta A4
+            </a>
+            <a href="copiloto_vendas.html?cliente=${encodeURIComponent(a.nome)}&cidade=${encodeURIComponent(a.cidade)}&segmento=${encodeURIComponent(a.segmento)}&caixas=${encodeURIComponent(pdvs)}&cnpj=${encodeURIComponent(a.cnpj)}&decisor=${encodeURIComponent(a.decisor)}&telefone=${encodeURIComponent(foneLimpo)}&email=${encodeURIComponent(a.email || '')}&distancia=${encodeURIComponent(a.distancia_km + ' km')}" target="_blank" class="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-lg transition flex items-center gap-1.5 shadow-sm">
+              🧠 Copiloto & Cold Call
+            </a>
+            <a href="${a.link_whatsapp}" target="_blank" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg transition flex items-center gap-1.5 shadow-sm">
+              💬 WhatsApp Direto
+            </a>
+            <button onclick="abrirStreetView(${a.lat || 'null'}, ${a.lon || 'null'}, '${a.nome.replace(/'/g, "\\'")}', '${a.endereco.replace(/'/g, "\\'")}', '${a.cidade}')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold text-xs rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+              👁️ Fachada Loja
+            </button>
+            <a href="${a.link_maps}" target="_blank" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+              🗺️ Maps
+            </a>
+            <button onclick="auditarSintegra('${a.cnpj}')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold text-xs rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+              🔍 Sintegra-RS
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleSelecao(id, checked) {
+      if (checked) SELECIONADOS.add(id);
+      else SELECIONADOS.delete(id);
+      atualizarContador();
+    }
+
+    function toggleTodos(checked) {
+      if (checked) {
+        ALVOS.forEach(a => SELECIONADOS.add(a.id));
+      } else {
+        SELECIONADOS.clear();
+      }
+      atualizarContador();
+      renderizarAlvos(ALVOS);
+    }
+
+    function atualizarContador() {
+      document.getElementById('txt-selecionados').innerText = `${SELECIONADOS.size} selecionado(s)`;
+    }
+
+    function filtrarTabela() {
+      const nicho = document.getElementById('filtro-nicho').value;
+      const cidade = document.getElementById('filtro-cidade').value;
+
+      let filtrados = ALVOS;
+      if (nicho !== 'todos') {
+        filtrados = filtrados.filter(a => a.segmento === nicho);
+      }
+      if (cidade !== 'todas') {
+        filtrados = filtrados.filter(a => a.cidade === cidade);
+      }
+      atualizarKPIs(filtrados);
+      renderizarAlvos(filtrados);
+    }
+
+    function abrirStreetView(lat, lon, nome, endereco, cidade) {
+      let url = '';
+      if (lat && lon) {
+        url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lon}`;
+      } else {
+        url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(nome + ' ' + endereco + ' ' + cidade + ' RS')}`;
+      }
+      window.open(url, '_blank');
+    }
+
+    function auditarSintegra(cnpj) {
+      const limpo = cnpj.replace(/\D/g, '');
+      navigator.clipboard.writeText(limpo);
+      alert(`CNPJ ${cnpj} copiado com sucesso para a área de transferência! Abrindo Sintegra-RS...`);
+      window.open('https://dfe-portal.svrs.rs.gov.br/NFE/CCC', '_blank');
+    }
+
+    async function gerarRotaSelecionados() {
+      const selecionadosList = ALVOS.filter(a => SELECIONADOS.has(a.id));
+      const listaParaRota = selecionadosList.length > 0 ? selecionadosList : ALVOS.slice(0, 5);
+
+      try {
+        const r = await fetch('/api/gerar_rota_maps', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            origem: 'Sarandi, RS',
+            clientes: listaParaRota.map(c => ({
+              nome: c.nome,
+              endereco: c.endereco,
+              cidade: c.cidade,
+              lat: c.lat,
+              lon: c.lon
+            })),
+            retornar_origem: true
+          })
+        });
+        const res = await r.json();
+        if (res.sucesso && res.rota_url) {
+          window.open(res.rota_url, '_blank');
+        } else {
+          alert('Não foi possível gerar a rota.');
+        }
+      } catch (e) {
+        console.error(e);
+        alert('Erro ao conectar ao serviço de rotas.');
+      }
+    }
+
+    function copiarTelefonesLista() {
+      const telefones = [];
+      ALVOS.forEach(a => {
+        const tel = (a.whatsapp || a.telefone || '').replace(/\D/g, '');
+        if (tel) telefones.push(tel.startsWith('55') ? tel : `55${tel}`);
+      });
+      navigator.clipboard.writeText(telefones.join('\n')).then(() => {
+        alert(`${telefones.length} telefones copiados para a área de transferência!`);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', carregarAlvos);
+  </script>
+</body>
+</html>

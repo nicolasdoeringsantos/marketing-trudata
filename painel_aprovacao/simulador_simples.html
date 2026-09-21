@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Reforma Tributária p/ Simples Nacional — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' } },
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col">
+
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
+        ← Voltar ao Hub Central
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-300 font-display">Simulador Simples Nacional 2026</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 font-bold px-2 py-0.5 rounded border border-blue-500/30">IBS & CBS</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
+    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl border border-blue-500/30">
+          ⚖️
+        </div>
+        <div>
+          <h1 class="text-2xl font-black font-display text-white">Impacto da Reforma Tributária no Simples Nacional</h1>
+          <p class="text-xs text-slate-400">Descubra se sua empresa deve manter o recolhimento unificado no DAS ou migrar o IBS/CBS para o regime regular.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1">Faturamento Médio Mensal (R$):</label>
+          <input type="number" id="simples-fat" value="120000" oninput="calcularSimples()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white font-mono outline-none focus:border-blue-500" />
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1">% de Vendas para Empresas (B2B):</label>
+          <input type="number" id="simples-b2b" value="35" min="0" max="100" oninput="calcularSimples()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white font-mono outline-none focus:border-blue-500" />
+        </div>
+      </div>
+
+      <!-- DIAGNÓSTICO COMPARATIVO -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+        
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-300 uppercase">Cenário 1: Tudo Dentro do DAS</span>
+            <span class="text-[10px] bg-slate-800 text-slate-400 font-mono px-2 py-0.5 rounded">Padrão Simples</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Seus clientes PJ só aproveitam crédito proporcional de IBS/CBS equivalente ao que você recolhe na faixa do Simples.
+          </p>
+          <div class="pt-2 border-t border-slate-900">
+            <span class="text-[10px] text-slate-500 block">Crédito gerado p/ seus clientes:</span>
+            <span class="text-base font-bold text-amber-400 font-mono" id="credito-das">R$ 1.848,00 /mês</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-brand-azure/10 border border-brand-azure/30 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-brand-azure uppercase">Cenário 2: IBS/CBS Fora do DAS</span>
+            <span class="text-[10px] bg-brand-azure/20 text-brand-azure font-mono px-2 py-0.5 rounded">Modo Híbrido</span>
+          </div>
+          <p class="text-[11px] text-slate-300 leading-relaxed">
+            Sua empresa passa a transferir crédito integral de IBS e CBS para clientes PJ, mantendo a competitividade de fornecedor.
+          </p>
+          <div class="pt-2 border-t border-brand-azure/20">
+            <span class="text-[10px] text-slate-400 block">Crédito gerado p/ seus clientes:</span>
+            <span class="text-base font-bold text-emerald-400 font-mono" id="credito-hibrido">R$ 11.130,00 /mês</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECOMENDAÇÃO TRUDATA -->
+      <div class="p-5 rounded-2xl bg-slate-950 border border-emerald-500/30 flex items-start gap-3">
+        <span class="text-2xl">💡</span>
+        <div>
+          <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Diagnóstico Recomendado TruData:</h4>
+          <p class="text-xs text-slate-300 mt-1" id="diag-simples">
+            Como mais de 30% do seu faturamento é B2B, seus clientes PJ exigirão créditos integrais. O TruData ERP já está preparado para emitir notas no modelo híbrido com parâmetros separados de IBS e CBS sem retrabalho contábil.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function calcularSimples() {
+      const fat = parseFloat(document.getElementById('simples-fat').value) || 0;
+      const b2b = parseFloat(document.getElementById('simples-b2b').value) || 0;
+
+      const fatB2B = fat * (b2b / 100);
+      const creditoDAS = fatB2B * 0.044; // Estimativa média de alíquota efetiva de crédito Simples
+      const creditoHibrido = fatB2B * 0.265; // Alíquota estimada de referência IBS+CBS (26.5%)
+
+      document.getElementById('credito-das').textContent = 'R$ ' + creditoDAS.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) + ' /mês';
+      document.getElementById('credito-hibrido').textContent = 'R$ ' + creditoHibrido.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) + ' /mês';
+
+      const diag = document.getElementById('diag-simples');
+      if (b2b >= 30) {
+        diag.textContent = `Como ${b2b}% do seu faturamento é B2B, seus clientes empresas exigirão crédito integral para não trocar de fornecedor. Recomendamos parametrizar no TruData ERP a opção de IBS/CBS por fora do DAS.`;
+      } else {
+        diag.textContent = `Como seu foco principal é o consumidor final B2C (${100 - b2b}%), a melhor estratégia é manter todo o recolhimento simplificado dentro do DAS, preservando sua margem líquida.`;
+      }
+    }
+
+    calcularSimples();
+  </script>
+</body>
+</html>

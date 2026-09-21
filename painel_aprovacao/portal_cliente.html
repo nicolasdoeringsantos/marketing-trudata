@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Cliente & Autoatendimento — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' } },
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col">
+
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
+        ← Voltar ao Hub Central
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-300 font-display">Portal do Cliente Simulado</span>
+        <span class="text-[10px] bg-indigo-500/20 text-indigo-400 font-bold px-2 py-0.5 rounded border border-indigo-500/30">Autoatendimento 24/7</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
+    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-6">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/30">
+            🏢
+          </div>
+          <div>
+            <h1 class="text-2xl font-black font-display text-white">Central do Cliente & Autoatendimento</h1>
+            <p class="text-xs text-slate-400">Ambiente onde o lojista acessa 2ª via de faturas, notas fiscais e chamados diretos de suporte.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARDS DE RESUMO -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-1">
+          <span class="text-[10px] text-slate-400 uppercase font-mono block">Status da Licença:</span>
+          <strong class="text-emerald-400 text-sm flex items-center gap-1.5">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span> Licença Ativa (Plano Enterprise)
+          </strong>
+        </div>
+        <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-1">
+          <span class="text-[10px] text-slate-400 uppercase font-mono block">Próxima Fatura:</span>
+          <strong class="text-white text-sm font-mono">10/10/2026 (R$ 788,00)</strong>
+        </div>
+        <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-1">
+          <span class="text-[10px] text-slate-400 uppercase font-mono block">SLA de Atendimento:</span>
+          <strong class="text-brand-azure text-sm font-mono">&lt; 15 min (Sarandi-RS)</strong>
+        </div>
+      </div>
+
+      <!-- HISTÓRICO DE FATURAS & NOTAS FISCAIS -->
+      <div class="space-y-3 pt-2">
+        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Histórico de Faturas & Arquivos XML:</h3>
+        <div class="bg-slate-950 rounded-2xl border border-slate-800 divide-y divide-slate-900 text-xs">
+          
+          <div class="p-4 flex items-center justify-between">
+            <div>
+              <strong class="text-white block">Licenciamento Mensal TruData ERP — Setembro/2026</strong>
+              <span class="text-[11px] text-slate-400">Vencimento: 10/09/2026 · Status: <span class="text-emerald-400 font-bold">Pago via Pix</span></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="alert('Download do recibo e XML gerado com sucesso!')" class="px-3 py-1 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-lg border border-slate-800 text-[11px]">
+                📥 Recibo PDF
+              </button>
+            </div>
+          </div>
+
+          <div class="p-4 flex items-center justify-between">
+            <div>
+              <strong class="text-white block">Licenciamento Mensal TruData ERP — Outubro/2026</strong>
+              <span class="text-[11px] text-slate-400">Vencimento: 10/10/2026 · Status: <span class="text-amber-400 font-bold">Aberto (Disponível p/ Pagamento)</span></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="alert('Chave Pix Copia e Cola gerada para o pagamento da mensalidade!')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-[11px]">
+                💳 Pagar via Pix
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABERTURA RÁPIDA DE CHAMADO -->
+      <div class="p-5 rounded-2xl bg-gradient-to-r from-indigo-950/40 via-slate-950 to-slate-950 border border-indigo-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h4 class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Precisa de Ajuda ou Suporte de Caixa?</h4>
+          <p class="text-xs text-slate-300 mt-1">Converse direto com nossa equipe técnica de Sarandi - RS pelo WhatsApp prioritário.</p>
+        </div>
+        <a href="https://wa.me/5554996966175?text=Ola!%20Sou%20cliente%20TruData%20e%20preciso%20de%20um%20suporte%20rapido." target="_blank" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-emerald-600/20 shrink-0">
+          📲 Chamar Suporte Humano
+        </a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

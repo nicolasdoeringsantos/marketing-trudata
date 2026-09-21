@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamentador de Hardware & Periféricos Homologados — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              azure: '#00A3FF',
+              dark: '#020B18',
+              card: '#0A192F',
+              emerald: '#10B981',
+              amber: '#F59E0B'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #020B18; color: #F8FAFC; }
+    .glass { background: rgba(10, 25, 47, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    @media print {
+      body { background: #fff !important; color: #000 !important; }
+      .no-print { display: none !important; }
+      .print-box { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col justify-between selection:bg-brand-azure selection:text-white pb-12">
+
+  <!-- CABEÇALHO -->
+  <header class="border-b border-slate-800/80 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2 group text-xs text-slate-400 hover:text-white transition">
+          <span class="p-1.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-brand-azure">←</span>
+          <span>Voltar ao Hub</span>
+        </a>
+        <div class="h-4 w-px bg-slate-800"></div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-white font-display">ORÇAMENTADOR DE HARDWARE PDV</span>
+          <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded font-mono">Garantia Expressa 2h RS</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="window.print()" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200 flex items-center gap-1.5 transition">
+          <span>🖨️</span> Imprimir Orçamento
+        </button>
+        <button onclick="compartilharWhatsApp()" class="px-4 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 transition">
+          <span>📲</span> Enviar no WhatsApp
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full space-y-8">
+    
+    <!-- HERO / BANNER -->
+    <div class="glass rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-2xl print-box">
+      <div class="absolute -right-16 -top-16 w-80 h-80 bg-brand-azure/10 rounded-full blur-3xl pointer-events-none no-print"></div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-6">
+        <div>
+          <span class="text-[11px] font-bold text-brand-azure uppercase tracking-wider bg-brand-azure/10 px-3 py-1 rounded-full border border-brand-azure/20 font-mono">
+            Equipamentos Homologados de Fábrica
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-black font-display text-white mt-3">
+            Orçamentador de Checkouts & Periféricos Homologados
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
+            Economize montando a infraestrutura ideal para sua loja: impressoras térmicas velozes, leitores de código de barras 2D, balanças Toledo e nobreaks para contingência elétrica.
+          </p>
+        </div>
+
+        <div class="text-left sm:text-right bg-slate-950/80 p-4 rounded-2xl border border-slate-800 shrink-0 print-box">
+          <span class="text-[10px] text-slate-500 uppercase font-mono block">Garantia Regional Hansen</span>
+          <span class="text-sm font-bold text-emerald-400 font-mono">Troca Expressa em 2 Horas</span>
+          <span class="text-[10px] text-slate-400 block mt-0.5">Atendimento em Sarandi e Raio 50km</span>
+        </div>
+      </div>
+
+      <!-- SELETOR DE QUANTIDADE DE CHECKOUTS -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+        <div class="p-3.5 bg-slate-950/60 rounded-xl border border-slate-800">
+          <label class="text-slate-400 block mb-1">Cliente / Loja:</label>
+          <input type="text" id="orc-cliente" value="Comércio Exemplo RS" class="w-full bg-transparent text-white font-bold outline-none border-b border-dashed border-slate-700 focus:border-brand-azure" />
+        </div>
+
+        <div class="p-3.5 bg-slate-950/60 rounded-xl border border-slate-800">
+          <label class="text-slate-400 block mb-1">Quantidade de Caixas (PDVs):</label>
+          <select id="orc-caixas" onchange="recalcularHardware()" class="w-full bg-slate-900 border border-slate-700 text-white rounded-lg p-1.5 outline-none font-mono font-bold">
+            <option value="1">1 Caixa PDV</option>
+            <option value="2" selected>2 Caixas PDVs (Padrão)</option>
+            <option value="3">3 Caixas PDVs</option>
+            <option value="4">4 Caixas PDVs</option>
+            <option value="6">6 Caixas PDVs (Supermercado Médio)</option>
+            <option value="10">10 Caixas PDVs (Supermercado Grande)</option>
+          </select>
+        </div>
+
+        <div class="p-3.5 bg-slate-950/60 rounded-xl border border-slate-800">
+          <label class="text-slate-400 block mb-1">Condição de Pagamento do Hardware:</label>
+          <select id="orc-condicao" onchange="recalcularHardware()" class="w-full bg-slate-900 border border-slate-700 text-white rounded-lg p-1.5 outline-none font-mono">
+            <option value="avista">À Vista (5% de Desconto)</option>
+            <option value="6x">6x sem juros no Cartão de Crédito</option>
+            <option value="12x">12x no Boleto Bancário / BNDES</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- SELETOR DE PERIFÉRICOS & ITENS DO ORÇAMENTO -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- COLUNA DE ITENS (7 colunas) -->
+      <div class="lg:col-span-7 space-y-4">
+        <h2 class="text-base font-bold text-white font-display flex items-center justify-between">
+          <span>Selecione os Equipamentos Necessários</span>
+          <span class="text-xs text-slate-400 font-normal">Preços médios homologados para o RS</span>
+        </h2>
+
+        <!-- ITEM 1: IMPRESSORA TÉRMICA -->
+        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">🖨️</span>
+              <span class="text-xs font-bold text-white">Impressora Térmica Não-Fiscal (NFC-e)</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-emerald-400" id="preco-item-impressora">R$ 680,00 un</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+            <label class="p-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-azure cursor-pointer flex items-center gap-2">
+              <input type="radio" name="rad-impressora" value="680" checked onchange="recalcularHardware()" class="accent-brand-azure" />
+              <span>Epson TM-T20X (Robusta)</span>
+            </label>
+            <label class="p-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-azure cursor-pointer flex items-center gap-2">
+              <input type="radio" name="rad-impressora" value="790" onchange="recalcularHardware()" class="accent-brand-azure" />
+              <span>Bematech MP-4200 TH</span>
+            </label>
+            <label class="p-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-azure cursor-pointer flex items-center gap-2">
+              <input type="radio" name="rad-impressora" value="620" onchange="recalcularHardware()" class="accent-brand-azure" />
+              <span>Elgin i9 USB/Ethernet</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ITEM 2: LEITOR DE CÓDIGO DE BARRAS -->
+        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">⚡</span>
+              <span class="text-xs font-bold text-white">Leitor de Código de Barras (Checkout)</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-emerald-400" id="preco-item-leitor">R$ 380,00 un</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+            <label class="p-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-azure cursor-pointer flex items-center gap-2">
+              <input type="radio" name="rad-leitor" value="380" checked onchange="recalcularHardware()" class="accent-brand-azure" />
+              <span>Honeywell Voyager 1250g</span>
+            </label>
+            <label class="p-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-azure cursor-pointer flex items-center gap-2">
+              <input type="radio" name="rad-leitor" value="490" onchange="recalcularHardware()" class="accent-brand-azure" />
+              <span>Honeywell 2D QR Code</span>
+            </label>
+            <label class="p-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-azure cursor-pointer flex items-center gap-2">
+              <input type="radio" name="rad-leitor" value="160" onchange="recalcularHardware()" class="accent-brand-azure" />
+              <span>Bematech BR-400 USB</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ITENS ADICIONAIS DE FRENTE DE CAIXA -->
+        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2.5 text-xs">
+          <span class="font-bold text-white block mb-1">Acessórios de Automação do Caixa</span>
+
+          <label class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="chk-gaveta" checked onchange="recalcularHardware()" class="accent-brand-azure" />
+              <span>Gaveta de Dinheiro Automática (Abertura no Cupom)</span>
+            </div>
+            <span class="font-mono text-slate-300">R$ 280,00 /caixa</span>
+          </label>
+
+          <label class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="chk-nobreak" checked onchange="recalcularHardware()" class="accent-brand-azure" />
+              <span>Nobreak de Contingência Elétrica 1200VA (Caixas & Servidor)</span>
+            </div>
+            <span class="font-mono text-slate-300">R$ 720,00 un</span>
+          </label>
+
+          <label class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="chk-balanca-toledo" onchange="recalcularHardware()" class="accent-brand-azure" />
+              <span>Balança Toledo Prix 3 Fit de Checkout (Opcional)</span>
+            </div>
+            <span class="font-mono text-slate-300">+ R$ 1.850,00 un</span>
+          </label>
+        </div>
+
+      </div>
+
+      <!-- COLUNA DE RESUMO CONSOLIDADO (5 colunas) -->
+      <div class="lg:col-span-5 glass rounded-3xl p-6 space-y-6 flex flex-col justify-between shadow-2xl print-box">
+        <div>
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider font-display">Resumo do Investimento</h3>
+            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded font-mono">Em até 12x</span>
+          </div>
+
+          <div class="space-y-2.5 text-xs text-slate-300">
+            <div class="flex items-center justify-between py-1 border-b border-slate-800/60">
+              <span class="text-slate-400">Terminais PDV Sizing:</span>
+              <strong id="resumo-qtd-caixas" class="text-white font-mono">2 Caixas</strong>
+            </div>
+
+            <div class="flex items-center justify-between py-1 border-b border-slate-800/60">
+              <span class="text-slate-400">Impressoras Térmicas:</span>
+              <span id="resumo-val-impressora" class="font-mono">R$ 1.360,00</span>
+            </div>
+
+            <div class="flex items-center justify-between py-1 border-b border-slate-800/60">
+              <span class="text-slate-400">Leitores de Código de Barras:</span>
+              <span id="resumo-val-leitor" class="font-mono">R$ 760,00</span>
+            </div>
+
+            <div class="flex items-center justify-between py-1 border-b border-slate-800/60">
+              <span class="text-slate-400">Gavetas & Nobreaks:</span>
+              <span id="resumo-val-acessorios" class="font-mono">R$ 1.280,00</span>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-gradient-to-r from-slate-950 to-slate-900 border border-brand-azure/30 text-center mt-4">
+              <span class="text-[11px] text-slate-400 uppercase tracking-wider block">Total Geral Estimado de Hardware</span>
+              <span id="total-hardware-geral" class="text-3xl font-black text-white font-mono block mt-1">R$ 3.400,00</span>
+              <span id="parcelamento-display" class="text-xs text-emerald-400 font-bold block mt-1">ou 12x de R$ 315,00 sem sustos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3 no-print">
+          <div class="p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/30 text-[11px] text-emerald-300/90 leading-relaxed">
+            🛡️ <strong>Garantia Expressa Hansen:</strong> Se qualquer impressora ou leitor falhar, enviamos técnico de Sarandi com equipamento reserva para sua loja continuar vendendo!
+          </div>
+
+          <button onclick="compartilharWhatsApp()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+            <span>📲</span> Enviar Orçamento no WhatsApp
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    function recalcularHardware() {
+      const caixas = parseInt(document.getElementById('orc-caixas').value) || 1;
+      const condicao = document.getElementById('orc-condicao').value;
+
+      document.getElementById('resumo-qtd-caixas').textContent = `${caixas} ${caixas === 1 ? 'Caixa' : 'Caixas'}`;
+
+      // Impressoras
+      const impPreco = parseFloat(document.querySelector('input[name="rad-impressora"]:checked').value) || 680;
+      const impTotal = impPreco * caixas;
+      document.getElementById('preco-item-impressora').textContent = 'R$ ' + impPreco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) + ' un';
+      document.getElementById('resumo-val-impressora').textContent = 'R$ ' + impTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+      // Leitores
+      const leiPreco = parseFloat(document.querySelector('input[name="rad-leitor"]:checked').value) || 380;
+      const leiTotal = leiPreco * caixas;
+      document.getElementById('preco-item-leitor').textContent = 'R$ ' + leiPreco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) + ' un';
+      document.getElementById('resumo-val-leitor').textContent = 'R$ ' + leiTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+      // Acessórios
+      let acessoriosTotal = 0;
+      if (document.getElementById('chk-gaveta').checked) acessoriosTotal += (280 * caixas);
+      if (document.getElementById('chk-nobreak').checked) acessoriosTotal += 720;
+      if (document.getElementById('chk-balanca-toledo').checked) acessoriosTotal += 1850;
+
+      document.getElementById('resumo-val-acessorios').textContent = 'R$ ' + acessoriosTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+      let subtotal = impTotal + leiTotal + acessoriosTotal;
+
+      if (condicao === 'avista') {
+        subtotal = subtotal * 0.95; // 5% off
+        document.getElementById('parcelamento-display').textContent = 'Com 5% de desconto à vista via Pix/TED';
+      } else if (condicao === '6x') {
+        const parc = subtotal / 6;
+        document.getElementById('parcelamento-display').textContent = `ou 6x sem juros de R$ ${parc.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+      } else {
+        const parc = (subtotal * 1.08) / 12;
+        document.getElementById('parcelamento-display').textContent = `ou 12x no boleto/cartão de R$ ${parc.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+      }
+
+      document.getElementById('total-hardware-geral').textContent = 'R$ ' + subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    }
+
+    function compartilharWhatsApp() {
+      const cliente = document.getElementById('orc-cliente').value;
+      const caixas = document.getElementById('orc-caixas').value;
+      const total = document.getElementById('total-hardware-geral').textContent;
+      const cond = document.getElementById('parcelamento-display').textContent;
+
+      const msg = `Olá equipe técnica Hansen Software! Gostaria de formalizar o pedido de *Hardware Homologado TruData ERP*:\n\n` +
+        `🏬 *Cliente:* ${cliente}\n` +
+        `🖥️ *Checkouts (PDVs):* ${caixas} Caixas\n` +
+        `💰 *Investimento Total:* ${total}\n` +
+        `💳 *Condição:* ${cond}\n\n` +
+        `*Garantia:* Solicito ativação da Garantia Expressa de 2h para Sarandi e região!`;
+
+      window.open('https://wa.me/5554996966175?text=' + encodeURIComponent(msg), '_blank');
+    }
+
+    window.addEventListener('DOMContentLoaded', recalcularHardware);
+  </script>
+</body>
+</html>

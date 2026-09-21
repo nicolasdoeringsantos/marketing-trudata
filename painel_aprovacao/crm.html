@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TruData CRM — Pipeline de Vendas B2B & Gestão de Leads</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #009fe3;
+      --primary-dark: #0284c7;
+      --navy: #0f172a;
+      --bg: #080c14;
+      --card-bg: #111827;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 1.5rem; overflow-x: auto; }
+    
+    .header { max-width: 1560px; margin: 0 auto 1.25rem auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .brand-title { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 800; }
+    .brand-title span { color: #009fe3; }
+    .btn-top { background: #0284c7; color: #fff; border: none; padding: 0.6rem 1.1rem; border-radius: 0.6rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; transition: all 0.2s; }
+    .btn-top:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+    /* KPIS FINANCEIROS */
+    .kpi-strip {
+      max-width: 1560px;
+      margin: 0 auto 1.5rem auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .kpi-card {
+      background: rgba(17, 24, 39, 0.75);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem 1.25rem;
+      backdrop-filter: blur(10px);
+    }
+    .kpi-label { font-size: 0.72rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; display: flex; justify-content: space-between; align-items: center; }
+    .kpi-val { font-size: 1.5rem; font-weight: 800; font-family: 'Outfit', sans-serif; color: #fff; margin-top: 0.35rem; }
+    .kpi-sub { font-size: 0.75rem; color: #64748b; margin-top: 0.2rem; }
+
+    /* BARRA DE FILTROS DO CRM */
+    .filters-bar {
+      max-width: 1560px;
+      margin: 0 auto 1.25rem auto;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .filter-group { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .crm-input {
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 0.45rem 0.8rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      outline: none;
+    }
+    .crm-input:focus { border-color: #009fe3; }
+
+    /* KANBAN BOARD */
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(290px, 1fr));
+      gap: 1.25rem;
+      max-width: 1560px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .kanban-col {
+      background: #0d131f;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      min-height: 75vh;
+    }
+
+    .col-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .col-title { font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 0.4rem; }
+    .col-count { background: #1f2937; color: #94a3b8; font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; }
+
+    /* CARD DE LEAD */
+    .lead-card {
+      background: #151d2e;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 0.85rem;
+      padding: 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .lead-card:hover { transform: translateY(-2px); border-color: rgba(0,159,227,0.4); }
+
+    .lead-empresa { font-size: 0.95rem; font-weight: 800; color: #fff; }
+    .lead-nome { font-size: 0.8rem; color: #cbd5e1; display: flex; align-items: center; gap: 0.3rem; }
+    .lead-meta { font-size: 0.75rem; color: #94a3b8; display: flex; flex-direction: column; gap: 0.2rem; }
+    .lead-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 0.3rem; width: fit-content; }
+
+    .badge-origem { background: rgba(0,159,227,0.15); color: #38bdf8; border: 1px solid rgba(0,159,227,0.3); }
+    .badge-mrr { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; }
+
+    /* NOTAS TIMELINE NO CARD */
+    .lead-notes-box {
+      background: #090d16;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      font-size: 0.72rem;
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .note-item { border-left: 2px solid #009fe3; padding-left: 0.4rem; line-height: 1.35; }
+    .note-meta { font-size: 0.65rem; color: #64748b; margin-bottom: 0.1rem; }
+
+    .lead-actions { display: flex; gap: 0.35rem; margin-top: 0.4rem; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; }
+    .btn-card { flex: 1; padding: 0.45rem 0.5rem; border-radius: 0.45rem; font-size: 0.7rem; font-weight: 700; border: none; cursor: pointer; text-align: center; text-decoration: none; transition: background 0.2s; }
+    .btn-wpp-lead { background: #15803d; color: #fff; }
+    .btn-wpp-lead:hover { background: #16a34a; }
+    .btn-prop-lead { background: #0284c7; color: #fff; }
+    .btn-prop-lead:hover { background: #0369a1; }
+    .btn-note-lead { background: #334155; color: #e2e8f0; }
+    .btn-note-lead:hover { background: #475569; }
+    .btn-next-phase { background: #1e293b; color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); }
+    .btn-next-phase:hover { background: #009fe3; color: #fff; }
+
+    /* MODAIS */
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.82); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+    .modal.hidden { display: none; }
+    .modal-box { background: #111827; border: 1px solid var(--border); border-radius: 1.25rem; width: 100%; max-width: 520px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+    .form-group { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 700; color: #cbd5e1; }
+    .form-group input, .form-group select, .form-group textarea { background: #090d16; border: 1px solid rgba(255,255,255,0.15); padding: 0.65rem 0.85rem; border-radius: 0.5rem; color: #fff; font-size: 0.85rem; outline: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #009fe3; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <div class="brand-title">TRU<span>DATA</span> CRM · PIPELINE DE VENDAS REGIONAL</div>
+      <p style="font-size:0.85rem; color:var(--text-muted);">Gestão Ativa de Oportunidades no Raio de 100 km a partir de Sarandi/RS</p>
+    </div>
+    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+      <a href="index.html" class="btn-top" style="background:#334155;">← Painel Geral</a>
+      <a href="radar_clientes.html" class="btn-top" style="background:linear-gradient(135deg, #009fe3, #2563eb); box-shadow:0 0 15px rgba(0,159,227,0.35);">🛰️ Radar de Clientes (100km)</a>
+      <a href="copiloto_vendas.html" class="btn-top" style="background:#9333ea;">🧠 Copiloto Comercial</a>
+      <a href="gerador_proposta.html" class="btn-top" style="background:#0d9488;">📄 Gerar Proposta B2B</a>
+      <button onclick="abrirModalNovoLead()" class="btn-top">+ Novo Lead</button>
+    </div>
+  </div>
+
+  <!-- KPIS FINANCEIROS DO FUNIL -->
+  <div class="kpi-strip">
+    <div class="kpi-card">
+      <div class="kpi-label"><span>Total no Pipeline</span><span>🏢</span></div>
+      <div class="kpi-val" id="kpi-total-leads">0</div>
+      <div class="kpi-sub">Leads ativos na região</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label"><span>MRR Potencial</span><span>💰</span></div>
+      <div class="kpi-val" style="color:#34d399;" id="kpi-total-mrr">R$ 0,00</div>
+      <div class="kpi-sub">Mensalidades estimadas</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label"><span>Setup em Negociação</span><span>🚀</span></div>
+      <div class="kpi-val" style="color:#38bdf8;" id="kpi-total-setup">R$ 0,00</div>
+      <div class="kpi-sub">Taxas de implantação/treinamento</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label"><span>Taxa de Conversão</span><span>📈</span></div>
+      <div class="kpi-val" style="color:#facc15;" id="kpi-taxa-conversao">0%</div>
+      <div class="kpi-sub">Avanço até contrato fechado</div>
+    </div>
+  </div>
+
+  <!-- SELETOR RÁPIDO DE CANAL DE PIPELINE (VAREJO vs PARCEIROS CONTÁBEIS) -->
+  <div style="max-width: 1560px; margin: 0 auto 0.75rem auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+    <span style="font-size:0.75rem; font-weight:800; color:#94a3b8; text-transform:uppercase; letter-spacing:0.05em;">Foco Comercial:</span>
+    <button onclick="definirFiltroRapidoSegmento('todos')" id="btn-tab-crm-todos" class="btn-top" style="font-size:0.78rem; padding:0.35rem 0.8rem; background:#0284c7;">
+      🏢 Todos os Negócios
+    </button>
+    <button onclick="definirFiltroRapidoSegmento('varejo')" id="btn-tab-crm-varejo" class="btn-top" style="font-size:0.78rem; padding:0.35rem 0.8rem; background:#1e293b; color:#94a3b8;">
+      🛒 Comércio & Varejo
+    </button>
+    <button onclick="definirFiltroRapidoSegmento('Escritórios de Contabilidade')" id="btn-tab-crm-contadores" class="btn-top" style="font-size:0.78rem; padding:0.35rem 0.8rem; background:#1e293b; color:#d8b4fe; border:1px solid rgba(168,85,247,0.4);">
+      🏛️ Parceiros Contábeis (B2B2B)
+    </button>
+    <a href="contadores.html" class="btn-top" style="font-size:0.78rem; padding:0.35rem 0.8rem; background:transparent; color:#c084fc; text-decoration:underline;">
+      Central de Contadores 150km ↗
+    </a>
+    <a href="termo_parceria_contabil.html" target="_blank" class="btn-top" style="font-size:0.78rem; padding:0.35rem 0.8rem; background:transparent; color:#fbbf24; text-decoration:underline;">
+      📜 Gerador de Termos A4 ↗
+    </a>
+  </div>
+
+  <!-- FILTROS E EXPORTAÇÃO -->
+  <div class="filters-bar">
+    <div class="filter-group">
+      <input type="text" id="filtro-busca" class="crm-input" placeholder="🔍 Buscar empresa, cidade ou decisor..." style="min-width:240px;" oninput="filtrarLeadsCRM()">
+      
+      <select id="filtro-cidade" class="crm-input" onchange="filtrarLeadsCRM()">
+        <option value="todas">📍 Todas as Cidades</option>
+      </select>
+
+      <select id="filtro-segmento" class="crm-input" onchange="filtrarLeadsCRM()">
+        <option value="todos">📦 Todos os Segmentos</option>
+        <option value="Escritórios de Contabilidade">🏛️ Escritórios de Contabilidade (Parceiros)</option>
+        <option value="Supermercados & Mercearias">Supermercados & Mercearias</option>
+        <option value="Lojas de Confecções & Moda">Lojas de Confecções & Moda</option>
+        <option value="Farmácias & Drogarias">Farmácias & Drogarias</option>
+        <option value="Autopeças & Serviços">Autopeças & Serviços</option>
+        <option value="Padarias & Gastronomia">Padarias & Gastronomia</option>
+        <option value="Comércio Geral">Comércio Geral</option>
+      </select>
+
+      <button onclick="limparFiltrosCRM()" class="crm-input" style="cursor:pointer; background:#334155;">Limpar</button>
+    </div>
+
+    <div class="filter-group">
+      <a href="/api/exportar_crm_csv" download="trudata_pipeline_crm_leads.csv" class="btn-top" style="background:#15803d; font-size:0.8rem; padding:0.45rem 0.9rem;">
+        📥 Exportar Planilha (.CSV)
+      </a>
+    </div>
+  </div>
+
+  <!-- KANBAN BOARD -->
+  <div class="kanban-board">
+    <!-- COLUNA 1: NOVOS LEADS -->
+    <div class="kanban-col" id="col-novo">
+      <div class="col-header">
+        <span class="col-title" style="color:#60a5fa;">📥 1. Novos Leads</span>
+        <span class="col-count" id="count-novo">0</span>
+      </div>
+      <div class="cards-list" id="list-novo"></div>
+    </div>
+
+    <!-- COLUNA 2: CONTATO FEITO -->
+    <div class="kanban-col" id="col-contato">
+      <div class="col-header">
+        <span class="col-title" style="color:#fbbf24;">📞 2. Contato Feito</span>
+        <span class="col-count" id="count-contato">0</span>
+      </div>
+      <div class="cards-list" id="list-contato"></div>
+    </div>
+
+    <!-- COLUNA 3: DEMONSTRAÇÃO AGENDADA -->
+    <div class="kanban-col" id="col-demo">
+      <div class="col-header">
+        <span class="col-title" style="color:#a855f7;">💻 3. Demonstração</span>
+        <span class="col-count" id="count-demo">0</span>
+      </div>
+      <div class="cards-list" id="list-demo"></div>
+    </div>
+
+    <!-- COLUNA 4: PROPOSTA ENVIADA -->
+    <div class="kanban-col" id="col-proposta">
+      <div class="col-header">
+        <span class="col-title" style="color:#f97316;">📑 4. Proposta Enviada</span>
+        <span class="col-count" id="count-proposta">0</span>
+      </div>
+      <div class="cards-list" id="list-proposta"></div>
+    </div>
+
+    <!-- COLUNA 5: FECHADO / CONTRATO -->
+    <div class="kanban-col" id="col-fechado">
+      <div class="col-header">
+        <span class="col-title" style="color:#34d399;">🎉 5. Contrato Fechado</span>
+        <span class="col-count" id="count-fechado">0</span>
+      </div>
+      <div class="cards-list" id="list-fechado"></div>
+    </div>
+  </div>
+
+  <!-- MODAL ADICIONAR NOTA AO LEAD -->
+  <div id="modalNotaLead" class="modal hidden">
+    <div class="modal-box">
+      <h3 style="margin-bottom:0.35rem; font-size:1.15rem; color:#fff;" id="modalNotaTitulo">Registrar Interação com o Lead</h3>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1.25rem;" id="modalNotaSub">Anote o retorno da ligação, reunião ou objeção levantada.</p>
+      
+      <input type="hidden" id="notaLeadId">
+      <input type="hidden" id="notaEmpresa">
+
+      <div class="form-group">
+        <label>Tipo de Contato / Atividade</label>
+        <select id="notaTipo">
+          <option value="ligacao">📞 Ligação Telefônica</option>
+          <option value="whatsapp">💬 Mensagem WhatsApp</option>
+          <option value="reuniao">🤝 Reunião / Visita Presencial</option>
+          <option value="proposta">📑 Apresentação de Proposta</option>
+          <option value="fiscal">🧾 Auditoria Fiscal / Dúvida Tributária</option>
+          <option value="objecao">🛡️ Objeção do Lojista</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Consultor / Responsável</label>
+        <input type="text" id="notaAutor" value="Consultor Comercial Sarandi">
+      </div>
+
+      <div class="form-group">
+        <label>Resumo da Interação / Próximo Passo *</label>
+        <textarea id="notaTexto" rows="4" placeholder="Ex: Conversei com o sócio Carlos. Gostou da contingência offline para sábado. Agendada demo para terça às 14h via AnyDesk."></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem;">
+        <button onclick="fecharModalNota()" class="btn-top" style="background:#334155;">Cancelar</button>
+        <button onclick="salvarNotaLead()" class="btn-top" style="background:#009fe3;">💾 Salvar Nota na Timeline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL NOVO LEAD -->
+  <div id="modalNovoLead" class="modal hidden">
+    <div class="modal-box">
+      <h3 style="margin-bottom:1rem; font-size:1.15rem; color:#fff;">Adicionar Novo Lead no CRM</h3>
+      <div class="form-group">
+        <label>Nome do Responsável / Lojista</label>
+        <input type="text" id="nlNome" placeholder="Ex: João da Silva">
+      </div>
+      <div class="form-group">
+        <label>Nome da Empresa / Loja</label>
+        <input type="text" id="nlEmpresa" placeholder="Ex: Mercado Compre Bem">
+      </div>
+      <div class="form-group">
+        <label>Cidade (RS)</label>
+        <input type="text" id="nlCidade" placeholder="Ex: Sarandi, Passo Fundo, Marau">
+      </div>
+      <div class="form-group">
+        <label>Segmento</label>
+        <select id="nlSegmento">
+          <option value="Supermercados & Mercearias">Supermercados & Mercearias</option>
+          <option value="Lojas de Confecções & Moda">Lojas de Confecções & Moda</option>
+          <option value="Farmácias & Drogarias">Farmácias & Drogarias</option>
+          <option value="Autopeças & Serviços">Autopeças & Serviços</option>
+          <option value="Padarias & Gastronomia">Padarias & Gastronomia</option>
+          <option value="Comércio Geral">Comércio Geral</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Telefone / WhatsApp</label>
+        <input type="text" id="nlTelefone" placeholder="54999999999">
+      </div>
+      <div class="form-group">
+        <label>Quantidade de Caixas (PDVs)</label>
+        <input type="number" id="nlCaixas" value="2">
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem;">
+        <button onclick="fecharModalNovoLead()" class="btn-top" style="background:#334155;">Cancelar</button>
+        <button onclick="salvarNovoLead()" class="btn-top" style="background:#009fe3;">Salvar Lead</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DISPARO DE PROPOSTA CRM -->
+  <div id="modalEmailCRM" class="modal hidden">
+    <div class="modal-box">
+      <h3 style="margin-bottom:0.5rem; font-size:1.15rem; color:#fff; display:flex; align-items:center; gap:0.4rem;">
+        <span>⚡</span> Enviar Proposta por E-mail ao Lead
+      </h3>
+      <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:1rem;" id="crmEmailSub">
+        Proposta formal TruData ERP personalizada para o estabelecimento.
+      </p>
+
+      <input type="hidden" id="crmLeadId">
+
+      <div class="form-group">
+        <label>Destinatário (E-mail) *</label>
+        <input type="email" id="crmInputEmail" placeholder="contato@empresa.com.br" required>
+      </div>
+      <div class="form-group">
+        <label>Nome do Contato / Decisor</label>
+        <input type="text" id="crmInputDecisor">
+      </div>
+      <div class="form-group">
+        <label>Assunto do E-mail</label>
+        <input type="text" id="crmInputAssunto">
+      </div>
+
+      <div id="crmEmailFeedback" style="display:none; padding:0.75rem; border-radius:0.4rem; font-size:0.85rem; margin-top:0.75rem;"></div>
+
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem;">
+        <button onclick="fecharModalEmailCRM()" class="btn-top" style="background:#334155;">Cancelar</button>
+        <button onclick="dispararEmailLeadCRM()" class="btn-top" id="btnDisparoCRM" style="background:linear-gradient(135deg, #0284c7, #009fe3);">
+          🚀 Disparar Proposta (1 Clique)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let LEADS = [];
+    const FASES = ["novo", "contato", "demo", "proposta", "fechado"];
+
+    function normalizarFase(f) {
+      if (!f) return 'novo';
+      f = f.toLowerCase();
+      if (f.includes('wpp') || f.includes('whatsapp') || f.includes('contat')) return 'contato';
+      if (f.includes('demo')) return 'demo';
+      if (f.includes('prop') || f.includes('email')) return 'proposta';
+      if (f.includes('ganho') || f.includes('fechad') || f.includes('contrat')) return 'fechado';
+      return 'novo';
+    }
+
+    async function carregarLeads() {
+      try {
+        const r = await fetch('/api/leads');
+        LEADS = await r.json();
+        atualizarDropdownCidades();
+        renderizarKanban();
+      } catch (e) {
+        console.error('Erro ao carregar leads:', e);
+      }
+    }
+
+    function atualizarDropdownCidades() {
+      const sel = document.getElementById('filtro-cidade');
+      const cidades = [...new Set(LEADS.map(l => (l.cidade || '').replace(' - RS', '').replace('/RS', '').trim()).filter(Boolean))].sort();
+      sel.innerHTML = '<option value="todas">📍 Todas as Cidades</option>' + 
+        cidades.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+
+    function filtrarLeadsCRM() {
+      renderizarKanban();
+    }
+
+    function definirFiltroRapidoSegmento(modo) {
+      const sel = document.getElementById('filtro-segmento');
+      const btnTodos = document.getElementById('btn-tab-crm-todos');
+      const btnVarejo = document.getElementById('btn-tab-crm-varejo');
+      const btnCont = document.getElementById('btn-tab-crm-contadores');
+
+      [btnTodos, btnVarejo, btnCont].forEach(b => {
+        if (b) {
+          b.style.background = '#1e293b';
+          b.style.color = '#94a3b8';
+        }
+      });
+
+      if (modo === 'todos') {
+        sel.value = 'todos';
+        if (btnTodos) {
+          btnTodos.style.background = '#0284c7';
+          btnTodos.style.color = '#fff';
+        }
+      } else if (modo === 'varejo') {
+        sel.value = 'varejo';
+        if (btnVarejo) {
+          btnVarejo.style.background = '#0284c7';
+          btnVarejo.style.color = '#fff';
+        }
+      } else if (modo === 'Escritórios de Contabilidade') {
+        sel.value = 'Escritórios de Contabilidade';
+        if (btnCont) {
+          btnCont.style.background = '#7c3aed';
+          btnCont.style.color = '#fff';
+        }
+      }
+      renderizarKanban();
+    }
+
+    function limparFiltrosCRM() {
+      document.getElementById('filtro-busca').value = '';
+      document.getElementById('filtro-cidade').value = 'todas';
+      document.getElementById('filtro-segmento').value = 'todos';
+      definirFiltroRapidoSegmento('todos');
+    }
+
+    function renderizarKanban() {
+      const termoBusca = document.getElementById('filtro-busca').value.toLowerCase().trim();
+      const cidadeFiltro = document.getElementById('filtro-cidade').value.toLowerCase();
+      const segmentoFiltro = document.getElementById('filtro-segmento').value;
+
+      let totalMRRPipeline = 0;
+      let totalSetupPipeline = 0;
+      let totalFiltrados = 0;
+      let totalAvancados = 0;
+
+      FASES.forEach(f => {
+        const el = document.getElementById(`list-${f}`);
+        el.innerHTML = '';
+
+        const leadsDaFase = LEADS.filter(l => {
+          const faseNorm = normalizarFase(l.fase);
+          if (faseNorm !== f) return false;
+
+          if (cidadeFiltro !== 'todas' && !(l.cidade || '').toLowerCase().includes(cidadeFiltro)) {
+            return false;
+          }
+          if (segmentoFiltro === 'varejo') {
+            if (l.segmento === 'Escritórios de Contabilidade') return false;
+          } else if (segmentoFiltro !== 'todos' && l.segmento !== segmentoFiltro) {
+            return false;
+          }
+          if (termoBusca) {
+            const txt = `${l.empresa} ${l.nome} ${l.cidade} ${l.segmento} ${l.telefone} ${l.email || ''}`.toLowerCase();
+            if (!txt.includes(termoBusca)) return false;
+          }
+          return true;
+        });
+
+        document.getElementById(`count-${f}`).innerText = leadsDaFase.length;
+
+        leadsDaFase.forEach(lead => {
+          totalFiltrados++;
+          const isContabilidade = (lead.segmento || '').toLowerCase().includes('contabil');
+          const caixas = parseInt(lead.caixas || 1) || 1;
+          const mrr = isContabilidade ? 750 : (180 + Math.max(0, caixas - 1) * 60);
+          const setup = isContabilidade ? 0 : (800 + Math.max(0, caixas - 1) * 200);
+
+          if (f !== 'fechado') {
+            totalMRRPipeline += mrr;
+            totalSetupPipeline += setup;
+          }
+          if (['demo', 'proposta', 'fechado'].includes(f)) {
+            totalAvancados++;
+          }
+
+          const card = document.createElement('div');
+          card.className = 'lead-card';
+          if (isContabilidade) {
+            card.style.borderColor = 'rgba(168, 85, 247, 0.4)';
+          }
+          
+          let msgWhatsApp = '';
+          if (isContabilidade) {
+            msgWhatsApp = encodeURIComponent(
+              `Olá, ${lead.nome}! Tudo bem? Aqui é da equipe TruData ERP (Hansen Software, de Sarandi/RS). 🤝\n\n` +
+              `Desenvolvemos o *Modo Escritório* no nosso ERP Web sob medida para eliminar o retrabalho contábil da *${lead.empresa}*:\n` +
+              `• Troca de empresas em 2 cliques sem deslogar na SEFAZ;\n` +
+              `• Validação e devolução fiscal automática por XML;\n` +
+              `• Envio de todos os XMLs e SPED todo dia 1º no piloto automático.\n\n` +
+              `Preparamos uma proposta de parceria com 15% de comissão recorrente. Podemos conversar nesta semana?`
+            );
+          } else {
+            msgWhatsApp = encodeURIComponent(
+              `Olá, ${lead.nome}! Aqui é da equipe comercial da TruData ERP em Sarandi/RS. 🤝\n\n` +
+              `Acompanhamos a operação da *${lead.empresa}* (${lead.segmento}) em *${lead.cidade}*.\n` +
+              `Gostaríamos de agendar 10 minutos para demonstrar como o TruData ERP garante emissão fiscal em 3s e contingência 100% offline nos seus ${caixas} PDV(s).\n\n` +
+              `Podemos conversar nesta semana?`
+            );
+          }
+
+          // Renderizar histórico de notas
+          let notasHtml = '';
+          if (lead.historico_notas && lead.historico_notas.length > 0) {
+            const ultimas = lead.historico_notas.slice(0, 2);
+            notasHtml = `
+              <div class="lead-notes-box">
+                ${ultimas.map(n => `
+                  <div class="note-item">
+                    <div class="note-meta">${n.data} · ${n.autor || 'Consultor'} (${n.tipo || 'contato'})</div>
+                    <div>${n.texto}</div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          } else if (lead.notas) {
+            notasHtml = `<div style="font-size:0.75rem; color:#94a3b8; font-style:italic;">"${lead.notas}"</div>`;
+          }
+
+          const linkTermoA4 = `termo_parceria_contabil.html?nome=${encodeURIComponent(lead.empresa)}&cidade=${encodeURIComponent(lead.cidade)}&decisor=${encodeURIComponent(lead.nome)}&telefone=${encodeURIComponent(lead.telefone || '')}&email=${encodeURIComponent(lead.email || '')}`;
+
+          card.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:start; gap:0.5rem;">
+              <div class="lead-empresa">${lead.empresa}</div>
+              <span class="lead-badge badge-mrr" style="${isContabilidade ? 'background:rgba(168,85,247,0.2); color:#d8b4fe; border:1px solid rgba(168,85,247,0.4);' : ''}">
+                ${isContabilidade ? 'Potencial ~R$ 750/mês' : `R$ ${mrr}/mês`}
+              </span>
+            </div>
+            <div class="lead-nome">👤 ${lead.nome} · 📍 ${lead.cidade}</div>
+            <div class="lead-meta">
+              <span>📦 ${lead.segmento} · <strong>${isContabilidade ? 'Parceiro Multiplicador' : `${caixas} PDV(s)`}</strong></span>
+              <div style="display:flex; gap:0.35rem; align-items:center; margin-top:2px;">
+                <span class="lead-badge badge-origem">${isContabilidade ? '🏛️ Canal Contábil' : `🎯 ${lead.origem || 'Radar'}`}</span>
+                <span style="font-size:0.7rem; color:#64748b;">📅 ${lead.data || 'Recente'}</span>
+              </div>
+            </div>
+            ${lead.email ? `<div style="font-size:0.75rem; color:#38bdf8; margin-top:0.1rem;">✉️ ${lead.email}</div>` : ''}
+            ${notasHtml}
+            <div class="lead-actions">
+              <a href="https://wa.me/55${(lead.telefone || '').replace(/\D/g, '')}?text=${msgWhatsApp}" target="_blank" class="btn-card btn-wpp-lead" title="Chamar no WhatsApp">💬 Wpp</a>
+              ${isContabilidade ? `
+              <a href="${linkTermoA4}" target="_blank" class="btn-card btn-prop-lead" style="background:#581c87; color:#e9d5ff;" title="Abrir Termo de Parceria A4">📜 Termo</a>
+              ` : `
+              <button onclick="abrirModalEmailCRM('${lead.id}')" class="btn-card btn-prop-lead" title="Enviar Proposta por E-mail">✉️ Proposta</button>
+              `}
+              <button onclick="abrirModalNota('${lead.id}')" class="btn-card btn-note-lead" title="Registrar Nota / Histórico">📝 + Nota</button>
+              <button onclick="avancarFase('${lead.id}')" class="btn-card btn-next-phase" title="Avançar fase" style="flex:0 0 auto;">➔</button>
+            </div>
+          `;
+          el.appendChild(card);
+        });
+      });
+
+      // Atualiza KPIs
+      document.getElementById('kpi-total-leads').innerText = totalFiltrados;
+      document.getElementById('kpi-total-mrr').innerText = `R$ ${totalMRRPipeline.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+      document.getElementById('kpi-total-setup').innerText = `R$ ${totalSetupPipeline.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+      const taxa = totalFiltrados > 0 ? Math.round((totalAvancados / totalFiltrados) * 100) : 0;
+      document.getElementById('kpi-taxa-conversao').innerText = `${taxa}%`;
+    }
+
+    async function avancarFase(id) {
+      const lead = LEADS.find(l => l.id === id);
+      if (!lead) return;
+
+      const faseAtual = normalizarFase(lead.fase);
+      const idx = FASES.indexOf(faseAtual);
+      if (idx < FASES.length - 1) {
+        lead.fase = FASES[idx + 1];
+        await salvarLeadsServidor();
+        renderizarKanban();
+      }
+    }
+
+    async function salvarLeadsServidor() {
+      try {
+        await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(LEADS)
+        });
+      } catch (e) {
+        console.error('Erro ao salvar no servidor:', e);
+      }
+    }
+
+    // GESTÃO DE NOTAS NA TIMELINE
+    function abrirModalNota(id) {
+      const lead = LEADS.find(l => l.id === id);
+      if (!lead) return;
+
+      document.getElementById('notaLeadId').value = lead.id;
+      document.getElementById('notaEmpresa').value = lead.empresa;
+      document.getElementById('modalNotaTitulo').innerText = `Registrar Nota: ${lead.empresa}`;
+      document.getElementById('modalNotaSub').innerText = `Decisor: ${lead.nome} (${lead.cidade} - ${lead.segmento})`;
+      document.getElementById('notaTexto').value = '';
+      document.getElementById('modalNotaLead').classList.remove('hidden');
+    }
+
+    function fecharModalNota() {
+      document.getElementById('modalNotaLead').classList.add('hidden');
+    }
+
+    async function salvarNotaLead() {
+      const id = document.getElementById('notaLeadId').value;
+      const empresa = document.getElementById('notaEmpresa').value;
+      const tipo = document.getElementById('notaTipo').value;
+      const autor = document.getElementById('notaAutor').value.trim() || 'Consultor Comercial';
+      const texto = document.getElementById('notaTexto').value.trim();
+
+      if (!texto) {
+        alert('Por favor, digite o resumo da interação.');
+        return;
+      }
+
+      try {
+        const r = await fetch('/api/adicionar_nota_lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, empresa, tipo, autor, texto })
+        });
+        const res = await r.json();
+        if (res.sucesso) {
+          const lead = LEADS.find(l => l.id === id);
+          if (lead) {
+            if (!lead.historico_notas) lead.historico_notas = [];
+            lead.historico_notas.unshift(res.nota);
+            lead.notas = `[${res.nota.data} - ${tipo.toUpperCase()}] ${texto}`;
+          }
+          renderizarKanban();
+          fecharModalNota();
+        } else {
+          alert('Erro ao salvar nota: ' + res.erro);
+        }
+      } catch (e) {
+        console.error('Erro:', e);
+        alert('Falha ao conectar com o servidor.');
+      }
+    }
+
+    function abrirModalNovoLead() {
+      document.getElementById('modalNovoLead').classList.remove('hidden');
+    }
+
+    function fecharModalNovoLead() {
+      document.getElementById('modalNovoLead').classList.add('hidden');
+    }
+
+    async function salvarNovoLead() {
+      const nome = document.getElementById('nlNome').value.trim();
+      const empresa = document.getElementById('nlEmpresa').value.trim();
+      const cidade = document.getElementById('nlCidade').value.trim();
+      const segmento = document.getElementById('nlSegmento').value;
+      const telefone = document.getElementById('nlTelefone').value.trim().replace(/\D/g, '');
+      const caixas = document.getElementById('nlCaixas').value || '1';
+
+      if (!nome || !empresa) {
+        alert('Por favor, preencha pelo menos o nome e o nome da empresa.');
+        return;
+      }
+
+      const novo = {
+        id: 'lead-' + Date.now(),
+        nome,
+        empresa,
+        cidade: cidade || 'Sarandi - RS',
+        segmento,
+        telefone: telefone || '5433612650',
+        caixas,
+        origem: 'Entrada Manual CRM',
+        fase: 'novo',
+        data: new Date().toLocaleDateString('pt-BR'),
+        notas: 'Lead cadastrado diretamente pela equipe comercial.'
+      };
+
+      LEADS.unshift(novo);
+      await salvarLeadsServidor();
+      atualizarDropdownCidades();
+      renderizarKanban();
+      fecharModalNovoLead();
+    }
+
+    // DISPARO DE PROPOSTA
+    let LEAD_ATUAL_CRM = null;
+
+    function abrirModalEmailCRM(id) {
+      const lead = LEADS.find(l => l.id === id);
+      if (!lead) return;
+      LEAD_ATUAL_CRM = lead;
+
+      document.getElementById('crmLeadId').value = lead.id;
+      document.getElementById('crmEmailSub').innerText = `${lead.empresa} (${lead.cidade}) · ${lead.segmento} (${lead.caixas || 1} PDVs)`;
+      document.getElementById('crmInputEmail').value = lead.email || '';
+      document.getElementById('crmInputDecisor').value = lead.nome || 'Responsável';
+      document.getElementById('crmInputAssunto').value = `Proposta Comercial TruData ERP — ${lead.empresa} (${lead.cidade})`;
+
+      const fb = document.getElementById('crmEmailFeedback');
+      fb.style.display = 'none';
+
+      const btn = document.getElementById('btnDisparoCRM');
+      btn.disabled = false;
+      btn.innerText = '🚀 Disparar Proposta (1 Clique)';
+
+      document.getElementById('modalEmailCRM').classList.remove('hidden');
+    }
+
+    function fecharModalEmailCRM() {
+      document.getElementById('modalEmailCRM').classList.add('hidden');
+    }
+
+    async function dispararEmailLeadCRM() {
+      if (!LEAD_ATUAL_CRM) return;
+
+      const email = document.getElementById('crmInputEmail').value.trim();
+      const decisor = document.getElementById('crmInputDecisor').value.trim();
+      const assunto = document.getElementById('crmInputAssunto').value.trim();
+
+      if (!email || !email.includes('@')) {
+        alert('Por favor, informe um endereço de e-mail válido.');
+        document.getElementById('crmInputEmail').focus();
+        return;
+      }
+
+      const btn = document.getElementById('btnDisparoCRM');
+      btn.disabled = true;
+      btn.innerText = '⏳ Enviando...';
+
+      const fb = document.getElementById('crmEmailFeedback');
+      fb.style.display = 'block';
+      fb.style.background = '#1e3a8a';
+      fb.style.color = '#bfdbfe';
+      fb.innerText = 'Gerando e enviando proposta...';
+
+      try {
+        const r = await fetch('/api/enviar_proposta_email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            destinatario: email,
+            cliente: LEAD_ATUAL_CRM.empresa,
+            cidade: LEAD_ATUAL_CRM.cidade,
+            segmento: LEAD_ATUAL_CRM.segmento,
+            decisor: decisor,
+            caixas: LEAD_ATUAL_CRM.caixas || 1,
+            cnpj: LEAD_ATUAL_CRM.cnpj || '',
+            telefone: LEAD_ATUAL_CRM.telefone || '',
+            assunto: assunto
+          })
+        });
+
+        const res = await r.json();
+
+        if (res.sucesso) {
+          fb.style.background = '#064e3b';
+          fb.style.color = '#a7f3d0';
+          fb.innerHTML = `✅ Proposta enviada com sucesso para ${email}!`;
+
+          LEAD_ATUAL_CRM.email = email;
+          const faseAtual = normalizarFase(LEAD_ATUAL_CRM.fase);
+          if (faseAtual === 'novo' || faseAtual === 'contato') {
+            LEAD_ATUAL_CRM.fase = 'proposta';
+          }
+          const hoje = new Date().toLocaleDateString('pt-BR');
+          LEAD_ATUAL_CRM.notas = `[${hoje}] Proposta enviada por e-mail para ${email}. ` + (LEAD_ATUAL_CRM.notas || '');
+          await salvarLeadsServidor();
+          renderizarKanban();
+
+          setTimeout(() => fecharModalEmailCRM(), 1200);
+        } else {
+          fb.style.background = '#7f1d1d';
+          fb.style.color = '#fecaca';
+          fb.innerText = `Erro: ${res.erro || res.mensagem}`;
+          btn.disabled = false;
+          btn.innerText = 'Tentar Novamente';
+        }
+      } catch (err) {
+        fb.style.background = '#7f1d1d';
+        fb.style.color = '#fecaca';
+        fb.innerText = 'Falha de conexão com o servidor.';
+        btn.disabled = false;
+        btn.innerText = 'Tentar Novamente';
+      }
+    }
+
+    carregarLeads();
+  </script>
+</body>
+</html>

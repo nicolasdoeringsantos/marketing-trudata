@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitrine de Fachadas &amp; PDV Regional RS | TruData Media Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#06b6d4',
+                            blue: '#3b82f6',
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .store-facade {
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+    <!-- Topbar -->
+    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-40 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="/" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse"></span>
+                    <span class="font-bold text-lg text-white">Tru<span class="text-cyan-400">Design</span></span>
+                    <span class="text-xs px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-semibold border border-cyan-500/30">Pilar 4: Trade Marketing</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-slate-400 hidden sm:inline">Identidade de Fachadas &amp; Ponto de Venda Físico</span>
+                <button onclick="exportarFichaGrafica()" class="px-3.5 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-xs font-bold text-white flex items-center gap-1.5 shadow-lg shadow-cyan-900/30 transition-all">
+                    <i class="fa-solid fa-file-pdf"></i> Exportar Ficha para Gráfica
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <!-- Hero Header -->
+        <div class="mb-8">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-xs font-medium mb-3">
+                <i class="fa-solid fa-store"></i> Comunicação Visual &amp; Sinalização de Balcão Gaúcho
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                Vitrine &amp; Fachadas Comerciais do RS
+            </h1>
+            <p class="text-slate-400 text-sm mt-1 max-w-3xl">
+                Crie projetos de comunicação visual física para o comércio gaúcho: totens de calçada, faixas de ofertas, adesivos perfurados para vitrine e displays de caixa inteligente com QR Code PIX integrado ao TruData.
+            </p>
+        </div>
+
+        <!-- Filtros por Microrregião e Categoria -->
+        <div class="glass-panel p-4 rounded-2xl border border-slate-800 mb-8 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 text-xs">
+                <span class="text-slate-400 font-semibold uppercase text-[10px]">Microrregião:</span>
+                <button onclick="filtrarRegiao('todas')" id="chipRegTodas" class="px-3 py-1.5 rounded-lg bg-cyan-600 text-white font-bold whitespace-nowrap">Todas as Regiões</button>
+                <button onclick="filtrarRegiao('serra')" id="chipRegSerra" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 font-medium whitespace-nowrap">Serra Gaúcha</button>
+                <button onclick="filtrarRegiao('planalto')" id="chipRegPlanalto" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 font-medium whitespace-nowrap">Planalto Médio</button>
+                <button onclick="filtrarRegiao('sinos')" id="chipRegSinos" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 font-medium whitespace-nowrap">Vale dos Sinos</button>
+                <button onclick="filtrarRegiao('sul')" id="chipRegSul" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 font-medium whitespace-nowrap">Região Sul &amp; Litoral</button>
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+                <span class="text-slate-400 font-semibold uppercase text-[10px]">Material:</span>
+                <select id="selPecaVisual" onchange="renderizarPeca()" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:border-cyan-500 focus:outline-none">
+                    <option value="totem">Totem de Calçada (90x180cm)</option>
+                    <option value="adesivo">Adesivo Perfurado de Vitrine (200x120cm)</option>
+                    <option value="faixa">Faixa Frontal de Ofertas (400x80cm)</option>
+                    <option value="display_pdv" selected>Display de Balcão &amp; QR Code PIX (A4 Vertical)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Painel de Customização da Fachada (Esquerda) -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4">
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-palette text-cyan-400"></i> Editor da Peça Visual
+                    </h2>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Nome do Estabelecimento Comercial</label>
+                        <input type="text" id="inpNomeLoja" oninput="atualizarMockup()" value="Supermercado Bella Vista" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-cyan-500 focus:outline-none font-bold">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Cidade / Estado</label>
+                            <input type="text" id="inpCidade" oninput="atualizarMockup()" value="Bento Gonçalves - RS" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-cyan-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Tipo de Comércio</label>
+                            <select id="selSegmento" onchange="atualizarMockup()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-cyan-500 focus:outline-none">
+                                <option value="Supermercado">Supermercado &amp; Atacarejo</option>
+                                <option value="Acougue">Casa de Carnes &amp; Frigorífico</option>
+                                <option value="Ferragem">Ferragem &amp; Tintas</option>
+                                <option value="Pet">Agropecuária &amp; Pet</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Frase Principal de Destaque</label>
+                        <input type="text" id="inpFrase" oninput="atualizarMockup()" value="ATENDIMENTO RÁPIDO NO CAIXA &amp; PREÇO JUSTO" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-cyan-500 focus:outline-none font-bold">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Diferencial Tecnológico (Selo TruData)</label>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900 border border-slate-800 cursor-pointer">
+                                <input type="checkbox" id="chkPix" checked onchange="atualizarMockup()" class="text-cyan-500 focus:ring-0 rounded">
+                                <span>Pague com PIX Direto</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900 border border-slate-800 cursor-pointer">
+                                <input type="checkbox" id="chkNotaFiscal" checked onchange="atualizarMockup()" class="text-cyan-500 focus:ring-0 rounded">
+                                <span>Nota Fiscal Gaúcha</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Chave PIX / WhatsApp de Atendimento</label>
+                        <input type="text" id="inpContato" oninput="atualizarMockup()" value="(54) 99968-0012 · pix@bellavista.com.br" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-cyan-500 focus:outline-none font-mono">
+                    </div>
+                </div>
+
+                <!-- Dica para Fornecedores Locais -->
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-xs space-y-2">
+                    <h3 class="font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-truck-ramp-box text-cyan-400"></i> Padronização para Gráficas do RS
+                    </h3>
+                    <p class="text-slate-400">
+                        Os arquivos gerados estão calibrados em CMYK padrão ISO Coated v2 com sangria de 5mm para corte em guilhotina ou router CNC de acrílico/ACM.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Coluna de Visualização do Mockup (Direita) -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Simulador Visual da Peça -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 shadow-2xl flex flex-col items-center">
+                    <div class="w-full flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                            <span id="lblNomePeca" class="text-xs font-bold text-slate-300 uppercase font-mono">DISPLAY ACRÍLICO A4 BALCÃO</span>
+                        </div>
+                        <span id="lblMedidasPeca" class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">21.0 x 29.7 cm (300 DPI)</span>
+                    </div>
+
+                    <!-- Quadro do Mockup Físico -->
+                    <div id="quadroMockup" class="w-full max-w-[420px] bg-slate-900 rounded-2xl p-6 border-4 border-slate-700 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[460px] text-center">
+                        <!-- Topo da Peça -->
+                        <div class="relative z-10 space-y-2">
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[10px] font-extrabold uppercase tracking-wider">
+                                <i class="fa-solid fa-store"></i> <span id="prevCidade">BENTO GONÇALVES - RS</span>
+                            </div>
+                            <h2 id="prevNomeLoja" class="text-2xl font-black text-white tracking-tight uppercase">
+                                SUPERMERCADO BELLA VISTA
+                            </h2>
+                            <p id="prevSegmento" class="text-xs text-cyan-400 font-bold uppercase tracking-wider">
+                                Ponto de Atendimento Oficial TruData
+                            </p>
+                        </div>
+
+                        <!-- Miolo Central / QR Code & Benefício -->
+                        <div class="relative z-10 my-6 bg-slate-950/80 p-5 rounded-xl border border-slate-800 space-y-3">
+                            <p id="prevFrase" class="text-sm font-extrabold text-white leading-snug">
+                                "ATENDIMENTO RÁPIDO NO CAIXA &amp; PREÇO JUSTO"
+                            </p>
+                            
+                            <!-- QR Code Simulado -->
+                            <div class="w-28 h-28 mx-auto bg-white p-2 rounded-lg shadow-inner flex items-center justify-center">
+                                <i class="fa-solid fa-qrcode text-6xl text-slate-900"></i>
+                            </div>
+
+                            <p class="text-[11px] font-mono text-cyan-300 font-bold">
+                                Aponte a câmera do celular para pagar
+                            </p>
+                        </div>
+
+                        <!-- Selos de Confiança & Rodapé -->
+                        <div class="relative z-10 space-y-2 pt-2 border-t border-slate-800/80">
+                            <div class="flex items-center justify-center gap-4 text-[10px] font-bold text-slate-300">
+                                <span id="tagPix" class="flex items-center gap-1 text-emerald-400"><i class="fa-brands fa-pix"></i> PIX Instantâneo</span>
+                                <span id="tagNfg" class="flex items-center gap-1 text-amber-400"><i class="fa-solid fa-receipt"></i> Nota Fiscal Gaúcha</span>
+                            </div>
+                            <p id="prevContato" class="text-[9px] font-mono text-slate-500">
+                                (54) 99968-0012 · pix@bellavista.com.br
+                            </p>
+                        </div>
+
+                        <!-- Linha de Fundo Decorativa -->
+                        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    </div>
+
+                    <div class="w-full flex items-center justify-between mt-5 pt-3 border-t border-slate-800 text-xs">
+                        <span class="text-slate-400">Escala de visualização pré-impressão: 100%</span>
+                        <button onclick="copiarEspecificacao()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-700 flex items-center gap-1.5">
+                            <i class="fa-solid fa-copy"></i> Copiar Especificações Técnicas
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let regiaoSelecionada = 'todas';
+
+        function filtrarRegiao(reg) {
+            regiaoSelecionada = reg;
+            ['todas', 'serra', 'planalto', 'sinos', 'sul'].forEach(r => {
+                const btn = document.getElementById('chipReg' + (r.charAt(0).toUpperCase() + r.slice(1)));
+                if (r === reg) {
+                    btn.className = 'px-3 py-1.5 rounded-lg bg-cyan-600 text-white font-bold whitespace-nowrap';
+                } else {
+                    btn.className = 'px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 font-medium whitespace-nowrap';
+                }
+            });
+
+            if (reg === 'serra') {
+                document.getElementById('inpCidade').value = 'Caxias do Sul - RS';
+            } else if (reg === 'planalto') {
+                document.getElementById('inpCidade').value = 'Passo Fundo - RS';
+            } else if (reg === 'sinos') {
+                document.getElementById('inpCidade').value = 'Novo Hamburgo - RS';
+            } else if (reg === 'sul') {
+                document.getElementById('inpCidade').value = 'Pelotas - RS';
+            }
+            atualizarMockup();
+        }
+
+        function renderizarPeca() {
+            const tipo = document.getElementById('selPecaVisual').value;
+            const lblNome = document.getElementById('lblNomePeca');
+            const lblMedidas = document.getElementById('lblMedidasPeca');
+            const quadro = document.getElementById('quadroMockup');
+
+            if (tipo === 'totem') {
+                lblNome.innerText = 'TOTEM VERTICAL DE ENTRADA';
+                lblMedidas.innerText = '90 x 180 cm · Lona com Ilhós ou ACM';
+                quadro.className = 'w-full max-w-[280px] bg-slate-900 rounded-2xl p-6 border-4 border-slate-700 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[580px] text-center';
+            } else if (tipo === 'adesivo') {
+                lblNome.innerText = 'ADESIVO PERFURADO DE VITRINE';
+                lblMedidas.innerText = '200 x 120 cm · Vinil Microperfurado 50/50';
+                quadro.className = 'w-full max-w-[480px] bg-slate-900 rounded-2xl p-6 border-4 border-slate-700 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[340px] text-center';
+            } else if (tipo === 'faixa') {
+                lblNome.innerText = 'FAIXA FRONTAL DE OFERTAS';
+                lblMedidas.innerText = '400 x 80 cm · Lona Frontlight 440g';
+                quadro.className = 'w-full max-w-[520px] bg-slate-900 rounded-2xl p-4 border-4 border-slate-700 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[220px] text-center';
+            } else {
+                lblNome.innerText = 'DISPLAY ACRÍLICO A4 BALCÃO';
+                lblMedidas.innerText = '21.0 x 29.7 cm (300 DPI)';
+                quadro.className = 'w-full max-w-[420px] bg-slate-900 rounded-2xl p-6 border-4 border-slate-700 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[460px] text-center';
+            }
+            atualizarMockup();
+        }
+
+        function atualizarMockup() {
+            document.getElementById('prevNomeLoja').innerText = document.getElementById('inpNomeLoja').value;
+            document.getElementById('prevCidade').innerText = document.getElementById('inpCidade').value.toUpperCase();
+            document.getElementById('prevSegmento').innerText = 'Ponto Oficial TruData · ' + document.getElementById('selSegmento').value;
+            document.getElementById('prevFrase').innerText = `"${document.getElementById('inpFrase').value}"`;
+            document.getElementById('prevContato').innerText = document.getElementById('inpContato').value;
+
+            document.getElementById('tagPix').style.display = document.getElementById('chkPix').checked ? 'flex' : 'none';
+            document.getElementById('tagNfg').style.display = document.getElementById('chkNotaFiscal').checked ? 'flex' : 'none';
+        }
+
+        function copiarEspecificacao() {
+            const peca = document.getElementById('lblNomePeca').innerText;
+            const medidas = document.getElementById('lblMedidasPeca').innerText;
+            const loja = document.getElementById('inpNomeLoja').value;
+            const cidade = document.getElementById('inpCidade').value;
+            const contato = document.getElementById('inpContato').value;
+
+            const ficha = `*FICHA DE PRODUÇÃO GRÁFICA TRUDATA TRADE*\n` +
+                          `Peça: ${peca}\n` +
+                          `Formato: ${medidas}\n` +
+                          `Cliente: ${loja} (${cidade})\n` +
+                          `Contato / PIX: ${contato}\n` +
+                          `Padrão de Cores: CMYK 300DPI, Sangria 5mm\n` +
+                          `Acabamento: Laminação fosca ou recorte eletrônico`;
+
+            navigator.clipboard.writeText(ficha).then(() => {
+                alert('Especificações técnicas copiadas para envio à gráfica!');
+            });
+        }
+
+        function exportarFichaGrafica() {
+            window.print();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            atualizarMockup();
+        });
+    </script>
+</body>
+</html>

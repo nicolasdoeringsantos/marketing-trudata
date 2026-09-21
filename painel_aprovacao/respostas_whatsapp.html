@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Central de Respostas Rápidas WhatsApp — Teclado do Vendedor | TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              azure: '#009fe3',
+              dark: '#06121a',
+              teal: '#0a2333',
+              mint: '#34d399',
+              lightmint: '#5eead4'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #06121a; color: #f8fafc; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+  </style>
+</head>
+<body class="min-h-screen bg-[#06121a] text-slate-100 antialiased selection:bg-brand-mint selection:text-slate-950 pb-20">
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2.5 text-slate-300 hover:text-white transition">
+          <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-400 flex items-center justify-center font-black text-slate-950 text-base shadow-lg shadow-teal-950/50">
+            T
+          </div>
+          <div>
+            <span class="font-display font-bold text-white text-base tracking-tight">TruData ERP</span>
+            <span class="hidden sm:inline-block text-[10px] text-emerald-300 font-semibold ml-2 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">Teclado Comercial WhatsApp</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          ← Voltar ao Hub
+        </a>
+        <a href="copiloto_vendas.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-teal-300 border border-teal-500/30 transition flex items-center gap-1.5">
+          🧠 Copiloto IA
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- BARRA DE PERSONALIZAÇÃO DINÂMICA (FIXA OU DESTAQUE) -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+    <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <h2 class="text-base font-bold text-white font-display flex items-center gap-2">
+            <span>⚡</span> Personalização em Tempo Real das Respostas
+          </h2>
+          <p class="text-xs text-slate-400">Preencha os dados do cliente abaixo para que todos os textos se adaptem automaticamente com 1 clique</p>
+        </div>
+        <span class="text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">Modo Vendedor Ágil</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nome do Lojista / Decisor:</label>
+          <input type="text" id="input-cliente-nome" value="Roberto" oninput="renderizarRespostas()" placeholder="Ex: Roberto" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-emerald-400 focus:outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nome da Empresa / Loja:</label>
+          <input type="text" id="input-cliente-loja" value="Supermercado Central" oninput="renderizarRespostas()" placeholder="Ex: Mercado Popular" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-emerald-400 focus:outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Cidade / Região:</label>
+          <input type="text" id="input-cliente-cidade" value="Sarandi / Região" oninput="renderizarRespostas()" placeholder="Ex: Sarandi" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-emerald-400 focus:outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">WhatsApp do Lojista (com DDD):</label>
+          <input type="text" id="input-cliente-fone" value="" oninput="renderizarRespostas()" placeholder="Ex: 54999998888" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-emerald-400 focus:outline-none" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVEGAÇÃO POR ABAS & BUSCA -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-6">
+
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <!-- Pílulas de Categoria -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 custom-scrollbar">
+        <button onclick="filtrarCategoria('todas', this)" class="btn-aba-resp px-4 py-2 rounded-xl text-xs font-bold transition bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">Todas (16)</button>
+        <button onclick="filtrarCategoria('prospeccao', this)" class="btn-aba-resp px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800">🎯 Prospecção Ativa (4)</button>
+        <button onclick="filtrarCategoria('objecoes', this)" class="btn-aba-resp px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800">🛡️ Quebra de Objeções (5)</button>
+        <button onclick="filtrarCategoria('followup', this)" class="btn-aba-resp px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800">⏱️ Follow-up & Resgate (4)</button>
+        <button onclick="filtrarCategoria('cafe', this)" class="btn-aba-resp px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800">☕ Convite & Relacionamento (3)</button>
+      </div>
+
+      <!-- Campo de Busca -->
+      <div class="relative w-full sm:w-64">
+        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500 text-xs">🔍</span>
+        <input type="text" id="campo-busca-resp" oninput="renderizarRespostas()" placeholder="Pesquisar resposta..." class="w-full pl-8 pr-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 transition" />
+      </div>
+    </div>
+
+    <!-- GRID DE RESPOSTAS RÁPIDAS -->
+    <div id="container-respostas" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Renderizado via JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- TOAST -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-slate-900 border border-emerald-500 text-white px-5 py-3 rounded-xl shadow-2xl">
+    <span id="toast-icon">✅</span>
+    <span id="toast-msg" class="text-sm font-medium">Resposta copiada!</span>
+  </div>
+
+  <script>
+    let categoriaAtiva = 'todas';
+
+    const BANCO_RESPOSTAS = [
+      // --- PROSPECÇÃO ATIVA ---
+      {
+        id: 'p-mercado',
+        cat: 'prospeccao',
+        titulo: 'Prospecção Supermercados: Fila Travando & TEF',
+        subtitulo: 'Para mercados e mercearias com fluxo intenso no caixa',
+        template: (nome, loja, cidade) => 
+`Olá, ${nome}! Tudo bem?
+
+Passando rápido porque sei que a rotina aí no *${loja}* não para.
+
+Muitos supermercadistas aqui de ${cidade} me relatam que o maior pesadelo no sábado é a fila do caixa travar quando a internet oscila, ou o operador errar o valor digitado na maquininha avulsa.
+
+No *TruData ERP*, a NFC-e é autorizada em *3 segundos*, o TEF aciona a maquininha direto sem digitação manual e, se a internet cair, o sistema emite em contingência automática sem parar a venda.
+
+Consigo te mostrar isso funcionando em 10 minutinhos no balcão essa semana? Abraço!`
+      },
+      {
+        id: 'p-farmacia',
+        cat: 'prospeccao',
+        titulo: 'Prospecção Farmácias: SNGPC Anvisa & PBM sem Travar',
+        subtitulo: 'Para drogarias que sofrem com controle de lotes e receitas',
+        template: (nome, loja, cidade) => 
+`Olá, ${nome}! Tudo certo?
+
+Aqui é da equipe do *TruData ERP* em Sarandi-RS.
+
+A rotina de farmácia é puxada: fechamento do SNGPC na Anvisa, controle rigoroso de validade/lote e os PBMs que às vezes demoram a responder no balcão.
+
+Desenvolvemos um módulo exclusivo para drogarias no RS que automatiza o livro de controlados, alerta lotes a vencer com antecedência e tem suporte 100% humano no fone e WhatsApp direto de Sarandi para não deixar o balcão na mão.
+
+Podemos marcar um café rápido aí no *${loja}* para você conhecer?`
+      },
+      {
+        id: 'p-moda',
+        cat: 'prospeccao',
+        titulo: 'Prospecção Lojas de Moda: Grade Cor x Tamanho & Crediário',
+        subtitulo: 'Para confecções e calçados com gestão de grade e carnês',
+        template: (nome, loja, cidade) => 
+`Oi, ${nome}! Tudo bem?
+
+Aqui é do *TruData ERP*. Acompanho o trabalho impecável do *${loja}*!
+
+Sabemos que controlar confecção exige muito: saber exatamente qual cor e tamanho (P, M, G) mais vende, gerar carnês de crediário próprio para clientes fiéis e imprimir etiquetas de código de barras na hora.
+
+O TruData resolve isso em uma única tela leve, sem complicar a vida dos vendedores.
+
+Topa dar uma olhada em como funciona na prática em uma demonstração rápida sem compromisso?`
+      },
+      {
+        id: 'p-contador',
+        cat: 'prospeccao',
+        titulo: 'Parceria com Contabilidades: Fim do Retrabalho no SPED',
+        subtitulo: 'Para contadores parceiros e escritórios contábeis',
+        template: (nome, loja, cidade) => 
+`Olá, ${nome}! Como estão os fechamentos mensais aí no escritório?
+
+Sabemos que o início do mês é um estresse: clientes enviando XMLs incompletos, notas sem tributação correta e retrabalho para fechar o SPED Fiscal e EFD.
+
+No *TruData ERP*, temos o *Modo Escritório*: o contador acessa a carteira em 2 cliques, com SPED limpo, regras de ICMS-ST conferidas e o novo motor da Reforma Tributária (IBS/CBS) já preparado.
+
+Podemos bater um papo rápido para você conhecer nosso programa de escritórios parceiros aqui no RS?`
+      },
+
+      // --- QUEBRA DE OBJEÇÕES ---
+      {
+        id: 'o-ja-tenho',
+        cat: 'objecoes',
+        titulo: 'Objeção: "Já tenho sistema e estou acostumado"',
+        subtitulo: 'Quando o lojista está acomodado com o sistema atual',
+        template: (nome, loja, cidade) => 
+`Entendo perfeitamente, ${nome}! Mexer no que está funcionando dá receio mesmo.
+
+A maioria dos lojistas que hoje usam TruData aqui em ${cidade} também estavam em outros sistemas há anos. O que fez eles trocarem foram 2 detalhes:
+
+1. Quando dá um problema no caixa no sábado, eles falam com gente de verdade no fone aqui de Sarandi, sem robô;
+2. As notas e o TEF rodam tão leves que a fila anda no dobro da velocidade.
+
+Não quero que você troque agora. Só quero te mandar uma simulação de 5 minutos para você ter um comparativo no bolso quando precisar. Posso te enviar?`
+      },
+      {
+        id: 'o-preco',
+        cat: 'objecoes',
+        titulo: 'Objeção: "Achei a mensalidade alta"',
+        subtitulo: 'Demonstrar que o custo do erro e da fila é muito maior',
+        template: (nome, loja, cidade) => 
+`Compreendo sua preocupação com custos, ${nome}. Toda empresa séria cuida de cada centavo.
+
+Mas deixa eu te fazer uma pergunta sincera: quanto custa para o *${loja}* ter o caixa parado por 30 minutos em um dia de pico? Ou uma autuação da SEFAZ por erro de NCM que gera multa de 10% da nota?
+
+O TruData não é apenas um software, é uma blindagem: suporte imediato, contingência que não deixa a loja parar e eliminação de erros na maquininha com TEF.
+
+Ele se paga logo no primeiro mês com a economia de perdas. Vamos recalcular juntos?`
+      },
+      {
+        id: 'o-medo-parar',
+        cat: 'objecoes',
+        titulo: 'Objeção: "Tenho medo de trocar e parar minha loja"',
+        subtitulo: 'Garantia Zero Dia Parado e importação de XMLs',
+        template: (nome, loja, cidade) => 
+`${nome}, esse é o medo mais legítimo de qualquer comerciante, e você tem toda razão em se preocupar!
+
+Por isso, na Hansen Software temos a garantia oficial *Zero Dia Parado*:
+• Puxamos todos os seus produtos e clientes diretamente dos XMLs das notas fiscais dos últimos 90 dias (você não digita nada);
+• Seus caixas treinam em 15 minutos em um ambiente de teste;
+• A virada de chave acontece no horário mais calmo, com nosso técnico de plantão dedicado para a sua loja.
+
+Sua loja continua vendendo 100% durante todo o processo. Posso te mostrar o cronograma detalhado?`
+      },
+      {
+        id: 'o-depois-vejo',
+        cat: 'objecoes',
+        titulo: 'Objeção: "Me procura no mês que vem / depois vejo"',
+        subtitulo: 'Trazer urgência suave com a Reforma Tributária',
+        template: (nome, loja, cidade) => 
+`Sem problemas, ${nome}! Respeito muito o seu tempo.
+
+Só quero deixar um ponto de atenção no seu radar: com as novas regras da Reforma Tributária (IBS e CBS) e as fiscalizações da SEFAZ-RS, deixar a parametrização para a última hora pode sobrecarregar sua equipe e o seu contador.
+
+Vou deixar seu cadastro salvo aqui com carinho. Posso te mandar apenas um resumo de 1 página em PDF com o checklist de transição segura para você ler quando tiver 5 minutinhos?`
+      },
+      {
+        id: 'o-contador-decide',
+        cat: 'objecoes',
+        titulo: 'Objeção: "Meu contador que escolhe o sistema"',
+        subtitulo: 'Convidar a contabilidade para avaliar juntos',
+        template: (nome, loja, cidade) => 
+`Excelente ponto, ${nome}! Lojista que ouve o contador evita muita dor de cabeça.
+
+Inclusive, os contadores adoram o TruData porque nós entregamos os arquivos do SPED e as notas fiscais 100% validadas, sem erros de alíquota. Isso tira um peso enorme das costas do escritório contábil no fechamento do mês.
+
+Qual é o nome do seu contador ou escritório? Posso mandar uma demonstração técnica direta para ele avaliar e te dar o parecer!`
+      },
+
+      // --- FOLLOW-UP & RESGATE ---
+      {
+        id: 'f-48h',
+        cat: 'followup',
+        titulo: 'Follow-up 48h: Proposta enviada sem resposta',
+        subtitulo: 'Retomar contato após o envio da proposta comercial',
+        template: (nome, loja, cidade) => 
+`Olá, ${nome}! Tudo bem?
+
+Passando só para confirmar se você conseguiu dar uma olhadinha na proposta do *TruData ERP* que te enviei para o *${loja}*.
+
+Ficou alguma dúvida sobre a implantação, o TEF ou o cronograma de transição sem parar a loja?
+
+Estou à disposição para ajustar o plano para o formato ideal da sua operação!`
+      },
+      {
+        id: 'f-semanal',
+        cat: 'followup',
+        titulo: 'Follow-up 7 Dias: Resgate com Novidade / Case do RS',
+        subtitulo: 'Reativar negociação sem parecer insistente',
+        template: (nome, loja, cidade) => 
+`Oi, ${nome}! Como estão as coisas por aí?
+
+Lembrei de você hoje porque acabamos de concluir a migração de mais um comércio aqui na região de ${cidade}, e o cliente me disse: *"Deveria ter trocado antes, o caixa ficou muito mais leve e não temos mais fila"*.
+
+Sei que sua rotina é corrida, mas quando quiser dar aquele passo para modernizar o *${loja}*, estamos a uma mensagem de distância.
+
+Quer agendar 15 minutinhos essa semana?`
+      },
+      {
+        id: 'f-orcamento-expirando',
+        cat: 'followup',
+        titulo: 'Follow-up de Fechamento: Condição Especial do Mês',
+        subtitulo: 'Criar escassez legítima de agenda técnica de implantação',
+        template: (nome, loja, cidade) => 
+`${nome}, tudo bem?
+
+Nossa equipe técnica de Sarandi está fechando a escala de implantações acompanhadas deste mês.
+
+Como conversamos anteriormente, reservei uma condição diferenciada de implantação para o *${loja}*, incluindo o treinamento prioritário dos operadores de caixa.
+
+Conseguimos dar o aceite essa semana para garantir a sua vaga na agenda técnica?`
+      },
+      {
+        id: 'f-reforma-aviso',
+        cat: 'followup',
+        titulo: 'Follow-up Educativo: Alerta da SEFAZ / Reforma Tributária',
+        subtitulo: 'Gerar valor com notícia fiscal relevante',
+        template: (nome, loja, cidade) => 
+`Olá, ${nome}! Vi uma atualização importante da SEFAZ-RS sobre validação de notas fiscais e lembrei do *${loja}*.
+
+Muitos sistemas antigos estão gerando rejeição por desatualização de tabelas e códigos de benefício fiscal. No TruData, essa validação é automática antes do envio da nota.
+
+Se estiver sentindo qualquer instabilidade no seu emissor atual, me avisa que te ajudo a auditar sem custo algum!`
+      },
+
+      // --- CONVITE & RELACIONAMENTO ---
+      {
+        id: 'c-cafe-sarandi',
+        cat: 'cafe',
+        titulo: 'Convite: Tomar um Café na Sede em Sarandi-RS',
+        subtitulo: 'Aproximação humana e olho no olho para clientes da região',
+        template: (nome, loja, cidade) => 
+`Olá, ${nome}! Tudo bem?
+
+Você costuma vir para o centro de Sarandi?
+
+Nossa sede própria da Hansen Software fica bem aqui em Sarandi-RS. Gostaria muito de te convidar para tomar um café com a nossa equipe, conhecer nossos desenvolvedores e ver de perto a estrutura por trás do *TruData ERP*.
+
+Sem compromisso comercial nenhum, apenas para nos conhecermos pessoalmente. Que dia você costuma passar por aqui?`
+      },
+      {
+        id: 'c-visita-loja',
+        cat: 'cafe',
+        titulo: 'Convite: Visita do Consultor no Balcão do Cliente',
+        subtitulo: 'Para o vendedor ir até a loja do cliente levar material',
+        template: (nome, loja, cidade) => 
+`Oi, ${nome}! Tudo certo?
+
+Estou com a rota agendada para visitar alguns lojistas parceiros aí em ${cidade} nesta semana.
+
+Gostaria de passar aí no *${loja}* para te entregar em mãos nosso Guia Prático de Frente de Caixa e a Proposta Comercial impressa.
+
+Você estará pela loja amanhã de manhã ou prefere na parte da tarde? Abraço!`
+      },
+      {
+        id: 'c-chimarrao',
+        cat: 'cafe',
+        titulo: 'Regional Gaúcho: Bate-papo com Chimarrão',
+        subtitulo: 'Tom informal e autêntico para produtores e lojistas gaúchos',
+        template: (nome, loja, cidade) => 
+`E aí, ${nome}! Tranquilo?
+
+Nós aqui da TruData valorizamos o aperto de mão e a conversa franca, de lojista para lojista aqui do nosso Rio Grande.
+
+Se você tiver 15 minutos nessa semana, levo a cuia e a térmica de chimarrão para batermos um papo rápido sobre o movimento do comércio e como a tecnologia pode te poupar dores de cabeça no fechamento.
+
+Qual o melhor dia para você?`
+      }
+    ];
+
+    function renderizarRespostas() {
+      const container = document.getElementById('container-respostas');
+      const nome = document.getElementById('input-cliente-nome').value.trim() || 'Amigo(a)';
+      const loja = document.getElementById('input-cliente-loja').value.trim() || 'sua loja';
+      const cidade = document.getElementById('input-cliente-cidade').value.trim() || 'nossa região';
+      const fone = document.getElementById('input-cliente-fone').value.trim().replace(/\D/g, '');
+      const termoBusca = (document.getElementById('campo-busca-resp').value || '').toLowerCase();
+
+      const filtrados = BANCO_RESPOSTAS.filter(item => {
+        const matchCat = categoriaAtiva === 'todas' || item.cat === categoriaAtiva;
+        const matchBusca = !termoBusca || 
+          item.titulo.toLowerCase().includes(termoBusca) || 
+          item.subtitulo.toLowerCase().includes(termoBusca);
+        return matchCat && matchBusca;
+      });
+
+      if (filtrados.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full bg-slate-900 border border-slate-800 rounded-2xl p-12 text-center">
+            <span class="text-3xl block mb-2">🔍</span>
+            <h4 class="text-white font-bold text-sm">Nenhuma resposta encontrada</h4>
+            <p class="text-xs text-slate-400 mt-1">Tente pesquisar com outro termo ou troque de categoria.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtrados.map(item => {
+        const textoGerado = item.template(nome, loja, cidade);
+        const textoEnc = encodeURIComponent(textoGerado);
+        
+        let urlWa = `https://wa.me/?text=${textoEnc}`;
+        if (fone) {
+          urlWa = `https://wa.me/55${fone}?text=${textoEnc}`;
+        }
+
+        return `
+          <div class="bg-slate-900 border border-slate-800 hover:border-emerald-500/40 rounded-2xl p-5 shadow-xl flex flex-col justify-between space-y-4 transition">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-1.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                  ${item.cat.toUpperCase()}
+                </span>
+                <span class="text-[11px] text-slate-500 font-mono">1-Click WhatsApp</span>
+              </div>
+              <h3 class="font-bold text-white text-sm leading-snug">${item.titulo}</h3>
+              <p class="text-xs text-slate-400 mt-0.5">${item.subtitulo}</p>
+            </div>
+
+            <!-- Preview da Mensagem Formatada -->
+            <div class="relative">
+              <pre class="bg-slate-950 border border-slate-800/80 rounded-xl p-3.5 text-xs text-slate-300 font-sans whitespace-pre-wrap max-h-48 overflow-y-auto custom-scrollbar leading-relaxed select-all">${textoGerado}</pre>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="flex items-center justify-between gap-2 pt-2 border-t border-slate-800">
+              <button onclick="copiarTextoPersonalizado(decodeURIComponent('${textoEnc}'))" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+                📋 Copiar Texto
+              </button>
+              <a href="${urlWa}" target="_blank" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-emerald-950/50 flex items-center gap-1.5">
+                <span>📲 Abrir no WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filtrarCategoria(cat, btn) {
+      categoriaAtiva = cat;
+      document.querySelectorAll('.btn-aba-resp').forEach(b => {
+        b.className = 'btn-aba-resp px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800';
+      });
+      btn.className = 'btn-aba-resp px-4 py-2 rounded-xl text-xs font-bold transition bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+      renderizarRespostas();
+    }
+
+    function copiarTextoPersonalizado(texto) {
+      navigator.clipboard.writeText(texto).then(() => {
+        mostrarToast('Mensagem copiada para a área de transferência!');
+      });
+    }
+
+    function mostrarToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    // Inicialização
+    renderizarRespostas();
+  </script>
+</body>
+</html>

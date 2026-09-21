@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparativo Técnico Frente a Frente — TruData ERP vs Concorrentes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col">
+
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
+        ← Voltar ao Hub Central
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-300 font-display">Matriz Versus Concorrentes</span>
+        <span class="text-[10px] bg-purple-500/20 text-purple-400 font-bold px-2 py-0.5 rounded border border-purple-500/30">Blindagem Comercial</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
+    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-8">
+        <div>
+          <span class="text-[11px] font-bold text-purple-400 uppercase tracking-wider bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
+            Comparativo de Engenharia & SLA
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-black font-display text-white mt-3">TruData ERP vs Sistemas Nacionais em Nuvem</h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1">Veja por que o comércio físico do RS troca sistemas 100% web pelo modelo híbrido blindado da Hansen Software.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="migracao_concorrentes.html" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white rounded-xl transition shadow-lg flex items-center gap-2">
+            🚀 Guia de Migração Blindada
+          </a>
+          <button onclick="copiarResumoVersus()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 rounded-xl transition border border-slate-700 flex items-center gap-2">
+            📋 Copiar Argumentário
+          </button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-slate-800 text-slate-400">
+              <th class="p-3.5 font-bold uppercase tracking-wider">Critério Técnico / Negócio</th>
+              <th class="p-3.5 bg-brand-azure/10 text-brand-azure font-extrabold border-x border-brand-azure/20 text-sm">TruData ERP (Hansen)</th>
+              <th class="p-3.5 text-slate-400 font-semibold">Sistemas 100% Nuvem (Bling/Tiny)</th>
+              <th class="p-3.5 text-slate-400 font-semibold">Grandes Redes (Linx / Totvs)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60">
+            <tr>
+              <td class="p-3.5 font-bold text-slate-200">Queda de Internet (Contingência)</td>
+              <td class="p-3.5 bg-brand-azure/5 font-bold text-emerald-400 border-x border-brand-azure/20">🟢 Continua vendendo no PDV local e sincroniza automático quando voltar</td>
+              <td class="p-3.5 text-rose-400">🔴 Loja completamente parada. Sem internet não há venda</td>
+              <td class="p-3.5 text-amber-400">🟡 Módulos de contingência complexos e caros</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-bold text-slate-200">Velocidade de Emissão NFC-e</td>
+              <td class="p-3.5 bg-brand-azure/5 font-bold text-emerald-400 border-x border-brand-azure/20">⚡ 3 Segundos por cupom (otimizado para filas de pico)</td>
+              <td class="p-3.5 text-slate-400">⏳ 8 a 15 segundos dependendo do ping do navegador</td>
+              <td class="p-3.5 text-slate-400">⏳ 5 a 8 segundos com interface pesada</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-bold text-slate-200">Suporte Técnico</td>
+              <td class="p-3.5 bg-brand-azure/5 font-bold text-emerald-400 border-x border-brand-azure/20">👨‍💻 100% Humano em Sarandi/RS por telefone e WhatsApp (< 15 min)</td>
+              <td class="p-3.5 text-rose-400">🤖 Tickets lentos e respostas automáticas em até 48h</td>
+              <td class="p-3.5 text-amber-400">🟡 Chatbot de triagem e horas de espera em fila</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-bold text-slate-200">Integração de Balanças & Periféricos</td>
+              <td class="p-3.5 bg-brand-azure/5 font-bold text-emerald-400 border-x border-brand-azure/20">🔌 Plug & Play nativo serial/USB (Toledo, Elgin, Bematech)</td>
+              <td class="p-3.5 text-rose-400">🔴 Requer plugins de terceiros ou não comunica nativamente</td>
+              <td class="p-3.5 text-slate-400">🟡 Drivers específicos homologados sob consulta</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-bold text-slate-200">Previsibilidade Contratual</td>
+              <td class="p-3.5 bg-brand-azure/5 font-bold text-emerald-400 border-x border-brand-azure/20">💰 Sem taxas ocultas por nota emitida, reajuste só por IPCA</td>
+              <td class="p-3.5 text-amber-400">🟡 Cobra por volume de notas ou faixas de faturamento</td>
+              <td class="p-3.5 text-rose-400">🔴 Reajustes anuais agressivos e custos de consultoria</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-bold text-slate-200">Tempo de Estrada no RS</td>
+              <td class="p-3.5 bg-brand-azure/5 font-bold text-emerald-400 border-x border-brand-azure/20">🏆 +25 Anos (desde 1998) com selo MPS.BR e sede própria</td>
+              <td class="p-3.5 text-slate-400">Novas plataformas sujeitas a fusões e aquisições</td>
+              <td class="p-3.5 text-slate-400">Grandes corporações distantes da realidade local</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span class="text-xs text-slate-400">
+          * Dados com base em pesquisas de campo com mais de 300 clientes migrados no Rio Grande do Sul.
+        </span>
+        <a href="https://wa.me/5554996966175?text=Ola!%20Gostaria%20de%20saber%20mais%20sobre%20as%20vantagens%20do%20TruData%20vs%20outros%20sistemas." target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-emerald-600/30">
+          📲 Falar com Consultor TruData
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function copiarResumoVersus() {
+      const texto = `🛡️ POR QUE ESCOLHER TRUDATA ERP VS SISTEMAS NACIONAIS:\n\n1. Não para na queda de internet (Contingência local blindada);\n2. Emissão de NFC-e em 3s no caixa;\n3. Suporte 100% HUMANO em Sarandi - RS por telefone e WhatsApp;\n4. Balanças Toledo e periféricos Plug & Play nativos;\n5. Sem surpresa de cobrança por nota ou taxas abusivas;\n6. +25 anos de solidez e certificação MPS.BR.\n\nFale com nosso time: (54) 3361-2345`;
+      navigator.clipboard.writeText(texto).then(() => alert('Resumo comparativo copiado para o WhatsApp!'));
+    }
+  </script>
+</body>
+</html>

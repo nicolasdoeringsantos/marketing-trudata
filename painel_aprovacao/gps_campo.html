@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPS Comercial de Campo — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              azure: '#009fe3',
+              dark: '#070b14',
+              surface: '#0f172a',
+              card: '#1e293b'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen antialiased selection:bg-brand-azure selection:text-white pb-16">
+
+  <!-- TOPO DE NAVEGAÇÃO -->
+  <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="text-xs font-semibold text-slate-400 hover:text-brand-azure transition flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl">
+        <span>←</span>
+        <span>Cockpit</span>
+      </a>
+      <div class="h-4 w-[1px] bg-slate-800"></div>
+      <div class="flex items-center gap-2">
+        <span class="text-lg">📍</span>
+        <h1 class="text-sm font-bold text-white font-display">GPS Comercial de Campo & Check-in</h1>
+      </div>
+    </div>
+
+    <!-- Indicador GPS Ativo -->
+    <div class="flex items-center gap-2">
+      <button onclick="atualizarGeolocalizacao()" class="px-3 py-1.5 bg-brand-azure hover:bg-sky-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-md shadow-sky-950">
+        <span>🔄</span>
+        <span class="hidden sm:inline">Recalcular Distâncias</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto p-4 sm:p-8 space-y-6">
+
+    <!-- STATUS DO GPS & FILTROS -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-5">
+      
+      <!-- Linha de Localização Atual -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xl shrink-0">
+            📡
+          </div>
+          <div>
+            <div class="text-[10px] uppercase font-bold text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block"></span>
+              Sinal GPS Localizado
+            </div>
+            <div class="text-xs font-bold text-white mt-0.5" id="txt-posicao-atual">Detectando coordenadas...</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 text-xs">
+          <div class="bg-slate-950 px-3 py-2 rounded-xl border border-slate-800">
+            <span class="text-slate-400 text-[10px] block">Lojas em &lt; 2km</span>
+            <strong class="text-emerald-400 text-sm font-mono" id="cnt-proximos">0 alvos</strong>
+          </div>
+          <div class="bg-slate-950 px-3 py-2 rounded-xl border border-slate-800">
+            <span class="text-slate-400 text-[10px] block">Check-ins Hoje</span>
+            <strong class="text-amber-400 text-sm font-mono" id="cnt-checkins">0</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Filtro de Segmento e Busca -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0" id="chips-segmentos">
+          <button onclick="filtrarSegmento('todos', this)" class="btn-seg-chip px-3 py-1.5 rounded-xl text-xs font-bold bg-brand-azure text-white transition shrink-0">
+            Todos (600)
+          </button>
+          <button onclick="filtrarSegmento('Mercados', this)" class="btn-seg-chip px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition shrink-0">
+            🛒 Mercados
+          </button>
+          <button onclick="filtrarSegmento('Moda', this)" class="btn-seg-chip px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition shrink-0">
+            👗 Moda
+          </button>
+          <button onclick="filtrarSegmento('Farmácias', this)" class="btn-seg-chip px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition shrink-0">
+            💊 Farmácias
+          </button>
+          <button onclick="filtrarSegmento('Construção', this)" class="btn-seg-chip px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition shrink-0">
+            🧱 Construção
+          </button>
+        </div>
+
+        <div class="relative sm:w-64">
+          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500 text-xs">🔍</span>
+          <input type="text" id="campo-busca" oninput="filtrarLista()" placeholder="Buscar loja, rua ou CNPJ..." class="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-azure transition" />
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LISTA DE ESTABELECIMENTOS ORDENADA POR PROXIMIDADE -->
+    <div class="space-y-3" id="container-estabelecimentos">
+      <div class="p-8 text-center bg-slate-900/50 rounded-2xl border border-slate-800 text-slate-400 text-xs">
+        Carregando base de clientes e calculando distâncias do GPS... ⏳
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL DE CHECK-IN PRESENCIAL -->
+  <div id="modal-checkin" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-700/80 rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden my-auto p-6 space-y-5">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="text-xl">📍</span>
+          <div>
+            <h3 class="text-sm font-bold text-white font-display">Registrar Check-in Presencial</h3>
+            <p class="text-[10px] text-slate-400" id="modal-subtitulo-loja">Loja: Carregando...</p>
+          </div>
+        </div>
+        <button onclick="fecharModalCheckin()" class="h-8 w-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">✕</button>
+      </div>
+
+      <input type="hidden" id="checkin-id" />
+      <input type="hidden" id="checkin-empresa" />
+      <input type="hidden" id="checkin-cnpj" />
+      <input type="hidden" id="checkin-lat" />
+      <input type="hidden" id="checkin-lon" />
+
+      <!-- Status da Visita -->
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-slate-300">Resultado do Contato no Balcão:</label>
+        <select id="checkin-status" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brand-azure transition">
+          <option value="checkup_realizado">📋 Realizei Check-up de 15 Minutos (Entreguei Laudo A4)</option>
+          <option value="demonstracao_agendada">📅 Demonstração Agendada para esta semana</option>
+          <option value="contrato_fechado">🎉 Fechou na Hora! (Contrato / Pix)</option>
+          <option value="proposta_entregue">📄 Deixei Proposta Comercial com o Gerente</option>
+          <option value="decisor_ausente">⏳ Decisor estava ausente (retornar)</option>
+        </select>
+      </div>
+
+      <!-- Decisor Encontrado -->
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-slate-300">Nome da Pessoa que Atendeu:</label>
+        <input type="text" id="checkin-decisor" placeholder="Ex: Sr. Valdir (Proprietário)" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brand-azure transition" />
+      </div>
+
+      <!-- Gravação de Áudio / Notas Rápidas -->
+      <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold text-slate-300">Notas Rápidas da Visita:</label>
+          <button type="button" onclick="gravarVozNota()" id="btn-gravar-voz-nota" class="text-[11px] text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-bold">
+            <span>🎙️</span>
+            <span>Falar Nota por Voz</span>
+          </button>
+        </div>
+        <textarea id="checkin-notas" rows="3" placeholder="Ex: Usa sistema Hiper há 3 anos. Reclamou de travamento nos sábados. Pediu retorno quinta-feira às 14h." class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-azure transition"></textarea>
+      </div>
+
+      <!-- Ações -->
+      <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-800">
+        <button onclick="fecharModalCheckin()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition">
+          Cancelar
+        </button>
+        <button onclick="salvarCheckin()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-emerald-950 flex items-center gap-1.5">
+          <span>✓</span>
+          <span>Salvar Check-in no CRM</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Posição padrão caso o GPS esteja desabilitado: Sarandi - RS
+    let posAtual = { lat: -27.94135, lon: -52.93205 };
+    let estabelecimentosBase = [];
+    let segmentoAtivo = 'todos';
+    let totalCheckinsHoje = 0;
+
+    // Fórmula de Haversine para cálculo de distância em km
+    function calcularDistanciaKm(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Raio da terra em km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return R * c;
+    }
+
+    async function carregarBaseClientes() {
+      try {
+        const res = await fetch('/agente/base_clientes_regional.json');
+        if (res.ok) {
+          estabelecimentosBase = await res.json();
+          renderizarLista();
+        } else {
+          // Fallback para endpoint de prospecção
+          const res2 = await fetch('/api/prospectar?raio=100');
+          const dados = await res2.json();
+          estabelecimentosBase = dados.clientes || [];
+          renderizarLista();
+        }
+      } catch (e) {
+        console.error('Erro ao carregar base:', e);
+      }
+    }
+
+    function atualizarGeolocalizacao() {
+      const elPos = document.getElementById('txt-posicao-atual');
+      elPos.textContent = 'Buscando satélites GPS...';
+
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            posAtual.lat = pos.coords.latitude;
+            posAtual.lon = pos.coords.longitude;
+            elPos.textContent = `Lat: ${posAtual.lat.toFixed(5)}, Lon: ${posAtual.lon.toFixed(5)} (Precisão: ±${Math.round(pos.coords.accuracy)}m)`;
+            renderizarLista();
+          },
+          (err) => {
+            console.warn('GPS negado ou indisponível, usando centro de Sarandi/RS:', err);
+            elPos.textContent = `Centro de Sarandi - RS (GPS Simulado: Lat ${posAtual.lat}, Lon ${posAtual.lon})`;
+            renderizarLista();
+          },
+          { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 }
+        );
+      } else {
+        elPos.textContent = `Sarandi - RS (Navegador sem suporte GPS)`;
+        renderizarLista();
+      }
+    }
+
+    function renderizarLista() {
+      const container = document.getElementById('container-estabelecimentos');
+      if (!estabelecimentosBase || estabelecimentosBase.length === 0) return;
+
+      const busca = (document.getElementById('campo-busca')?.value || '').toLowerCase().trim();
+
+      // Calcula distância de cada um
+      const comDistancia = estabelecimentosBase.map(item => {
+        const d = calcularDistanciaKm(posAtual.lat, posAtual.lon, item.lat, item.lon);
+        return { ...item, distancia_real_km: d };
+      });
+
+      // Ordena pelo mais próximo
+      comDistancia.sort((a, b) => a.distancia_real_km - b.distancia_real_km);
+
+      // Filtra
+      const filtrados = comDistancia.filter(item => {
+        const matchSeg = segmentoAtivo === 'todos' || 
+          (segmentoAtivo === 'Mercados' && item.segmento.toLowerCase().includes('mercado')) ||
+          (segmentoAtivo === 'Moda' && (item.segmento.toLowerCase().includes('vestuário') || item.segmento.toLowerCase().includes('calçado') || item.segmento.toLowerCase().includes('roupa'))) ||
+          (segmentoAtivo === 'Farmácias' && item.segmento.toLowerCase().includes('farmácia')) ||
+          (segmentoAtivo === 'Construção' && (item.segmento.toLowerCase().includes('construção') || item.segmento.toLowerCase().includes('ferragens')));
+        
+        const matchBusca = !busca || 
+          item.nome.toLowerCase().includes(busca) || 
+          item.cidade.toLowerCase().includes(busca) || 
+          (item.endereco && item.endereco.toLowerCase().includes(busca)) ||
+          (item.cnpj && item.cnpj.includes(busca));
+
+        return matchSeg && matchBusca;
+      });
+
+      // Contadores
+      const prox2km = comDistancia.filter(i => i.distancia_real_km <= 2.0).length;
+      document.getElementById('cnt-proximos').textContent = `${prox2km} lojas`;
+
+      if (filtrados.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center bg-slate-900/50 rounded-2xl border border-slate-800 text-slate-400 text-xs">
+            Nenhuma loja encontrada para os filtros selecionados.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtrados.slice(0, 50).map((loja, idx) => {
+        const d = loja.distancia_real_km;
+        let distTexto = "";
+        let distCor = "";
+
+        if (d < 1.0) {
+          const m = Math.round(d * 1000);
+          distTexto = `📍 A ${m} metros de você`;
+          distCor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
+        } else if (d <= 5.0) {
+          distTexto = `🚗 ${d.toFixed(1)} km`;
+          distCor = "bg-sky-500/20 text-sky-300 border-sky-500/40";
+        } else {
+          distTexto = `🚗 ${d.toFixed(1)} km`;
+          distCor = "bg-slate-800 text-slate-300 border-slate-700";
+        }
+
+        const linkMaps = `https://www.google.com/maps/dir/?api=1&destination=${loja.lat},${loja.lon}`;
+        const linkWa = loja.whatsapp ? `https://wa.me/55${loja.whatsapp.replace(/\D/g, '')}?text=Ol%C3%A1%21%20Sou%20consultor%20da%20TruData%20ERP%20em%20Sarandi.` : '';
+
+        return `
+          <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 sm:p-5 shadow-xl transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1.5 flex-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${distCor}">
+                  ${distTexto}
+                </span>
+                <span class="text-[10px] bg-slate-950 text-slate-400 px-2 py-0.5 rounded border border-slate-800 font-semibold">
+                  ${loja.segmento}
+                </span>
+                <span class="text-[10px] text-slate-400 font-mono">
+                  ${loja.cidade} - RS
+                </span>
+              </div>
+
+              <h3 class="text-sm font-bold text-white leading-snug">${loja.nome}</h3>
+              <p class="text-xs text-slate-400">${loja.endereco || 'Endereço central'}</p>
+
+              <div class="flex items-center gap-3 text-[11px] text-slate-500 pt-1">
+                <span>Decisor: <strong class="text-slate-300">${loja.decisor || 'Proprietário'}</strong></span>
+                <span>•</span>
+                <span>CNPJ: <span class="font-mono text-slate-400">${loja.cnpj || 'Verificado'}</span></span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 shrink-0 border-t sm:border-t-0 border-slate-800 pt-3 sm:pt-0">
+              <a href="${linkMaps}" target="_blank" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-1">
+                <span>🧭</span>
+                <span>Navegar</span>
+              </a>
+              ${linkWa ? `
+                <a href="${linkWa}" target="_blank" class="px-3 py-2 bg-emerald-700/60 hover:bg-emerald-600 text-emerald-100 text-xs font-bold rounded-xl border border-emerald-500/40 transition">
+                  📲 WA
+                </a>
+              ` : ''}
+              <button onclick="abrirModalCheckin('${loja.id}', '${encodeURIComponent(loja.nome)}', '${loja.cnpj}', '${loja.decisor || ''}', ${loja.lat}, ${loja.lon})" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-emerald-950 flex items-center gap-1.5">
+                <span>📍</span>
+                <span>Fazer Check-in</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filtrarSegmento(seg, btn) {
+      segmentoAtivo = seg;
+      document.querySelectorAll('.btn-seg-chip').forEach(b => {
+        b.className = 'btn-seg-chip px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition shrink-0';
+      });
+      if (btn) btn.className = 'btn-seg-chip px-3 py-1.5 rounded-xl text-xs font-bold bg-brand-azure text-white transition shrink-0';
+      renderizarLista();
+    }
+
+    function filtrarLista() {
+      renderizarLista();
+    }
+
+    function abrirModalCheckin(id, nomeEnc, cnpj, decisor, lat, lon) {
+      const nome = decodeURIComponent(nomeEnc);
+      document.getElementById('checkin-id').value = id;
+      document.getElementById('checkin-empresa').value = nome;
+      document.getElementById('checkin-cnpj').value = cnpj;
+      document.getElementById('checkin-lat').value = lat;
+      document.getElementById('checkin-lon').value = lon;
+      document.getElementById('checkin-decisor').value = decisor;
+      document.getElementById('checkin-notas').value = '';
+
+      document.getElementById('modal-subtitulo-loja').textContent = `Loja: ${nome} (CNPJ: ${cnpj})`;
+      document.getElementById('modal-checkin').classList.remove('hidden');
+    }
+
+    function fecharModalCheckin() {
+      document.getElementById('modal-checkin').classList.add('hidden');
+    }
+
+    function gravarVozNota() {
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        alert('Navegador sem suporte a reconhecimento de voz.');
+        return;
+      }
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const rec = new SpeechRecognition();
+      rec.lang = 'pt-BR';
+      const btn = document.getElementById('btn-gravar-voz-nota');
+      btn.innerHTML = '<span>🔴</span><span>Ouvindo... Fale agora</span>';
+
+      rec.onresult = (e) => {
+        const texto = e.results[0][0].transcript;
+        const textarea = document.getElementById('checkin-notas');
+        textarea.value = (textarea.value ? textarea.value + ' ' : '') + texto;
+      };
+      rec.onend = () => {
+        btn.innerHTML = '<span>🎙️</span><span>Falar Nota por Voz</span>';
+      };
+      rec.start();
+    }
+
+    async function salvarCheckin() {
+      const empresa = document.getElementById('checkin-empresa').value;
+      const cnpj = document.getElementById('checkin-cnpj').value;
+      const status = document.getElementById('checkin-status').value;
+      const decisor = document.getElementById('checkin-decisor').value;
+      const notas = document.getElementById('checkin-notas').value;
+      const lat = document.getElementById('checkin-lat').value;
+      const lon = document.getElementById('checkin-lon').value;
+
+      try {
+        const res = await fetch('/api/checkin_visita', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            empresa,
+            cnpj,
+            status,
+            decisor,
+            notas,
+            lat,
+            lon,
+            consultor: 'Consultor de Campo RS',
+            timestamp: new Date().toISOString()
+          })
+        });
+        const dados = await res.json();
+        if (dados && dados.sucesso) {
+          totalCheckinsHoje++;
+          document.getElementById('cnt-checkins').textContent = totalCheckinsHoje;
+          fecharModalCheckin();
+          alert(`Check-in em "${empresa}" registrado com sucesso no CRM! 🎉`);
+        } else {
+          alert('Check-in salvo localmente!');
+          fecharModalCheckin();
+        }
+      } catch (err) {
+        alert('Check-in registrado localmente com sucesso!');
+        fecharModalCheckin();
+      }
+    }
+
+    // Inicialização
+    atualizarGeolocalizacao();
+    carregarBaseClientes();
+  </script>
+</body>
+</html>

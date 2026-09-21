@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Treinamento de Caixa — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' } },
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col">
+
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
+        ← Voltar ao Hub Central
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-300 font-display">Treinamento Interativo de PDV</span>
+        <span class="text-[10px] bg-cyan-500/20 text-cyan-400 font-bold px-2 py-0.5 rounded border border-cyan-500/30">Ambiente Seguro Sandbox</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
+    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/30">
+          🎓
+        </div>
+        <div>
+          <h1 class="text-2xl font-black font-display text-white">Simulador de Rotinas de Caixa: Treine Novos Colaboradores em 15 Minutos</h1>
+          <p class="text-xs text-slate-400">Pratique as 3 operações mais críticas da frente de loja sem medo de errar no financeiro real.</p>
+        </div>
+      </div>
+
+      <!-- BOTÕES DAS ROTINAS -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <button onclick="selecionarRotina('suprimento')" id="btn-rot-suprimento" class="p-4 rounded-2xl bg-brand-azure text-white text-left font-bold text-xs transition border border-brand-azure">
+          💵 1. Abertura & Suprimento
+          <span class="block text-[11px] font-normal text-white/80 mt-1">Fundo de troco no início do expediente.</span>
+        </button>
+        <button onclick="selecionarRotina('sangria')" id="btn-rot-sangria" class="p-4 rounded-2xl bg-slate-950 text-slate-300 text-left font-bold text-xs transition border border-slate-800 hover:border-slate-700">
+          💸 2. Sangria de Segurança
+          <span class="block text-[11px] font-normal text-slate-500 mt-1">Retirada de excesso de dinheiro da gaveta.</span>
+        </button>
+        <button onclick="selecionarRotina('fechamento')" id="btn-rot-fechamento" class="p-4 rounded-2xl bg-slate-950 text-slate-300 text-left font-bold text-xs transition border border-slate-800 hover:border-slate-700">
+          🔒 3. Fechamento Cego
+          <span class="block text-[11px] font-normal text-slate-500 mt-1">Conferência sem o operador ver o saldo do sistema.</span>
+        </button>
+      </div>
+
+      <!-- ÁREA INTERATIVA DA ROTINA SELECIONADA -->
+      <div id="painel-rotina" class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
+        <!-- Renderizado dinamicamente -->
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function selecionarRotina(tipo) {
+      ['suprimento', 'sangria', 'fechamento'].forEach(t => {
+        const b = document.getElementById('btn-rot-' + t);
+        if (t === tipo) {
+          b.className = "p-4 rounded-2xl bg-brand-azure text-white text-left font-bold text-xs transition border border-brand-azure shadow-lg shadow-brand-azure/20";
+        } else {
+          b.className = "p-4 rounded-2xl bg-slate-950 text-slate-300 text-left font-bold text-xs transition border border-slate-800 hover:border-slate-700";
+        }
+      });
+
+      const painel = document.getElementById('painel-rotina');
+
+      if (tipo === 'suprimento') {
+        painel.innerHTML = `
+          <div class="space-y-3">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2"><span>💵</span> Passo 1: Informar Fundo de Troco Inicial</h3>
+            <p class="text-xs text-slate-400">O operador conta as moedas e notas recebidas na abertura da gaveta para iniciar as vendas com segurança.</p>
+            <div class="max-w-xs space-y-1">
+              <label class="text-[11px] text-slate-400 font-semibold">Valor em Dinheiro (R$):</label>
+              <input type="number" id="valor-suprimento" value="150" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white font-mono" />
+            </div>
+            <button onclick="alert('Suprimento registrado com sucesso! O comprovante fiscal de abertura foi impresso na mini-impressora térmica sem impactar o faturamento bruto.')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition">
+              Confirmar Abertura de Caixa
+            </button>
+          </div>
+        `;
+      } else if (tipo === 'sangria') {
+        painel.innerHTML = `
+          <div class="space-y-3">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2"><span>💸</span> Passo 2: Efetuar Sangria de Gaveta</h3>
+            <p class="text-xs text-slate-400">Para segurança contra roubos, quando a gaveta atinge mais de R$ 800, o sistema avisa o operador para sangrar o dinheiro para o cofre.</p>
+            <div class="max-w-xs space-y-1">
+              <label class="text-[11px] text-slate-400 font-semibold">Valor a Retirar (R$):</label>
+              <input type="number" id="valor-sangria" value="500" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white font-mono" />
+            </div>
+            <button onclick="alert('Sangria de R$ 500,00 efetuada! Comprovante assinado pelo gerente e saldo da gaveta atualizado instantaneamente.')" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold rounded-xl transition">
+              Emitir Sangria de Dinheiro
+            </button>
+          </div>
+        `;
+      } else if (tipo === 'fechamento') {
+        painel.innerHTML = `
+          <div class="space-y-3">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2"><span>🔒</span> Passo 3: Fechamento de Caixa Cego</h3>
+            <p class="text-xs text-slate-400">O operador digita exatamente quanto contou de dinheiro, comprovantes de cartão e moedas. Ele não sabe o saldo do sistema, evitando desvios.</p>
+            <div class="grid grid-cols-2 gap-3 max-w-sm">
+              <div>
+                <label class="text-[10px] text-slate-400 font-semibold">Dinheiro contado (R$):</label>
+                <input type="number" id="fc-dinheiro" value="1240" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono" />
+              </div>
+              <div>
+                <label class="text-[10px] text-slate-400 font-semibold">Cartão contado (R$):</label>
+                <input type="number" id="fc-cartao" value="2850" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-mono" />
+              </div>
+            </div>
+            <button onclick="alert('Caixa encerrado com perfeição! Diferença apurada: R$ 0,00 (100% batido). Relatório confidencial enviado para o WhatsApp do gerente.')" class="px-4 py-2 bg-brand-azure hover:bg-brand-hover text-white text-xs font-bold rounded-xl transition">
+              Processar Fechamento Cego
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    selecionarRotina('suprimento');
+  </script>
+</body>
+</html>

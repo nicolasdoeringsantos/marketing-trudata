@@ -1,0 +1,522 @@
+[
+  {
+    "id": "01",
+    "categoria": "Fiscal & Tributário",
+    "cat_slug": "fiscal",
+    "titulo": "Centro Fiscal Inteligente",
+    "subtitulo": "Identifique e bloqueie erros antes de enviar à SEFAZ.",
+    "arquivo": "card_story_01_fiscal.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_01_fiscal.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "02",
+    "categoria": "Fiscal & Tributário",
+    "cat_slug": "fiscal",
+    "titulo": "Reforma Tributária",
+    "subtitulo": "IBS, CBS e novos impostos sempre atualizados.",
+    "arquivo": "card_story_02_fiscal.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_02_fiscal.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "03",
+    "categoria": "Fiscal & Tributário",
+    "cat_slug": "fiscal",
+    "titulo": "Contingência Offline",
+    "subtitulo": "Continue emitindo NFC-e mesmo sem internet.",
+    "arquivo": "card_story_03_fiscal.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_03_fiscal.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "04",
+    "categoria": "Fiscal & Tributário",
+    "cat_slug": "fiscal",
+    "titulo": "NF-e",
+    "subtitulo": "Emissão e entrada de notas fiscais por XML.",
+    "arquivo": "card_story_04_fiscal.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_04_fiscal.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "05",
+    "categoria": "Fiscal & Tributário",
+    "cat_slug": "fiscal",
+    "titulo": "NFS-e Nacional",
+    "subtitulo": "Emissão de serviços pelo padrão nacional DPS.",
+    "arquivo": "card_story_05_fiscal.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_05_fiscal.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "06",
+    "categoria": "Fiscal & Tributário",
+    "cat_slug": "fiscal",
+    "titulo": "MDF-e e CT-e",
+    "subtitulo": "Documentos fiscais para transporte e logística.",
+    "arquivo": "card_story_06_fiscal.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_06_fiscal.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "07",
+    "categoria": "Fiscal & Tributário",
+    "cat_slug": "fiscal",
+    "titulo": "Assistente Fiscal",
+    "subtitulo": "Emissão guiada em apenas três passos.",
+    "arquivo": "card_story_07_fiscal.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_07_fiscal.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "08",
+    "categoria": "Fiscal & Tributário",
+    "cat_slug": "fiscal",
+    "titulo": "IBPT Automático",
+    "subtitulo": "Transparência fiscal calculada automaticamente.",
+    "arquivo": "card_story_08_fiscal.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_08_fiscal.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "09",
+    "categoria": "Fiscal & Tributário",
+    "cat_slug": "fiscal",
+    "titulo": "Porta Única Fiscal",
+    "subtitulo": "Só avance quando sua nota estiver correta.",
+    "arquivo": "card_story_09_fiscal.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_09_fiscal.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "10",
+    "categoria": "PDV & Vendas",
+    "cat_slug": "pdv",
+    "titulo": "PDV Rápido",
+    "subtitulo": "Venda com agilidade no balcão ou tela touch.",
+    "arquivo": "card_story_10_pdv.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_10_pdv.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "11",
+    "categoria": "PDV & Vendas",
+    "cat_slug": "pdv",
+    "titulo": "PIX + TEF Integrado",
+    "subtitulo": "Pagamentos rápidos com conciliação automática.",
+    "arquivo": "card_story_11_pdv.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_11_pdv.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "12",
+    "categoria": "PDV & Vendas",
+    "cat_slug": "pdv",
+    "titulo": "Cancelamento Inteligente",
+    "subtitulo": "Estoque e financeiro estornados juntos.",
+    "arquivo": "card_story_12_pdv.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_12_pdv.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "13",
+    "categoria": "PDV & Vendas",
+    "cat_slug": "pdv",
+    "titulo": "Comissões Automáticas",
+    "subtitulo": "Calcule por vendedor, produto ou meta.",
+    "arquivo": "card_story_13_pdv.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_13_pdv.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "14",
+    "categoria": "PDV & Vendas",
+    "cat_slug": "pdv",
+    "titulo": "Orçamento → Venda",
+    "subtitulo": "Converta o orçamento aprovado com um clique.",
+    "arquivo": "card_story_14_pdv.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_14_pdv.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "15",
+    "categoria": "PDV & Vendas",
+    "cat_slug": "pdv",
+    "titulo": "PDV Completo",
+    "subtitulo": "Comandas, delivery, pré-venda e devoluções.",
+    "arquivo": "card_story_15_pdv.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_15_pdv.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "16",
+    "categoria": "Estoque & Armazém",
+    "cat_slug": "estoque",
+    "titulo": "Grade de Produtos",
+    "subtitulo": "Cor, tamanho e modelo em um único cadastro.",
+    "arquivo": "card_story_16_estoque.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_16_estoque.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "17",
+    "categoria": "Estoque & Armazém",
+    "cat_slug": "estoque",
+    "titulo": "Transferência entre Filiais",
+    "subtitulo": "Movimente estoque com saldo atualizado na hora.",
+    "arquivo": "card_story_17_estoque.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_17_estoque.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "18",
+    "categoria": "Estoque & Armazém",
+    "cat_slug": "estoque",
+    "titulo": "Lote e Validade",
+    "subtitulo": "Priorize automaticamente o que vence primeiro.",
+    "arquivo": "card_story_18_estoque.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_18_estoque.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "19",
+    "categoria": "Estoque & Armazém",
+    "cat_slug": "estoque",
+    "titulo": "Estoque Multi-local",
+    "subtitulo": "Controle lojas, depósitos, kits e composições.",
+    "arquivo": "card_story_19_estoque.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_19_estoque.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "20",
+    "categoria": "Estoque & Armazém",
+    "cat_slug": "estoque",
+    "titulo": "Inventário Inteligente",
+    "subtitulo": "Conte, organize e analise seu estoque.",
+    "arquivo": "card_story_20_estoque.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_20_estoque.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "21",
+    "categoria": "Gestão Financeira",
+    "cat_slug": "financeiro",
+    "titulo": "Financeiro Inteligente",
+    "subtitulo": "Fiscal e contábil integrados sem retrabalho.",
+    "arquivo": "card_story_21_financeiro.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_21_financeiro.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "22",
+    "categoria": "Gestão Financeira",
+    "cat_slug": "financeiro",
+    "titulo": "Gestão Financeira",
+    "subtitulo": "Contas, caixa e conciliações em uma só tela.",
+    "arquivo": "card_story_22_financeiro.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_22_financeiro.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "23",
+    "categoria": "Gestão Financeira",
+    "cat_slug": "financeiro",
+    "titulo": "DRE + Balancete",
+    "subtitulo": "Informação contábil organizada e auditável.",
+    "arquivo": "card_story_23_financeiro.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_23_financeiro.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "24",
+    "categoria": "Gestão Financeira",
+    "cat_slug": "financeiro",
+    "titulo": "Do Simples ao Completo",
+    "subtitulo": "Use apenas o nível de gestão que você precisa.",
+    "arquivo": "card_story_24_financeiro.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_24_financeiro.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "25",
+    "categoria": "Gestão Financeira",
+    "cat_slug": "financeiro",
+    "titulo": "Conciliação Bancária",
+    "subtitulo": "Importe OFX e CNAB e reduza tarefas manuais.",
+    "arquivo": "card_story_25_financeiro.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_25_financeiro.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "26",
+    "categoria": "Gestão Financeira",
+    "cat_slug": "financeiro",
+    "titulo": "Cobranças Automatizadas",
+    "subtitulo": "Boleto e PIX integrados ao seu financeiro.",
+    "arquivo": "card_story_26_financeiro.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_26_financeiro.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "27",
+    "categoria": "Gestão Financeira",
+    "cat_slug": "financeiro",
+    "titulo": "Centro de Custos",
+    "subtitulo": "Analise resultados por setor, projeto ou filial.",
+    "arquivo": "card_story_27_financeiro.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_27_financeiro.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "28",
+    "categoria": "Comunicação & Vendas",
+    "cat_slug": "comunicacao",
+    "titulo": "Integração Nuvemshop",
+    "subtitulo": "Pedidos, estoque e faturamento sincronizados.",
+    "arquivo": "card_story_28_comunicacao.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_28_comunicacao.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "29",
+    "categoria": "Comunicação & Vendas",
+    "cat_slug": "comunicacao",
+    "titulo": "WhatsApp Inteligente",
+    "subtitulo": "Atenda, venda e envie documentos em um só canal.",
+    "arquivo": "card_story_29_comunicacao.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_29_comunicacao.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "30",
+    "categoria": "Comunicação & Vendas",
+    "cat_slug": "comunicacao",
+    "titulo": "Telegram + SMS",
+    "subtitulo": "Notificações automáticas para seus clientes.",
+    "arquivo": "card_story_30_comunicacao.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_30_comunicacao.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "31",
+    "categoria": "Comunicação & Vendas",
+    "cat_slug": "comunicacao",
+    "titulo": "E-mails Automatizados",
+    "subtitulo": "Envie notas, boletos e pedidos automaticamente.",
+    "arquivo": "card_story_31_comunicacao.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_31_comunicacao.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "32",
+    "categoria": "Nuvem & Segurança",
+    "cat_slug": "seguranca",
+    "titulo": "Segurança em Duas Etapas",
+    "subtitulo": "Mais proteção para usuários e dados.",
+    "arquivo": "card_story_32_seguranca.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_32_seguranca.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "33",
+    "categoria": "Nuvem & Segurança",
+    "cat_slug": "seguranca",
+    "titulo": "Controle de Acessos",
+    "subtitulo": "Defina exatamente o que cada usuário pode acessar.",
+    "arquivo": "card_story_33_seguranca.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_33_seguranca.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "34",
+    "categoria": "Nuvem & Segurança",
+    "cat_slug": "seguranca",
+    "titulo": "Atualizações Automáticas",
+    "subtitulo": "Sempre atualizado sem instalações manuais.",
+    "arquivo": "card_story_34_seguranca.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_34_seguranca.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "35",
+    "categoria": "Nuvem & Segurança",
+    "cat_slug": "seguranca",
+    "titulo": "Backup Automático",
+    "subtitulo": "Seus dados protegidos e sempre disponíveis.",
+    "arquivo": "card_story_35_seguranca.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_35_seguranca.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "36",
+    "categoria": "Nuvem & Segurança",
+    "cat_slug": "seguranca",
+    "titulo": "Gestão Multiempresa",
+    "subtitulo": "Controle matriz, filiais e empresas em um só acesso.",
+    "arquivo": "card_story_36_seguranca.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_36_seguranca.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "37",
+    "categoria": "TruData BI",
+    "cat_slug": "bi",
+    "titulo": "Matriz RFV",
+    "subtitulo": "Descubra seus melhores clientes e quem está se afastando.",
+    "arquivo": "card_story_37_bi.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_37_bi.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "38",
+    "categoria": "TruData BI",
+    "cat_slug": "bi",
+    "titulo": "Indicadores em Tempo Real",
+    "subtitulo": "Faturamento, ticket, vendas e margem sempre atualizados.",
+    "arquivo": "card_story_38_bi.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_38_bi.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "39",
+    "categoria": "TruData BI",
+    "cat_slug": "bi",
+    "titulo": "Curva ABC + Heatmaps",
+    "subtitulo": "Entenda produtos, cores e tamanhos que mais vendem.",
+    "arquivo": "card_story_39_bi.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_39_bi.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "40",
+    "categoria": "TruData BI",
+    "cat_slug": "bi",
+    "titulo": "PivotGrid Interativo",
+    "subtitulo": "Explore seus dados do seu jeito.",
+    "arquivo": "card_story_40_bi.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_40_bi.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "41",
+    "categoria": "TruData BI",
+    "cat_slug": "bi",
+    "titulo": "Trudata BI",
+    "subtitulo": "Dados sincronizados e disponíveis de qualquer lugar.",
+    "arquivo": "card_story_41_bi.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_41_bi.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "42",
+    "categoria": "Módulos Especializados",
+    "cat_slug": "modulos",
+    "titulo": "Gestão para Farmácias",
+    "subtitulo": "SNGPC, PBM, controlados, lote e validade.",
+    "arquivo": "card_story_42_modulos.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_42_modulos.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "43",
+    "categoria": "Módulos Especializados",
+    "cat_slug": "modulos",
+    "titulo": "Ordem de Serviço",
+    "subtitulo": "Veículo, peças, mão de obra e histórico completos.",
+    "arquivo": "card_story_43_modulos.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_43_modulos.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "44",
+    "categoria": "Segmentos Atendidos",
+    "cat_slug": "segmentos",
+    "titulo": "Confecção e Calçados",
+    "subtitulo": "Grade completa, PDV rápido e vendas integradas.",
+    "arquivo": "card_story_44_segmentos.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_44_segmentos.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "45",
+    "categoria": "Segmentos Atendidos",
+    "cat_slug": "segmentos",
+    "titulo": "Comércio em Geral",
+    "subtitulo": "Venda mais rápido e controle todas as suas lojas.",
+    "arquivo": "card_story_45_segmentos.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_45_segmentos.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "46",
+    "categoria": "Segmentos Atendidos",
+    "cat_slug": "segmentos",
+    "titulo": "Gestão para Oficinas",
+    "subtitulo": "OS, veículos, peças e histórico em um só lugar.",
+    "arquivo": "card_story_46_segmentos.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_46_segmentos.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "47",
+    "categoria": "Segmentos Atendidos",
+    "cat_slug": "segmentos",
+    "titulo": "Escritórios Contábeis",
+    "subtitulo": "Gerencie sua carteira de empresas com eficiência.",
+    "arquivo": "card_story_47_segmentos.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_47_segmentos.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "48",
+    "categoria": "Segmentos Atendidos",
+    "cat_slug": "segmentos",
+    "titulo": "Prestação de Serviços",
+    "subtitulo": "OS, NFS-e e faturamento em uma gestão completa.",
+    "arquivo": "card_story_48_segmentos.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_48_segmentos.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "49",
+    "categoria": "Segmentos Atendidos",
+    "cat_slug": "segmentos",
+    "titulo": "Farmácias e Drogarias",
+    "subtitulo": "Controle especializado para a rotina farmacêutica.",
+    "arquivo": "card_story_49_segmentos.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_49_segmentos.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "50",
+    "categoria": "Ecossistema Completo",
+    "cat_slug": "ecossistema",
+    "titulo": "Trudata Desktop",
+    "subtitulo": "Robustez e operação mesmo quando a internet falha.",
+    "arquivo": "card_story_50_ecossistema.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_50_ecossistema.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "51",
+    "categoria": "Ecossistema Completo",
+    "cat_slug": "ecossistema",
+    "titulo": "Trudata Nuvem",
+    "subtitulo": "Acesse sua empresa de onde estiver.",
+    "arquivo": "card_story_51_ecossistema.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_51_ecossistema.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  },
+  {
+    "id": "52",
+    "categoria": "Ecossistema Completo",
+    "cat_slug": "ecossistema",
+    "titulo": "Um Ecossistema Completo",
+    "subtitulo": "Desktop + Nuvem + BI na combinação certa para sua empresa.",
+    "arquivo": "card_story_52_ecossistema.svg",
+    "url": "/conteudo_pronto/cards_stories/card_story_52_ecossistema.svg",
+    "dimensoes": "1080x1920 (9:16)"
+  }
+]

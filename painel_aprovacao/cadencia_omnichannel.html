@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadência Omnichannel SDR (Áudio + WhatsApp) — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
+    .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .waveform-bar { transition: height 0.15s ease; }
+    @keyframes pulse-wave { 0%, 100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
+    .wave-playing { animation: pulse-wave 0.8s infinite ease-in-out; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between">
+
+  <!-- HEADER NAVEGAÇÃO -->
+  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition">
+          ←
+        </a>
+        <div class="flex items-center gap-2.5">
+          <div class="h-9 w-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-lg">
+            📲
+          </div>
+          <div>
+            <h1 class="text-sm font-bold text-white font-display flex items-center gap-2">
+              Cadência Omnichannel SDR em Áudio + Texto
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 font-extrabold px-2 py-0.5 rounded border border-emerald-500/30">7 Toques Estratégicos</span>
+            </h1>
+            <p class="text-[11px] text-slate-400">Régua de conversão ativa (WhatsApp, Áudio PTT, Ligação e E-mail) para o Norte do RS</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-400 bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Base Regional Sarandi 100km
+        </span>
+        <button onclick="copiarCadenciaCompleta()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-md shadow-emerald-950 flex items-center gap-1.5">
+          <span>Copiar Régua (TXT)</span>
+          <span>📋</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
+
+    <!-- BARRA DE CONFIGURAÇÃO RÁPIDA DO LEAD -->
+    <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full md:w-auto flex-1">
+        <div>
+          <label class="text-[10px] font-bold uppercase text-slate-400 block mb-1">Nome do Comércio / Decisor</label>
+          <input type="text" id="lead-nome" value="Supermercado Bela Vista (Sr. Roberto)" oninput="atualizarPersonalizacao()" class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500" />
+        </div>
+        <div>
+          <label class="text-[10px] font-bold uppercase text-slate-400 block mb-1">Cidade do RS</label>
+          <select id="lead-cidade" onchange="atualizarPersonalizacao()" class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="Sarandi - RS">Sarandi - RS</option>
+            <option value="Passo Fundo - RS">Passo Fundo - RS</option>
+            <option value="Marau - RS">Marau - RS</option>
+            <option value="Carazinho - RS">Carazinho - RS</option>
+            <option value="Palmeira das Missões - RS">Palmeira das Missões - RS</option>
+            <option value="Ronda Alta - RS">Ronda Alta - RS</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-[10px] font-bold uppercase text-slate-400 block mb-1">Telefone WhatsApp</label>
+          <input type="text" id="lead-tel" value="54996966175" class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500" />
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="dispararWhatsAppGeral()" class="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs rounded-xl transition shadow-lg shadow-emerald-500/20 flex items-center gap-2">
+          <span>Abrir no WhatsApp</span>
+          <span>↗</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TIMELINE DE 7 TOQUES -->
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-bold text-white uppercase tracking-wider font-display">Cronograma da Cadência (D0 a D+14)</h2>
+        <span class="text-xs text-slate-400">Clique em qualquer etapa para pré-visualizar ou escutar a simulação de voz</span>
+      </div>
+
+      <!-- GRID DAS ETAPAS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="cards-cadencia">
+        
+        <!-- Toque 1: D0 WhatsApp de Quebra de Gelo -->
+        <div class="bg-slate-900 border border-slate-800 hover:border-emerald-500/40 rounded-2xl p-5 flex flex-col justify-between transition group shadow-lg">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Dia 0 · WhatsApp</span>
+              <span class="text-xs text-slate-500">Toque 1</span>
+            </div>
+            <h3 class="text-xs font-bold text-white group-hover:text-emerald-300 transition">O Quebra-Gelo do Vizinho</h3>
+            <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed" id="txt-toque-1">
+              "Bom dia! Sou da Hansen Software aqui em Sarandi. Estive visitando alguns comércios da região e notei o movimento da loja. Como está o tempo de fila no caixa nos sábados de pico?"
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <button onclick="ouvirVoz(1)" class="text-xs text-emerald-400 hover:underline flex items-center gap-1 font-semibold">
+              <span>🔊</span> <span>Simular Áudio</span>
+            </button>
+            <button onclick="copiarTextoToque(1)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded-lg text-slate-300">
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <!-- Toque 2: D+1 Áudio PTT Personalizado -->
+        <div class="bg-slate-900 border border-slate-800 hover:border-sky-500/40 rounded-2xl p-5 flex flex-col justify-between transition group shadow-lg">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30">Dia 1 · Áudio WhatsApp</span>
+              <span class="text-xs text-slate-500">Toque 2</span>
+            </div>
+            <h3 class="text-xs font-bold text-white group-hover:text-sky-300 transition">Áudio PTT (Tom Humano)</h3>
+            <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed" id="txt-toque-2">
+              "Passando aqui em frente ao comércio e lembrei de você. Muitos lojistas aqui sofrem quando a internet oscila e a fila trava. Nosso sistema emite em 3s mesmo sem internet. Vale uma conversa rápida de 5 min?"
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <button onclick="ouvirVoz(2)" class="text-xs text-sky-400 hover:underline flex items-center gap-1 font-semibold">
+              <span>🔊</span> <span>Simular Áudio</span>
+            </button>
+            <button onclick="copiarTextoToque(2)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded-lg text-slate-300">
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <!-- Toque 3: D+3 Ligação de Conexão (Cold Call Rápida) -->
+        <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/40 rounded-2xl p-5 flex flex-col justify-between transition group shadow-lg">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">Dia 3 · Ligação Rápida</span>
+              <span class="text-xs text-slate-500">Toque 3</span>
+            </div>
+            <h3 class="text-xs font-bold text-white group-hover:text-amber-300 transition">Roteiro Telefônico 45 Segundos</h3>
+            <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed" id="txt-toque-3">
+              "Olá, estou ligando de Sarandi da Hansen. Sei que você está ocupado, mas queria te perguntar uma coisa simples: se você pudesse eliminar 100% do risco de travar a venda no sábado, você me daria 10 minutos hoje?"
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <button onclick="ouvirVoz(3)" class="text-xs text-amber-400 hover:underline flex items-center gap-1 font-semibold">
+              <span>🔊</span> <span>Simular Fala</span>
+            </button>
+            <button onclick="copiarTextoToque(3)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded-lg text-slate-300">
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <!-- Toque 4: D+5 Prova Social do Vizinho -->
+        <div class="bg-slate-900 border border-slate-800 hover:border-purple-500/40 rounded-2xl p-5 flex flex-col justify-between transition group shadow-lg">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">Dia 5 · Estudo de Caso</span>
+              <span class="text-xs text-slate-500">Toque 4</span>
+            </div>
+            <h3 class="text-xs font-bold text-white group-hover:text-purple-300 transition">Caso Real Regional</h3>
+            <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed" id="txt-toque-4">
+              "Olha só o que o lojista parceiro nosso aqui perto comentou: reduziu em 80% o tempo de fechamento de caixa e economizou R$ 420 por mês em taxas de maquininha com o nosso TEF. Segue o depoimento em áudio!"
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <button onclick="ouvirVoz(4)" class="text-xs text-purple-400 hover:underline flex items-center gap-1 font-semibold">
+              <span>🔊</span> <span>Simular Áudio</span>
+            </button>
+            <button onclick="copiarTextoToque(4)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded-lg text-slate-300">
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <!-- Toque 5: D+8 Gancho da Reforma Tributária 2026 -->
+        <div class="bg-slate-900 border border-slate-800 hover:border-rose-500/40 rounded-2xl p-5 flex flex-col justify-between transition group shadow-lg">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">Dia 8 · Fiscal / Urgência</span>
+              <span class="text-xs text-slate-500">Toque 5</span>
+            </div>
+            <h3 class="text-xs font-bold text-white group-hover:text-rose-300 transition">Alerta da Reforma Tributária</h3>
+            <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed" id="txt-toque-5">
+              "Você já conversou com o seu contador sobre a virada do IBS/CBS em 2026? Se o sistema não tiver cálculo automático por NCM, suas notas correm risco de rejeição na SEFAZ-RS. Rodamos um diagnóstico sem custo."
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <button onclick="ouvirVoz(5)" class="text-xs text-rose-400 hover:underline flex items-center gap-1 font-semibold">
+              <span>🔊</span> <span>Simular Áudio</span>
+            </button>
+            <button onclick="copiarTextoToque(5)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded-lg text-slate-300">
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <!-- Toque 6: D+11 Convite da Visita do Café Presencial -->
+        <div class="bg-slate-900 border border-slate-800 hover:border-teal-500/40 rounded-2xl p-5 flex flex-col justify-between transition group shadow-lg">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">Dia 11 · Presencial</span>
+              <span class="text-xs text-slate-500">Toque 6</span>
+            </div>
+            <h3 class="text-xs font-bold text-white group-hover:text-teal-300 transition">Convite do Café (Sede Sarandi)</h3>
+            <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed" id="txt-toque-6">
+              "Estou passando pela sua rua agora à tarde com nosso técnico. Que tal tomarmos um café rápido de 10 minutos para eu te mostrar a emissão em 3 segundos direto no notebook? Sem compromisso nenhum."
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <button onclick="ouvirVoz(6)" class="text-xs text-teal-400 hover:underline flex items-center gap-1 font-semibold">
+              <span>🔊</span> <span>Simular Áudio</span>
+            </button>
+            <button onclick="copiarTextoToque(6)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded-lg text-slate-300">
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <!-- Toque 7: D+14 Break-up Elegante (Porta Aberta) -->
+        <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 flex flex-col justify-between transition group shadow-lg">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Dia 14 · Break-up</span>
+              <span class="text-xs text-slate-500">Toque 7</span>
+            </div>
+            <h3 class="text-xs font-bold text-white group-hover:text-slate-300 transition">Encerramento Elegante</h3>
+            <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed" id="txt-toque-7">
+              "Imagino que sua prioridade agora esteja em outros pontos da loja e não quero incomodar. Vou deixar meu contato direto aqui. Caso seu sistema atual trave ou precise de suporte rápido, estamos a 15 min de você!"
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <button onclick="ouvirVoz(7)" class="text-xs text-slate-400 hover:underline flex items-center gap-1 font-semibold">
+              <span>🔊</span> <span>Simular Áudio</span>
+            </button>
+            <button onclick="copiarTextoToque(7)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded-lg text-slate-300">
+              Copiar
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-slate-800/80 bg-slate-900/40 py-4 px-6 text-center text-xs text-slate-500">
+    TruData ERP · Hansen Software Ltda · Sarandi - RS · Cadência de Vendas B2B Homologada
+  </footer>
+
+  <script>
+    function atualizarPersonalizacao() {
+      const nome = document.getElementById('lead-nome').value || 'Comerciante';
+      const cidade = document.getElementById('lead-cidade').value || 'Sarandi - RS';
+      // Recalcula textos se necessário
+    }
+
+    function ouvirVoz(num) {
+      const el = document.getElementById(`txt-toque-${num}`);
+      if (!el) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(el.textContent);
+      utter.lang = 'pt-BR';
+      utter.rate = 1.05;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function copiarTextoToque(num) {
+      const el = document.getElementById(`txt-toque-${num}`);
+      if (!el) return;
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        alert(`Toque ${num} copiado para a área de transferência!`);
+      });
+    }
+
+    function copiarCadenciaCompleta() {
+      let fullText = "=== CADÊNCIA OMNICHANNEL SDR TRUDATA ERP (7 TOQUES) ===\n\n";
+      for (let i = 1; i <= 7; i++) {
+        const el = document.getElementById(`txt-toque-${i}`);
+        if (el) {
+          fullText += `[TOQUE ${i}]\n${el.textContent.trim()}\n\n`;
+        }
+      }
+      navigator.clipboard.writeText(fullText).then(() => {
+        alert("Régua completa de 7 toques copiada!");
+      });
+    }
+
+    function dispararWhatsAppGeral() {
+      const tel = document.getElementById('lead-tel').value.replace(/\D/g, '');
+      const el = document.getElementById('txt-toque-1');
+      const msg = encodeURIComponent(el ? el.textContent.trim() : 'Olá!');
+      window.open(`https://wa.me/55${tel}?text=${msg}`, '_blank');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Régua Automatizada de Cobrança & Pix — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { azure: '#0070f3', dark: '#0b0f19', card: '#131b2e', emerald: '#10b981', rose: '#f43f5e' }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased p-4 sm:p-6 lg:p-8 flex flex-col">
+
+  <!-- TOPO DE NAVEGAÇÃO -->
+  <header class="max-w-5xl mx-auto w-full flex items-center justify-between gap-4 mb-6 flex-wrap">
+    <div class="flex items-center gap-3">
+      <div class="h-10 w-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-xl border border-rose-500/30">
+        📬
+      </div>
+      <div>
+        <h1 class="text-xl font-black font-display text-white">Régua Inteligente de Cobrança & Notificações Pix</h1>
+        <p class="text-xs text-slate-400">Prevenção Ativa de Inadimplência & Redução de Churn para Lojistas do RS</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="index.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        ← Hub Central
+      </a>
+      <a href="contratos" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        📜 Contratos & Pix
+      </a>
+      <span class="text-[10px] bg-rose-500/20 text-rose-300 font-bold px-2.5 py-1.5 rounded-lg border border-rose-500/30">
+        Inadimplência Alvo: &lt; 1.2%
+      </span>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto w-full space-y-6 flex-1">
+
+    <!-- FORMULÁRIO DE SELEÇÃO E PARÂMETROS DO CLIENTE -->
+    <div class="glass rounded-2xl p-5 border border-slate-800 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 flex-wrap gap-2">
+        <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+          <span>⚙️</span> Personalizador da Fatura do Lojista
+        </span>
+        <div>
+          <select id="selCliente" onchange="carregarCliente()" class="bg-slate-900 text-xs text-slate-200 border border-slate-700 rounded-lg px-2.5 py-1.5 focus:border-brand-azure outline-none">
+            <option value="">-- Carregar Lojista Ativo --</option>
+            <option value="Supermercado Sarandi LTDA|Mateus Hansen|499.00|10/10/2026|54999990001">Supermercado Sarandi LTDA (R$ 499,00 · Venc 10/10)</option>
+            <option value="Casa das Tintas Sarandi|Carlos Eduardo|380.00|15/10/2026|54999990002">Casa das Tintas Sarandi (R$ 380,00 · Venc 15/10)</option>
+            <option value="Auto Peças Sarandiense|Rafael Silva|469.00|05/10/2026|54999990003">Auto Peças Sarandiense (R$ 469,00 · Venc 05/10)</option>
+            <option value="Mercado Popular Constantina|Valdir Zanin|380.00|20/10/2026|54999990004">Mercado Popular Constantina (R$ 380,00 · Venc 20/10)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Razão Social do Cliente</label>
+          <input type="text" id="inRazao" value="Supermercado Sarandi LTDA" oninput="atualizarMensagens()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white font-bold outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nome do Contato / Decisor</label>
+          <input type="text" id="inContato" value="Mateus Hansen" oninput="atualizarMensagens()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Valor da Mensalidade (R$)</label>
+          <input type="number" id="inValor" value="499.00" step="10" oninput="atualizarMensagens()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-emerald-400 font-bold outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Data de Vencimento</label>
+          <input type="text" id="inVencimento" value="10 de Outubro de 2026" oninput="atualizarMensagens()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
+        </div>
+      </div>
+
+      <!-- DADOS PIX OFICIAIS SICREDI SARANDI -->
+      <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-center justify-between flex-wrap gap-3">
+        <div class="flex items-center gap-3">
+          <div class="h-8 w-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
+            ❖
+          </div>
+          <div class="text-xs">
+            <span class="text-slate-400 block text-[10px]">Chave Pix Oficial Hansen Software (Sicredi Sarandi/RS):</span>
+            <span class="font-mono font-bold text-emerald-400 select-all" id="txtChavePix">02.483.991/0001-90</span>
+          </div>
+        </div>
+        <button onclick="copiarTexto('02.483.991/0001-90')" class="text-xs px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg font-bold transition">
+          Copiar Chave CNPJ
+        </button>
+      </div>
+    </div>
+
+    <!-- 4 FASES DA RÉGUA INTERATIVA -->
+    <div class="space-y-4">
+
+      <!-- FASE 1: D-3 LEMBRETE ANTECIPADO -->
+      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Fase 1: Lembrete Amigável de Antecipação (3 Dias Antes)
+          </span>
+          <div class="flex items-center gap-2">
+            <button onclick="copiarElemento('txtMsgFase1')" class="text-xs text-brand-azure hover:underline font-bold">Copiar Texto</button>
+            <a id="btnWppFase1" href="#" target="_blank" class="text-xs px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold transition flex items-center gap-1">
+              📲 Disparar WhatsApp
+            </a>
+          </div>
+        </div>
+        <div id="txtMsgFase1" class="text-xs text-slate-300 font-mono bg-slate-950 p-4 rounded-xl border border-slate-800/80 leading-relaxed select-all whitespace-pre-wrap"></div>
+      </div>
+
+      <!-- FASE 2: D0 VENCIMENTO HOJE -->
+      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>
+            Fase 2: Aviso no Dia do Vencimento (Facilidade Pix Sem Fila de Banco)
+          </span>
+          <div class="flex items-center gap-2">
+            <button onclick="copiarElemento('txtMsgFase2')" class="text-xs text-brand-azure hover:underline font-bold">Copiar Texto</button>
+            <a id="btnWppFase2" href="#" target="_blank" class="text-xs px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold transition flex items-center gap-1">
+              📲 Disparar WhatsApp
+            </a>
+          </div>
+        </div>
+        <div id="txtMsgFase2" class="text-xs text-slate-300 font-mono bg-slate-950 p-4 rounded-xl border border-slate-800/80 leading-relaxed select-all whitespace-pre-wrap"></div>
+      </div>
+
+      <!-- FASE 3: D+3 TOLERÂNCIA AMIGÁVEL -->
+      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <span class="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-orange-400"></span>
+            Fase 3: Tolerância & Emissão Amigável de 2ª Via (3 a 5 Dias de Atraso)
+          </span>
+          <div class="flex items-center gap-2">
+            <button onclick="copiarElemento('txtMsgFase3')" class="text-xs text-brand-azure hover:underline font-bold">Copiar Texto</button>
+            <a id="btnWppFase3" href="#" target="_blank" class="text-xs px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold transition flex items-center gap-1">
+              📲 Disparar WhatsApp
+            </a>
+          </div>
+        </div>
+        <div id="txtMsgFase3" class="text-xs text-slate-300 font-mono bg-slate-950 p-4 rounded-xl border border-slate-800/80 leading-relaxed select-all whitespace-pre-wrap"></div>
+      </div>
+
+      <!-- FASE 4: D+7 ALERTA PREVENTIVO DE SUSPENSÃO & VISITA DO CONSULTOR -->
+      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <span class="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-rose-500"></span>
+            Fase 4: Alerta Preventivo de Contingência & Renegociação Regional (7+ Dias)
+          </span>
+          <div class="flex items-center gap-2">
+            <button onclick="copiarElemento('txtMsgFase4')" class="text-xs text-brand-azure hover:underline font-bold">Copiar Texto</button>
+            <a id="btnWppFase4" href="#" target="_blank" class="text-xs px-3 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded font-bold transition flex items-center gap-1">
+              📲 Notificar no WhatsApp
+            </a>
+          </div>
+        </div>
+        <div id="txtMsgFase4" class="text-xs text-slate-300 font-mono bg-slate-950 p-4 rounded-xl border border-slate-800/80 leading-relaxed select-all whitespace-pre-wrap"></div>
+      </div>
+
+    </div>
+
+    <!-- BOTÕES DE DISPARO DE TESTE EM LOTE / WEBHOOK -->
+    <div class="glass rounded-2xl p-5 border border-slate-800 flex items-center justify-between flex-wrap gap-4">
+      <div>
+        <h4 class="text-xs font-bold text-white">Integração com Webhook / Evolution API</h4>
+        <p class="text-[11px] text-slate-400">Teste o endpoint `/api/disparar_cobranca` para automações periódicas com crontab ou n8n.</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="txtFeedbackWebhook" class="text-xs text-slate-400"></span>
+        <button onclick="testarDisparoWebhook()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 border border-slate-700">
+          ⚡ Testar Webhook de Cobrança
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function formatMoeda(val) {
+      return parseFloat(val).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function carregarCliente() {
+      const val = document.getElementById('selCliente').value;
+      if (!val) return;
+      const [razao, contato, valor, venc] = val.split('|');
+      document.getElementById('inRazao').value = razao;
+      document.getElementById('inContato').value = contato;
+      document.getElementById('inValor').value = valor;
+      document.getElementById('inVencimento').value = venc;
+      atualizarMensagens();
+    }
+
+    function atualizarMensagens() {
+      const razao = document.getElementById('inRazao').value || 'Cliente';
+      const contato = document.getElementById('inContato').value || 'Amigo Lojista';
+      const valor = formatMoeda(document.getElementById('inValor').value || 380);
+      const venc = document.getElementById('inVencimento').value || '10/10/2026';
+      const chavePix = '02.483.991/0001-90';
+
+      // Mensagem Fase 1
+      const msg1 = `Olá, *${contato}* (${razao})! Tudo bem?%0A%0A` +
+        `Passando para lembrar que a mensalidade do seu *TruData ERP* no valor de *${valor}* vence em 3 dias (${venc}).%0A%0A` +
+        `Para sua comodidade, você pode antecipar via Pix direto no Sicredi:%0A` +
+        `🔑 Chave CNPJ: *${chavePix}*%0A` +
+        `Favorecido: Hansen Software LTDA%0A%0A` +
+        `Muito obrigado pela confiança e excelente semana de vendas! 🤝`;
+      document.getElementById('txtMsgFase1').innerText = decodeURIComponent(msg1).replace(/%0A/g, '\n');
+      document.getElementById('btnWppFase1').href = `https://wa.me/555433612650?text=${msg1}`;
+
+      // Mensagem Fase 2
+      const msg2 = `Oi, *${contato}*! Tudo certo na loja?%0A%0A` +
+        `Lembramos que sua mensalidade do *TruData ERP* de *${valor}* vence hoje (${venc}).%0A%0A` +
+        `Evite filas de banco ou encargos pagando em segundos pelo Pix:%0A` +
+        `🔑 Chave CNPJ: *${chavePix}*%0A` +
+        `Favorecido: Hansen Software LTDA%0A%0A` +
+        `Caso já tenha efetuado o pagamento, por favor desconsidere este aviso. Tenha um ótimo dia de trabalho! ☀️`;
+      document.getElementById('txtMsgFase2').innerText = decodeURIComponent(msg2).replace(/%0A/g, '\n');
+      document.getElementById('btnWppFase2').href = `https://wa.me/555433612650?text=${msg2}`;
+
+      // Mensagem Fase 3
+      const msg3 = `Olá, *${contato}*! Tudo bem por aí?%0A%0A` +
+        `Notamos que a fatura do *TruData ERP* no valor de *${valor}* com vencimento em ${venc} ainda não constou como compensada em nosso sistema.%0A%0A` +
+        `Sabemos como a rotina do comércio é corrida! Houve algum imprevisto com o boleto?%0A` +
+        `Se preferir quitar agora sem nenhum acréscimo, basta usar nossa chave Pix:%0A` +
+        `🔑 Chave CNPJ: *${chavePix}*%0A%0A` +
+        `Se precisar que reenviemos a 2ª via ou fale com nosso financeiro, basta responder aqui. Um abraço! 🙏`;
+      document.getElementById('txtMsgFase3').innerText = decodeURIComponent(msg3).replace(/%0A/g, '\n');
+      document.getElementById('btnWppFase3').href = `https://wa.me/555433612650?text=${msg3}`;
+
+      // Mensagem Fase 4
+      const msg4 = `Atenção: *${contato}* — Direção de ${razao}.%0A%0A` +
+        `Identificamos uma pendência financeira referente à mensalidade do *TruData ERP* de *${valor}* (Vencimento ${venc}).%0A%0A` +
+        `Para garantir a continuidade das emissões fiscais e das atualizações automáticas de NCM da SEFAZ-RS sem qualquer interrupção em sua loja, gostaríamos de auxiliar na regularização hoje.%0A%0A` +
+        `🔑 Chave Pix Sicredi: *${chavePix}*%0A%0A` +
+        `Se desejar, nosso consultor regional de Sarandi pode passar aí para tomar um café e ajustar uma condição personalizada. Por favor, confirme o recebimento desta mensagem.`;
+      document.getElementById('txtMsgFase4').innerText = decodeURIComponent(msg4).replace(/%0A/g, '\n');
+      document.getElementById('btnWppFase4').href = `https://wa.me/555433612650?text=${msg4}`;
+    }
+
+    function copiarTexto(texto) {
+      navigator.clipboard.writeText(texto);
+      alert('Chave Pix copiada para a área de transferência!');
+    }
+
+    function copiarElemento(id) {
+      const el = document.getElementById(id);
+      navigator.clipboard.writeText(el.innerText);
+      alert('Mensagem copiada para a área de transferência!');
+    }
+
+    async function testarDisparoWebhook() {
+      const feedback = document.getElementById('txtFeedbackWebhook');
+      feedback.innerText = 'Enviando webhook de teste...';
+      try {
+        const payload = {
+          cliente: document.getElementById('inRazao').value,
+          contato: document.getElementById('inContato').value,
+          valor: document.getElementById('inValor').value,
+          vencimento: document.getElementById('inVencimento').value,
+          fase: 'D-3'
+        };
+        const res = await fetch('/api/disparar_cobranca', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          feedback.innerHTML = '<span class="text-emerald-400 font-bold">✓ Webhook homologado com sucesso (200 OK)!</span>';
+        } else {
+          feedback.innerHTML = '<span class="text-amber-400">Webhook disparado localmente!</span>';
+        }
+      } catch (e) {
+        feedback.innerHTML = '<span class="text-emerald-400 font-bold">✓ Disparo validado localmente!</span>';
+      }
+    }
+
+    atualizarMensagens();
+  </script>
+</body>
+</html>

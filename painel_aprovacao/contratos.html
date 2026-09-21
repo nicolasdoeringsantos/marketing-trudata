@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Contratos & Termos B2B — TruData ERP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0b1329;
+            --bg-card: #152243;
+            --accent-cyan: #00d2ff;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #233560;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            padding: 25px 15px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-area h1 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-area p {
+            color: var(--text-secondary);
+            font-size: 13.5px;
+            margin-top: 3px;
+        }
+
+        .nav-links a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 600;
+            padding: 8px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-card);
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background: var(--accent-cyan);
+            color: #000;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 950px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 22px;
+            height: fit-content;
+        }
+
+        .form-card h2 {
+            font-size: 17px;
+            color: #fff;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .field-group {
+            margin-bottom: 14px;
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .field-input, select {
+            width: 100%;
+            background: #0b1329;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 9px 12px;
+            color: #fff;
+            font-size: 13.5px;
+            outline: none;
+        }
+
+        .field-input:focus, select:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+
+        .btn-print {
+            width: 100%;
+            background: var(--accent-emerald);
+            color: #000;
+            font-weight: 800;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-print:hover {
+            opacity: 0.9;
+        }
+
+        /* Folha A4 do Contrato */
+        .preview-pane {
+            background: #ffffff;
+            color: #1a202c;
+            border-radius: 12px;
+            padding: 45px 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-family: 'Merriweather', serif;
+            line-height: 1.7;
+            font-size: 13.5px;
+            min-height: 800px;
+        }
+
+        .preview-pane h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            text-align: center;
+            font-weight: 800;
+            color: #0b192c;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #0b192c;
+            padding-bottom: 12px;
+        }
+
+        .contract-parties {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 22px;
+            font-size: 12.5px;
+        }
+
+        .clause-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 18px 0 6px 0;
+            text-transform: uppercase;
+        }
+
+        .signature-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+        }
+
+        .signature-line {
+            border-top: 1px solid #000;
+            padding-top: 8px;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            header, .form-card, .nav-links {
+                display: none !important;
+            }
+            .workspace {
+                display: block;
+            }
+            .preview-pane {
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo-area">
+            <h1>⚖️ Gerador de Contratos & Termos B2B</h1>
+            <p>Hansen Software LTDA • Minutas Contratuais de Licenciamento & Suporte TruData ERP</p>
+        </div>
+        <div class="nav-links">
+            <a href="/index.html">← Voltar ao Painel</a>
+            <a href="/proposta">Gerador de Propostas</a>
+            <a href="/crm">CRM de Vendas</a>
+        </div>
+    </header>
+
+    <div class="workspace">
+        <!-- Formulário de Preenchimento -->
+        <div class="form-card">
+            <h2>📝 Dados do Contrato</h2>
+
+            <div class="field-group" style="background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(14, 165, 233, 0.35); padding: 12px; border-radius: 10px; margin-bottom: 16px;">
+                <label style="color: #38bdf8; font-weight: 700;">⚡ Carregar Alvo Real (Top 20 Piloto / CRM)</label>
+                <select id="sel-lead-rapido" class="field-input" onchange="carregarLeadSelecionado()">
+                    <option value="">-- Selecione para preenchimento automático --</option>
+                </select>
+                <p style="font-size: 11px; color: #94a3b8; margin-top: 4px;">Puxa Razão Social, CNPJ, Cidade, Endereço, PDVs e calcula Setup/MRR</p>
+            </div>
+
+            <div class="field-group">
+                <label>Razão Social do Cliente</label>
+                <input type="text" id="cli-razao" class="field-input" value="Supermercado Sarandi LTDA" oninput="renderContrato()">
+            </div>
+
+            <div class="field-group">
+                <label>Nome Fantasia / Loja</label>
+                <input type="text" id="cli-fantasia" class="field-input" value="Super Planalto" oninput="renderContrato()">
+            </div>
+
+            <div class="field-group">
+                <label>CNPJ / MF</label>
+                <input type="text" id="cli-cnpj" class="field-input" value="12.345.678/0001-99" oninput="renderContrato()">
+            </div>
+
+            <div class="field-group">
+                <label>Cidade / UF</label>
+                <input type="text" id="cli-cidade" class="field-input" value="Sarandi / RS" oninput="renderContrato()">
+            </div>
+
+            <div class="field-group">
+                <label>Representante Legal (Nome e CPF)</label>
+                <input type="text" id="cli-rep" class="field-input" value="João Silva (CPF 123.456.789-00)" oninput="renderContrato()">
+            </div>
+
+            <div class="field-group">
+                <label>Módulos Contratados</label>
+                <div class="checkbox-grid">
+                    <label class="checkbox-label"><input type="checkbox" id="mod-pdv" checked onchange="renderContrato()"> PDV Frente de Caixa</label>
+                    <label class="checkbox-label"><input type="checkbox" id="mod-estoque" checked onchange="renderContrato()"> Estoque & Grade</label>
+                    <label class="checkbox-label"><input type="checkbox" id="mod-fiscal" checked onchange="renderContrato()"> Fiscal & SPED/EFD</label>
+                    <label class="checkbox-label"><input type="checkbox" id="mod-financeiro" checked onchange="renderContrato()"> Financeiro & DRE</label>
+                    <label class="checkbox-label"><input type="checkbox" id="mod-bi" onchange="renderContrato()"> BI & Indicadores</label>
+                    <label class="checkbox-label"><input type="checkbox" id="mod-vendas" onchange="renderContrato()"> Força de Vendas</label>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label>Taxa de Implantação e Treinamento (R$)</label>
+                <input type="text" id="val-implantacao" class="field-input" value="1.500,00" oninput="renderContrato()">
+            </div>
+
+            <div class="field-group">
+                <label>Mensalidade de Manutenção e Suporte (R$)</label>
+                <input type="text" id="val-mensal" class="field-input" value="480,00" oninput="renderContrato()">
+            </div>
+
+            <div class="field-group">
+                <label>Quantidade de Caixas / PDVs</label>
+                <input type="number" id="qtd-pdv" class="field-input" value="3" min="1" oninput="renderContrato()">
+            </div>
+
+            <button class="btn-print" onclick="window.print()">
+                🖨️ Imprimir / Salvar Contrato em PDF
+            </button>
+            <button class="btn-print" style="background: #0284c7; color: #fff; margin-top: 10px;" onclick="enviarContratoWhatsApp()">
+                📲 Enviar Resumo do Contrato & Chave Pix no WhatsApp
+            </button>
+        </div>
+
+        <!-- Visualização da Folha Contratual -->
+        <div class="preview-pane" id="contrato-folha">
+            <h1>CONTRATO DE LICENÇA DE USO DE SOFTWARE E PRESTAÇÃO DE SERVIÇOS TÉCNICOS</h1>
+
+            <div class="contract-parties">
+                <p><strong>CONTRATADA:</strong> HANSEN SOFTWARE LTDA, pessoa jurídica de direito privado, inscrita no CNPJ sob o nº 02.483.991/0001-90, com sede em Sarandi - RS, desenvolvedora e proprietária dos direitos do software TruData ERP.</p>
+                <br>
+                <p><strong>CONTRATANTE:</strong> <span id="doc-razao">Supermercado Planalto LTDA</span>, Nome Fantasia: <span id="doc-fantasia">Super Planalto</span>, inscrita no CNPJ/MF sob o nº <span id="doc-cnpj">12.345.678/0001-99</span>, estabelecida em <span id="doc-cidade">Sarandi / RS</span>, neste ato representada por <span id="doc-rep">João Silva (CPF 123.456.789-00)</span>.</p>
+            </div>
+
+            <div class="clause-title">CLÁUSULA 1ª — DO OBJETO</div>
+            <p>O presente instrumento tem por objeto a concessão de licença de uso do sistema de gestão empresarial <strong>TruData ERP</strong> para <span id="doc-qtd-pdv">3</span> terminais de caixa PDV e retaguarda administrativa, contemplando os seguintes módulos ativos: <span id="doc-modulos">PDV Frente de Caixa, Estoque & Grade, Fiscal & SPED/EFD, Financeiro & DRE</span>.</p>
+
+            <div class="clause-title">CLÁUSULA 2ª — DO SUPORTE TÉCNICO, SLA HUMANO E ATENDIMENTO REGIONAL</div>
+            <p>A CONTRATADA assegura suporte técnico operacional prestado por equipe humana qualificada, sem intermediação de robôs, de segunda a sexta-feira em horário comercial e plantão para paradas críticas de caixas aos sábados. O tempo de resposta inicial para chamados que impactem a emissão fiscal é de até 15 (quinze) minutos. Para estabelecimentos comerciais localizados em Sarandi e municípios vizinhos em um raio de até 30km, em caso de falha crítica irrecuperável remotamente, a CONTRATADA garante deslocamento técnico presencial in loco em até 2 (duas) horas.</p>
+
+            <div class="clause-title">CLÁUSULA 3ª — DOS VALORES E FORMA DE PAGAMENTO</div>
+            <p>Pela implantação, migração de dados e treinamento operacional, a CONTRATANTE pagará o valor único de <strong>R$ <span id="doc-implantacao">750,00</span></strong>. Pelos serviços continuados de manutenção, atualizações fiscais legais (incluindo as regras de transição da Reforma Tributária) e suporte, a CONTRATANTE pagará a mensalidade de <strong>R$ <span id="doc-mensal">380,00</span></strong>, com vencimento todo dia 10.</p>
+
+            <!-- BOX PAGAMENTO PIX DINÂMICO -->
+            <div id="box-pix-contrato" style="background: #f0fdf4; border: 1.5px dashed #16a34a; border-radius: 10px; padding: 14px 18px; margin: 16px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+                <div>
+                    <div style="font-family: 'Inter', sans-serif; font-weight: 800; color: #166534; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        🟢 Entrada do Setup de Implantação via Pix
+                    </div>
+                    <p style="font-size: 12px; color: #15803d; margin: 4px 0;">
+                        Chave Pix CNPJ: <strong>02.483.991/0001-90</strong> (Hansen Software LTDA · Sicredi)
+                    </p>
+                    <p style="font-size: 11.5px; color: #374151;">
+                        Valor da Entrada: <strong>R$ <span id="doc-pix-valor">750,00</span></strong>
+                    </p>
+                    <button onclick="copiarChavePix()" style="margin-top: 6px; background: #16a34a; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                        📋 Copiar Chave Pix
+                    </button>
+                    <span id="toast-pix" style="font-size: 11px; color: #16a34a; font-weight: bold; margin-left: 8px; display: none;">✓ Copiado!</span>
+                </div>
+                <div style="text-align: center; background: #fff; padding: 6px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                    <img id="doc-qr-pix" src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=02483991000190" alt="QR Code Pix" style="width: 90px; height: 90px; display: block;">
+                    <span style="font-size: 9.5px; color: #166534; font-weight: 700; display: block; margin-top: 2px;">Pague com o App</span>
+                </div>
+            </div>
+
+            <div class="clause-title">CLÁUSULA 4ª — DA PROTEÇÃO DE DADOS (LGPD) E CONFIDENCIALIDADE</div>
+            <p>As partes comprometem-se a cumprir integralmente as disposições da Lei Geral de Proteção de Dados (Lei Federal nº 13.709/2018). Todas as informações financeiras, cadastrais de clientes e notas fiscais armazenadas no banco de dados pertencem exclusivamente à CONTRATANTE, sendo vedado à CONTRATADA qualquer compartilhamento ou comercialização com terceiros.</p>
+
+            <div class="clause-title">CLÁUSULA 5ª — DO FORO</div>
+            <p>Para dirimir quaisquer dúvidas decorrentes do presente contrato, as partes elegem o Foro da Comarca de Sarandi, Estado do Rio Grande do Sul, com renúncia expressa a qualquer outro por mais privilegiado que seja.</p>
+
+            <div class="signature-area">
+                <div>
+                    <div class="signature-line">
+                        <strong>HANSEN SOFTWARE LTDA</strong><br>
+                        CNPJ: 02.483.991/0001-90<br>
+                        Sarandi - RS
+                    </div>
+                </div>
+                <div>
+                    <div class="signature-line">
+                        <strong id="doc-ass-razao">Supermercado Planalto LTDA</strong><br>
+                        Representante Legal
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let ALVOS_CARREGADOS = [];
+
+    // Carregar os 20 Alvos Piloto do Servidor
+    async function inicializarLeadsContrato() {
+        try {
+            const res = await fetch('/alvos_prioritarios_piloto.json');
+            if (res.ok) {
+                ALVOS_CARREGADOS = await res.json();
+                const sel = document.getElementById('sel-lead-rapido');
+                sel.innerHTML = '<option value="">-- Selecione para preenchimento automático --</option>';
+                ALVOS_CARREGADOS.forEach((alvo, idx) => {
+                    const opt = document.createElement('option');
+                    opt.value = idx;
+                    opt.textContent = `${alvo.nome} (${alvo.municipio} - ${alvo.distancia_km}km) [${alvo.pdvs_estimados} PDVs]`;
+                    sel.appendChild(opt);
+                });
+
+                // Selecionar o primeiro por padrão
+                if (ALVOS_CARREGADOS.length > 0) {
+                    sel.value = "0";
+                    carregarLeadSelecionado();
+                }
+            }
+        } catch (e) {
+            console.log("Não foi possível carregar alvos piloto automaticamente:", e);
+        }
+    }
+
+    function carregarLeadSelecionado() {
+        const selVal = document.getElementById('sel-lead-rapido').value;
+        if (selVal === "" || !ALVOS_CARREGADOS[selVal]) return;
+
+        const lead = ALVOS_CARREGADOS[selVal];
+        document.getElementById('cli-razao').value = lead.razao_social || lead.nome;
+        document.getElementById('cli-fantasia').value = lead.nome;
+        document.getElementById('cli-cnpj').value = lead.cnpj || '';
+        document.getElementById('cli-cidade').value = `${lead.municipio || 'Sarandi'} / RS`;
+        document.getElementById('cli-rep').value = `${lead.decisor || 'Diretor / Proprietário'}`;
+        document.getElementById('qtd-pdv').value = lead.pdvs_estimados || 2;
+        document.getElementById('val-implantacao').value = (lead.setup_estimado || 750).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        document.getElementById('val-mensal').value = (lead.mrr_estimado || 380).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+        renderContrato();
+    }
+
+    function renderContrato() {
+        const razao = document.getElementById('cli-razao').value || 'Contratante Exemplo';
+        const fantasia = document.getElementById('cli-fantasia').value || '';
+        const cnpj = document.getElementById('cli-cnpj').value || '';
+        const cidade = document.getElementById('cli-cidade').value || '';
+        const rep = document.getElementById('cli-rep').value || '';
+        const implantacao = document.getElementById('val-implantacao').value || '0,00';
+        const mensal = document.getElementById('val-mensal').value || '0,00';
+        const qtdPdv = document.getElementById('qtd-pdv').value || '1';
+
+        document.getElementById('doc-razao').innerText = razao;
+        document.getElementById('doc-ass-razao').innerText = razao;
+        document.getElementById('doc-fantasia').innerText = fantasia;
+        document.getElementById('doc-cnpj').innerText = cnpj;
+        document.getElementById('doc-cidade').innerText = cidade;
+        document.getElementById('doc-rep').innerText = rep;
+        document.getElementById('doc-implantacao').innerText = implantacao;
+        document.getElementById('doc-pix-valor').innerText = implantacao;
+        document.getElementById('doc-mensal').innerText = mensal;
+        document.getElementById('doc-qtd-pdv').innerText = qtdPdv;
+
+        const mods = [];
+        if (document.getElementById('mod-pdv').checked) mods.push("PDV Frente de Caixa");
+        if (document.getElementById('mod-estoque').checked) mods.push("Estoque & Grade");
+        if (document.getElementById('mod-fiscal').checked) mods.push("Fiscal & SPED/EFD");
+        if (document.getElementById('mod-financeiro').checked) mods.push("Financeiro & DRE");
+        if (document.getElementById('mod-bi').checked) mods.push("BI & Indicadores");
+        if (document.getElementById('mod-vendas').checked) mods.push("Força de Vendas");
+
+        document.getElementById('doc-modulos').innerText = mods.join(", ") || "Nenhum módulo selecionado";
+    }
+
+    function copiarChavePix() {
+        const chave = "02.483.991/0001-90";
+        navigator.clipboard.writeText(chave).then(() => {
+            const toast = document.getElementById('toast-pix');
+            toast.style.display = "inline";
+            setTimeout(() => toast.style.display = "none", 3000);
+        });
+    }
+
+    function enviarContratoWhatsApp() {
+        const razao = document.getElementById('cli-razao').value;
+        const cidade = document.getElementById('cli-cidade').value;
+        const pdvs = document.getElementById('qtd-pdv').value;
+        const setup = document.getElementById('val-implantacao').value;
+        const mensal = document.getElementById('val-mensal').value;
+        const selVal = document.getElementById('sel-lead-rapido').value;
+        
+        let fone = "";
+        if (selVal !== "" && ALVOS_CARREGADOS[selVal]) {
+            fone = (ALVOS_CARREGADOS[selVal].telefone || "").replace(/\D/g, "");
+        }
+        if (!fone.startsWith("55") && fone.length >= 10) fone = "55" + fone;
+
+        const texto = `*CONTRATO DE LICENCIAMENTO & IMPLANTAÇÃO — TRUDATA ERP*\n\n` +
+            `Olá, equipe do *${razao}* em ${cidade}!\n\n` +
+            `Conforme acordado na nossa reunião, geramos a minuta contratual de licenciamento do sistema TruData ERP com suporte humano direto de Sarandi:\n\n` +
+            `📌 *Escopo Homologado:*\n` +
+            `• Terminais de Caixa (PDVs): ${pdvs} checkouts com contingência offline\n` +
+            `• SLA Garantido: Atendimento presencial em até 2 horas na região de Sarandi\n` +
+            `• Mensalidade: R$ ${mensal}/mês (atualizações fiscais e suporte ilimitado)\n` +
+            `• Setup de Implantação e Migração: R$ ${setup}\n\n` +
+            `🟢 *Chave Pix para Entrada do Setup:*\n` +
+            `CNPJ: *02.483.991/0001-90*\n` +
+            `Favorecido: Hansen Software LTDA (Sicredi Sarandi)\n\n` +
+            `Estamos prontos para agendar a virada sem travar um minuto da sua loja!`;
+
+        const waUrl = fone ? `https://wa.me/${fone}?text=${encodeURIComponent(texto)}` : `https://wa.me/?text=${encodeURIComponent(texto)}`;
+        window.open(waUrl, '_blank');
+    }
+
+    window.addEventListener('DOMContentLoaded', inicializarLeadsContrato);
+</script>
+
+</body>
+</html>

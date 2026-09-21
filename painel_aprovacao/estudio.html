@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estúdio Criativo TruData — Gerador de Cards PNG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --navy: #0f172a;
+      --bg: #0b0f19;
+      --card-bg: #1e293b;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 1.5rem; }
+
+    .header { max-width: 1300px; margin: 0 auto 1.5rem auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .brand-title { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 800; }
+    .brand-title span { color: #3b82f6; }
+
+    .layout-studio {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 950px) { .layout-studio { grid-template-columns: 1fr; } }
+
+    .controls-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 700; color: #cbd5e1; }
+    .form-group input, .form-group select, .form-group textarea {
+      background: #0f172a; border: 1px solid rgba(255,255,255,0.15); border-radius: 0.5rem; padding: 0.6rem 0.8rem; color: #fff; font-size: 0.9rem; outline: none;
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .preview-container {
+      background: #000;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 550px;
+    }
+
+    canvas {
+      max-width: 100%;
+      height: auto;
+      border-radius: 0.75rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      background: #0f172a;
+    }
+
+    .btn-download {
+      background: #10b981;
+      color: #fff;
+      border: none;
+      padding: 0.85rem;
+      border-radius: 0.5rem;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background 0.2s;
+    }
+    .btn-download:hover { background: #059669; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <div class="brand-title">🎨 ESTÚDIO CRIATIVO TRUDATA</div>
+      <p style="font-size:0.85rem; color:var(--text-muted);">Gere artes profissionais em PNG prontas para feed e stories em segundos</p>
+    </div>
+    <div style="display:flex; gap:0.5rem;">
+      <a href="index.html" style="background:#334155; color:#fff; text-decoration:none; padding:0.5rem 1rem; border-radius:0.5rem; font-size:0.85rem; font-weight:700;">← Painel Geral</a>
+    </div>
+  </div>
+
+  <div class="layout-studio">
+    <!-- CONTROLES -->
+    <div class="controls-panel">
+      <div class="form-group">
+        <label>Formato da Imagem</label>
+        <select id="formato" onchange="renderizarArte()">
+          <option value="feed">Instagram Feed (1080 x 1080)</option>
+          <option value="stories">Stories / Reels (1080 x 1920)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tema de Cores</label>
+        <select id="tema" onchange="renderizarArte()">
+          <option value="navy">Navy Tech (Azul Noturno & Royal)</option>
+          <option value="emerald">Fiscal Seguro (Verde Esmeralda)</option>
+          <option value="rose">Varejo Moda (Rosa Intenso & Índigo)</option>
+          <option value="amber">Alerta & Velocidade (Âmbar & Laranja)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Etiqueta / Badge Superior</label>
+        <input type="text" id="badge" value="TECNOLOGIA & VAREJO GAÚCHO" oninput="renderizarArte()">
+      </div>
+
+      <div class="form-group">
+        <label>Título Principal (Gancho)</label>
+        <textarea id="titulo" oninput="renderizarArte()">Sábado de loja cheia e seu caixa voando sem travar!</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Texto Secundário / Descrição</label>
+        <textarea id="subtitulo" oninput="renderizarArte()">Emissão de NFC-e em 3 segundos e contingência offline blindada: se a internet cair, suas vendas não param.</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Chamada de Ação (Rodapé)</label>
+        <input type="text" id="cta" value="👉 Conheça o TruData ERP · Sarandi/RS" oninput="renderizarArte()">
+      </div>
+
+      <button class="btn-download" onclick="baixarPNG()">
+        📥 Baixar Arte em PNG HD
+      </button>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="preview-container">
+      <canvas id="canvasArte" width="1080" height="1080"></canvas>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvasArte');
+    const ctx = canvas.getContext('2d');
+
+    function renderizarArte() {
+      const formato = document.getElementById('formato').value;
+      const tema = document.getElementById('tema').value;
+      const badge = document.getElementById('badge').value;
+      const titulo = document.getElementById('titulo').value;
+      const subtitulo = document.getElementById('subtitulo').value;
+      const cta = document.getElementById('cta').value;
+
+      if (formato === 'feed') {
+        canvas.width = 1080;
+        canvas.height = 1080;
+      } else {
+        canvas.width = 1080;
+        canvas.height = 1920;
+      }
+
+      // FUNDO / GRADIENTES
+      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      if (tema === 'navy') {
+        grad.addColorStop(0, '#0a0f1d');
+        grad.addColorStop(0.6, '#0f172a');
+        grad.addColorStop(1, '#1e3a8a');
+      } else if (tema === 'emerald') {
+        grad.addColorStop(0, '#062c20');
+        grad.addColorStop(0.6, '#064e3b');
+        grad.addColorStop(1, '#022c22');
+      } else if (tema === 'rose') {
+        grad.addColorStop(0, '#2e1065');
+        grad.addColorStop(0.6, '#1e1b4b');
+        grad.addColorStop(1, '#831843');
+      } else if (tema === 'amber') {
+        grad.addColorStop(0, '#451a03');
+        grad.addColorStop(0.6, '#78350f');
+        grad.addColorStop(1, '#1e293b');
+      }
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // DETALHES VISUAIS (CÍRCULOS DECORATIVOS)
+      ctx.save();
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+      ctx.beginPath();
+      ctx.arc(canvas.width * 0.85, canvas.height * 0.2, 280, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(canvas.width * 0.15, canvas.height * 0.85, 340, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // HEADER: LOGO E SELO MPS.BR
+      ctx.save();
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 42px "Outfit", sans-serif';
+      ctx.fillText('TRU', 70, 110);
+      ctx.fillStyle = '#38bdf8';
+      ctx.fillText('DATA', 160, 110);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '700 24px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('ERP', 275, 110);
+
+      // BADGE MPS.BR
+      ctx.fillStyle = 'rgba(56, 189, 248, 0.15)';
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.5)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(canvas.width - 340, 70, 270, 48, 24);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('★ Selo MPS.BR Nível G', canvas.width - 205, 102);
+      ctx.restore();
+
+      // BADGE DO TEMA
+      ctx.save();
+      ctx.fillStyle = '#fbbf24';
+      ctx.font = '800 22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('◆ ' + badge.toUpperCase(), 70, 240);
+      ctx.restore();
+
+      // TÍTULO PRINCIPAL (COM QUEBRA DE LINHA)
+      ctx.save();
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 64px "Outfit", sans-serif';
+      wrapText(ctx, titulo, 70, 330, canvas.width - 140, 76);
+      ctx.restore();
+
+      // SUBTÍTULO
+      ctx.save();
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '500 32px "Plus Jakarta Sans", sans-serif';
+      wrapText(ctx, subtitulo, 70, formato === 'feed' ? 620 : 800, canvas.width - 140, 48);
+      ctx.restore();
+
+      // CAIXA DESTAQUE INFERIOR
+      const boxY = formato === 'feed' ? 840 : 1550;
+      ctx.save();
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.7)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(70, boxY, canvas.width - 140, 150, 20);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 30px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(cta, 110, boxY + 60);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '500 22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Hansen Software LTDA · Sarandi - RS · +25 Anos · (54) 3361-2650', 110, boxY + 110);
+      ctx.restore();
+    }
+
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+      const words = text.split(' ');
+      let line = '';
+      let currentY = y;
+
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        const testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+          ctx.fillText(line, x, currentY);
+          line = words[n] + ' ';
+          currentY += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, x, currentY);
+    }
+
+    function baixarPNG() {
+      const link = document.createElement('a');
+      link.download = 'card_trudata_' + Date.now() + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // Inicializa renderização
+    setTimeout(renderizarArte, 200);
+  </script>
+</body>
+</html>

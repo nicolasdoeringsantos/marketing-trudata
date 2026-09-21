@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TruData Farmácias — SNGPC, Lotes, Validades e Balcão Ágil no RS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-gradient: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
+      --navy: #0f172a;
+      --bg: #0b0f19;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+    
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .brand { font-size: 1.5rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+    .brand span { color: #34d399; }
+    .badge-mps { background: rgba(5,150,105,0.2); border: 1px solid var(--primary); color: #34d399; font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 9999px; font-weight: 700; }
+    
+    .btn-wpp { background: #25D366; color: #fff; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s; box-shadow: 0 4px 20px rgba(37,211,102,0.3); }
+    .btn-wpp:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(37,211,102,0.5); }
+    
+    .hero { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; text-align: center; }
+    .hero-tag { display: inline-block; background: rgba(5,150,105,0.15); border: 1px solid var(--primary); color: #34d399; padding: 0.35rem 1rem; border-radius: 9999px; font-weight: 700; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+    .hero h1 span { background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 760px; margin: 0 auto 2.5rem auto; }
+    
+    .grid-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; backdrop-filter: blur(12px); transition: border-color 0.2s, transform 0.2s; }
+    .card:hover { border-color: rgba(5,150,105,0.5); transform: translateY(-4px); }
+    .card-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .card h3 { font-size: 1.3rem; margin-bottom: 0.75rem; font-weight: 700; }
+    .card p { color: var(--text-muted); font-size: 0.95rem; }
+    
+    .banner-sngpc { background: linear-gradient(90deg, #064e3b 0%, #0f172a 100%); border: 1px solid rgba(5,150,105,0.3); border-left: 5px solid #10b981; border-radius: 1rem; max-width: 1200px; margin: 3rem auto; padding: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+    .banner-sngpc h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .banner-sngpc p { color: var(--text-muted); max-width: 650px; }
+    
+    .cta-final { background: radial-gradient(circle at center, rgba(5,150,105,0.15) 0%, transparent 70%); text-align: center; padding: 5rem 2rem; margin-top: 4rem; border-top: 1px solid var(--border); }
+    .cta-final h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .cta-final p { color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem auto; }
+    
+    .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      TRU<span>DATA</span> FARMA
+      <span class="badge-mps">MPS.BR Nível G</span>
+    </a>
+    <a href="https://wa.me/555433612650?text=Ol%C3%A1%21+Gostaria+de+conhecer+o+TruData+para+Farm%C3%A1cias." target="_blank" class="btn-wpp">
+      💬 Falar com Especialista
+    </a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">💊 Especial para Farmácias & Drogarias Independentes</div>
+    <h1>Gestão Segura: <span>SNGPC Sem Erros e Controle Rigoroso de Lotes</span></h1>
+    <p>Proteja sua farmácia contra autuações da Anvisa e perdas de estoque por vencimento. O TruData Farma integra controle de medicamentos controlados, leitura ágil no balcão e conferência de lote/validade na entrada da nota.</p>
+    <a href="https://wa.me/555433612650?text=Ol%C3%A1%2C+tenho+uma+farm%C3%A1cia+e+quero+conhecer+o+TruData+Farma." target="_blank" class="btn-wpp" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
+      📲 Solicitar Demonstração do TruData Farma
+    </a>
+  </section>
+
+  <div class="banner-sngpc">
+    <div>
+      <h2>Conformidade Plena com a Anvisa (SNGPC) 🛡️</h2>
+      <p>Transmissão automática dos arquivos XML do Sistema Nacional de Gerenciamento de Produtos Controlados. Movimentações de entrada, saída e perda registradas com histórico do médico, paciente e receita médica.</p>
+    </div>
+    <div>
+      <a href="https://wa.me/555433612650?text=Quero+saber+mais+sobre+o+m%C3%B3dulo+SNGPC+do+TruData." target="_blank" class="btn-wpp" style="background:#059669;">
+        📋 Ver Módulo SNGPC
+      </a>
+    </div>
+  </div>
+
+  <section class="grid-features">
+    <div class="card">
+      <div class="card-icon">⏳</div>
+      <h3>Alerta de Vencimento Preventivo</h3>
+      <p>Relatório de produtos próximos do vencimento em 30, 60 e 90 dias, permitindo ações promocionais antes que a mercadoria expire na prateleira.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📥</div>
+      <h3>Importação Direta de Distribuidoras</h3>
+      <p>Conecte o XML dos maiores distribuidores farmacêuticos do Brasil, cadastrando lotes, PMC (Preço Máximo ao Consumidor) e tributação na hora.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Balcão Ágil com Histórico do Cliente</h3>
+      <p>Consulte na hora o histórico de compras de pacientes de uso contínuo, facilitando a fidelização e a venda de produtos correlatos (perfumaria/higiene).</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🩺</div>
+      <h3>Integração com PBM</h3>
+      <p>Homologado para autorização de vendas por Programas de Benefício em Medicamentos (PBM), atendendo clientes de convênios sem travar o caixa.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧾</div>
+      <h3>Fiscal SEFAZ/RS 100% Ajustado</h3>
+      <p>Tributação correta para monofásicos, PIS/COFINS com alíquota zero e Substituição Tributária de medicamentos, evitando pagar imposto indevido.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>Suporte Humano Sem Robôs</h3>
+      <p>O farmacêutico e a equipe de balcão têm suporte direto com especialistas da Hansen Software em Sarandi/RS sem fila de espera.</p>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <h2>Traga Tranquilidade Regulatória para a sua Farmácia</h2>
+    <p>Agende uma demonstração prática e veja como simplificar sua rotina com quem atende o comércio farmacêutico com selo MPS.BR de qualidade.</p>
+    <a href="https://wa.me/555433612650?text=Ol%C3%A1%2C+quero+uma+demonstra%C3%A7%C3%A3o+do+TruData+para+minha+farm%C3%A1cia." target="_blank" class="btn-wpp" style="font-size: 1.15rem; padding: 1.1rem 2.8rem;">
+      💬 Falar com a Equipe pelo WhatsApp
+    </a>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 Hansen Software LTDA — Desenvolvedora TruData ERP · Sarandi - RS</p>
+    <p>Telefone: (54) 3361-2650 · Certificação de Qualidade de Software MPS.BR Nível G</p>
+  </footer>
+
+</body>
+</html>

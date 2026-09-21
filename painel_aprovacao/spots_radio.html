@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estúdio de Spots de Rádio — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              azure: '#009fe3',
+              cyan: '#169fdb',
+              dark: '#070c18',
+              card: '#0f172a',
+              border: '#1e293b',
+              emerald: '#10b981',
+              gold: '#f59e0b',
+              radio: '#f97316'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased selection:bg-orange-500 selection:text-white pb-24">
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold text-sm transition">←</a>
+        <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-orange-500/20">
+          🎙️
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-display font-black text-lg text-white">Estúdio de Spots de Rádio & Podcasts</h1>
+            <span class="text-[10px] uppercase font-bold tracking-wider bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full border border-orange-500/30">Norte Gaúcho 30s / 60s</span>
+          </div>
+          <p class="text-xs text-slate-400">Rádio Sarandi 103.3 FM · Rádio Minuano · Rádio Gazeta · Podcasts Comerciais</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="teleprompter.html" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+          🎬 Abrir no Teleprompter
+        </a>
+        <button onclick="enviarScriptRadialistaWhatsApp()" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white transition shadow-lg shadow-emerald-600/20 flex items-center gap-1.5">
+          📲 Enviar p/ Produtora / Rádio (WhatsApp)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- COLUNA DA ESQUERDA: CONTROLES E CRONÔMETRO DE LOCUÇÃO -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <!-- PAINEL DO CRONÔMETRO DE LOCUÇÃO / METRÔNOMO -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-5 text-center">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 text-left">
+            <div>
+              <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Cronômetro de Locução</span>
+              <div class="text-xs text-orange-400 font-semibold">Alvo Comercial Padrão: 30 Segundos</div>
+            </div>
+            <span id="badge-status-locucao" class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 uppercase">Parado</span>
+          </div>
+
+          <!-- DISPLAY GIGANTE DO TIMER -->
+          <div class="py-2">
+            <div id="display-tempo" class="text-6xl font-black font-mono tracking-tight text-white transition-colors duration-200">
+              00:00
+            </div>
+            <div class="text-xs text-slate-500 font-mono mt-1">Limite Máximo da Grade: <span id="meta-segundos">30</span>s</div>
+          </div>
+
+          <!-- BARRA DE PROGRESSO DO TEMPO -->
+          <div class="w-full bg-slate-950 border border-slate-800 rounded-full h-3 overflow-hidden p-0.5">
+            <div id="barra-progresso" class="bg-gradient-to-r from-orange-500 to-amber-400 h-full rounded-full transition-all duration-100" style="width: 0%;"></div>
+          </div>
+
+          <!-- BOTÕES DE CONTROLE DO CRONÔMETRO -->
+          <div class="flex items-center justify-center gap-3 pt-2">
+            <button id="btn-timer-toggle" onclick="toggleCronometro()" class="px-6 py-3 rounded-2xl bg-orange-600 hover:bg-orange-500 text-white font-black text-sm transition shadow-lg shadow-orange-600/30 flex items-center gap-2">
+              <span>▶</span> Iniciar Treino de Voz
+            </button>
+            <button onclick="resetCronometro()" class="px-4 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-sm transition border border-slate-700">
+              ⏮ Reiniciar
+            </button>
+          </div>
+        </div>
+
+        <!-- SELEÇÃO DE EMISSORA E CONFIGURAÇÕES -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+          <h2 class="text-sm font-bold text-white font-display flex items-center gap-2 border-b border-slate-800 pb-3">
+            <span>📻</span> Parâmetros da Veiculação
+          </h2>
+
+          <div class="space-y-3.5">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Emissora Alvo / Veículo:</label>
+              <select id="sel-emissora" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-orange-500 focus:outline-none">
+                <option value="Rádio Sarandi 103.3 FM">Rádio Sarandi 103.3 FM (Sarandi - RS)</option>
+                <option value="Rádio Minuano AM/FM">Rádio Minuano (Sarandi - RS)</option>
+                <option value="Rádio Gazeta Carazinho">Rádio Gazeta (Carazinho - RS)</option>
+                <option value="Rádio Planalto Passo Fundo">Rádio Planalto (Passo Fundo - RS)</option>
+                <option value="Rádio Máxima Ronda Alta">Rádio Máxima FM (Ronda Alta - RS)</option>
+                <option value="Podcast de Negócios / Carro de Som">Podcast de Negócios / Som Local</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Escolha o Roteiro do Spot:</label>
+              <select id="sel-spot" onchange="carregarSpotSelecionado()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-orange-500 focus:outline-none font-bold text-orange-300">
+                <option value="spot1">Spot 1 (30s): Chega de Robô no Suporte</option>
+                <option value="spot2">Spot 2 (30s): Sábado de Loja Cheia e PDV Rápido</option>
+                <option value="spot3">Spot 3 (30s): Parceria Forte com a Contabilidade</option>
+                <option value="spot4">Spot 4 (45s): Semana Farroupilha & Tradição no Varejo</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">WhatsApp da Emissora / Produtora:</label>
+              <input type="text" id="inp-radio-fone" value="(54) 3361-1033" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-orange-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <!-- GUIA DA TRILHA SONORA -->
+          <div class="bg-slate-950 border border-orange-500/20 rounded-2xl p-4 space-y-2">
+            <div class="text-[11px] font-bold text-orange-400 uppercase tracking-wider flex items-center gap-1.5">
+              <span>🎵</span> Trilha Sonora Recomendada
+            </div>
+            <p id="desc-trilha" class="text-xs text-slate-300 leading-relaxed">
+              Acústica suave com violão dedilhado de fundo, transmitindo segurança, calor humano e proximidade regional.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUNA DA DIREITA: ESPELHO DE LOCUÇÃO COM MARCAÇÕES -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div>
+              <h2 id="titulo-spot" class="text-base font-black text-white font-display">Spot 1: "Chega de Robô no Suporte"</h2>
+              <span id="duracao-spot" class="text-xs text-orange-400 font-semibold font-mono">Duração Estimada: 30 Segundos · ~65 Palavras</span>
+            </div>
+            <button onclick="copiarTextoSpot()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-orange-300 border border-orange-500/30 text-xs font-bold rounded-xl transition flex items-center gap-1.5">
+              <span id="btn-copiar-spot-txt">📋 Copiar Texto</span>
+            </button>
+          </div>
+
+          <!-- CAIXA DO TEXTO DE LOCUÇÃO -->
+          <div class="bg-slate-950 border border-slate-800/80 rounded-2xl p-6 space-y-4">
+            <div class="flex items-center gap-4 text-[11px] text-slate-400 border-b border-slate-800/60 pb-3 font-mono">
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span> Efeito Sonoro</span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-orange-400 inline-block"></span> Ênfase / Destaque</span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span> Tom Amigável</span>
+            </div>
+
+            <div id="corpo-script" class="text-sm sm:text-base text-slate-200 leading-relaxed space-y-3 font-sans">
+              <!-- Conteúdo renderizado via JS -->
+            </div>
+          </div>
+
+          <!-- DICAS DE INTERPRETAÇÃO PARA O LOCUTOR -->
+          <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-4 space-y-2">
+            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+              🎙️ Orientações de Interpretação Vocal (Direção de Áudio):
+            </div>
+            <ul id="dicas-locucao" class="text-xs text-slate-400 space-y-1.5 list-disc pl-5 leading-relaxed">
+              <li>Tom de voz: Conversa sincera de balcão, sem afetação ou frieza publicitária paulista.</li>
+              <li>Pronunciar "Sarandi" e "TruData" com clareza e autoridade.</li>
+              <li>Pausa de 0,5s antes do número de telefone para fixação do ouvinte.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const BANCO_SPOTS = {
+      spot1: {
+        titulo: "Spot 1: 'Chega de Robô no Suporte'",
+        duracao: "Duração: 30 Segundos · ~65 Palavras",
+        limite: 30,
+        trilha: "Acústica suave com violão dedilhado de fundo, transmitindo segurança, calor humano e proximidade regional.",
+        html: `
+          <p class="text-slate-300">Sabe aquela sensação de precisar de ajuda no caixa da sua loja... e ter que falar com um <span class="text-orange-400 font-bold">robô que não resolve nada?</span></p>
+          <p class="text-white font-medium">Na <span class="text-cyan-400 font-black">TruData ERP</span>, isso não acontece!</p>
+          <p class="text-slate-300">Aqui em <span class="text-emerald-400 font-bold">Sarandi</span>, nossa equipe atende você de verdade: de pessoa pra pessoa, com agilidade e conhecimento da nossa gente.</p>
+          <p class="text-slate-300">São mais de <span class="text-orange-400 font-bold">25 anos</span> desenvolvendo o sistema que faz o comércio gaúcho crescer seguro.</p>
+          <p class="text-white font-bold text-base pt-2">TruData ERP da Hansen Software. Fale com a gente no <span class="text-orange-400">(54) 3361-2650</span> ou acesse <span class="text-cyan-400">trudata.com.br</span>.</p>
+        `,
+        textoPuro: `Sabe aquela sensação de precisar de ajuda no caixa da sua loja e ter que falar com um robô que não resolve nada?\n\nNa TruData ERP, isso não acontece!\n\nAqui em Sarandi, nossa equipe atende você de verdade: de pessoa pra pessoa, com agilidade e conhecimento da nossa gente.\n\nSão mais de 25 anos desenvolvendo o sistema que faz o comércio gaúcho crescer seguro.\n\nTruData ERP da Hansen Software. Fale com a gente no (54) 3361-2650 ou acesse trudata.com.br.`,
+        dicas: [
+          "Tom de voz: Acolhedor, quebrando a frieza de softwares concorrentes.",
+          "Ênfase na palavra 'robô' com leve ironia no início.",
+          "Dar calor e orgulho ao falar 'Aqui em Sarandi'.",
+          "Ditar o telefone (54) 3361-2650 em ritmo cadenciado."
+        ]
+      },
+      spot2: {
+        titulo: "Spot 2: 'Sábado de Loja Cheia e PDV Rápido'",
+        duracao: "Duração: 30 Segundos · ~72 Palavras",
+        limite: 30,
+        trilha: "Dinâmica e vibrante, ritmo animado com bipe de código de barras no início.",
+        html: `
+          <p class="text-cyan-400 font-mono text-xs uppercase tracking-wider font-bold">[Efeito Sonoro: Bip de leitor óptico e som rápido de papel saindo]</p>
+          <p class="text-slate-200">Sábado de manhã, balcão lotado e a fila <span class="text-orange-400 font-bold">andando rápido!</span></p>
+          <p class="text-slate-300">Com o PDV da <span class="text-cyan-400 font-black">TruData ERP</span>, sua loja nunca para, mesmo se a internet cair.</p>
+          <p class="text-slate-300">Emissão de cupom fiscal em segundos, controle de estoque sem furos e integração completa com a contabilidade.</p>
+          <p class="text-slate-300">Mais de <span class="text-emerald-400 font-bold">4 milhões de cupons emitidos</span> com a qualidade e o selo MPS.BR da Hansen Software.</p>
+          <p class="text-white font-bold text-base pt-2">Modernize o caixa da sua empresa. Ligue agora: <span class="text-orange-400">(54) 3361-2650</span>.</p>
+        `,
+        textoPuro: `[Efeito Sonoro: Bip de leitor óptico e som de papel de cupom]\n\nSábado de manhã, balcão lotado e a fila andando rápido!\n\nCom o PDV da TruData ERP, sua loja nunca para, mesmo se a internet cair.\n\nEmissão de cupom fiscal em segundos, controle de estoque sem furos e integração completa com a contabilidade.\n\nMais de 4 milhões de cupons emitidos com a qualidade e o selo MPS.BR da Hansen Software.\n\nModernize o caixa da sua empresa. Ligue agora: (54) 3361-2650.`,
+        dicas: [
+          "Locução enérgica, ritmo ágil que passa velocidade de fila.",
+          "Destacar 'mesmo se a internet cair' com tom de segurança inquestionável.",
+          "Fechar com chamada imediata para ligação."
+        ]
+      },
+      spot3: {
+        titulo: "Spot 3: 'Parceria Forte com a Contabilidade'",
+        duracao: "Duração: 30 Segundos · ~68 Palavras",
+        limite: 30,
+        trilha: "Corporativa nobre, piano moderno ou violoncelo sutil, transmitindo confiança institucional.",
+        html: `
+          <p class="text-slate-200 font-medium">Contador: o encerramento do mês dos seus clientes pode ser <span class="text-emerald-400 font-bold">simples e sem dor de cabeça</span>.</p>
+          <p class="text-slate-300">O <span class="text-cyan-400 font-black">TruData ERP</span> gera os arquivos SPED e Sintegra <span class="text-orange-400 font-bold">100% validados</span> de acordo com as exigências da SEFAZ do Rio Grande do Sul.</p>
+          <p class="text-slate-300">Menos retrabalho para o seu escritório e mais segurança fiscal para o lojista.</p>
+          <p class="text-white font-bold text-base pt-2">Conheça o Programa de Escritórios Parceiros em Sarandi. Acesse <span class="text-cyan-400">trudata.com.br</span> ou chame no <span class="text-orange-400">(54) 3361-2650</span>.</p>
+        `,
+        textoPuro: `Contador: o encerramento do mês dos seus clientes pode ser simples e sem dor de cabeça.\n\nO TruData ERP gera os arquivos SPED e Sintegra 100% validados de acordo com as exigências da SEFAZ do Rio Grande do Sul.\n\nMenos retrabalho para o seu escritório e mais segurança fiscal para o lojista.\n\nConheça o Programa de Escritórios Parceiros em Sarandi. Acesse trudata.com.br ou chame no (54) 3361-2650.`,
+        dicas: [
+          "Voz firme, madura e assertiva.",
+          "Falar de profissional para profissional contábil.",
+          "Pausa intencional antes de '100% validados'."
+        ]
+      },
+      spot4: {
+        titulo: "Spot 4: 'Semana Farroupilha & Tradição no Varejo'",
+        duracao: "Duração: 45 Segundos · ~95 Palavras",
+        limite: 45,
+        trilha: "Gaita gaúcha acústica tradicional suave, evocando raízes e força da terra.",
+        html: `
+          <p class="text-cyan-400 font-mono text-xs uppercase tracking-wider font-bold">[Fundo musical: Acordeon suave tradicional do RS]</p>
+          <p class="text-slate-200">No Rio Grande do Sul, honrar a palavra e estar ao lado de quem produz é questão de princípio.</p>
+          <p class="text-slate-300">Aqui no Norte Gaúcho, os comércios que movem nossas cidades confiam na <span class="text-orange-400 font-bold">Hansen Software</span> há mais de 25 anos.</p>
+          <p class="text-slate-300">O <span class="text-cyan-400 font-black">TruData ERP</span> foi feito para a nossa gente: frente de caixa rápida, suporte presencial que vem até a sua porta e estabilidade que não te deixa na mão nem no feriado.</p>
+          <p class="text-white font-bold text-base pt-2">Orgulho de ser de Sarandi. Orgulho de fazer o comércio do RS crescer. TruData ERP: <span class="text-orange-400">(54) 3361-2650</span>.</p>
+        `,
+        textoPuro: `[Fundo musical: Acordeon suave tradicional do RS]\n\nNo Rio Grande do Sul, honrar a palavra e estar ao lado de quem produz é questão de princípio.\n\nAqui no Norte Gaúcho, os comércios que movem nossas cidades confiam na Hansen Software há mais de 25 anos.\n\nO TruData ERP foi feito para a nossa gente: frente de caixa rápida, suporte presencial que vem até a sua porta e estabilidade que não te deixa na mão nem no feriado.\n\nOrgulho de ser de Sarandi. Orgulho de fazer o comércio do RS crescer. TruData ERP: (54) 3361-2650.`,
+        dicas: [
+          "Tom solene, com o peso e o respeito do tradicionalismo gaúcho.",
+          "Cadência ritmada, transmitindo proximidade e honra.",
+          "Fechar com entusiasmo e sentimento de pertencimento regional."
+        ]
+      }
+    };
+
+    let timerId = null;
+    let timerRodando = false;
+    let tempoDecorrido = 0;
+    let limiteSegundos = 30;
+
+    function carregarSpotSelecionado() {
+      const chave = document.getElementById('sel-spot').value;
+      const s = BANCO_SPOTS[chave];
+      if (!s) return;
+
+      document.getElementById('titulo-spot').innerText = s.titulo;
+      document.getElementById('duracao-spot').innerText = s.duracao;
+      document.getElementById('desc-trilha').innerText = s.trilha;
+      document.getElementById('corpo-script').innerHTML = s.html;
+      document.getElementById('meta-segundos').innerText = s.limite;
+      limiteSegundos = s.limite;
+
+      const ul = document.getElementById('dicas-locucao');
+      ul.innerHTML = '';
+      s.dicas.forEach(d => {
+        const li = document.createElement('li');
+        li.innerText = d;
+        ul.appendChild(li);
+      });
+
+      resetCronometro();
+    }
+
+    function toggleCronometro() {
+      if (timerRodando) {
+        pararCronometro();
+      } else {
+        iniciarCronometro();
+      }
+    }
+
+    function iniciarCronometro() {
+      timerRodando = true;
+      document.getElementById('btn-timer-toggle').innerHTML = '<span>⏸</span> Pausar Treino';
+      document.getElementById('btn-timer-toggle').className = 'px-6 py-3 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white font-black text-sm transition shadow-lg shadow-rose-600/30 flex items-center gap-2';
+      
+      const badge = document.getElementById('badge-status-locucao');
+      badge.textContent = "Gravando Voz";
+      badge.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-orange-500/20 text-orange-400 uppercase border border-orange-500/30 animate-pulse";
+
+      const startTime = Date.now() - (tempoDecorrido * 1000);
+      timerId = setInterval(() => {
+        tempoDecorrido = (Date.now() - startTime) / 1000;
+        atualizarDisplayTimer();
+      }, 50);
+    }
+
+    function pararCronometro() {
+      timerRodando = false;
+      clearInterval(timerId);
+      document.getElementById('btn-timer-toggle').innerHTML = '<span>▶</span> Continuar Treino';
+      document.getElementById('btn-timer-toggle').className = 'px-6 py-3 rounded-2xl bg-orange-600 hover:bg-orange-500 text-white font-black text-sm transition shadow-lg shadow-orange-600/30 flex items-center gap-2';
+
+      const badge = document.getElementById('badge-status-locucao');
+      badge.textContent = "Pausado";
+      badge.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 uppercase";
+    }
+
+    function resetCronometro() {
+      pararCronometro();
+      tempoDecorrido = 0;
+      atualizarDisplayTimer();
+      document.getElementById('btn-timer-toggle').innerHTML = '<span>▶</span> Iniciar Treino de Voz';
+      document.getElementById('btn-timer-toggle').className = 'px-6 py-3 rounded-2xl bg-orange-600 hover:bg-orange-500 text-white font-black text-sm transition shadow-lg shadow-orange-600/30 flex items-center gap-2';
+      
+      const badge = document.getElementById('badge-status-locucao');
+      badge.textContent = "Parado";
+      badge.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 uppercase";
+    }
+
+    function atualizarDisplayTimer() {
+      const minutos = Math.floor(tempoDecorrido / 60);
+      const segundos = Math.floor(tempoDecorrido % 60);
+      const strMin = String(minutos).padStart(2, '0');
+      const strSeg = String(segundos).padStart(2, '0');
+      const display = document.getElementById('display-tempo');
+      display.textContent = `${strMin}:${strSeg}`;
+
+      const pct = Math.min(100, (tempoDecorrido / limiteSegundos) * 100);
+      document.getElementById('barra-progresso').style.width = `${pct}%`;
+
+      if (tempoDecorrido > limiteSegundos) {
+        display.classList.add('text-rose-400');
+        display.classList.remove('text-white', 'text-amber-400');
+      } else if (tempoDecorrido > limiteSegundos - 5) {
+        display.classList.add('text-amber-400');
+        display.classList.remove('text-white', 'text-rose-400');
+      } else {
+        display.classList.add('text-white');
+        display.classList.remove('text-amber-400', 'text-rose-400');
+      }
+    }
+
+    function copiarTextoSpot() {
+      const chave = document.getElementById('sel-spot').value;
+      const emissora = document.getElementById('sel-emissora').value;
+      const s = BANCO_SPOTS[chave];
+      if (!s) return;
+
+      const textoCompleto = `*ROTEIRO DE SPOT DE RÁDIO COMERCIAL — TRUDATA ERP*\n` +
+        `Veículo: ${emissora}\n` +
+        `${s.titulo} (${s.duracao})\n` +
+        `Trilha Recomendada: ${s.trilha}\n\n` +
+        `--- TEXTO DE LOCUÇÃO ---\n\n` +
+        s.textoPuro + `\n\n` +
+        `---\nHansen Software LTDA · Sarandi - RS · Tel: (54) 3361-2650`;
+
+      navigator.clipboard.writeText(textoCompleto).then(() => {
+        const btnTxt = document.getElementById('btn-copiar-spot-txt');
+        btnTxt.innerText = "✓ Copiado!";
+        setTimeout(() => btnTxt.innerText = "📋 Copiar Texto", 2500);
+      });
+    }
+
+    function enviarScriptRadialistaWhatsApp() {
+      const chave = document.getElementById('sel-spot').value;
+      const emissora = document.getElementById('sel-emissora').value;
+      const fone = (document.getElementById('inp-radio-fone').value || '').replace(/\D/g, '');
+      const s = BANCO_SPOTS[chave];
+      if (!s) return;
+
+      const texto = `*SOLICITAÇÃO DE GRAVAÇÃO / VEICULAÇÃO DE SPOT COMERCIAL*\n\n` +
+        `Olá, equipe da *${emissora}*!\n\n` +
+        `Segue o roteiro oficial do spot de 30 segundos da *TruData ERP (Hansen Software)* de Sarandi para veiculação:\n\n` +
+        `🎙️ *${s.titulo}*\n` +
+        `🎵 *Trilha Sugerida:* ${s.trilha}\n\n` +
+        `*Texto de Locução:*\n` +
+        `"${s.textoPuro}"\n\n` +
+        `Ficamos no aguardo da prova de áudio e do comprovante de inserção na grade!`;
+
+      let targetFone = fone;
+      if (!targetFone.startsWith('55') && targetFone.length >= 10) targetFone = '55' + targetFone;
+
+      const url = targetFone ? `https://wa.me/${targetFone}?text=${encodeURIComponent(texto)}` : `https://wa.me/?text=${encodeURIComponent(texto)}`;
+      window.open(url, '_blank');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      carregarSpotSelecionado();
+    });
+  </script>
+</body>
+</html>

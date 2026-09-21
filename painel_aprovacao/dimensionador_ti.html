@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dimensionador de Infraestrutura & Servidor TI — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' } },
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col">
+
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
+        ← Voltar ao Hub Central
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-300 font-display">Dimensionador de Servidor & TI</span>
+        <span class="text-[10px] bg-slate-800 text-slate-400 font-mono px-2 py-0.5 rounded border border-slate-700">Hardware Sizing</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
+    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-slate-800 text-slate-200 flex items-center justify-center text-xl border border-slate-700">
+          🖥️
+        </div>
+        <div>
+          <h1 class="text-2xl font-black font-display text-white">Calculadora de Dimensionamento de Servidor & Infraestrutura</h1>
+          <p class="text-xs text-slate-400">Recomendações técnicas de hardware, memória RAM, SSD NVMe e rotina de backup Firebird para a loja do cliente.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1">Caixas PDV Ativos (Qtd):</label>
+          <input type="number" id="dim-caixas" value="3" min="1" max="50" oninput="dimensionarTI()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white font-mono" />
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1">Terminais Retaguarda (Qtd):</label>
+          <input type="number" id="dim-retaguarda" value="4" min="1" max="50" oninput="dimensionarTI()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-white font-mono" />
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1">Produtos Cadastrados:</label>
+          <select id="dim-itens" onchange="dimensionarTI()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+            <option value="pequeno">Até 5.000 itens</option>
+            <option value="medio" selected>5.000 a 25.000 itens</option>
+            <option value="grande">Mais de 25.000 itens</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- RECOMENDAÇÃO TÉCNICA -->
+      <div class="p-6 rounded-2xl bg-slate-950 border border-brand-azure/30 space-y-4">
+        <h3 class="text-xs font-bold text-brand-azure uppercase tracking-wider font-display">Especificação Recomendada para o Servidor Local:</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+          <div class="p-3.5 bg-slate-900 rounded-xl border border-slate-800">
+            <span class="text-slate-500 block text-[10px]">PROCESSADOR:</span>
+            <strong class="text-white text-sm" id="rec-cpu">Intel Core i5 (12ª gen+)</strong>
+          </div>
+          <div class="p-3.5 bg-slate-900 rounded-xl border border-slate-800">
+            <span class="text-slate-500 block text-[10px]">MEMÓRIA RAM:</span>
+            <strong class="text-emerald-400 text-sm font-mono" id="rec-ram">16 GB DDR4</strong>
+          </div>
+          <div class="p-3.5 bg-slate-900 rounded-xl border border-slate-800">
+            <span class="text-slate-500 block text-[10px]">ARMAZENAMENTO:</span>
+            <strong class="text-white text-sm" id="rec-ssd">SSD NVMe M.2 500GB</strong>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-slate-800 space-y-2 text-xs">
+          <div class="flex items-center justify-between text-slate-300">
+            <span>🛡️ Rotina de Backup Recomendada:</span>
+            <strong class="text-amber-400">Diário automático local + Cópia em Nuvem às 22h</strong>
+          </div>
+          <div class="flex items-center justify-between text-slate-300">
+            <span>⚡ Rede Local (Switch):</span>
+            <strong class="text-white">Gigabit 10/100/1000 com cabos Cat6</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function dimensionarTI() {
+      const caixas = parseInt(document.getElementById('dim-caixas').value) || 1;
+      const ret = parseInt(document.getElementById('dim-retaguarda').value) || 1;
+      const itens = document.getElementById('dim-itens').value;
+      const totalTerminais = caixas + ret;
+
+      let ram = '8 GB DDR4';
+      let cpu = 'Intel Core i3 / Ryzen 3';
+      let ssd = 'SSD SATA 256GB';
+
+      if (totalTerminais > 10 || itens === 'grande') {
+        ram = '32 GB DDR4/DDR5';
+        cpu = 'Intel Core i7 / Xeon E-Series';
+        ssd = 'SSD NVMe 1TB (RAID 1 espelhado)';
+      } else if (totalTerminais > 4 || itens === 'medio') {
+        ram = '16 GB DDR4';
+        cpu = 'Intel Core i5 (12ª gen+) / Ryzen 5';
+        ssd = 'SSD NVMe M.2 500GB';
+      }
+
+      document.getElementById('rec-ram').textContent = ram;
+      document.getElementById('rec-cpu').textContent = cpu;
+      document.getElementById('rec-ssd').textContent = ssd;
+    }
+
+    dimensionarTI();
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+  <defs>
+    <!-- Gradiente Fundo Azul-Petróleo Escuro Elegante -->
+    <radialGradient id="bg-grad-52" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#0f2b3c"/>
+      <stop offset="55%" stop-color="#091b26"/>
+      <stop offset="100%" stop-color="#06121a"/>
+    </radialGradient>
+    <filter id="subtle-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Fundo Sólido Corporativo com Gradiente Sutil -->
+  <rect width="1080" height="1920" fill="url(#bg-grad-52)"/>
+
+  <!-- Guia Sutil de Categoria no Topo Seguro (y=280) -->
+  <g transform="translate(540, 290)">
+    <rect x="-140" y="-18" width="280" height="36" rx="18" fill="rgba(52, 211, 153, 0.08)" stroke="rgba(52, 211, 153, 0.25)" stroke-width="1.5"/>
+    <text x="0" y="6" font-family="'Inter', -apple-system, sans-serif" font-size="14" font-weight="700" fill="#34d399" text-anchor="middle" letter-spacing="2">ECOSSISTEMA COMPLETO • 52</text>
+  </g>
+
+  <!-- Ícone Principal Flat/Linear Minimalista (Terço Superior, y=560) -->
+  <g transform="translate(540, 560)">
+    
+            <!-- Trio Triangular: Desktop, Nuvem e Gráfico BI perfeitamente equilibrados -->
+            <!-- Desktop (Topo) -->
+            <rect x="-40" y="-125" width="80" height="55" rx="6" stroke="#ffffff" stroke-width="5" fill="none"/>
+            <line x1="0" y1="-70" x2="0" y2="-55" stroke="#ffffff" stroke-width="4"/>
+            <!-- Nuvem (Esquerda) -->
+            <path d="M -105,65 Q -125,65 -125,45 Q -125,25 -105,25 Q -95,0 -70,0 Q -45,0 -40,20 Q -25,20 -25,45 Q -25,65 -45,65 Z" stroke="#34d399" stroke-width="5" fill="none"/>
+            <!-- Gráfico BI (Direita) -->
+            <rect x="35" y="10" width="75" height="55" rx="6" stroke="#ffffff" stroke-width="5" fill="none"/>
+            <polyline points="45,45 60,30 75,38 95,22" stroke="#34d399" stroke-width="4" fill="none"/>
+            <!-- Linhas de Interconexão Triangular -->
+            <line x1="0" y1="-50" x2="-65" y2="10" stroke="#5eead4" stroke-width="4" stroke-dasharray="6,4"/>
+            <line x1="0" y1="-50" x2="65" y2="10" stroke="#5eead4" stroke-width="4" stroke-dasharray="6,4"/>
+            <line x1="-25" y1="45" x2="35" y2="45" stroke="#5eead4" stroke-width="4" stroke-dasharray="6,4"/>
+        
+  </g>
+
+  <!-- Título Moderno Geométrico Bold em Branco (y=960) -->
+  <text x="540" y="960" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="58" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="-0.5">
+    Um Ecossistema Completo
+  </text>
+
+  <!-- Subtítulo Regular Menor em Branco com 80% Opacidade (y=1040) -->
+  <text x="540" y="1040" font-family="'Inter', -apple-system, sans-serif" font-size="32" font-weight="400" fill="rgba(255, 255, 255, 0.82)" text-anchor="middle">
+    Desktop + Nuvem + BI na combinação certa para sua empresa.
+  </text>
+
+  <!-- Linha Decorativa Minimalista -->
+  <line x1="490" y1="1120" x2="590" y2="1120" stroke="#34d399" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Rodapé Padronizado com Logo Trudata (Margem de Segurança Base y=1720) -->
+  <g transform="translate(540, 1720)">
+    <text x="-8" y="0" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="32" font-weight="800" fill="rgba(255, 255, 255, 0.75)" text-anchor="middle" letter-spacing="6">TRUDATA</text>
+    <circle cx="82" cy="-8" r="4.5" fill="#34d399"/>
+    <text x="0" y="32" font-family="'Inter', -apple-system, sans-serif" font-size="13" font-weight="600" fill="rgba(255, 255, 255, 0.4)" text-anchor="middle" letter-spacing="3">SISTEMAS DE GESTÃO</text>
+  </g>
+</svg>

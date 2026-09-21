@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mural de Cases de Sucesso & Depoimentos RS — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' } },
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col">
+
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
+        ← Voltar ao Hub Central
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-300 font-display">Mural de Prova Social</span>
+        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 font-bold px-2 py-0.5 rounded border border-emerald-500/30">+25 Anos no RS</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
+    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-8">
+        <div>
+          <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+            Autoridade Regional Inabalável
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-black font-display text-white mt-3">Empresas do RS que Confiam no TruData ERP</h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1">Mais de 300 comércios, supermercados, confecções e farmácias atendidos com suporte 100% humano.</p>
+        </div>
+        <button onclick="copiarLinkMural()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 rounded-xl transition border border-slate-700 flex items-center gap-2">
+          📋 Compartilhar Cases
+        </button>
+      </div>
+
+      <!-- CARDS DE CASES REAIS -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- CASE 1: AUTOPEÇAS -->
+        <div class="bg-slate-950 border border-slate-800 p-6 rounded-2xl space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] bg-slate-800 text-slate-300 font-mono px-2 py-0.5 rounded font-bold">AUTOPEÇAS & SERVIÇOS</span>
+              <span class="text-xs font-bold text-amber-400">12 Anos de TruData</span>
+            </div>
+            <h3 class="text-base font-bold text-white font-display">Taura Autopeças</h3>
+            <p class="text-xs text-slate-300 leading-relaxed italic">
+              "Migramos para o TruData há mais de 10 anos porque nosso sistema anterior travava toda vez que a internet caía. Com a Hansen Software, nossos caixas nunca param e o suporte resolve na hora pelo telefone."
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-900 flex items-center justify-between">
+            <span class="text-[11px] text-slate-500">Sarandi - RS</span>
+            <span class="text-xs font-bold text-emerald-400">★★★★★ 5.0</span>
+          </div>
+        </div>
+
+        <!-- CASE 2: VAREJO DE CONFECÇÃO -->
+        <div class="bg-slate-950 border border-slate-800 p-6 rounded-2xl space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] bg-slate-800 text-slate-300 font-mono px-2 py-0.5 rounded font-bold">MODA & CALÇADOS</span>
+              <span class="text-xs font-bold text-amber-400">8 Anos de TruData</span>
+            </div>
+            <h3 class="text-base font-bold text-white font-display">O Lojão Confecções</h3>
+            <p class="text-xs text-slate-300 leading-relaxed italic">
+              "O controle de grade de cor e tamanho mudou nossa organização. Hoje sabemos exatamente onde cada par de calçado está. E o crediário com emissão de carnê no cupom fiscal facilitou muito a cobrança dos clientes fiéis."
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-900 flex items-center justify-between">
+            <span class="text-[11px] text-slate-500">Região Norte - RS</span>
+            <span class="text-xs font-bold text-emerald-400">★★★★★ 5.0</span>
+          </div>
+        </div>
+
+        <!-- CASE 3: DROGARIA & SNGPC -->
+        <div class="bg-slate-950 border border-slate-800 p-6 rounded-2xl space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] bg-slate-800 text-slate-300 font-mono px-2 py-0.5 rounded font-bold">DROGARIA & FARMÁCIA</span>
+              <span class="text-xs font-bold text-amber-400">15 Anos de TruData</span>
+            </div>
+            <h3 class="text-base font-bold text-white font-display">Farmácia Fátima</h3>
+            <p class="text-xs text-slate-300 leading-relaxed italic">
+              "A transmissão do SNGPC para a Anvisa sempre foi nosso maior pavor. O módulo farma do TruData automatizou os lotes e validades sem erro. Já passamos por fiscalizações sem nenhuma notificação."
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-900 flex items-center justify-between">
+            <span class="text-[11px] text-slate-500">Planalto Médio - RS</span>
+            <span class="text-xs font-bold text-emerald-400">★★★★★ 5.0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span class="text-xs text-slate-400">
+          ✓ Mais de 300 empresas no RS operando diariamente com a Hansen Software desde 1998.
+        </span>
+        <a href="https://wa.me/5554996966175?text=Ola!%20Vi%20os%20cases%20de%20sucesso%20do%20TruData%20ERP%20e%20gostaria%20de%20uma%20demonstracao." target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-emerald-600/30">
+          📲 Quero Fazer Parte da Família TruData
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function copiarLinkMural() {
+      navigator.clipboard.writeText(window.location.href).then(() => alert('Link dos Cases de Sucesso copiado!'));
+    }
+  </script>
+</body>
+</html>

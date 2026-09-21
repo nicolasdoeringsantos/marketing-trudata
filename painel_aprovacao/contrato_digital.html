@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrato Digital & Pix Dinâmico — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #070b14; color: #f1f5f9; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    @media print {
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .no-print { display: none !important; }
+      .print-box { border: 1px solid #ccc !important; box-shadow: none !important; color: black !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 sm:p-6 lg:p-8">
+
+  <!-- TOPO & VOLTAR -->
+  <div class="max-w-5xl mx-auto mb-6 no-print">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900/80 border border-slate-800 p-5 rounded-3xl backdrop-blur-md">
+      <div class="flex items-center gap-3.5">
+        <a href="index.html" class="h-10 w-10 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-lg transition" title="Voltar ao Cockpit">
+          ←
+        </a>
+        <div class="h-10 w-10 rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-xl">
+          ⚖️
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg font-black text-white">Contrato Digital & Ativação Pix 1-Click</h1>
+            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded-full border border-emerald-500/30">Validade Jurídica MP 2.200-2</span>
+          </div>
+          <p class="text-xs text-slate-400">Formalização no balcão com assinatura touch, hash criptográfico e Pix Sicredi com conciliação automática.</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold rounded-xl transition flex items-center gap-1.5">
+          <span>🖨️</span>
+          <span>Imprimir Contrato A4</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-5xl mx-auto space-y-6">
+    
+    <!-- GRID FORMULÁRIO + PREVIEW DO CONTRATO -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- COLUNA ESQUERDA: DADOS DE FECHAMENTO (5 COLUNAS) -->
+      <div class="lg:col-span-5 space-y-5 no-print">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+          <h3 class="text-sm font-bold text-white border-b border-slate-800 pb-2.5 flex items-center gap-2">
+            <span>📋</span>
+            <span>1. Dados da Contratação</span>
+          </h3>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Razão Social / Nome Fantasia:</label>
+            <input type="text" id="c-nome" oninput="atualizarContrato()" value="Mercado Bela Vista Ltda" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 transition" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">CNPJ do Comércio:</label>
+              <input type="text" id="c-cnpj" oninput="atualizarContrato()" value="34.892.123/0001-44" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white mono focus:outline-none focus:border-indigo-500 transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Cidade Polo RS:</label>
+              <input type="text" id="c-cidade" oninput="atualizarContrato()" value="Sarandi - RS" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 transition" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Taxa Implantação (Setup):</label>
+              <input type="number" id="c-setup" oninput="atualizarContrato()" value="450" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white mono focus:outline-none focus:border-indigo-500 transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Mensalidade ERP:</label>
+              <input type="number" id="c-mensal" oninput="atualizarContrato()" value="290" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white mono focus:outline-none focus:border-indigo-500 transition" />
+            </div>
+          </div>
+
+          <!-- ASSINATURA TOUCH CANVAS -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs font-bold text-slate-300">Assinatura do Titular na Tela (Touch):</label>
+              <button onclick="limparAssinatura()" class="text-[10px] text-rose-400 hover:text-rose-300 font-bold">Limpar Traço</button>
+            </div>
+            <div class="bg-slate-950 border-2 border-dashed border-slate-700 rounded-2xl overflow-hidden relative h-28">
+              <canvas id="canvas-assinatura" class="w-full h-full cursor-crosshair"></canvas>
+              <div id="hint-assinatura" class="absolute inset-0 flex items-center justify-center text-[11px] text-slate-600 pointer-events-none">
+                Assine aqui com o dedo ou mouse
+              </div>
+            </div>
+          </div>
+
+          <button onclick="gerarPixEContrato()" class="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-sky-600 hover:brightness-110 text-white font-bold text-xs rounded-2xl transition shadow-lg shadow-indigo-950 flex items-center justify-center gap-2 cursor-pointer">
+            <span>⚡</span>
+            <span>Gerar QR Code Pix & Selar Contrato</span>
+          </button>
+        </div>
+
+        <!-- BOX DO PIX DINAMICO -->
+        <div id="box-pix-pagamento" class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">💳</span>
+              <div>
+                <h4 class="text-xs font-bold text-white">QR Code Pix Dinâmico (Sicredi)</h4>
+                <p class="text-[10px] text-slate-400">Chave CNPJ: 02.483.991/0001-90 (Hansen Software)</p>
+              </div>
+            </div>
+            <span class="text-xs font-black text-emerald-400 mono" id="pix-valor-display">R$ 450,18</span>
+          </div>
+
+          <!-- QR Code Canvas Simulado -->
+          <div class="flex flex-col items-center justify-center py-2 space-y-3">
+            <div class="p-3 bg-white rounded-2xl shadow-xl">
+              <img id="img-qrcode" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126580014br.gov.bcb.pix0136024839910001905204000053039865406450.185802BR5915HANSEN_SOFTWARE6007SARANDI62070503TRU6304" alt="QR Code Pix" class="w-36 h-36" />
+            </div>
+            <div class="text-[11px] text-slate-400 text-center">
+              Escaneie no App do seu Banco ou use o código Copia e Cola:
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <input type="text" id="pix-copia-cola" readonly value="00020126580014br.gov.bcb.pix0136024839910001905204000053039865406450.185802BR5915HANSEN_SOFTWARE6007SARANDI62070503TRU6304" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-[10px] text-slate-300 mono truncate" />
+            <div class="flex items-center gap-2">
+              <button onclick="copiarPix()" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-xs rounded-xl transition shadow">
+                📋 Copiar Código Pix
+              </button>
+              <button onclick="simularConfirmacaoPagamento()" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-emerald-400 text-xs font-bold rounded-xl transition" title="Simular aprovação do Webhook Sicredi">
+                Simular Pagamento ⚡
+              </button>
+            </div>
+          </div>
+
+          <!-- Status do Webhook -->
+          <div class="p-3 bg-slate-950/80 border border-slate-800 rounded-xl flex items-center justify-between text-[11px]">
+            <div class="flex items-center gap-2 text-slate-400">
+              <span class="h-2 w-2 rounded-full bg-amber-400 animate-ping"></span>
+              <span>Aguardando liquidação Pix Sicredi...</span>
+            </div>
+            <span class="text-slate-500 mono" id="timer-pix">14:59</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUNA DIREITA: MINUTA DO CONTRATO FORMAL A4 (7 COLUNAS) -->
+      <div class="lg:col-span-7">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl print-box space-y-6 text-slate-300 text-xs leading-relaxed">
+          
+          <!-- Cabeçalho do Contrato -->
+          <div class="border-b border-slate-800 pb-5 flex items-start justify-between">
+            <div>
+              <div class="text-[10px] uppercase font-black tracking-widest text-indigo-400">Instrumento Particular de Licenciamento & Suporte</div>
+              <h2 class="text-base font-black text-white font-display mt-0.5">Contrato de Prestação de Serviços — TruData ERP</h2>
+              <p class="text-[11px] text-slate-400 mt-1">HANSEN SOFTWARE LTDA · CNPJ: 02.483.991/0001-90 · Sarandi - RS</p>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] bg-slate-950 text-indigo-400 font-bold px-2.5 py-1 rounded-full border border-slate-800 mono" id="txt-contrato-num">#TRU-2026-089</span>
+            </div>
+          </div>
+
+          <!-- Cláusula 1: Das Partes -->
+          <div class="space-y-1.5">
+            <h4 class="font-bold text-white text-xs uppercase tracking-wide">1. Das Partes Contratantes</h4>
+            <p>
+              <strong>CONTRATADA:</strong> HANSEN SOFTWARE LTDA, inscrita no CNPJ sob nº 02.483.991/0001-90, com sede em Sarandi - RS, desenvolvedora e mantenedora do software TruData ERP.<br>
+              <strong>CONTRATANTE:</strong> <span class="text-white font-bold" id="doc-nome">Mercado Bela Vista Ltda</span>, inscrita no CNPJ sob nº <span class="text-white font-bold mono" id="doc-cnpj">34.892.123/0001-44</span>, estabelecida em <span class="text-white font-bold" id="doc-cidade">Sarandi - RS</span>.
+            </p>
+          </div>
+
+          <!-- Cláusula 2: Do Objeto e SLA Presencial -->
+          <div class="space-y-1.5">
+            <h4 class="font-bold text-white text-xs uppercase tracking-wide">2. Do Objeto, Módulos e SLA Presencial</h4>
+            <p>
+              O presente contrato tem como objeto o licenciamento de uso do sistema <strong>TruData ERP</strong>, incluindo frente de caixa (PDV) com contingência offline automática, módulo de gestão de estoque, emissão fiscal (NFC-e / NF-e) e integração com balanças e TEF.
+            </p>
+            <p class="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+              <strong>Compromisso de Suporte Presencial (SLA 2 Horas):</strong> A CONTRATADA garante tempo máximo de deslocamento e atendimento presencial de até <strong>2 (duas) horas</strong> em caso de paralisação crítica da frente de caixa para a localidade contratada.
+            </p>
+          </div>
+
+          <!-- Cláusula 3: Valores e Condições -->
+          <div class="space-y-1.5">
+            <h4 class="font-bold text-white text-xs uppercase tracking-wide">3. Dos Valores e Condições Comerciais</h4>
+            <ul class="list-disc list-inside space-y-1 pl-1 text-slate-300">
+              <li><strong>Taxa de Instalação, Migração e Treinamento (Setup):</strong> <span class="text-white font-bold mono" id="doc-setup">R$ 450,00</span> em parcela única na virada.</li>
+              <li><strong>Mensalidade de Manutenção, Suporte e Atualizações SEFAZ:</strong> <span class="text-white font-bold mono" id="doc-mensal">R$ 290,00 / mês</span>.</li>
+              <li><strong>Garantia Incondicional de 30 Dias:</strong> Se por qualquer razão a CONTRATANTE desejar cancelar nos primeiros 30 dias, 100% dos valores pagos de setup serão devolvidos via Pix.</li>
+            </ul>
+          </div>
+
+          <!-- Cláusula 4: Carimbo Criptográfico SHA-256 e Assinatura -->
+          <div class="space-y-3 pt-3 border-t border-slate-800">
+            <h4 class="font-bold text-white text-xs uppercase tracking-wide">4. Validação Digital & Assinatura</h4>
+            
+            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+              <div class="flex items-center justify-between text-[10px] text-slate-400">
+                <span>Hash Criptográfico de Integridade (SHA-256):</span>
+                <span class="text-emerald-400 font-bold">Verificado</span>
+              </div>
+              <div class="font-mono text-[9px] text-slate-400 break-all" id="doc-hash">
+                e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+              </div>
+              <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-800">
+                <span>Data/Hora: <strong class="text-slate-300" id="doc-timestamp">-</strong></span>
+                <span>IP / Origem: <strong class="text-slate-300">Sarandi, RS (Local Gateway)</strong></span>
+              </div>
+            </div>
+
+            <!-- Área da Assinatura Digital Renderizada -->
+            <div class="grid grid-cols-2 gap-4 pt-2">
+              <div class="border-t border-slate-700 pt-2 text-center">
+                <div class="text-[11px] font-bold text-white">HANSEN SOFTWARE LTDA</div>
+                <div class="text-[10px] text-slate-400">Diretoria de Operações</div>
+              </div>
+              <div class="border-t border-slate-700 pt-2 text-center">
+                <div id="doc-preview-assinatura" class="h-10 flex items-center justify-center text-xs text-indigo-400 italic">
+                  [Assinatura na Tela]
+                </div>
+                <div class="text-[11px] font-bold text-white" id="doc-ass-titular">Mercado Bela Vista Ltda</div>
+                <div class="text-[10px] text-slate-400">Assinatura Eletrônica do Titular</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL SUCESSO DO PIX / VENDA CONFIRMADA -->
+  <div id="modal-sucesso" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-emerald-500/50 rounded-3xl p-8 max-w-md w-full shadow-2xl text-center space-y-4 relative overflow-hidden">
+      <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/20 rounded-full blur-2xl"></div>
+      <div class="h-16 w-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-400 flex items-center justify-center text-3xl mx-auto shadow-lg shadow-emerald-500/30 animate-bounce">
+        ✓
+      </div>
+      <h3 class="text-xl font-black text-white font-display">Venda Confirmada!</h3>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        O pagamento do setup via Pix Sicredi foi identificado e liquidado com sucesso. O contrato está juridicamente selado e a ordem de implantação foi enviada para os técnicos de Sarandi!
+      </p>
+      <div class="p-3 bg-slate-950 rounded-2xl border border-slate-800 text-xs space-y-1">
+        <div class="flex justify-between text-slate-400"><span>Contrato:</span><strong class="text-white" id="sucesso-num">#TRU-2026-089</strong></div>
+        <div class="flex justify-between text-slate-400"><span>Valor Liquidado:</span><strong class="text-emerald-400" id="sucesso-valor">R$ 450,18</strong></div>
+        <div class="flex justify-between text-slate-400"><span>SLA de Início:</span><strong class="text-sky-400">Até 48 horas</strong></div>
+      </div>
+      <div class="flex items-center gap-3 pt-2">
+        <button onclick="window.print()" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl transition">
+          Imprimir Contrato
+        </button>
+        <button onclick="fecharModalSucesso()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-xs rounded-xl transition shadow-lg shadow-emerald-950">
+          Concluir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Canvas de Assinatura
+    const canvas = document.getElementById('canvas-assinatura');
+    const ctx = canvas.getContext('2d');
+    let desenhando = false;
+
+    function redimensionarCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#818cf8';
+    }
+    window.addEventListener('resize', redimensionarCanvas);
+    redimensionarCanvas();
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.x, y: clientY - rect.y };
+    }
+
+    canvas.addEventListener('mousedown', (e) => { desenhando = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); document.getElementById('hint-assinatura').style.display = 'none'; });
+    canvas.addEventListener('mousemove', (e) => { if (!desenhando) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+    window.addEventListener('mouseup', () => { if (desenhando) { desenhando = false; atualizarPreviewAssinatura(); } });
+
+    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); desenhando = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); document.getElementById('hint-assinatura').style.display = 'none'; });
+    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); if (!desenhando) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+    window.addEventListener('touchend', () => { if (desenhando) { desenhando = false; atualizarPreviewAssinatura(); } });
+
+    function limparAssinatura() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      document.getElementById('hint-assinatura').style.display = 'flex';
+      document.getElementById('doc-preview-assinatura').innerHTML = '[Assinatura na Tela]';
+    }
+
+    function atualizarPreviewAssinatura() {
+      const dataUrl = canvas.toDataURL();
+      document.getElementById('doc-preview-assinatura').innerHTML = `<img src="${dataUrl}" class="h-8 mx-auto" />`;
+    }
+
+    function atualizarContrato() {
+      const nome = document.getElementById('c-nome').value || 'Comércio Parceiro';
+      const cnpj = document.getElementById('c-cnpj').value || '00.000.000/0001-00';
+      const cidade = document.getElementById('c-cidade').value || 'Sarandi - RS';
+      const setup = parseFloat(document.getElementById('c-setup').value || 0);
+      const mensal = parseFloat(document.getElementById('c-mensal').value || 0);
+
+      document.getElementById('doc-nome').textContent = nome;
+      document.getElementById('doc-cnpj').textContent = cnpj;
+      document.getElementById('doc-cidade').textContent = cidade;
+      document.getElementById('doc-ass-titular').textContent = nome;
+      document.getElementById('doc-setup').textContent = `R$ ${setup.toFixed(2)}`;
+      document.getElementById('doc-mensal').textContent = `R$ ${mensal.toFixed(2)} / mês`;
+
+      // Atualiza timestamp e hash simulado
+      const agora = new Date();
+      document.getElementById('doc-timestamp').textContent = agora.toLocaleString('pt-BR');
+      
+      const strParaHash = `${nome}|${cnpj}|${setup}|${agora.toISOString()}`;
+      document.getElementById('doc-hash').textContent = gerarHashSimulado(strParaHash);
+    }
+
+    function gerarHashSimulado(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        hash |= 0;
+      }
+      return 'a8f3' + Math.abs(hash).toString(16).padStart(8, '0') + 'c9b4e721' + Math.abs(hash * 31).toString(16).padStart(12, '0') + '99ff';
+    }
+
+    function gerarPixEContrato() {
+      const setup = parseFloat(document.getElementById('c-setup').value || 450);
+      // Gera centavos aleatórios para conciliação única
+      const centavos = Math.floor(Math.random() * 89 + 10);
+      const valorComCentavos = (Math.floor(setup) + (centavos / 100)).toFixed(2);
+      
+      document.getElementById('pix-valor-display').textContent = `R$ ${valorComCentavos.replace('.', ',')}`;
+      
+      const payloadPix = `00020126580014br.gov.bcb.pix0136024839910001905204000053039865406${valorComCentavos}5802BR5915HANSEN_SOFTWARE6007SARANDI62070503TRU6304`;
+      document.getElementById('pix-copia-cola').value = payloadPix;
+      document.getElementById('img-qrcode').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(payloadPix)}`;
+
+      document.getElementById('box-pix').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copiarPix() {
+      const txt = document.getElementById('pix-copia-cola').value;
+      navigator.clipboard.writeText(txt).then(() => {
+        alert('Código Pix Copia e Cola copiado com sucesso! 📋');
+      });
+    }
+
+    function simularConfirmacaoPagamento() {
+      const valor = document.getElementById('pix-valor-display').textContent;
+      const num = document.getElementById('txt-contrato-num').textContent;
+      document.getElementById('sucesso-valor').textContent = valor;
+      document.getElementById('sucesso-num').textContent = num;
+      document.getElementById('modal-sucesso').classList.remove('hidden');
+
+      // Toca áudio suave de sucesso
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.15); // A5
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.6);
+      } catch(e) {}
+    }
+
+    function fecharModalSucesso() {
+      document.getElementById('modal-sucesso').classList.add('hidden');
+    }
+
+    // Inicialização
+    atualizarContrato();
+    setTimeout(redimensionarCanvas, 300);
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "CHK-1789857699",
+    "cliente": "Moda & Estilo Carazinho",
+    "tipo": "Confecção / Vestuário",
+    "cidade": "Carazinho - RS",
+    "lat": -28.2844,
+    "lon": -52.7867,
+    "distancia_km": 42.1,
+    "notas": "Lojista insatisfeito com sistema atual que trava na emissão de NFC-e.",
+    "gravacao_voz": false,
+    "timestamp": "2026-09-19 19:41:39"
+  }
+]

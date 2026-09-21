@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz Fiscal & Diagnóstico de NCM — TruData ERP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #131b2e;
+            --accent-cyan: #0ea5e9;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --border-color: #243048;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            padding: 30px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-area h1 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-area p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .nav-links a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-card);
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background: var(--accent-cyan);
+            color: #000;
+        }
+
+        .nicho-selector-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nicho-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nicho-btn.active, .nicho-btn:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            border-color: var(--accent-cyan);
+        }
+
+        .alerts-banner {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), rgba(245, 158, 11, 0.1));
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            border-radius: 14px;
+            padding: 22px 26px;
+            margin-bottom: 30px;
+        }
+
+        .alerts-banner h3 {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--accent-rose);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alerts-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+        }
+
+        .alert-item {
+            font-size: 13px;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        .alert-item strong {
+            color: #fff;
+        }
+
+        .table-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        .table-card h2 {
+            font-size: 19px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .table-card p {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            text-align: left;
+        }
+
+        th {
+            background: #0b1329;
+            color: var(--accent-cyan);
+            padding: 12px 16px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border-color);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: #cbd5e1;
+        }
+
+        tr:hover td {
+            background: rgba(0, 210, 255, 0.03);
+        }
+
+        .tag-status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11.5px;
+            font-weight: 700;
+        }
+
+        .tag-st { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); }
+        .tag-mono { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); }
+        .tag-normal { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .tag-isento { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+
+        .automation-box {
+            background: #0b1329;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .auto-text h3 {
+            font-size: 17px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .auto-text p {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            max-width: 750px;
+            line-height: 1.5;
+        }
+
+        .btn-action {
+            background: var(--accent-emerald);
+            color: #000;
+            font-weight: 800;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-action:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo-area">
+            <h1>🔍 Matriz Fiscal & Diagnóstico de NCM</h1>
+            <p>TruData ERP • Parâmetros Tributários RS, ICMS-ST, PIS/COFINS e Reforma Tributária</p>
+        </div>
+        <div class="nav-links">
+            <a href="/index.html">← Voltar ao Painel</a>
+            <a href="/parceiros">Clube do Contador</a>
+            <a href="/reforma-tributaria">Simulador Tributário</a>
+        </div>
+    </header>
+
+    <div class="nicho-selector-bar">
+        <button class="nicho-btn active" onclick="trocarNicho('mercados', this)">🛒 Supermercados & Alimentos</button>
+        <button class="nicho-btn" onclick="trocarNicho('farmacias', this)">💊 Farmácias & Medicamentos</button>
+        <button class="nicho-btn" onclick="trocarNicho('moda', this)">👗 Roupas & Calçados</button>
+        <button class="nicho-btn" onclick="trocarNicho('auto', this)">🚗 Autopeças & Oficinas</button>
+        <button class="nicho-btn" onclick="trocarNicho('construcao', this)">🧱 Materiais de Construção</button>
+    </div>
+
+    <div class="alerts-banner">
+        <h3>⚠️ 4 Maiores Erros Tributários que Causam Multas na SEFAZ-RS</h3>
+        <div class="alerts-list">
+            <div class="alert-item">
+                <strong>1. Bitributação no Simples:</strong> Revender produtos de PIS/COFINS monofásico sem segregar na apuração do DAS, pagando imposto duas vezes.
+            </div>
+            <div class="alert-item">
+                <strong>2. Cadastro sem CEST:</strong> Rejeição imediata de NFC-e na SEFAZ quando o NCM exige CEST obrigatório no Rio Grande do Sul.
+            </div>
+            <div class="alert-item">
+                <strong>3. NCM Inexistente ou Extinto:</strong> Produtos cadastrados com códigos revogados pela Camex, travando a transmissão do lote de notas.
+            </div>
+            <div class="alert-item">
+                <strong>4. ICMS-ST Errado:</strong> Aplicar alíquota normal em mercadorias que já tiveram o imposto retido por substituição tributária na indústria.
+            </div>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <h2 id="tabela-titulo">Matriz Fiscal: Supermercados & Mercearias (Regras RS)</h2>
+        <p id="tabela-desc">Exemplos reais de tributação aplicável no comércio do Rio Grande do Sul.</p>
+
+        <div id="tabela-container">
+            <!-- Tabela Dinâmica Carregada por JavaScript -->
+        </div>
+    </div>
+
+    <div class="automation-box">
+        <div class="auto-text">
+            <h3>⚡ Como o TruData ERP Blinda Sua Empresa Automaticamente</h3>
+            <p>Ao importar o XML da nota de compra do seu fornecedor, o TruData converte o CFOP de entrada para venda, vincula o NCM correto, aplica o CEST e parametriza as regras de ICMS-ST e Monofásicos sem que o operador precise digitar códigos fiscais manualmente.</p>
+        </div>
+        <button class="btn-action" onclick="compartilharDiagnostico()">
+            📲 Compartilhar Diagnóstico no WhatsApp
+        </button>
+    </div>
+</div>
+
+<script>
+    const dadosMatriz = {
+        mercados: {
+            titulo: "Matriz Fiscal: Supermercados & Mercearias (Regras RS)",
+            desc: "Classificação típica de gêneros alimentícios, bebidas, limpeza e hortifrúti.",
+            itens: [
+                { produto: "Refrigerante 2L", ncm: "2202.10.00", cest: "03.010.00", icms: "Substituição Tributária", icmsTag: "tag-st", pis: "Monofásico (Alíquota Zero)", pisTag: "tag-mono", reforma: "IBS/CBS Padrão + Seletivo" },
+                { produto: "Cerveja Lata 350ml", ncm: "2203.00.00", cest: "03.001.00", icms: "Substituição Tributária", icmsTag: "tag-st", pis: "Monofásico (Alíquota Zero)", pisTag: "tag-mono", reforma: "IBS/CBS Padrão + Seletivo" },
+                { produto: "Arroz Branco Tipo 1 (1kg)", ncm: "1006.30.21", cest: "—", icms: "Cesta Básica RS (Isento/Reduzido)", icmsTag: "tag-isento", pis: "Alíquota Zero (Cesta Básica)", pisTag: "tag-mono", reforma: "Cesta Básica Nacional (Alíquota Zero)" },
+                { produto: "Detergente Líquido", ncm: "3402.50.00", cest: "11.001.00", icms: "ICMS Normal (17%)", icmsTag: "tag-normal", pis: "Tributado Normal", pisTag: "tag-normal", reforma: "IBS/CBS Padrão" },
+                { produto: "Carne Bovina Resfriada", ncm: "0201.30.00", cest: "—", icms: "Cesta Básica / Diferimento RS", icmsTag: "tag-isento", pis: "Alíquota Zero", pisTag: "tag-mono", reforma: "Cesta Básica Reduzida" }
+            ]
+        },
+        farmacias: {
+            titulo: "Matriz Fiscal: Farmácias & Drogarias (Regras RS)",
+            desc: "Classificação de medicamentos controlados, similares e produtos de higiene e perfumaria.",
+            itens: [
+                { produto: "Paracetamol 750mg", ncm: "3004.90.69", cest: "13.001.00", icms: "Substituição Tributária", icmsTag: "tag-st", pis: "Monofásico (Lista Positiva)", pisTag: "tag-mono", reforma: "Redução de 60% no IBS/CBS" },
+                { produto: "Dipirona Monoidratada", ncm: "3004.90.99", cest: "13.001.00", icms: "Substituição Tributária", icmsTag: "tag-st", pis: "Monofásico (Lista Positiva)", pisTag: "tag-mono", reforma: "Redução de 60% no IBS/CBS" },
+                { produto: "Shampoo Anticaspa", ncm: "3305.10.00", cest: "20.016.00", icms: "ICMS-ST Perfumaria RS", icmsTag: "tag-st", pis: "Monofásico (Perfumaria)", pisTag: "tag-mono", reforma: "IBS/CBS Padrão" },
+                { produto: "Fralda Descartável Infantil", ncm: "9619.00.00", cest: "20.048.00", icms: "ICMS Normal / Reduzido RS", icmsTag: "tag-normal", pis: "Tributado Normal", pisTag: "tag-normal", reforma: "IBS/CBS Padrão" }
+            ]
+        },
+        moda: {
+            titulo: "Matriz Fiscal: Roupas, Calçados & Confecções (Regras RS)",
+            desc: "Grade de vestuário masculino, feminino, infantil e calçados em geral.",
+            itens: [
+                { produto: "Camiseta de Algodão", ncm: "6109.10.00", cest: "28.038.00", icms: "ICMS Normal (17%)", icmsTag: "tag-normal", pis: "Tributado Normal", pisTag: "tag-normal", reforma: "IBS/CBS Padrão (Sem Cumulatividade)" },
+                { produto: "Calça Jeans Masculina", ncm: "6203.42.00", cest: "28.038.00", icms: "ICMS Normal (17%)", icmsTag: "tag-normal", pis: "Tributado Normal", pisTag: "tag-normal", reforma: "IBS/CBS Padrão" },
+                { produto: "Tênis Esportivo", ncm: "6404.11.00", cest: "28.059.00", icms: "ICMS Normal (17%)", icmsTag: "tag-normal", pis: "Tributado Normal", pisTag: "tag-normal", reforma: "IBS/CBS Padrão" },
+                { produto: "Meias de Algodão", ncm: "6115.95.00", cest: "28.043.00", icms: "ICMS Normal (17%)", icmsTag: "tag-normal", pis: "Tributado Normal", pisTag: "tag-normal", reforma: "IBS/CBS Padrão" }
+            ]
+        },
+        auto: {
+            titulo: "Matriz Fiscal: Autopeças & Oficinas Mecânicas (Regras RS)",
+            desc: "Componentes mecânicos, elétricos e fluidos com forte incidência de ICMS-ST.",
+            itens: [
+                { produto: "Óleo Lubrificante Motor", ncm: "2710.19.32", cest: "06.001.00", icms: "Substituição Tributária", icmsTag: "tag-st", pis: "Monofásico (Combustíveis/Óleos)", pisTag: "tag-mono", reforma: "IBS/CBS Padrão + Seletivo" },
+                { produto: "Pastilha de Freio", ncm: "8708.30.90", cest: "01.001.00", icms: "Substituição Tributária (Autopeças)", icmsTag: "tag-st", pis: "Monofásico Autopeças", pisTag: "tag-mono", reforma: "IBS/CBS Padrão" },
+                { produto: "Filtro de Óleo", ncm: "8421.23.00", cest: "01.018.00", icms: "Substituição Tributária (Autopeças)", icmsTag: "tag-st", pis: "Monofásico Autopeças", pisTag: "tag-mono", reforma: "IBS/CBS Padrão" },
+                { produto: "Pneu Radial Aro 15", ncm: "4011.10.00", cest: "16.001.00", icms: "Substituição Tributária", icmsTag: "tag-st", pis: "Monofásico (Pneus/Câmaras)", pisTag: "tag-mono", reforma: "IBS/CBS Padrão" }
+            ]
+        },
+        construcao: {
+            titulo: "Matriz Fiscal: Materiais de Construção & Ferragens",
+            desc: "Itens de cimento, tintas, fiação e ferramentas manuais.",
+            itens: [
+                { produto: "Cimento Portland", ncm: "2523.29.10", cest: "05.001.00", icms: "Substituição Tributária", icmsTag: "tag-st", pis: "Tributado Normal", pisTag: "tag-normal", reforma: "IBS/CBS Padrão" },
+                { produto: "Tinta Látex Acrílica", ncm: "3209.10.10", cest: "24.001.00", icms: "Substituição Tributária (Tintas)", icmsTag: "tag-st", pis: "Tributado Normal", pisTag: "tag-normal", reforma: "IBS/CBS Padrão" },
+                { produto: "Fio de Cobre 2,5mm", ncm: "8544.49.00", cest: "10.052.00", icms: "ICMS Normal (17%)", icmsTag: "tag-normal", pis: "Tributado Normal", pisTag: "tag-normal", reforma: "IBS/CBS Padrão" }
+            ]
+        }
+    };
+
+    function renderTabela(chave) {
+        const dados = dadosMatriz[chave];
+        document.getElementById('tabela-titulo').innerText = dados.titulo;
+        document.getElementById('tabela-desc').innerText = dados.desc;
+
+        let html = `<table>
+            <thead>
+                <tr>
+                    <th>Produto Exemplo</th>
+                    <th>NCM Oficial</th>
+                    <th>CEST</th>
+                    <th>Regime ICMS (RS)</th>
+                    <th>PIS / COFINS</th>
+                    <th>Impacto Reforma 2026</th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+        dados.itens.forEach(item => {
+            html += `<tr>
+                <td><strong>${item.produto}</strong></td>
+                <td><code>${item.ncm}</code></td>
+                <td><code>${item.cest}</code></td>
+                <td><span class="tag-status ${item.icmsTag}">${item.icms}</span></td>
+                <td><span class="tag-status ${item.pisTag}">${item.pis}</span></td>
+                <td><small>${item.reforma}</small></td>
+            </tr>`;
+        });
+
+        html += `</tbody></table>`;
+        document.getElementById('tabela-container').innerHTML = html;
+    }
+
+    function trocarNicho(chave, btn) {
+        document.querySelectorAll('.nicho-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderTabela(chave);
+    }
+
+    function compartilharDiagnostico() {
+        const titulo = document.getElementById('tabela-titulo').innerText;
+        const msg = encodeURIComponent(`Olá! Consultei a matriz tributária do TruData ERP para *${titulo}*.
+
+O sistema automatiza a conversão de NCM, validação de CEST e segregação de PIS/COFINS monofásicos para evitar multas da SEFAZ-RS e pagamento duplicado de impostos!
+
+Vale a pena conferir uma demonstração: (54) 3361-2345`);
+        window.open(`https://wa.me/?text=${msg}`, '_blank');
+    }
+
+    // Inicializa com mercados
+    renderTabela('mercados');
+</script>
+
+</body>
+</html>

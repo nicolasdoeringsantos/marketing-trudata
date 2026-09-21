@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telemetria de Propostas (Leads em Chamas) — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
+    .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between">
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition">
+          ←
+        </a>
+        <div class="flex items-center gap-2.5">
+          <div class="h-9 w-9 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-lg">
+            🔥
+          </div>
+          <div>
+            <h1 class="text-sm font-bold text-white font-display flex items-center gap-2">
+              Radar de Leads em Chamas (Telemetria de Propostas)
+              <span class="text-[10px] bg-rose-500/20 text-rose-300 font-extrabold px-2 py-0.5 rounded border border-rose-500/30 animate-pulse">Ao Vivo</span>
+            </h1>
+            <p class="text-[11px] text-slate-400">Notificação imediata quando o cliente abre e visualiza a proposta comercial</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="carregarAberturas()" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition border border-slate-700 flex items-center gap-1.5">
+          <span>Atualizar Radar</span>
+          <span>🔄</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
+
+    <!-- CARDS DE RESUMO OPERACIONAL -->
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+      <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+        <span class="text-[10px] font-extrabold uppercase text-slate-400 block mb-1">Total de Propostas Ativas</span>
+        <div class="text-2xl font-black text-white font-display">18</div>
+        <span class="text-[11px] text-slate-500 mt-1 block">Últimos 7 dias</span>
+      </div>
+
+      <div class="bg-slate-900 border border-rose-500/30 p-5 rounded-2xl">
+        <span class="text-[10px] font-extrabold uppercase text-rose-400 block mb-1">🔥 Leads em Chamas (Hoje)</span>
+        <div class="text-2xl font-black text-rose-400 font-display" id="stat-hoje">4</div>
+        <span class="text-[11px] text-slate-500 mt-1 block">Abertas nas últimas 2h</span>
+      </div>
+
+      <div class="bg-slate-900 border border-amber-500/30 p-5 rounded-2xl">
+        <span class="text-[10px] font-extrabold uppercase text-amber-400 block mb-1">Tempo Médio na Tela</span>
+        <div class="text-2xl font-black text-amber-400 font-display">2m 45s</div>
+        <span class="text-[11px] text-slate-500 mt-1 block">Alto engajamento</span>
+      </div>
+
+      <div class="bg-slate-900 border border-emerald-500/30 p-5 rounded-2xl">
+        <span class="text-[10px] font-extrabold uppercase text-emerald-400 block mb-1">Taxa de Conversão em Aceite</span>
+        <div class="text-2xl font-black text-emerald-400 font-display">62.5%</div>
+        <span class="text-[11px] text-slate-500 mt-1 block">Assinatura digital touch</span>
+      </div>
+    </div>
+
+    <!-- LISTA DE PROPOSTAS MONITORADAS -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h2 class="text-xs font-bold text-slate-200 uppercase tracking-wider font-display">Timeline de Aberturas Registradas</h2>
+        <span class="text-xs text-slate-500">Sincronizado via Webhook & `POST /api/proposta/notificar_abertura`</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left">
+          <thead>
+            <tr class="border-b border-slate-800 text-slate-400">
+              <th class="py-3">Status / Temperatura</th>
+              <th class="py-3">Cliente / Comércio</th>
+              <th class="py-3">Cidade RS</th>
+              <th class="py-3">Data / Hora Abertura</th>
+              <th class="py-3">Dispositivo</th>
+              <th class="py-3 text-right">Ação Imediata</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60 text-slate-300" id="tabela-aberturas">
+            <!-- Linhas inseridas dinamicamente -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-slate-800/80 bg-slate-900/40 py-4 px-6 text-center text-xs text-slate-500">
+    TruData ERP · Hansen Software Ltda · Sarandi - RS · Telemetria de Propostas Comerciais
+  </footer>
+
+  <script>
+    const DADOS_MOCK = [
+      { cliente: "Supermercado Santa Helena", cidade: "Sarandi - RS", hora: "Hoje às 18:42", dispositivo: "iPhone (Safari)", status: "chamas", telefone: "54996966175" },
+      { cliente: "Farmácia Vida & Saúde", cidade: "Passo Fundo - RS", hora: "Hoje às 17:15", dispositivo: "Android (Chrome)", status: "lendo", telefone: "54998124433" },
+      { cliente: "Boutique Elegância", cidade: "Marau - RS", hora: "Hoje às 15:30", dispositivo: "Windows PC", status: "interessado", telefone: "54991448822" },
+      { cliente: "Ferragens & Ferramentas Gaúcha", cidade: "Carazinho - RS", hora: "Ontem às 16:20", dispositivo: "Android (Chrome)", status: "fechado", telefone: "54992557711" },
+      { cliente: "Padaria Pão Dourado", cidade: "Ronda Alta - RS", hora: "Ontem às 11:05", dispositivo: "iPhone (Safari)", status: "lendo", telefone: "54993112244" }
+    ];
+
+    function carregarAberturas() {
+      const tbody = document.getElementById('tabela-aberturas');
+      tbody.innerHTML = '';
+
+      DADOS_MOCK.forEach(item => {
+        let badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300">Aberta</span>';
+        if (item.status === 'chamas') {
+          badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 animate-pulse">🔥 Em Chamas (Lendo Agora)</span>';
+        } else if (item.status === 'lendo') {
+          badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">⏳ 2ª Abertura</span>';
+        } else if (item.status === 'fechado') {
+          badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">✅ Assinado</span>';
+        }
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-800/40 transition";
+        tr.innerHTML = `
+          <td class="py-3">${badge}</td>
+          <td class="py-3 font-bold text-white">${item.cliente}</td>
+          <td class="py-3 text-slate-400">${item.cidade}</td>
+          <td class="py-3 font-mono text-slate-300">${item.hora}</td>
+          <td class="py-3 text-slate-400">${item.dispositivo}</td>
+          <td class="py-3 text-right">
+            <button onclick="ligarAgora('${item.telefone}')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-xs transition shadow">
+              Ligar Agora 📞
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function ligarAgora(tel) {
+      window.open(`https://wa.me/55${tel}?text=Ol%C3%A1!%20Vi%20que%20voc%C3%AA%20estava%20olhando%20nossa%20proposta%20do%20TruData%20ERP.%20Ficou%20alguma%20d%C3%BAvida%20sobre%20o%20tempo%20de%20emiss%C3%A3o?`, '_blank');
+    }
+
+    carregarAberturas();
+  </script>
+</body>
+</html>

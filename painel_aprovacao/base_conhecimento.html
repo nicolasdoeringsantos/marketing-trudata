@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de Dúvidas Rápidas de Balcão — TruData Suporte</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { azure: '#0070f3', dark: '#0b0f19', card: '#131b2e', emerald: '#10b981', rose: '#f43f5e' }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased p-4 sm:p-6 lg:p-8 flex flex-col">
+
+  <!-- TOPO DE NAVEGAÇÃO -->
+  <header class="max-w-5xl mx-auto w-full flex items-center justify-between gap-4 mb-6 flex-wrap">
+    <div class="flex items-center gap-3">
+      <div class="h-10 w-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xl border border-amber-500/30">
+        💡
+      </div>
+      <div>
+        <h1 class="text-xl font-black font-display text-white">Central de Dúvidas Rápidas de Balcão</h1>
+        <p class="text-xs text-slate-400">Guia de Resolução Imediata (&lt; 2 min) para Operadores de Caixa e Lojistas no RS</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="index.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        ← Hub Central
+      </a>
+      <a href="simulador-contingencia" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        ⚡ Simulador Offline
+      </a>
+      <a href="https://wa.me/555433612650?text=Olá!%20Sou%20lojista%20e%20preciso%20de%20ajuda%20do%20suporte%20técnico%20de%20plantão%20em%20Sarandi/RS." target="_blank" class="text-xs px-3.5 py-2 rounded-lg bg-rose-600 text-white font-bold hover:bg-rose-500 transition flex items-center gap-1.5 shadow-lg shadow-rose-600/20">
+        🚨 Suporte Humano Sarandi (SLA 2h)
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto w-full space-y-6 flex-1">
+
+    <!-- BUSCA INSTANTÂNEA E FILTROS -->
+    <div class="glass rounded-3xl p-6 border border-slate-800 space-y-4">
+      <div class="relative">
+        <span class="absolute left-4 top-3.5 text-slate-400 text-base">🔍</span>
+        <input type="text" id="inBusca" oninput="filtrarPerguntas()" placeholder="Digite sua dúvida (ex: internet caiu, cancelar cupom, balança toledo, sangria, erro NCM)..." class="w-full bg-slate-950 border border-slate-700/80 rounded-2xl pl-11 pr-4 py-3 text-sm text-white focus:border-brand-azure outline-none transition shadow-inner">
+      </div>
+
+      <!-- CHIPS DE FILTRO RÁPIDO -->
+      <div class="flex items-center gap-2 flex-wrap text-xs">
+        <button onclick="filtrarCategoria('todas')" class="btn-filtro px-3 py-1.5 rounded-lg bg-brand-azure text-white font-bold transition">Todas as Dúvidas</button>
+        <button onclick="filtrarCategoria('pdv')" class="btn-filtro px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition">🛒 Frente de Caixa (PDV)</button>
+        <button onclick="filtrarCategoria('fiscal')" class="btn-filtro px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition">⚖️ Fiscal & SEFAZ-RS</button>
+        <button onclick="filtrarCategoria('balancas')" class="btn-filtro px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition">⚖️ Balanças Toledo/Filizola</button>
+        <button onclick="filtrarCategoria('impressora')" class="btn-filtro px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition">🖨️ Impressoras & Hardware</button>
+      </div>
+    </div>
+
+    <!-- LISTA DE DÚVIDAS E RESPOSTAS (ACCORDION) -->
+    <div class="space-y-3" id="listaFaq">
+
+      <!-- ITEM 1 -->
+      <details class="faq-item cat-pdv glass rounded-2xl border border-slate-800 overflow-hidden group">
+        <summary class="p-5 cursor-pointer flex items-center justify-between font-bold text-sm text-white hover:text-brand-azure transition">
+          <span class="flex items-center gap-3">
+            <span class="h-7 w-7 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center text-xs">⚡</span>
+            A internet caiu bem no sábado de loja cheia. O que fazer?
+          </span>
+          <span class="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <div class="px-5 pb-5 pt-1 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 space-y-2">
+          <p>
+            <strong>Fique 100% tranquilo!</strong> O TruData ERP possui contingência offline automática. O seu caixa não trava:
+          </p>
+          <ol class="list-decimal list-inside space-y-1 text-slate-300 pl-2">
+            <li>Continue passando os produtos normalmente com leitor ou balança.</li>
+            <li>No fechamento da venda, o sistema imprimirá o cupom NFC-e com a mensagem oficial <em>"Emitido em Contingência Offline"</em>.</li>
+            <li>O cliente leva a mercadoria e a via impressa imediatamente (tempo médio 3.1 segundos).</li>
+            <li>Assim que a internet for restabelecida pelo provedor da sua cidade, o TruData sincroniza todos os cupons pendentes com a SEFAZ-RS em segundo plano, sem nenhuma intervenção sua.</li>
+          </ol>
+        </div>
+      </details>
+
+      <!-- ITEM 2 -->
+      <details class="faq-item cat-balancas glass rounded-2xl border border-slate-800 overflow-hidden group">
+        <summary class="p-5 cursor-pointer flex items-center justify-between font-bold text-sm text-white hover:text-brand-azure transition">
+          <span class="flex items-center gap-3">
+            <span class="h-7 w-7 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs">⚖️</span>
+            Como cadastrar e enviar tabela de preços para as Balanças Toledo Prix (MGV6)?
+          </span>
+          <span class="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <div class="px-5 pb-5 pt-1 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 space-y-2">
+          <ol class="list-decimal list-inside space-y-1 pl-2">
+            <li>No cadastro do produto no TruData, marque a opção <strong>"Produto Pesável em Balança"</strong> e informe o código de 4 a 6 dígitos do PLU.</li>
+            <li>Acesse o menu <em>Estoque ➔ Exportar Balanças ➔ Toledo MGV6</em>.</li>
+            <li>Clique no botão <strong>"Gerar Carga de Preços"</strong>. O arquivo TXT padrão Toledo será gerado e enviado automaticamente para o software MGV6 via rede local.</li>
+            <li>Na balança Toledo (ex: Prix 4, Prix 5 ou Prix 6), pressione o botão de atualização ou aguarde a sincronização de 30 segundos.</li>
+          </ol>
+        </div>
+      </details>
+
+      <!-- ITEM 3 -->
+      <details class="faq-item cat-fiscal glass rounded-2xl border border-slate-800 overflow-hidden group">
+        <summary class="p-5 cursor-pointer flex items-center justify-between font-bold text-sm text-white hover:text-brand-azure transition">
+          <span class="flex items-center gap-3">
+            <span class="h-7 w-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs">❌</span>
+            Como cancelar uma NFC-e emitida por engano no caixa?
+          </span>
+          <span class="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <div class="px-5 pb-5 pt-1 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 space-y-2">
+          <p>
+            <strong class="text-amber-400">Atenção ao prazo legal:</strong> A SEFAZ do Rio Grande do Sul permite o cancelamento formal de NFC-e em até <strong>30 minutos</strong> após a autorização.
+          </p>
+          <ol class="list-decimal list-inside space-y-1 pl-2">
+            <li>No terminal de caixa, pressione a tecla de atalho <code>F8</code> (ou menu <em>Vendas ➔ Consultar Cupons Emitidos</em>).</li>
+            <li>Localize o cupom pelo número ou horário e clique em <strong>"Cancelar Cupom"</strong>.</li>
+            <li>Informe a justificativa (mínimo de 15 caracteres, ex: <em>"Cancelamento por desistência do cliente no caixa"</em>).</li>
+            <li>Confirme a senha do supervisor. A impressora emitirá o comprovante de cancelamento homologado pela SEFAZ.</li>
+          </ol>
+        </div>
+      </details>
+
+      <!-- ITEM 4 -->
+      <details class="faq-item cat-pdv glass rounded-2xl border border-slate-800 overflow-hidden group">
+        <summary class="p-5 cursor-pointer flex items-center justify-between font-bold text-sm text-white hover:text-brand-azure transition">
+          <span class="flex items-center gap-3">
+            <span class="h-7 w-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs">💵</span>
+            Como fazer Sangria e Suprimento sem quebrar o Fechamento Cego de Caixa?
+          </span>
+          <span class="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <div class="px-5 pb-5 pt-1 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 space-y-2">
+          <p>
+            O <strong>Fechamento Cego</strong> do TruData impede que o operador saiba o valor esperado pelo sistema, garantindo auditoria limpa contra perdas:
+          </p>
+          <ul class="list-disc list-inside space-y-1 pl-2">
+            <li><strong>Sangria (Retirada):</strong> Pressione <code>F6</code>, informe o valor a ser retirado para o cofre e pegue a assinatura do gerente no canhoto impresso.</li>
+            <li><strong>Suprimento (Troco Inicial):</strong> Pressione <code>F5</code> na abertura do turno e lance o valor de moedas e cédulas fornecidas para troco.</li>
+            <li><strong>Fechamento do Turno:</strong> O operador apenas digita quantas notas e moedas contou na gaveta. O sistema faz o cruzamento oculto e só exibe eventuais diferenças no relatório gerencial restrito ao proprietário.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- ITEM 5 -->
+      <details class="faq-item cat-impressora glass rounded-2xl border border-slate-800 overflow-hidden group">
+        <summary class="p-5 cursor-pointer flex items-center justify-between font-bold text-sm text-white hover:text-brand-azure transition">
+          <span class="flex items-center gap-3">
+            <span class="h-7 w-7 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center text-xs">🖨️</span>
+            A impressora térmica parou de imprimir o cupom. Como destravar em 3 passos?
+          </span>
+          <span class="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <div class="px-5 pb-5 pt-1 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 space-y-2">
+          <ol class="list-decimal list-inside space-y-1 pl-2">
+            <li><strong>Tampa & Guilhotina:</strong> Verifique se a bobina térmica terminou ou se a lâmina da guilhotina travou no meio. Puxe a trava lateral e feche com firmeza até ouvir o "click".</li>
+            <li><strong>Cabo USB / Serial:</strong> Desconecte e reconecte o cabo USB na parte traseira da impressora (as portas Epson/Elgin podem adormecer se o Windows suspender energia).</li>
+            <li><strong>Reimpressão:</strong> No TruData, pressione <code>F9</code> (Reimprimir Último Cupom Fiscal). O sistema reenvia o comando sem duplicar a venda no caixa.</li>
+          </ol>
+        </div>
+      </details>
+
+      <!-- ITEM 6 -->
+      <details class="faq-item cat-fiscal glass rounded-2xl border border-slate-800 overflow-hidden group">
+        <summary class="p-5 cursor-pointer flex items-center justify-between font-bold text-sm text-white hover:text-brand-azure transition">
+          <span class="flex items-center gap-3">
+            <span class="h-7 w-7 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs">🏛️</span>
+            Como enviar o lote de XMLs do mês para a contabilidade com 1 clique?
+          </span>
+          <span class="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <div class="px-5 pb-5 pt-1 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 space-y-2">
+          <p>
+            O TruData ERP gera o pacote fiscal 100% saneado e compatível com o SPED Fiscal e Sintegra:
+          </p>
+          <ol class="list-decimal list-inside space-y-1 pl-2">
+            <li>Acesse o menu <em>Fiscal ➔ Fechamento Mensal / Exportar Contabilidade</em>.</li>
+            <li>Selecione o mês de competência anterior (ex: Mês Passado completo).</li>
+            <li>Clique em <strong>"Enviar Direto por E-mail para o Contador"</strong> ou <strong>"Baixar Arquivo ZIP Consolidado"</strong>.</li>
+            <li>O sistema empacota os XMLs autorizados, cancelados e o relatório analítico em PDF sem arquivos corrompidos.</li>
+          </ol>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- BOX DE CONTATO DIRETO COM A EQUIPE HANSEN DE SARANDI -->
+    <div class="p-6 rounded-3xl bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800 flex items-center justify-between flex-wrap gap-4">
+      <div class="space-y-1">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <span>🤝</span> Não encontrou a resposta ou precisa de suporte presencial?
+        </h3>
+        <p class="text-xs text-slate-400">
+          Nossa equipe técnica fica baseada em Sarandi - RS com deslocamento expresso de até 2 horas na região.
+        </p>
+      </div>
+      <a href="https://wa.me/555433612650?text=Olá!%20Sou%20lojista%20parceiro%20TruData%20e%20preciso%20de%20ajuda%20no%20meu%20estabelecimento." target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition flex items-center gap-2 shadow-lg shadow-emerald-600/20">
+        📲 Chamar Suporte no WhatsApp (54) 3361-2650
+      </a>
+    </div>
+
+  </main>
+
+  <script>
+    function filtrarPerguntas() {
+      const termo = document.getElementById('inBusca').value.toLowerCase();
+      const itens = document.querySelectorAll('.faq-item');
+      itens.forEach(it => {
+        const texto = it.innerText.toLowerCase();
+        it.style.display = texto.includes(termo) ? '' : 'none';
+      });
+    }
+
+    function filtrarCategoria(cat) {
+      document.querySelectorAll('.btn-filtro').forEach(btn => {
+        btn.className = 'btn-filtro px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition';
+      });
+      event.target.className = 'btn-filtro px-3 py-1.5 rounded-lg bg-brand-azure text-white font-bold transition';
+
+      const itens = document.querySelectorAll('.faq-item');
+      itens.forEach(it => {
+        if (cat === 'todas') {
+          it.style.display = '';
+        } else if (cat === 'pdv') {
+          it.style.display = it.classList.contains('cat-pdv') ? '' : 'none';
+        } else if (cat === 'fiscal') {
+          it.style.display = it.classList.contains('cat-fiscal') ? '' : 'none';
+        } else if (cat === 'balancas') {
+          it.style.display = it.classList.contains('cat-balancas') ? '' : 'none';
+        } else if (cat === 'impressora') {
+          it.style.display = it.classList.contains('cat-impressora') ? '' : 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

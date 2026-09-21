@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo Digital Integrado — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' } },
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col">
+
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
+        ← Voltar ao Hub Central
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-300 font-display">Demonstração Catálogo Digital</span>
+        <span class="text-[10px] bg-teal-500/20 text-teal-400 font-bold px-2 py-0.5 rounded border border-teal-500/30">Vendas WhatsApp</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
+    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-8">
+        <div>
+          <span class="text-[11px] font-bold text-teal-400 uppercase tracking-wider bg-teal-500/10 px-3 py-1 rounded-full border border-teal-500/20">
+            Módulo Omnichannel & Varejo
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-black font-display text-white mt-3">Catálogo Digital de Produtos para Lojistas</h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1">Como seus clientes varejistas exibem produtos no WhatsApp e recebem pedidos sincronizados com o estoque do TruData ERP.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copiarLinkCatalogo()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition">
+            🔗 Copiar Link da Vitrine
+          </button>
+        </div>
+      </div>
+
+      <!-- GRID DE PRODUTOS SIMULADOS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
+          <div class="p-6 text-center bg-slate-900/60 border-b border-slate-800">
+            <span class="text-5xl">👟</span>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] bg-teal-500/20 text-teal-400 font-bold px-2 py-0.5 rounded font-mono">CÓD: 1042</span>
+              <span class="text-xs font-bold text-emerald-400">Estoque: 14 pares</span>
+            </div>
+            <h3 class="text-sm font-bold text-white">Tênis Esportivo Comfort Pro</h3>
+            <p class="text-xs text-slate-400">Grade disponível: 38, 39, 40, 41 e 42 nas cores Preto e Azul.</p>
+            <div class="pt-2 border-t border-slate-900 flex items-center justify-between">
+              <span class="text-lg font-black text-white font-mono">R$ 219,90</span>
+              <a href="https://wa.me/5554996966175?text=Ola!%20Tenho%20interesse%20no%20Tenis%20Esportivo%20Comfort%20Pro%20(Cod:%201042)" target="_blank" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition shadow-md shadow-emerald-600/20">
+                Pedir no WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
+          <div class="p-6 text-center bg-slate-900/60 border-b border-slate-800">
+            <span class="text-5xl">👗</span>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] bg-teal-500/20 text-teal-400 font-bold px-2 py-0.5 rounded font-mono">CÓD: 2088</span>
+              <span class="text-xs font-bold text-emerald-400">Estoque: 8 peças</span>
+            </div>
+            <h3 class="text-sm font-bold text-white">Vestido Linho Floral Verão</h3>
+            <p class="text-xs text-slate-400">Grade disponível: P, M e G. Tecido 100% respirável de alta costura.</p>
+            <div class="pt-2 border-t border-slate-900 flex items-center justify-between">
+              <span class="text-lg font-black text-white font-mono">R$ 189,00</span>
+              <a href="https://wa.me/5554996966175?text=Ola!%20Tenho%20interesse%20no%20Vestido%20Linho%20Floral%20(Cod:%202088)" target="_blank" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition shadow-md shadow-emerald-600/20">
+                Pedir no WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
+          <div class="p-6 text-center bg-slate-900/60 border-b border-slate-800">
+            <span class="text-5xl">🥩</span>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] bg-teal-500/20 text-teal-400 font-bold px-2 py-0.5 rounded font-mono">CÓD: 3015</span>
+              <span class="text-xs font-bold text-emerald-400">Pesagem Direta</span>
+            </div>
+            <h3 class="text-sm font-bold text-white">Picanha Bovina Grill Premium (Kg)</h3>
+            <p class="text-xs text-slate-400">Origem gaúcha com corte especial e etiqueta Toledo integrada.</p>
+            <div class="pt-2 border-t border-slate-900 flex items-center justify-between">
+              <span class="text-lg font-black text-white font-mono">R$ 79,90 <small class="text-xs text-slate-400">/Kg</small></span>
+              <a href="https://wa.me/5554996966175?text=Ola!%20Tenho%20interesse%20na%20Picanha%20Bovina%20Grill%20(Cod:%203015)" target="_blank" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition shadow-md shadow-emerald-600/20">
+                Pedir no WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+        <span>✓ Sincronização automática: Quando o produto é vendido no caixa físico, o estoque no catálogo web atualiza na hora.</span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function copiarLinkCatalogo() {
+      navigator.clipboard.writeText(window.location.href).then(() => alert('Link do Catálogo Digital copiado para envio!'));
+    }
+  </script>
+</body>
+</html>

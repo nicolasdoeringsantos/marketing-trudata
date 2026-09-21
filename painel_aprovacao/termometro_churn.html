@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termômetro de Churn &amp; Telemetria NFC-e RS | TruData Suite 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            rose: '#f43f5e',
+                            amber: '#f59e0b',
+                            emerald: '#10b981',
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-40 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="/" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+                    <span class="font-bold text-lg text-white">Tru<span class="text-rose-400">ChurnShield</span></span>
+                    <span class="text-xs px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-semibold border border-rose-500/30">Pilar 2: Retenção</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-slate-400 hidden sm:inline">Monitoramento Preditivo de Emissão Fiscal</span>
+                <button onclick="gerarPlanoRetencaoGeral()" class="px-3.5 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-xs font-bold text-white flex items-center gap-1.5 shadow-lg shadow-rose-900/30 transition-all">
+                    <i class="fa-solid fa-shield-virus"></i> Gerar Ações de Retenção
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <!-- Hero Header -->
+        <div class="mb-8">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 text-xs font-medium mb-3">
+                <i class="fa-solid fa-temperature-arrow-up"></i> Detecção Precoce de Cancelamentos &amp; Queda de Volume
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                Termômetro de Risco de Churn (NFC-e)
+            </h1>
+            <p class="text-slate-400 text-sm mt-1 max-w-3xl">
+                O cliente não cancela de repente: ele dá sinais fiscais antes. Nosso algoritmo cruza a média diária de emissão de NFC-e na SEFAZ-RS com a frequência de sincronização de banco de dados para antecipar descontentamento ou risco de troca de sistema.
+            </p>
+        </div>
+
+        <!-- Indicadores de Risco Consolidado -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800">
+                <p class="text-xs text-slate-400 font-medium">Taxa de Retenção (Logo Retention)</p>
+                <div class="flex items-baseline gap-2 mt-1">
+                    <p class="text-3xl font-black text-emerald-400">98.4%</p>
+                    <span class="text-xs text-emerald-500 font-bold">Excelente</span>
+                </div>
+                <span class="text-[10px] text-slate-500">Churn anual acumulado: 1.6%</span>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl border border-rose-900/40 bg-rose-950/10">
+                <p class="text-xs text-slate-400 font-medium">Contas em Risco Alto (Score &lt; 50)</p>
+                <div class="flex items-baseline gap-2 mt-1">
+                    <p class="text-3xl font-black text-rose-500">4 Lojas</p>
+                    <span class="text-xs text-rose-400 font-bold">Ação Imediata</span>
+                </div>
+                <span class="text-[10px] text-rose-400">Queda de emissão &gt; 40%</span>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl border border-amber-900/40 bg-amber-950/10">
+                <p class="text-xs text-slate-400 font-medium">Contas em Atenção (Score 50 - 75)</p>
+                <div class="flex items-baseline gap-2 mt-1">
+                    <p class="text-3xl font-black text-amber-400">9 Lojas</p>
+                    <span class="text-xs text-amber-300">Acompanhar</span>
+                </div>
+                <span class="text-[10px] text-slate-500">Oscilações leves de volume</span>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800">
+                <p class="text-xs text-slate-400 font-medium">Receita Sob Risco (MRR)</p>
+                <div class="flex items-baseline gap-2 mt-1">
+                    <p class="text-3xl font-black text-white">R$ 1.480</p>
+                    <span class="text-xs text-slate-400">/ mês</span>
+                </div>
+                <span class="text-[10px] text-slate-500">4 contratos vulneráveis</span>
+            </div>
+        </div>
+
+        <!-- Tabela de Telemetria de Lojas Vulneráveis -->
+        <div class="glass-panel p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4 mb-8">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <h2 class="text-base font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-500"></i> Radar de Lojas com Alerta Fiscal Ativado
+                </h2>
+                <div class="flex items-center gap-2 text-xs">
+                    <span class="text-slate-400">Filtrar por:</span>
+                    <button class="px-2.5 py-1 rounded bg-rose-600 text-white font-bold">Apenas Risco Crítico</button>
+                    <button class="px-2.5 py-1 rounded bg-slate-900 text-slate-400 hover:text-white border border-slate-800">Todos os Alertas</button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px]">
+                            <th class="py-3 font-semibold">Cliente / Cidade</th>
+                            <th class="py-3 font-semibold text-center">Volume NFC-e (30d)</th>
+                            <th class="py-3 font-semibold text-center">Variação vs Mês Ant.</th>
+                            <th class="py-3 font-semibold">Gatilho de Risco Detectado</th>
+                            <th class="py-3 font-semibold text-center">Health Score</th>
+                            <th class="py-3 font-semibold text-right">Plano de Resgate</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                        <tr>
+                            <td class="py-3.5">
+                                <p class="font-bold text-white">Supermercado Bela Vista II</p>
+                                <p class="text-[10px] text-slate-500 font-mono">Passo Fundo - RS · 3 Caixas</p>
+                            </td>
+                            <td class="py-3.5 text-center font-mono font-bold text-slate-200">
+                                4.120 <span class="text-[10px] text-slate-500 font-normal">notas</span>
+                            </td>
+                            <td class="py-3.5 text-center font-mono font-bold text-rose-400">
+                                -48.2% <i class="fa-solid fa-arrow-trend-down"></i>
+                            </td>
+                            <td class="py-3.5">
+                                <span class="text-rose-300 font-medium">Caixa 2 parou de emitir há 12 dias. Suspeita de uso de POS paralelo.</span>
+                            </td>
+                            <td class="py-3.5 text-center">
+                                <span class="px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-400 font-black font-mono text-xs">
+                                    34 / 100
+                                </span>
+                            </td>
+                            <td class="py-3.5 text-right">
+                                <button onclick="acionarVisitaPresencial('Supermercado Bela Vista II', 'Passo Fundo')" class="px-3 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition-all">
+                                    <i class="fa-solid fa-car mr-1"></i> Visita de Campo Hoje
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="py-3.5">
+                                <p class="font-bold text-white">Ferragem &amp; Tintas Farroupilha</p>
+                                <p class="text-[10px] text-slate-500 font-mono">Caxias do Sul - RS · 2 Caixas</p>
+                            </td>
+                            <td class="py-3.5 text-center font-mono font-bold text-slate-200">
+                                890 <span class="text-[10px] text-slate-500 font-normal">notas</span>
+                            </td>
+                            <td class="py-3.5 text-center font-mono font-bold text-rose-400">
+                                -36.5% <i class="fa-solid fa-arrow-trend-down"></i>
+                            </td>
+                            <td class="py-3.5">
+                                <span class="text-amber-300 font-medium">3 chamados na mesma semana sobre lentidão na busca de produtos.</span>
+                            </td>
+                            <td class="py-3.5 text-center">
+                                <span class="px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-400 font-black font-mono text-xs">
+                                    42 / 100
+                                </span>
+                            </td>
+                            <td class="py-3.5 text-right">
+                                <button onclick="otimizarBancoRemoto('Ferragem Farroupilha')" class="px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs transition-all">
+                                    <i class="fa-solid fa-wrench mr-1"></i> Otimizar BD Remoto
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="py-3.5">
+                                <p class="font-bold text-white">Pet Shop &amp; Veterinária Pampa</p>
+                                <p class="text-[10px] text-slate-500 font-mono">Pelotas - RS · 1 Caixa</p>
+                            </td>
+                            <td class="py-3.5 text-center font-mono font-bold text-slate-200">
+                                1.450 <span class="text-[10px] text-slate-500 font-normal">notas</span>
+                            </td>
+                            <td class="py-3.5 text-center font-mono font-bold text-amber-400">
+                                -22.0% <i class="fa-solid fa-arrow-trend-down"></i>
+                            </td>
+                            <td class="py-3.5">
+                                <span class="text-slate-300 font-medium">Não sincroniza estoque móvel desde segunda-feira.</span>
+                            </td>
+                            <td class="py-3.5 text-center">
+                                <span class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 font-black font-mono text-xs">
+                                    58 / 100
+                                </span>
+                            </td>
+                            <td class="py-3.5 text-right">
+                                <button onclick="ligarCS('Pet Shop Pampa', 'Pelotas')" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 transition-all">
+                                    <i class="fa-solid fa-phone mr-1"></i> Contato Preventivo CS
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Gatilhos de Prevenção Automática -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-2">
+                <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg mb-2">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <h4 class="font-bold text-white text-sm">Gatilho de Hardware Antigo</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Quando o PDV trava por falta de memória RAM (Windows lento), ofereça a substituição facilitada com payback amortizado na própria mensalidade TruData.
+                </p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-2">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg mb-2">
+                    <i class="fa-solid fa-handshake-angle"></i>
+                </div>
+                <h4 class="font-bold text-white text-sm">Visita Presencial do Técnico</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    No interior do RS, um aperto de mão e uma revisão presencial no balcão eliminam 90% das intenções de troca para concorrentes nacionais frios.
+                </p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-2">
+                <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-lg mb-2">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h4 class="font-bold text-white text-sm">Reciclagem de Operadores</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Alta rotatividade de funcionários de caixa causa sensação de 'sistema difícil'. O treinamento rápido de 15 minutos resolve na raiz.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function acionarVisitaPresencial(cliente, cidade) {
+            alert(`Alerta prioritário enviado para a rota do técnico de campo em ${cidade}. Visita agendada para: ${cliente}.`);
+        }
+
+        function otimizarBancoRemoto(cliente) {
+            alert(`Iniciando rotina remota de vacuum, reindexação e compactação do banco Firebird/PostgreSQL de: ${cliente}.`);
+        }
+
+        function ligarCS(cliente, cidade) {
+            alert(`Conectando consultor de Customer Success para chamada preventiva com ${cliente} (${cidade}).`);
+        }
+
+        function gerarPlanoRetencaoGeral() {
+            alert('Gerando relatório compilado das 4 lojas sob risco para a diretoria comercial do RS.');
+        }
+    </script>
+</body>
+</html>

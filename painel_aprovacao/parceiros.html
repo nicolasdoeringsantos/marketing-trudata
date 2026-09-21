@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clube do Contador TruData ERP — Parceria Estratégica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #131b2e;
+            --bg-card-hover: #1e293b;
+            --accent-cyan: #0ea5e9;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --border-color: #243048;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            padding: 30px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-area h1 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-area p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .nav-links a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-card);
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background: var(--accent-cyan);
+            color: #000;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(0, 210, 255, 0.1));
+            border: 1px solid var(--accent-emerald);
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .hero-banner h2 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .hero-banner p {
+            font-size: 16px;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto 24px auto;
+            line-height: 1.6;
+        }
+
+        .badge-pill {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-emerald);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border: 1px solid var(--accent-emerald);
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-cyan);
+        }
+
+        .pillar-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .pillar-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .pillar-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .interactive-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .interactive-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .panel-box h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+
+        .calc-row {
+            margin-bottom: 20px;
+        }
+
+        .calc-row label {
+            display: block;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .calc-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #233560;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .calc-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--accent-emerald);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .val-display {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent-emerald);
+            margin: 15px 0 5px 0;
+        }
+
+        .val-sub {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .whatsapp-kit-box textarea {
+            width: 100%;
+            height: 160px;
+            background: #0b1329;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: #e2e8f0;
+            padding: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: none;
+            margin-bottom: 15px;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--accent-emerald);
+            color: #0b1329;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-action:hover {
+            opacity: 0.9;
+        }
+
+        .btn-cyan {
+            background: var(--accent-cyan);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #10b981;
+            color: #000;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            display: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo-area">
+            <h1>🏛️ Clube do Contador TruData ERP</h1>
+            <p>Hansen Software LTDA — Sarandi/RS • Parceria Oficial com Contabilidade</p>
+        </div>
+        <div class="nav-links">
+            <a href="/index.html">← Voltar ao Painel</a>
+            <a href="/reforma-tributaria">Reforma Tributária</a>
+            <a href="/crm">CRM de Vendas</a>
+        </div>
+    </header>
+
+    <div class="hero-banner">
+        <span class="badge-pill">Fechamento Fiscal Sem Estresse</span>
+        <h2>O ERP que o Contador Gaúcho Adora Recomendar</h2>
+        <p>Desenvolvido há mais de 25 anos em Sarandi - RS com selo MPS.BR. Arquivos SPED Fiscal e EFD Contribuições sem erros de validação no PVA, cálculo automatizado de ICMS-ST e suporte técnico humano direto com nossa equipe de desenvolvimento.</p>
+    </div>
+
+    <div class="pillars-grid">
+        <div class="pillar-card">
+            <div class="pillar-icon">📂</div>
+            <h3>SPED & EFD Perfeitos</h3>
+            <p>Geração dos blocos 0, C, D, E, 1 e registros de inventário com validação imediata no SPED Fiscal e EFD Contribuições, sem retrabalho no fim do mês.</p>
+        </div>
+
+        <div class="pillar-card">
+            <div class="pillar-icon">🛡️</div>
+            <h3>Blindagem ICMS-ST & RS</h3>
+            <p>Parametrização automática de MVA, Substituição Tributária gaúcha, alíquotas internas e monofásicos de PIS/COFINS, evitando autuações da SEFAZ-RS.</p>
+        </div>
+
+        <div class="pillar-card">
+            <div class="pillar-icon">🤝</div>
+            <h3>Canal Direto com o Suporte</h3>
+            <p>O contador tem linha prioritária com nossos especialistas técnicos em Sarandi. Nada de robôs, menus infinitos ou tickets que demoram dias.</p>
+        </div>
+
+        <div class="pillar-card">
+            <div class="pillar-icon">💰</div>
+            <h3>Bonificação Recorrente</h3>
+            <p>O escritório parceiro recebe bonificação por clientes ativos indicados, fortalecendo a relação comercial e garantindo clientes organizados.</p>
+        </div>
+    </div>
+
+    <div class="interactive-section">
+        <!-- Simulador de Parceria -->
+        <div class="panel-box">
+            <h3>💵 Simulador de Bonificação para o Escritório</h3>
+            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 25px;">Veja o potencial de receita recorrente para seu escritório contábil indicando o TruData ERP para seus clientes do comércio varejista.</p>
+
+            <div class="calc-row">
+                <label>Clientes da Carteira Utilizando TruData: <strong id="lbl-clientes" style="color: #fff;">10 clientes</strong></label>
+                <input type="range" id="slider-clientes" class="calc-slider" min="1" max="50" value="10" oninput="atualizarCalculo()">
+            </div>
+
+            <div style="background: #0b1329; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; text-align: center; margin-top: 20px;">
+                <div class="val-sub">BONIFICAÇÃO RECORRENTE MENSAL ESTIMADA:</div>
+                <div class="val-display" id="display-mensal">R$ 500,00</div>
+                <div class="val-sub" id="display-anual">Total acumulado em 1 ano: <strong>R$ 6.000,00</strong></div>
+            </div>
+
+            <button class="btn-action" style="margin-top: 25px;" onclick="abrirWhatsAppParceria()">
+                📲 Quero Cadastrar Meu Escritório como Parceiro
+            </button>
+        </div>
+
+        <!-- Kit de Indicação para o WhatsApp -->
+        <div class="panel-box">
+            <h3>📢 Mensagem de Indicação Rápida (WhatsApp)</h3>
+            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Copie este texto e envie para os lojistas da sua carteira que sofrem com sistemas instáveis ou suporte ruim:</p>
+
+            <div class="whatsapp-kit-box">
+                <textarea id="texto-indicacao">Olá! Aqui é da contabilidade. 
+
+Notamos que muitos lojistas da nossa região sofrem com sistemas fiscais que travam ou têm suporte robótico demorado. 
+
+Para garantir que sua empresa opere 100% regularizada perante a SEFAZ-RS (incluindo as regras da Reforma Tributária 2026) e com fechamento mensal rápido, recomendamos o **TruData ERP** (da Hansen Software, empresa gaúcha de Sarandi há +25 anos e selo MPS.BR).
+
+Eles têm suporte 100% humano e o sistema nunca trava seu caixa. Vale muito a pena conhecer uma demonstração:
+👉 WhatsApp TruData: (54) 3361-2345</textarea>
+            </div>
+
+            <button class="btn-action btn-cyan" onclick="copiarTextoIndicacao()">
+                📋 Copiar Mensagem de Indicação
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast">Mensagem copiada com sucesso!</div>
+
+<script>
+    function atualizarCalculo() {
+        const qtd = parseInt(document.getElementById('slider-clientes').value);
+        document.getElementById('lbl-clientes').innerText = qtd + (qtd === 1 ? ' cliente' : ' clientes');
+        
+        // Estimativa média de bonificação contábil de R$ 50 por cliente ativo
+        const mensal = qtd * 50;
+        const anual = mensal * 12;
+
+        document.getElementById('display-mensal').innerText = 'R$ ' + mensal.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+        document.getElementById('display-anual').innerHTML = 'Total acumulado em 1 ano: <strong>R$ ' + anual.toLocaleString('pt-BR', {minimumFractionDigits: 2}) + '</strong>';
+    }
+
+    function copiarTextoIndicacao() {
+        const txt = document.getElementById('texto-indicacao').value;
+        navigator.clipboard.writeText(txt).then(() => {
+            mostrarToast('Texto de indicação copiado!');
+        });
+    }
+
+    function abrirWhatsAppParceria() {
+        const qtd = document.getElementById('slider-clientes').value;
+        const msg = encodeURIComponent(`Olá equipe TruData! Sou contador e gostaria de cadastrar meu escritório contábil no Clube do Contador TruData. Tenho potencial inicial de indicação para cerca de ${qtd} clientes da minha carteira.`);
+        window.open(`https://wa.me/555433612345?text=${msg}`, '_blank');
+    }
+
+    function mostrarToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.innerText = msg;
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dossiê Comparativo de Portabilidade — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              azure: '#009fe3',
+              dark: '#070b14',
+              surface: '#0f172a',
+              card: '#1e293b'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media print {
+      body { background: #ffffff !important; color: #000000 !important; }
+      .no-print { display: none !important; }
+      .print-border { border: 1px solid #cbd5e1 !important; }
+      .print-bg { background: #f8fafc !important; }
+      .print-text-dark { color: #0f172a !important; }
+    }
+  </style>
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen antialiased selection:bg-brand-azure selection:text-white">
+
+  <!-- TOPO DE NAVEGAÇÃO -->
+  <header class="no-print border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="/" class="text-xs font-semibold text-slate-400 hover:text-brand-azure transition flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl">
+        <span>←</span>
+        <span>Voltar ao Cockpit</span>
+      </a>
+      <div class="h-4 w-[1px] bg-slate-800"></div>
+      <div class="flex items-center gap-2">
+        <span class="text-lg">🛡️</span>
+        <h1 class="text-sm font-bold text-white font-display">Dossiê de Portabilidade & Raio-X de Concorrentes</h1>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="window.print()" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+        <span>🖨️</span>
+        <span class="hidden sm:inline">Imprimir Laudo A4</span>
+      </button>
+      <button onclick="copiarDossieWhatsApp()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-emerald-950/50 flex items-center gap-1.5">
+        <span>📲</span>
+        <span>Copiar p/ WhatsApp</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto p-4 sm:p-8 space-y-6">
+
+    <!-- CONTROLES DO CONSULTOR (NO PRINT) -->
+    <div class="no-print bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div>
+          <h2 class="text-sm font-bold text-white flex items-center gap-2">
+            <span>⚙️</span>
+            <span>Configurar Raio-X Personalizado da Loja</span>
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">Selecione o concorrente atual e a cidade do prospect para gerar o laudo personalizado em 1 segundo</p>
+        </div>
+        <span class="text-[10px] uppercase font-bold bg-brand-azure/10 text-brand-azure px-2.5 py-1 rounded-full border border-brand-azure/30">Hansen Software 1998-2026</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Sistema Atual -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-bold text-slate-300">Sistema Concorrente Atual:</label>
+          <select id="sel-concorrente" onchange="atualizarDossie()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-azure transition">
+            <option value="hiper">Hiper (Linx / Stone)</option>
+            <option value="linx">Linx Microvix</option>
+            <option value="totvs">Totvs / Fly01</option>
+            <option value="bling">Bling (Web)</option>
+            <option value="digisat">DigiSat G6</option>
+            <option value="syspdv">SysPDV</option>
+            <option value="contaazul">ContaAzul</option>
+          </select>
+        </div>
+
+        <!-- Cidade Polo -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-bold text-slate-300">Cidade da Loja (RS):</label>
+          <select id="sel-cidade" onchange="atualizarDossie()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-azure transition">
+            <option value="Sarandi">Sarandi - RS</option>
+            <option value="Passo Fundo">Passo Fundo - RS</option>
+            <option value="Marau">Marau - RS</option>
+            <option value="Carazinho">Carazinho - RS</option>
+            <option value="Palmeira das Missões">Palmeira das Missões - RS</option>
+            <option value="Rondinha">Rondinha - RS</option>
+            <option value="Constantina">Constantina - RS</option>
+          </select>
+        </div>
+
+        <!-- Segmento -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-bold text-slate-300">Segmento de Mercado:</label>
+          <select id="sel-segmento" onchange="atualizarDossie()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-azure transition">
+            <option value="Mercado & Mercearia">Mercado & Mercearia</option>
+            <option value="Moda, Roupas & Calçados">Moda, Roupas & Calçados</option>
+            <option value="Materiais de Construção & Ferragens">Materiais de Construção & Ferragens</option>
+            <option value="Farmácia & Drogaria">Farmácia & Drogaria</option>
+            <option value="Autopeças & Oficinas">Autopeças & Oficinas</option>
+          </select>
+        </div>
+
+        <!-- Caixas -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-bold text-slate-300">Quantidade de Caixas (PDVs):</label>
+          <input type="number" id="inp-caixas" oninput="atualizarDossie()" value="2" min="1" max="20" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-brand-azure transition" />
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENTO A4 OFICIAL DE PORTABILIDADE (IMPRIMÍVEL) -->
+    <div id="documento-dossie" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-6 print-border print-bg">
+      
+      <!-- CABEÇALHO DO LAUDO -->
+      <div class="border-b border-slate-800 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="h-12 w-12 rounded-2xl bg-brand-azure/10 border border-brand-azure/30 text-brand-azure flex items-center justify-center text-2xl font-bold">
+            T
+          </div>
+          <div>
+            <div class="text-[10px] font-mono uppercase text-brand-azure font-bold tracking-wider">HANSEN SOFTWARE · DESDE 1998 · SARANDI/RS</div>
+            <h2 class="text-lg font-black text-white font-display print-text-dark">Laudo de Portabilidade & Comparativo de Risco Zero</h2>
+            <p class="text-xs text-slate-400 mt-0.5 print-text-dark">Estudo técnico preparado exclusivamente para empresários do Norte Gaúcho</p>
+          </div>
+        </div>
+
+        <div class="text-right sm:text-right border-t sm:border-t-0 border-slate-800 pt-3 sm:pt-0">
+          <span class="text-[10px] font-mono text-slate-400 block print-text-dark">CÓDIGO DE HOMOLOGAÇÃO</span>
+          <span class="text-xs font-mono font-bold text-emerald-400" id="cod-laudo">TRU-PORT-2026-RS</span>
+          <span class="text-[10px] text-slate-500 block mt-0.5" id="data-laudo">Emitido em 19/09/2026</span>
+        </div>
+      </div>
+
+      <!-- BANNER DE IDENTIFICAÇÃO DO CASO -->
+      <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+        <div>
+          <span class="text-slate-500 text-[10px] uppercase font-bold block">Sistema Atual</span>
+          <strong class="text-rose-400 font-bold" id="lbl-concorrente">Hiper</strong>
+        </div>
+        <div>
+          <span class="text-slate-500 text-[10px] uppercase font-bold block">Localidade</span>
+          <strong class="text-white font-bold" id="lbl-cidade">Sarandi - RS</strong>
+        </div>
+        <div>
+          <span class="text-slate-500 text-[10px] uppercase font-bold block">Segmento</span>
+          <strong class="text-white font-bold" id="lbl-segmento">Mercado & Mercearia</strong>
+        </div>
+        <div>
+          <span class="text-slate-500 text-[10px] uppercase font-bold block">Estrutura</span>
+          <strong class="text-emerald-400 font-bold" id="lbl-caixas">2 Caixas (PDVs)</strong>
+        </div>
+      </div>
+
+      <!-- TABELA COMPARATIVA LADO A LADO -->
+      <div class="space-y-2">
+        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">1. Matriz de Confiabilidade & Custos Ocultos</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse border border-slate-800">
+            <thead>
+              <tr class="bg-slate-950 text-slate-400 border-b border-slate-800">
+                <th class="p-3 w-1/4">Dimensão Analisada</th>
+                <th class="p-3 w-3/8 text-rose-300 bg-rose-950/20 border-r border-slate-800">
+                  <span id="th-concorrente">Hiper (Sistema Atual)</span>
+                </th>
+                <th class="p-3 w-3/8 text-emerald-300 bg-emerald-950/20">
+                  <span>TruData ERP (Hansen Software)</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800" id="corpo-tabela-comparativa">
+              <!-- Injetado via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ESTUDO DE IMPACTO FINANCEIRO ANUAL -->
+      <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">2. Economia Direta com a Portabilidade (36 Meses)</h3>
+          <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-bold border border-emerald-500/20">Zero Custos Ocultos</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
+            <span class="text-[10px] text-slate-500 uppercase font-bold block">Gasto Estimado Atual (36M)</span>
+            <span class="text-base font-black text-rose-400 font-mono" id="val-gasto-atual">R$ 16.200,00</span>
+          </div>
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
+            <span class="text-[10px] text-slate-500 uppercase font-bold block">Investimento TruData (36M)</span>
+            <span class="text-base font-black text-emerald-400 font-mono" id="val-invest-trudata">R$ 8.640,00</span>
+          </div>
+          <div class="p-3 bg-emerald-950/30 rounded-xl border border-emerald-500/30">
+            <span class="text-[10px] text-emerald-300 uppercase font-bold block">Economia Líquida no Bolso</span>
+            <span class="text-lg font-black text-emerald-400 font-mono" id="val-economia-total">R$ 7.560,00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEPOIMENTO REAL DA MESMA REGIÃO -->
+      <div class="bg-gradient-to-r from-slate-950 via-slate-950 to-emerald-950/20 border border-slate-800 rounded-2xl p-5 space-y-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-amber-400">★ ★ ★ ★ ★</span>
+            <span class="text-xs font-bold text-white font-display">Caso Real de Sucesso na Região</span>
+          </div>
+          <span class="text-[10px] text-slate-500" id="depo-distancia">A 28 km de você</span>
+        </div>
+        <p class="text-xs text-slate-300 italic leading-relaxed" id="depo-texto">
+          "Usávamos sistema web de fora e em dias de temporal a loja simplesmente travava. Migramos para o TruData da Hansen há 2 anos e nunca mais perdemos um único cupom. Suporte nota 10 aqui pertinho."
+        </p>
+        <div class="pt-2 flex items-center justify-between text-[11px] text-slate-400">
+          <strong class="text-white" id="depo-autor">Supermercado Dal Pai · Sarandi/RS</strong>
+          <span class="text-emerald-400 font-medium">Ex-usuário do mesmo sistema</span>
+        </div>
+      </div>
+
+      <!-- PROTOCOLO 48H ZERO DIA PARADO -->
+      <div class="border-t border-slate-800 pt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+        <div>
+          <span class="font-bold text-white block">Protocolo de Migração Segura:</span>
+          <span class="text-slate-400">Cadastro de produtos, clientes, saldos e tributação importados em até 48h sem fechar a loja.</span>
+        </div>
+        <div class="shrink-0 flex items-center gap-3">
+          <a href="/contrato-digital" class="no-print px-4 py-2 bg-brand-azure hover:bg-sky-500 text-white font-bold rounded-xl transition shadow-lg shadow-sky-950">
+            Ir para Contrato Digital →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    const DADOS_CONCORRENTES = {
+      hiper: {
+        nome: "Hiper (Linx / Stone)",
+        mensalidade_pdv: 189,
+        instalacao_pdv: 450,
+        tef_obrigatorio: "Taxa adicional de licença de TEF e mensalidade por PDV extra.",
+        suporte: "Central remota via ticket e robô. Fila média de espera de 45 min a 2 horas.",
+        offline: "Depende de sincronização em nuvem constante. Quedas de link geram inconsistência fiscal e travamento.",
+        retencao: "Contratos de fidelidade com multa de rescisão antecipada.",
+        fraqueza_chave: "Emissão de cupom instável durante oscilações de 4G no interior do RS."
+      },
+      linx: {
+        nome: "Linx Microvix",
+        mensalidade_pdv: 240,
+        instalacao_pdv: 800,
+        tef_obrigatorio: "Módulos de TEF e NF-e cobrados à parte como pacotes empresariais.",
+        suporte: "Central corporativa em São Paulo/Joinville. Suporte impessoal sem contato presencial.",
+        offline: "Arquitetura web pesada. Quando a internet cai, a frente de caixa perde recursos críticos.",
+        retencao: "Fidelidade de 12 a 24 meses com aviso prévio oneroso.",
+        fraqueza_chave: "Custo de mensalidade e setup estratosférico para pequenos e médios lojistas."
+      },
+      totvs: {
+        nome: "Totvs / Fly01",
+        mensalidade_pdv: 280,
+        instalacao_pdv: 950,
+        tef_obrigatorio: "TEF e integrações fiscais cobrados como adicionais com taxas sobre faturamento.",
+        suporte: "Abertura de chamados por portal. Atendimento moroso e burocrático.",
+        offline: "Sistema complexo que exige infraestrutura pesada para operar adequadamente.",
+        retencao: "Contratos rígidos com reajustes anuais bem acima do IPCA/IGP-M.",
+        fraqueza_chave: "Complexidade excessiva: exige semanas de treinamento da equipe de operadores."
+      },
+      bling: {
+        nome: "Bling (100% Web)",
+        mensalidade_pdv: 120,
+        instalacao_pdv: 150,
+        tef_obrigatorio: "Não possui TEF de balcão integrado homologado com pinpad direto no PDV.",
+        suporte: "Apenas abertura de chamado por e-mail ou chat. Zero suporte telefônico imediato.",
+        offline: "Sem internet a loja fica completamente paralisada. Zero emissão offline no caixa.",
+        retencao: "Sem contrato, mas sem garantia alguma de assistência presencial em Sarandi.",
+        fraqueza_chave: "Desamparo total: se faltar internet em dia de pico, o cliente não consegue emitir cupom."
+      },
+      digisat: {
+        nome: "DigiSat G6",
+        mensalidade_pdv: 175,
+        instalacao_pdv: 500,
+        tef_obrigatorio: "Módulos vendidos separadamente por chave de ativação anual.",
+        suporte: "Revendas terceirizadas locais com qualidade muito variável.",
+        offline: "Opera localmente, mas com banco de dados suscetível a corrupção em quedas de luz.",
+        retencao: "Renovação anual de licenças obrigatória.",
+        fraqueza_chave: "Interface legada pesada e lentidão no fechamento cego de caixa."
+      },
+      syspdv: {
+        nome: "SysPDV",
+        mensalidade_pdv: 195,
+        instalacao_pdv: 600,
+        tef_obrigatorio: "Exige servidor de TEF dedicado configurado.",
+        suporte: "Depende de parceiro terceirizado regional.",
+        offline: "Possui frente offline, porém com rotinas de sincronização complexas.",
+        retencao: "Cobrança adicional por pontos de rede e terminais de consulta.",
+        fraqueza_chave: "Dificuldade de suporte ágil em finais de semana e feriados."
+      },
+      contaazul: {
+        nome: "ContaAzul",
+        mensalidade_pdv: 160,
+        instalacao_pdv: 200,
+        tef_obrigatorio: "Focado em gestão financeira de escritório, não possui frente de caixa veloz para varejo.",
+        suporte: "Chat online sem suporte in-loco na região.",
+        offline: "Totalmente na nuvem: loja para imediatamente se a internet oscilar.",
+        retencao: "Planos mensais por faixa de faturamento.",
+        fraqueza_chave: "Inviável para frente de caixa de varejo físico com fila e emissão em 3 segundos."
+      }
+    };
+
+    const DEPOIMENTOS_REGIONAIS = {
+      Sarandi: {
+        autor: "Supermercado Dal Pai · Sarandi/RS",
+        distancia: "Na sua cidade (Sarandi/RS)",
+        texto: "Usávamos um sistema de fora e toda vez que dava temporal ficávamos na mão sem conseguir fechar a venda. Com a Hansen Software, emitimos cupom em 3s mesmo se a internet oscilar, e se precisar de algo os técnicos chegam na hora."
+      },
+      "Passo Fundo": {
+        autor: "Confecções Silva & Ramos · Passo Fundo/RS",
+        distancia: "A 45 km de Sarandi",
+        texto: "Trocar de sistema dava muito medo por causa da grade de tamanhos e das roupas cadastradas. A equipe da TruData migrou mais de 4.000 itens em menos de 48h sem travar nosso sábado de movimento. Suporte humano faz toda a diferença."
+      },
+      Marau: {
+        autor: "Agro Comercial Battisti · Marau/RS",
+        distancia: "A 65 km de Sarandi",
+        texto: "O antigo sistema cobrava até para emitir boleto e nos cobrava licença por cada caixa novo. No TruData temos TEF direto, emissão veloz e uma economia anual que pagou o investimento em 4 meses."
+      },
+      Carazinho: {
+        autor: "Mercado & Padaria Ponto Certo · Carazinho/RS",
+        distancia: "A 40 km de Sarandi",
+        texto: "O maior diferencial é o suporte por fone e WhatsApp na hora. Antes ficávamos horas em fila de robô. Aqui o atendimento é de gente para gente e com técnicos da nossa terra."
+      },
+      "Palmeira das Missões": {
+        autor: "Ferragens & Ferramentas Missões · Palmeira/RS",
+        distancia: "A 52 km de Sarandi",
+        texto: "O controle de NCM e a emissão de nota com TEF integrado na maquininha acabou com as divergências no fechamento do dia. Valeu cada centavo a migração."
+      },
+      Rondinha: {
+        autor: "Minimercado & Bazar Rondinha · Rondinha/RS",
+        distancia: "A 18 km de Sarandi",
+        texto: "A proximidade física da Hansen em Sarandi nos dá uma segurança que nenhuma empresa de São Paulo ou Curitiba consegue oferecer. O suporte em até 2h é real."
+      },
+      Constantina: {
+        autor: "Loja Avenida Confecções · Constantina/RS",
+        distancia: "A 32 km de Sarandi",
+        texto: "Sistema limpo, rápido e sem complicações para as vendedoras. O carnê e o crediário com Pix direto no balcão aumentou nossas vendas a prazo com zero inadimplência."
+      }
+    };
+
+    function atualizarDossie() {
+      const concKey = document.getElementById('sel-concorrente').value;
+      const cidade = document.getElementById('sel-cidade').value;
+      const segmento = document.getElementById('sel-segmento').value;
+      const caixas = parseInt(document.getElementById('inp-caixas').value) || 1;
+
+      const conc = DADOS_CONCORRENTES[concKey] || DADOS_CONCORRENTES.hiper;
+      const depo = DEPOIMENTOS_REGIONAIS[cidade] || DEPOIMENTOS_REGIONAIS.Sarandi;
+
+      // Labels
+      document.getElementById('lbl-concorrente').textContent = conc.nome;
+      document.getElementById('th-concorrente').textContent = conc.nome + " (Sistema Atual)";
+      document.getElementById('lbl-cidade').textContent = cidade + " - RS";
+      document.getElementById('lbl-segmento').textContent = segmento;
+      document.getElementById('lbl-caixas').textContent = `${caixas} Caixa${caixas > 1 ? 's' : ''} (PDV${caixas > 1 ? 's' : ''})`;
+
+      // Cálculos financeiros (36 meses)
+      const gastoAtual = (conc.mensalidade_pdv * caixas * 36) + (conc.instalacao_pdv * caixas);
+      // TruData: R$ 180 base + R$ 60 por caixa extra
+      const mrrTruData = 180 + Math.max(0, caixas - 1) * 60;
+      const setupTruData = 450 + Math.max(0, caixas - 1) * 150;
+      const investTruData = (mrrTruData * 36) + setupTruData;
+      const economia = Math.max(0, gastoAtual - investTruData);
+
+      document.getElementById('val-gasto-atual').textContent = 'R$ ' + gastoAtual.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      document.getElementById('val-invest-trudata').textContent = 'R$ ' + investTruData.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      document.getElementById('val-economia-total').textContent = 'R$ ' + economia.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+      // Injetar Tabela
+      const tbody = document.getElementById('corpo-tabela-comparativa');
+      tbody.innerHTML = `
+        <tr>
+          <td class="p-3 font-semibold text-slate-200">Emissão em Queda de Internet</td>
+          <td class="p-3 text-rose-300 bg-rose-950/10 border-r border-slate-800">${conc.offline}</td>
+          <td class="p-3 text-emerald-300 bg-emerald-950/10 font-bold">Contingência offline automática: loja nunca para de vender e emite NFC-e em 3s mesmo sem sinal.</td>
+        </tr>
+        <tr>
+          <td class="p-3 font-semibold text-slate-200">Suporte Técnico & Proximidade</td>
+          <td class="p-3 text-rose-300 bg-rose-950/10 border-r border-slate-800">${conc.suporte}</td>
+          <td class="p-3 text-emerald-300 bg-emerald-950/10 font-bold">100% Humano, por fone e WhatsApp direto de Sarandi/RS com compromisso de atendimento presencial em até 2h.</td>
+        </tr>
+        <tr>
+          <td class="p-3 font-semibold text-slate-200">TEF & Maquininhas no Caixa</td>
+          <td class="p-3 text-rose-300 bg-rose-950/10 border-r border-slate-800">${conc.tef_obrigatorio}</td>
+          <td class="p-3 text-emerald-300 bg-emerald-950/10 font-bold">TEF integrado nativo: aciona a maquininha sem redigitação, eliminando fraudes e erros de digitação.</td>
+        </tr>
+        <tr>
+          <td class="p-3 font-semibold text-slate-200">Cláusulas de Fidelidade & Multas</td>
+          <td class="p-3 text-rose-300 bg-rose-950/10 border-r border-slate-800">${conc.retencao}</td>
+          <td class="p-3 text-emerald-300 bg-emerald-950/10 font-bold">Garantia Blindada de 30 dias: devolução total de 100% caso a loja não se adapte. Sem multas abusivas.</td>
+        </tr>
+        <tr>
+          <td class="p-3 font-semibold text-slate-200">Migração de Dados (Portabilidade)</td>
+          <td class="p-3 text-rose-300 bg-rose-950/10 border-r border-slate-800">Exportação travada ou com suporte cobrado à parte.</td>
+          <td class="p-3 text-emerald-300 bg-emerald-950/10 font-bold">Protocolo 48h Gratuito: importamos produtos, saldos, clientes e histórico do ${conc.nome} sem custo extra.</td>
+        </tr>
+      `;
+
+      // Depoimento
+      document.getElementById('depo-autor').textContent = depo.autor;
+      document.getElementById('depo-distancia').textContent = depo.distancia;
+      document.getElementById('depo-texto').textContent = `"${depo.texto}"`;
+    }
+
+    function copiarDossieWhatsApp() {
+      const conc = document.getElementById('lbl-concorrente').textContent;
+      const cidade = document.getElementById('lbl-cidade').textContent;
+      const economia = document.getElementById('val-economia-total').textContent;
+      const depo = document.getElementById('depo-autor').textContent;
+
+      const texto = `🛡️ *DOSSIÊ DE PORTABILIDADE TRUDATA ERP vs ${conc.toUpperCase()}*\n\n` +
+        `Olá! Preparamos um estudo de viabilidade para comércios de *${cidade}*:\n\n` +
+        `❌ *Fragilidade do ${conc}:* Dependência de internet externa, suporte distante por robô e custos ocultos de PDV;\n` +
+        `✅ *Com o TruData ERP (Hansen Software - Sarandi/RS):*\n` +
+        `• Emissão de NFC-e em 3s mesmo sem internet (contingência nativa);\n` +
+        `• Suporte humano local direto de Sarandi com SLA presencial de 2 horas;\n` +
+        `• Economia estimada de *${economia}* em 36 meses;\n` +
+        `• Protocolo 48h Zero Dia Parado: migramos todos os dados do ${conc} sem parar o seu caixa.\n\n` +
+        `🌟 *Depoimento na região:* ${depo}\n\n` +
+        `Podemos agendar uma demonstração de 15 minutos sem compromisso na sua loja?`;
+
+      navigator.clipboard.writeText(texto).then(() => {
+        alert('Dossiê formatado copiado com sucesso! Cole no WhatsApp do empresário.');
+      });
+    }
+
+    // Inicializar
+    atualizarDossie();
+  </script>
+</body>
+</html>

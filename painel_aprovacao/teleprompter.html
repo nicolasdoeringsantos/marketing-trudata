@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teleprompter TruData — Gravação de Reels & Spots de Rádio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg: #000000;
+      --text: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+    
+    /* BARRA SUPERIOR DE CONTROLES */
+    .topbar {
+      background: #111827;
+      border-bottom: 1px solid #374151;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .topbar a { color: #60a5fa; text-decoration: none; font-weight: 700; font-size: 0.9rem; }
+    .controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .btn { background: #2563eb; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; }
+    .btn:hover { background: #1d4ed8; }
+    .btn-secondary { background: #374151; }
+    .btn-secondary:hover { background: #4b5563; }
+    
+    select, input[type="range"] { background: #1f2937; color: #fff; border: 1px solid #4b5563; padding: 0.4rem 0.8rem; border-radius: 0.4rem; outline: none; }
+
+    /* ÁREA DO PROMPTER */
+    .prompter-container {
+      flex: 1;
+      overflow-y: scroll;
+      padding: 4rem 2rem 15rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      scroll-behavior: auto;
+    }
+    .prompter-container::-webkit-scrollbar { display: none; }
+
+    .prompter-content {
+      max-width: 850px;
+      width: 100%;
+      font-size: 3rem;
+      line-height: 1.5;
+      font-weight: 700;
+      text-align: center;
+      transition: font-size 0.2s;
+    }
+
+    /* GUIA DE LEITURA CENTRAL */
+    .reading-guide {
+      position: fixed;
+      top: 40%;
+      left: 0;
+      right: 0;
+      height: 100px;
+      border-top: 2px dashed rgba(37,99,235,0.4);
+      border-bottom: 2px dashed rgba(37,99,235,0.4);
+      background: rgba(37,99,235,0.05);
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .mirrored {
+      transform: scaleX(-1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div>
+      <a href="index.html">← Voltar ao Painel</a>
+      <span style="margin:0 0.5rem; color:#4b5563;">|</span>
+      <span style="font-weight:700;">🎬 Teleprompter TruData</span>
+    </div>
+
+    <div class="controls">
+      <select id="selRoteiro" onchange="trocarRoteiro()">
+        <optgroup label="🎬 Equipe TruData (Sarandi - RS)">
+          <option value="equipe1">🎬 Suporte: O Caixa Travou na Hora do Pico (32s)</option>
+          <option value="equipe2">🎬 Implantação: Cadê o Produto na Prateleira? (35s)</option>
+          <option value="equipe3">🎬 Atendimento: O Fim dos Robôs no Suporte (30s)</option>
+          <option value="equipe4">🎬 Fiscal: O Que Todo Contador Gostaria de Dizer (38s)</option>
+          <option value="entrevista_cliente">🌟 Série Cliente em Destaque: 5 Perguntas de Campo</option>
+        </optgroup>
+        <optgroup label="📻 Spots de Rádio Regional">
+          <option value="spot1">📻 Spot Rádio: Chega de Robô no Suporte</option>
+          <option value="spot2">📻 Spot Rádio: Sábado de Loja Cheia</option>
+          <option value="spot3">📻 Spot Rádio: Parceria Contabilidade</option>
+        </optgroup>
+        <optgroup label="📱 Reels Comerciais">
+          <option value="reels1">📱 Reels: O Erro Silencioso do Fechamento</option>
+          <option value="reels2">📱 Reels: O Pesadelo da Grade de Roupas</option>
+          <option value="reels3">📱 Reels: Internet Caiu? O Caixa Não Para</option>
+        </optgroup>
+      </select>
+
+      <button id="btnPlay" class="btn" onclick="togglePlay()">▶ Iniciar (Espaço)</button>
+      <button class="btn btn-secondary" onclick="resetScroll()">⏮ Reiniciar</button>
+
+      <label style="font-size:0.85rem; display:flex; align-items:center; gap:0.5rem;">
+        Velocidade:
+        <input type="range" id="speed" min="1" max="10" value="3" onchange="atualizarVelocidade()">
+      </label>
+
+      <label style="font-size:0.85rem; display:flex; align-items:center; gap:0.5rem;">
+        Fonte:
+        <input type="range" id="fontSize" min="2" max="6" value="3" step="0.2" oninput="ajustarFonte()">
+      </label>
+
+      <button class="btn btn-secondary" onclick="toggleMirror()">🪞 Espelho</button>
+    </div>
+  </div>
+
+  <div class="reading-guide"></div>
+
+  <div class="prompter-container" id="prompter">
+    <div class="prompter-content" id="textoPrompter">
+      Carregando roteiro...
+    </div>
+  </div>
+
+  <script>
+    const ROTEIROS = {
+      equipe1: `Sábado à tarde, loja cheia, fila no caixa... e a tela do sistema começa a girar.\n\nJá passou por esse desespero?\n\nNa maioria dos softwares, o operador fica refém da internet ou de telas pesadas.\n\nAqui no TruData ERP, a emissão de NFC-e acontece em menos de 3 segundos e o TEF é direto na maquininha, sem digitação manual.\n\nSão mais de 4 milhões de cupons emitidos sem deixar comerciante na mão.\n\nEstabilidade que você sente no bolso e no sorriso do seu cliente.\n\nQuer parar de passar vergonha no caixa? Chama nossa equipe aqui de Sarandi pelo WhatsApp!`,
+      equipe2: `O sistema diz que tem 3 peças no estoque.\n\nO cliente quer comprar. Você procura na loja inteira e... cadê o produto?\n\nEssa divergência acontece por três motivos: entrada de nota sem importar o XML, devolução mal lançada ou venda feita sem baixa automática.\n\nNo TruData ERP, o XML da nota do fornecedor dá entrada no lote, no custo e no estoque no mesmo segundo.\n\nE qualquer devolução corrige o cupom e o saldo físico na hora.\n\nChega de perder venda de produto que você não acha, ou comprar o que já tem encalhado.\n\nComente 'ESTOQUE' que nossa equipe te mostra como organizar isso em 15 minutos!`,
+      equipe3: `"Digite 1 para suporte, digite 2 para esperar, digite 3 para a ligação cair..."\n\nQuantas horas você já perdeu tentando explicar um problema urgente do seu comércio para um robô que não entende nada?\n\nAqui na Hansen Software é diferente.\n\nQuando você liga ou manda WhatsApp, quem atende é a gente, direto de Sarandi no Rio Grande do Sul.\n\nGente de verdade que sabe o nome da sua empresa e resolve na hora.\n\nHá mais de 25 anos garantindo 98% de satisfação no suporte.\n\nVem tomar um mate com a gente ou chama no WhatsApp pelo link da bio!`,
+      equipe4: `Dia 5 do mês chegando e o seu contador te manda aquela mensagem:\n\n"Cadê os arquivos do SPED e os XMLs das notas?"\n\nO pesadelo do fechamento fiscal não é culpa do contador nem do lojista: é culpa de sistema que não valida impostos na hora da emissão e exporta arquivo corrompido.\n\nO TruData ERP gera os pacotes fiscais 100% validados, limpos e prontos para o escritório contábil.\n\nZero retrabalho, zero multa e o seu contador feliz da vida.\n\nEncaminha esse vídeo para o seu contador agora mesmo para ele conhecer a área de parceiros da TruData!`,
+      entrevista_cliente: `1. O DESAFIO ANTERIOR:\n"Antes de conhecer a TruData, qual era a sua maior dor de cabeça no caixa ou estoque da loja?"\n\n2. A DECISÃO:\n"Por que você escolheu confiar na equipe da Hansen Software aqui de Sarandi?"\n\n3. A VIRADA NA ROTINA:\n"O que mudou na prática para os seus operadores de caixa e para você como gestor?"\n\n4. O SUPORTE HUMANO:\n"Quando alguém da sua equipe precisa de ajuda, como é o atendimento da TruData?"\n\n5. RECOMENDAÇÃO:\n"Se outro comerciante estiver na dúvida se vale a pena mudar de sistema, o que você diria para ele?"`,
+      spot1: `Sabe aquela sensação de precisar de ajuda no caixa da sua loja e ter que falar com um robô que não resolve nada?\n\nNa TruData ERP, isso não acontece.\n\nAqui em Sarandi, nossa equipe atende você de verdade: de pessoa pra pessoa, com agilidade e conhecimento da nossa gente.\n\nSão mais de 25 anos desenvolvendo o sistema que faz o comércio gaúcho crescer seguro.\n\nTruData ERP da Hansen Software.\n\nFale com a gente no (54) 3361-2650 ou acesse trudata.com.br.`,
+      spot2: `Sábado de manhã, balcão lotado e a fila andando rápido!\n\nCom o PDV da TruData ERP, sua loja nunca para, mesmo se a internet cair.\n\nEmissão de cupom fiscal em segundos, controle de estoque sem furos e integração completa com a contabilidade.\n\nMais de 4 milhões de cupons emitidos com a qualidade e o selo MPS.BR da Hansen Software.\n\nModernize o caixa da sua empresa.\n\nLigue agora: (54) 3361-2650.`,
+      spot3: `Contador: o encerramento do mês dos seus clientes pode ser simples e sem dor de cabeça.\n\nO TruData ERP gera os arquivos SPED e Sintegra 100% validados de acordo com as exigências da SEFAZ do Rio Grande do Sul.\n\nMenos retrabalho para o seu escritório e mais segurança fiscal para o lojista.\n\nConheça o Programa de Escritórios Parceiros da TruData em Sarandi.\n\nAcesse trudata.com.br ou chame no (54) 3361-2650.`,
+      reels1: `Se o seu caixa faz isso na hora do pagamento, você está perdendo clientes todos os dias!\n\nSabe quando a fila começa a acumular porque a emissão da nota fiscal demora ou o sistema dá erro de comunicação?\n\nNo TruData ERP, o cupom sai em 3 segundos.\n\nE se a internet da sua cidade oscilar, o sistema opera em contingência offline sem travar o cliente.\n\nQuer ver na prática? Fale com a gente no link da bio!`,
+      reels2: `Tem no sistema, mas sumiu da arara?\n\nQuem tem loja de roupas sabe o desespero de procurar uma blusa tamanho M azul que o estoque diz que tem, mas ninguém acha.\n\nO TruData Moda organiza grade bidimensional de cor e tamanho e imprime etiquetas térmicas com código de barras na hora.\n\nControle total do que entra, do que sai e do que vai para condicional!\n\nToque no link da bio e conheça!`,
+      reels3: `E se a internet cair na sua cidade em pleno sábado de movimento?\n\nCom a maioria dos sistemas na nuvem comum, a sua loja fica de mãos atadas sem poder emitir cupom fiscal.\n\nCom o TruData ERP de Sarandi, a contingência é blindada: você continua vendendo e imprimindo cupom localmente.\n\nQuando a conexão voltar, ele transmite tudo sozinho para a SEFAZ do RS.\n\nIsso é segurança de verdade para o comerciante!`
+    };
+
+    let rodando = false;
+    let animId = null;
+    let velocidade = 3;
+    let espelhado = false;
+
+    function trocarRoteiro() {
+      const chave = document.getElementById('selRoteiro').value;
+      document.getElementById('textoPrompter').innerText = ROTEIROS[chave] || '';
+      resetScroll();
+    }
+
+    function togglePlay() {
+      rodando = !rodando;
+      const btn = document.getElementById('btnPlay');
+      if (rodando) {
+        btn.innerText = '⏸ Pausar (Espaço)';
+        btn.style.background = '#e11d48';
+        scrollStep();
+      } else {
+        btn.innerText = '▶ Iniciar (Espaço)';
+        btn.style.background = '#2563eb';
+        cancelAnimationFrame(animId);
+      }
+    }
+
+    function scrollStep() {
+      if (!rodando) return;
+      const el = document.getElementById('prompter');
+      el.scrollTop += (velocidade * 0.5);
+      animId = requestAnimationFrame(scrollStep);
+    }
+
+    function resetScroll() {
+      const el = document.getElementById('prompter');
+      el.scrollTop = 0;
+      if (rodando) togglePlay();
+    }
+
+    function atualizarVelocidade() {
+      velocidade = parseFloat(document.getElementById('speed').value);
+    }
+
+    function ajustarFonte() {
+      const f = document.getElementById('fontSize').value;
+      document.getElementById('textoPrompter').style.fontSize = `${f}rem`;
+    }
+
+    function toggleMirror() {
+      espelhado = !espelhado;
+      const p = document.getElementById('prompter');
+      if (espelhado) {
+        p.classList.add('mirrored');
+      } else {
+        p.classList.remove('mirrored');
+      }
+    }
+
+    // Atalhos de teclado
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        togglePlay();
+      } else if (e.code === 'ArrowUp') {
+        velocidade = Math.min(10, velocidade + 0.5);
+        document.getElementById('speed').value = velocidade;
+      } else if (e.code === 'ArrowDown') {
+        velocidade = Math.max(1, velocidade - 0.5);
+        document.getElementById('speed').value = velocidade;
+      }
+    });
+
+    trocarRoteiro();
+  </script>
+</body>
+</html>

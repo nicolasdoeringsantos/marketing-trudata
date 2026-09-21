@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditor de Taxas de Cartão & TEF — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col">
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
+        ← Voltar ao Hub Central
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-slate-300 font-display">Calculadora TEF & Cartões</span>
+        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 font-bold px-2 py-0.5 rounded border border-emerald-500/30">ROI Garantido</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
+    <div class="glass rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-2xl">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="h-10 w-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30">
+          💳
+        </div>
+        <div>
+          <h1 class="text-2xl font-black font-display text-white">Auditor de Custos de Cartão: POS Avulso vs TEF Integrado</h1>
+          <p class="text-xs text-slate-400">Descubra quanto sua loja perde por ano em aluguel de maquininhas, taxas ocultas e erros de digitação de caixa.</p>
+        </div>
+      </div>
+
+      <!-- CAMPOS DE ENTRADA -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1.5">Faturamento em Cartão/mês (R$):</label>
+          <input type="number" id="faturamento-cartao" value="85000" oninput="calcularTEF()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-base font-bold text-white font-mono outline-none focus:border-brand-azure" />
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1.5">Maquininhas POS Avulsas (Qtd):</label>
+          <input type="number" id="qtd-maquininhas" value="3" oninput="calcularTEF()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-base font-bold text-white font-mono outline-none focus:border-brand-azure" />
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <label class="text-[11px] text-slate-400 font-semibold block mb-1.5">Aluguel Médio por Máquina (R$):</label>
+          <input type="number" id="aluguel-maquina" value="89" oninput="calcularTEF()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-base font-bold text-white font-mono outline-none focus:border-brand-azure" />
+        </div>
+      </div>
+
+      <!-- RESULTADOS -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+        <div class="p-5 rounded-2xl bg-rose-500/10 border border-rose-500/30">
+          <span class="text-[11px] font-bold text-rose-400 uppercase tracking-wider block">Gasto Anual c/ Aluguel POS:</span>
+          <span class="text-2xl font-black text-white font-mono block mt-1" id="res-aluguel">R$ 3.204,00</span>
+          <p class="text-[10px] text-slate-400 mt-1">Custo fixo que o TEF elimina.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/30">
+          <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider block">Perdas p/ Erro de Digitação:</span>
+          <span class="text-2xl font-black text-white font-mono block mt-1" id="res-erros">R$ 5.100,00</span>
+          <p class="text-[10px] text-slate-400 mt-1">Estimativa de 0,5% em digitação incorreta.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-emerald-500/15 border border-emerald-500/40">
+          <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">Economia Real Anual TruData:</span>
+          <span class="text-2xl font-black text-emerald-400 font-mono block mt-1" id="res-economia">R$ 8.304,00</span>
+          <p class="text-[10px] text-slate-300 mt-1">Mais do que paga o sistema inteiro!</p>
+        </div>
+      </div>
+
+      <!-- BOTÃO DE AÇÃO -->
+      <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-xs text-slate-300">
+          ✓ O TEF TruData integra com Stone, Cielo, Rede, PagBank e SafraPay sem redigitação de valores.
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="copiarDiagnosticoTEF()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl transition">
+            📋 Copiar Cálculo
+          </button>
+          <button onclick="enviarTEFWhatsApp()" class="w-full sm:w-auto px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-emerald-600/30">
+            📲 Agendar Demonstração TEF
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function calcularTEF() {
+      const fat = parseFloat(document.getElementById('faturamento-cartao').value) || 0;
+      const qtd = parseFloat(document.getElementById('qtd-maquininhas').value) || 0;
+      const aluguel = parseFloat(document.getElementById('aluguel-maquina').value) || 0;
+
+      const aluguelAnual = qtd * aluguel * 12;
+      const errosAnuais = (fat * 12) * 0.005; // 0.5% em falhas de caixa / conciliação
+      const economiaTotal = aluguelAnual + errosAnuais;
+
+      document.getElementById('res-aluguel').textContent = 'R$ ' + aluguelAnual.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      document.getElementById('res-erros').textContent = 'R$ ' + errosAnuais.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      document.getElementById('res-economia').textContent = 'R$ ' + economiaTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    }
+
+    function copiarDiagnosticoTEF() {
+      const eco = document.getElementById('res-economia').textContent;
+      const texto = `💳 AUDITORIA DE CARTÕES & TEF TRUDATA ERP\n\nIdentificamos que sua loja pode economizar cerca de ${eco} por ano eliminando aluguel de maquininhas avulsas e erros de digitação de cartão no caixa!\n\nCom o TEF integrado TruData ERP, o valor passa automático do PDV para a maquininha. Zero erro e 100% conciliado.\n\nDemonstração sem compromisso: (54) 3361-2345`;
+      navigator.clipboard.writeText(texto).then(() => alert('Diagnóstico de economia TEF copiado!'));
+    }
+
+    function enviarTEFWhatsApp() {
+      const eco = document.getElementById('res-economia').textContent;
+      const msg = encodeURIComponent(`Olá! Fiz a simulação na calculadora de TEF da TruData e vi uma economia estimada de ${eco} por ano na minha loja. Gostaria de entender como funciona a integração de TEF no meu caixa!`);
+      window.open('https://wa.me/5554996966175?text=' + msg, '_blank');
+    }
+
+    calcularTEF();
+  </script>
+</body>
+</html>

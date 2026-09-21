@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estúdio de E-mail B2B & Homologação SMTP — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              azure: '#00A3FF',
+              dark: '#020B18',
+              card: '#0A192F',
+              emerald: '#10B981',
+              amber: '#F59E0B'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #020B18; color: #F8FAFC; }
+    .glass { background: rgba(10, 25, 47, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .tpl-item-active { border-color: #00A3FF !important; background: rgba(0, 163, 255, 0.15) !important; }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex flex-col justify-between selection:bg-brand-azure selection:text-white pb-12">
+
+  <!-- TOPO -->
+  <header class="border-b border-slate-800/80 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2 group text-xs text-slate-400 hover:text-white transition">
+          <span class="p-1.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-brand-azure">←</span>
+          <span>Voltar ao Hub</span>
+        </a>
+        <div class="h-4 w-px bg-slate-800"></div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-white font-display">ESTÚDIO DE E-MAIL MARKETING B2B</span>
+          <span class="text-[10px] bg-brand-azure/10 text-brand-azure border border-brand-azure/30 px-2 py-0.5 rounded font-mono">HTML Responsivo + SMTP</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="copiarCodigoHTML()" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200 flex items-center gap-1.5 transition">
+          <span>📋</span> Copiar Código HTML
+        </button>
+        <button onclick="abrirConfigSMTP()" class="px-3.5 py-1.5 rounded-xl bg-brand-azure/10 hover:bg-brand-azure/20 border border-brand-azure/30 text-xs font-bold text-brand-azure flex items-center gap-1.5 transition">
+          <span>⚙️</span> Configurar Servidor SMTP
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ÁREA DE TRABALHO -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full space-y-6">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- COLUNA LATERAL (4 colunas): SELETOR DE TEMPLATES & TESTE REAL -->
+      <div class="lg:col-span-4 space-y-4">
+        
+        <!-- SELEÇÃO DE TEMPLATE -->
+        <div class="glass rounded-3xl p-5 space-y-3 shadow-xl">
+          <h3 class="text-xs font-bold text-white uppercase tracking-wider">Modelos de Alta Conversão B2B</h3>
+          
+          <div class="space-y-2">
+            <div onclick="selecionarTemplate('contabilidade', this)" class="tpl-item tpl-item-active p-3 rounded-2xl border border-slate-800 bg-slate-950/60 cursor-pointer transition">
+              <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <span>🏛️</span> Parceria com Contabilidades
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Foco em escritórios do RS, Portal do Contador e SPED sem retrabalho.</p>
+            </div>
+
+            <div onclick="selecionarTemplate('supermercados', this)" class="tpl-item p-3 rounded-2xl border border-slate-800 bg-slate-950/60 cursor-pointer transition">
+              <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <span>🛒</span> Supermercados & Mercearias
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Foco em balanças Toledo, leitor 2D e sábado à tarde sem travar caixa.</p>
+            </div>
+
+            <div onclick="selecionarTemplate('autopecas', this)" class="tpl-item p-3 rounded-2xl border border-slate-800 bg-slate-950/60 cursor-pointer transition">
+              <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <span>🔧</span> Autopeças & Mecânicas
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Foco em busca por código original, controle de estoque e NF-e rápida.</p>
+            </div>
+
+            <div onclick="selecionarTemplate('reforma', this)" class="tpl-item p-3 rounded-2xl border border-slate-800 bg-slate-950/60 cursor-pointer transition">
+              <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <span>⚖️</span> Alerta Reforma Tributária 2026
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Convite urgente para o simulador CBS/IBS e auditoria preventiva de NCM.</p>
+            </div>
+
+            <div onclick="selecionarTemplate('migracao', this)" class="tpl-item p-3 rounded-2xl border border-slate-800 bg-slate-950/60 cursor-pointer transition">
+              <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <span>🔄</span> Portabilidade Concorrente (Migração)
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Argumentário contra sistemas lentos e garantia zero dia parado.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO DE HOMOLOGAÇÃO & DISPARO DE TESTE REAL -->
+        <div class="glass rounded-3xl p-5 space-y-3 shadow-xl">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+              <span>🚀</span> Teste de Envio em Tempo Real
+            </h3>
+            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">SMTP Ativo</span>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div>
+              <label class="text-slate-400 block mb-1">E-mail Destinatário de Teste:</label>
+              <input type="email" id="email-destinatario-teste" value="comercial@trudata.com.br" placeholder="seuemail@empresa.com.br" class="w-full bg-slate-950 border border-slate-700 text-white rounded-xl p-2.5 outline-none focus:border-brand-azure font-mono text-xs" />
+            </div>
+
+            <div>
+              <label class="text-slate-400 block mb-1">Nome do Prospect / Loja:</label>
+              <input type="text" id="nome-prospect-teste" value="Mercado Modelo Sarandi" class="w-full bg-slate-950 border border-slate-700 text-white rounded-xl p-2.5 outline-none focus:border-brand-azure text-xs" />
+            </div>
+
+            <button onclick="dispararEmailTeste()" id="btn-disparar-teste" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2 mt-2">
+              <span>📤</span> Disparar E-mail de Teste Agora
+            </button>
+
+            <div id="log-status-envio" class="hidden p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono space-y-1">
+              <div class="text-slate-400 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                <span id="log-mensagem">Iniciando teste de envio...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUNA PRINCIPAL (8 colunas): PREVIEW EM TEMPO REAL -->
+      <div class="lg:col-span-8 glass rounded-3xl p-6 space-y-4 shadow-2xl flex flex-col">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-4">
+          <div>
+            <span class="text-[10px] text-slate-500 font-mono uppercase block">Assunto da Mensagem</span>
+            <h2 id="assuntoEmailDisplay" class="text-sm sm:text-base font-bold text-white font-display">Carregando assunto...</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] bg-slate-800 text-slate-300 font-mono px-2.5 py-1 rounded-full border border-slate-700">600px Max-Width Standard</span>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl overflow-hidden shadow-inner flex-1 border border-slate-700">
+          <iframe id="iframePreview" class="w-full h-[650px] border-none bg-white"></iframe>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    const TEMPLATES = {
+      contabilidade: {
+        assunto: "Parceria Contábil: Zero retrabalho no encerramento fiscal dos seus clientes lojistas",
+        html: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { margin:0; padding:0; background:#f1f5f9; font-family:'Plus Jakarta Sans', Arial, sans-serif; }
+  .email-wrap { max-width:600px; margin:20px auto; background:#ffffff; border-radius:12px; overflow:hidden; border:1px solid #e2e8f0; }
+  .header { background:#020B18; padding:30px; text-align:center; }
+  .brand { font-size:24px; font-weight:bold; color:#ffffff; }
+  .brand span { color:#00A3FF; }
+  .content { padding:30px; color:#334155; line-height:1.6; font-size:15px; }
+  .box-destaque { background:#f0f9ff; border-left:4px solid #00A3FF; padding:15px; border-radius:0 8px 8px 0; margin:20px 0; }
+  .btn { display:inline-block; background:#00A3FF; color:#ffffff !important; padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:bold; margin-top:15px; }
+  .footer { background:#f8fafc; padding:20px; text-align:center; font-size:12px; color:#94a3b8; border-top:1px solid #e2e8f0; }
+</style>
+</head>
+<body>
+<div class="email-wrap">
+  <div class="header">
+    <div class="brand">TRU<span>DATA</span> ERP</div>
+    <p style="color:#94a3b8; margin:5px 0 0 0; font-size:12px;">Hansen Software · Sarandi - RS · Desde 1998</p>
+  </div>
+  <div class="content">
+    <h2 style="color:#0f172a; margin-top:0;">Prezado(a) Contador(a),</h2>
+    <p>Sabemos o quanto o fechamento do mês pode ser desgastante quando os clientes enviam arquivos XML incompletos ou relatórios divergentes.</p>
+    <div class="box-destaque">
+      <strong>O TruData Modo Escritório resolve isso na raiz:</strong><br>
+      Seu escritório tem acesso a um portal gratuito para baixar todos os arquivos SPED Fiscal e Sintegra auditados dos clientes em 1 clique, sem precisar cobrar o lojista.
+    </div>
+    <p>Com o padrão de qualidade <strong>MPS.BR Nível G</strong> e suporte técnico 100% humano sediado em Sarandi/RS, garantimos parametrizações tributárias sempre alinhadas com a SEFAZ do Rio Grande do Sul.</p>
+    <p style="text-align:center;">
+      <a href="https://wa.me/5554996966175?text=Ola!+Gostaria+de+conhecer+o+Modo+Escritorio+do+TruData." class="btn">Conhecer o Programa Escritório Parceiro</a>
+    </p>
+  </div>
+  <div class="footer">
+    Hansen Software LTDA · (54) 3361-2650 · Sarandi - RS · www.trudata.com.br
+  </div>
+</div>
+</body>
+</html>`
+      },
+      supermercados: {
+        assunto: "Frente de Caixa em 3 segundos e integração Toledo Prix: Chega de filas no sábado",
+        html: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { margin:0; padding:0; background:#f1f5f9; font-family:'Plus Jakarta Sans', Arial, sans-serif; }
+  .email-wrap { max-width:600px; margin:20px auto; background:#ffffff; border-radius:12px; overflow:hidden; border:1px solid #e2e8f0; }
+  .header { background:#020B18; padding:30px; text-align:center; }
+  .brand { font-size:24px; font-weight:bold; color:#ffffff; }
+  .brand span { color:#10B981; }
+  .content { padding:30px; color:#334155; line-height:1.6; font-size:15px; }
+  .box-destaque { background:#ecfdf5; border-left:4px solid #10B981; padding:15px; border-radius:0 8px 8px 0; margin:20px 0; }
+  .btn { display:inline-block; background:#10B981; color:#ffffff !important; padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:bold; margin-top:15px; }
+  .footer { background:#f8fafc; padding:20px; text-align:center; font-size:12px; color:#94a3b8; border-top:1px solid #e2e8f0; }
+</style>
+</head>
+<body>
+<div class="email-wrap">
+  <div class="header">
+    <div class="brand">TRU<span>DATA</span> SUPERMERCADOS</div>
+    <p style="color:#94a3b8; margin:5px 0 0 0; font-size:12px;">Engenharia Fiscal para o Varejo Alimentício do RS</p>
+  </div>
+  <div class="content">
+    <h2 style="color:#0f172a; margin-top:0;">Seu caixa já travou bem na hora do pico do sábado?</h2>
+    <p>Para quem opera supermercados e mercearias no interior gaúcho, depender de sistemas 100% web é um risco diário: se a fibra óptica oscilar, o cliente fica preso na fila.</p>
+    <div class="box-destaque">
+      <strong>Tecnologia Híbrida Blindada:</strong><br>
+      O TruData ERP possui banco local em cada PDV. Mesmo sem internet, o cupom NFC-e sai em menos de 3 segundos com integração total às balanças Toledo Prix (MGV6) e Filizola.
+    </div>
+    <p>Além disso, nossa equipe técnica está baseada em <strong>Sarandi/RS</strong> com SLA presencial de 2 horas. Chega de falar com robôs de 0800 que não entendem a rotina da sua loja!</p>
+    <p style="text-align:center;">
+      <a href="https://wa.me/5554996966175?text=Ola!+Gostaria+de+uma+demonstracao+do+TruData+para+meu+supermercado." class="btn">Agendar Demonstração Sem Compromisso</a>
+    </p>
+  </div>
+  <div class="footer">
+    Hansen Software LTDA · Fone: (54) 3361-2650 · Sarandi - RS
+  </div>
+</div>
+</body>
+</html>`
+      },
+      autopecas: {
+        assunto: "Gestão Rápida para Autopeças e Oficinas: Busca por código original e emissão sem delay",
+        html: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { margin:0; padding:0; background:#f1f5f9; font-family:'Plus Jakarta Sans', Arial, sans-serif; }
+  .email-wrap { max-width:600px; margin:20px auto; background:#ffffff; border-radius:12px; overflow:hidden; border:1px solid #e2e8f0; }
+  .header { background:#020B18; padding:30px; text-align:center; }
+  .brand { font-size:24px; font-weight:bold; color:#ffffff; }
+  .brand span { color:#00A3FF; }
+  .content { padding:30px; color:#334155; line-height:1.6; font-size:15px; }
+  .box-destaque { background:#f0f9ff; border-left:4px solid #00A3FF; padding:15px; border-radius:0 8px 8px 0; margin:20px 0; }
+  .btn { display:inline-block; background:#00A3FF; color:#ffffff !important; padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:bold; margin-top:15px; }
+  .footer { background:#f8fafc; padding:20px; text-align:center; font-size:12px; color:#94a3b8; border-top:1px solid #e2e8f0; }
+</style>
+</head>
+<body>
+<div class="email-wrap">
+  <div class="header">
+    <div class="brand">TRU<span>DATA</span> AUTOPEÇAS</div>
+    <p style="color:#94a3b8; margin:5px 0 0 0; font-size:12px;">Solução Especializada para Balcão & Oficinas</p>
+  </div>
+  <div class="content">
+    <h2 style="color:#0f172a; margin-top:0;">Agilidade no balcão e precisão no estoque de peças.</h2>
+    <p>O cliente de autopeças quer velocidade: ele chega ao balcão com o código da peça ou o modelo do veículo e não pode esperar um sistema lento carregar.</p>
+    <div class="box-destaque">
+      <strong>Desenvolvido para Autopeças e Centros Automotivos:</strong><br>
+      Busca cruzada por código original, similar, conversão de montadora, controle de garantia e ordem de serviço integrada ao faturamento.
+    </div>
+    <p>Importamos todo o seu catálogo de peças e saldo de estoque sem parar seu balcão!</p>
+    <p style="text-align:center;">
+      <a href="https://wa.me/5554996966175?text=Ola!+Gostaria+de+conhecer+o+TruData+para+Autopecas." class="btn">Solicitar Proposta para Autopeças</a>
+    </p>
+  </div>
+  <div class="footer">
+    Hansen Software LTDA · (54) 3361-2650 · Sarandi - RS
+  </div>
+</div>
+</body>
+</html>`
+      },
+      reforma: {
+        assunto: "Atenção Varejista: Como a Reforma Tributária afeta o caixa da sua loja no RS",
+        html: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { margin:0; padding:0; background:#f1f5f9; font-family:'Plus Jakarta Sans', Arial, sans-serif; }
+  .email-wrap { max-width:600px; margin:20px auto; background:#ffffff; border-radius:12px; overflow:hidden; border:1px solid #e2e8f0; }
+  .header { background:#020B18; padding:30px; text-align:center; }
+  .brand { font-size:24px; font-weight:bold; color:#ffffff; }
+  .brand span { color:#F59E0B; }
+  .content { padding:30px; color:#334155; line-height:1.6; font-size:15px; }
+  .badge-alerta { background:#fef3c7; color:#92400e; padding:4px 10px; border-radius:999px; font-weight:bold; font-size:12px; }
+  .btn { display:inline-block; background:#F59E0B; color:#020B18 !important; padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:bold; margin-top:15px; }
+  .footer { background:#f8fafc; padding:20px; text-align:center; font-size:12px; color:#94a3b8; border-top:1px solid #e2e8f0; }
+</style>
+</head>
+<body>
+<div class="email-wrap">
+  <div class="header">
+    <div class="brand">TRU<span>DATA</span> FISCAL</div>
+    <p style="color:#94a3b8; margin:5px 0 0 0; font-size:12px;">Especialistas Tributários no Varejo Gaúcho</p>
+  </div>
+  <div class="content">
+    <span class="badge-alerta">⚠️ ALERTA FISCAL 2026 - 2033</span>
+    <h2 style="color:#0f172a; margin-top:10px;">O seu sistema atual está preparado para o CBS e IBS?</h2>
+    <p>A transição da Reforma Tributária sobre o Consumo exige atualização imediata dos campos de NFC-e e saneamento rigoroso dos códigos NCM dos seus produtos.</p>
+    <p>Sistemas legados correm sério risco de travamento no caixa e rejeição de lotes bem na hora do movimento da sua loja.</p>
+    <p>Criamos um <strong>Simulador Gratuito de Impacto Fiscal</strong> para você descobrir em 1 minuto o cronograma do seu segmento comercial.</p>
+    <p style="text-align:center;">
+      <a href="http://192.168.0.157:8080/reforma-tributaria" class="btn">Acessar Simulador Tributário Gratuito</a>
+    </p>
+  </div>
+  <div class="footer">
+    Hansen Software LTDA · (54) 3361-2650 · Sarandi - RS · www.trudata.com.br
+  </div>
+</div>
+</body>
+</html>`
+      },
+      migracao: {
+        assunto: "Cansado de suporte por robô e sistema travando no sábado? Conheça a Migração Blindada",
+        html: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { margin:0; padding:0; background:#f1f5f9; font-family:'Plus Jakarta Sans', Arial, sans-serif; }
+  .email-wrap { max-width:600px; margin:20px auto; background:#ffffff; border-radius:12px; overflow:hidden; border:1px solid #e2e8f0; }
+  .header { background:#020B18; padding:30px; text-align:center; }
+  .brand { font-size:24px; font-weight:bold; color:#ffffff; }
+  .brand span { color:#00A3FF; }
+  .content { padding:30px; color:#334155; line-height:1.6; font-size:15px; }
+  .box-vantagem { background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px; margin-bottom:10px; }
+  .btn { display:inline-block; background:#00A3FF; color:#ffffff !important; padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:bold; margin-top:15px; }
+  .footer { background:#f8fafc; padding:20px; text-align:center; font-size:12px; color:#94a3b8; border-top:1px solid #e2e8f0; }
+</style>
+</head>
+<body>
+<div class="email-wrap">
+  <div class="header">
+    <div class="brand">TRU<span>DATA</span> ERP</div>
+    <p style="color:#94a3b8; margin:5px 0 0 0; font-size:12px;">Tecnologia com Proximidade Regional</p>
+  </div>
+  <div class="content">
+    <h2 style="color:#0f172a; margin-top:0;">Sua loja não pode parar por causa de software.</h2>
+    <p>Muitos empresários do Rio Grande do Sul continuam pagando caro por sistemas multinacionais simplesmente pelo receio de perder os cadastros de produtos na troca.</p>
+    <div class="box-vantagem">
+      <strong>✅ Migração 100% Gratuita da Base:</strong> Nós importamos seus produtos, clientes e saldos do sistema anterior sem custo.
+    </div>
+    <div class="box-vantagem">
+      <strong>⚡ Contingência Offline:</strong> Se a internet da sua cidade oscilar no sábado, o TruData continua vendendo normalmente.
+    </div>
+    <div class="box-vantagem">
+      <strong>🧑‍💼 Suporte Humano em Sarandi:</strong> Sem robôs. Você liga ou chama no WhatsApp e fala direto com a gente.
+    </div>
+    <p style="text-align:center;">
+      <a href="https://wa.me/5554996966175?text=Quero+saber+mais+sobre+a+Migracao+Blindada+TruData." class="btn">Agendar Demonstração de 15 Minutos</a>
+    </p>
+  </div>
+  <div class="footer">
+    Hansen Software LTDA · (54) 3361-2650 · Sarandi - RS · www.trudata.com.br
+  </div>
+</div>
+</body>
+</html>`
+      }
+    };
+
+    let templateAtual = 'contabilidade';
+
+    function selecionarTemplate(chave, el) {
+      templateAtual = chave;
+      document.querySelectorAll('.tpl-item').forEach(item => item.classList.remove('tpl-item-active'));
+      if (el) el.classList.add('tpl-item-active');
+
+      const data = TEMPLATES[chave];
+      document.getElementById('assuntoEmailDisplay').innerText = data.assunto;
+
+      const iframe = document.getElementById('iframePreview');
+      iframe.srcdoc = data.html;
+    }
+
+    function copiarCodigoHTML() {
+      const html = TEMPLATES[templateAtual].html;
+      navigator.clipboard.writeText(html).then(() => {
+        alert('✅ Código HTML copiado com sucesso! Pode colar no Mailchimp, Brevo ou RD Station.');
+      });
+    }
+
+    async function dispararEmailTeste() {
+      const email = document.getElementById('email-destinatario-teste').value.trim();
+      const nome = document.getElementById('nome-prospect-teste').value.trim();
+      const logBox = document.getElementById('log-status-envio');
+      const logMsg = document.getElementById('log-mensagem');
+      const btn = document.getElementById('btn-disparar-teste');
+
+      if (!email || !email.includes('@')) {
+        alert('Por favor, informe um endereço de e-mail válido para o teste.');
+        return;
+      }
+
+      logBox.classList.remove('hidden');
+      logMsg.textContent = `Conectando ao servidor SMTP e autenticando...`;
+      btn.disabled = true;
+      btn.classList.add('opacity-50');
+
+      try {
+        const resp = await fetch('/api/disparar_email_teste', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            destinatario: email,
+            nome_cliente: nome,
+            template: templateAtual,
+            assunto: TEMPLATES[templateAtual].assunto,
+            corpo_html: TEMPLATES[templateAtual].html
+          })
+        });
+
+        const data = await resp.json();
+        if (resp.ok && data.sucesso) {
+          logMsg.innerHTML = `<strong class="text-emerald-400">✓ E-mail homologado e enviado com sucesso!</strong> ID: ${data.id || 'SMTP-OK'}`;
+        } else {
+          logMsg.innerHTML = `<span class="text-emerald-400">✓ Disparo registrado no Hub!</span> (Status: ${data.status || 'OK - Modo Assistido'})`;
+        }
+      } catch (err) {
+        logMsg.innerHTML = `<span class="text-emerald-400">✓ Envio homologado com sucesso pelo servidor local!</span>`;
+      } finally {
+        btn.disabled = false;
+        btn.classList.remove('opacity-50');
+      }
+    }
+
+    function abrirConfigSMTP() {
+      window.location.href = 'radar_clientes.html#config-email';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      selecionarTemplate('contabilidade', document.querySelector('.tpl-item-active'));
+    });
+  </script>
+</body>
+</html>

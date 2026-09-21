@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador & Visualizador de Carrosséis Fiscais — TruData ERP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Outfit:wght@600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --navy: #0f172a;
+      --bg: #0b0f19;
+      --card-bg: #1e293b;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 2rem 1rem; }
+    
+    .container { max-width: 1200px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .header h1 { font-size: 1.8rem; font-weight: 800; }
+    .header a { color: #60a5fa; text-decoration: none; font-weight: 700; }
+
+    .selector-box { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .btn-carrossel { background: #1e293b; border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 0.75rem 1.25rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .btn-carrossel.active, .btn-carrossel:hover { background: var(--primary); border-color: var(--primary); }
+
+    .viewer-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    @media (max-width: 850px) { .viewer-layout { grid-template-columns: 1fr; } }
+
+    /* MOCKUP DO SLIDE INSTAGRAM (1080x1080) */
+    .slide-canvas {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-width: 500px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+      user-select: none;
+    }
+
+    .slide-top { display: flex; justify-content: space-between; align-items: center; }
+    .slide-logo { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 900; letter-spacing: 0.05em; color: #fff; }
+    .slide-logo span { color: #3b82f6; }
+    .slide-badge { background: rgba(37,99,235,0.25); border: 1px solid #3b82f6; color: #93c5fd; font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 9999px; font-weight: 700; }
+
+    .slide-content { margin: auto 0; }
+    .slide-tag { color: #f59e0b; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .slide-title { font-family: 'Outfit', sans-serif; font-size: 1.9rem; font-weight: 900; line-height: 1.2; margin-bottom: 1rem; color: #fff; }
+    .slide-text { font-size: 1.05rem; color: #cbd5e1; line-height: 1.5; }
+
+    .slide-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; font-size: 0.8rem; color: var(--text-muted); }
+    .slide-pagination { font-weight: 700; color: #60a5fa; }
+
+    /* PAINEL DE CONTROLE LATERAL */
+    .controls-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem; padding: 1.75rem; }
+    .nav-slides { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+    .btn-nav { flex: 1; background: #334155; border: none; color: #fff; padding: 0.75rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; }
+    .btn-nav:hover { background: #475569; }
+
+    .copy-box { background: #0f172a; border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 1rem; color: #94a3b8; font-size: 0.9rem; line-height: 1.5; max-height: 250px; overflow-y: auto; white-space: pre-wrap; margin-bottom: 1rem; }
+    .btn-copy { width: 100%; background: #2563eb; color: #fff; border: none; padding: 0.9rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; }
+    .btn-copy:hover { background: #1d4ed8; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>📚 Gerador & Visualizador de Carrosséis Fiscais</h1>
+        <p style="color:var(--text-muted); font-size:0.95rem;">Roteiros didáticos prontos para publicação no Instagram e LinkedIn</p>
+      </div>
+      <a href="index.html">← Voltar ao Painel Geral</a>
+    </div>
+
+    <div class="selector-box" id="selector"></div>
+
+    <div class="viewer-layout">
+      <!-- SLIDE VISUAL -->
+      <div>
+        <div class="slide-canvas" id="slideCanvas">
+          <div class="slide-top">
+            <div class="slide-logo">TRU<span>DATA</span> ERP</div>
+            <div class="slide-badge" id="slideBadge">DICIONÁRIO FISCAL</div>
+          </div>
+          <div class="slide-content">
+            <div class="slide-tag" id="slideTag">SLIDE 1 / 5</div>
+            <div class="slide-title" id="slideTitle">Carregando...</div>
+            <div class="slide-text" id="slideText"></div>
+          </div>
+          <div class="slide-footer">
+            <span>Hansen Software · Sarandi - RS</span>
+            <span class="slide-pagination" id="slidePagina">1 / 5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTROLES -->
+      <div class="controls-card">
+        <h3 style="margin-bottom:1rem;">Navegação do Carrossel</h3>
+        <div class="nav-slides">
+          <button class="btn-nav" onclick="voltarSlide()">◀ Lâmina Anterior</button>
+          <button class="btn-nav" onclick="avancarSlide()" style="background:#2563eb;">Próxima Lâmina ▶</button>
+        </div>
+
+        <h4 style="margin-bottom:0.5rem; color:#cbd5e1;">Legenda Completa para Postagem:</h4>
+        <div class="copy-box" id="copyText"></div>
+        <button class="btn-copy" onclick="copiarLegenda()">📋 Copiar Legenda Completa</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CARROSSEIS = [
+      {
+        id: "difal",
+        tema: "1. DIFAL Descomplicado",
+        badge: "TRIBUTAÇÃO INTERESTADUAL",
+        slides: [
+          { tag: "Capa", title: "Você compra mercadoria de fora e toma susto na fatura?", text: "Entenda o DIFAL em 1 minuto e pare de rasgar margem de lucro no seu comércio." },
+          { tag: "O que é", title: "Diferencial de Alíquota (DIFAL)", text: "É a diferença entre a alíquota de ICMS do estado onde você comprou o produto e a alíquota interna aqui do Rio Grande do Sul." },
+          { tag: "O perigo", title: "Cuidado com o cadastro errado", text: "Se a parametrização do produto estiver inconsistente no ERP, você ou paga imposto em dobro, ou tem o caminhão parado na barreira da SEFAZ." },
+          { tag: "Como resolvemos", title: "Cálculo Automático no TruData", text: "Ao importar o XML do fornecedor, o TruData calcula o DIFAL exato e adiciona ao custo real da peça antes de você definir o preço de venda." },
+          { tag: "Ação", title: "Precifique com Lucro Real", text: "Quer blindar o seu faturamento fiscal? Converse com a equipe de especialistas da TruData em Sarandi/RS. Link na bio!" }
+        ],
+        legenda: `Você compra mercadoria de fornecedores de fora do Estado e fica perdido com os custos extras? 🛑📦\n\nO DIFAL (Diferencial de Alíquota de ICMS) é um dos impostos que mais confunde os comerciantes no Rio Grande do Sul.\n\nSe o seu ERP não calcula isso automaticamente na entrada da nota fiscal, sua margem de lucro simplesmente desaparece na hora do fechamento contábil.\n\nCom o TruData ERP, o cálculo é automático via importador de XML!\n\n👉 Toque no link da bio e fale com nosso time técnico em Sarandi/RS.\n\n#TruDataERP #DIFAL #SefazRS #ComercioGaucho #GestaoFiscal`
+      },
+      {
+        id: "cfop",
+        tema: "2. O Mistério do CFOP",
+        badge: "CLASSIFICAÇÃO FISCAL",
+        slides: [
+          { tag: "Capa", title: "5102, 5405, 6102... Sopa de letrinhas ou prejuízo?", text: "O código que diz para a SEFAZ exatamente o que a sua loja está vendendo." },
+          { tag: "Conceito", title: "O que é o CFOP?", text: "Código Fiscal de Operações e Prestações. Cada dígito define o tipo de operação: compra, revenda, bonificação ou devolução." },
+          { tag: "O erro comum", title: "Vender com Substituição Tributária errado", text: "Usar CFOP de tributação integral em produto que já teve ICMS retido na indústria faz você recolher imposto duas vezes!" },
+          { tag: "Solução TruData", title: "Amarração nos Bastidores", text: "O operador de caixa só passa o produto no leitor. O sistema aplica o CFOP correto automaticamente sem exigir esforço da equipe." },
+          { tag: "Ação", title: "Revise seus Cadastros", text: "Elimine o retrabalho e as multas fiscais com quem atua há mais de 25 anos no comércio do RS." }
+        ],
+        legenda: `CFOP 5102 ou 5405? Você sabia que usar o código errado pode fazer sua loja pagar ICMS em dobro? 🧾⚠️\n\nA parametrização correta por grupo de produtos poupa milhares de reais e horas de dor de cabeça com seu contador.\n\nNo TruData ERP, a inteligência fiscal fica nos bastidores para o caixa rodar rápido e sem falhas.\n\n#TruDataERP #CFOP #ContabilidadeRS #VarejoForte #SarandiRS`
+      },
+      {
+        id: "cest",
+        tema: "3. CEST & Substituição Tributária",
+        badge: "BLINDAGEM TRIBUTÁRIA",
+        slides: [
+          { tag: "Capa", title: "Pagando imposto que a fábrica já recolheu?", text: "Descubra o segredo do CEST que quase ninguém te explica no varejo." },
+          { tag: "O que é", title: "Código Especificador da ST", text: "O CEST identifica mercadorias sujeitas ao regime de Substituição Tributária do ICMS no Brasil." },
+          { tag: "A pegadinha", title: "CEST desvinculado do NCM", text: "Sem o código correto no cadastro do produto, o sistema emite cupom com cobrança integral indevida." },
+          { tag: "A proteção", title: "Auditoria de NCM x CEST", text: "O banco de dados do TruData possui regras auditadas que evitam recolhimentos duplicados na sua empresa." },
+          { tag: "Ação", title: "Proteja seu Fluxo de Caixa", text: "Fale com os consultores da Hansen Software em Sarandi/RS e descubra como simplificar sua gestão." }
+        ],
+        legenda: `Não deixe dinheiro na mesa pagando impostos que já foram recolhidos na origem! 💰🛡️\n\nO CEST é indispensável para produtos sujeitos a Substituição Tributária. Confira no carrossel como proteger sua loja!\n\n#TruDataERP #SubstituicaoTributaria #CEST #VarejoRS #HansenSoftware`
+      },
+      {
+        id: "nfce",
+        tema: "4. NFC-e vs NF-e",
+        badge: "DOCUMENTOS FISCAIS",
+        slides: [
+          { tag: "Capa", title: "Cupom Fiscal ou Nota Grande? Quando emitir?", text: "Entenda a diferença exata entre Modelo 65 e Modelo 55 para agilizar seu balcão." },
+          { tag: "NFC-e", title: "Modelo 65: O Cupom do Consumidor", text: "Ágil, direto, impresso em maquininha térmica para pessoas físicas em segundos." },
+          { tag: "NF-e", title: "Modelo 55: A Nota Fiscal Grande", text: "Obrigatória para frete interestadual, vendas entre empresas (PJ) ou faturamento consignado." },
+          { tag: "No TruData", title: "Conversão em 1 Clique", text: "Se o cliente comprou com cupom e pediu nota grande depois, o TruData converte sem precisar redigitar nada." },
+          { tag: "Ação", title: "Frente de Caixa Sem Fila", text: "Velocidade e flexibilidade para o seu comércio voar todos os dias." }
+        ],
+        legenda: `Você sabe quando emitir NFC-e ou NF-e grande? 🧾⏱️\n\nDescubra as regras básicas para nunca travar a fila do caixa nem cometer infrações com clientes jurídicos.\n\n#TruDataERP #NFCe #NFe #FrenteDeCaixa #PDV`
+      },
+      {
+        id: "ncm",
+        tema: "5. NCM e Saneamento de Cadastro",
+        badge: "CONFORMIDADE SEFAZ",
+        slides: [
+          { tag: "Capa", title: "Cadastrar produto como 'Geral' custa caro", text: "Por que a SEFAZ/RS rejeita cupons fiscais bem na hora do movimento da loja." },
+          { tag: "O RG do Produto", title: "O que é o NCM?", text: "Nomenclatura Comum do Mercosul. 8 dígitos que dizem exatamente qual é a matéria-prima e o imposto aplicável." },
+          { tag: "O risco de rejeição", title: "NCMs extintos ou genéricos", text: "A SEFAZ atualiza tabelas de NCM periodicamente. Notas com códigos antigos são barradas na hora." },
+          { tag: "Tranquilidade", title: "Importação Segura", text: "O TruData importa o cadastro pronto da nota do fabricante, mantendo seu estoque 100% auditado." },
+          { tag: "Ação", title: "Audite seus Cadastros", text: "Venha para um sistema que dá tranquilidade e suporte humano há 25 anos." }
+        ],
+        legenda: `Produto cadastrado sem NCM ou com código antigo é a causa número 1 de notas fiscais travadas no caixa! 🛑📦\n\nVeja como manter seus cadastros 100% alinhados com a SEFAZ do RS.\n\n#TruDataERP #NCM #CadastroLimpo #ComercioGaucho`
+      }
+    ];
+
+    let carrosselAtual = 0;
+    let slideAtual = 0;
+
+    function renderizarSeletores() {
+      const el = document.getElementById('selector');
+      el.innerHTML = '';
+      CARROSSEIS.forEach((c, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `btn-carrossel ${idx === carrosselAtual ? 'active' : ''}`;
+        btn.innerText = c.tema;
+        btn.onclick = () => { carrosselAtual = idx; slideAtual = 0; atualizarView(); };
+        el.appendChild(btn);
+      });
+    }
+
+    function atualizarView() {
+      renderizarSeletores();
+      const c = CARROSSEIS[carrosselAtual];
+      const s = c.slides[slideAtual];
+
+      document.getElementById('slideBadge').innerText = c.badge;
+      document.getElementById('slideTag').innerText = `${s.tag.toUpperCase()} · SLIDE ${slideAtual + 1} DE ${c.slides.length}`;
+      document.getElementById('slideTitle').innerText = s.title;
+      document.getElementById('slideText').innerText = s.text;
+      document.getElementById('slidePagina').innerText = `${slideAtual + 1} / ${c.slides.length}`;
+      document.getElementById('copyText').innerText = c.legenda;
+    }
+
+    function avancarSlide() {
+      if (slideAtual < CARROSSEIS[carrosselAtual].slides.length - 1) {
+        slideAtual++;
+        atualizarView();
+      }
+    }
+
+    function voltarSlide() {
+      if (slideAtual > 0) {
+        slideAtual--;
+        atualizarView();
+      }
+    }
+
+    function copiarLegenda() {
+      const text = CARROSSEIS[carrosselAtual].legenda;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ Legenda copiada para a área de transferência!');
+      });
+    }
+
+    atualizarView();
+  </script>
+</body>
+</html>

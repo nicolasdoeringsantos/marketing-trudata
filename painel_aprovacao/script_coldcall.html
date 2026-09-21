@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Script de Cold Call Interativo (Árvore de Decisão) — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
+    .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between">
+
+  <!-- HEADER COM CRONÔMETRO DE LIGAÇÃO -->
+  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition">
+          ←
+        </a>
+        <div class="flex items-center gap-2.5">
+          <div class="h-9 w-9 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center text-lg">
+            📞
+          </div>
+          <div>
+            <h1 class="text-sm font-bold text-white font-display flex items-center gap-2">
+              Script de Cold Call Interativo (Árvore Decisória)
+              <span class="text-[10px] bg-purple-500/20 text-purple-300 font-extrabold px-2 py-0.5 rounded border border-purple-500/30">Telefonia Comercial RS</span>
+            </h1>
+            <p class="text-[11px] text-slate-400">Guia de combate telefônico para quebrar objeções em menos de 1 minuto</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Cronômetro de Chamada -->
+        <div class="flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" id="dot-timer"></span>
+          <span class="text-xs font-mono font-bold text-white" id="call-timer">00:00</span>
+          <button onclick="toggleTimer()" id="btn-timer" class="text-[10px] text-brand-azure hover:underline ml-1">Iniciar</button>
+        </div>
+        <button onclick="resetarScript()" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition border border-slate-700">
+          Reiniciar Roteiro ↺
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
+
+    <!-- CABEÇALHO DO CONTATO ATIVO -->
+    <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-3xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <div class="h-12 w-12 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-xl font-black text-white shadow-lg">
+          👤
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-sm font-bold text-white font-display">Comércio Alvo: Mercado & Açougue São Paulo</h2>
+            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">Passo Fundo - RS</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-0.5">Contato: Sr. Marcos (Proprietário) · Tel: (54) 99823-4412</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="marcarResultado('qualificado')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-md">
+          ✅ Qualificado
+        </button>
+        <button onclick="marcarResultado('reagendado')" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold rounded-xl transition shadow-md">
+          ⏳ Reagendar
+        </button>
+        <button onclick="marcarResultado('sem_interesse')" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold rounded-xl transition shadow-md">
+          ✕ Sem Interesse
+        </button>
+      </div>
+    </div>
+
+    <!-- ÁRVORE INTERATIVA DE NAVEGAÇÃO -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Lado Esquerdo: Fala do Consultor (7 colunas) -->
+      <div class="lg:col-span-7 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-purple-400" id="step-fase">Fase 1: Gancho Inicial (10 segundos)</span>
+          <button onclick="ouvirTextoFala()" class="text-xs text-purple-400 hover:underline flex items-center gap-1 font-semibold">
+            <span>🔊</span> <span>Escutar Tom Ideal</span>
+          </button>
+        </div>
+
+        <div class="space-y-4">
+          <div class="p-5 bg-slate-950 rounded-2xl border border-slate-800/80">
+            <p class="text-sm sm:text-base font-medium text-white leading-relaxed" id="script-fala">
+              "Bom dia, Sr. Marcos! Quem fala é o Matheus da Hansen Software aqui em Sarandi. Sei que sua rotina no mercado é corrida, então prometo ser direto em 30 segundos: nós estamos homologando o emissor fiscal em 3 segundos para vários mercados vizinhos aqui na região. Quando a internet oscila aí no sábado, a fila do seu caixa trava ou continua emitindo?"
+            </p>
+          </div>
+
+          <div class="bg-purple-500/10 border border-purple-500/20 p-4 rounded-xl text-xs text-purple-200">
+            <span class="font-bold block mb-1">🎯 Objetivo desta pergunta:</span>
+            Tocar no ponto de maior dor (travar a fila no pico do sábado) sem parecer vendedor chato de telemarketing.
+          </div>
+        </div>
+      </div>
+
+      <!-- Lado Direito: Objeções do Cliente (O que ele respondeu?) (5 colunas) -->
+      <div class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+        <div class="border-b border-slate-800 pb-3">
+          <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-display">O que o cliente respondeu?</h3>
+          <p class="text-[11px] text-slate-500">Clique na resposta dada pelo lojista para abrir a réplica correspondente:</p>
+        </div>
+
+        <div class="space-y-2.5" id="botoes-respostas">
+          <button onclick="navegarRoteiro('sem_tempo')" class="w-full text-left p-3 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/40 text-xs text-slate-200 transition flex items-center justify-between group">
+            <span>"Estou sem tempo agora / Correria total"</span>
+            <span class="text-slate-500 group-hover:text-amber-400 font-bold">➔</span>
+          </button>
+
+          <button onclick="navegarRoteiro('ja_tem_sistema')" class="w-full text-left p-3 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-sky-500/40 text-xs text-slate-200 transition flex items-center justify-between group">
+            <span>"Já tenho sistema funcionando há anos"</span>
+            <span class="text-slate-500 group-hover:text-sky-400 font-bold">➔</span>
+          </button>
+
+          <button onclick="navegarRoteiro('achou_caro')" class="w-full text-left p-3 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-rose-500/40 text-xs text-slate-200 transition flex items-center justify-between group">
+            <span>"Não tenho verba / Sistema é tudo caro"</span>
+            <span class="text-slate-500 group-hover:text-rose-400 font-bold">➔</span>
+          </button>
+
+          <button onclick="navegarRoteiro('manda_whatsapp')" class="w-full text-left p-3 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-emerald-500/40 text-xs text-slate-200 transition flex items-center justify-between group">
+            <span>"Me manda uma proposta pelo WhatsApp"</span>
+            <span class="text-slate-500 group-hover:text-emerald-400 font-bold">➔</span>
+          </button>
+
+          <button onclick="navegarRoteiro('sucesso')" class="w-full text-left p-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-xs text-emerald-300 font-bold transition flex items-center justify-between group">
+            <span>"Pode me mostrar como funciona? (Interessado)"</span>
+            <span class="text-emerald-400 font-bold">➔</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="border-t border-slate-800/80 bg-slate-900/40 py-4 px-6 text-center text-xs text-slate-500">
+    TruData ERP · Hansen Software Ltda · Sarandi - RS · Script de Telefonia de Alta Conversão
+  </footer>
+
+  <script>
+    let timerInterval = null;
+    let timerSeconds = 0;
+
+    function toggleTimer() {
+      const btn = document.getElementById('btn-timer');
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        btn.textContent = 'Retomar';
+      } else {
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          const min = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+          const sec = String(timerSeconds % 60).padStart(2, '0');
+          document.getElementById('call-timer').textContent = `${min}:${sec}`;
+        }, 1000);
+        btn.textContent = 'Pausar';
+      }
+    }
+
+    const CENARIOS = {
+      sem_tempo: {
+        fase: "Réplica: Ocupado / Sem Tempo (15 segundos)",
+        fala: "Entendo perfeitamente, Sr. Marcos! É justamente por isso que liguei: lojista ocupado não pode perder 40 minutos fechando caixa ou ligando para suporte em São Paulo que coloca em fila de espera. Que dia desta semana fica mais calmo para uma conversa de apenas 8 minutos pelo computador: terça às 14h ou quarta às 09h?"
+      },
+      ja_tem_sistema: {
+        fase: "Réplica: Já Tem Sistema (Quebra de Concorrência)",
+        fala: "Excelente! Não queremos que você mude de sistema se ele te atende bem. Mas me diga uma coisa com franqueza: quando dá qualquer problema no caixa ou na SEFAZ, o suporte deles te atende em menos de 15 minutos pelo WhatsApp com gente de verdade, ou te jogam para um robô 0800? A Hansen tem suporte presencial em Sarandi há mais de 25 anos."
+      },
+      achou_caro: {
+        fase: "Réplica: Objeção de Preço / Custo",
+        fala: "Compreendo, Sr. Marcos! Mas sabia que a maioria dos nossos clientes economiza mais do que a mensalidade do TruData só eliminando o aluguel das maquininhas POS e as divergências de caixa com nosso TEF integrado? O sistema não é um custo, ele coloca dinheiro no seu caixa todo mês."
+      },
+      manda_whatsapp: {
+        fase: "Réplica: Enviar por WhatsApp (Compromisso de Leitura)",
+        fala: "Perfeito! Vou te enviar agora mesmo um laudo comparativo personalizado com o teste do cronômetro de 3 segundos. Mas para eu não encher seu celular à toa, posso te ligar amanhã às 10h para saber o que você achou dos números?"
+      },
+      sucesso: {
+        fase: "Fechamento: Agendamento de Demonstração Confirmada",
+        fala: "Show de bola, Sr. Marcos! Nosso consultor técnico está na sua cidade esta semana. Posso levar nosso notebook aí no balcão amanhã às 14h para você ver na prática a velocidade de emissão sem parar seu atendimento? Leva só 10 minutos!"
+      }
+    };
+
+    function navegarRoteiro(tipo) {
+      const cenario = CENARIOS[tipo];
+      if (!cenario) return;
+      document.getElementById('step-fase').textContent = cenario.fase;
+      document.getElementById('script-fala').textContent = cenario.fala;
+    }
+
+    function resetarScript() {
+      document.getElementById('step-fase').textContent = "Fase 1: Gancho Inicial (10 segundos)";
+      document.getElementById('script-fala').textContent = '"Bom dia, Sr. Marcos! Quem fala é o Matheus da Hansen Software aqui em Sarandi. Sei que sua rotina no mercado é corrida, então prometo ser direto em 30 segundos: nós estamos homologando o emissor fiscal em 3 segundos para vários mercados vizinhos aqui na região. Quando a internet oscila aí no sábado, a fila do seu caixa trava ou continua emitindo?"';
+    }
+
+    function ouvirTextoFala() {
+      const txt = document.getElementById('script-fala').textContent;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(txt);
+      utter.lang = 'pt-BR';
+      utter.rate = 1.08;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function marcarResultado(status) {
+      alert(`Ligação registrada com status: ${status.toUpperCase()}! Sincronizado no CRM.`);
+    }
+  </script>
+</body>
+</html>

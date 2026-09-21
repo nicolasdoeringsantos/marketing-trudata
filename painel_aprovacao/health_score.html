@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Score & Retenção de Clientes — TruData ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { azure: '#0070f3', dark: '#0b0f19', card: '#131b2e', emerald: '#10b981', rose: '#f43f5e' }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f1f5f9; }
+    .glass { background: rgba(19, 27, 46, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased p-4 sm:p-6 lg:p-8 flex flex-col">
+
+  <!-- TOPO DE NAVEGAÇÃO -->
+  <header class="max-w-6xl mx-auto w-full flex items-center justify-between gap-4 mb-6 flex-wrap">
+    <div class="flex items-center gap-3">
+      <div class="h-10 w-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xl border border-emerald-500/30">
+        🩺
+      </div>
+      <div>
+        <h1 class="text-xl font-black font-display text-white">Monitor de Health Score & Churn Zero</h1>
+        <p class="text-xs text-slate-400">Prevenção Proativa de Cancelamentos com o "Protocolo Visita do Café" no RS</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="index.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        ← Hub Central
+      </a>
+      <a href="crm.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+        💼 CRM Kanban
+      </a>
+      <span class="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2.5 py-1.5 rounded-lg border border-emerald-500/30">
+        Churn Rate Hansen: &lt; 0.6% ao mês
+      </span>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto w-full space-y-6 flex-1">
+
+    <!-- KPI CARDS DA BASE -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="glass rounded-2xl p-4 border border-slate-800">
+        <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Empresas Monitoradas</span>
+        <div class="text-2xl font-black text-white font-display">+300</div>
+        <span class="text-[11px] text-emerald-400 font-semibold">96.8% em Zona Segura</span>
+      </div>
+      <div class="glass rounded-2xl p-4 border border-slate-800">
+        <span class="text-[10px] uppercase font-bold text-emerald-400 block mb-1">🟢 Clientes Saudáveis</span>
+        <div class="text-2xl font-black text-emerald-400 font-display">291</div>
+        <span class="text-[11px] text-slate-400">Emissão diária regular</span>
+      </div>
+      <div class="glass rounded-2xl p-4 border border-slate-800">
+        <span class="text-[10px] uppercase font-bold text-amber-400 block mb-1">🟡 Zona de Atenção</span>
+        <div class="text-2xl font-black text-amber-400 font-display">7</div>
+        <span class="text-[11px] text-slate-400">Check-in de suporte agendado</span>
+      </div>
+      <div class="glass rounded-2xl p-4 border border-slate-800">
+        <span class="text-[10px] uppercase font-bold text-rose-400 block mb-1">🔴 Risco Crítico de Churn</span>
+        <div class="text-2xl font-black text-rose-400 font-display">2</div>
+        <span class="text-[11px] text-rose-400 font-bold">Acionar Visita do Café (24h)</span>
+      </div>
+    </div>
+
+    <!-- DIAGNÓSTICO INTERATIVO DE SAÚDE -->
+    <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 flex-wrap gap-2">
+        <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+          <span>🔬</span> Calculadora de Health Score de Lojista
+        </span>
+        <span class="text-xs text-slate-400">Métricas Ponderadas de Comportamento e Retenção</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Dias Sem Emitir NFC-e</label>
+          <select id="selEmissoes" onchange="calcularHealthScore()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
+            <option value="35">Hoje / Ontem (Emissão Diária Normal - 35 pts)</option>
+            <option value="20">2 a 4 dias sem emitir (Alerta - 20 pts)</option>
+            <option value="5">5 ou mais dias sem emissão (Crítico - 5 pts)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Chamados de Suporte (Últimos 14d)</label>
+          <select id="selChamados" onchange="calcularHealthScore()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
+            <option value="25">0 a 1 chamado (Tudo redondinho - 25 pts)</option>
+            <option value="15">2 a 3 chamados normais (Acompanhado - 15 pts)</option>
+            <option value="0">4+ chamados ou travamento recorrente (0 pts)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Situação Financeira</label>
+          <select id="selFinanceiro" onchange="calcularHealthScore()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
+            <option value="25">Mensalidade rigorosamente em dia (25 pts)</option>
+            <option value="15">Atraso pontual de 1 a 5 dias (15 pts)</option>
+            <option value="0">Inadimplência &gt; 10 dias (0 pts)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Versão do TruData ERP</label>
+          <select id="selVersao" onchange="calcularHealthScore()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
+            <option value="15">Última versão 2026 instalada (15 pts)</option>
+            <option value="5">Versão do ano passado defasada (5 pts)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- PAINEL RESULTADO DO SCORE -->
+      <div id="cardResultadoScore" class="p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between flex-wrap gap-4">
+        <div class="flex items-center gap-4">
+          <div id="badgeScoreNum" class="h-16 w-16 rounded-2xl flex items-center justify-center text-3xl font-black font-display">
+            95
+          </div>
+          <div>
+            <div id="txtScoreStatus" class="text-base font-black font-display uppercase tracking-wide">
+              Cliente Saudável (Promotor)
+            </div>
+            <p id="txtScoreDesc" class="text-xs text-slate-300 max-w-xl mt-0.5 leading-relaxed">
+              O cliente opera com fluidez, tem baixíssimo índice de chamados e pagamento em dia. Potencial candidato para case da série "Cliente em Destaque".
+            </p>
+          </div>
+        </div>
+
+        <div id="boxAcaoSugerida" class="flex items-center gap-2">
+          <a id="btnAcaoScore" href="#" target="_blank" class="px-4 py-2 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-lg">
+            ☕ Agendar Visita do Café
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LISTA DE ALERTA DE CLIENTES REAIS DA BASE -->
+    <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <span>📋</span> Matriz de Retenção & Acompanhamento de Campo
+          </h3>
+          <p class="text-xs text-slate-400">Clientes prioritários para visitas preventivas presenciais de Sarandi e cidades vizinhas.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="filtrarTabela('todos')" class="px-2.5 py-1 rounded bg-slate-800 text-xs text-slate-300 hover:bg-slate-700">Todos</button>
+          <button onclick="filtrarTabela('critico')" class="px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 text-xs font-bold hover:bg-rose-500/30">🔴 Críticos (2)</button>
+          <button onclick="filtrarTabela('atencao')" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs font-bold hover:bg-amber-500/30">🟡 Atenção (2)</button>
+          <button onclick="filtrarTabela('saudavel')" class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 text-xs font-bold hover:bg-emerald-500/30">🟢 Saudáveis</button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left">
+          <thead class="text-[10px] text-slate-400 uppercase bg-slate-900/80 border-b border-slate-800">
+            <tr>
+              <th class="p-3">Estabelecimento</th>
+              <th class="p-3">Cidade</th>
+              <th class="p-3">Última Emissão</th>
+              <th class="p-3">Chamados (14d)</th>
+              <th class="p-3">Health Score</th>
+              <th class="p-3 text-right">Ação Preventiva</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyClientes" class="divide-y divide-slate-800/60 text-slate-300">
+            <!-- LINHA 1: CRÍTICO -->
+            <tr class="row-cliente row-critico hover:bg-slate-900/40 transition">
+              <td class="p-3 font-bold text-white">Comercial de Bebidas do Vale</td>
+              <td class="p-3">Ronda Alta - RS (25km)</td>
+              <td class="p-3 text-rose-400 font-bold">Há 6 dias sem emitir</td>
+              <td class="p-3 text-rose-400 font-bold">4 chamados (Balança)</td>
+              <td class="p-3">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-rose-500/20 text-rose-400 border border-rose-500/30">
+                  🔴 35 pts (Crítico)
+                </span>
+              </td>
+              <td class="p-3 text-right">
+                <a href="https://wa.me/555433612650?text=Olá!%20Nosso%20consultor%20técnico%20está%20em%20Ronda%20Alta%20hoje%20e%20gostaria%20de%20passar%20aí%20na%20loja%20para%20tomar%20um%20café%20e%20revisar%20a%20balança%20sem%20custo.%20Podemos%20ir%20às%2014h?" target="_blank" class="px-3 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded font-bold text-[11px] inline-flex items-center gap-1 shadow-lg shadow-rose-600/30">
+                  ☕ Acionar Visita Café
+                </a>
+              </td>
+            </tr>
+
+            <!-- LINHA 2: CRÍTICO -->
+            <tr class="row-cliente row-critico hover:bg-slate-900/40 transition">
+              <td class="p-3 font-bold text-white">Mercado e Açougue São José</td>
+              <td class="p-3">Sarandi - RS (Local)</td>
+              <td class="p-3 text-rose-400 font-bold">Há 4 dias sem emitir</td>
+              <td class="p-3 text-amber-400">3 chamados (Troca de PC)</td>
+              <td class="p-3">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-rose-500/20 text-rose-400 border border-rose-500/30">
+                  🔴 45 pts (Crítico)
+                </span>
+              </td>
+              <td class="p-3 text-right">
+                <a href="https://wa.me/555433612650?text=Olá,%20tudo%20bem?%20Passando%20para%20combinar%20uma%20visita%20rápida%20da%20equipe%20Hansen%20aí%20no%20São%20José%20para%20deixar%20o%20computador%20100%%20redondo.%20Tudo%20certo?" target="_blank" class="px-3 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded font-bold text-[11px] inline-flex items-center gap-1 shadow-lg shadow-rose-600/30">
+                  ☕ Acionar Visita Café
+                </a>
+              </td>
+            </tr>
+
+            <!-- LINHA 3: ATENÇÃO -->
+            <tr class="row-cliente row-atencao hover:bg-slate-900/40 transition">
+              <td class="p-3 font-bold text-white">Ferragens & Materiais Progresso</td>
+              <td class="p-3">Constantina - RS (28km)</td>
+              <td class="p-3 text-slate-300">Hoje (Normal)</td>
+              <td class="p-3 text-amber-400">2 chamados (Dúvida NF-e)</td>
+              <td class="p-3">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                  🟡 65 pts (Atenção)
+                </span>
+              </td>
+              <td class="p-3 text-right">
+                <a href="https://wa.me/555433612650?text=Olá!%20Equipe%20TruData%20por%20aqui.%20Notamos%20as%20dúvidas%20fiscais%20desta%20semana%20e%20queríamos%20saber%20se%20ficou%20tudo%20100%%20esclarecido%20ou%20se%20precisam%20de%20um%20reforço%20remoto?" target="_blank" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded font-bold text-[11px] inline-flex items-center gap-1 border border-slate-700">
+                  💬 Check-in Suporte
+                </a>
+              </td>
+            </tr>
+
+            <!-- LINHA 4: ATENÇÃO -->
+            <tr class="row-cliente row-atencao hover:bg-slate-900/40 transition">
+              <td class="p-3 font-bold text-white">Auto Elétrica e Peças Sul</td>
+              <td class="p-3">Barra Funda - RS (14km)</td>
+              <td class="p-3 text-slate-300">Ontem (Normal)</td>
+              <td class="p-3 text-slate-400">0 chamados</td>
+              <td class="p-3">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                  🟡 70 pts (Atraso D+3)
+                </span>
+              </td>
+              <td class="p-3 text-right">
+                <a href="regua_cobranca.html" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-bold text-[11px] inline-flex items-center gap-1 border border-slate-700">
+                  📬 Enviar Régua Pix
+                </a>
+              </td>
+            </tr>
+
+            <!-- LINHA 5: SAUDÁVEL -->
+            <tr class="row-cliente row-saudavel hover:bg-slate-900/40 transition">
+              <td class="p-3 font-bold text-white">Supermercado Sarandi LTDA</td>
+              <td class="p-3">Sarandi - RS (Local)</td>
+              <td class="p-3 text-emerald-400 font-bold">Hoje (+450 cupons)</td>
+              <td class="p-3 text-emerald-400 font-bold">0 chamados</td>
+              <td class="p-3">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  🟢 100 pts (Promotor)
+                </span>
+              </td>
+              <td class="p-3 text-right">
+                <a href="cliente_destaque.html" class="px-3 py-1 bg-emerald-900/40 hover:bg-emerald-900 text-emerald-300 border border-emerald-700/50 rounded font-bold text-[11px] inline-flex items-center gap-1">
+                  🌟 Gerar Post Case
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function calcularHealthScore() {
+      const p1 = parseInt(document.getElementById('selEmissoes').value) || 0;
+      const p2 = parseInt(document.getElementById('selChamados').value) || 0;
+      const p3 = parseInt(document.getElementById('selFinanceiro').value) || 0;
+      const p4 = parseInt(document.getElementById('selVersao').value) || 0;
+
+      const score = p1 + p2 + p3 + p4;
+
+      const card = document.getElementById('cardResultadoScore');
+      const badgeNum = document.getElementById('badgeScoreNum');
+      const txtStatus = document.getElementById('txtScoreStatus');
+      const txtDesc = document.getElementById('txtScoreDesc');
+      const btnAcao = document.getElementById('btnAcaoScore');
+
+      badgeNum.innerText = score;
+
+      if (score >= 80) {
+        card.className = 'p-5 rounded-2xl border border-emerald-500/40 bg-emerald-950/20 transition-all duration-300 flex items-center justify-between flex-wrap gap-4';
+        badgeNum.className = 'h-16 w-16 rounded-2xl flex items-center justify-center text-3xl font-black font-display bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+        txtStatus.className = 'text-base font-black font-display uppercase tracking-wide text-emerald-400';
+        txtStatus.innerText = '🟢 Cliente Saudável (Promotor & Estável)';
+        txtDesc.innerText = 'O cliente opera com alta regularidade, sem chamados críticos de frente de caixa e financeiro rigorosamente em dia. Excelente momento para coletar depoimento para o Instagram.';
+        btnAcao.className = 'px-4 py-2 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 shadow-lg shadow-emerald-600/30';
+        btnAcao.innerText = '🌟 Gerar Post Case de Sucesso';
+        btnAcao.href = 'cliente_destaque.html';
+      } else if (score >= 50) {
+        card.className = 'p-5 rounded-2xl border border-amber-500/40 bg-amber-950/20 transition-all duration-300 flex items-center justify-between flex-wrap gap-4';
+        badgeNum.className = 'h-16 w-16 rounded-2xl flex items-center justify-center text-3xl font-black font-display bg-amber-500/20 text-amber-400 border border-amber-500/30';
+        txtStatus.className = 'text-base font-black font-display uppercase tracking-wide text-amber-400';
+        txtStatus.innerText = '🟡 Zona de Atenção (Sinal Amarelo)';
+        txtDesc.innerText = 'Detectada leve oscilação nas emissões ou pequenos atritos no suporte/pagamento. Sugerido contato preventivo via WhatsApp para sanar dúvidas operacionais antes que vire insatisfação.';
+        btnAcao.className = 'px-4 py-2 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 bg-amber-600 hover:bg-amber-500 shadow-lg shadow-amber-600/30';
+        btnAcao.innerText = '💬 Check-in Preventivo no WhatsApp';
+        btnAcao.href = 'https://wa.me/555433612650?text=Olá!%20Equipe%20TruData%20por%20aqui.%20Tudo%20certo%20com%20as%20operações%20na%20loja%20hoje?%20Estamos%20à%20disposição!';
+      } else {
+        card.className = 'p-5 rounded-2xl border border-rose-500/40 bg-rose-950/20 transition-all duration-300 flex items-center justify-between flex-wrap gap-4';
+        badgeNum.className = 'h-16 w-16 rounded-2xl flex items-center justify-center text-3xl font-black font-display bg-rose-500/20 text-rose-400 border border-rose-500/30';
+        txtStatus.className = 'text-base font-black font-display uppercase tracking-wide text-rose-400';
+        txtStatus.innerText = '🔴 Risco Crítico de Cancelamento (Acionar Visita do Café)';
+        txtDesc.innerText = 'Alerta máximo: queda drástica de emissões ou chamados repetidos sem resolução definitiva. Deslocamento presencial do consultor de Sarandi em até 24h para visita técnica de cortesia e alinhamento pessoal.';
+        btnAcao.className = 'px-4 py-2 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 bg-rose-600 hover:bg-rose-500 shadow-lg shadow-rose-600/30 animate-pulse';
+        btnAcao.innerText = '☕ Agendar Visita do Café (24h)';
+        btnAcao.href = 'https://wa.me/555433612650?text=Olá,%20tudo%20bem?%20Gostaria%20de%20agendar%20uma%20visita%20presencial%20do%20nosso%20consultor%20aí%20na%20loja%20hoje%20ou%20amanhã%20para%20tomar%20um%20café%20e%20ajustar%20todos%20os%20detalhes%20pessoalmente.';
+      }
+    }
+
+    function filtrarTabela(filtro) {
+      const rows = document.querySelectorAll('.row-cliente');
+      rows.forEach(r => {
+        if (filtro === 'todos') {
+          r.style.display = '';
+        } else if (filtro === 'critico') {
+          r.style.display = r.classList.contains('row-critico') ? '' : 'none';
+        } else if (filtro === 'atencao') {
+          r.style.display = r.classList.contains('row-atencao') ? '' : 'none';
+        } else if (filtro === 'saudavel') {
+          r.style.display = r.classList.contains('row-saudavel') ? '' : 'none';
+        }
+      });
+    }
+
+    calcularHealthScore();
+  </script>
+</body>
+</html>

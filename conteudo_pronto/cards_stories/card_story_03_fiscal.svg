@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+  <defs>
+    <!-- Gradiente Fundo Azul-Petróleo Escuro Elegante -->
+    <radialGradient id="bg-grad-03" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#0f2b3c"/>
+      <stop offset="55%" stop-color="#091b26"/>
+      <stop offset="100%" stop-color="#06121a"/>
+    </radialGradient>
+    <filter id="subtle-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Fundo Sólido Corporativo com Gradiente Sutil -->
+  <rect width="1080" height="1920" fill="url(#bg-grad-03)"/>
+
+  <!-- Guia Sutil de Categoria no Topo Seguro (y=280) -->
+  <g transform="translate(540, 290)">
+    <rect x="-140" y="-18" width="280" height="36" rx="18" fill="rgba(52, 211, 153, 0.08)" stroke="rgba(52, 211, 153, 0.25)" stroke-width="1.5"/>
+    <text x="0" y="6" font-family="'Inter', -apple-system, sans-serif" font-size="14" font-weight="700" fill="#34d399" text-anchor="middle" letter-spacing="2">FISCAL & TRIBUTÁRIO • 03</text>
+  </g>
+
+  <!-- Ícone Principal Flat/Linear Minimalista (Terço Superior, y=560) -->
+  <g transform="translate(540, 560)">
+    
+            <!-- Documento Fiscal com Wi-Fi Desconectado e Seta de Sync -->
+            <rect x="-90" y="-110" width="180" height="230" rx="16" stroke="#ffffff" stroke-width="6" fill="none"/>
+            <!-- Linhas do cupom -->
+            <line x1="-55" y1="-60" x2="55" y2="-60" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+            <line x1="-55" y1="-25" x2="15" y2="-25" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+            <!-- Símbolo Wi-Fi interrompido -->
+            <path d="M 50,60 Q 95,20 140,60" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M 65,78 Q 95,50 125,78" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <circle cx="95" cy="100" r="6" fill="#ffffff"/>
+            <!-- Linha de corte/interrupção -->
+            <line x1="45" y1="110" x2="145" y2="30" stroke="#f43f5e" stroke-width="5" stroke-linecap="round"/>
+            <!-- Seta de Sincronização Futura em Verde Menta -->
+            <path d="M -40,30 Q -60,65 -30,85 Q 0,105 20,80" stroke="#34d399" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <polyline points="10,65 24,80 12,95" stroke="#34d399" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        
+  </g>
+
+  <!-- Título Moderno Geométrico Bold em Branco (y=960) -->
+  <text x="540" y="960" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="58" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="-0.5">
+    Contingência Offline
+  </text>
+
+  <!-- Subtítulo Regular Menor em Branco com 80% Opacidade (y=1040) -->
+  <text x="540" y="1040" font-family="'Inter', -apple-system, sans-serif" font-size="32" font-weight="400" fill="rgba(255, 255, 255, 0.82)" text-anchor="middle">
+    Continue emitindo NFC-e mesmo sem internet.
+  </text>
+
+  <!-- Linha Decorativa Minimalista -->
+  <line x1="490" y1="1120" x2="590" y2="1120" stroke="#34d399" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Rodapé Padronizado com Logo Trudata (Margem de Segurança Base y=1720) -->
+  <g transform="translate(540, 1720)">
+    <text x="-8" y="0" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="32" font-weight="800" fill="rgba(255, 255, 255, 0.75)" text-anchor="middle" letter-spacing="6">TRUDATA</text>
+    <circle cx="82" cy="-8" r="4.5" fill="#34d399"/>
+    <text x="0" y="32" font-family="'Inter', -apple-system, sans-serif" font-size="13" font-weight="600" fill="rgba(255, 255, 255, 0.4)" text-anchor="middle" letter-spacing="3">SISTEMAS DE GESTÃO</text>
+  </g>
+</svg>
