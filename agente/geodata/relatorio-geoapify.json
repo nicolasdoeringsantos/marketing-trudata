@@ -1,0 +1,5959 @@
+{
+  "consultas_em_cache": 661,
+  "resumo": {
+    "pendente": 482,
+    "localizado": 179
+  },
+  "criterio": "Prédio, confiança >= 0.95 nos quatro níveis; rua, número, município e UF compatíveis; sem CEP específico divergente ou conflito conhecido.",
+  "itens": [
+    {
+      "id": "CONT-150KM-055",
+      "nome": "Planno Cont Contabilidade",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-054",
+      "nome": "Tecnisul Assessoria Contábil",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-053",
+      "nome": "Percont Planejamento Estratégico e Contábil",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-052",
+      "nome": "Escritório Contábil Tonial",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Barao Do Rio Branco 11, Casca - Sul, 99260-000, Brasil",
+      "lat": -28.562773,
+      "lon": -51.974563
+    },
+    {
+      "id": "CONT-150KM-051",
+      "nome": "Global Contabilidade",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Salzano Da Cunha 594, Sananduva - Sul, 99840-000, Brasil",
+      "lat": -27.949909,
+      "lon": -51.808628
+    },
+    {
+      "id": "CONT-150KM-050",
+      "nome": "Segmento Contábil",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-049",
+      "nome": "Escritório Contabilidade Alécio Stella",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Doutor Pedro Roso 378, Nonoai - Sul, 99600-000, Brasil",
+      "lat": -27.363965,
+      "lon": -52.773977
+    },
+    {
+      "id": "CONT-150KM-048",
+      "nome": "Ricardo Ribeiro Assessoria (Exatus)",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Doutor Borges de Medeiros 25, Cruz Alta - RS, 98005-110, Brasil",
+      "lat": -28.6447118,
+      "lon": -53.6004156
+    },
+    {
+      "id": "CONT-150KM-046",
+      "nome": "Rocha Contabilidade e Assessoria",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Mauricio Cardoso 632, Soledade - Sul, 99300-000, Brasil",
+      "lat": -28.832639,
+      "lon": -52.510738
+    },
+    {
+      "id": "CONT-150KM-045",
+      "nome": "Escritório Borges Contábil & Fiscal",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-044",
+      "nome": "Escritório Artmann",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Diniz Dias 903, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.62908,
+      "lon": -53.090178
+    },
+    {
+      "id": "CONT-150KM-043",
+      "nome": "Escritório Contábil Zeni",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Tiradentes 1034, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.630348,
+      "lon": -53.091337
+    },
+    {
+      "id": "CONT-150KM-042",
+      "nome": "Master Escritório Contábil",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Barao Do Rio Branco 1008, Panambi - Sul, 98280-000, Brasil",
+      "lat": -28.290363,
+      "lon": -53.499134
+    },
+    {
+      "id": "CONT-150KM-041",
+      "nome": "Escritório Contábil Panambi",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-040",
+      "nome": "Fink Contabilidade",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-037",
+      "nome": "Escritório Contábil Erechim",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Italia 174, Erechim - Sul, 99700-014, Brasil",
+      "lat": -27.634057,
+      "lon": -52.276391
+    },
+    {
+      "id": "CONT-150KM-036",
+      "nome": "Contecas Contabilidade e Assessoria",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-035",
+      "nome": "Agiliza Soluções Contábeis",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-034",
+      "nome": "Escritório de Contabilidade Oleksinski",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-033",
+      "nome": "ST Serviços Contábeis (Contec)",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Fernando Sturm 75, Não-Me-Toque - Sul, 99470-000, Brasil",
+      "lat": -28.459647,
+      "lon": -52.817088
+    },
+    {
+      "id": "CONT-150KM-032",
+      "nome": "Zanini Soluções Contábeis",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Sete De Setembro 890, Tapejara - Sul, 99950-000, Brasil",
+      "lat": -28.071347,
+      "lon": -52.01449
+    },
+    {
+      "id": "CONT-150KM-031",
+      "nome": "Canali Contabilidade",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua do Comércio 1371, Centro, Tapejara - RS, 99950-000, Brasil",
+      "lat": -28.0677707,
+      "lon": -52.0115556
+    },
+    {
+      "id": "CONT-150KM-030",
+      "nome": "Pasa Contabilidade",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-029",
+      "nome": "Bervian e Zohler Contabilidade (Parceria)",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Alfredo Winck 563, Chapada - Sul, 99530-000, Brasil",
+      "lat": -28.060729,
+      "lon": -53.068087
+    },
+    {
+      "id": "CONT-150KM-028",
+      "nome": "Planacon Contabilidade",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-026",
+      "nome": "Silva Contabilidade",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Belo Horizonte 33, Ronda Alta - Sul, 99670-000, Brasil",
+      "lat": -27.774756,
+      "lon": -52.81045
+    },
+    {
+      "id": "CONT-150KM-025",
+      "nome": "Escritório de Contabilidade JB (Contec)",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Presidente Vargas 722, Ronda Alta - Sul, 99670-000, Brasil",
+      "lat": -27.783628,
+      "lon": -52.808155
+    },
+    {
+      "id": "CONT-150KM-024",
+      "nome": "Queiroz e Souza Assessoria Contábil",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-023",
+      "nome": "Ribeiro Contabilidade (Missões Contabilidade)",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-022",
+      "nome": "Escritório Contábil Scalcon & Maia",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-021",
+      "nome": "Exatas Contabilidade e Assessoria Empresarial",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-020",
+      "nome": "Rigo Assessoria Empresarial",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Julio Borella 1362, Marau - Sul, 99150-000, Brasil",
+      "lat": -28.45349,
+      "lon": -52.199242
+    },
+    {
+      "id": "CONT-150KM-019",
+      "nome": "Via Contabilidade",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-018",
+      "nome": "ContaPro Contabilidade",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-017",
+      "nome": "Ferres Serviços Contábeis",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-016",
+      "nome": "Salvador Contabilistas Associados",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-015",
+      "nome": "Escritório Assecon Contábil",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Independencia 808, Passo Fundo - Sul, 99010-041, Brasil",
+      "lat": -28.263897,
+      "lon": -52.407588
+    },
+    {
+      "id": "CONT-150KM-014",
+      "nome": "In Company Soluções Contábeis",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-013",
+      "nome": "Contasa Contabilidade e Assessoria",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Presidente Vargas 389, Passo Fundo - Sul, 99070-000, Brasil",
+      "lat": -28.266102,
+      "lon": -52.39769
+    },
+    {
+      "id": "CONT-150KM-012",
+      "nome": "Prisma Gestão Contábil",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Patria 635, Carazinho - Sul, 99500-000, Brasil",
+      "lat": -28.283631,
+      "lon": -52.793734
+    },
+    {
+      "id": "CONT-150KM-011",
+      "nome": "Addizionare Contabilidade",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-010",
+      "nome": "Conttaflex Serviços de Contabilidade",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-009",
+      "nome": "Tibola Contabilidade",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-008",
+      "nome": "Escritório Momberger & Hoffmann",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-007",
+      "nome": "Giehl Serviços Contábeis",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-006",
+      "nome": "Adcon Auditoria e Contabilidade",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-005",
+      "nome": "Almeida Serviços Contábeis",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-004",
+      "nome": "Escritório Contábil Apolo",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-003",
+      "nome": "Escritório Contábil Visão",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-002",
+      "nome": "Delmir Ganassini Assessoria Contábil",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Bortolo De Marco 1383, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.939224,
+      "lon": -52.921806
+    },
+    {
+      "id": "CONT-150KM-001",
+      "nome": "Escritório Contábil Tesser",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Arminio Da Silva 1671, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.942683,
+      "lon": -52.921511
+    },
+    {
+      "id": "CLI-REAL-0001",
+      "nome": "Auto Service",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0002",
+      "nome": "B & G Construtora",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Bortolo De Marco 1452, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.939862,
+      "lon": -52.921467
+    },
+    {
+      "id": "CLI-REAL-0003",
+      "nome": "Bela Arte Construtora E Incorporadora",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0004",
+      "nome": "Biomix - Sanidade Animal",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0005",
+      "nome": "Cd Sarandi E Clinrad",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0006",
+      "nome": "Centro De Formacao De Condutores America -",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Angelo Rech 902, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.940163,
+      "lon": -52.925655
+    },
+    {
+      "id": "CLI-REAL-0007",
+      "nome": "Colombo, Kreling, Dal Pupo &",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Expedicionario 111, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.946773,
+      "lon": -52.92805
+    },
+    {
+      "id": "CLI-REAL-0008",
+      "nome": "Construtora Scopel",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0009",
+      "nome": "Cor Do Ceu Industria Do Vestuario",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Ivo Sprandel 1244, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.944222,
+      "lon": -52.929157
+    },
+    {
+      "id": "CLI-REAL-0010",
+      "nome": "Dp Tecnologia Da Informacao",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Angelo Rech 1064, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.939519,
+      "lon": -52.924527
+    },
+    {
+      "id": "CLI-REAL-0011",
+      "nome": "Escritorio Contabil Precisao",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Expedicionario 1255, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.939752,
+      "lon": -52.920735
+    },
+    {
+      "id": "CLI-REAL-0012",
+      "nome": "Farmacia N.S. Fatima",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0013",
+      "nome": "Finger Ambientes Personalizados",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0014",
+      "nome": "Frecar Comercio De Veiculos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0015",
+      "nome": "Gre Group",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0016",
+      "nome": "Hipermercado Wagner",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0017",
+      "nome": "Industria De Embalagens Esperanca",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Mostardeiro 366, Mont'serrat, Porto Alegre - Sul, 90430-000, Brasil",
+      "lat": -30.028612,
+      "lon": -51.203778
+    },
+    {
+      "id": "CLI-REAL-0018",
+      "nome": "Inframaq Equipamentos E Locacoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Paulo Dall Oglio 1031, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.942198,
+      "lon": -52.921327
+    },
+    {
+      "id": "CLI-REAL-0019",
+      "nome": "Metalurgica Perin",
+      "status": "pendente",
+      "motivo": "Há divergência conhecida de endereço ou filial; confirme onde a empresa funciona.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0020",
+      "nome": "Mobile Engenharia E Construcoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Tiradentes 655, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.942035,
+      "lon": -52.92632
+    },
+    {
+      "id": "CLI-REAL-0021",
+      "nome": "Pastificio Rosin",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0022",
+      "nome": "Perin Veiculos",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0023",
+      "nome": "Posto Papagaio",
+      "status": "pendente",
+      "motivo": "Há divergência conhecida de endereço ou filial; confirme onde a empresa funciona.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0024",
+      "nome": "Rembecker - Estruturas Metalicas",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0025",
+      "nome": "Reterra",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0026",
+      "nome": "Salwipa Auto Pecas",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0027",
+      "nome": "Samaqsul",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0028",
+      "nome": "Sarandi Bureaux",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Expedicionario 1055, Sarandi - Sul, 99560-000, Brasil",
+      "lat": -27.941117,
+      "lon": -52.921978
+    },
+    {
+      "id": "CLI-REAL-0029",
+      "nome": "Signomar Bebidas",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0030",
+      "nome": "Taura Auto Pecas",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0031",
+      "nome": "Vileli Industria De Malhas",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0032",
+      "nome": "Acougue Merten",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Jacob Wagner Sobrinho 1203, Nova Boa Vista - Sul, 99580-000, Brasil",
+      "lat": -27.994213,
+      "lon": -52.980251
+    },
+    {
+      "id": "CLI-REAL-0033",
+      "nome": "Auto Eletrica Segredo",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0034",
+      "nome": "Boa Vista Planejados",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0035",
+      "nome": "C & C Engenharia",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Felipe Werlang 113, Nova Boa Vista - Sul, 99580-000, Brasil",
+      "lat": -27.98927,
+      "lon": -52.979277
+    },
+    {
+      "id": "CLI-REAL-0036",
+      "nome": "Cachacaria Strohhut",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0037",
+      "nome": "Donna Supermercados",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0038",
+      "nome": "Eletronica Milani",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Joao Pedro Werlang 671, Nova Boa Vista - Sul, 99580-000, Brasil",
+      "lat": -27.990469,
+      "lon": -52.979142
+    },
+    {
+      "id": "CLI-REAL-0039",
+      "nome": "Lacticinio Boavistense",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0040",
+      "nome": "Madeireira Eckert",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Carlos Romeno Eckert 125, Nova Boa Vista - Sul, 99580-000, Brasil",
+      "lat": -27.983129,
+      "lon": -52.978072
+    },
+    {
+      "id": "CLI-REAL-0041",
+      "nome": "Madereira Ott",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0042",
+      "nome": "Mini Padaria Canto Doce",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0043",
+      "nome": "Noila Maria Artini",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0044",
+      "nome": "Weber Tur",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0045",
+      "nome": "Agrotec Colheita",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0046",
+      "nome": "Anderson Zandona - Transportes",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0047",
+      "nome": "Barrinox",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0048",
+      "nome": "Farcenter",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0049",
+      "nome": "Goias Auto Pecas",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0050",
+      "nome": "Gp Veiculos",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0051",
+      "nome": "Jz Terra",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0052",
+      "nome": "Maqbras",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0053",
+      "nome": "Mohn Shelly Pousada Bar",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0054",
+      "nome": "Neco Moveis",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0055",
+      "nome": "Sd Moveis",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0056",
+      "nome": "Sucos Tolotti",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0057",
+      "nome": "Tendencia Natural",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0058",
+      "nome": "Terrasul Terraplenagem E Construcao",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0059",
+      "nome": "Transportes Castoldi",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0060",
+      "nome": "Transprtes Marcotto Ltda",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0061",
+      "nome": "Carrocerias Signor",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0062",
+      "nome": "Distribuidora De Bebidas Gabi",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0063",
+      "nome": "Drogaria Formula Certa",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Sarandi 546, Rondinha - Sul, 99590-000, Brasil",
+      "lat": -27.830463,
+      "lon": -52.908565
+    },
+    {
+      "id": "CLI-REAL-0064",
+      "nome": "Gevania Moda Intima",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0065",
+      "nome": "Jz - S Transportes E Comercio",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0066",
+      "nome": "Loja Center Lar",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0067",
+      "nome": "Mecanica Agricola Della Pasqua",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Sete De Setembro 86, Rondinha - Sul, 99590-000, Brasil",
+      "lat": -27.829797,
+      "lon": -52.908154
+    },
+    {
+      "id": "CLI-REAL-0068",
+      "nome": "Mercado Mebal",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Nossa Senhora Do Rosario 251, Rondinha - Sul, 99590-000, Brasil",
+      "lat": -27.827887,
+      "lon": -52.908883
+    },
+    {
+      "id": "CLI-REAL-0069",
+      "nome": "Merlin Transportes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0070",
+      "nome": "Porto Bello Construtora E Engenharia",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0071",
+      "nome": "R D - Tatotur",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Julio Mailhos 494, Rondinha - Sul, 99590-000, Brasil",
+      "lat": -27.832975,
+      "lon": -52.905683
+    },
+    {
+      "id": "CLI-REAL-0072",
+      "nome": "Rafael Eduardo Lago",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0073",
+      "nome": "Restaurante Chapao Hotel Bharranco",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0074",
+      "nome": "Transportadora Sabia",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0075",
+      "nome": "Agropecuaria Bratzely",
+      "status": "pendente",
+      "motivo": "Nenhum endereço encontrado pela API.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0076",
+      "nome": "Agropecuaria Elisa",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0077",
+      "nome": "Anfelog Transportes E Logistica",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0078",
+      "nome": "Berwig Motors",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0079",
+      "nome": "Dalmiro Automoveis",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0080",
+      "nome": "Deomir Antonio Baruffi",
+      "status": "pendente",
+      "motivo": "Nenhum endereço encontrado pela API.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0081",
+      "nome": "Fornari E Lazzarotto",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0082",
+      "nome": "Frajana Transportes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Alfredo Winck 537, Chapada - Sul, 99530-000, Brasil",
+      "lat": -28.06082,
+      "lon": -53.068254
+    },
+    {
+      "id": "CLI-REAL-0083",
+      "nome": "Frigolara",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0084",
+      "nome": "Friolack",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0085",
+      "nome": "G7 Cerealista",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0086",
+      "nome": "Gauer Comercio De Bebidas",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Padre Antonio Busch 628, Chapada - Sul, 99535-000, Brasil",
+      "lat": -28.110851,
+      "lon": -53.067736
+    },
+    {
+      "id": "CLI-REAL-0087",
+      "nome": "Hofer Engenharia",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua 7 De Setembro 391, Chapada - Sul, 99530-000, Brasil",
+      "lat": -28.060045,
+      "lon": -53.065348
+    },
+    {
+      "id": "CLI-REAL-0088",
+      "nome": "Kerber Comercio De Material De Construcao",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0089",
+      "nome": "Lara Alimentos",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0090",
+      "nome": "Lisboauto Pecas E Transportes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0091",
+      "nome": "Lonestur",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0092",
+      "nome": "Loteamento Franke",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Da Republica 130, Chapada - Sul, 99530-000, Brasil",
+      "lat": -28.059268,
+      "lon": -53.067553
+    },
+    {
+      "id": "CLI-REAL-0093",
+      "nome": "Medim Automveis",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0094",
+      "nome": "Nogueira Comercio E Transportes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0095",
+      "nome": "Transportes Klein",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0096",
+      "nome": "Waldprojekt Reflorestamento",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Marechal Deodoro 446, Chapada - Sul, 99530-000, Brasil",
+      "lat": -28.060216,
+      "lon": -53.068968
+    },
+    {
+      "id": "CLI-REAL-0097",
+      "nome": "Agroronda",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0098",
+      "nome": "Beux Transportes",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0099",
+      "nome": "Dalu Livraria E Papelaria",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0100",
+      "nome": "Dec'S Industria Do Vestuario",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0101",
+      "nome": "Donaldo Paulo Dos Santos &",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Sete De Setembro 969, Ronda Alta - Sul, 99670-000, Brasil",
+      "lat": -27.781808,
+      "lon": -52.81028
+    },
+    {
+      "id": "CLI-REAL-0102",
+      "nome": "Ds Solucoes Digitais",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0103",
+      "nome": "Gildo Orlandi",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0104",
+      "nome": "Gr Som E Luz",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0105",
+      "nome": "Grupo Fc",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Ipora 46, Ronda Alta - Sul, 99670-000, Brasil",
+      "lat": -27.775802,
+      "lon": -52.810637
+    },
+    {
+      "id": "CONT-150KM-027",
+      "nome": "Escritório de Contabilidade Somar",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Amandio Araujo 793, Constantina - Sul, 99680-000, Brasil",
+      "lat": -27.733502,
+      "lon": -52.994445
+    },
+    {
+      "id": "CLI-REAL-0107",
+      "nome": "Jovitur Transporte E Turismo",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0108",
+      "nome": "Mecanica Boita",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0109",
+      "nome": "Mecanica E Tornearia Fontana",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0110",
+      "nome": "Mercado Sao Joao",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Presidente Vargas 1948, Ronda Alta - Sul, 99670-000, Brasil",
+      "lat": -27.773713,
+      "lon": -52.810273
+    },
+    {
+      "id": "CLI-REAL-0111",
+      "nome": "Oficina Mecanica Mesa Casa",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0112",
+      "nome": "Oficina Mecanica Sl",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Tiradentes 295, Ronda Alta - Sul, 99670-000, Brasil",
+      "lat": -27.780489,
+      "lon": -52.810614
+    },
+    {
+      "id": "CLI-REAL-0113",
+      "nome": "Posto Bedin",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Presidente Vargas 1463, Ronda Alta - Sul, 99670-000, Brasil",
+      "lat": -27.777547,
+      "lon": -52.809573
+    },
+    {
+      "id": "CLI-REAL-0114",
+      "nome": "Sentinela Eletronicos",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Sete De Setembro 457, Ronda Alta - Sul, 99670-000, Brasil",
+      "lat": -27.78253,
+      "lon": -52.805701
+    },
+    {
+      "id": "CLI-REAL-0115",
+      "nome": "Strada Colchoes & Acessorios",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Sete De Setembro 344, Ronda Alta - Sul, 99670-000, Brasil",
+      "lat": -27.78289,
+      "lon": -52.804325
+    },
+    {
+      "id": "CLI-REAL-0116",
+      "nome": "Supermercado Lavarda",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0117",
+      "nome": "Transportadora Rinaldi",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0118",
+      "nome": "03.685.582 Rosane Strack",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0119",
+      "nome": "Drogaria Aresi",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0120",
+      "nome": "Fabricio Krummel",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0121",
+      "nome": "Hidromineradora Valle Azul",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0122",
+      "nome": "Irmaos Erlo",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0123",
+      "nome": "Kuki Tur",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 568, Almirante Tamandaré do Sul - Sul, 99523-000, Brasil",
+      "lat": -28.111293,
+      "lon": -52.91323
+    },
+    {
+      "id": "CLI-REAL-0124",
+      "nome": "Laboratorio Sao Jose",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0125",
+      "nome": "Laticinio Deale",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0126",
+      "nome": "Nelson Rockenbach",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0127",
+      "nome": "Precisaoap Planejamento",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0128",
+      "nome": "Produza",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0129",
+      "nome": "Comax Construcao E Acabamentos",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Francisco Anziliero 64, Constantina - Sul, 99680-000, Brasil",
+      "lat": -27.731922,
+      "lon": -52.996481
+    },
+    {
+      "id": "CLI-REAL-0130",
+      "nome": "Concregial",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0131",
+      "nome": "Construir Construtora E Incorporadora",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0132",
+      "nome": "Escritorio De Contabilidade Somar",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Franklin Siliprandi 309, Constantina - Sul, 99680-000, Brasil",
+      "lat": -27.735175,
+      "lon": -52.995779
+    },
+    {
+      "id": "CLI-REAL-0133",
+      "nome": "Evandro Turismo",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Presidente Vargas 52, Constantina - Sul, 99680-000, Brasil",
+      "lat": -27.732476,
+      "lon": -53.001953
+    },
+    {
+      "id": "CLI-REAL-0134",
+      "nome": "Fabricio Giacomini",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Cantidio Rodrigues De Almeida 386, Constantina - Sul, 99680-000, Brasil",
+      "lat": -27.732429,
+      "lon": -52.995331
+    },
+    {
+      "id": "CLI-REAL-0135",
+      "nome": "Giacomini Pneus",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0136",
+      "nome": "Loteamento Belvedere",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0137",
+      "nome": "Mecanica Gheller",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0138",
+      "nome": "Personal Comunicacao Visual",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0139",
+      "nome": "Supermercado Durante",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0140",
+      "nome": "Tormaq",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0141",
+      "nome": "Transportes Anziliero",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Presidente Vargas 370, Constantina - Sul, 99680-000, Brasil",
+      "lat": -27.732044,
+      "lon": -52.998876
+    },
+    {
+      "id": "CLI-REAL-0142",
+      "nome": "Transportes Zanchet",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0143",
+      "nome": "Agropecuaria E Floricultura Placotnik",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0144",
+      "nome": "Auto Posto Dois Irmaos",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Julio De Mailhos 1538, Pontão - Sul, 99190-000, Brasil",
+      "lat": -28.059471,
+      "lon": -52.679345
+    },
+    {
+      "id": "CLI-REAL-0145",
+      "nome": "Auto Posto Pontao",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0146",
+      "nome": "Auto-Pecas E Mecanica Do Bino",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0147",
+      "nome": "Camping Zambiasi",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0148",
+      "nome": "Da Cruz Transporte Turistico",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Jose Antonio Lapido 74, Pontão - Sul, 99190-000, Brasil",
+      "lat": -28.061274,
+      "lon": -52.67644
+    },
+    {
+      "id": "CLI-REAL-0149",
+      "nome": "Loja Central",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Julio De Mailhos 1620, Pontão - Sul, 99190-000, Brasil",
+      "lat": -28.058623,
+      "lon": -52.679258
+    },
+    {
+      "id": "CLI-REAL-0150",
+      "nome": "Marcenaria Rs",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0151",
+      "nome": "Mercado Santos",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Jose Antonio Lapido 268, Pontão - Sul, 99190-000, Brasil",
+      "lat": -28.059899,
+      "lon": -52.677412
+    },
+    {
+      "id": "CLI-REAL-0152",
+      "nome": "Mini-Mercado Zete",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Julio De Mailhos 1411, Pontão - Sul, 99190-000, Brasil",
+      "lat": -28.060375,
+      "lon": -52.678114
+    },
+    {
+      "id": "CLI-REAL-0153",
+      "nome": "Serraria Sagriza",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0154",
+      "nome": "Antonio Dias Vinhos Finos",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0155",
+      "nome": "As Industria, Comercio E Servicos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0156",
+      "nome": "Conkremaxx Construtora",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0157",
+      "nome": "Demolicar - Saibro",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0158",
+      "nome": "Forte Implementos Agricolas",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0159",
+      "nome": "Imobil Moveis",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0160",
+      "nome": "Industria E Comercio De Artefatos De Cimento Tres Palmeiras",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0161",
+      "nome": "Injetec Plasticos Injetados",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0162",
+      "nome": "Lamonato Engenharia E Servicos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0163",
+      "nome": "Louscher",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0164",
+      "nome": "Mecanica E Refligeracao Blombach",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0165",
+      "nome": "Mercado Rigo",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0166",
+      "nome": "Milano Esquadrias",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0167",
+      "nome": "Posto Amigao",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0168",
+      "nome": "Rosicler De Oliveira Buffon",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0169",
+      "nome": "Supermercado Tradicao",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Das Palmeiras 1472, Três Palmeiras - Sul, 99675-000, Brasil",
+      "lat": -27.612723,
+      "lon": -52.846472
+    },
+    {
+      "id": "CLI-REAL-0170",
+      "nome": "Trasporte Echer",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0171",
+      "nome": "Cleci Bueno Fernandes",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0172",
+      "nome": "Farmacia Bem Estar",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0173",
+      "nome": "Mecanica Andrecar",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0174",
+      "nome": "V.A Agropecuaria",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0175",
+      "nome": "Abastecedora Agnolin",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0176",
+      "nome": "Agropecuaria Alvorada Das Missoes Administracoes E Participacao",
+      "status": "pendente",
+      "motivo": "Nenhum endereço encontrado pela API.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0177",
+      "nome": "Agropecuaria Legalu Administracao E Participacoes",
+      "status": "pendente",
+      "motivo": "Nenhum endereço encontrado pela API.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0178",
+      "nome": "Agropecuaria Vo Tita Administracao E Participacoes",
+      "status": "pendente",
+      "motivo": "Nenhum endereço encontrado pela API.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0179",
+      "nome": "Artebase Construtora",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0180",
+      "nome": "C.P.P.",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0181",
+      "nome": "Comercial Palmeira",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0182",
+      "nome": "Franco Locacoes E Transportes",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0183",
+      "nome": "Gat Transportes",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0184",
+      "nome": "Gaviao Locacoes",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0185",
+      "nome": "Induspal",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0186",
+      "nome": "Ledur Engenharia E Construcoes",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0187",
+      "nome": "Mandeli Servicos Especializados",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0188",
+      "nome": "Maqgranja",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0189",
+      "nome": "Planasul",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0190",
+      "nome": "Simpex",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0191",
+      "nome": "Staudt Transportes",
+      "status": "pendente",
+      "motivo": "Município divergente.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0192",
+      "nome": "Wilson Park Hotel Ltda.",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0193",
+      "nome": "Andrioli Esportes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0194",
+      "nome": "Bbs Industrial",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0195",
+      "nome": "Carazinho Motos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0196",
+      "nome": "Carmetal",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0197",
+      "nome": "Cj Empreendimentos",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0198",
+      "nome": "Construtora Del Rijo S.A",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0199",
+      "nome": "D'Marche Cosmeticos",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0200",
+      "nome": "Empreendimentos Imobiliarios Rajab",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0201",
+      "nome": "Geral Materiais De Construcao",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0202",
+      "nome": "Jarre Empreendimentos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0203",
+      "nome": "Lopes E Oliveira Transportes",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0204",
+      "nome": "Marchetti Incorporadora",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Patria 287, Carazinho - Sul, 99500-000, Brasil",
+      "lat": -28.283761,
+      "lon": -52.789753
+    },
+    {
+      "id": "CLI-REAL-0205",
+      "nome": "Michael Chehade Administracao E Locacao De Imoveis",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0206",
+      "nome": "Plantiagro",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Flores Da Cunha 5527, Carazinho - Sul, 99500-000, Brasil",
+      "lat": -28.316766,
+      "lon": -52.793094
+    },
+    {
+      "id": "CLI-REAL-0207",
+      "nome": "Plumbus",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0208",
+      "nome": "Posto Cavol",
+      "status": "pendente",
+      "motivo": "Há divergência conhecida de endereço ou filial; confirme onde a empresa funciona.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0209",
+      "nome": "Prime Representacoes Comerciais E Transportes",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0210",
+      "nome": "Produza Comercio De Insumos Agricolas",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Travessa Aloisio Linck 67, Carazinho - Sul, 99500-000, Brasil",
+      "lat": -28.293109,
+      "lon": -52.800756
+    },
+    {
+      "id": "CLI-REAL-0212",
+      "nome": "Rhriss Patrimonial",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0213",
+      "nome": "Rotoplastyc Industrias De Rotomoldados",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0214",
+      "nome": "Safira Empreendimentos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0215",
+      "nome": "Semente Sol",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0216",
+      "nome": "Sementes Cerenna",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0217",
+      "nome": "Soder",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0218",
+      "nome": "01.329.199 Valdair De Oliveira",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0219",
+      "nome": "C.R.G. Modas",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0220",
+      "nome": "Ecomed - Ecografia E Medicina Geral",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0221",
+      "nome": "Posto Rozo",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0222",
+      "nome": "Supermercado Tesca",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Getulio Vargas 279, Jaboticaba - Sul, 98350-000, Brasil",
+      "lat": -27.632775,
+      "lon": -53.277361
+    },
+    {
+      "id": "CLI-REAL-0223",
+      "nome": "Transportes Castro",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Valentin Stefanello 137, Jaboticaba - Sul, 98350-000, Brasil",
+      "lat": -27.632385,
+      "lon": -53.279925
+    },
+    {
+      "id": "CLI-REAL-0224",
+      "nome": "Arts Papelaria E Servicos Contabeis",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0225",
+      "nome": "Atacado Boa Vista",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0226",
+      "nome": "Auto Eletrica Saggiorato",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0227",
+      "nome": "Auto Mecanica Vicari",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0228",
+      "nome": "Boa Vista Tratores",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0229",
+      "nome": "Construtora Rebelato",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0230",
+      "nome": "Evidencce Modas",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0231",
+      "nome": "Farmacia Sao Jose",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0232",
+      "nome": "Mercado Tche",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0233",
+      "nome": "Mil Ideias E Variedades",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0234",
+      "nome": "Panificadora Por Do Sol",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0235",
+      "nome": "S T Transportes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Altivo Jose Rodrigues 350, Boa Vista das Missões - Sul, 98335-000, Brasil",
+      "lat": -27.659641,
+      "lon": -53.315114
+    },
+    {
+      "id": "CLI-REAL-0236",
+      "nome": "Varanda Construcoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rodovia Br 386 2201, Boa Vista das Missões - Sul, 98335-000, Brasil",
+      "lat": -27.675234,
+      "lon": -53.312052
+    },
+    {
+      "id": "CLI-REAL-0237",
+      "nome": "Varanda Moveis E Materiais De Construcao",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida 20 De Marco 584, Boa Vista das Missões - Sul, 98335-000, Brasil",
+      "lat": -27.660805,
+      "lon": -53.315805
+    },
+    {
+      "id": "CLI-REAL-0238",
+      "nome": "04.589.920 Cassiano Jose Sebastiani",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0239",
+      "nome": "Agro-E Comercio De Produtos Agricolas",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0240",
+      "nome": "Cristiane Milani",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0241",
+      "nome": "Drehmer & Sertoli",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Jorge Muller 2000, Santo Antônio do Planalto - Sul, 99525-000, Brasil",
+      "lat": -28.391102,
+      "lon": -52.690874
+    },
+    {
+      "id": "CLI-REAL-0242",
+      "nome": "Gilmar A. Sertoli &",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Adolfo Schneider 620, Santo Antônio do Planalto - Sul, 99525-000, Brasil",
+      "lat": -28.398112,
+      "lon": -52.692542
+    },
+    {
+      "id": "CLI-REAL-0243",
+      "nome": "Laurindo Nickhorn",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0244",
+      "nome": "Mercado Renascer",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0245",
+      "nome": "Sandra Jarre Muller",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0246",
+      "nome": "Casa Sul",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 1340, Sertão nordestino, Sertão - Sul, 99170-000, Brasil",
+      "lat": -27.990627,
+      "lon": -52.256397
+    },
+    {
+      "id": "CLI-REAL-0247",
+      "nome": "Ceramica Sao Francisco",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0248",
+      "nome": "Cia Moveis",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0249",
+      "nome": "D A Engenharia E Empreendimentos",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Jose Bonifacio 435, Sertão nordestino, Sertão - Sul, 99170-000, Brasil",
+      "lat": -27.985046,
+      "lon": -52.25782
+    },
+    {
+      "id": "CLI-REAL-0250",
+      "nome": "Farmacia Central",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0251",
+      "nome": "Farmacia Do Aposentado",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 1394, Sertão nordestino, Sertão - Sul, 99170-000, Brasil",
+      "lat": -27.991152,
+      "lon": -52.256336
+    },
+    {
+      "id": "CLI-REAL-0252",
+      "nome": "Haramaq",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0253",
+      "nome": "Henrique Luiz Nardi",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 1135, Sertão nordestino, Sertão - Sul, 99170-000, Brasil",
+      "lat": -27.988635,
+      "lon": -52.25685
+    },
+    {
+      "id": "CLI-REAL-0254",
+      "nome": "J M Turismo",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Jose Bonifacio 667, Sertão nordestino, Sertão - Sul, 99170-000, Brasil",
+      "lat": -27.985287,
+      "lon": -52.26048
+    },
+    {
+      "id": "CLI-REAL-0255",
+      "nome": "Menetur",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0256",
+      "nome": "Transmoraes",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0257",
+      "nome": "Zoraide Bocalon &",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0258",
+      "nome": "A. Roso Investimentos Imobiliarios S.A",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida General Neto 740, Passo Fundo - Sul, 99010-022, Brasil",
+      "lat": -28.259603,
+      "lon": -52.409269
+    },
+    {
+      "id": "CLI-REAL-0259",
+      "nome": "Atitus Educacao",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0260",
+      "nome": "Be8",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0261",
+      "nome": "Be8 Exportacao E Importacao",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0262",
+      "nome": "Brair Imoveis",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0263",
+      "nome": "Brinvest Participacoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Coronel Chicuta 504, Passo Fundo - Sul, 99010-051, Brasil",
+      "lat": -28.263793,
+      "lon": -52.408093
+    },
+    {
+      "id": "CLI-REAL-0264",
+      "nome": "Centro Shopping",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0265",
+      "nome": "Compass.Uol",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0266",
+      "nome": "Construatacado Comercio De Materiais De Construcao",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0267",
+      "nome": "Cooperforte",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Silva Jardim 691, Passo Fundo - Sul, 99010-240, Brasil",
+      "lat": -28.259529,
+      "lon": -52.400932
+    },
+    {
+      "id": "CLI-REAL-0268",
+      "nome": "Erebango Participacoes",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0269",
+      "nome": "Iamb Empreendimentos",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0270",
+      "nome": "Indyana Comercio De Veiculos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0271",
+      "nome": "Maplan Administradora",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0272",
+      "nome": "Mw Projetos",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Padre Valentim 71, Passo Fundo - Sul, 99072-100, Brasil",
+      "lat": -28.266218,
+      "lon": -52.400675
+    },
+    {
+      "id": "CLI-REAL-0273",
+      "nome": "Razaoinfo Telecom.",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0274",
+      "nome": "Agencia De Viagens E Turismo Martins",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0275",
+      "nome": "Autopecas Sanini Aimi",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0276",
+      "nome": "C.B.S. Materiais De Construcao",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0277",
+      "nome": "Comercial Agroleite",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0278",
+      "nome": "Comercial Bortolan",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0279",
+      "nome": "Elosul",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0280",
+      "nome": "Farmacia Tres",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0281",
+      "nome": "Fepol",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0282",
+      "nome": "Ki-Presente",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0283",
+      "nome": "Laboratorio Bioexame",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0284",
+      "nome": "Multi Safra",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0285",
+      "nome": "Ndb Locadora De Veiculos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0286",
+      "nome": "S.H.E.",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0287",
+      "nome": "Signor Concretos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0288",
+      "nome": "Technorodas",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0289",
+      "nome": "Tor-Metais",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0290",
+      "nome": "Transportadora Do Inho",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0291",
+      "nome": "Agropecuaria Flc",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0292",
+      "nome": "Comercial Agricola Gutatry",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0293",
+      "nome": "Diana Lohmann Transportes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0294",
+      "nome": "Doce Alimentos",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Henrique Werminghoff 941, Erebango - Sul, 99920-000, Brasil",
+      "lat": -27.853794,
+      "lon": -52.306182
+    },
+    {
+      "id": "CLI-REAL-0295",
+      "nome": "Erlon Deniz Zanata Moagem De Trigo",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0296",
+      "nome": "Fernando Ricardo Zboralski",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0297",
+      "nome": "Lider Farma Erebango",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Ouro Verde 490, Erebango - Sul, 99920-000, Brasil",
+      "lat": -27.853784,
+      "lon": -52.302561
+    },
+    {
+      "id": "CLI-REAL-0298",
+      "nome": "Mello & Filhos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0299",
+      "nome": "Agricola Kuffel",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0300",
+      "nome": "Centro Mistico",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0301",
+      "nome": "Eco Serraria",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Sao Jose 12, Colorado - Sul, 99460-000, Brasil",
+      "lat": -28.52191,
+      "lon": -52.993945
+    },
+    {
+      "id": "CLI-REAL-0302",
+      "nome": "Loterica Colorado",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0303",
+      "nome": "Lupharma",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0304",
+      "nome": "Produfort",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0305",
+      "nome": "Supermercado Bom Preco",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0306",
+      "nome": "F S Sementes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0307",
+      "nome": "Folle Gas",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0308",
+      "nome": "M G Transportes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0309",
+      "nome": "Mazutti Moveis, Vidracaria E Materiais De Construcao",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Ilso Jose Webber 252, Coxilha - Sul, 99145-000, Brasil",
+      "lat": -28.126746,
+      "lon": -52.299466
+    },
+    {
+      "id": "CLI-REAL-0310",
+      "nome": "Posto Coxilha",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0311",
+      "nome": "Restaurante Recanto Dos Pinheiros",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0312",
+      "nome": "Rossato & Tonial",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0313",
+      "nome": "Sementes Webber",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0314",
+      "nome": "Beto Car",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0315",
+      "nome": "Cacil Materiais De Construcao",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0316",
+      "nome": "Canada ' Plast",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0317",
+      "nome": "Comercial Agricola Brandalise",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0318",
+      "nome": "Comercial Zaninpharma",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0319",
+      "nome": "Eletrontec",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0320",
+      "nome": "Imperial",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0321",
+      "nome": "Incasul Industria De Carrocerias Do Sul",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0322",
+      "nome": "Laboratorio Pro-Saude",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0323",
+      "nome": "Maicon Tonial &",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0324",
+      "nome": "Megafarma",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0325",
+      "nome": "Nelson Pneus",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0326",
+      "nome": "Polo Agricola",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0327",
+      "nome": "Prata Engenharia E Construcoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Luiz Antoniolli 393, Estação - Sul, 99930-000, Brasil",
+      "lat": -27.91415,
+      "lon": -52.255695
+    },
+    {
+      "id": "CLI-REAL-0328",
+      "nome": "Rio Grande On Line",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0329",
+      "nome": "Rose Calcados E Confeccoes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0330",
+      "nome": "Stereo Som",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0331",
+      "nome": "Sulpesca Macro Atacado",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0332",
+      "nome": "Zaninpharma",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0333",
+      "nome": "Caresia Terraplanagens",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0334",
+      "nome": "Centro De Formacao De Condutores Uniao",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0335",
+      "nome": "Incorporadora Santuario",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Borges De Medeiros 303, Nonoai - Sul, 99600-000, Brasil",
+      "lat": -27.36168,
+      "lon": -52.774975
+    },
+    {
+      "id": "CLI-REAL-0336",
+      "nome": "Jattas",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0337",
+      "nome": "Laticinios Kiformaggio",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0338",
+      "nome": "Loja Perotto",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0339",
+      "nome": "Proline Telecom",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Rocha Loires 664, Nonoai - Sul, 99600-000, Brasil",
+      "lat": -27.365735,
+      "lon": -52.772098
+    },
+    {
+      "id": "CLI-REAL-0340",
+      "nome": "Soma Agronegocios",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0341",
+      "nome": "Vasel- Comercio E Transporte",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0342",
+      "nome": "A. Cervinski & F. R. Thome",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Irmao Gabriel Leao 326, Getúlio Vargas - Sul, 99900-000, Brasil",
+      "lat": -27.887439,
+      "lon": -52.225091
+    },
+    {
+      "id": "CLI-REAL-0343",
+      "nome": "Administradora De Bens D Sul",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0344",
+      "nome": "Biagro",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0345",
+      "nome": "Castell Di Mantova",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0346",
+      "nome": "Clinica Atenas",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0347",
+      "nome": "Emprendimentos E Construcoes Lagoa",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0348",
+      "nome": "Getulio Vargas Empreendimentos Turisticos",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0349",
+      "nome": "Getulio Vargas Parque Hotel",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0350",
+      "nome": "Instituto De Desenvolvimento Educacional Do Alto Uruguai",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0351",
+      "nome": "Intelcav Tecnologias E Cartoes S.A",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Irmao Gabriel Leao 1102, Getúlio Vargas - Sul, 99900-000, Brasil",
+      "lat": -27.896034,
+      "lon": -52.215394
+    },
+    {
+      "id": "CLI-REAL-0352",
+      "nome": "K. N. Pre Moldados",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0353",
+      "nome": "Old Luz",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Jose Mazzoleni 27, Getúlio Vargas - Sul, 99900-000, Brasil",
+      "lat": -27.879319,
+      "lon": -52.226488
+    },
+    {
+      "id": "CLI-REAL-0354",
+      "nome": "Posto Mil",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Jacob Gremmelmaier 2275, Getúlio Vargas - Sul, 99900-000, Brasil",
+      "lat": -27.899035,
+      "lon": -52.238506
+    },
+    {
+      "id": "CLI-REAL-0355",
+      "nome": "Reas Solar Renovacao De Energias",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0356",
+      "nome": "Rigo Transportes E Logistica",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0357",
+      "nome": "Santa Teresinha Tur",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0358",
+      "nome": "Spr Solucoes Em Pisos Industriais E Revestimentos",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Ernesto Troglio 181, Getúlio Vargas - Sul, 99900-000, Brasil",
+      "lat": -27.896147,
+      "lon": -52.215401
+    },
+    {
+      "id": "CLI-REAL-0359",
+      "nome": "Sulcam",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0360",
+      "nome": "Vanguard Factoring",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Borges De Medeiros 534, Getúlio Vargas - Sul, 99900-000, Brasil",
+      "lat": -27.886538,
+      "lon": -52.223729
+    },
+    {
+      "id": "CLI-REAL-0361",
+      "nome": "Weber Artefatos De Concreto",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Ernesto Troglio 327, Getúlio Vargas - Sul, 99900-000, Brasil",
+      "lat": -27.89832,
+      "lon": -52.217688
+    },
+    {
+      "id": "CLI-REAL-0362",
+      "nome": "Abastecedora Ferrari",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 457, Ametista do Sul - Sul, 98465-000, Brasil",
+      "lat": -27.361803,
+      "lon": -53.181682
+    },
+    {
+      "id": "CLI-REAL-0363",
+      "nome": "Agricenter",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0364",
+      "nome": "Ametista Tur Viagens E Turismo",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0365",
+      "nome": "Auto Posto G.S.",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0366",
+      "nome": "Biome Farmacia De Manipulacao E Drogaria",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0367",
+      "nome": "Bonfanti Telhas",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0368",
+      "nome": "Bonissoni Turismo",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0369",
+      "nome": "Br Caminhoes E Terraplanagens",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0370",
+      "nome": "Cassol Gemas & Minerais",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0371",
+      "nome": "Cb Transportes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0372",
+      "nome": "Cerealista Rice",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0373",
+      "nome": "Comercio Representacao E Salvados Seberi",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Jose Bonifacio 351, Seberi - Sul, 98380-000, Brasil",
+      "lat": -27.48162,
+      "lon": -53.402455
+    },
+    {
+      "id": "CLI-REAL-0374",
+      "nome": "Engezzi Engenharia",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida General Flores Da Cunha 874, Seberi - Sul, 98380-000, Brasil",
+      "lat": -27.482835,
+      "lon": -53.401063
+    },
+    {
+      "id": "CLI-REAL-0375",
+      "nome": "Erva Mate Realeza",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0376",
+      "nome": "F.F.F. Sul Empreendimentos",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0377",
+      "nome": "Hidreletrica Frederico Joao Cerutti",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0378",
+      "nome": "Industria De Erva-Mate Provincia",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0379",
+      "nome": "Izidoro Karpinski E",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Pinheiro Machado 238, Seberi - Sul, 98380-000, Brasil",
+      "lat": -27.481891,
+      "lon": -53.404634
+    },
+    {
+      "id": "CLI-REAL-0380",
+      "nome": "Jackson Ferreira Da Silva Em Recuperacao Judicial",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0382",
+      "nome": "Lampiao Terraplanagem",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0383",
+      "nome": "Loja Dos Esportes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0384",
+      "nome": "Meazza Pedras",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0385",
+      "nome": "Mercado Martinello",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Fortaleza 132, Seberi - Sul, 98380-000, Brasil",
+      "lat": -27.475173,
+      "lon": -53.401945
+    },
+    {
+      "id": "CLI-REAL-0386",
+      "nome": "Muniz Auto Center Seberi",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0387",
+      "nome": "Piscuilos Pedras",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0388",
+      "nome": "Planta Sul Insumos Agricolas",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0389",
+      "nome": "Posto Rota Sul",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0390",
+      "nome": "Posto Seberi",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0391",
+      "nome": "Seberitur",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Doutor Horacio 39, Seberi - Sul, 98380-000, Brasil",
+      "lat": -27.482921,
+      "lon": -53.405927
+    },
+    {
+      "id": "CLI-REAL-0392",
+      "nome": "Terraplenagem Spezia",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0393",
+      "nome": "Trans-Belo",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida General Flores Da Cunha 1157, Seberi - Sul, 98380-000, Brasil",
+      "lat": -27.48496,
+      "lon": -53.399745
+    },
+    {
+      "id": "CLI-REAL-0394",
+      "nome": "Transportadora Dalbosco",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0395",
+      "nome": "Tubiano Moveis E Materiais De Construcao",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0396",
+      "nome": "A.D.R. Cervi Lanches",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Aloisio Enck 78, Victor Graeff - Sul, 99350-000, Brasil",
+      "lat": -28.562111,
+      "lon": -52.745289
+    },
+    {
+      "id": "CLI-REAL-0397",
+      "nome": "Acquaviva",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0398",
+      "nome": "Agro Panissi",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Dom Pedro Ii 857, Planalto - Sul, 98470-000, Brasil",
+      "lat": -27.33043,
+      "lon": -53.057972
+    },
+    {
+      "id": "CLI-REAL-0399",
+      "nome": "All Telecomunicacoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Duque De Caxias 776, Planalto - Sul, 98470-000, Brasil",
+      "lat": -27.331053,
+      "lon": -53.05703
+    },
+    {
+      "id": "CLI-REAL-0400",
+      "nome": "Britagem E Engenharia Basso Mc",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Duque De Caxias 909, Planalto - Sul, 98470-000, Brasil",
+      "lat": -27.332285,
+      "lon": -53.057715
+    },
+    {
+      "id": "CLI-REAL-0401",
+      "nome": "Casa Das Flores",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0402",
+      "nome": "Casa Do Pescador - Peixaria Do Paulinho",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Presidente Vargas 579, Planalto - Sul, 98470-000, Brasil",
+      "lat": -27.328651,
+      "lon": -53.058658
+    },
+    {
+      "id": "CLI-REAL-0403",
+      "nome": "Chies Artefatos E Terraplanagem",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0404",
+      "nome": "Coinastur",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0405",
+      "nome": "Escritorio Escher",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0406",
+      "nome": "F.B. Transportes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0407",
+      "nome": "Fimapel",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0408",
+      "nome": "J B Transportes",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0409",
+      "nome": "Kazza Moveis E Esquadrias",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Cochinho 1104, Victor Graeff - Sul, 99350-000, Brasil",
+      "lat": -28.567882,
+      "lon": -52.746262
+    },
+    {
+      "id": "CLI-REAL-0410",
+      "nome": "Marcos Andre Gotardo E",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0411",
+      "nome": "Mercado Real.",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Duque De Caxias 850, Planalto - Sul, 98470-000, Brasil",
+      "lat": -27.331811,
+      "lon": -53.057146
+    },
+    {
+      "id": "CLI-REAL-0412",
+      "nome": "Moresco Terraplenagem",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0413",
+      "nome": "Moveis Mariotti",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0414",
+      "nome": "Mr Desinsetizacao",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0415",
+      "nome": "Vandal Dist. De Alimentos",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0416",
+      "nome": "Barella Auto Moto Pecas",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Elemar Eggers 350, Ernestina - Sul, 99140-000, Brasil",
+      "lat": -28.502289,
+      "lon": -52.568411
+    },
+    {
+      "id": "CLI-REAL-0417",
+      "nome": "Barella Tratores",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0418",
+      "nome": "Comercial Nick",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0419",
+      "nome": "Concrefer Industria De Estruturas Metalicas E Concreto",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0420",
+      "nome": "Diversoes Estrela Guia",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0421",
+      "nome": "Extintores Nacional",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0422",
+      "nome": "Kurz & Filhos",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0423",
+      "nome": "Lilah Clothes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Afonso Kaipper 82, Ernestina - Sul, 99140-000, Brasil",
+      "lat": -28.501007,
+      "lon": -52.566777
+    },
+    {
+      "id": "CLI-REAL-0424",
+      "nome": "Postos Luizinho",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0425",
+      "nome": "S.C.Mercado",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0426",
+      "nome": "Viveiro Rio Verde",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0427",
+      "nome": "Altair Domingos Barazetti &",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0428",
+      "nome": "Belasul Industria E Comercio De Moveis",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0429",
+      "nome": "Brastelha Industrial",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0430",
+      "nome": "Casa De Pedra Energia S.A",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Leo Neuls 113, Erechim - Sul, 99711-102, Brasil",
+      "lat": -27.644586,
+      "lon": -52.279206
+    },
+    {
+      "id": "CLI-REAL-0431",
+      "nome": "Cavaletti Empreendimentos Imobiliarios",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0432",
+      "nome": "Clinica Oftalmoplastica",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Sao Paulo 466, Erechim - Sul, 99700-302, Brasil",
+      "lat": -27.635187,
+      "lon": -52.268545
+    },
+    {
+      "id": "CLI-REAL-0433",
+      "nome": "Comil",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0434",
+      "nome": "De Bona Empreendimentos Imobiliarios E Participacoes Societarias",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Bento Goncalves 790, Erechim - Sul, 99700-536, Brasil",
+      "lat": -27.629322,
+      "lon": -52.285177
+    },
+    {
+      "id": "CLI-REAL-0435",
+      "nome": "Ema, Ema Silos, Ema Bus E Maxibus",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0436",
+      "nome": "Empreendimentos Imobiliarios Alexandre",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0437",
+      "nome": "Fermatec",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0438",
+      "nome": "Futura",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0439",
+      "nome": "Intecnial Participacoes S.A. - Em Recuperacao Judicial",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Alberto Parenti 1133, Erechim - Sul, 99706-404, Brasil",
+      "lat": -27.651036,
+      "lon": -52.244855
+    },
+    {
+      "id": "CLI-REAL-0440",
+      "nome": "Master Sonda Hipermercados",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0441",
+      "nome": "Santa Monica Locacoes Imobiliarias",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0442",
+      "nome": "Sementes Estrela Comercio Importacao E Exportacao",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Portugal 359, Erechim - Sul, 99700-030, Brasil",
+      "lat": -27.631171,
+      "lon": -52.279727
+    },
+    {
+      "id": "CLI-REAL-0443",
+      "nome": "Sonda - Empreendimentos E Participacoes",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0444",
+      "nome": "Sponchiado Participacoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Joaquim Brasil Cabral 299, Erechim - Sul, 99700-420, Brasil",
+      "lat": -27.629837,
+      "lon": -52.273249
+    },
+    {
+      "id": "CLI-REAL-0445",
+      "nome": "Transportes Transvidal S.A",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0446",
+      "nome": "Tzs-Administracao E Participacoes",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0447",
+      "nome": "A. O. Transportes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Presidente Vargas 61, Selbach - Sul, 99450-000, Brasil",
+      "lat": -28.630174,
+      "lon": -52.955119
+    },
+    {
+      "id": "CLI-REAL-0448",
+      "nome": "Esquadrias Abs",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0449",
+      "nome": "Indumavi Componentes E Pecas",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0450",
+      "nome": "Lics Super Agua",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0451",
+      "nome": "Mecanica Bottega",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Jacui 54, Selbach - Sul, 99450-000, Brasil",
+      "lat": -28.638311,
+      "lon": -52.952585
+    },
+    {
+      "id": "CLI-REAL-0452",
+      "nome": "Mega Turismo",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida 25 De Julho 707, Selbach - Sul, 99450-000, Brasil",
+      "lat": -28.631094,
+      "lon": -52.953433
+    },
+    {
+      "id": "CONT-150KM-039",
+      "nome": "Argenta Contabilidade e Consultoria",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Presidente Kennedy 977, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.356501,
+      "lon": -53.397051
+    },
+    {
+      "id": "CLI-REAL-0454",
+      "nome": "Super Moresco",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Coronel Selbach 729, Selbach - Sul, 99450-000, Brasil",
+      "lat": -28.627672,
+      "lon": -52.95202
+    },
+    {
+      "id": "CLI-REAL-0455",
+      "nome": "Tosagro Comercio De Cereais",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0456",
+      "nome": "Agropecuaria Eurico Fonseca De Araujo",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Getulio Vargas 1136, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.628855,
+      "lon": -53.092013
+    },
+    {
+      "id": "CLI-REAL-0457",
+      "nome": "Agropecuaria Lorentz De Araujo",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Getulio Vargas 1136, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.628855,
+      "lon": -53.092013
+    },
+    {
+      "id": "CLI-REAL-0458",
+      "nome": "Agrosoja Sant'Ana",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0459",
+      "nome": "Becker Implementos",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0460",
+      "nome": "Bme - Casa De Pedra",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 2530, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.636133,
+      "lon": -53.107829
+    },
+    {
+      "id": "CLI-REAL-0461",
+      "nome": "Bme Energia",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 2530, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.636133,
+      "lon": -53.107829
+    },
+    {
+      "id": "CLI-REAL-0462",
+      "nome": "Boca Do Monte Energia E Participacoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 2530, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.636133,
+      "lon": -53.107829
+    },
+    {
+      "id": "CLI-REAL-0463",
+      "nome": "Brita Ibiruba Industria E Comercio",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0464",
+      "nome": "Calumas Tur",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Maua 1653, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.636427,
+      "lon": -53.095473
+    },
+    {
+      "id": "CLI-REAL-0465",
+      "nome": "Cereais Werlang",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0466",
+      "nome": "Conplan Organizacao De Servicos",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0467",
+      "nome": "Conquista",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 2530, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.636133,
+      "lon": -53.107829
+    },
+    {
+      "id": "CLI-REAL-0468",
+      "nome": "Coprel Geracao E Desenvolvimento",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 2530, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.636133,
+      "lon": -53.107829
+    },
+    {
+      "id": "CLI-REAL-0469",
+      "nome": "Dutra & Nicolodi",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0470",
+      "nome": "Giru'S Turismo",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Maua 635, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.626848,
+      "lon": -53.095766
+    },
+    {
+      "id": "CLI-REAL-0471",
+      "nome": "Hospital Annes Dias",
+      "status": "pendente",
+      "motivo": "Há divergência conhecida de endereço ou filial; confirme onde a empresa funciona.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0472",
+      "nome": "Ibisul",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0473",
+      "nome": "Indutar",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0474",
+      "nome": "Ismadi Viagens E Turismo",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Getulio Vargas 1114, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.628858,
+      "lon": -53.091726
+    },
+    {
+      "id": "CLI-REAL-0475",
+      "nome": "Jale Transportes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0476",
+      "nome": "Joalheria E Optica Medeiros",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Serafim Fagundes 994, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.629984,
+      "lon": -53.092466
+    },
+    {
+      "id": "CLI-REAL-0477",
+      "nome": "Kaderli Motor",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0478",
+      "nome": "Napolita Calcados",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua General Osorio 740, Ibirubá - Sul, 98200-000, Brasil",
+      "lat": -28.629831,
+      "lon": -53.088199
+    },
+    {
+      "id": "CLI-REAL-0479",
+      "nome": "Pavi Transportes",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0480",
+      "nome": "Selma Materiais De Construcao",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0481",
+      "nome": "Serraria Pitangueira",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0482",
+      "nome": "Theo Transportes",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0483",
+      "nome": "Tipel",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0484",
+      "nome": "Transluda",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0485",
+      "nome": "Uniao Agrocomercial Em Recuperacao Judicial",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0486",
+      "nome": "Usifundi",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0487",
+      "nome": "Abatedouro De Frangos Piovesan",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0488",
+      "nome": "Alecarla Administradora De Imoveis",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Presidente Kennedy 1064, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.356318,
+      "lon": -53.397917
+    },
+    {
+      "id": "CLI-REAL-0489",
+      "nome": "Argenta Contabilidade E Consultoria",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Presidente Kennedy 977, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.356501,
+      "lon": -53.397051
+    },
+    {
+      "id": "CLI-REAL-0490",
+      "nome": "Bino Arte",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Tenente Portela 877, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.354243,
+      "lon": -53.398618
+    },
+    {
+      "id": "CLI-REAL-0491",
+      "nome": "Bk Logistica",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0492",
+      "nome": "Central Eletrica Caibi",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0493",
+      "nome": "Cereais Ruviaro",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0494",
+      "nome": "Cfc Barril",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Tenente Lira 197, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.360047,
+      "lon": -53.391214
+    },
+    {
+      "id": "CLI-REAL-0495",
+      "nome": "Freeway",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Monsenhor Vitor Batistella 695, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.355405,
+      "lon": -53.396151
+    },
+    {
+      "id": "CLI-REAL-0496",
+      "nome": "Kb Assessoria E Empreendimentos",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0497",
+      "nome": "Marcos Lima Construcoes E Incorporacoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Miguel Couto 242, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.357654,
+      "lon": -53.394467
+    },
+    {
+      "id": "CLI-REAL-0498",
+      "nome": "Meta Administradora",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Presidente Kennedy 977, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.356501,
+      "lon": -53.397051
+    },
+    {
+      "id": "CLI-REAL-0499",
+      "nome": "Probon Industria De Colchoes",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0500",
+      "nome": "Ravena",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Do Comercio 524, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.356124,
+      "lon": -53.395443
+    },
+    {
+      "id": "CLI-REAL-0501",
+      "nome": "Siltan Empreendimentos Imobiliarios E Participacoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Presidente Kennedy 909, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.357046,
+      "lon": -53.396589
+    },
+    {
+      "id": "CLI-REAL-0502",
+      "nome": "Supermercado Barril",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0503",
+      "nome": "Tcheturbo Internet Provider",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0504",
+      "nome": "Tecsol",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0505",
+      "nome": "Terras Barril",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Paulo Vi 270, Frederico Westphalen - Sul, 98400-000, Brasil",
+      "lat": -27.354937,
+      "lon": -53.403903
+    },
+    {
+      "id": "CLI-REAL-0506",
+      "nome": "Agrodireto",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Osvaldo Julio Werlang 1924, Espumoso - Sul, 99400-000, Brasil",
+      "lat": -28.735083,
+      "lon": -52.837405
+    },
+    {
+      "id": "CLI-REAL-0507",
+      "nome": "Capaz",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0508",
+      "nome": "Capaz",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0509",
+      "nome": "Comercio De Combustiveis Cotriel",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0510",
+      "nome": "Comercio E Beneficiamentos De Cereais Aliance",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0511",
+      "nome": "Cr-Espumoso Construtora E Incorporadora",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0512",
+      "nome": "Farmacia Do Ze",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Osvaldo Julio Werlang 1597, Espumoso - Sul, 99400-000, Brasil",
+      "lat": -28.731846,
+      "lon": -52.839282
+    },
+    {
+      "id": "CLI-REAL-0513",
+      "nome": "G & R - Gestao Imobiliaria",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Luiz Stefenon 44, Espumoso - Sul, 99400-000, Brasil",
+      "lat": -28.725133,
+      "lon": -52.842872
+    },
+    {
+      "id": "CLI-REAL-0514",
+      "nome": "Gelgas Solucoes Para Pecuaria",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0515",
+      "nome": "Jacobo Materiais De Construcao",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0516",
+      "nome": "Jair De O. Delfino &",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Franciosi 97, Espumoso - Sul, 99400-000, Brasil",
+      "lat": -28.729121,
+      "lon": -52.839069
+    },
+    {
+      "id": "CLI-REAL-0517",
+      "nome": "Marcello Stefenon",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0518",
+      "nome": "Marcielli Fontana & Cia Ltda",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0519",
+      "nome": "Napolita Calcados",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0520",
+      "nome": "Paulo C. Mayer &",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Presidente Dutra 70, Espumoso - Sul, 99400-000, Brasil",
+      "lat": -28.727846,
+      "lon": -52.848511
+    },
+    {
+      "id": "CLI-REAL-0521",
+      "nome": "Produtos Campesinos",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0522",
+      "nome": "Silgas",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0523",
+      "nome": "Sucatao Agricola Do Sul",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0524",
+      "nome": "Sudmerco Comercio E Industria De Otica",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Angelo Macalos 256, Espumoso - Sul, 99400-000, Brasil",
+      "lat": -28.725469,
+      "lon": -52.849156
+    },
+    {
+      "id": "CLI-REAL-0525",
+      "nome": "Tecwave Telecom",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Angelo Macalos 200, Espumoso - Sul, 99400-000, Brasil",
+      "lat": -28.725305,
+      "lon": -52.84984
+    },
+    {
+      "id": "CLI-REAL-0526",
+      "nome": "Transporte Turismo Espumoso Costa Tur",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Vasco Da Gama 621, Espumoso - Sul, 99400-000, Brasil",
+      "lat": -28.736011,
+      "lon": -52.840487
+    },
+    {
+      "id": "CLI-REAL-0527",
+      "nome": "Wagner Roberto Batista",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0528",
+      "nome": "Acao Administracao E Participacoes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0529",
+      "nome": "Agrodanieli Industria E Comercio",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Valdo Nunes Vieira 323, Tapejara - Sul, 99950-000, Brasil",
+      "lat": -28.072984,
+      "lon": -52.017132
+    },
+    {
+      "id": "CLI-REAL-0530",
+      "nome": "Ags Mecanica E Renovadora De Pneus",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0531",
+      "nome": "Agua Viva Pocos Artesianos",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida 7 De Setembro 200, Tapejara - Sul, 99950-000, Brasil",
+      "lat": -28.078065,
+      "lon": -52.022861
+    },
+    {
+      "id": "CLI-REAL-0532",
+      "nome": "Auto Center A.B.S.",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Angelo Dalzotto 349, Tapejara - Sul, 99950-000, Brasil",
+      "lat": -28.069848,
+      "lon": -52.011709
+    },
+    {
+      "id": "CLI-REAL-0533",
+      "nome": "Autolog - Locacao E Incorporacao",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Eurides Becker Reveilleau 129, Marau - Sul, 99150-000, Brasil",
+      "lat": -28.435665,
+      "lon": -52.212662
+    },
+    {
+      "id": "CLI-REAL-0534",
+      "nome": "Bernardes Dias Imoveis",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0535",
+      "nome": "Bimoveis Administradora",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0536",
+      "nome": "Bondless Negocios Imobiliarios",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Julio Borella 1362, Marau - Sul, 99150-000, Brasil",
+      "lat": -28.45349,
+      "lon": -52.199242
+    },
+    {
+      "id": "CLI-REAL-0537",
+      "nome": "Borilli Racing",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0538",
+      "nome": "Combi Participacoes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0539",
+      "nome": "Constante Participacoes",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0540",
+      "nome": "Cs Metalurgica",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0541",
+      "nome": "Gensur Brasil Agropecuaria",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Do Comercio 1660, Tapejara - Sul, 99950-000, Brasil",
+      "lat": -28.065888,
+      "lon": -52.009507
+    },
+    {
+      "id": "CLI-REAL-0542",
+      "nome": "Gsi Brasil Industria E Comercio De Equipamentos Agropecuarios",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0543",
+      "nome": "Incorporadora Attualita",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida 7 de Setembro 1000, Centro, Tapejara - RS, 99950-000, Brasil",
+      "lat": -28.0708162,
+      "lon": -52.0139614
+    },
+    {
+      "id": "CLI-REAL-0544",
+      "nome": "Industria De Laticinios Santa Tereza",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0545",
+      "nome": "Innovar Urbanizadora",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Padres Capuchinhos 158, Marau - Sul, 99150-000, Brasil",
+      "lat": -28.443443,
+      "lon": -52.202524
+    },
+    {
+      "id": "CLI-REAL-0546",
+      "nome": "Javali",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida 7 De Setembro 154, Tapejara - Sul, 99950-000, Brasil",
+      "lat": -28.075864,
+      "lon": -52.020009
+    },
+    {
+      "id": "CLI-REAL-0547",
+      "nome": "Loja Andrioli",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0548",
+      "nome": "Magnabosco S.A. - Administracao E Participacoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Julio Borella 762, Marau - Sul, 99150-000, Brasil",
+      "lat": -28.448278,
+      "lon": -52.199435
+    },
+    {
+      "id": "CLI-REAL-0549",
+      "nome": "Marangoni Metalurgica",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Idalino Possa 686, Marau - Sul, 99152-000, Brasil",
+      "lat": -28.41864,
+      "lon": -52.226678
+    },
+    {
+      "id": "CLI-REAL-0550",
+      "nome": "Net11 Tecnologia",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0551",
+      "nome": "Panizzon Construcoes E Incorporacoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Independencia 279, Tapejara - Sul, 99950-000, Brasil",
+      "lat": -28.071313,
+      "lon": -52.01189
+    },
+    {
+      "id": "CLI-REAL-0552",
+      "nome": "Papel Higienico Padrao",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0553",
+      "nome": "Parana Industrial",
+      "status": "pendente",
+      "motivo": "Rua divergente ou grafia que exige conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0554",
+      "nome": "Plasbil",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0555",
+      "nome": "Rdr Fuga Administracao E Participacoes",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0556",
+      "nome": "Reconquista",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Vitorio Tessaro 599, Marau - Sul, 99150-000, Brasil",
+      "lat": -28.4482,
+      "lon": -52.204738
+    },
+    {
+      "id": "CLI-REAL-0557",
+      "nome": "Roso Participacoes",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0558",
+      "nome": "Rota Agricola",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0559",
+      "nome": "Serra Azul Turismo",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONT-150KM-047",
+      "nome": "Atitudeh Contábil",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Venâncio Aires 444, Schettert, Cruz Alta - RS, 98005-096, Brasil",
+      "lat": -28.6349414,
+      "lon": -53.6064982
+    },
+    {
+      "id": "CLI-REAL-0561",
+      "nome": "Ss Administracao E Participacoes Ltda.",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Presidente Vargas 770, Marau - Sul, 99150-000, Brasil",
+      "lat": -28.448506,
+      "lon": -52.197793
+    },
+    {
+      "id": "CLI-REAL-0562",
+      "nome": "Sucata Marau",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0563",
+      "nome": "Sul Redes Informatica",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0564",
+      "nome": "Super Danieli",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Valdo Nunes Vieira 323, Tapejara - Sul, 99950-000, Brasil",
+      "lat": -28.072984,
+      "lon": -52.017132
+    },
+    {
+      "id": "CONT-150KM-038",
+      "nome": "Antoni Contabilidade",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Argentina 399, Erechim - Sul, 99700-026, Brasil",
+      "lat": -27.631962,
+      "lon": -52.279471
+    },
+    {
+      "id": "CLI-REAL-0566",
+      "nome": "Transportes Estrelao",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0567",
+      "nome": "Unnilodi",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0568",
+      "nome": "Valente Supermercado",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0569",
+      "nome": "Wz Participacoes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Do Comercio 1660, Tapejara - Sul, 99950-000, Brasil",
+      "lat": -28.065888,
+      "lon": -52.009507
+    },
+    {
+      "id": "CLI-REAL-0570",
+      "nome": "Agrosul",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0571",
+      "nome": "Auto Eletrica Circuito",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0572",
+      "nome": "Bertoncelo Transportes",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Getulio Vargas 220, Vila Maria - Sul, 99155-000, Brasil",
+      "lat": -28.532018,
+      "lon": -52.153588
+    },
+    {
+      "id": "CLI-REAL-0573",
+      "nome": "Cereais Mariense",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0574",
+      "nome": "Clebertur",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Getulio Vargas 301, Vila Maria - Sul, 99155-000, Brasil",
+      "lat": -28.533929,
+      "lon": -52.154565
+    },
+    {
+      "id": "CLI-REAL-0575",
+      "nome": "Concremar",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0576",
+      "nome": "Eco Verde Prestacao De Servicos De Coleta De Lixo",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0577",
+      "nome": "Errebe Industria E Comercio De Embalagens",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0578",
+      "nome": "Fuga Rendering - Vila Maria",
+      "status": "pendente",
+      "motivo": "Nenhum endereço encontrado pela API.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0579",
+      "nome": "Grafica Villa Maria",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Getulio Vargas 216, Vila Maria - Sul, 99155-000, Brasil",
+      "lat": -28.532053,
+      "lon": -52.153484
+    },
+    {
+      "id": "CLI-REAL-0580",
+      "nome": "Grupo Mpx",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0581",
+      "nome": "Juliano Viagens E Turismo",
+      "status": "pendente",
+      "motivo": "Nenhum endereço encontrado pela API.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0582",
+      "nome": "Maroto Transportes",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0583",
+      "nome": "Mecanica E.J.C. Diesel",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0584",
+      "nome": "Mpm Tratores",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0585",
+      "nome": "Organomineral Absoluto Ksp",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0586",
+      "nome": "Piran Incorporadora",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Rua Quero Quero 129, Vila Maria - Sul, 99155-000, Brasil",
+      "lat": -28.531106,
+      "lon": -52.150053
+    },
+    {
+      "id": "CLI-REAL-0587",
+      "nome": "Protege",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0588",
+      "nome": "Robustec Industria E Comercio",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0589",
+      "nome": "Tecnotri Industria De Plasticos S.A",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0590",
+      "nome": "Transportes Buffon",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0591",
+      "nome": "W.F. Fae Transportes",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0592",
+      "nome": "Acertplast Industria E Comercio De Embalagens Plasticas",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0593",
+      "nome": "Adriane Modas",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0594",
+      "nome": "Agropecuaria R. Filippi",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0595",
+      "nome": "Cepal",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0596",
+      "nome": "Clodomar Da Silva",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0597",
+      "nome": "Irmaos Zilli Intermediacao De Negocios",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 333, Camargo - Sul, 99165-000, Brasil",
+      "lat": -28.585338,
+      "lon": -52.200665
+    },
+    {
+      "id": "CLI-REAL-0598",
+      "nome": "Ll Mercado E Restaurante",
+      "status": "pendente",
+      "motivo": "Endereço sem número identificável; requer conferência.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CLI-REAL-0599",
+      "nome": "Pagnussat Contabilidade",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Brasil 856, Camargo - Sul, 99165-000, Brasil",
+      "lat": -28.586216,
+      "lon": -52.205589
+    },
+    {
+      "id": "CLI-REAL-0600",
+      "nome": "Upbio",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0001",
+      "nome": "Organização Contábil Sarandi",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0002",
+      "nome": "Solução Contabilidade & Assessoria Fiscal",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0003",
+      "nome": "Líder Assessoria Contábil e Tributária",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0004",
+      "nome": "Exata Contabilidade & Gestão Empresarial",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0005",
+      "nome": "Dinâmica Assessoria Contábil",
+      "status": "pendente",
+      "motivo": "CEP específico divergente; confira o cadastro.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0006",
+      "nome": "Central Contábil Carazinho",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0007",
+      "nome": "Delta Contabilidade e Consultoria",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0008",
+      "nome": "Marau Assessoria Contábil & Empresarial",
+      "status": "localizado",
+      "motivo": null,
+      "endereco_fonte": "Avenida Júlio Borella 890, Marau - Sul, 99150-000, Brasil",
+      "lat": -28.4493655,
+      "lon": -52.199367
+    },
+    {
+      "id": "CONTAB-0009",
+      "nome": "Alfa Contabilidade Regional",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0010",
+      "nome": "Prisma Escritório Contábil",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0011",
+      "nome": "Tapejara Assessoria Contábil",
+      "status": "pendente",
+      "motivo": "A resposta não identifica um prédio.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "CONTAB-0012",
+      "nome": "Ronda Contábil Escritório Fiscal",
+      "status": "pendente",
+      "motivo": "Confiança insuficiente na posição do prédio ou no endereço.",
+      "endereco_fonte": null,
+      "lat": null,
+      "lon": null
+    }
+  ]
+}

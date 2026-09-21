@@ -1,495 +1,85 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checklist Digital de Implantação 48h — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: { azure: '#0070f3', dark: '#0b0f19', card: '#131b2e', emerald: '#10b981', rose: '#f43f5e' }
-          },
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { background-color: #080c14; color: #f1f5f9; }
-    .glass { background: rgba(19, 27, 46, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    @media print {
-      body { background-color: #fff !important; color: #000 !important; }
-      .no-print { display: none !important; }
-      .print-only { display: block !important; }
-      .glass { background: #fff !important; border: 1px solid #ddd !important; box-shadow: none !important; }
-    }
-    .print-only { display: none; }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased p-4 sm:p-6 lg:p-8 flex flex-col">
-
-  <!-- TOPO DE NAVEGAÇÃO -->
-  <header class="max-w-5xl mx-auto w-full flex items-center justify-between gap-4 mb-6 no-print flex-wrap">
-    <div class="flex items-center gap-3">
-      <div class="h-10 w-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xl border border-blue-500/30">
-        🛠️
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Planejar implantação · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="implantacao">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
       </div>
-      <div>
-        <h1 class="text-xl font-black font-display text-white">Checklist de Implantação 48h & Termo de Homologação</h1>
-        <p class="text-xs text-slate-400">Roteiro de Campo para Técnicos de Sarandi e Região Norte/RS</p>
-      </div>
-    </div>
-    <div class="flex items-center gap-2">
-      <a href="index.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-        ← Hub Central
-      </a>
-      <a href="migracao-concorrentes" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-        🛡️ Migração Blindada
-      </a>
-      <button onclick="window.print()" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 transition flex items-center gap-1">
-        🖨️ Imprimir Termo A4
-      </button>
-    </div>
-  </header>
-
-  <!-- LAUDO CABEÇALHO PARA IMPRESSÃO -->
-  <div class="print-only mb-6 border-b pb-4 text-black max-w-5xl mx-auto w-full">
-    <div class="flex justify-between items-start">
-      <div>
-        <h1 class="text-2xl font-bold font-display">HANSEN SOFTWARE — TRUDATA ERP</h1>
-        <p class="text-xs text-gray-600">CNPJ: 02.483.991/0001-90 · Av. Expedicionário, Sarandi - RS · Tel: (54) 3361-2650</p>
-        <p class="text-xs font-semibold text-gray-800 mt-1">TERMO DE HOMOLOGAÇÃO E ENTREGA TÉCNICA DE SISTEMA</p>
-      </div>
-      <div class="text-right">
-        <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded font-bold border border-emerald-300">Certificado MPS.BR</span>
-        <p class="text-[10px] text-gray-500 mt-1" id="printDataHoje"></p>
-      </div>
-    </div>
-  </div>
-
-  <main class="max-w-5xl mx-auto w-full space-y-6 flex-1">
-
-    <!-- IDENTIFICAÇÃO DO CLIENTE & TÉCNICO -->
-    <div class="glass rounded-2xl p-5 border border-slate-800 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 flex-wrap gap-2">
-        <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-          <span>📋</span> Dados da Instalação & Estabelecimento
-        </span>
-        <div class="no-print">
-          <select id="selAlvo" onchange="carregarAlvo()" class="bg-slate-900 text-xs text-slate-200 border border-slate-700 rounded-lg px-2.5 py-1.5 focus:border-brand-azure outline-none">
-            <option value="">-- Carregar Alvo Piloto de Sarandi --</option>
-            <option value="Supermercado Sarandi LTDA|Sarandi|Supermercado|4|Mateus Hansen">Supermercado Sarandi LTDA (Sarandi - 4 PDVs)</option>
-            <option value="Casa das Tintas Sarandi|Sarandi|Varejo|2|Carlos Eduardo">Casa das Tintas Sarandi (Sarandi - 2 PDVs)</option>
-            <option value="Auto Peças Sarandiense|Sarandi|Autopeças|3|Rafael Silva">Auto Peças Sarandiense (Sarandi - 3 PDVs)</option>
-            <option value="Mercado Popular Constantina|Constantina|Supermercado|2|Valdir Zanin">Mercado Popular Constantina (Constantina - 2 PDVs)</option>
-            <option value="Ferragens do Vale|Ronda Alta|Construção|2|Pedro Albuquerque">Ferragens do Vale (Ronda Alta - 2 PDVs)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+    </header>
+    <main id="main">
+      <header class="tools-heading">
         <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Razão Social / Nome Fantasia</label>
-          <input type="text" id="inRazaoSocial" value="Supermercado Sarandi LTDA" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white font-bold outline-none">
+          <a href="ferramentas.html">Todas as ferramentas</a>
+          <h1 id="work-title">Planejar implantação</h1>
+          <p id="work-desc"></p>
         </div>
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Município - RS</label>
-          <input type="text" id="inCidade" value="Sarandi - RS" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
-        </div>
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Técnico Responsável Hansen</label>
-          <input type="text" id="inTecnico" value="Equipe Técnica Sarandi" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
-        </div>
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Qtd. de Checkouts (PDVs)</label>
-          <input type="number" id="inPDVs" value="4" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white font-bold outline-none">
-        </div>
-      </div>
-    </div>
-
-    <!-- BARRA DE PROGRESSO DINÂMICA -->
-    <div class="glass rounded-2xl p-5 border border-slate-800 space-y-2 no-print">
-      <div class="flex justify-between items-center text-xs">
-        <span class="font-bold text-slate-300">Progresso da Implantação Técnica:</span>
-        <span id="txtProgresso" class="font-mono font-black text-emerald-400 text-sm">0% Concluído (0 de 15 itens)</span>
-      </div>
-      <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-800">
-        <div id="barProgresso" class="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-500 rounded-full transition-all duration-300 w-0"></div>
-      </div>
-    </div>
-
-    <!-- ETAPAS DO CHECKLIST (15 ITENS EM 5 FASES) -->
-    <div class="space-y-4" id="containerEtapas">
-
-      <!-- FASE 1: DIAGNÓSTICO E BACKUP -->
-      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
-        <div class="flex items-center gap-2 border-b border-slate-800/80 pb-2">
-          <span class="h-6 w-6 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center">1</span>
-          <h2 class="text-sm font-bold text-white">Fase 1: Diagnóstico e Backup do Sistema Legado</h2>
-        </div>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Backup Integral do Banco de Dados Anterior</span>
-              <p class="text-[11px] text-slate-400">Cópia de segurança extraída em pendrive e nuvem com integridade testada antes de qualquer alteração.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Mapeamento de Tributação & Contabilidade</span>
-              <p class="text-[11px] text-slate-400">Validação com a contabilidade da loja sobre o regime tributário (Simples vs Presumido) e regras de ICMS-ST vigentes.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Certificado Digital A1 Instalado e Válido</span>
-              <p class="text-[11px] text-slate-400">Certificado A1 importado no servidor e testado na SEFAZ-RS com validade superior a 60 dias.</p>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <!-- FASE 2: IMPORTAÇÃO E SANEAMENTO DE DADOS -->
-      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
-        <div class="flex items-center gap-2 border-b border-slate-800/80 pb-2">
-          <span class="h-6 w-6 rounded-full bg-indigo-500/20 text-indigo-400 text-xs font-bold flex items-center justify-center">2</span>
-          <h2 class="text-sm font-bold text-white">Fase 2: Importação e Saneamento de Dados (48 Horas)</h2>
-        </div>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Carga de Produtos com NCMs Corrigidos</span>
-              <p class="text-[11px] text-slate-400">Todos os códigos de barras EAN-13, descrições, unidades e NCMs saneados contra erros na emissão de NFC-e.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Migração de Clientes, Fornecedores e Contas em Aberto</span>
-              <p class="text-[11px] text-slate-400">Histórico de fiados/crediário próprio, prazos de pagamento e dados cadastrais 100% conferidos.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Ajuste e Homologação de Estoque Inicial</span>
-              <p class="text-[11px] text-slate-400">Balanço conferido com margens de segurança para início da operação no primeiro dia.</p>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <!-- FASE 3: HARDWARE E PERIFÉRICOS -->
-      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
-        <div class="flex items-center gap-2 border-b border-slate-800/80 pb-2">
-          <span class="h-6 w-6 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center justify-center">3</span>
-          <h2 class="text-sm font-bold text-white">Fase 3: Configuração de Hardware e Periféricos Homologados</h2>
-        </div>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Impressoras Térmicas de Cupom (ESC/POS)</span>
-              <p class="text-[11px] text-slate-400">Guilhotina, velocidade e corte automático testados em todas as frentes de caixa (Epson, Elgin ou Bematech).</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Homologação de Balanças Toledo (MGV6) / Filizola</span>
-              <p class="text-[11px] text-slate-400">Comunicação serial de checkout e carga de tabelas de produtos pesáveis (açougue, padaria e hortifruti).</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Leitores de Código de Barras 2D / QR Code</span>
-              <p class="text-[11px] text-slate-400">Leitura instantânea em menos de 0.5s de produtos danificados e QR Code Pix dinâmico no monitor.</p>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <!-- FASE 4: TREINAMENTO E OPERAÇÃO -->
-      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
-        <div class="flex items-center gap-2 border-b border-slate-800/80 pb-2">
-          <span class="h-6 w-6 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center">4</span>
-          <h2 class="text-sm font-bold text-white">Fase 4: Capacitação da Equipe & Operadores de Caixa</h2>
-        </div>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Treinamento de Passagem Rápida no PDV (3.1s/item)</span>
-              <p class="text-[11px] text-slate-400">Operadores de caixa treinados para abertura, passagem, pesagem e fechamento sem atrito.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Simulação de Rotinas de Caixa (Sangria, Suprimento e Fechamento Cego)</span>
-              <p class="text-[11px] text-slate-400">Prevenção contra desvios com conferência cega no final do turno e sangria de valores altos.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Procedimento de Devolução & Cancelamento Legal</span>
-              <p class="text-[11px] text-slate-400">Treinamento sobre o cancelamento dentro da janela legal de 30 minutos estabelecida pela SEFAZ-RS.</p>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <!-- FASE 5: TESTE DE FOGO E CONTINGÊNCIA -->
-      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
-        <div class="flex items-center gap-2 border-b border-slate-800/80 pb-2">
-          <span class="h-6 w-6 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center justify-center">5</span>
-          <h2 class="text-sm font-bold text-white">Fase 5: Teste de Fogo (Queda de Internet & Emissão Real)</h2>
-        </div>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Simulação Real de Queda de Internet na Loja</span>
-              <p class="text-[11px] text-slate-400">Cabo de rede desconectado intencionalmente; emissão de NFC-e em contingência offline validada com sucesso.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Sincronização em Lote com a SEFAZ-RS</span>
-              <p class="text-[11px] text-slate-400">Reconexão do cabo e confirmação do envio automático dos cupons pendentes em segundo plano.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="atualizarProgresso()" class="chk-item mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-0 bg-slate-900">
-            <div>
-              <span class="font-bold text-slate-200">Emissão da 1ª Venda Real em Produção</span>
-              <p class="text-[11px] text-slate-400">Emissão da primeira NFC-e oficial com chave de acesso autorizada na SEFAZ e entrega ao lojista.</p>
-            </div>
-          </label>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- PAD DE ASSINATURA DIGITAL DO CLIENTE -->
-    <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 flex-wrap gap-2">
-        <div>
-          <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-            <span>✍️</span> Termo de Aceite & Assinatura Digital do Lojista
-          </h3>
-          <p class="text-xs text-slate-400">O lojista atesta que o sistema TruData ERP foi implantado e homologado em perfeito estado.</p>
-        </div>
-        <button type="button" onclick="limparAssinatura()" class="text-xs text-rose-400 hover:text-rose-300 font-bold no-print">
-          Limpar Assinatura
-        </button>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nome do Responsável / Lojista</label>
-          <input type="text" id="inNomeAssinante" value="Mateus Hansen" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold outline-none mb-3">
-          
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Cargo / Função</label>
-          <input type="text" id="inCargoAssinante" value="Proprietário / Diretor" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white outline-none mb-3">
-
-          <p class="text-[11px] text-slate-400 leading-relaxed">
-            Declaro para os devidos fins que a equipe técnica da <strong>Hansen Software</strong> concluiu a instalação e migração de dados do sistema TruData ERP, tendo sido ministrado o treinamento de frente de caixa e retaguarda com sucesso.
-          </p>
-        </div>
-
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Assine com o dedo no celular ou mouse:</label>
-          <div class="border-2 border-dashed border-slate-700 rounded-xl bg-slate-950/80 relative overflow-hidden">
-            <canvas id="cvAssinatura" width="450" height="150" class="w-full h-36 cursor-crosshair touch-none"></canvas>
-            <div id="txtPlaceholderAssinatura" class="absolute inset-0 flex items-center justify-center pointer-events-none text-slate-600 text-xs">
-              Assine aqui
-            </div>
+      </header>
+      <p class="work-notice" id="work-notice"></p>
+      <div class="workspace">
+        <form id="work-form" class="work-form">
+          <h2>Prepare os dados</h2>
+          <div class="input-grid" id="fields"></div>
+          <p id="work-error" class="work-error" role="alert" hidden></p>
+          <div class="actions">
+            <button class="btn primary" id="generate" type="submit">
+              Atualizar resumo</button
+            ><button class="btn" id="save-draft" type="button">
+              Salvar rascunho</button
+            ><button class="btn" id="load-draft" type="button">
+              Recuperar rascunho
+            </button>
           </div>
-        </div>
+          <p class="work-help">
+            Um rascunho por ferramenta neste navegador. Baixe o resumo para
+            guardar uma cópia.
+          </p>
+        </form>
+        <section class="work-output" aria-labelledby="output-title">
+          <h2 id="output-title">Seu resumo</h2>
+          <p class="placeholder" id="result-empty">
+            Preencha os dados e atualize o resumo para revisar o resultado.
+          </p>
+          <pre id="result" hidden></pre>
+          <div id="output-special"></div>
+          <div class="actions">
+            <button class="btn" id="copy-result" data-output disabled>
+              Copiar resumo</button
+            ><button class="btn" id="download-result" data-output disabled>
+              Baixar texto</button
+            ><button class="btn" id="print-result" data-output disabled>
+              Imprimir / PDF
+            </button>
+          </div>
+        </section>
       </div>
-    </div>
-
-    <!-- BOTÕES DE AÇÃO -->
-    <div class="flex items-center justify-between gap-4 p-4 rounded-xl bg-slate-900/60 border border-slate-800 no-print flex-wrap">
-      <div id="msgStatus" class="text-xs text-slate-400">
-        Pronto para concluir? Salve o registro digital ou imprima a via assinada.
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <button type="button" onclick="marcarTodos()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-bold transition">
-          ✓ Marcar Todos
-        </button>
-        <button type="button" onclick="salvarTermoNoServidor()" class="px-4 py-2 bg-brand-azure hover:bg-brand-hover text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-lg shadow-blue-500/20">
-          💾 Salvar Homologação
-        </button>
-        <button type="button" onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold transition">
-          🖨️ Imprimir Termo A4
-        </button>
-        <a id="btnWppTermo" href="#" target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-black transition flex items-center gap-2 shadow-lg shadow-emerald-600/30">
-          📲 Notificar no WhatsApp
-        </a>
-      </div>
-    </div>
-
-  </main>
-
-  <script>
-    // Inicialização do Canvas de Assinatura
-    const canvas = document.getElementById('cvAssinatura');
-    const ctx = canvas.getContext('2d');
-    let desenhando = false;
-    let assinado = false;
-
-    ctx.strokeStyle = '#38bdf8';
-    ctx.lineWidth = 2.5;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-
-    function getPos(e) {
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      return {
-        x: (clientX - rect.left) * (canvas.width / rect.width),
-        y: (clientY - rect.top) * (canvas.height / rect.height)
-      };
-    }
-
-    function iniciarDesenho(e) {
-      desenhando = true;
-      assinado = true;
-      document.getElementById('txtPlaceholderAssinatura').style.display = 'none';
-      const p = getPos(e);
-      ctx.beginPath();
-      ctx.moveTo(p.x, p.y);
-      e.preventDefault();
-    }
-
-    function desenhar(e) {
-      if (!desenhando) return;
-      const p = getPos(e);
-      ctx.lineTo(p.x, p.y);
-      ctx.stroke();
-      e.preventDefault();
-    }
-
-    function pararDesenho() {
-      desenhando = false;
-    }
-
-    canvas.addEventListener('mousedown', iniciarDesenho);
-    canvas.addEventListener('mousemove', desenhar);
-    window.addEventListener('mouseup', pararDesenho);
-
-    canvas.addEventListener('touchstart', iniciarDesenho, { passive: false });
-    canvas.addEventListener('touchmove', desenhar, { passive: false });
-    window.addEventListener('touchend', pararDesenho);
-
-    function limparAssinatura() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      document.getElementById('txtPlaceholderAssinatura').style.display = 'flex';
-      assinado = false;
-    }
-
-    function carregarAlvo() {
-      const val = document.getElementById('selAlvo').value;
-      if (!val) return;
-      const [razao, cidade, seg, pdvs, contato] = val.split('|');
-      document.getElementById('inRazaoSocial').value = razao;
-      document.getElementById('inCidade').value = `${cidade} - RS`;
-      document.getElementById('inPDVs').value = pdvs;
-      document.getElementById('inNomeAssinante').value = contato || 'Responsável';
-      atualizarProgresso();
-    }
-
-    function atualizarProgresso() {
-      const checkboxes = document.querySelectorAll('.chk-item');
-      const total = checkboxes.length;
-      let marcados = 0;
-      checkboxes.forEach(c => { if (c.checked) marcados++; });
-
-      const pct = Math.round((marcados / total) * 100);
-      document.getElementById('txtProgresso').innerText = `${pct}% Concluído (${marcados} de ${total} itens)`;
-      document.getElementById('barProgresso').style.width = `${pct}%`;
-
-      const razao = document.getElementById('inRazaoSocial').value || 'Cliente';
-      const cidade = document.getElementById('inCidade').value || 'Sarandi';
-      const tec = document.getElementById('inTecnico').value || 'Equipe Técnica';
-      const assinante = document.getElementById('inNomeAssinante').value || 'Diretor';
-
-      const msg = `*Termo de Homologação e Entrega de Implantação — TruData ERP*%0A` +
-        `✅ *Cliente:* ${razao} (${cidade})%0A` +
-        `🛠️ *Técnico Hansen:* ${tec}%0A` +
-        `📊 *Status:* ${pct}% dos itens homologados (${marcados}/${total})%0A` +
-        `✍️ *Homologado por:* ${assinante}%0A%0A` +
-        `• Contingência Offline Testada: *OK (3.1s/venda)*%0A` +
-        `• Balanças e Periféricos Integrados: *OK (Toledo MGV6)*%0A` +
-        `• Treinamento de Frente de Caixa: *Concluído com Sucesso*%0A%0A` +
-        `Agradecemos a confiança na Hansen Software (Sarandi/RS)! Suporte de plantão no telefone (54) 3361-2650.`;
-
-      document.getElementById('btnWppTermo').href = `https://wa.me/555433612650?text=${msg}`;
-    }
-
-    function marcarTodos() {
-      document.querySelectorAll('.chk-item').forEach(c => c.checked = true);
-      atualizarProgresso();
-    }
-
-    async function salvarTermoNoServidor() {
-      const checkboxes = document.querySelectorAll('.chk-item');
-      let marcados = 0;
-      checkboxes.forEach(c => { if (c.checked) marcados++; });
-      const pct = Math.round((marcados / checkboxes.length) * 100);
-
-      const dados = {
-        razao_social: document.getElementById('inRazaoSocial').value,
-        cidade: document.getElementById('inCidade').value,
-        tecnico: document.getElementById('inTecnico').value,
-        pdvs: document.getElementById('inPDVs').value,
-        responsavel: document.getElementById('inNomeAssinante').value,
-        progresso: pct,
-        data_hora: new Date().toISOString()
-      };
-
-      const msgStatus = document.getElementById('msgStatus');
-      msgStatus.innerText = 'Salvando homologação no servidor...';
-
-      try {
-        const res = await fetch('/api/salvar_implantacao', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(dados)
-        });
-        if (res.ok) {
-          msgStatus.innerHTML = '<span class="text-emerald-400 font-bold">✓ Homologação salva no pipeline com sucesso!</span>';
-        } else {
-          msgStatus.innerHTML = '<span class="text-amber-400">Salvo localmente (Servidor respondeu com código de aviso).</span>';
-        }
-      } catch (e) {
-        msgStatus.innerHTML = '<span class="text-emerald-400">✓ Homologação registrada localmente no dispositivo!</span>';
-      }
-    }
-
-    document.getElementById('printDataHoje').innerText = `Data da Entrega: ${new Date().toLocaleDateString('pt-BR')}`;
-    atualizarProgresso();
-  </script>
-</body>
+      <noscript>Ative o JavaScript para preencher e gerar o resumo.</noscript>
+    </main>
+    <div id="work-toast" class="toast" role="status" hidden></div>
+    <script src="/painel_aprovacao/oficina.js?v=20260921-3" defer></script>
+  </body>
 </html>

@@ -1,416 +1,60 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estúdio de Spots de Rádio &amp; Carro de Som RS | TruData Media</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            amber: '#f59e0b',
-                            rose: '#f43f5e',
-                            dark: '#0f172a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bungee&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .glass-panel {
-            background: rgba(17, 24, 39, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .vu-meter-bar {
-            height: 4px;
-            border-radius: 2px;
-            transition: all 0.1s ease;
-        }
-    </style>
-</head>
-<body class="bg-slate-950 text-slate-100 min-h-screen">
-    <!-- Header de Estúdio -->
-    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-40 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <a href="/" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-rose-500 animate-pulse"></span>
-                    <span class="font-black text-lg text-white tracking-wider uppercase">ON AIR <span class="text-amber-400">STUDIO</span></span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30">Pilar 4: Rádio &amp; Som</span>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="flex items-center gap-1.5 px-3 py-1 rounded bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">
-                    <i class="fa-solid fa-tower-broadcast text-rose-500"></i> FM 98.7 / AM 1120 RS
-                </div>
-                <button onclick="copiarRoteiroClaquete()" class="px-3.5 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-xs font-bold text-slate-950 flex items-center gap-1.5 shadow-lg transition-all">
-                    <i class="fa-solid fa-clipboard-list"></i> Copiar Claquete Técnica
-                </button>
-            </div>
-        </div>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
     </header>
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <!-- Hero Header -->
-        <div class="mb-8">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-medium mb-3">
-                <i class="fa-solid fa-microphone-lines"></i> Propaganda de Alto Alcance Regional &amp; Interior do RS
-            </div>
-            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-                Estúdio de Spots de Rádio &amp; Carro de Som
-            </h1>
-            <p class="text-slate-400 text-sm mt-1 max-w-3xl">
-                Crie roteiros cronometrados no segundo exato (15s, 30s e 45s) para emissoras de rádio líderes no interior gaúcho e circuitos de som de rua. Teste com locução sintetizada e sonoplastia comercial.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- Coluna de Controles (Esquerda) -->
-            <div class="lg:col-span-5 space-y-6">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 shadow-xl space-y-5">
-                    <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-sliders text-amber-400"></i> Parâmetros da Emissão
-                    </h2>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Cidade / Região Foco</label>
-                        <select id="selRegiao" onchange="atualizarRegiao()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-amber-500 focus:outline-none">
-                            <option value="Passo Fundo e Planalto Médio" selected>Passo Fundo &amp; Planalto Médio (Rádio Planalto / Uirapuru)</option>
-                            <option value="Serra Gaúcha (Caxias e Bento)">Serra Gaúcha (Caxias do Sul &amp; Bento Gonçalves - Rádio Viva / Mais)</option>
-                            <option value="Vale dos Sinos e Metropolitana">Vale dos Sinos &amp; Metropolitana (Novo Hamburgo / São Leopoldo)</option>
-                            <option value="Pelotas e Zona Sul">Pelotas &amp; Região Sul (Rádio Gaúcha Sul / Pelotense)</option>
-                            <option value="Santa Maria e Região Central">Santa Maria &amp; Região Central (Rádio Medianeira / Imembuí)</option>
-                            <option value="Missões e Noroeste">Missões &amp; Noroeste (Santo Ângelo / Santa Rosa / Ijuí)</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Duração / Timing do Spot</label>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button onclick="setTiming(15)" id="btnTime15" class="py-2 rounded-lg bg-slate-800 text-slate-400 text-xs font-bold border border-slate-700">15s (Flash)</button>
-                            <button onclick="setTiming(30)" id="btnTime30" class="py-2 rounded-lg bg-amber-500 text-slate-950 text-xs font-black border border-amber-400 shadow-md">30s (Padrão)</button>
-                            <button onclick="setTiming(45)" id="btnTime45" class="py-2 rounded-lg bg-slate-800 text-slate-400 text-xs font-bold border border-slate-700">45s (Feirão)</button>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Tom de Locução</label>
-                        <select id="selTom" onchange="gerarRoteiro()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-amber-500 focus:outline-none">
-                            <option value="varejo_explosivo">Varejo Explosivo (Voz enérgica, rápida e urgente)</option>
-                            <option value="tradicionalista">Confiança Gaúcha (Tom firme, parceiro e resoluto)</option>
-                            <option value="urgencia_fiscal">Urgência SEFAZ / Fiscal (Alerta contábil e modernização)</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Trilha de Fundo / Sonoplastia</label>
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <label class="flex items-center gap-2 p-2.5 rounded-lg bg-slate-900 border border-slate-800 cursor-pointer">
-                                <input type="radio" name="trilha" value="gaita" checked class="text-amber-500 focus:ring-0">
-                                <span><i class="fa-solid fa-guitar text-amber-400"></i> Acordeon / Gaita Suave</span>
-                            </label>
-                            <label class="flex items-center gap-2 p-2.5 rounded-lg bg-slate-900 border border-slate-800 cursor-pointer">
-                                <input type="radio" name="trilha" value="supermercado" class="text-amber-500 focus:ring-0">
-                                <span><i class="fa-solid fa-barcode text-cyan-400"></i> Beep de PDV &amp; Batida</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="pt-2">
-                        <button onclick="gerarRoteiro()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold border border-slate-700 text-xs flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> Regenerar Texto do Spot
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Painel de Controle de Reprodução (Mesa de Som) -->
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-volume-high text-rose-500"></i> Monitor de Áudio &amp; VU Meter
-                        </h3>
-                        <span id="lblStatusAudio" class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">STANDBY</span>
-                    </div>
-
-                    <!-- VU Meter Simulado -->
-                    <div class="space-y-1.5 bg-slate-950 p-3 rounded-xl border border-slate-800">
-                        <div class="flex items-center gap-2 text-[10px] font-mono text-slate-500">
-                            <span class="w-4">L</span>
-                            <div class="flex-1 flex gap-1 h-3 items-center" id="vuMeterL"></div>
-                        </div>
-                        <div class="flex items-center gap-2 text-[10px] font-mono text-slate-500">
-                            <span class="w-4">R</span>
-                            <div class="flex-1 flex gap-1 h-3 items-center" id="vuMeterR"></div>
-                        </div>
-                    </div>
-
-                    <!-- Controles de Playback -->
-                    <div class="flex items-center gap-3">
-                        <button id="btnPlay" onclick="tocarVoz()" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-amber-600 hover:from-rose-500 hover:to-amber-500 text-white font-extrabold text-sm shadow-lg shadow-rose-950/40 flex items-center justify-center gap-2 transition-all">
-                            <i class="fa-solid fa-play"></i> Ouvir Locução do Spot
-                        </button>
-                        <button onclick="pararVoz()" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700">
-                            <i class="fa-solid fa-stop"></i>
-                        </button>
-                    </div>
-
-                    <div class="text-xs text-slate-500 text-center font-mono">
-                        Taxa de fala calibrada para <span id="lblWpm" class="text-amber-400 font-bold">135 palavras/min</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Coluna de Roteiro & Claquete (Direita) -->
-            <div class="lg:col-span-7 space-y-6">
-                <!-- Claquete de Estúdio -->
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4">
-                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
-                        <div>
-                            <span class="text-[10px] font-mono uppercase text-amber-400 font-bold tracking-wider">MAPA TÉCNICO DE PRODUÇÃO</span>
-                            <h3 id="txtTituloSpot" class="text-lg font-black text-white">TRUDATA VAREJO RS - EDIÇÃO 30 SEGUNDOS</h3>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span id="badgeSegundos" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 font-mono font-bold text-xs">
-                                30.0s (EXATO)
-                            </span>
-                            <span id="badgePalavras" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-mono text-xs">
-                                68 Palavras
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Texto com Marcações Técnicas de Rádio -->
-                    <div class="bg-slate-950/80 p-5 rounded-xl border border-slate-800 space-y-4 font-mono text-xs leading-relaxed text-slate-300">
-                        <div class="text-slate-500 border-b border-slate-800/60 pb-2 flex justify-between">
-                            <span>[TRILHA]: <span id="txtTrilhaInfo" class="text-amber-300">Gaita gaúcha tradicional em crescendo suave de fundo</span></span>
-                            <span>[SFX]: Efeito sonoro estéreo</span>
-                        </div>
-
-                        <div id="corpoRoteiroFormatado" class="space-y-3">
-                            <!-- Inserido dinamicamente via JS -->
-                        </div>
-
-                        <div class="text-slate-500 border-t border-slate-800/60 pt-2 flex justify-between">
-                            <span>[ASSINATURA]: Locução institucional grave</span>
-                            <span class="text-emerald-400 font-bold">TruData Tecnologia</span>
-                        </div>
-                    </div>
-
-                    <!-- Editor Direto do Texto -->
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Edição do Texto Corrido para Leitura</label>
-                        <textarea id="txtRoteiroCru" rows="5" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-xs text-slate-200 font-mono focus:border-amber-500 focus:outline-none leading-relaxed"></textarea>
-                    </div>
-
-                    <div class="flex items-center justify-between pt-2">
-                        <span class="text-xs text-slate-400">Pronto para envio a produtoras de áudio parceiras do RS</span>
-                        <button onclick="copiarTextoCru()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold border border-slate-700 flex items-center gap-2">
-                            <i class="fa-solid fa-copy text-amber-400"></i> Copiar Apenas Texto
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Tabela de Preços e Prazos Médios de Rádio no RS -->
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
-                    <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line text-emerald-400"></i> Tabela Referencial de Inserções no Interior do RS
-                    </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                        <div class="p-3 rounded-lg bg-slate-900/60 border border-slate-800">
-                            <p class="text-slate-400 text-[10px]">Rotativo AM/FM (Cidades 50-100k hab)</p>
-                            <p class="text-white font-bold mt-1">R$ 18 a R$ 35</p>
-                            <span class="text-[10px] text-emerald-400">por inserção de 30s</span>
-                        </div>
-                        <div class="p-3 rounded-lg bg-slate-900/60 border border-slate-800">
-                            <p class="text-slate-400 text-[10px]">Carro de Som em Bairros</p>
-                            <p class="text-white font-bold mt-1">R$ 70 a R$ 90</p>
-                            <span class="text-[10px] text-emerald-400">por hora circulada</span>
-                        </div>
-                        <div class="p-3 rounded-lg bg-slate-900/60 border border-slate-800">
-                            <p class="text-slate-400 text-[10px]">Gravação em Estúdio Local</p>
-                            <p class="text-white font-bold mt-1">R$ 60 a R$ 120</p>
-                            <span class="text-[10px] text-emerald-400">spot produzido completo</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Material preservado na biblioteca</h1>
+      <p style="margin-top: 24px">
+        Os textos das coleções anteriores estão na biblioteca de referência para
+        consulta e adaptação. A versão original completa também foi preservada,
+        sem publicação automática.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="biblioteca.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
     </main>
-
     <script>
-        let duracaoAtual = 30;
-        let regiaoAtual = 'Passo Fundo e Planalto Médio';
-        let tomAtual = 'varejo_explosivo';
-        let synth = window.speechSynthesis;
-        let audioInterval = null;
-
-        function setTiming(segundos) {
-            duracaoAtual = segundos;
-            [15, 30, 45].forEach(s => {
-                const btn = document.getElementById('btnTime' + s);
-                if (s === segundos) {
-                    btn.className = 'py-2 rounded-lg bg-amber-500 text-slate-950 text-xs font-black border border-amber-400 shadow-md';
-                } else {
-                    btn.className = 'py-2 rounded-lg bg-slate-800 text-slate-400 text-xs font-bold border border-slate-700';
-                }
-            });
-            document.getElementById('badgeSegundos').innerText = segundos + '.0s (EXATO)';
-            gerarRoteiro();
-        }
-
-        function atualizarRegiao() {
-            regiaoAtual = document.getElementById('selRegiao').value;
-            gerarRoteiro();
-        }
-
-        function gerarRoteiro() {
-            tomAtual = document.getElementById('selTom').value;
-            let roteiro = '';
-            let sfx1 = 'BEEP DE CAIXA REGISTRADORA';
-            let sfx2 = 'CORTE SECO';
-
-            if (duracaoAtual === 15) {
-                roteiro = `Atenção comerciante de ${regiaoAtual}! Chega de caixa travando no sábado e cliente esperando na fila. Conheça o TruData, o sistema de vendas que não para nunca! Chame agora no Whats: cinquenta e quatro, nove, noventa e nove, meia-oito, zero zero um dois.`;
-            } else if (duracaoAtual === 30) {
-                roteiro = `Sábado de movimento e o seu sistema antigo de caixa travou de novo? Enquanto o suporte de fora nem atende o telefone, o seu cliente desiste da compra! No Rio Grande do Sul, quem tem mercado, loja ou agropecuária confia no TruData Tecnologia. Emissão de cupom fiscal em um segundo, suporte gaúcho de verdade e você no controle total do seu lucro. Não perca mais vendas! TruData: o sistema que anda junto com quem trabalha. Chame agora no Whats!`;
-            } else {
-                // 45s
-                roteiro = `Você que é comerciante aqui em ${regiaoAtual}, sabe muito bem: cliente não tem paciência pra esperar fila de caixa travado! Por isso milhares de varejistas gaúchos já mudaram para o TruData. Com o TruData, seu ponto de venda nunca para: funciona mesmo sem internet, fecha o caixa sem erro de centavos e ainda blinda sua empresa nas exigências da SEFAZ-RS. Chega de pagar caro por sistema que te deixa na mão bem na hora do pico. Tenha suporte humanizado que entende a sua rotina no balcão. Fale com nossa equipe e faça um teste gratuito hoje mesmo. TruData Tecnologia: eficiência no balcão e lucro no bolso!`;
-            }
-
-            document.getElementById('txtRoteiroCru').value = roteiro;
-            atualizarFormatado(roteiro);
-        }
-
-        function atualizarFormatado(texto) {
-            const palavras = texto.split(/\s+/).filter(Boolean).length;
-            document.getElementById('badgePalavras').innerText = palavras + ' Palavras';
-
-            const container = document.getElementById('corpoRoteiroFormatado');
-            container.innerHTML = `
-                <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
-                    <p class="text-amber-400 font-bold mb-1">[LOCUTOR PRINCIPAL]:</p>
-                    <p class="text-slate-200">"${texto}"</p>
-                </div>
-            `;
-        }
-
-        // Simulação do VU Meter
-        function initVuMeter() {
-            const vL = document.getElementById('vuMeterL');
-            const vR = document.getElementById('vuMeterR');
-            vL.innerHTML = '';
-            vR.innerHTML = '';
-            for (let i = 0; i < 24; i++) {
-                const cor = i < 16 ? 'bg-emerald-500' : (i < 20 ? 'bg-amber-400' : 'bg-rose-500');
-                vL.innerHTML += `<div class="vu-meter-bar w-1.5 ${cor} opacity-20" id="vL_${i}"></div>`;
-                vR.innerHTML += `<div class="vu-meter-bar w-1.5 ${cor} opacity-20" id="vR_${i}"></div>`;
-            }
-        }
-
-        function animarVu(ativo) {
-            if (audioInterval) clearInterval(audioInterval);
-            if (!ativo) {
-                for (let i = 0; i < 24; i++) {
-                    const elL = document.getElementById('vL_' + i);
-                    const elR = document.getElementById('vR_' + i);
-                    if (elL) elL.style.opacity = '0.2';
-                    if (elR) elR.style.opacity = '0.2';
-                }
-                document.getElementById('lblStatusAudio').innerText = 'STANDBY';
-                document.getElementById('lblStatusAudio').className = 'text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono';
-                return;
-            }
-
-            document.getElementById('lblStatusAudio').innerText = 'REPRODUZINDO NO AR';
-            document.getElementById('lblStatusAudio').className = 'text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono font-bold animate-pulse';
-
-            audioInterval = setInterval(() => {
-                const randL = Math.floor(Math.random() * 22) + 2;
-                const randR = Math.floor(Math.random() * 22) + 2;
-                for (let i = 0; i < 24; i++) {
-                    const elL = document.getElementById('vL_' + i);
-                    const elR = document.getElementById('vR_' + i);
-                    if (elL) elL.style.opacity = i <= randL ? '1' : '0.2';
-                    if (elR) elR.style.opacity = i <= randR ? '1' : '0.2';
-                }
-            }, 80);
-        }
-
-        function tocarVoz() {
-            if (!('speechSynthesis' in window)) {
-                alert('Seu navegador não suporta síntese de voz local.');
-                return;
-            }
-            synth.cancel();
-
-            const texto = document.getElementById('txtRoteiroCru').value;
-            const utter = new SpeechSynthesisUtterance(texto);
-            utter.lang = 'pt-BR';
-            utter.rate = duracaoAtual === 15 ? 1.25 : 1.12;
-            utter.pitch = 0.95; // voz mais grave de rádio
-
-            utter.onstart = () => animarVu(true);
-            utter.onend = () => animarVu(false);
-            utter.onerror = () => animarVu(false);
-
-            synth.speak(utter);
-        }
-
-        function pararVoz() {
-            if (synth) synth.cancel();
-            animarVu(false);
-        }
-
-        function copiarRoteiroClaquete() {
-            const regiao = regiaoAtual;
-            const tempo = duracaoAtual;
-            const texto = document.getElementById('txtRoteiroCru').value;
-
-            const claquete = `========================================================\n` +
-                             `CLAQUETE TÉCNICA DE GRAVAÇÃO - SPOT DE RÁDIO TRUDATA\n` +
-                             `========================================================\n` +
-                             `CLIENTE: TruData Tecnologia de Gestão\n` +
-                             `PRAÇA: ${regiao}\n` +
-                             `TEMPO: ${tempo} Segundos Exatos\n` +
-                             `ESTILO DE LOCUÇÃO: Rádio Comercial / Varejo Gaúcho\n` +
-                             `TRILHA SUGERIDA: Acordeon nativista suave com final enérgico\n\n` +
-                             `TEXTO PARA LEITURA:\n` +
-                             `"${texto}"\n\n` +
-                             `ASSINATURA FINAL: TruData Tecnologia - O parceiro do comércio gaúcho.\n` +
-                             `========================================================`;
-
-            navigator.clipboard.writeText(claquete).then(() => {
-                alert('Claquete técnica completa copiada para a área de transferência!');
-            });
-        }
-
-        function copiarTextoCru() {
-            const texto = document.getElementById('txtRoteiroCru').value;
-            navigator.clipboard.writeText(texto).then(() => {
-                alert('Texto do spot copiado com sucesso!');
-            });
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            initVuMeter();
-            gerarRoteiro();
-            document.getElementById('txtRoteiroCru').addEventListener('input', (e) => {
-                atualizarFormatado(e.target.value);
-            });
-        });
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
+      }
     </script>
-</body>
+  </body>
 </html>

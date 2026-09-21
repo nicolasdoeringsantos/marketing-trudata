@@ -1,295 +1,62 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TruData Supermercados — PDV Rápido, Balanças Toledo & Contingência Offline no RS</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            display: ['"Space Grotesk"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              azure: '#00A3FF',
-              dark: '#020B18',
-              card: '#0A192F',
-              emerald: '#10B981',
-              amber: '#F59E0B'
-            }
-          }
-        }
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Reunida em Planejar implantação</h1>
+      <p style="margin-top: 24px">
+        O planejamento registra conferências e pendências. Não promete prazo
+        universal nem compatibilidade de equipamentos sem teste.
+      </p>
+      <div class="actions">
+        <a
+          class="btn primary"
+          id="replacement"
+          href="checklist_implantacao.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    }
-  </script>
-  <style>
-    body { background-color: #020B18; color: #F8FAFC; }
-    .glass { background: rgba(10, 25, 47, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased flex flex-col justify-between selection:bg-brand-azure selection:text-white pb-12">
-
-  <!-- CABEÇALHO -->
-  <header class="border-b border-slate-800/80 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 group text-xs text-slate-400 hover:text-white transition">
-          <span class="p-1.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-brand-azure">←</span>
-          <span>Voltar ao Hub</span>
-        </a>
-        <div class="h-4 w-px bg-slate-800"></div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-white font-display">SUPERMERCADOS & MERCADOS</span>
-          <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded font-mono">Toledo MGV6 Homologado</span>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <a href="https://wa.me/5554996966175?text=Ol%C3%A1!+Gostaria+de+agendar+uma+visita+t%C3%A9cnica+para+meu+supermercado." target="_blank" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center gap-1.5">
-          <span>📲</span> Agendar Visita Técnica
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- CONTEÚDO PRINCIPAL -->
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 w-full space-y-8">
-    
-    <!-- HERO -->
-    <div class="glass rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-2xl">
-      <div class="absolute -right-20 -top-20 w-96 h-96 bg-brand-azure/15 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="max-w-3xl space-y-4">
-        <div class="inline-flex items-center gap-2 bg-brand-azure/10 border border-brand-azure/20 px-3 py-1 rounded-full text-xs font-bold text-brand-azure uppercase tracking-wider font-mono">
-          <span>🛒</span> Especializado para Supermercados, Fruteiras e Mercearias
-        </div>
-
-        <h1 class="text-3xl sm:text-5xl font-black font-display text-white leading-tight">
-          Frente de Caixa em 3 Segundos com Toledo Prix e Zero Travamento
-        </h1>
-
-        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
-          No supermercado, sábado à tarde é sagrado: cada segundo na fila custa vendas e irrita clientes. O <strong class="text-white">TruData ERP</strong> opera com banco local em cada PDV, garantindo que mesmo na queda total de internet da sua cidade, seu caixa continue passando compras e pesando itens sem parar.
-        </p>
-
-        <div class="flex flex-wrap items-center gap-4 pt-2">
-          <a href="#dimensionador" class="px-6 py-3.5 bg-brand-azure hover:bg-sky-500 text-slate-950 font-extrabold text-xs rounded-xl transition shadow-lg shadow-brand-azure/30 flex items-center gap-2">
-            <span>🧮</span> Dimensionar Checkouts para Minha Loja
-          </a>
-          <a href="migracao_concorrentes.html" class="px-5 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 font-bold text-xs rounded-xl transition">
-            Ver Portabilidade de Dados em 48h →
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- HOMOLOGAÇÃO COM BALANÇAS & PERIFÉRICOS DE CHECKOUT -->
-    <div class="glass rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
-        <div>
-          <h2 class="text-lg font-bold text-white font-display">Balanças & Equipamentos Homologados de Fábrica</h2>
-          <p class="text-xs text-slate-400">Integração nativa com software MGV6 da Toledo e protocolos seriais/Ethernet</p>
-        </div>
-        <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
-          Zero Incompatibilidade
-        </span>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-sm">Toledo Prix 3, 4, 5 e 6</span>
-            <span class="text-emerald-400 font-bold font-mono">100% OK</span>
-          </div>
-          <p class="text-slate-400 text-[11px] leading-relaxed">
-            Carga automática de preços e cadastros do açougue e padaria via MGV6. Leitura imediata de etiquetas com peso e valor.
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-sm">Filizola Platina & CS</span>
-            <span class="text-emerald-400 font-bold font-mono">100% OK</span>
-          </div>
-          <p class="text-slate-400 text-[11px] leading-relaxed">
-            Comunicação direta para balanças de balcão e conferência de pesáveis (hortifrúti) com pesagem de tara programada.
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-sm">Leitores 2D / GS1 DataBar</span>
-            <span class="text-emerald-400 font-bold font-mono">100% OK</span>
-          </div>
-          <p class="text-slate-400 text-[11px] leading-relaxed">
-            Leitura instantânea de códigos danificados, QR Codes de pagamento e códigos compactos de frios e fatiados.
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-sm">TEF Integrado & PIX</span>
-            <span class="text-emerald-400 font-bold font-mono">100% OK</span>
-          </div>
-          <p class="text-slate-400 text-[11px] leading-relaxed">
-            Elimina maquininhas avulsas. O valor da compra vai direto para o pinpad, reduzindo filas e fraudes no caixa.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- CALCULADORA / DIMENSIONADOR DE CHECKOUTS -->
-    <div id="dimensionador" class="glass rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-        <div>
-          <h2 class="text-lg font-bold text-white font-display">Dimensionador de Checkouts & Frente de Caixa</h2>
-          <p class="text-xs text-slate-400">Calcule a estrutura recomendada de hardware e software para a sua loja</p>
-        </div>
-        <span class="text-xs font-mono font-bold text-brand-azure">Simulação Regional RS</span>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        <!-- ENTRADAS (7 colunas) -->
-        <div class="lg:col-span-7 space-y-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1.5">
-              Quantos caixas de atendimento sua loja opera?
-            </label>
-            <div class="flex items-center gap-3">
-              <input type="range" id="range-caixas-mercado" min="1" max="10" value="3" oninput="atualizarDimensionamento()" class="w-full accent-brand-azure cursor-pointer" />
-              <span id="label-num-caixas" class="text-base font-black text-brand-azure font-mono w-20 text-right">3 Caixas</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-2">
-            <label class="p-3 rounded-2xl bg-slate-950/60 border border-slate-800 flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" id="chk-acougue" checked onchange="atualizarDimensionamento()" class="accent-brand-azure" />
-              <span>Possui Açougue / Padaria (Carga MGV)</span>
-            </label>
-
-            <label class="p-3 rounded-2xl bg-slate-950/60 border border-slate-800 flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" id="chk-tef-mercado" checked onchange="atualizarDimensionamento()" class="accent-brand-azure" />
-              <span>TEF Integrado Multi-Adquirente</span>
-            </label>
-
-            <label class="p-3 rounded-2xl bg-slate-950/60 border border-slate-800 flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" id="chk-coletor" checked onchange="atualizarDimensionamento()" class="accent-brand-azure" />
-              <span>Coletor de Dados para Inventário</span>
-            </label>
-
-            <label class="p-3 rounded-2xl bg-slate-950/60 border border-slate-800 flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" id="chk-suporte-plantao" checked onchange="atualizarDimensionamento()" class="accent-brand-azure" />
-              <span>Plantão Técnico de Sábado & Feriados</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- RESUMO TÉCNICO (5 colunas) -->
-        <div class="lg:col-span-5 p-5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-4 flex flex-col justify-between">
-          <div class="space-y-3">
-            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Arquitetura Recomendada</span>
-            
-            <div class="flex items-center justify-between text-xs py-1 border-b border-slate-800">
-              <span class="text-slate-400">Banco de Dados:</span>
-              <span class="text-emerald-400 font-bold">Híbrido (Local + Nuvem)</span>
-            </div>
-
-            <div class="flex items-center justify-between text-xs py-1 border-b border-slate-800">
-              <span class="text-slate-400">Tempo Médio no Caixa:</span>
-              <span class="text-white font-mono font-bold">2.8 a 3.4 seg / item</span>
-            </div>
-
-            <div class="flex items-center justify-between text-xs py-1 border-b border-slate-800">
-              <span class="text-slate-400">SLA Técnico Presencial:</span>
-              <span class="text-brand-azure font-mono font-bold">Até 2h em Sarandi e Região</span>
-            </div>
-
-            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-center">
-              <span class="text-[11px] text-slate-400 block">Investimento Estimado Mensal:</span>
-              <span id="valor-mercado-mensal" class="text-2xl font-black text-emerald-400 font-mono block mt-0.5">R$ 517,00</span>
-              <span class="text-[10px] text-slate-500">Sem limite de itens cadastrados e sem taxa por usuário.</span>
-            </div>
-          </div>
-
-          <button onclick="solicitarOrcamentoSupermercado()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center justify-center gap-2">
-            <span>📲</span> Solicitar Orçamento de Supermercado
-          </button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- DIFERENCIAIS DA HANSEN SOFTWARE PARA SUPERMERCADOS -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-      <div class="glass p-5 rounded-2xl space-y-2">
-        <span class="text-2xl block">⚡</span>
-        <h4 class="font-bold text-white text-sm">Virada Noturna ou Domingo</h4>
-        <p class="text-slate-400 leading-relaxed">
-          Nossa equipe realiza a troca de sistema na virada de sábado para domingo para que seus clientes encontrem a loja pronta na segunda-feira.
-        </p>
-      </div>
-
-      <div class="glass p-5 rounded-2xl space-y-2">
-        <span class="text-2xl block">📊</span>
-        <h4 class="font-bold text-white text-sm">Curva ABC & Perdas de Hortifrúti</h4>
-        <p class="text-slate-400 leading-relaxed">
-          Relatórios específicos para apontamento de quebras de produtos perecíveis, margem real por departamento e sugestão de compras.
-        </p>
-      </div>
-
-      <div class="glass p-5 rounded-2xl space-y-2">
-        <span class="text-2xl block">🤝</span>
-        <h4 class="font-bold text-white text-sm">Técnicos que Vão até a Loja</h4>
-        <p class="text-slate-400 leading-relaxed">
-          Não atendemos por robôs de São Paulo. Se houver qualquer falha física de balança ou impressora, o técnico da Hansen vai até seu mercado.
-        </p>
-      </div>
-    </div>
-
-  </main>
-
-  <footer class="border-t border-slate-800/80 max-w-6xl mx-auto px-4 sm:px-6 py-6 text-center text-xs text-slate-500">
-    © 2026 Hansen Software LTDA • TruData Supermercados • Sarandi - RS • Fone: (54) 3361-2650 / (54) 99696-6175
-  </footer>
-
-  <script>
-    function atualizarDimensionamento() {
-      const caixas = parseInt(document.getElementById('range-caixas-mercado').value) || 1;
-      document.getElementById('label-num-caixas').textContent = `${caixas} ${caixas === 1 ? 'Caixa' : 'Caixas'}`;
-
-      // Base: R$ 249 + R$ 149 (estoque mercado) + (caixas - 1)*89
-      let mensal = 249 + 149 + ((caixas - 1) * 89);
-      
-      if (document.getElementById('chk-acougue').checked) mensal += 60; // Módulo balanças
-      if (document.getElementById('chk-tef-mercado').checked) mensal += 80;
-
-      document.getElementById('valor-mercado-mensal').textContent = 'R$ ' + mensal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-    }
-
-    function solicitarOrcamentoSupermercado() {
-      const caixas = document.getElementById('range-caixas-mercado').value;
-      const valor = document.getElementById('valor-mercado-mensal').textContent;
-
-      const msg = `Olá equipe Hansen Software! Gostaria de agendar uma demonstração do *TruData Supermercados* para o meu estabelecimento:\n\n` +
-        `🛒 *Número de Caixas (PDVs):* ${caixas}\n` +
-        `⚖️ *Balanças Integradas:* Sim (Toledo/Filizola)\n` +
-        `💰 *Investimento Estimado:* ${valor}/mês\n\n` +
-        `Quero conhecer a contingência offline e a migração de dados sem fechar meu mercado!`;
-
-      window.open('https://wa.me/5554996966175?text=' + encodeURIComponent(msg), '_blank');
-    }
-
-    window.addEventListener('DOMContentLoaded', atualizarDimensionamento);
-  </script>
-</body>
+    </script>
+  </body>
 </html>

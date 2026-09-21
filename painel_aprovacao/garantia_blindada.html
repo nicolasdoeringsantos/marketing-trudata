@@ -1,311 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificado de Garantia Blindada 30 Dias — Hansen Software / TruData ERP</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        gold: {
-                            100: '#fef3c7',
-                            200: '#fde68a',
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
-                        },
-                        dark: {
-                            950: '#05070d',
-                            900: '#090d16',
-                            800: '#0f172a',
-                            700: '#1e293b',
-                        }
-                    },
-                    fontFamily: {
-                        cinzel: ['Cinzel', 'serif'],
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #060911;
-            color: #e2e8f0;
-        }
-
-        .cert-border {
-            border: 3px double #d97706;
-            box-shadow: 0 0 35px rgba(217, 119, 6, 0.15), inset 0 0 25px rgba(217, 119, 6, 0.08);
-        }
-
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #fde68a 0%, #d97706 50%, #fef3c7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .seal-stamp {
-            background: radial-gradient(circle, rgba(217, 119, 6, 0.2) 0%, rgba(15, 23, 42, 0.9) 70%);
-            border: 2px dashed #f59e0b;
-        }
-
-        @media print {
-            body {
-                background-color: #ffffff !important;
-                color: #000000 !important;
-            }
-            .no-print {
-                display: none !important;
-            }
-            .print-certificate {
-                border: 2px solid #b45309 !important;
-                background: #ffffff !important;
-                color: #000000 !important;
-                box-shadow: none !important;
-                margin: 0 !important;
-                padding: 24px !important;
-                max-width: 100% !important;
-                page-break-inside: avoid;
-            }
-            .print-certificate * {
-                color: #000000 !important;
-                border-color: #94a3b8 !important;
-                text-shadow: none !important;
-            }
-            .print-gold-text {
-                color: #b45309 !important;
-                font-weight: 800 !important;
-                -webkit-text-fill-color: #b45309 !important;
-            }
-        }
-    </style>
-</head>
-<body class="min-h-screen pb-16">
-
-    <!-- Navbar Superior -->
-    <header class="border-b border-slate-800 bg-dark-900/90 backdrop-blur sticky top-0 z-50 no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <a href="/index.html" class="flex items-center space-x-2 text-slate-300 hover:text-white transition">
-                    <span class="text-xl font-black bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">TruData ERP</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-semibold">Garantia Blindada</span>
-                </a>
-            </div>
-            <div class="flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm">
-                <a href="/checkup-loja" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition">🔍 Check-up Loja</a>
-                <a href="/fechamento-rapido" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition">⚡ Fechador de Bolso</a>
-                <a href="/prova-social" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition">🌟 Prova Social RS</a>
-                <button onclick="window.print()" class="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-black font-bold shadow-lg shadow-amber-950/40 transition flex items-center gap-1.5">
-                    <span>🖨️ Imprimir Certificado</span>
-                </button>
-            </div>
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
     </header>
-
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-8">
-
-        <!-- Personalizador do Certificado (No-Print) -->
-        <div class="no-print bg-dark-900 border border-slate-800 p-5 rounded-2xl mb-8 shadow-xl">
-            <div class="flex items-center justify-between mb-4">
-                <div>
-                    <h2 class="text-sm font-bold text-white flex items-center gap-2">
-                        <span>✍️ Personalizar Termo de Garantia para o Cliente</span>
-                    </h2>
-                    <p class="text-xs text-slate-400">Preencha os dados do prospect para emitir o certificado nominal antes do fechamento.</p>
-                </div>
-                <button onclick="atualizarCertificado()" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold rounded-xl transition">
-                    Atualizar Documento
-                </button>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                    <label class="block text-[11px] font-semibold text-slate-300 mb-1">Nome Fantasia da Loja:</label>
-                    <input type="text" id="input-loja" value="Supermercado São José" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-semibold text-slate-300 mb-1">Cidade / Estado:</label>
-                    <input type="text" id="input-cidade" value="Sarandi - RS" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-semibold text-slate-300 mb-1">Consultor Responsável:</label>
-                    <input type="text" id="input-consultor" value="Representante Comercial Regional" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-amber-400">
-                </div>
-            </div>
-        </div>
-
-        <!-- CERTIFICADO OFICIAL EXECUTIVO -->
-        <div id="certificado" class="print-certificate bg-dark-900 cert-border rounded-3xl p-6 sm:p-12 relative overflow-hidden shadow-2xl mb-8">
-            
-            <!-- Marca D'água sutil de fundo -->
-            <div class="absolute -right-16 -bottom-16 w-80 h-80 rounded-full bg-amber-500/5 blur-3xl pointer-events-none"></div>
-
-            <!-- Cabeçalho do Certificado -->
-            <div class="text-center pb-8 border-b border-amber-500/20">
-                <div class="text-xs uppercase font-bold tracking-[0.25em] text-amber-500 mb-2">
-                    Hansen Software Ltda • CNPJ 02.483.991/0001-90 • Fundada em 1998
-                </div>
-                <h1 class="font-cinzel text-2xl sm:text-4xl font-extrabold gold-gradient-text tracking-wider mb-2 print-gold-text">
-                    CERTIFICADO DE RISCO ZERO 30 DIAS
-                </h1>
-                <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto">
-                    Termo oficial de compromisso incondicional e estabilidade operacional para o comércio varejista do Rio Grande do Sul.
-                </p>
-            </div>
-
-            <!-- Identificação do Beneficiário -->
-            <div class="my-6 p-4 rounded-xl bg-slate-950/70 border border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-3">
-                <div>
-                    <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Empresa Beneficiária:</span>
-                    <span id="label-loja" class="text-base font-bold text-white">Supermercado São José</span>
-                </div>
-                <div class="text-center sm:text-right">
-                    <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Comarca / Região:</span>
-                    <span id="label-cidade" class="text-sm font-semibold text-amber-300">Sarandi - RS</span>
-                </div>
-            </div>
-
-            <!-- As 4 Cláusulas Blindadas -->
-            <div class="space-y-4 my-8">
-                
-                <div class="flex gap-4 items-start p-3.5 rounded-xl bg-slate-950/40 border border-slate-800/80">
-                    <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 font-cinzel font-bold flex items-center justify-center shrink-0 text-sm">
-                        I
-                    </div>
-                    <div>
-                        <h2 class="text-sm font-bold text-white mb-1">Cláusula 1ª — Garantia Incondicional de Restituição Total (30 Dias)</h2>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            Se durante os primeiros 30 (trinta) dias após o início da operação do TruData ERP o lojista entender que o software não atendeu às necessidades da sua loja, devolvemos <strong>100% dos valores pagos</strong> por mensalidade e implantação, sem questionamentos, sem burocracia e sem cobrança de multas contratuais.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 items-start p-3.5 rounded-xl bg-slate-950/40 border border-slate-800/80">
-                    <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 font-cinzel font-bold flex items-center justify-center shrink-0 text-sm">
-                        II
-                    </div>
-                    <div>
-                        <h2 class="text-sm font-bold text-white mb-1">Cláusula 2ª — Migração Reversa Gratuita e Propriedade de Dados</h2>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            Os dados de clientes, produtos, estoques e histórico financeiro pertencem exclusivamente à loja. Em caso de cancelamento, a Hansen Software compromete-se a entregar todos os dados exportados em formatos abertos (Excel / CSV / SQL) <strong>sem nenhuma cobrança de taxa de resgate</strong> ou retenção forçada.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 items-start p-3.5 rounded-xl bg-slate-950/40 border border-slate-800/80">
-                    <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 font-cinzel font-bold flex items-center justify-center shrink-0 text-sm">
-                        III
-                    </div>
-                    <div>
-                        <h2 class="text-sm font-bold text-white mb-1">Cláusula 3ª — SLA Presencial de 2 Horas para Sarandi e Raio de 50km</h2>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            Por estarmos sediados em Sarandi - RS, garantimos atendimento telefônico imediato por técnicos humanos em menos de 3 minutos. Em ocorrências críticas de hardware ou falha de frente de caixa não resolvidas remotamente, disponibilizamos <strong>socorro técnico presencial em até 2 horas úteis</strong> na sua loja.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4 items-start p-3.5 rounded-xl bg-slate-950/40 border border-slate-800/80">
-                    <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 font-cinzel font-bold flex items-center justify-center shrink-0 text-sm">
-                        IV
-                    </div>
-                    <div>
-                        <h2 class="text-sm font-bold text-white mb-1">Cláusula 4ª — Blindagem Fiscal e Contingência Offline NFC-e</h2>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            O TruData opera com motor de PDV desacoplado: mesmo com oscilação, corte de sinal de fibra óptica ou temporais comuns no RS, sua loja continuará emitindo cupons em contingência offline sem paralisar as filas do caixa, sincronizando com a SEFAZ-RS assim que a conexão retornar.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Assinatura e Selo Oficial -->
-            <div class="pt-8 border-t border-amber-500/20 grid grid-cols-1 sm:grid-cols-3 items-center gap-6">
-                
-                <!-- Selo de Cera / Carimbo -->
-                <div class="flex items-center justify-center">
-                    <div class="seal-stamp w-28 h-28 rounded-full flex flex-col items-center justify-center text-center p-2">
-                        <span class="text-[9px] font-extrabold text-amber-400 uppercase tracking-widest">HANSEN</span>
-                        <span class="text-xs font-cinzel font-bold text-white">GARANTIA</span>
-                        <span class="text-[9px] text-amber-300 font-semibold">100% BLINDADA</span>
-                        <span class="text-[8px] text-slate-400">DESDE 1998</span>
-                    </div>
-                </div>
-
-                <!-- Assinatura Hansen Software -->
-                <div class="text-center sm:text-left">
-                    <div class="h-10 border-b border-slate-700 flex items-end justify-center sm:justify-start pb-1 font-cinzel text-xs text-amber-300 italic">
-                        Diretoria Técnica & Operações
-                    </div>
-                    <div class="text-xs font-bold text-white mt-1">Hansen Software Ltda</div>
-                    <div class="text-[10px] text-slate-400">Matriz: Sarandi - RS • Fone: (54) 3361-2300</div>
-                </div>
-
-                <!-- Assinatura do Consultor / Aceite -->
-                <div class="text-center sm:text-right">
-                    <div class="h-10 border-b border-slate-700 flex items-end justify-center sm:justify-end pb-1 text-xs text-slate-300" id="label-consultor">
-                        Representante Comercial Regional
-                    </div>
-                    <div class="text-xs font-bold text-white mt-1">Emissão em: <span id="label-data"></span></div>
-                    <div class="text-[10px] text-emerald-400 font-semibold">Autenticidade Verificada</div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Botões de Ação Final (No-Print) -->
-        <div class="no-print flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button onclick="enviarCertificadoWhatsApp()" class="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition shadow-lg shadow-emerald-950 flex items-center justify-center gap-2">
-                <span>📲 Enviar Certificado no WhatsApp do Lojista</span>
-            </button>
-            <button onclick="window.print()" class="w-full sm:w-auto px-6 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl border border-slate-700 transition flex items-center justify-center gap-2">
-                <span>🖨️ Imprimir Termo A4</span>
-            </button>
-            <a href="/fechamento-rapido" class="w-full sm:w-auto px-6 py-3.5 bg-amber-600 hover:bg-amber-500 text-black font-bold rounded-xl transition shadow-lg shadow-amber-950 text-center">
-                <span>⚡ Avançar para Fechamento Rápido</span>
-            </a>
-        </div>
-
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Retirada: condições sem validação</h1>
+      <p style="margin-top: 24px">
+        A versão anterior apresentava garantia, bônus ou formalização sem um
+        fluxo validado. Registre na proposta apenas as condições combinadas com
+        o responsável comercial.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="gerador_proposta.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
     </main>
-
     <script>
-        function atualizarCertificado() {
-            const loja = document.getElementById('input-loja').value.trim() || 'Comércio Parceiro';
-            const cidade = document.getElementById('input-cidade').value.trim() || 'Sarandi - RS';
-            const consultor = document.getElementById('input-consultor').value.trim() || 'Equipe Comercial TruData';
-
-            document.getElementById('label-loja').innerText = loja;
-            document.getElementById('label-cidade').innerText = cidade;
-            document.getElementById('label-consultor').innerText = consultor;
-        }
-
-        function setDataAtual() {
-            const hoje = new Date();
-            const dia = String(hoje.getDate()).padStart(2, '0');
-            const mes = String(hoje.getMonth() + 1).padStart(2, '0');
-            const ano = hoje.getFullYear();
-            document.getElementById('label-data').innerText = `${dia}/${mes}/${ano}`;
-        }
-
-        function enviarCertificadoWhatsApp() {
-            const loja = document.getElementById('label-loja').innerText;
-            const cidade = document.getElementById('label-cidade').innerText;
-
-            const mensagem = encodeURIComponent(`Olá! Conforme combinamos, segue o *Certificado de Garantia Risco Zero 30 Dias* da Hansen Software emitido para o *${loja}* (${cidade}):\n\n🛡️ *Garantias Oficiais:*\n1. *30 Dias Risco Zero:* Devolução de 100% dos valores se você não aprovar a operação da loja.\n2. *Migração Reversa Gratuita:* Seus dados devolvidos em Excel/SQL a qualquer momento sem taxas.\n3. *SLA Presencial 2h:* Equipe técnica em Sarandi pronta para socorrer seu caixa presencialmente.\n4. *Contingência Offline:* Emissão de NFC-e mesmo se a internet da cidade cair.\n\nPodemos confirmar a implantação protegida por este termo?`);
-
-            const url = `https://api.whatsapp.com/send?text=${mensagem}`;
-            window.open(url, '_blank');
-        }
-
-        // Inicializar com a data de hoje
-        setDataAtual();
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
+      }
     </script>
-</body>
+  </body>
 </html>

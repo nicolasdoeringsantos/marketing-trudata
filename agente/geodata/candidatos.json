@@ -1,0 +1,1324 @@
+[
+  {
+    "cliente": "CONT-150KM-054",
+    "nome": "Tecnisul Assessoria Contábil",
+    "endereco": "Rua 25 de Julho, 87",
+    "cidade": "Santo Ângelo",
+    "candidatos": [
+      [
+        0.83,
+        1.07,
+        "Tolfo Assessoria Contabil",
+        "node",
+        11578151377,
+        {
+          "addr:city": "Santo Ângelo",
+          "addr:housenumber": "660",
+          "addr:postcode": "98801-630",
+          "addr:street": "Rua Antunes Ribas",
+          "addr:suburb": "Centro",
+          "check_date": "2024-02-01",
+          "check_date:currency:XBT": "2024-02-01",
+          "currency:XBT": "yes",
+          "name": "Tolfo Assessoria Contabil",
+          "office": "accountant",
+          "opening_hours": "Mo-Fr 08:00-18:00",
+          "payment:lightning": "yes",
+          "payment:lightning_contactless": "yes",
+          "payment:onchain": "yes",
+          "survey:date": "2024-02-01",
+          "website": "https://www.tolfocontabilidade.com.br"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0012",
+    "nome": "Farmacia N.S. Fatima",
+    "endereco": "RUA MARCOS NOVELLO, 101 - LOJA 01",
+    "cidade": "Sarandi",
+    "candidatos": [
+      [
+        0.686,
+        0.8,
+        "Farmácia São João",
+        "node",
+        2492244593,
+        {
+          "amenity": "pharmacy",
+          "name": "Farmácia São João"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0016",
+    "nome": "Hipermercado Wagner",
+    "endereco": "AVENIDA 7 DE SETEMBRO, 1067",
+    "cidade": "Sarandi",
+    "candidatos": [
+      [
+        1.0,
+        0.79,
+        "Hipermercado Wagner",
+        "node",
+        2492209460,
+        {
+          "name": "Hipermercado Wagner",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0023",
+    "nome": "Posto Papagaio",
+    "endereco": "BR 386, SN - KM 135",
+    "cidade": "Sarandi",
+    "candidatos": [
+      [
+        1.0,
+        3.26,
+        "Posto Papagaio",
+        "way",
+        656875018,
+        {
+          "amenity": "fuel",
+          "brand": "BR",
+          "brand:wikidata": "Q4836468",
+          "name": "Posto Papagaio"
+        }
+      ],
+      [
+        0.727,
+        3.21,
+        "Papagaio",
+        "way",
+        656875019,
+        {
+          "amenity": "restaurant",
+          "building": "yes",
+          "name": "Papagaio"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0037",
+    "nome": "Donna Supermercados",
+    "endereco": "AVENIDA JACOB WAGNER SOBRINHO, 422",
+    "cidade": "Nova Boa Vista",
+    "candidatos": [
+      [
+        0.65,
+        12.52,
+        "Supermercado Cotrisal",
+        "node",
+        2492209458,
+        {
+          "name": "Supermercado Cotrisal",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0116",
+    "nome": "Supermercado Lavarda",
+    "endereco": "RUA RAIMUNDO LEONARDI, 10 - CASA",
+    "cidade": "Ronda Alta",
+    "candidatos": [
+      [
+        0.8,
+        18.44,
+        "Supermercado Orlando",
+        "node",
+        8954357407,
+        {
+          "addr:city": "Campinas do Sul",
+          "addr:housenumber": "830",
+          "addr:postcode": "99660-000",
+          "addr:street": "Rua Pedro Alvares Cabral",
+          "addr:suburb": "Centro",
+          "name": "Supermercado Orlando",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0121",
+    "nome": "Hidromineradora Valle Azul",
+    "endereco": "RODOVIA BR 386, SN - KM 149",
+    "cidade": "Almirante Tamandare Do Sul",
+    "candidatos": [
+      [
+        0.694,
+        10.63,
+        "Água Mineral Valle Azul",
+        "node",
+        12805293582,
+        {
+          "name": "Água Mineral Valle Azul",
+          "office": "company"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0130",
+    "nome": "Concregial",
+    "endereco": "ESTRADA CONSTANTINA P/ L. TAQUARUCU KM02, S/N",
+    "cidade": "Constantina",
+    "candidatos": [
+      [
+        0.667,
+        0.62,
+        "Cotrisal",
+        "way",
+        1294606650,
+        {
+          "building": "commercial",
+          "building:use": "commercial",
+          "level": "0",
+          "name": "Cotrisal",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0144",
+    "nome": "Auto Posto Dois Irmaos",
+    "endereco": "AVENIDA JULIO DE MAILHOS, 1538",
+    "cidade": "Pontão",
+    "candidatos": [
+      [
+        0.65,
+        18.43,
+        "Auto Posto Segredo",
+        "node",
+        7082936287,
+        {
+          "amenity": "fuel",
+          "brand": "Shell",
+          "brand:wikidata": "Q110716465",
+          "name": "Auto Posto Segredo"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0145",
+    "nome": "Auto Posto Pontao",
+    "endereco": "ACESSO ESTRADA RS-324, KM-169, S/N - KM",
+    "cidade": "Pontão",
+    "candidatos": [
+      [
+        0.686,
+        18.82,
+        "Auto Posto Segredo",
+        "node",
+        7082936287,
+        {
+          "amenity": "fuel",
+          "brand": "Shell",
+          "brand:wikidata": "Q110716465",
+          "name": "Auto Posto Segredo"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0167",
+    "nome": "Posto Amigao",
+    "endereco": "RODV. RS 324 KM 59+700, SN",
+    "cidade": "Três Palmeiras",
+    "candidatos": [
+      [
+        0.769,
+        17.53,
+        "Posto Tradição",
+        "node",
+        14079212201,
+        {
+          "amenity": "fuel",
+          "check_date": "2026-08-07",
+          "check_date:opening_hours": "2026-08-07",
+          "name": "Posto Tradição",
+          "opening_hours": "Mo-Sa 06:00-22:40; Su 08:00-12:00, 14:00-20:00"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0173",
+    "nome": "Mecanica Andrecar",
+    "endereco": ", ",
+    "cidade": "Sagrada Familia",
+    "candidatos": [
+      [
+        0.788,
+        11.72,
+        "Mecânica Zandoná",
+        "node",
+        3241925537,
+        {
+          "name": "Mecânica Zandoná",
+          "shop": "car_repair"
+        }
+      ],
+      [
+        0.688,
+        10.97,
+        "Mecânica Brocco",
+        "way",
+        550701309,
+        {
+          "building": "yes",
+          "name": "Mecânica Brocco",
+          "shop": "car_repair"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0181",
+    "nome": "Comercial Palmeira",
+    "endereco": "AVENIDA INDEPENDENCIA, 349",
+    "cidade": "Palmeira das Missões",
+    "candidatos": [
+      [
+        0.703,
+        16.76,
+        "Comercial Líder Sul",
+        "node",
+        3241925541,
+        {
+          "name": "Comercial Líder Sul",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0193",
+    "nome": "Andrioli Esportes",
+    "endereco": "AVENIDA FLORES DA CUNHA, 1602",
+    "cidade": "Carazinho",
+    "candidatos": [
+      [
+        0.69,
+        0.23,
+        "Auto Esporte",
+        "way",
+        546854566,
+        {
+          "building": "yes",
+          "name": "Auto Esporte",
+          "shop": "car_parts"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0195",
+    "nome": "Carazinho Motos",
+    "endereco": "AVENIDA FLORES DA CUNHA, 3608",
+    "cidade": "Carazinho",
+    "candidatos": [
+      [
+        0.903,
+        3.6,
+        "Carazinho Postos",
+        "node",
+        3907372401,
+        {
+          "amenity": "fuel",
+          "name": "Carazinho Postos",
+          "opening_hours": "06:00-22:00"
+        }
+      ],
+      [
+        0.727,
+        1.36,
+        "Carazinho Veículos",
+        "way",
+        546854538,
+        {
+          "addr:city": "CARAZINHO",
+          "addr:housenumber": "2339",
+          "addr:postcode": "99500-000",
+          "addr:street": "Avenida Flores da Cunha",
+          "addr:suburb": "PADUA",
+          "brand": "Revenda Chevrolet",
+          "building": "yes",
+          "name": "Carazinho Veículos",
+          "shop": "car",
+          "website": "https://carazinhochevrolet.com.br/modelos?cid=meu_negocio-ddp-198438"
+        }
+      ],
+      [
+        0.667,
+        0.57,
+        "AC Carazinho",
+        "way",
+        544653060,
+        {
+          "addr:housenumber": "1197",
+          "addr:postcode": "99500-970",
+          "addr:street": "Avenida Flores da Cunha",
+          "amenity": "post_office",
+          "building": "yes",
+          "contact:phone": "+55 54 3318-6334",
+          "name": "AC Carazinho"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0201",
+    "nome": "Geral Materiais De Construcao",
+    "endereco": "AVENIDA FLORES DA CUNHA, 2780",
+    "cidade": "Carazinho",
+    "candidatos": [
+      [
+        0.881,
+        2.16,
+        "Nelsão Materiais de Construção",
+        "way",
+        444212958,
+        {
+          "addr:housenumber": "32",
+          "addr:street": "Rua Humberto de Campos",
+          "building": "yes",
+          "name": "Nelsão Materiais de Construção",
+          "shop": "hardware"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0208",
+    "nome": "Posto Cavol",
+    "endereco": "BR 386 KM 180, S/N",
+    "cidade": "Carazinho",
+    "candidatos": [
+      [
+        1.0,
+        1.71,
+        "POSTO CAVOL",
+        "node",
+        3886335163,
+        {
+          "addr:city": "CARAZINHO",
+          "addr:housenumber": "2967",
+          "addr:postcode": "99500-000",
+          "addr:street": "Avenida Flores da Cunha",
+          "amenity": "fuel",
+          "description": "Posto muito bem conceituado. Ainda mais porque incentiva o estudo e disponibiliza o <a href=\"http://blogmamiferas.com.br/descomplica/\" rel=\"\">descomplica</a> para todos que querem passar no ENEM",
+          "name": "POSTO CAVOL"
+        }
+      ],
+      [
+        0.72,
+        19.47,
+        "Posto Tradição",
+        "way",
+        708399128,
+        {
+          "addr:city": "Não-Me-Toque",
+          "addr:postcode": "99470-000",
+          "addr:street": "Avenida Doutor Waldomiro Graeff",
+          "addr:suburb": "Centro",
+          "amenity": "fuel",
+          "brand": "Shell",
+          "name": "Posto Tradição"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0211",
+    "nome": "Rhriss Combustiveis",
+    "endereco": "BR 386, S/N - KM 178",
+    "cidade": "Carazinho",
+    "candidatos": [
+      [
+        0.792,
+        4.3,
+        "RHRiss Postos de combustíveis",
+        "way",
+        548424422,
+        {
+          "addr:city": "Carazinho",
+          "addr:housenumber": "178",
+          "addr:postcode": "99500-000",
+          "addr:street": "Rodovia Governador Leonel de Moura Brizola",
+          "amenity": "fuel",
+          "brand": "BR",
+          "name": "RHRiss Postos de combustíveis",
+          "opening_hours": "sunrise-sunset",
+          "operator": "Petrobras"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0217",
+    "nome": "Soder",
+    "endereco": "AVENIDA FLORES DA CUNHA, 6015",
+    "cidade": "Carazinho",
+    "candidatos": [
+      [
+        0.667,
+        1.2,
+        "Sorg",
+        "way",
+        557693204,
+        {
+          "amenity": "school",
+          "name": "Sorg"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0221",
+    "nome": "Posto Rozo",
+    "endereco": "RUA VALENTIN STEFANELLO, 061",
+    "cidade": "Jaboticaba",
+    "candidatos": [
+      [
+        0.818,
+        13.38,
+        "Posto RodOil",
+        "node",
+        3241925528,
+        {
+          "amenity": "fuel",
+          "name": "Posto RodOil"
+        }
+      ],
+      [
+        0.696,
+        13.45,
+        "Posto do Nego",
+        "node",
+        3241925529,
+        {
+          "amenity": "fuel",
+          "name": "Posto do Nego"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0222",
+    "nome": "Supermercado Tesca",
+    "endereco": "AVENIDA GETULIO VARGAS, 279",
+    "cidade": "Jaboticaba",
+    "candidatos": [
+      [
+        0.821,
+        13.32,
+        "Supermercado Cotrisal",
+        "node",
+        3241925543,
+        {
+          "name": "Supermercado Cotrisal",
+          "shop": "supermarket"
+        }
+      ],
+      [
+        0.744,
+        16.89,
+        "Supermercado e Lojas Lavy",
+        "way",
+        554748129,
+        {
+          "building": "yes",
+          "name": "Supermercado e Lojas Lavy",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0232",
+    "nome": "Mercado Tche",
+    "endereco": ", ",
+    "cidade": "Boa Vista Das Missoes",
+    "candidatos": [
+      [
+        0.72,
+        12.5,
+        "Mercado Piuco",
+        "node",
+        3241925539,
+        {
+          "name": "Mercado Piuco",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0244",
+    "nome": "Mercado Renascer",
+    "endereco": "AVENIDA JORGE MULLER, 1467",
+    "cidade": "Santo Antonio Do Planalto",
+    "candidatos": [
+      [
+        0.765,
+        12.39,
+        "Mercado Nascimento",
+        "node",
+        4376443504,
+        {
+          "addr:city": "Carazinho",
+          "addr:housenumber": "502",
+          "addr:postcode": "99500-000",
+          "addr:street": "Rua Henrique Theodoro Schultz",
+          "addr:suburb": "Vila Rica",
+          "amenity": "marketplace",
+          "name": "Mercado Nascimento",
+          "opening_hours": "08:30-12:00,14:00-19:00"
+        }
+      ],
+      [
+        0.71,
+        14.73,
+        "Mercado Graebin",
+        "node",
+        6653389901,
+        {
+          "addr:street": "Rua Alferes Rodrigo",
+          "amenity": "marketplace",
+          "name": "Mercado Graebin",
+          "phone": "+55 54 99916-8668"
+        }
+      ],
+      [
+        0.688,
+        14.71,
+        "Mercado Ipiranga",
+        "way",
+        812688580,
+        {
+          "addr:city": "Carazinho",
+          "addr:housenumber": "1487",
+          "addr:postcode": "99500-000",
+          "addr:street": "Rua Ipiranga",
+          "building": "yes",
+          "name": "Mercado Ipiranga",
+          "opening_hours": "Mo-Fr 08:00-17:00",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0250",
+    "nome": "Farmacia Central",
+    "endereco": "RUA DALTRO FILHO, 361 - SALA 01",
+    "cidade": "Sertão",
+    "candidatos": [
+      [
+        0.722,
+        19.91,
+        "Farmácias Cesarfarma",
+        "node",
+        6659169332,
+        {
+          "addr:housenumber": "548",
+          "addr:street": "Avenida Padre Antônio Vieira",
+          "amenity": "pharmacy",
+          "name": "Farmácias Cesarfarma"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0259",
+    "nome": "Atitus Educacao",
+    "endereco": "RUA SENADOR PINHEIRO, 304",
+    "cidade": "Passo Fundo",
+    "candidatos": [
+      [
+        1.0,
+        0.97,
+        "Atitus Educação",
+        "way",
+        544856625,
+        {
+          "amenity": "university",
+          "name": "Atitus Educação"
+        }
+      ],
+      [
+        0.667,
+        1.26,
+        "Instituto Educacional",
+        "way",
+        545336410,
+        {
+          "amenity": "school",
+          "name": "Instituto Educacional",
+          "operator": "Igreja Metodista"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0262",
+    "nome": "Brair Imoveis",
+    "endereco": "AVENIDA BRASIL OESTE, 665 - SOBRELOJA SALA 03",
+    "cidade": "Passo Fundo",
+    "candidatos": [
+      [
+        0.741,
+        1.14,
+        "Master Imóveis",
+        "node",
+        13050673863,
+        {
+          "name": "Master Imóveis",
+          "office": "estate_agent"
+        }
+      ],
+      [
+        0.733,
+        1.36,
+        "Bortolini Imóveis",
+        "node",
+        11287177550,
+        {
+          "name": "Bortolini Imóveis",
+          "office": "estate_agent"
+        }
+      ],
+      [
+        0.733,
+        1.37,
+        "Bortolini Imóveis",
+        "node",
+        11287180311,
+        {
+          "name": "Bortolini Imóveis",
+          "office": "estate_agent"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0265",
+    "nome": "Compass.Uol",
+    "endereco": "AVENIDA SETE DE SETEMBRO, 496 - ANDAR 1 SALA 206 SALA A",
+    "cidade": "Passo Fundo",
+    "candidatos": [
+      [
+        0.889,
+        0.71,
+        "Compasso",
+        "node",
+        13043292027,
+        {
+          "name": "Compasso",
+          "office": "insurance"
+        }
+      ],
+      [
+        0.737,
+        1.19,
+        "Comprauto",
+        "way",
+        1462900860,
+        {
+          "building": "yes",
+          "name": "Comprauto",
+          "shop": "car"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0277",
+    "nome": "Comercial Agroleite",
+    "endereco": "RODOVIA RS 223, S/N - KM 28,3",
+    "cidade": "Tapera",
+    "candidatos": [
+      [
+        0.703,
+        6.83,
+        "Comercial Hartmann",
+        "way",
+        825197762,
+        {
+          "name": "Comercial Hartmann",
+          "shop": "clothes"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0278",
+    "nome": "Comercial Bortolan",
+    "endereco": "RODOVIA RS 332, 775 - BLOCO A PREDIO 03 E 04",
+    "cidade": "Tapera",
+    "candidatos": [
+      [
+        0.778,
+        7.07,
+        "Comercial Hartmann",
+        "way",
+        825197762,
+        {
+          "name": "Comercial Hartmann",
+          "shop": "clothes"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0305",
+    "nome": "Supermercado Bom Preco",
+    "endereco": ", ",
+    "cidade": "Colorado",
+    "candidatos": [
+      [
+        0.739,
+        17.97,
+        "Supermercado Casa do Pão",
+        "way",
+        827245181,
+        {
+          "addr:street": "Avenida Doutor Waldomiro Graeff",
+          "name": "Supermercado Casa do Pão",
+          "shop": "supermarket"
+        }
+      ],
+      [
+        0.698,
+        18.01,
+        "Supermercado Cotrijal",
+        "way",
+        708399130,
+        {
+          "addr:street": "Rua Liberato Salzano",
+          "building": "supermarket",
+          "building:levels": "2",
+          "height": "8",
+          "name": "Supermercado Cotrijal",
+          "shop": "supermarket"
+        }
+      ],
+      [
+        0.667,
+        9.33,
+        "Mercado São Pedro",
+        "way",
+        662478536,
+        {
+          "building": "yes",
+          "name": "Mercado São Pedro",
+          "shop": "convenience",
+          "source": "IBGE"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0308",
+    "nome": "M G Transportes",
+    "endereco": "AVENIDA DARCY ANTONIO VICENZI, 646 - PRIMEIRO ANDAR",
+    "cidade": "Coxilha",
+    "candidatos": [
+      [
+        0.727,
+        18.09,
+        "UNESUL Transportes",
+        "way",
+        549070127,
+        {
+          "building": "yes",
+          "name": "UNESUL Transportes",
+          "office": "company"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0311",
+    "nome": "Restaurante Recanto Dos Pinheiros",
+    "endereco": "RODOVIA RS 135, S/N - KM 14",
+    "cidade": "Coxilha",
+    "candidatos": [
+      [
+        0.679,
+        15.64,
+        "RESTAURANTE São José",
+        "way",
+        710775008,
+        {
+          "addr:city": "Passo Fundo",
+          "addr:housenumber": "83",
+          "addr:postcode": "99052-030",
+          "addr:street": "Avenida Luiz de Camões",
+          "addr:suburb": "São José",
+          "building": "yes",
+          "name": "RESTAURANTE São José",
+          "opening_hours": "Mo-Sa 08:00-19:00",
+          "phone": "+55 54 3312-5707",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0365",
+    "nome": "Auto Posto G.S.",
+    "endereco": "AVENIDA FLORES DA CUNHA, 1874",
+    "cidade": "Seberi",
+    "candidatos": [
+      [
+        1.0,
+        0.59,
+        "Auto Posto GS",
+        "node",
+        815618722,
+        {
+          "addr:street": "Avenida Flores da Cunha",
+          "amenity": "fuel",
+          "diesel": "yes",
+          "ethanol": "yes",
+          "name": "Auto Posto GS"
+        }
+      ],
+      [
+        1.0,
+        0.97,
+        "Auto Posto GS",
+        "node",
+        815618734,
+        {
+          "addr:street": "Avenida Flores da Cunha",
+          "amenity": "fuel",
+          "name": "Auto Posto GS"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0381",
+    "nome": "L.P. Minerais Do Brasil",
+    "endereco": "AVENIDA BENTO GONCALVES, 1900",
+    "cidade": "Ametista Do Sul",
+    "candidatos": [
+      [
+        1.0,
+        0.88,
+        "L.P. Minerais do Brasil",
+        "node",
+        7969535885,
+        {
+          "addr:housenumber": "1900",
+          "addr:postcode": "98465-000",
+          "addr:street": "Avenida Bento Gonçalves",
+          "name": "L.P. Minerais do Brasil",
+          "opening_hours": "Mo-Fr 09:00-18:00; Sa 08:45-14:00; Su 08:00-12:00",
+          "phone": "+55 55 3752-1100",
+          "shop": "department_store"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0385",
+    "nome": "Mercado Martinello",
+    "endereco": "AVENIDA FORTALEZA, 132 - SALA 1",
+    "cidade": "Seberi",
+    "candidatos": [
+      [
+        0.727,
+        14.52,
+        "Mercador Jardel",
+        "node",
+        2061050923,
+        {
+          "name": "Mercador Jardel",
+          "shop": "convenience"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0390",
+    "nome": "Posto Seberi",
+    "endereco": "RODOVIA BR 386, S/N - KM 51",
+    "cidade": "Seberi",
+    "candidatos": [
+      [
+        0.72,
+        11.66,
+        "Posto Serrano",
+        "node",
+        1843149680,
+        {
+          "addr:postcode": "98400-000",
+          "addr:suburb": "Bela Vista",
+          "amenity": "fuel",
+          "brand": "BR",
+          "name": "Posto Serrano",
+          "opening_hours": "24/7",
+          "operator": "Petrobras",
+          "phone": "+55 55 3744-3774",
+          "website": "http://www.hotelepostoserrano.com.br/",
+          "wheelchair": "limited"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0440",
+    "nome": "Master Sonda Hipermercados",
+    "endereco": "AVENIDA SETE DE SETEMBRO, 1200",
+    "cidade": "Erechim",
+    "candidatos": [
+      [
+        0.667,
+        1.14,
+        "Caitá Supermercados",
+        "node",
+        3014193141,
+        {
+          "name": "Caitá Supermercados",
+          "shop": "supermarket"
+        }
+      ],
+      [
+        0.667,
+        1.18,
+        "Caitá Supermercados",
+        "way",
+        756660121,
+        {
+          "addr:city": "Erechim",
+          "addr:housenumber": "307",
+          "addr:street": "Rua Emílio Grando",
+          "addr:suburb": "Centro",
+          "building": "yes",
+          "name": "Caitá Supermercados",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0471",
+    "nome": "Hospital Annes Dias",
+    "endereco": "RUA DINIZ DIAS, 309",
+    "cidade": "Ibirubá",
+    "candidatos": [
+      [
+        0.844,
+        0.19,
+        "Antigo Hospital Annes Dias",
+        "way",
+        815839474,
+        {
+          "addr:city": "Ibirubá",
+          "addr:housenumber": "309",
+          "addr:postcode": "98200-000",
+          "addr:street": "Rua Diniz Dias",
+          "addr:suburb": "Centro",
+          "amenity": "hospital",
+          "healthcare": "hospital",
+          "name": "Antigo Hospital Annes Dias",
+          "ref:CNES": "5395674",
+          "ref:vatin": "BR07964977000178"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0472",
+    "nome": "Ibisul",
+    "endereco": "RUA ETWIN SCHWEIG FILHO, 63",
+    "cidade": "Ibirubá",
+    "candidatos": [
+      [
+        0.714,
+        0.39,
+        "Banrisul",
+        "node",
+        5695821130,
+        {
+          "amenity": "bank",
+          "brand": "Banrisul",
+          "brand:wikidata": "Q4857098",
+          "brand:wikipedia": "en:Banrisul",
+          "name": "Banrisul",
+          "source": "IBGE"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0502",
+    "nome": "Supermercado Barril",
+    "endereco": "RUA APARICIO BORGES, 216",
+    "cidade": "Frederico Westphalen",
+    "candidatos": [
+      [
+        1.0,
+        0.13,
+        "Supermercado Barril",
+        "node",
+        1978960291,
+        {
+          "name": "Supermercado Barril",
+          "shop": "supermarket"
+        }
+      ],
+      [
+        0.811,
+        0.56,
+        "Supermercado Silva",
+        "node",
+        1978978383,
+        {
+          "name": "Supermercado Silva",
+          "shop": "supermarket"
+        }
+      ],
+      [
+        0.762,
+        0.68,
+        "Supermercado Bertoletti",
+        "node",
+        1788030119,
+        {
+          "name": "Supermercado Bertoletti",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0505",
+    "nome": "Terras Barril",
+    "endereco": "RUA PAULO VI, 270",
+    "cidade": "Frederico Westphalen",
+    "candidatos": [
+      [
+        0.688,
+        0.9,
+        "Supermercado Barril",
+        "node",
+        1978960291,
+        {
+          "name": "Supermercado Barril",
+          "shop": "supermarket"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0546",
+    "nome": "Javali",
+    "endereco": "AVENIDA 7 DE SETEMBRO, 154",
+    "cidade": "Tapejara",
+    "candidatos": [
+      [
+        1.0,
+        1.44,
+        "Javali",
+        "way",
+        544583020,
+        {
+          "building": "yes",
+          "name": "Javali",
+          "shop": "clothes"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0562",
+    "nome": "Sucata Marau",
+    "endereco": "RUA MIGUEL ANGELO PEGORETTI, 780",
+    "cidade": "Marau",
+    "candidatos": [
+      [
+        0.667,
+        0.77,
+        "CFC Marau",
+        "way",
+        1451855717,
+        {
+          "amenity": "driving_school",
+          "education": "driving_school",
+          "name": "CFC Marau"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0564",
+    "nome": "Super Danieli",
+    "endereco": "AVENIDA VALDO NUNES VIEIRA, 323 - SALA 2",
+    "cidade": "Tapejara",
+    "candidatos": [
+      [
+        0.788,
+        0.59,
+        "Supermercado Danieli",
+        "way",
+        544587658,
+        {
+          "building": "yes",
+          "name": "Supermercado Danieli",
+          "shop": "supermarket"
+        }
+      ],
+      [
+        0.667,
+        14.38,
+        "Postos Danieli",
+        "node",
+        12328968764,
+        {
+          "amenity": "fuel",
+          "check_date": "2024-11-10",
+          "internet_access": "wlan",
+          "internet_access:fee": "no",
+          "name": "Postos Danieli",
+          "name:pt": "Postos Danieli",
+          "payment:cash": "yes",
+          "payment:credit_cards": "yes",
+          "payment:debit_cards": "yes"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0570",
+    "nome": "Agrosul",
+    "endereco": "RUA DR. VESPASIANO CORREA, 105 - PAVLH INDUSTRIAL",
+    "cidade": "Vila Maria",
+    "candidatos": [
+      [
+        0.667,
+        0.28,
+        "Banrisul",
+        "node",
+        6170770541,
+        {
+          "amenity": "bank",
+          "brand": "Banrisul",
+          "brand:wikidata": "Q4857098",
+          "name": "Banrisul",
+          "source": "IBGE"
+        }
+      ],
+      [
+        0.667,
+        10.33,
+        "Banrisul",
+        "way",
+        562519393,
+        {
+          "amenity": "bank",
+          "brand": "Banrisul",
+          "brand:wikidata": "Q4857098",
+          "brand:wikipedia": "en:Banrisul",
+          "building": "yes",
+          "name": "Banrisul"
+        }
+      ],
+      [
+        0.667,
+        17.81,
+        "Banrisul",
+        "node",
+        5058824244,
+        {
+          "addr:city": "Casca",
+          "addr:housenumber": "1018",
+          "addr:postcode": "99260-000",
+          "addr:street": "Rua Tiradentes",
+          "addr:suburb": "Centro",
+          "amenity": "bank",
+          "brand": "Banrisul",
+          "brand:wikidata": "Q4857098",
+          "brand:wikipedia": "en:Banrisul",
+          "name": "Banrisul",
+          "operator": "Banco do Estado do Rio Grande do Sul S/A",
+          "phone": "+55 54 3347-3350"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CLI-REAL-0598",
+    "nome": "Ll Mercado E Restaurante",
+    "endereco": ", ",
+    "cidade": "Camargo",
+    "candidatos": [
+      [
+        0.696,
+        14.52,
+        "GourmeTchê Restaurante",
+        "node",
+        12993404331,
+        {
+          "addr:city": "Marau",
+          "addr:housenumber": "1040",
+          "addr:postcode": "99150-000",
+          "addr:street": "Avenida Barão do Rio Branco",
+          "addr:suburb": "Centro",
+          "amenity": "restaurant",
+          "check_date:currency:XBT": "2025-07-11",
+          "contact:instagram": "https://www.instagram.com/gourmetche_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+          "currency:XBT": "yes",
+          "name": "GourmeTchê Restaurante",
+          "opening_hours": "Mo-Sa 11:00-14:00",
+          "payment:lightning": "yes",
+          "payment:lightning_contactless": "no",
+          "payment:onchain": "yes",
+          "phone": "+55 54 99655 9239"
+        }
+      ]
+    ]
+  },
+  {
+    "cliente": "CONTAB-0006",
+    "nome": "Central Contábil Carazinho",
+    "endereco": "AVENIDA FLORES DA CUNHA, 1680",
+    "cidade": "Carazinho",
+    "candidatos": [
+      [
+        0.714,
+        0.87,
+        "Hospital Comunitário carazinho",
+        "way",
+        531584244,
+        {
+          "addr:city": "Carazinho",
+          "addr:housenumber": "70",
+          "addr:postcode": "99500-000",
+          "addr:street": "Rua General Camara",
+          "addr:suburb": "Centro",
+          "amenity": "hospital",
+          "email": "hcc@wavetec.com.br",
+          "fax": "+55 54 3329 9898",
+          "healthcare": "hospital",
+          "name": "Hospital Comunitário carazinho",
+          "ref:CNES": "2262274",
+          "ref:vatin": "BR88450234000181"
+        }
+      ]
+    ]
+  }
+]

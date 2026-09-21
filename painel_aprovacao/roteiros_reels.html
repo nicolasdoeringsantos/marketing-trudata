@@ -1,110 +1,60 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>20 Roteiros para Reels & Vídeos Curtos (AIDA) — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: { brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' } },
-          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
-        }
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Material preservado na biblioteca</h1>
+      <p style="margin-top: 24px">
+        Os textos das coleções anteriores estão na biblioteca de referência para
+        consulta e adaptação. A versão original completa também foi preservada,
+        sem publicação automática.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="biblioteca.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    }
-  </script>
-  <style>
-    body { background-color: #080c14; color: #f1f5f9; }
-    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased flex flex-col">
-
-  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
-        ← Voltar ao Hub Central
-      </a>
-      <div class="flex items-center gap-2">
-        <a href="teleprompter.html" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold rounded-lg transition flex items-center gap-1.5">
-          🎬 Abrir Teleprompter Web
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-6xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
-    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-8">
-        <div>
-          <span class="text-[11px] font-bold text-rose-400 uppercase tracking-wider bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
-            Fórmula AIDA: Vídeos de 30 a 50 Segundos
-          </span>
-          <h1 class="text-2xl sm:text-3xl font-black font-display text-white mt-3">20 Roteiros de Reels & Vídeos Comerciais</h1>
-          <p class="text-xs sm:text-sm text-slate-400 mt-1">Grave vídeos que prendem a atenção nos primeiros 3 segundos e convertem lojistas no Instagram e WhatsApp.</p>
-        </div>
-      </div>
-
-      <!-- GRID DE ROTEIROS -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="grid-roteiros">
-        <!-- Inserido dinamicamente via JS -->
-      </div>
-    </div>
-  </main>
-
-  <script>
-    const ROTEIROS = [
-      { id: 1, titulo: "Sábado de Chuva e Loja Parada", nicho: "Geral", gancho: "Caiu a internet da sua loja no sábado de manhã? O que você faz?", dor: "A maioria dos sistemas em nuvem simplesmente trava a tela e o cliente vai embora furioso.", solucao: "Com o TruData ERP você continua emitindo normalmente em modo offline e nem percebe a queda.", cta: "Pare de perder vendas. Digite 'OFFLINE' no direct para testar!" },
-      { id: 2, titulo: "A Fila do Açougue e a Balança", nicho: "Mercados", gancho: "Você ainda digita código de produto da balança na mão no caixa?", dor: "Isso atrasa a fila, erra o preço e irrita quem está esperando.", solucao: "O TruData conecta com todas as balanças Toledo e Filizola. O leitor lê o código de barras da etiqueta e passa em 1 segundo.", cta: "Quer agilizar seu caixa? Fale com nosso suporte em Sarandi." },
-      { id: 3, titulo: "Onde Foi Parar o Calçado 37?", nicho: "Moda/Calçados", gancho: "O cliente pediu o tênis número 37 preto e ninguém acha no estoque?", dor: "Você perde a venda e o cliente compra no concorrente.", solucao: "Com o controle de grade Cor x Tamanho do TruData ERP você sabe a prateleira exata em 2 segundos.", cta: "Comente 'GRADE' para ver uma demonstração de 5 minutos." },
-      { id: 4, titulo: "Robô de Suporte vs Gente de Verdade", nicho: "Diferencial", gancho: "Você já ficou 40 minutos ouvindo musiquinha de espera no suporte do seu ERP?", dor: "Quando o caixa trava no sábado, você não pode esperar ticket de 24 horas.", solucao: "Aqui na Hansen Software em Sarandi - RS você é atendido por gente de verdade por fone e WhatsApp em menos de 15 minutos.", cta: "Valorize quem está perto de você. Venha para a TruData." },
-      { id: 5, titulo: "Seu Contador no Dia 14 do Mês", nicho: "Fiscal", gancho: "O seu contador vive te cobrando arquivo SPED que dá erro no PVA?", dor: "Erro fiscal gera retrabalho, estresse e risco de multa da SEFAZ.", solucao: "O TruData ERP gera o SPED Fiscal e EFD 100% amarrados direto da entrada do XML. O contador recebe redondo.", cta: "Deixe seu contador feliz. Agende uma demonstração fiscal." },
-      { id: 6, titulo: "Você Paga Imposto Monofásico 2x?", nicho: "Fiscal", gancho: "Você sabia que pode estar pagando imposto em dobro todo mês na sua loja?", dor: "Bebidas, remédios e cosméticos têm alíquota zero de PIS/COFINS na revenda.", solucao: "O TruData faz a segregação automática de monofásicos no caixa e economiza milhares de reais por ano.", cta: "Descubra quanto você pode economizar. Mande uma mensagem agora." },
-      { id: 7, titulo: "Erro de Digitação no Cartão", nicho: "Financeiro", gancho: "Já conferiu o relatório de cartão e viu que o operador digitou 10 reais em vez de 100?", dor: "Prejuízo direto no bolso do dono da loja.", solucao: "Com o TEF integrado TruData, o caixa passa o valor direto para a máquina sem o operador digitar um centavo.", cta: "Chega de erro no cartão. Instale o TEF TruData." },
-      { id: 8, titulo: "Vender Muito e Sobrar Pouco", nicho: "Gestão", gancho: "Sua loja bate recorde de vendas no mês mas a conta bancária continua vazia?", dor: "Sem DRE gerencial, você não sabe onde seu lucro está vazando.", solucao: "O DRE do TruData te mostra exatamente o custo fixo, margem real por produto e lucro líquido.", cta: "Assuma o controle do seu negócio. Fale com nosso consultor." },
-      { id: 9, titulo: "Farmácia e Controle de Anvisa", nicho: "Farmácias", gancho: "O controle de controlados e SNGPC da sua drogaria é uma dor de cabeça?", dor: "Multa da vigilância sanitária é pesada e pode interditar a loja.", solucao: "O módulo farma TruData controla lotes, datas de validade e faz transmissão automática do SNGPC.", cta: "Proteja sua farmácia com quem entende do assunto." },
-      { id: 10, titulo: "Reforma Tributária 2026", nicho: "Fiscal", gancho: "Sua empresa já está pronta para o IBS e CBS que entram em 2026?", dor: "Quem deixar para última hora vai ter dor de cabeça com transição de sistemas.", solucao: "O TruData ERP já tem o simulador e motor tributário pronto para a nova legislação.", cta: "Esteja um passo à frente. Agende seu diagnóstico tributário." }
-    ];
-
-    function renderizarRoteiros() {
-      const container = document.getElementById('grid-roteiros');
-      container.innerHTML = ROTEIROS.map(r => `
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-            <span class="text-xs font-bold text-rose-400 font-display uppercase tracking-wider">ROTEIRO #${r.id} · ${r.nicho}</span>
-            <button onclick="copiarRoteiro(${r.id})" class="text-[11px] text-brand-azure hover:underline font-semibold">Copiar Roteiro</button>
-          </div>
-          <h3 class="text-sm font-black text-white font-display">"${r.titulo}"</h3>
-          <div class="space-y-2 text-xs">
-            <p><strong class="text-amber-400">⚡ Gancho (0-3s):</strong> <span class="text-slate-200">"${r.gancho}"</span></p>
-            <p><strong class="text-rose-400">⚠️ Problema:</strong> <span class="text-slate-300">${r.dor}</span></p>
-            <p><strong class="text-emerald-400">💡 Solução TruData:</strong> <span class="text-slate-300">${r.solucao}</span></p>
-            <p><strong class="text-brand-azure">🎯 Chamada (CTA):</strong> <span class="text-slate-200">${r.cta}</span></p>
-          </div>
-          <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
-            <a href="teleprompter.html" class="text-xs text-rose-400 hover:text-rose-300 font-bold flex items-center gap-1">
-              🎬 Gravar no Teleprompter ↗
-            </a>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function copiarRoteiro(id) {
-      const r = ROTEIROS.find(item => item.id === id);
-      if (r) {
-        const txt = `🎬 ROTEIRO DE VÍDEO (AIDA) — ${r.titulo}\n\n⚡ GANCHO (0-3s):\n"${r.gancho}"\n\n⚠️ DOR:\n${r.dor}\n\n💡 SOLUÇÃO TRUDATA:\n${r.solucao}\n\n🎯 CHAMADA (CTA):\n${r.cta}`;
-        navigator.clipboard.writeText(txt).then(() => alert('Roteiro copiado para gravação!'));
-      }
-    }
-
-    renderizarRoteiros();
-  </script>
-</body>
+    </script>
+  </body>
 </html>

@@ -1,440 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Disparador Ativo WhatsApp & Propostas — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #070b14; color: #f1f5f9; }
-    .wa-bubble {
-      background-color: #005c4b;
-      border-radius: 1rem 1rem 0.25rem 1rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-  </style>
-</head>
-<body class="min-h-screen p-4 sm:p-6 lg:p-8 flex flex-col justify-between">
-
-  <!-- CABEÇALHO EXECUTIVO -->
-  <div class="max-w-7xl mx-auto w-full mb-8">
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900/80 border border-slate-800 p-5 rounded-3xl backdrop-blur-md">
-      <div class="flex items-center gap-3.5">
-        <a href="index.html" class="h-11 w-11 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-lg transition" title="Voltar ao Cockpit">
-          ←
-        </a>
-        <div class="h-11 w-11 rounded-2xl bg-[#25D366]/20 border border-[#25D366]/40 text-[#25D366] flex items-center justify-center text-2xl shadow-lg shadow-emerald-950">
-          📲
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-xl font-black text-white">Disparador Ativo de WhatsApp & Propostas</h1>
-            <span class="text-[10px] uppercase font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
-              <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span id="badge-status-conexao">API Evolution / Baileys Pronta</span>
-            </span>
-          </div>
-          <p class="text-xs text-slate-400 mt-0.5">Envio automatizado de propostas, laudos A4 do Check-up e áudios humanizados para o Norte Gaúcho.</p>
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
       </div>
-
-      <div class="flex items-center gap-3">
-        <button onclick="abrirModalConexao()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold rounded-xl transition flex items-center gap-2">
-          <span>⚙️</span>
-          <span>Status do Chip</span>
-        </button>
-        <a href="radar_clientes.html" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-lg shadow-sky-950">
-          <span>🗺️</span>
-          <span>Ver 600 Leads no Radar</span>
-        </a>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Reunida em Preparar uma conversa</h1>
+      <p style="margin-top: 24px">
+        Mensagens, objeções e roteiros foram reunidos em um editor. A nova
+        versão não promete envio nem atualização automática do CRM.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="cadencia_sdr.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
       </div>
-    </div>
-  </div>
-
-  <!-- CONTEÚDO PRINCIPAL (2 COLUNAS) -->
-  <main class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 mb-8">
-    
-    <!-- COLUNA 1: CONFIGURAÇÃO DO DISPARO (7 COLUNAS) -->
-    <div class="lg:col-span-7 space-y-5">
-      <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-5">
-        <h2 class="text-base font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-3">
-          <span>📝</span>
-          <span>1. Dados do Lojista & Mensagem</span>
-        </h2>
-
-        <!-- Seleção de Lead do CRM ou Manual -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1.5">Carregar Lead do CRM / Radar:</label>
-            <select id="sel-lead" onchange="carregarDadosLead(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 transition">
-              <option value="">-- Digitar Manualmente --</option>
-              <option value="super_sarandi" data-nome="Supermercado Sarandiense" data-cidade="Sarandi" data-fone="54991234567" data-decisor="Seu Carlos">Supermercado Sarandiense (Sarandi - RS)</option>
-              <option value="auto_pf" data-nome="Passo Fundo Auto Peças" data-cidade="Passo Fundo" data-fone="54999887766" data-decisor="Marcio">Passo Fundo Auto Peças (Passo Fundo - RS)</option>
-              <option value="moda_marau" data-nome="Boutique Elegance" data-cidade="Marau" data-fone="54998765432" data-decisor="Dona Sandra">Boutique Elegance (Marau - RS)</option>
-              <option value="agro_carazinho" data-nome="Agropecuária Norte RS" data-cidade="Carazinho" data-fone="54991122334" data-decisor="Rogério">Agropecuária Norte RS (Carazinho - RS)</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1.5">WhatsApp / Celular com DDD:</label>
-            <input type="text" id="txt-fone" oninput="atualizarPrevia()" placeholder="(54) 99123-4567" value="(54) 99123-4567" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-mono focus:outline-none focus:border-emerald-500 transition" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1.5">Nome da Empresa:</label>
-            <input type="text" id="txt-empresa" oninput="atualizarPrevia()" placeholder="Ex: Supermercado Bela Vista" value="Supermercado Sarandiense" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 transition" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1.5">Nome do Decisor / Proprietário:</label>
-            <input type="text" id="txt-decisor" oninput="atualizarPrevia()" placeholder="Ex: Seu Carlos" value="Seu Carlos" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 transition" />
-          </div>
-        </div>
-
-        <!-- Seletor de Modelo de Mensagem -->
-        <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1.5">Estratégia & Modelo da Mensagem:</label>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="grid-templates">
-            <button onclick="selecionarTemplate('checkup', this)" class="btn-tpl p-3 rounded-xl border border-emerald-500 bg-emerald-500/10 text-left transition">
-              <div class="text-xs font-bold text-emerald-300">1. Diagnóstico Check-up 15 Min</div>
-              <div class="text-[10px] text-slate-400 mt-0.5">Laudo de perdas e sangrias no caixa</div>
-            </button>
-            <button onclick="selecionarTemplate('proposta', this)" class="btn-tpl p-3 rounded-xl border border-slate-800 bg-slate-950 text-left transition hover:border-slate-700">
-              <div class="text-xs font-bold text-white">2. Proposta Online 50% Off</div>
-              <div class="text-[10px] text-slate-400 mt-0.5">Link interativo com desconto de setup</div>
-            </button>
-            <button onclick="selecionarTemplate('sefaz', this)" class="btn-tpl p-3 rounded-xl border border-slate-800 bg-slate-950 text-left transition hover:border-slate-700">
-              <div class="text-xs font-bold text-white">3. Alerta Fiscal SEFAZ-RS</div>
-              <div class="text-[10px] text-slate-400 mt-0.5">Contingência offline que não trava</div>
-            </button>
-            <button onclick="selecionarTemplate('cafe', this)" class="btn-tpl p-3 rounded-xl border border-slate-800 bg-slate-950 text-left transition hover:border-slate-700">
-              <div class="text-xs font-bold text-white">4. Visita do Café Presencial</div>
-              <div class="text-[10px] text-slate-400 mt-0.5">Atendimento in-loco de Sarandi (SLA 2h)</div>
-            </button>
-          </div>
-        </div>
-
-        <!-- Anexos Inteligentes -->
-        <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1.5">Anexo Automatizado:</label>
-          <div class="flex items-center gap-3 flex-wrap">
-            <label class="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition text-xs">
-              <input type="radio" name="anexo" value="pdf_checkup" checked onchange="atualizarPrevia()" class="text-emerald-500 focus:ring-0">
-              <span>📄 Laudo Check-up A4 (PDF)</span>
-            </label>
-            <label class="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition text-xs">
-              <input type="radio" name="anexo" value="audio_ptt" onchange="atualizarPrevia()" class="text-emerald-500 focus:ring-0">
-              <span>🎙️ Áudio Humano PTT (0:38)</span>
-            </label>
-            <label class="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition text-xs">
-              <input type="radio" name="anexo" value="none" onchange="atualizarPrevia()" class="text-emerald-500 focus:ring-0">
-              <span>Apenas Texto</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Editor da Mensagem -->
-        <div>
-          <div class="flex items-center justify-between mb-1.5">
-            <label class="text-xs font-bold text-slate-300">Mensagem Formatada (WhatsApp):</label>
-            <span class="text-[10px] text-slate-500">*negrito* · _itálico_ · variáveis automáticas</span>
-          </div>
-          <textarea id="txt-msg" oninput="atualizarPrevia()" rows="5" class="w-full bg-slate-950 border border-slate-700 rounded-2xl p-3 text-xs text-white font-mono leading-relaxed focus:outline-none focus:border-emerald-500 transition"></textarea>
-        </div>
-
-        <!-- Botões de Ação de Disparo -->
-        <div class="pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center gap-3">
-          <button onclick="dispararViaAPI()" id="btn-disparar" class="w-full sm:flex-1 py-3.5 px-6 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black text-xs transition shadow-lg shadow-emerald-950 flex items-center justify-center gap-2 cursor-pointer">
-            <span>⚡</span>
-            <span>Disparar Mensagem + Anexo via API Local</span>
-          </button>
-          <button onclick="abrirWhatsAppWeb()" class="w-full sm:w-auto py-3.5 px-5 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold text-xs transition flex items-center justify-center gap-2 cursor-pointer">
-            <span>📲</span>
-            <span>Abrir no Web / App</span>
-          </button>
-          <button onclick="copiarTexto()" class="w-full sm:w-auto py-3.5 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 font-bold text-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
-            <span>📋</span>
-            <span>Copiar</span>
-          </button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- COLUNA 2: SIMULADOR DE TELA DO WHATSAPP (5 COLUNAS) -->
-    <div class="lg:col-span-5 space-y-5">
-      <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 shadow-xl space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-          <div class="flex items-center gap-2.5">
-            <span class="text-xl">👁️</span>
-            <div>
-              <h3 class="text-sm font-bold text-white">Visualização em Tempo Real</h3>
-              <p class="text-[10px] text-slate-400">Como o lojista receberá no smartphone</p>
-            </div>
-          </div>
-          <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Modo Balcão</span>
-        </div>
-
-        <!-- MOLDURA DE CELULAR WHATSAPP -->
-        <div class="bg-[#0b141a] border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
-          <!-- Top bar do chat -->
-          <div class="bg-[#202c33] p-3 flex items-center gap-3 border-b border-slate-800">
-            <div class="h-9 w-9 rounded-full bg-gradient-to-tr from-brand-azure to-emerald-400 text-slate-950 font-black flex items-center justify-center text-sm font-display shrink-0">
-              T
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="text-xs font-bold text-white truncate" id="preview-header-nome">Supermercado Sarandiense</div>
-              <div class="text-[10px] text-emerald-400 flex items-center gap-1">
-                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-                <span>TruData ERP · Consultor Regional</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Área da Mensagem -->
-          <div class="p-4 space-y-3 min-h-[320px] flex flex-col justify-end bg-repeat" style="background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0); background-size: 16px 16px;">
-            
-            <!-- Anexo de Áudio PTT (Se ativo) -->
-            <div id="preview-anexo-audio" class="hidden wa-bubble p-3 self-end max-w-[88%] text-white text-xs space-y-2">
-              <div class="flex items-center gap-3">
-                <button onclick="tocarAudioSimulado()" class="h-10 w-10 rounded-full bg-emerald-400 text-slate-950 flex items-center justify-center font-bold text-base shrink-0 shadow">
-                  ▶
-                </button>
-                <div class="flex-1 min-w-0">
-                  <div class="h-1.5 bg-emerald-400/40 rounded-full overflow-hidden">
-                    <div class="h-full bg-white w-1/3 rounded-full"></div>
-                  </div>
-                  <div class="flex justify-between text-[10px] text-emerald-200 mt-1">
-                    <span>0:12</span>
-                    <span>0:38</span>
-                  </div>
-                </div>
-              </div>
-              <div class="text-[9px] text-emerald-200/80 text-right">Mensagem de Voz · TruData Sarandi</div>
-            </div>
-
-            <!-- Anexo de Documento PDF (Se ativo) -->
-            <div id="preview-anexo-pdf" class="wa-bubble p-3 self-end max-w-[88%] text-white text-xs flex items-center gap-3">
-              <div class="h-10 w-10 rounded-xl bg-red-500/20 text-red-400 border border-red-500/30 flex items-center justify-center text-xl shrink-0">
-                📄
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="font-bold text-xs truncate" id="preview-pdf-titulo">Laudo_Checkup_Caixa_Sarandiense.pdf</div>
-                <div class="text-[10px] text-emerald-200">1 página A4 · 184 KB · Auditoria Técnica</div>
-              </div>
-            </div>
-
-            <!-- Balão de Texto Principal -->
-            <div class="wa-bubble p-3.5 self-end max-w-[88%] text-white text-xs leading-relaxed space-y-2">
-              <div id="preview-texto" class="whitespace-pre-wrap font-sans">
-                Mensagem sendo digitada...
-              </div>
-              <div class="flex items-center justify-end gap-1 text-[10px] text-emerald-300/80 pt-1">
-                <span id="preview-hora">12:00</span>
-                <span class="text-sky-300 font-bold">✓✓</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Indicador de Fila de Disparos -->
-        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs flex items-center justify-between">
-          <div class="flex items-center gap-2 text-slate-400">
-            <span>📊</span>
-            <span>Disparos Hoje: <strong class="text-white">18 mensagens</strong></span>
-          </div>
-          <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Taxa Resposta: 44%</span>
-        </div>
-
-      </div>
-    </div>
-
-  </main>
-
-  <!-- MODAL DE STATUS DO CHIP WHATSAPP -->
-  <div id="modal-conexao" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <h3 class="text-base font-bold text-white flex items-center gap-2">
-          <span>📲</span>
-          <span>Status da Conexão WhatsApp</span>
-        </h3>
-        <button onclick="fecharModalConexao()" class="text-slate-400 hover:text-white text-lg">✕</button>
-      </div>
-
-      <div class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-xs text-emerald-300 space-y-2">
-        <div class="font-bold flex items-center gap-2 text-emerald-400">
-          <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
-          <span>Instância Local Conectada</span>
-        </div>
-        <p class="text-slate-300 leading-relaxed">
-          Serviço Baileys / Evolution API pronto em segundo plano. Mensagens são disparadas com simulação de digitação humana para proteção do número comercial.
-        </p>
-      </div>
-
-      <div class="space-y-2 text-xs">
-        <div class="flex justify-between py-1.5 border-b border-slate-800 text-slate-400">
-          <span>Número Vinculado:</span>
-          <strong class="text-white">+55 (54) 3361-XXXX</strong>
-        </div>
-        <div class="flex justify-between py-1.5 border-b border-slate-800 text-slate-400">
-          <span>Velocidade de Envio:</span>
-          <strong class="text-emerald-400">Humana (3 a 7 seg)</strong>
-        </div>
-        <div class="flex justify-between py-1.5 text-slate-400">
-          <span>Webhook de Retorno:</span>
-          <strong class="text-sky-400">Ativo (:8080/api/whatsapp)</strong>
-        </div>
-      </div>
-
-      <button onclick="fecharModalConexao()" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl transition">
-        Fechar Janela
-      </button>
-    </div>
-  </div>
-
-  <script>
-    const TEMPLATES = {
-      checkup: (empresa, decisor) => `Olá ${decisor}, tudo bem? Aqui é da equipe técnica da TruData ERP de Sarandi.\n\nConforme conversamos, geramos o *Laudo Oficial do Check-up de Frente de Caixa* da *${empresa}*.\n\nIdentificamos pontos importantes onde o comércio perde tempo e dinheiro com quedas da SEFAZ e furos de estoque. Segue anexo o PDF com a nota técnica da sua loja!\n\nPodemos passar aí para tomar um café de 15 minutos e alinhar os pontos?`,
-      proposta: (empresa, decisor) => `Olá ${decisor}! Tudo bem?\n\nMontei o estudo especial de implantação da TruData para a *${empresa}* com *50% de desconto na taxa de setup* neste mês.\n\nNosso sistema opera 100% offline se a internet oscilar e temos equipe presencial com atendimento em até 2 horas na região de Sarandi.\n\nQual o melhor horário para você dar uma olhada na proposta?`,
-      sefaz: (empresa, decisor) => `Olá ${decisor}! Passando com um alerta rápido sobre as rotinas fiscais da SEFAZ-RS.\n\nDiversos comerciantes da região sofrem com filas no sábado à tarde quando o sinal cai. O PDV da TruData ERP continua emitindo normalmente mesmo offline e sincroniza tudo depois.\n\nGostaria de ver uma demonstração de 5 minutos no balcão da *${empresa}*?`,
-      cafe: (empresa, decisor) => `Olá ${decisor}! Nossa equipe técnica estará visitando clientes em sua cidade nesta semana.\n\nGostaria de agendar um café rápido de 15 minutos no balcão da *${empresa}* para te mostrar como outros lojistas vizinhos reduziram custos e trocaram de sistema sem travar o caixa.\n\nPrefere quinta-feira pela manhã ou à tarde?`
-    };
-
-    let templateAtual = 'checkup';
-
-    function selecionarTemplate(tipo, btn) {
-      templateAtual = tipo;
-      document.querySelectorAll('.btn-tpl').forEach(b => {
-        b.className = 'btn-tpl p-3 rounded-xl border border-slate-800 bg-slate-950 text-left transition hover:border-slate-700';
-        const t = b.querySelector('div:first-child');
-        if (t) t.className = 'text-xs font-bold text-white';
-      });
-
-      btn.className = 'btn-tpl p-3 rounded-xl border border-emerald-500 bg-emerald-500/10 text-left transition';
-      const title = btn.querySelector('div:first-child');
-      if (title) title.className = 'text-xs font-bold text-emerald-300';
-
-      atualizarPrevia();
-    }
-
-    function carregarDadosLead(val) {
-      const sel = document.getElementById('sel-lead');
-      const opt = sel.options[sel.selectedIndex];
-      if (opt && opt.dataset.nome) {
-        document.getElementById('txt-empresa').value = opt.dataset.nome;
-        document.getElementById('txt-decisor').value = opt.dataset.decisor || 'Diretoria';
-        document.getElementById('txt-fone').value = opt.dataset.fone || '(54) 99123-4567';
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-      atualizarPrevia();
-    }
-
-    function atualizarPrevia() {
-      const empresa = document.getElementById('txt-empresa').value || 'Sua Empresa';
-      const decisor = document.getElementById('txt-decisor').value || 'Amigo Lojista';
-      const anexo = document.querySelector('input[name="anexo"]:checked')?.value || 'pdf_checkup';
-
-      // Gera mensagem
-      const gerador = TEMPLATES[templateAtual] || TEMPLATES.checkup;
-      const texto = gerador(empresa, decisor);
-      
-      const txtMsg = document.getElementById('txt-msg');
-      if (!txtMsg.dataset.editadoManualmente || txtMsg.dataset.ultimoTipo !== templateAtual) {
-        txtMsg.value = texto;
-        txtMsg.dataset.ultimoTipo = templateAtual;
-      }
-
-      // Converte *negrito* para <strong> na prévia
-      let previewHtml = (txtMsg.value || texto)
-        .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
-        .replace(/_(.*?)_/g, '<em>$1</em>');
-
-      document.getElementById('preview-texto').innerHTML = previewHtml;
-      document.getElementById('preview-header-nome').textContent = empresa;
-      document.getElementById('preview-pdf-titulo').textContent = `Laudo_Tecnico_${empresa.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
-
-      // Atualiza hora
-      const now = new Date();
-      document.getElementById('preview-hora').textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-
-      // Controle de Anexos na Prévia
-      const boxPdf = document.getElementById('preview-anexo-pdf');
-      const boxAudio = document.getElementById('preview-anexo-audio');
-
-      if (anexo === 'pdf_checkup') {
-        boxPdf.classList.remove('hidden');
-        boxAudio.classList.add('hidden');
-      } else if (anexo === 'audio_ptt') {
-        boxPdf.classList.add('hidden');
-        boxAudio.classList.remove('hidden');
-      } else {
-        boxPdf.classList.add('hidden');
-        boxAudio.classList.add('hidden');
-      }
-    }
-
-    async function dispararViaAPI() {
-      const btn = document.getElementById('btn-disparar');
-      const fone = document.getElementById('txt-fone').value;
-      const empresa = document.getElementById('txt-empresa').value;
-      const msg = document.getElementById('txt-msg').value;
-      const anexo = document.querySelector('input[name="anexo"]:checked')?.value;
-
-      btn.disabled = true;
-      btn.innerHTML = '<span>⏳</span><span>Simulando digitação humana e transmitindo...</span>';
-
-      try {
-        const res = await fetch('/api/whatsapp/enviar', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fone, empresa, msg, anexo })
-        });
-        const data = await res.json();
-        
-        btn.innerHTML = '<span>✅</span><span>Mensagem Enviada com Sucesso!</span>';
-        btn.className = "w-full sm:flex-1 py-3.5 px-6 rounded-2xl bg-emerald-600 text-white font-black text-xs transition flex items-center justify-center gap-2";
-        
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.innerHTML = '<span>⚡</span><span>Disparar Mensagem + Anexo via API Local</span>';
-          btn.className = "w-full sm:flex-1 py-3.5 px-6 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black text-xs transition shadow-lg shadow-emerald-950 flex items-center justify-center gap-2 cursor-pointer";
-        }, 3000);
-      } catch (err) {
-        btn.disabled = false;
-        btn.innerHTML = '<span>⚠️</span><span>Erro no Envio. Abrindo WhatsApp Web...</span>';
-        abrirWhatsAppWeb();
-      }
-    }
-
-    function abrirWhatsAppWeb() {
-      const fone = document.getElementById('txt-fone').value.replace(/\D/g, '');
-      const msg = encodeURIComponent(document.getElementById('txt-msg').value);
-      const url = `https://wa.me/55${fone}?text=${msg}`;
-      window.open(url, '_blank');
-    }
-
-    function copiarTexto() {
-      const msg = document.getElementById('txt-msg').value;
-      navigator.clipboard.writeText(msg).then(() => {
-        alert('Mensagem copiada para a área de transferência! 📋');
-      });
-    }
-
-    function tocarAudioSimulado() {
-      const som = new Audio('https://actions.google.com/sounds/v1/communication/human_voice_female_whisper.ogg');
-      som.play().catch(() => {});
-    }
-
-    function abrirModalConexao() { document.getElementById('modal-conexao').classList.remove('hidden'); }
-    function fecharModalConexao() { document.getElementById('modal-conexao').classList.add('hidden'); }
-
-    // Inicia com a primeira prévia
-    atualizarPrevia();
-  </script>
-</body>
+    </script>
+  </body>
 </html>

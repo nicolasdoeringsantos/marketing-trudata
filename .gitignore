@@ -22,3 +22,18 @@ desktop.ini
 # IDEs
 .vscode/
 .idea/
+
+# Credenciais e registros operacionais locais
+.env
+.env.*
+!.env.example
+painel_aprovacao/config_email.json
+painel_aprovacao/comercial_registros.json
+painel_aprovacao/status_posts.json
+
+# Backups, capturas e exportações de trabalho
+agente/geodata/base-antes-*.json
+agente/geodata/base-revisao-*.json
+painel_aprovacao/qa/*.png
+painel_aprovacao/qa/*.jpg
+output/

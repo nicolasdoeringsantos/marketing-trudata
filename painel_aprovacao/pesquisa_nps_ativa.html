@@ -1,264 +1,59 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisa NPS Ativa &amp; Resgate de Detratores RS | TruData Suite 2026</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            emerald: '#10b981',
-                            rose: '#f43f5e',
-                            amber: '#f59e0b',
-                            dark: '#0f172a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .glass-panel {
-            background: rgba(17, 24, 39, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-    </style>
-</head>
-<body class="bg-slate-950 text-slate-100 min-h-screen">
-    <!-- Header -->
-    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-40 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <a href="/" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="font-bold text-lg text-white">Tru<span class="text-emerald-400">NPS</span></span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">Pilar 2: Sucesso do Cliente</span>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <span class="text-xs text-slate-400 hidden sm:inline">Régua D+7, D+30 e D+90 WhatsApp</span>
-                <button onclick="dispararLotePesquisa()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white flex items-center gap-1.5 shadow-lg shadow-emerald-900/30 transition-all">
-                    <i class="fa-solid fa-paper-plane"></i> Disparar Lote Semanal NPS
-                </button>
-            </div>
-        </div>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
     </header>
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <!-- Hero Header -->
-        <div class="mb-8">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-medium mb-3">
-                <i class="fa-solid fa-heart-pulse"></i> Gestão de Satisfação, Encantamento &amp; Retenção Ativa
-            </div>
-            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-                Pesquisa NPS Ativa &amp; Resgate de Detratores
-            </h1>
-            <p class="text-slate-400 text-sm mt-1 max-w-3xl">
-                Monitore a percepção real dos clientes no Rio Grande do Sul. Quando uma nota menor que 7 é registrada, acione o protocolo de emergência em até 15 minutos. Promotores (9 e 10) são convidados a indicar vizinhos de balcão com bônus.
-            </p>
-        </div>
-
-        <!-- Indicadores Centrais do NPS -->
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800">
-                <p class="text-xs text-slate-400 font-medium">NPS Global TruData</p>
-                <div class="flex items-baseline gap-2 mt-1">
-                    <p class="text-3xl font-black text-emerald-400">+86</p>
-                    <span class="text-xs text-emerald-500 font-bold">Zona de Excelência</span>
-                </div>
-                <span class="text-[10px] text-slate-500">Benchmark SaaS Varejo: +55</span>
-            </div>
-
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800">
-                <p class="text-xs text-slate-400 font-medium">Promotores (9 - 10)</p>
-                <div class="flex items-baseline gap-2 mt-1">
-                    <p class="text-3xl font-black text-white">88%</p>
-                    <span class="text-xs text-slate-400">(142 clientes)</span>
-                </div>
-                <span class="text-[10px] text-emerald-400">Ativos para indicação</span>
-            </div>
-
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800">
-                <p class="text-xs text-slate-400 font-medium">Neutros (7 - 8)</p>
-                <div class="flex items-baseline gap-2 mt-1">
-                    <p class="text-3xl font-black text-amber-400">10%</p>
-                    <span class="text-xs text-slate-400">(16 clientes)</span>
-                </div>
-                <span class="text-[10px] text-slate-500">Necessitam refinamento</span>
-            </div>
-
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800">
-                <p class="text-xs text-slate-400 font-medium">Detratores (0 - 6)</p>
-                <div class="flex items-baseline gap-2 mt-1">
-                    <p class="text-3xl font-black text-rose-500">2%</p>
-                    <span class="text-xs text-rose-400 font-bold">(3 clientes)</span>
-                </div>
-                <span class="text-[10px] text-rose-500">Em protocolo de resgate</span>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- Painel de Resgate Imediato (Esquerda) -->
-            <div class="lg:col-span-6 space-y-6">
-                <!-- Alerta de Detratores em Aberto -->
-                <div class="glass-panel p-6 rounded-2xl border border-rose-900/50 bg-rose-950/10 shadow-xl space-y-4">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-base font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-triangle-exclamation text-rose-500 animate-pulse"></i> Fila de Resgate Imediato (Detratores)
-                        </h2>
-                        <span class="text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono font-bold">SLA: 15 MINUTOS</span>
-                    </div>
-
-                    <div class="space-y-3" id="listaDetratores">
-                        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2.5">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h4 class="font-bold text-white text-xs">Fruteira &amp; Padaria do Lago</h4>
-                                    <p class="text-[10px] text-slate-400">Marcos Silveira · Passo Fundo - RS</p>
-                                </div>
-                                <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 font-black text-xs font-mono">Nota 4</span>
-                            </div>
-                            <p class="text-xs text-slate-300 italic bg-slate-950/60 p-2 rounded border border-slate-800">
-                                "A impressora térmica desconfigurou a porta COM ontem na hora do fechamento e tive que reiniciar o computador duas vezes."
-                            </p>
-                            <div class="flex items-center justify-between pt-1">
-                                <span class="text-[10px] text-slate-500 font-mono">Registrado há 8 minutos</span>
-                                <button onclick="iniciarResgate('Marcos Silveira', 'Passo Fundo', '54991223344')" class="px-3 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold flex items-center gap-1.5 transition-all">
-                                    <i class="fa-solid fa-headset"></i> Ligar &amp; Abrir Acesso Remoto
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2.5">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h4 class="font-bold text-white text-xs">Agropecuária Serra Verde</h4>
-                                    <p class="text-[10px] text-slate-400">Cleiton Bresolin · Bento Gonçalves - RS</p>
-                                </div>
-                                <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 font-black text-xs font-mono">Nota 6</span>
-                            </div>
-                            <p class="text-xs text-slate-300 italic bg-slate-950/60 p-2 rounded border border-slate-800">
-                                "O sistema é bom, mas o operador novo apanhou pra cadastrar ração a granel com tara de balança."
-                            </p>
-                            <div class="flex items-center justify-between pt-1">
-                                <span class="text-[10px] text-slate-500 font-mono">Registrado há 24 minutos</span>
-                                <button onclick="iniciarTreinamento('Cleiton Bresolin')" class="px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-500 text-slate-950 text-xs font-bold flex items-center gap-1.5 transition-all">
-                                    <i class="fa-solid fa-chalkboard-user"></i> Agendar Retreinamento Presencial
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Playbook de Resgate de Churn -->
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-xs space-y-3">
-                    <h3 class="font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-book-bookmark text-emerald-400"></i> Protocolo Padrão de Resgate TruData
-                    </h3>
-                    <ol class="list-decimal list-inside space-y-1.5 text-slate-400 leading-relaxed">
-                        <li><strong>Contato em até 15 minutos:</strong> Gerente de CS liga com empatia total, sem discutir razão.</li>
-                        <li><strong>Diagnóstico técnico imediato:</strong> Acesso remoto AnyDesk/TeamViewer para sanar a falha em tempo real.</li>
-                        <li><strong>Acompanhamento de 48h:</strong> Monitoramento proativo do caixa nos dois dias seguintes.</li>
-                        <li><strong>Conversão de Detrator em Advogado:</strong> 74% dos clientes resgatados viram promotores fieis no RS.</li>
-                    </ol>
-                </div>
-            </div>
-
-            <!-- Coluna de Promotores & Indicação (Direita) -->
-            <div class="lg:col-span-6 space-y-6">
-                <!-- Painel de Promotores (Indicações Ativas) -->
-                <div class="glass-panel p-6 rounded-2xl border border-emerald-900/40 bg-emerald-950/10 shadow-xl space-y-4">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-base font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-star text-amber-400"></i> Promotores Prontos para Indicação
-                        </h2>
-                        <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono font-bold">MEMBER GET MEMBER</span>
-                    </div>
-
-                    <div class="space-y-3">
-                        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h4 class="font-bold text-white text-xs">Supermercado Nova Esperança</h4>
-                                    <p class="text-[10px] text-slate-400">Darci Zanon · Caxias do Sul - RS</p>
-                                </div>
-                                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-black text-xs font-mono">Nota 10</span>
-                            </div>
-                            <p class="text-xs text-slate-300 italic bg-slate-950/60 p-2 rounded border border-slate-800">
-                                "O melhor sistema que já usei em 18 anos de comércio. O suporte no WhatsApp responde em segundos."
-                            </p>
-                            <div class="flex items-center justify-between pt-1">
-                                <span class="text-[10px] text-emerald-400 font-semibold"><i class="fa-solid fa-gift mr-1"></i> Bônus: R$ 200 de desconto na mensalidade por amigo</span>
-                                <button onclick="enviarConviteIndicacao('Darci Zanon')" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all">
-                                    Enviar Link de Indicação
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h4 class="font-bold text-white text-xs">Ferragens &amp; Materiais Pampa</h4>
-                                    <p class="text-[10px] text-slate-400">Renato Goulart · Pelotas - RS</p>
-                                </div>
-                                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-black text-xs font-mono">Nota 10</span>
-                            </div>
-                            <p class="text-xs text-slate-300 italic bg-slate-950/60 p-2 rounded border border-slate-800">
-                                "A emissão de nota fiscal gaúcha e controle de estoque de areia e cimento ficaram perfeitos."
-                            </p>
-                            <div class="flex items-center justify-between pt-1">
-                                <span class="text-[10px] text-emerald-400 font-semibold"><i class="fa-solid fa-gift mr-1"></i> Bônus Liberado</span>
-                                <button onclick="enviarConviteIndicacao('Renato Goulart')" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all">
-                                    Enviar Link de Indicação
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Simulador de Disparo WhatsApp NPS -->
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
-                    <h3 class="font-bold text-white text-xs uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-brands fa-whatsapp text-emerald-400"></i> Modelo da Mensagem de Pesquisa no WhatsApp
-                    </h3>
-                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs text-slate-300 font-mono leading-relaxed">
-                        "Olá [Nome do Cliente], aqui é da diretoria da TruData Tecnologia! 🧉<br><br>
-                        Passando para saber: em uma escala de 0 a 10, o quanto você recomendaria o sistema TruData para outro comerciante aqui da sua cidade?<br><br>
-                        Basta responder apenas com o número de 0 a 10. Sua opinião sincera é muito importante para nós!"
-                    </div>
-                </div>
-            </div>
-        </div>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Retirada: integração não implementada</h1>
+      <p style="margin-top: 24px">
+        A versão anterior mostrava resultados ou confirmava ações sem a
+        integração necessária. Use o CRM para registrar o acompanhamento real.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="crm.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
     </main>
-
     <script>
-        function dispararLotePesquisa() {
-            alert('Iniciando régua de disparo automatizado via API Baileys/WhatsApp para 28 clientes que completaram 30 dias de uso. Mensagens distribuídas com intervalo de segurança anti-ban.');
-        }
-
-        function iniciarResgate(cliente, cidade, fone) {
-            alert(`Iniciando protocolo de resgate emergencial para ${cliente} (${cidade}). Abrindo canal de voz e preparando sessão de suporte remoto prioritário.`);
-        }
-
-        function iniciarTreinamento(cliente) {
-            alert(`Agendamento de retreinamento presencial/remoto para a equipe de ${cliente} registrado na agenda do técnico regional.`);
-        }
-
-        function enviarConviteIndicacao(cliente) {
-            alert(`Link do programa 'Indique um Comerciante e Ganhe R$ 200' enviado para o WhatsApp de ${cliente}.`);
-        }
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
+      }
     </script>
-</body>
+  </body>
 </html>

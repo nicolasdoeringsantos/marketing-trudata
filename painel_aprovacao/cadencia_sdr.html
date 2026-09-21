@@ -1,412 +1,85 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Copiloto de Cadência SDR WhatsApp — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            display: ['"Space Grotesk"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              azure: '#00A3FF',
-              dark: '#020B18',
-              card: '#0A192F',
-              emerald: '#10B981',
-              amber: '#F59E0B',
-              whatsapp: '#25D366'
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { background-color: #020B18; color: #F8FAFC; }
-    .glass { background: rgba(10, 25, 47, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .cadencia-pill-active { background-color: #00A3FF; color: #020B18; font-weight: 700; }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased flex flex-col justify-between selection:bg-brand-azure selection:text-white pb-12">
-
-  <!-- CABEÇALHO -->
-  <header class="border-b border-slate-800/80 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 group text-xs text-slate-400 hover:text-white transition">
-          <span class="p-1.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-brand-azure">←</span>
-          <span>Voltar ao Hub</span>
-        </a>
-        <div class="h-4 w-px bg-slate-800"></div>
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-xs font-bold text-white font-display">COPILOTO DE CADÊNCIA SDR</span>
-          <span class="text-[10px] bg-brand-azure/10 text-brand-azure border border-brand-azure/30 px-2 py-0.5 rounded font-mono">5 Touches Multicanal</span>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Preparar uma conversa · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="conversa">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main">
+      <header class="tools-heading">
+        <div>
+          <a href="ferramentas.html">Todas as ferramentas</a>
+          <h1 id="work-title">Preparar uma conversa</h1>
+          <p id="work-desc"></p>
         </div>
-      </div>
-
-      <div class="flex items-center gap-3">
-        <a href="prospeccao_ativa.html" class="text-xs text-slate-400 hover:text-slate-200 px-3 py-1.5 rounded-xl border border-slate-800 bg-slate-900/50">
-          Cockpit de Prospecção
-        </a>
-        <span class="text-xs font-mono text-emerald-400 bg-emerald-950/40 px-3 py-1.5 rounded-xl border border-emerald-500/30">
-          Base: 20 Alvos Prioritários RS
-        </span>
-      </div>
-    </div>
-  </header>
-
-  <!-- CONTEÚDO PRINCIPAL EM DUAS COLUNAS -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full space-y-6">
-    
-    <!-- BARRA DE FILTRO E ESTATÍSTICA -->
-    <div class="glass rounded-3xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-      <div>
-        <h1 class="text-xl sm:text-2xl font-black font-display text-white">Cadência de Aquisição B2B — WhatsApp & Balcão</h1>
-        <p class="text-xs text-slate-400 mt-1">Conduza abordagens consultivas com decisores reais sem parecer spam ou mensagem genérica.</p>
-      </div>
-
-      <!-- SELETOR DE ETAPA DA CADÊNCIA -->
-      <div class="flex flex-wrap items-center gap-1.5 bg-slate-950 p-1.5 rounded-2xl border border-slate-800">
-        <button onclick="mudarTouch(1)" id="btn-touch-1" class="cadencia-pill-active px-3 py-1.5 rounded-xl text-xs transition">
-          D1: Quebra-Gelo
-        </button>
-        <button onclick="mudarTouch(3)" id="btn-touch-3" class="px-3 py-1.5 rounded-xl text-xs text-slate-400 hover:text-white transition">
-          D3: Prova Social
-        </button>
-        <button onclick="mudarTouch(5)" id="btn-touch-5" class="px-3 py-1.5 rounded-xl text-xs text-slate-400 hover:text-white transition">
-          D5: Reforma 2026
-        </button>
-        <button onclick="mudarTouch(7)" id="btn-touch-7" class="px-3 py-1.5 rounded-xl text-xs text-slate-400 hover:text-white transition">
-          D7: Visita 15min
-        </button>
-        <button onclick="mudarTouch(10)" id="btn-touch-10" class="px-3 py-1.5 rounded-xl text-xs text-slate-400 hover:text-white transition">
-          D10: Break-up
-        </button>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      
-      <!-- COLUNA 1 (4 colunas): LISTA DE ALVOS PRIORITÁRIOS RS -->
-      <div class="lg:col-span-4 glass rounded-3xl p-5 space-y-4 flex flex-col max-h-[750px]">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-bold text-white uppercase tracking-wider">Prospects Alvo</span>
-            <span id="contador-alvos" class="text-[10px] bg-slate-800 text-slate-300 font-mono px-2 py-0.5 rounded-full">20 Alvos</span>
-          </div>
-          <input type="text" id="filtro-busca" oninput="filtrarAlvos()" placeholder="Buscar empresa, cidade..." class="bg-slate-950 border border-slate-700 text-xs text-white rounded-xl px-2.5 py-1 outline-none w-36 focus:border-brand-azure" />
-        </div>
-
-        <div class="overflow-y-auto space-y-2.5 pr-1 flex-1" id="lista-cards-alvos">
-          <!-- Renderizado via JavaScript -->
-        </div>
-      </div>
-
-      <!-- COLUNA 2 (8 colunas): COCKPIT DE DISPARO E PERSONALIZAÇÃO -->
-      <div class="lg:col-span-8 glass rounded-3xl p-6 space-y-6 flex flex-col justify-between">
-        
-        <div class="space-y-6">
-          <!-- CARTÃO DO PROSPECT ATIVO -->
-          <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <div class="flex items-center gap-2 mb-1">
-                <span id="badge-segmento-ativo" class="text-[10px] font-bold uppercase tracking-wider bg-brand-azure/10 text-brand-azure px-2.5 py-0.5 rounded-full border border-brand-azure/20">Supermercados</span>
-                <span id="badge-cidade-ativo" class="text-[10px] text-slate-400 font-mono">Sarandi - RS</span>
-              </div>
-              <h2 id="nome-empresa-ativa" class="text-lg font-black text-white font-display">Hipermercado Wagner</h2>
-              <p class="text-xs text-slate-400 mt-0.5">Decisor mapeado: <strong id="decisor-ativo" class="text-white">Adriana Re Wagner</strong> • CNPJ: <span id="cnpj-ativo" class="font-mono text-slate-400">93.801.330/0001-67</span></p>
-            </div>
-
-            <div class="text-left sm:text-right shrink-0">
-              <span class="text-[10px] text-slate-500 uppercase font-mono block">Status Atual no Funil</span>
-              <select id="status-funil-alvo" onchange="atualizarStatusFunil()" class="bg-slate-900 border border-slate-700 text-xs text-emerald-400 font-bold rounded-xl p-1.5 mt-1 outline-none">
-                <option value="novo">🆕 Novo Lead (Aguardando D1)</option>
-                <option value="d1">📨 D1 Enviado</option>
-                <option value="d3">💬 D3 Enviado (Follow-up)</option>
-                <option value="respondeu">🔥 Respondeu / Em Diálogo</option>
-                <option value="demo_agendada">📅 Visita / Demo Agendada</option>
-                <option value="descartado">❄️ Sem Resposta (D10)</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- EXPLICAÇÃO ESTRATÉGICA DO TOUCH SELECIONADO -->
-          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-xs flex items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="text-xl" id="icone-touch">🎯</span>
-              <div>
-                <span class="font-bold text-white block" id="titulo-touch-estrat">Touch 1 (D1): Quebra-Gelo de Proximidade Regional</span>
-                <span class="text-slate-400 text-[11px]" id="meta-touch-estrat">Objetivo: Iniciar diálogo sem pressão de venda, citando presença local em Sarandi e suporte 2h.</span>
-              </div>
-            </div>
-            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded border border-emerald-500/20 shrink-0">Alta Conversão</span>
-          </div>
-
-          <!-- EDITOR DE MENSAGEM DO WHATSAPP -->
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-                <span>💬</span> Mensagem Formatada para WhatsApp:
-              </label>
-              <div class="flex items-center gap-2">
-                <button onclick="restaurarMensagemPadrao()" class="text-[11px] text-slate-400 hover:text-brand-azure underline">
-                  Restaurar Template
-                </button>
-                <button onclick="copiarMensagemFormatada()" class="text-[11px] font-bold text-slate-300 hover:text-white px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700">
-                  📋 Copiar Texto
-                </button>
-              </div>
-            </div>
-
-            <textarea id="texto-mensagem-whatsapp" rows="7" class="w-full bg-slate-950/90 border border-slate-700 text-slate-100 text-xs sm:text-sm font-sans rounded-2xl p-4 leading-relaxed outline-none focus:border-brand-azure transition shadow-inner resize-none"></textarea>
-            
-            <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500 font-mono">
-              <span>Variáveis ativas: {NOME}, {EMPRESA}, {CIDADE}, {SEGMENTO}</span>
-              <span id="char-counter">0 caracteres</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- BARRA DE AÇÕES E DISPARO -->
-        <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div class="flex items-center gap-2 text-xs text-slate-400">
-            <span>Telefone:</span>
-            <strong id="telefone-display" class="text-white font-mono">(54) 3612-096</strong>
-          </div>
-
-          <div class="flex items-center gap-3 w-full sm:w-auto">
-            <button onclick="dispararWebhookApi()" class="flex-1 sm:flex-initial px-4 py-3 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold rounded-xl transition flex items-center justify-center gap-2">
-              <span>⚡</span> Disparar via Webhook
-            </button>
-            <button onclick="abrirWhatsAppWeb()" class="flex-1 sm:flex-initial px-6 py-3 bg-[#25D366] hover:bg-[#20ba59] text-slate-950 text-xs font-black rounded-xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2">
-              <span>📲</span> Abrir no WhatsApp Web
+      </header>
+      <p class="work-notice" id="work-notice"></p>
+      <div class="workspace">
+        <form id="work-form" class="work-form">
+          <h2>Prepare os dados</h2>
+          <div class="input-grid" id="fields"></div>
+          <p id="work-error" class="work-error" role="alert" hidden></p>
+          <div class="actions">
+            <button class="btn primary" id="generate" type="submit">
+              Atualizar resumo</button
+            ><button class="btn" id="save-draft" type="button">
+              Salvar rascunho</button
+            ><button class="btn" id="load-draft" type="button">
+              Recuperar rascunho
             </button>
           </div>
-        </div>
-
-      </div>
-    </div>
-
-  </main>
-
-  <script>
-    let prospects = [];
-    let prospectSelecionado = null;
-    let touchAtual = 1;
-
-    const templatesCadencia = {
-      1: {
-        titulo: "Touch 1 (D1): Quebra-Gelo de Proximidade Regional",
-        meta: "Iniciar diálogo com o decisor citando o comércio físico e o suporte de Sarandi.",
-        icone: "🎯",
-        gerar: (p) => `Olá *${p.decisor || 'Gestor(a)'}*, tudo bem?\n\nAqui é da equipe técnica da *TruData ERP (Hansen Software)*, aqui de Sarandi-RS.\n\nAcompanhamos o trabalho da *${p.nome}* no ramo de ${p.segmento}. Sabemos que manter os caixas rápidos e a emissão de cupom fiscal em dia é crítico para a rotina da loja.\n\nDesenvolvemos uma tecnologia híbrida que emite NFC-e mesmo se a internet cair e oferecemos suporte presencial com SLA de 2 horas na região.\n\nComo está o sistema de vocês hoje em termos de velocidade de caixa e atendimento nos fins de semana?`
-      },
-      3: {
-        titulo: "Touch 3 (D3): Prova Social & Caso Real Regional",
-        meta: "Demonstrar autoridade com case no mesmo segmento comercial do Norte Gaúcho.",
-        icone: "⭐",
-        gerar: (p) => `Oi *${p.decisor || 'Gestor(a)'}*, passando rapidinho com um dado que pode interessar à *${p.nome}*:\n\nRecentemente um comércio do ramo de ${p.segmento} aqui da região de ${p.cidade} migrou para o nosso PDV TruData após sofrer com travamentos e filas no sábado.\n\nCom a migração, o tempo de emissão caiu para menos de 3 segundos por cliente e os custos mensais reduziram cerca de 35%.\n\nConseguimos importar seus cadastros de produtos e estoque sem parar o caixa da sua loja. Teria 5 minutos nesta quinta para eu te mandar uma prévia em vídeo?`
-      },
-      5: {
-        titulo: "Touch 5 (D5): Alerta da Reforma Tributária 2026 (CBS/IBS)",
-        meta: "Gerar urgência técnica preventiva sobre a nova legislação fiscal.",
-        icone: "⚖️",
-        gerar: (p) => `Olá *${p.decisor || 'Gestor(a)'}*, bom dia!\n\nVocê já conversou com o seu contador sobre as mudanças da *Reforma Tributária 2026* (CBS/IBS e split payment nas maquininhas)?\n\nMuitos sistemas nacionais ainda não estão preparados para as novas regras do Simples e Lucro Presumido no RS, o que pode gerar multas no SPED.\n\nNossa equipe em Sarandi já homologou a matriz CBS/IBS completa no TruData. Podemos rodar um diagnóstico gratuito de conformidade dos XMLs da *${p.nome}*? Não leva 10 minutos.`
-      },
-      7: {
-        titulo: "Touch 7 (D7): Proposta de Demonstração Presencial 15min",
-        meta: "Pedir o compromisso de baixo atrito: 15 minutos sem compromisso.",
-        icone: "🤝",
-        gerar: (p) => `Oi *${p.decisor || 'Gestor(a)'}*!\n\nNosso consultor técnico estará fazendo atendimentos presenciais em *${p.cidade}* nesta semana.\n\nGostaria de levar até a *${p.nome}* uma demonstração do nosso terminal PDV operando offline e tirando cupom em 3 segundos. Sem nenhum compromisso de compra, apenas para vocês conhecerem uma alternativa mais ágil e com suporte aqui do lado.\n\nQual dia fica melhor para um café de 15 minutos: quarta ou quinta-feira?`
-      },
-      10: {
-        titulo: "Touch 10 (D10): Break-up Message Elegante",
-        meta: "Desengajar com respeito e profissionalismo (reverte em até 20% das vezes).",
-        icone: "🚪",
-        gerar: (p) => `Olá *${p.decisor || 'Gestor(a)'}*, tudo bem?\n\nComo não conseguimos retorno nas últimas mensagens, imagino que o momento não seja ideal para revisar o sistema de gestão da *${p.nome}*.\n\nVou encerrar meus contatos por aqui para não incomodar seu dia a dia. Se no futuro vocês precisarem de suporte rápido em Sarandi, contingência offline de caixa ou adequação à Reforma Tributária, estarei sempre à disposição!\n\nO contato da nossa central em Sarandi é (54) 99696-6175. Sucesso nas vendas!`
-      }
-    };
-
-    async function inicializar() {
-      try {
-        const resp = await fetch('alvos_prioritarios_piloto.json');
-        if (resp.ok) {
-          prospects = await resp.json();
-          renderizarListaAlvos(prospects);
-          if (prospects.length > 0) {
-            selecionarProspect(0);
-          }
-        }
-      } catch (err) {
-        console.log('Modo offline/mock');
-      }
-    }
-
-    function renderizarListaAlvos(lista) {
-      const container = document.getElementById('lista-cards-alvos');
-      container.innerHTML = '';
-
-      lista.forEach((p, index) => {
-        const div = document.createElement('div');
-        div.className = `p-3 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-brand-azure/50 cursor-pointer transition flex items-center justify-between gap-3 target-card ${index === 0 ? 'border-brand-azure bg-slate-900/80' : ''}`;
-        div.dataset.index = index;
-        div.onclick = () => selecionarProspect(index);
-
-        div.innerHTML = `
-          <div class="overflow-hidden">
-            <div class="flex items-center gap-1.5">
-              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.2 rounded">${p.cidade}</span>
-              <span class="text-xs font-bold text-white truncate">${p.nome}</span>
-            </div>
-            <div class="text-[11px] text-slate-400 truncate mt-0.5">${p.decisor || 'Diretoria'} • ${p.segmento}</div>
+          <p class="work-help">
+            Um rascunho por ferramenta neste navegador. Baixe o resumo para
+            guardar uma cópia.
+          </p>
+        </form>
+        <section class="work-output" aria-labelledby="output-title">
+          <h2 id="output-title">Seu resumo</h2>
+          <p class="placeholder" id="result-empty">
+            Preencha os dados e atualize o resumo para revisar o resultado.
+          </p>
+          <pre id="result" hidden></pre>
+          <div id="output-special"></div>
+          <div class="actions">
+            <button class="btn" id="copy-result" data-output disabled>
+              Copiar resumo</button
+            ><button class="btn" id="download-result" data-output disabled>
+              Baixar texto</button
+            ><button class="btn" id="print-result" data-output disabled>
+              Imprimir / PDF
+            </button>
           </div>
-          <span class="text-xs text-slate-500 shrink-0">→</span>
-        `;
-        container.appendChild(div);
-      });
-
-      document.getElementById('contador-alvos').textContent = `${lista.length} Alvos`;
-    }
-
-    function selecionarProspect(index) {
-      if (!prospects[index]) return;
-      prospectSelecionado = prospects[index];
-
-      // Destaque visual
-      document.querySelectorAll('.target-card').forEach((card, idx) => {
-        if (idx === index) {
-          card.classList.add('border-brand-azure', 'bg-slate-900/80');
-          card.classList.remove('border-slate-800', 'bg-slate-950/60');
-        } else {
-          card.classList.remove('border-brand-azure', 'bg-slate-900/80');
-          card.classList.add('border-slate-800', 'bg-slate-950/60');
-        }
-      });
-
-      // Preencher painel
-      document.getElementById('nome-empresa-ativa').textContent = prospectSelecionado.nome;
-      document.getElementById('badge-segmento-ativo').textContent = prospectSelecionado.segmento;
-      document.getElementById('badge-cidade-ativo').textContent = `${prospectSelecionado.cidade} - RS`;
-      document.getElementById('decisor-ativo').textContent = prospectSelecionado.decisor || 'Não informado';
-      document.getElementById('cnpj-ativo').textContent = prospectSelecionado.cnpj || 'Sob consulta';
-      document.getElementById('telefone-display').textContent = prospectSelecionado.telefone || '(54) 99696-6175';
-
-      gerarTextoMensagem();
-    }
-
-    function mudarTouch(dias) {
-      touchAtual = dias;
-      
-      // Ajustar botões
-      [1, 3, 5, 7, 10].forEach(d => {
-        const btn = document.getElementById(`btn-touch-${d}`);
-        if (d === dias) {
-          btn.className = "cadencia-pill-active px-3 py-1.5 rounded-xl text-xs transition";
-        } else {
-          btn.className = "px-3 py-1.5 rounded-xl text-xs text-slate-400 hover:text-white transition";
-        }
-      });
-
-      const template = templatesCadencia[dias];
-      if (template) {
-        document.getElementById('titulo-touch-estrat').textContent = template.titulo;
-        document.getElementById('meta-touch-estrat').textContent = template.meta;
-        document.getElementById('icone-touch').textContent = template.icone;
-      }
-
-      gerarTextoMensagem();
-    }
-
-    function gerarTextoMensagem() {
-      if (!prospectSelecionado) return;
-      const tpl = templatesCadencia[touchAtual];
-      if (!tpl) return;
-
-      const texto = tpl.gerar(prospectSelecionado);
-      const textarea = document.getElementById('texto-mensagem-whatsapp');
-      textarea.value = texto;
-      document.getElementById('char-counter').textContent = `${texto.length} caracteres`;
-    }
-
-    function restaurarMensagemPadrao() {
-      gerarTextoMensagem();
-    }
-
-    function copiarMensagemFormatada() {
-      const txt = document.getElementById('texto-mensagem-whatsapp').value;
-      navigator.clipboard.writeText(txt).then(() => {
-        alert('Mensagem copiada para a área de transferência!');
-      });
-    }
-
-    function abrirWhatsAppWeb() {
-      if (!prospectSelecionado) return;
-      const fone = prospectSelecionado.whatsapp || prospectSelecionado.telefone;
-      const foneLimpo = (fone || '').replace(/\D/g, '');
-      const numCompleto = foneLimpo.startsWith('55') ? foneLimpo : ('55' + foneLimpo);
-
-      const msg = encodeURIComponent(document.getElementById('texto-mensagem-whatsapp').value);
-      const url = `https://wa.me/${numCompleto}?text=${msg}`;
-      window.open(url, '_blank');
-    }
-
-    async function dispararWebhookApi() {
-      if (!prospectSelecionado) return;
-      const msg = document.getElementById('texto-mensagem-whatsapp').value;
-
-      try {
-        const resp = await fetch('/api/disparar_whatsapp_webhook', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            alvo_id: prospectSelecionado.id,
-            telefone: prospectSelecionado.whatsapp || prospectSelecionado.telefone,
-            nome_contato: prospectSelecionado.decisor || prospectSelecionado.nome,
-            mensagem: msg,
-            touch_dia: touchAtual
-          })
-        });
-
-        const data = await resp.json();
-        if (data.status === 'ok' || resp.ok) {
-          alert(`Webhook disparado com sucesso para ${prospectSelecionado.nome}!\n\nPayload registrado no Hub.`);
-        } else {
-          alert('Webhook disparado (modo simulação local ativo).');
-        }
-      } catch (err) {
-        alert('Webhook simulado com sucesso (servidor local ativo).');
-      }
-    }
-
-    function filtrarAlvos() {
-      const q = document.getElementById('filtro-busca').value.toLowerCase();
-      const filtrados = prospects.filter(p => 
-        p.nome.toLowerCase().includes(q) ||
-        p.cidade.toLowerCase().includes(q) ||
-        p.segmento.toLowerCase().includes(q) ||
-        (p.decisor && p.decisor.toLowerCase().includes(q))
-      );
-      renderizarListaAlvos(filtrados);
-    }
-
-    function atualizarStatusFunil() {
-      const val = document.getElementById('status-funil-alvo').value;
-      console.log(`Status alterado para: ${val}`);
-    }
-
-    window.addEventListener('DOMContentLoaded', inicializar);
-  </script>
-</body>
+        </section>
+      </div>
+      <noscript>Ative o JavaScript para preencher e gerar o resumo.</noscript>
+    </main>
+    <div id="work-toast" class="toast" role="status" hidden></div>
+    <script src="/painel_aprovacao/oficina.js?v=20260921-3" defer></script>
+  </body>
 </html>

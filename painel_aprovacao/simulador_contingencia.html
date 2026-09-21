@@ -1,437 +1,59 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulador de Contingência Offline — TruData ERP | Hansen Software</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            display: ['"Space Grotesk"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              azure: '#00A3FF',
-              dark: '#020B18',
-              card: '#0A192F',
-              emerald: '#10B981',
-              amber: '#F59E0B',
-              rose: '#F43F5E'
-            }
-          }
-        }
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Reunida na Demonstração de caixa</h1>
+      <p style="margin-top: 24px">
+        A demonstração é didática e identificada como simulação. Não emite NFC-e
+        nem envia comandos a equipamentos.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="demo_pdv.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    }
-  </script>
-  <style>
-    body { background-color: #020B18; color: #F8FAFC; }
-    .glass { background: rgba(10, 25, 47, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .scanline {
-      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3));
-      background-size: 100% 4px;
-    }
-    @keyframes pulseFast {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-    .pulse-fast { animation: pulseFast 0.8s infinite; }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased flex flex-col justify-between selection:bg-brand-azure selection:text-white pb-12">
-
-  <!-- CABEÇALHO -->
-  <header class="border-b border-slate-800/80 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 group text-xs text-slate-400 hover:text-white transition">
-          <span class="p-1.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-brand-azure">←</span>
-          <span>Voltar ao Hub</span>
-        </a>
-        <div class="h-4 w-px bg-slate-800"></div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-white font-display">SIMULADOR DE CONTINGÊNCIA FISCAL</span>
-          <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded font-mono">NFC-e Offline RS</span>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <a href="migracao_concorrentes.html" class="text-xs text-slate-400 hover:text-slate-200 px-3 py-1.5 rounded-xl border border-slate-800 bg-slate-900/50">
-          Migração Blindada
-        </a>
-        <button onclick="demonstrarClienteWhatsApp()" class="px-4 py-1.5 rounded-xl bg-brand-azure text-slate-950 font-bold text-xs flex items-center gap-1.5 transition">
-          <span>📲</span> Apresentar ao Lojista
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- ÁREA DE SIMULAÇÃO -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full space-y-6">
-    
-    <!-- BARRA DE STATUS EM TEMPO REAL & CONTROLES DE REDE -->
-    <div class="glass rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-slate-800 pb-6">
-        <div>
-          <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 font-mono">
-            Engenharia de Alta Disponibilidade
-          </span>
-          <h1 class="text-2xl sm:text-3xl font-black font-display text-white mt-2">
-            Simulador Interativo: O que acontece se a internet cair?
-          </h1>
-          <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
-            Em sistemas 100% web, a queda da fibra óptica ou instabilidade da SEFAZ-RS no sábado paralisa o caixa. Teste abaixo como o <strong class="text-white">TruData ERP</strong> mantém as vendas fluindo sem delay.
-          </p>
-        </div>
-
-        <!-- BOTÕES DE DISRUPÇÃO DE REDE -->
-        <div class="flex flex-wrap items-center gap-3">
-          <button id="btn-toggle-net" onclick="alternarConexaoInternet()" class="px-5 py-3 rounded-2xl font-bold text-xs transition flex items-center gap-2 bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/30">
-            <span id="icone-btn-net">🔌</span> <span id="label-btn-net">Simular Queda de Internet (Cabo Desconectado)</span>
-          </button>
-          
-          <button id="btn-toggle-sefaz" onclick="alternarSefaz()" class="px-4 py-3 rounded-2xl font-bold text-xs transition border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-200 flex items-center gap-2">
-            <span>🏛️</span> <span id="label-btn-sefaz">Instabilidade na SEFAZ-RS</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- INSTRUMENTOS DE TELEMETRIA -->
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs font-mono">
-        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-between">
-          <div>
-            <span class="text-slate-500 block text-[10px] uppercase">Link de Internet</span>
-            <span id="status-rede-badge" class="font-bold text-emerald-400 flex items-center gap-1.5 text-sm mt-0.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Conectado (Fibra 500MB)
-            </span>
-          </div>
-          <span class="text-2xl">🌐</span>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-between">
-          <div>
-            <span class="text-slate-500 block text-[10px] uppercase">Servidores SEFAZ-RS</span>
-            <span id="status-sefaz-badge" class="font-bold text-emerald-400 flex items-center gap-1.5 text-sm mt-0.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Operando Normal (140ms)
-            </span>
-          </div>
-          <span class="text-2xl">🏛️</span>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-between">
-          <div>
-            <span class="text-slate-500 block text-[10px] uppercase">Modo de Operação PDV</span>
-            <span id="status-pdv-modo" class="font-bold text-brand-azure flex items-center gap-1.5 text-sm mt-0.5">
-              <span>⚡</span> Emissão Síncrona
-            </span>
-          </div>
-          <span class="text-2xl">🖥️</span>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-between">
-          <div>
-            <span class="text-slate-500 block text-[10px] uppercase">Fila de Sincronização</span>
-            <span id="status-fila-count" class="font-bold text-slate-400 flex items-center gap-1.5 text-sm mt-0.5">
-              0 notas pendentes
-            </span>
-          </div>
-          <span class="text-2xl">📥</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- TERMINAL PDV SIMULADO VS SISTEMA NUVEM CONCORRENTE -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      
-      <!-- LADO ESQUERDO: TRUDATA ERP (HÍBRIDO BLINDADO) -->
-      <div class="glass rounded-3xl p-6 space-y-4 border border-brand-azure/30 flex flex-col justify-between">
-        <div class="space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-brand-azure"></span>
-              <h3 class="text-base font-bold text-white font-display">Terminal TruData ERP (Frente de Caixa)</h3>
-            </div>
-            <span class="text-[10px] bg-brand-azure/10 text-brand-azure border border-brand-azure/30 px-2 py-0.5 rounded font-mono font-bold">Arquitetura Híbrida</span>
-          </div>
-
-          <!-- TELA DO CAIXA -->
-          <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 font-mono text-xs space-y-2 scanline">
-            <div class="flex items-center justify-between text-slate-400 border-b border-slate-800/60 pb-2">
-              <span>CAIXA 01 • OPERADOR: CARLOS (SARANDI)</span>
-              <span class="text-emerald-400 font-bold" id="tempo-resposta-trudata">3.1s / cupom</span>
-            </div>
-
-            <div class="space-y-1.5 text-slate-300 pt-1" id="itens-cupom-simulados">
-              <div class="flex justify-between"><span>1x COCA-COLA 2L PET</span><span class="text-white">R$ 11,50</span></div>
-              <div class="flex justify-between"><span>1.240kg COSTELA BOVINA (TOLEDO PRIX)</span><span class="text-white">R$ 43,40</span></div>
-              <div class="flex justify-between"><span>2x PÃO DE FORMA INTEGRAL</span><span class="text-white">R$ 17,00</span></div>
-            </div>
-
-            <div class="pt-2 border-t border-slate-800 flex justify-between items-baseline text-sm">
-              <span class="text-slate-400 font-bold">TOTAL DA VENDA:</span>
-              <span class="text-emerald-400 text-lg font-black" id="total-venda-trudata">R$ 71,90</span>
-            </div>
-          </div>
-
-          <!-- FEEDBACK DE EMISSÃO -->
-          <div id="box-feedback-emissao" class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 space-y-1">
-            <div class="flex items-center gap-2 font-bold text-white">
-              <span>🖨️</span> <span id="titulo-feedback-emissao">Terminal pronto para emitir NFC-e</span>
-            </div>
-            <p class="text-[11px] text-slate-400" id="detalhe-feedback-emissao">
-              Banco SQLite/Firebird local sincronizado. Todos os produtos pesáveis e tributações carregados em memória RAM.
-            </p>
-          </div>
-        </div>
-
-        <button onclick="passarVendaNoCaixa()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm rounded-2xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2">
-          <span>🛒</span> PASSAR VENDA NO CAIXA (FINALIZAR CUPOM)
-        </button>
-      </div>
-
-      <!-- LADO DIREITO: SISTEMA CONCORRENTE 100% NUVEM -->
-      <div class="glass rounded-3xl p-6 space-y-4 border border-rose-500/20 flex flex-col justify-between opacity-90">
-        <div class="space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-rose-500"></span>
-              <h3 class="text-base font-bold text-slate-200 font-display">Sistema Concorrente 100% Web (Bling / Hiper Web)</h3>
-            </div>
-            <span class="text-[10px] bg-rose-500/10 text-rose-400 border border-rose-500/30 px-2 py-0.5 rounded font-mono font-bold">Dependência Web Total</span>
-          </div>
-
-          <!-- TELA DO CAIXA CONCORRENTE -->
-          <div id="tela-concorrente" class="p-4 rounded-2xl bg-slate-950 border border-slate-800 font-mono text-xs space-y-2 min-h-[175px] flex flex-col justify-center items-center text-center">
-            <div id="concorrente-online-content" class="w-full space-y-2">
-              <div class="flex items-center justify-between text-slate-500 border-b border-slate-800/60 pb-2">
-                <span>PDV BROWSER WEB • SÃO PAULO</span>
-                <span class="text-amber-400">8.9s / cupom</span>
-              </div>
-              <p class="text-slate-400 text-[11px] pt-3">Aguardando resposta do servidor remoto na nuvem...</p>
-              <div class="text-slate-500 text-[10px]">Latência média: 450ms por requisição REST</div>
-            </div>
-
-            <div id="concorrente-offline-content" class="hidden space-y-2 text-rose-400">
-              <div class="text-3xl">⚠️</div>
-              <h4 class="font-bold text-sm">ERR_CONNECTION_TIMED_OUT</h4>
-              <p class="text-slate-400 text-[11px] max-w-xs">
-                Não foi possível conectar ao servidor central em nuvem. A tela de vendas travou e não é possível emitir cupom. Fila parada na loja!
-              </p>
-            </div>
-          </div>
-
-          <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20 text-xs text-rose-300/90 leading-relaxed">
-            💥 <strong>O Perigo do Sábado:</strong> Sem banco de dados local, se a operadora de internet da sua cidade sofrer rompimento de fibra, sua loja fica impedida de vender até o link voltar.
-          </div>
-        </div>
-
-        <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 text-center text-xs text-slate-500">
-          Simulação Comparativa em Tempo Real
-        </div>
-      </div>
-
-    </div>
-
-    <!-- TABELA DE LOG DE TRANSMISSÃO EM BACKGROUND -->
-    <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-        <div>
-          <h3 class="text-sm font-bold text-white font-display">Log de Auditoria & Transmissão de Contingência (SEFAZ-RS)</h3>
-          <p class="text-xs text-slate-400">Veja como os cupons gerados offline são enfileirados e sincronizados sozinhos</p>
-        </div>
-        <span class="text-xs font-mono font-bold text-brand-azure" id="qtd-sincronizados-badge">0 transmitidos</span>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr class="border-b border-slate-800 text-slate-500 font-mono">
-              <th class="p-2.5">Horário</th>
-              <th class="p-2.5">Cupom NFC-e</th>
-              <th class="p-2.5">Modo de Emissão</th>
-              <th class="p-2.5">Tempo Caixa</th>
-              <th class="p-2.5">Status SEFAZ</th>
-            </tr>
-          </thead>
-          <tbody id="tbody-log-contingencia" class="divide-y divide-slate-800/60 font-mono text-slate-300">
-            <tr>
-              <td colspan="5" class="p-4 text-center text-slate-600">Nenhum cupom emitido ainda. Clique em "PASSAR VENDA NO CAIXA" acima para testar!</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </main>
-
-  <script>
-    let internetAtiva = true;
-    let sefazAtiva = true;
-    let filaContingencia = [];
-    let contadorCupons = 1084;
-    let totalTransmitidos = 0;
-
-    function alternarConexaoInternet() {
-      internetAtiva = !internetAtiva;
-
-      const btnNet = document.getElementById('btn-toggle-net');
-      const labelNet = document.getElementById('label-btn-net');
-      const iconeNet = document.getElementById('icone-btn-net');
-      const badgeNet = document.getElementById('status-rede-badge');
-      const modoPDV = document.getElementById('status-pdv-modo');
-      const concOn = document.getElementById('concorrente-online-content');
-      const concOff = document.getElementById('concorrente-offline-content');
-
-      if (!internetAtiva) {
-        btnNet.className = "px-5 py-3 rounded-2xl font-bold text-xs transition flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30";
-        labelNet.textContent = "Reconectar Internet (Restabelecer Fibra)";
-        iconeNet.textContent = "🟢";
-
-        badgeNet.innerHTML = '<span class="w-2.5 h-2.5 rounded-full bg-rose-500 pulse-fast"></span> DESCONECTADO (Sem Link)';
-        badgeNet.className = "font-bold text-rose-400 flex items-center gap-1.5 text-sm mt-0.5";
-
-        modoPDV.innerHTML = '<span class="text-amber-400">🛡️ Contingência Offline Blindada</span>';
-        
-        concOn.classList.add('hidden');
-        concOff.classList.remove('hidden');
-
-        document.getElementById('titulo-feedback-emissao').textContent = "Modo Contingência Offline Ativado!";
-        document.getElementById('detalhe-feedback-emissao').textContent = "O TruData continuará emitindo NFC-e com assinatura digital local em 3 segundos. As notas serão guardadas no SQLite local e enviadas à SEFAZ assim que a internet voltar.";
-      } else {
-        btnNet.className = "px-5 py-3 rounded-2xl font-bold text-xs transition flex items-center gap-2 bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/30";
-        labelNet.textContent = "Simular Queda de Internet (Cabo Desconectado)";
-        iconeNet.textContent = "🔌";
-
-        badgeNet.innerHTML = '<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Conectado (Fibra 500MB)';
-        badgeNet.className = "font-bold text-emerald-400 flex items-center gap-1.5 text-sm mt-0.5";
-
-        modoPDV.innerHTML = '<span>⚡</span> Emissão Síncrona';
-
-        concOn.classList.remove('hidden');
-        concOff.classList.add('hidden');
-
-        // Sincroniza em background
-        sincronizarFilaBackground();
-      }
-    }
-
-    function alternarSefaz() {
-      sefazAtiva = !sefazAtiva;
-      const badgeSefaz = document.getElementById('status-sefaz-badge');
-      const labelBtn = document.getElementById('label-btn-sefaz');
-
-      if (!sefazAtiva) {
-        badgeSefaz.innerHTML = '<span class="w-2.5 h-2.5 rounded-full bg-amber-500 pulse-fast"></span> LENTA / TIMEOUT (SEFAZ-RS)';
-        badgeSefaz.className = "font-bold text-amber-400 flex items-center gap-1.5 text-sm mt-0.5";
-        labelBtn.textContent = "Normalizar SEFAZ-RS";
-      } else {
-        badgeSefaz.innerHTML = '<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Operando Normal (140ms)';
-        badgeSefaz.className = "font-bold text-emerald-400 flex items-center gap-1.5 text-sm mt-0.5";
-        labelBtn.textContent = "Simular Instabilidade SEFAZ-RS";
-        sincronizarFilaBackground();
-      }
-    }
-
-    function passarVendaNoCaixa() {
-      contadorCupons++;
-      const cupomNum = `NFC-e #${contadorCupons}`;
-      const hora = new Date().toLocaleTimeString('pt-BR');
-      const tbody = document.getElementById('tbody-log-contingencia');
-
-      // Limpa mensagem vazia se for a primeira
-      if (tbody.children.length === 1 && tbody.children[0].innerText.includes('Nenhum cupom')) {
-        tbody.innerHTML = '';
-      }
-
-      const emContingencia = (!internetAtiva || !sefazAtiva);
-      const modoTexto = emContingencia ? '🟡 Offline (Contingência TP-9)' : '🟢 Normal (Síncrono)';
-      const statusSefaz = emContingencia ? '⏳ Enfileirado no Banco Local' : '✅ Autorizado na SEFAZ-RS (Protocolo 14326000...)';
-
-      if (emContingencia) {
-        filaContingencia.push({ cupom: cupomNum, hora: hora });
-        atualizarFilaUI();
-      } else {
-        totalTransmitidos++;
-        document.getElementById('qtd-sincronizados-badge').textContent = `${totalTransmitidos} transmitidos`;
-      }
-
-      const tr = document.createElement('tr');
-      tr.id = `row-cupom-${contadorCupons}`;
-      tr.className = emContingencia ? 'bg-amber-950/20' : '';
-      tr.innerHTML = `
-        <td class="p-2.5 text-slate-400">${hora}</td>
-        <td class="p-2.5 font-bold text-white">${cupomNum}</td>
-        <td class="p-2.5">${modoTexto}</td>
-        <td class="p-2.5 text-emerald-400 font-bold">2.8 seg (Zero Fila)</td>
-        <td class="p-2.5 status-col">${statusSefaz}</td>
-      `;
-
-      tbody.insertBefore(tr, tbody.firstChild);
-
-      // Efeito visual no feedback
-      const fbTitulo = document.getElementById('titulo-feedback-emissao');
-      const fbDetalhe = document.getElementById('detalhe-feedback-emissao');
-
-      if (emContingencia) {
-        fbTitulo.innerHTML = `✅ Venda Finalizada com Sucesso no Caixa! (${cupomNum})`;
-        fbDetalhe.innerHTML = `O cupom impresso saiu com o QR Code de contingência. O cliente levou a compra normalmente e o caixa não travou por 1 segundo sequer!`;
-      } else {
-        fbTitulo.innerHTML = `✅ Venda Concluída & Autorizada na SEFAZ-RS (${cupomNum})`;
-        fbDetalhe.innerHTML = `Transmissão imediata autorizada com chave fiscal gerada em 2.8 segundos.`;
-      }
-    }
-
-    function atualizarFilaUI() {
-      const el = document.getElementById('status-fila-count');
-      el.textContent = `${filaContingencia.length} notas pendentes`;
-      if (filaContingencia.length > 0) {
-        el.className = "font-bold text-amber-400 flex items-center gap-1.5 text-sm mt-0.5";
-      } else {
-        el.className = "font-bold text-slate-400 flex items-center gap-1.5 text-sm mt-0.5";
-      }
-    }
-
-    function sincronizarFilaBackground() {
-      if (filaContingencia.length === 0) return;
-
-      const qtd = filaContingencia.length;
-      document.getElementById('titulo-feedback-emissao').innerHTML = `🔄 Sincronizando ${qtd} cupom(ns) com a SEFAZ-RS em segundo plano...`;
-
-      setTimeout(() => {
-        filaContingencia = [];
-        totalTransmitidos += qtd;
-        atualizarFilaUI();
-
-        document.getElementById('qtd-sincronizados-badge').textContent = `${totalTransmitidos} transmitidos`;
-        document.getElementById('titulo-feedback-emissao').innerHTML = `✅ Todos os cupons pendentes foram autorizados pela SEFAZ-RS!`;
-        document.getElementById('detalhe-feedback-emissao').innerHTML = `Transmissão em lote finalizada com sucesso sem qualquer interrupção do operador de caixa.`;
-
-        document.querySelectorAll('#tbody-log-contingencia tr').forEach(row => {
-          const col = row.querySelector('.status-col');
-          if (col && col.innerText.includes('Enfileirado')) {
-            col.innerHTML = '✅ Autorizado em Lote (Sincronizado)';
-            row.classList.remove('bg-amber-950/20');
-          }
-        });
-      }, 1500);
-    }
-
-    function demonstrarClienteWhatsApp() {
-      const msg = `Olá! Gostaria de compartilhar uma demonstração prática do *TruData ERP*: nosso sistema opera 100% offline em contingência contra queda de internet ou instabilidade da SEFAZ-RS no sábado à tarde.\n\n` +
-        `• O cupom fiscal sai em 3 segundos mesmo se o cabo de fibra for cortado.\n` +
-        `• A sincronização acontece sozinha quando a conexão voltar, sem travar o operador de caixa.\n\n` +
-        `Posso te mostrar um vídeo de 1 minuto rodando na prática?`;
-
-      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramentas · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main">
+      <header class="tools-heading">
+        <div>
+          <p>Comercial, planejamento e conteúdo</p>
+          <h1>Ferramentas para o trabalho de hoje.</h1>
+          <p>
+            Encontre o que precisa para preparar uma conversa e dar o próximo
+            passo.
+          </p>
+        </div>
+        <label class="field tool-search"
+          >Buscar ferramenta<input
+            type="search"
+            id="tool-search"
+            placeholder="Cliente, proposta, custos…"
+        /></label>
+      </header>
+      <section class="next-step" aria-label="Atalhos para a rotina">
+        <div>
+          <h2>Qual é o próximo passo?</h2>
+          <p>Comece pela tarefa que precisa resolver agora.</p>
+        </div>
+        <a href="radar_clientes.html"
+          ><strong>Encontrar clientes</strong
+          ><span>Explore as empresas próximas e escolha quem abordar.</span></a
+        ><a href="cadencia_sdr.html"
+          ><strong>Preparar uma conversa</strong
+          ><span
+            >Transforme o contexto do cliente em uma mensagem clara.</span
+          ></a
+        ><a href="gerador_proposta.html"
+          ><strong>Fazer uma proposta</strong
+          ><span>Organize escopo, valores e condições em um documento.</span></a
+        >
+      </section>
+      <div class="catalogue-layout">
+        <aside>
+          <nav class="catalogue-nav" aria-label="Categorias de ferramentas">
+            <button data-group="Todas" aria-pressed="true">Todas</button
+            ><button data-group="Comercial" aria-pressed="false">
+              Comercial</button
+            ><button data-group="Planejamento" aria-pressed="false">
+              Planejamento</button
+            ><button data-group="Conteúdo" aria-pressed="false">
+              Conteúdo
+            </button>
+            <p>Uma ferramenta para cada necessidade, sem atalhos repetidos.</p>
+          </nav>
+        </aside>
+        <section aria-labelledby="catalogue-title">
+          <div class="catalogue-top">
+            <h2 id="catalogue-title">Todas as ferramentas</h2>
+            <span class="small muted" id="tool-count" role="status"></span>
+          </div>
+          <div id="tool-list"></div>
+          <noscript
+            >Ative o JavaScript para buscar no catálogo. Você também pode usar
+            os atalhos acima.</noscript
+          >
+        </section>
+      </div>
+      <footer class="catalogue-note">
+        <details>
+          <summary>O que mudou nesta central?</summary>
+          <p>
+            As ferramentas repetidas foram reunidas. Saíram do catálogo os
+            painéis com métricas fictícias, ações sem integração e simulações
+            apresentadas como auditorias, pagamentos ou homologações. Os
+            endereços antigos explicam a mudança e indicam alternativas quando
+            existem.
+          </p>
+          <p>
+            Os registros do CRM e os materiais originais foram preservados.
+            Ferramentas de planejamento geram documentos locais; os textos devem
+            refletir o que foi combinado com o cliente.
+          </p>
+        </details>
+      </footer>
+    </main>
+    <script src="/painel_aprovacao/ferramentas.js?v=20260921-4" defer></script>
+  </body>
+</html>

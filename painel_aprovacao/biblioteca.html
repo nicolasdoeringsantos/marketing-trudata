@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Biblioteca de referência · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main">
+      <header class="tools-heading">
+        <div>
+          <a href="ferramentas.html">Todas as ferramentas</a>
+          <h1>Biblioteca de referência</h1>
+          <p>Roteiros e ideias preservados para a próxima criação.</p>
+        </div>
+        <label class="field tool-search"
+          >Buscar nas coleções<input
+            id="library-search"
+            type="search"
+            placeholder="Roteiro, loja, atendimento…"
+        /></label>
+      </header>
+      <p class="work-notice">
+        Material anterior, ainda sujeito à revisão editorial. Confira números,
+        promessas e condições antes de usar. As alterações feitas aqui são
+        temporárias; baixe o texto para guardá-las.
+      </p>
+      <div class="workspace">
+        <section class="work-form">
+          <h2 id="library-count">Coleções</h2>
+          <div id="library-list" class="checklist-items"></div>
+        </section>
+        <section class="work-output">
+          <h2 id="library-title">Escolha uma coleção</h2>
+          <label class="field"
+            >Texto para consultar e adaptar<textarea
+              id="library-text"
+              rows="22"
+              placeholder="Abra uma coleção ao lado."
+            ></textarea>
+          </label>
+          <div class="actions">
+            <button class="btn" id="library-copy" disabled>Copiar texto</button
+            ><button class="btn" id="library-download" disabled>
+              Baixar texto
+            </button>
+          </div>
+          <p id="library-status" role="status" class="work-help"></p>
+        </section>
+      </div>
+    </main>
+    <script src="/painel_aprovacao/biblioteca-dados.js?v=20260921-3"></script>
+    <script src="/painel_aprovacao/biblioteca.js?v=20260921-3" defer></script>
+  </body>
+</html>

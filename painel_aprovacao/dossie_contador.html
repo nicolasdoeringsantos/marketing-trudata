@@ -1,359 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dossiê Técnico para Contadores — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@300;400;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              azure: '#009fe3',
-              cyan: '#169fdb',
-              dark: '#070c18',
-              card: '#0f172a',
-              border: '#1e293b',
-              emerald: '#10b981',
-              gold: '#f59e0b',
-              purple: '#8b5cf6'
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Plus Jakarta Sans', 'sans-serif'],
-            serif: ['Merriweather', 'serif']
-          }
-        }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Reunida em Comparar custos</h1>
+      <p style="margin-top: 24px">
+        A comparação passa a usar valores informados, sem economia mínima
+        forçada, taxas de perda presumidas ou preços atribuídos a concorrentes.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="tco_roi.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    }
-  </script>
-  <style>
-    @media print {
-      body { background: #fff !important; color: #000 !important; padding: 0 !important; }
-      header, .no-print { display: none !important; }
-      .print-page { box-shadow: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; }
-    }
-  </style>
-</head>
-<body class="min-h-screen bg-slate-950 text-slate-100 antialiased selection:bg-brand-azure selection:text-white pb-24">
-
-  <!-- HEADER -->
-  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold text-sm transition">←</a>
-        <div class="h-9 w-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl border border-purple-500/30">
-          🏛️
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="font-display font-black text-lg text-white">Dossiê Técnico para Contadores</h1>
-            <span class="text-[10px] uppercase font-bold tracking-wider bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full border border-purple-500/30">Homologação SEFAZ-RS / SPED</span>
-          </div>
-          <p class="text-xs text-slate-400">Hansen Software · Sarandi/RS · Conformidade Fiscal & Eliminação de Retrabalho</p>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700 transition flex items-center gap-1.5 shadow-sm">
-          🖨️ Imprimir Laudo Técnico (A4)
-        </button>
-        <button onclick="enviarPropostaContadorWhatsApp()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white transition shadow-lg shadow-emerald-600/20 flex items-center gap-1.5">
-          📲 Enviar Pitch p/ Contador no WhatsApp
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-      <!-- COLUNA LATERAL ESQUERDA: SIMULADOR DE RETRABALHO & MENSAGENS -->
-      <div class="lg:col-span-4 space-y-6 no-print">
-        
-        <!-- CALCULADORA DE ECONOMIA DE HORAS CONTÁBEIS -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-5">
-          <div class="flex items-center gap-2 border-b border-slate-800 pb-3">
-            <span class="text-lg">🧮</span>
-            <h2 class="text-sm font-bold text-white font-display">Calculadora de Retrabalho Contábil</h2>
-          </div>
-
-          <div class="space-y-3.5">
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Clientes de Varejo no Escritório:</label>
-              <input type="number" id="calc-clientes" value="25" oninput="calcularEconomiaContador()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white font-mono focus:border-purple-500 focus:outline-none" />
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Horas/mês corrigindo notas rejeitadas por cliente:</label>
-              <input type="number" id="calc-horas-cliente" value="3.5" step="0.5" oninput="calcularEconomiaContador()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white font-mono focus:border-purple-500 focus:outline-none" />
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Custo médio hora analista fiscal (R$):</label>
-              <input type="number" id="calc-custo-hora" value="45" oninput="calcularEconomiaContador()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white font-mono focus:border-purple-500 focus:outline-none" />
-            </div>
-          </div>
-
-          <!-- RESULTADOS -->
-          <div class="bg-slate-950 border border-purple-500/30 rounded-2xl p-4 space-y-3">
-            <div class="flex justify-between items-center text-xs">
-              <span class="text-slate-400">Tempo perdido por mês:</span>
-              <span id="res-horas-mes" class="font-black text-amber-400 font-mono text-sm">87,5 horas</span>
-            </div>
-            <div class="flex justify-between items-center text-xs">
-              <span class="text-slate-400">Custo anual de retrabalho:</span>
-              <span id="res-custo-anual" class="font-black text-rose-400 font-mono text-sm">R$ 47.250,00</span>
-            </div>
-            <div class="p-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex justify-between items-center text-xs">
-              <span class="text-emerald-400 font-bold">Economia com TruData:</span>
-              <span id="res-economia-anual" class="font-black text-emerald-400 font-mono text-sm">R$ 37.800,00/ano</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- CADÊNCIA DE CONTATO COM O CONTADOR -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h2 class="text-sm font-bold text-white font-display flex items-center gap-2">
-              <span>💬</span> Abordagem ao Contador
-            </h2>
-            <select id="sel-toque-contador" onchange="trocarToqueContador()" class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-slate-300">
-              <option value="toque1">Toque 1: Modo Escritório (Abertura)</option>
-              <option value="toque2">Toque 2: Prova de Tempo (Follow-up)</option>
-              <option value="toque3">Toque 3: Café em Sarandi / Demo</option>
-            </select>
-          </div>
-
-          <div class="space-y-3">
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Nome do Escritório / Contador:</label>
-              <input type="text" id="inp-contador-nome" value="Escritório Contábil Regional" oninput="trocarToqueContador()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none" />
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Telefone WhatsApp:</label>
-              <input type="text" id="inp-contador-fone" value="(54) 3361-1200" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-purple-500 focus:outline-none" />
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Texto Formatado:</label>
-              <textarea id="txt-msg-contador" rows="6" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 font-mono resize-none focus:outline-none leading-relaxed"></textarea>
-            </div>
-
-            <button onclick="copiarMensagemContador()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-purple-300 border border-purple-500/30 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
-              <span id="btn-copiar-contador">📋 Copiar Mensagem</span>
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- COLUNA PRINCIPAL: FOLHA A4 DO LAUDO TÉCNICO EXECUTIVO -->
-      <div class="lg:col-span-8 print-page">
-        <div class="bg-white text-slate-900 rounded-3xl p-8 sm:p-12 shadow-2xl border border-slate-200 min-h-[900px] font-serif leading-relaxed">
-          
-          <!-- CABEÇALHO DO LAUDO -->
-          <div class="border-b-2 border-slate-900 pb-6 mb-8 flex items-start justify-between">
-            <div>
-              <div class="font-sans font-black text-2xl tracking-tight text-slate-950 uppercase">HANSEN SOFTWARE LTDA</div>
-              <p class="font-sans text-xs text-slate-600 font-semibold tracking-wider uppercase mt-0.5">
-                DEPARTAMENTO DE ENGENHARIA FISCAL & ARQUITETURA TRIBUTÁRIA · SARANDI/RS
-              </p>
-              <p class="font-sans text-[11px] text-slate-500 mt-1">
-                CNPJ: 02.483.991/0001-90 · Certificação Oficial MPS.BR Nível G · 25+ Anos de Estrada
-              </p>
-            </div>
-
-            <div class="text-right font-sans">
-              <span class="inline-block bg-emerald-50 border border-emerald-600 text-emerald-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
-                ✓ HOMOLOGADO SEFAZ-RS
-              </span>
-              <div class="text-[11px] text-slate-500 font-mono mt-2">Laudo Nº: TRU-2026/RS-084</div>
-            </div>
-          </div>
-
-          <!-- TÍTULO PRINCIPAL -->
-          <div class="text-center font-sans mb-8">
-            <h2 class="text-lg sm:text-xl font-black uppercase tracking-wide text-slate-950">
-              LAUDO TÉCNICO DE CONFORMIDADE FISCAL & AUDITORIA DE EXPORTAÇÃO SPED / SINTEGRA
-            </h2>
-            <p class="text-xs text-slate-600 mt-1">
-              Documento comprobatório de integridade de dados fiscais para escritórios contábeis do RS
-            </p>
-          </div>
-
-          <!-- DADOS DO DESTINATÁRIO -->
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-8 font-sans text-xs">
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <span class="text-slate-500 uppercase font-bold text-[10px] block">Escritório Contábil Parceiro:</span>
-                <strong id="doc-contabilidade" class="text-slate-900 text-sm">Escritório Contábil Regional</strong>
-              </div>
-              <div>
-                <span class="text-slate-500 uppercase font-bold text-[10px] block">Aplicação Tecnológica:</span>
-                <span class="text-slate-800 font-semibold">TruData ERP Enterprise (Módulos Fiscal, PDV e Estoque)</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- TEXTO DO LAUDO -->
-          <div class="space-y-4 text-xs sm:text-sm text-slate-800 leading-relaxed text-justify mb-8">
-            <p>
-              A <strong>HANSEN SOFTWARE LTDA</strong>, sediada no município de Sarandi - RS, certifica por meio deste laudo técnico que a plataforma de gestão <strong>TruData ERP</strong> atende de forma irrestrita a todas as obrigações acessórias estaduais e federais vigentes na legislação do Estado do Rio Grande do Sul (SEFAZ-RS), Receita Federal do Brasil e normas de transição para a Reforma Tributária.
-            </p>
-            <p>
-              Os algoritmos de validação pré-emissão garantem que <strong>nenhum documento fiscal (NFC-e / NF-e)</strong> seja gravado no banco de dados com parametrização inconsistente de NCM, CFOP ou CST, blindando o comércio contra autuações e reduzindo a quase zero o retrabalho dos analistas contábeis na apuração mensal.
-            </p>
-          </div>
-
-          <!-- TABELA DE BLOCOS FISCAIS AUDITADOS -->
-          <div class="font-sans mb-8">
-            <h3 class="text-xs font-black uppercase text-slate-900 mb-3 tracking-wider">
-              1. MATRIZ DE VALIDAÇÃO DE REGISTROS TRIBUTÁRIOS (SPED FISCAL & SINTEGRA)
-            </h3>
-            <table class="w-full text-left text-xs border border-slate-300 border-collapse">
-              <thead>
-                <tr class="bg-slate-100 text-slate-800 border-b border-slate-300">
-                  <th class="p-2.5 font-bold border-r border-slate-300">Registro / Bloco</th>
-                  <th class="p-2.5 font-bold border-r border-slate-300">Descrição Técnica</th>
-                  <th class="p-2.5 font-bold border-r border-slate-300">Mecanismo TruData</th>
-                  <th class="p-2.5 font-bold text-center">Status</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200">
-                <tr>
-                  <td class="p-2.5 font-mono font-bold border-r border-slate-300">Bloco C (C100 / C170)</td>
-                  <td class="p-2.5 border-r border-slate-300">Documentos fiscais e itens de mercadorias</td>
-                  <td class="p-2.5 border-r border-slate-300">Validação amarrada na importação de XML do fornecedor</td>
-                  <td class="p-2.5 text-emerald-700 font-bold text-center">Auditado 100%</td>
-                </tr>
-                <tr>
-                  <td class="p-2.5 font-mono font-bold border-r border-slate-300">Bloco E (E110 / E210)</td>
-                  <td class="p-2.5 border-r border-slate-300">Apuração de ICMS Próprio e ICMS-ST no RS</td>
-                  <td class="p-2.5 border-r border-slate-300">Segregação automática de monofásicos e substituição tributária</td>
-                  <td class="p-2.5 text-emerald-700 font-bold text-center">Auditado 100%</td>
-                </tr>
-                <tr>
-                  <td class="p-2.5 font-mono font-bold border-r border-slate-300">Bloco H (H010 / H020)</td>
-                  <td class="p-2.5 border-r border-slate-300">Inventário Físico e Fiscal de Estoque</td>
-                  <td class="p-2.5 border-r border-slate-300">Baixa instantânea no PDV sem divergência de grade/lotes</td>
-                  <td class="p-2.5 text-emerald-700 font-bold text-center">Auditado 100%</td>
-                </tr>
-                <tr>
-                  <td class="p-2.5 font-mono font-bold border-r border-slate-300">Sintegra (50, 54, 60 e 75)</td>
-                  <td class="p-2.5 border-r border-slate-300">Validação estrutural para clientes do Simples</td>
-                  <td class="p-2.5 border-r border-slate-300">Exportação com layout nativo sem necessidade de conversores externos</td>
-                  <td class="p-2.5 text-emerald-700 font-bold text-center">Auditado 100%</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- RECURSOS DO MODO ESCRITÓRIO -->
-          <div class="font-sans mb-8">
-            <h3 class="text-xs font-black uppercase text-slate-900 mb-3 tracking-wider">
-              2. DIFERENCIAIS EXCLUSIVOS PARA O ESCRITÓRIO CONTÁBIL
-            </h3>
-            <ul class="text-xs text-slate-700 space-y-2 list-disc pl-5">
-              <li><strong>Modo Escritório Unificado:</strong> O analista contábil acessa todos os clientes da carteira com 1 login e troca de empresa em 2 cliques.</li>
-              <li><strong>Exportação em Lote no Dia 1º:</strong> Pacote compactado (.ZIP) com todos os XMLs de emissão e cancelamento, sem precisar cobrar o cliente no WhatsApp.</li>
-              <li><strong>Auditoria Automática de Devoluções:</strong> Checagem de CFOPs de devolução (5202/5411) evitando estornos incorretos de ICMS.</li>
-              <li><strong>Canal Direto de Suporte Contábil:</strong> Fila prioritária sem robô atendida por especialistas fiscais em Sarandi-RS.</li>
-            </ul>
-          </div>
-
-          <!-- ASSINATURA EXECUTIVA -->
-          <div class="font-sans pt-8 border-t border-slate-300 mt-12 grid grid-cols-2 gap-8 text-center text-xs">
-            <div>
-              <div class="border-t border-slate-800 pt-2 font-bold text-slate-900">
-                ENG. FISCAL & DESENVOLVIMENTO
-              </div>
-              <div class="text-slate-600 text-[11px]">Hansen Software LTDA · Sarandi - RS</div>
-            </div>
-            <div>
-              <div class="border-t border-slate-800 pt-2 font-bold text-slate-900">
-                DIRETORIA DE OPERAÇÕES B2B
-              </div>
-              <div class="text-slate-600 text-[11px]">Selo MPS.BR de Qualidade de Software</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <script>
-    function calcularEconomiaContador() {
-      const clientes = parseFloat(document.getElementById('calc-clientes').value) || 0;
-      const horas = parseFloat(document.getElementById('calc-horas-cliente').value) || 0;
-      const custo = parseFloat(document.getElementById('calc-custo-hora').value) || 0;
-
-      const totalHorasMes = clientes * horas;
-      const custoAnual = totalHorasMes * custo * 12;
-      const economiaAnual = custoAnual * 0.8; // Elimina 80% do retrabalho
-
-      document.getElementById('res-horas-mes').innerText = `${totalHorasMes.toLocaleString('pt-BR', { minimumFractionDigits: 1 })} horas`;
-      document.getElementById('res-custo-anual').innerText = `R$ ${custoAnual.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-      document.getElementById('res-economia-anual').innerText = `R$ ${economiaAnual.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}/ano`;
-    }
-
-    function trocarToqueContador() {
-      const toque = document.getElementById('sel-toque-contador').value;
-      const nomeContador = document.getElementById('inp-contador-nome').value || 'Amigo Contador';
-      document.getElementById('doc-contabilidade').innerText = nomeContador;
-
-      let msg = "";
-      if (toque === 'toque1') {
-        msg = `Olá, ${nomeContador}! Tudo bem?\n\n` +
-          `Aqui é da equipe do TruData ERP (Hansen Software, aqui mesmo de Sarandi).\n\n` +
-          `Desenvolvemos uma funcionalidade específica para escritórios contábeis da nossa região chamada *Modo Escritório*: um painel onde seu analista troca de cliente em 2 cliques para puxar SPED e XMLs validados, sem precisar cobrar o comerciante no dia do fechamento.\n\n` +
-          `Além disso, o sistema conta com validação automática de devolução fiscal por XML e segregação de ICMS-ST para o Simples Nacional.\n\n` +
-          `Faz sentido conversarmos 5 minutinhos nesta semana para você ver como funciona na prática?`;
-      } else if (toque === 'toque2') {
-        msg = `Oi, ${nomeContador}! Passando só para compartilhar um dado rápido da nossa região:\n\n` +
-          `Em média, os escritórios contábeis que atendem lojistas com o TruData economizam mais de *3 horas por semana por analista*, eliminando correções manuais de notas rejeitadas na SEFAZ-RS e pacotes de XML corrompidos.\n\n` +
-          `Emitimos um laudo técnico de conformidade que posso te enviar em PDF. Um abraço!`;
-      } else {
-        msg = `Olá, ${nomeContador}! Imagino que a rotina esteja corrida por aí com o fechamento fiscal.\n\n` +
-          `Estou à disposição para uma demonstração rápida de 10 minutos pelo Google Meet ou até para dar uma passada aí no escritório em Sarandi para tomar um café e te apresentar a área de parceiros contábeis do TruData.\n\n` +
-          `Quinta ou sexta-feira pela manhã fica melhor para você?`;
-      }
-
-      document.getElementById('txt-msg-contador').value = msg;
-    }
-
-    function copiarMensagemContador() {
-      const txt = document.getElementById('txt-msg-contador').value;
-      navigator.clipboard.writeText(txt).then(() => {
-        const btn = document.getElementById('btn-copiar-contador');
-        btn.innerText = "✓ Mensagem Copiada!";
-        setTimeout(() => btn.innerText = "📋 Copiar Mensagem", 2500);
-      });
-    }
-
-    function enviarPropostaContadorWhatsApp() {
-      const fone = (document.getElementById('inp-contador-fone').value || '').replace(/\D/g, '');
-      const txt = document.getElementById('txt-msg-contador').value;
-      let targetFone = fone;
-      if (!targetFone.startsWith('55') && targetFone.length >= 10) targetFone = '55' + targetFone;
-
-      const url = targetFone ? `https://wa.me/${targetFone}?text=${encodeURIComponent(txt)}` : `https://wa.me/?text=${encodeURIComponent(txt)}`;
-      window.open(url, '_blank');
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      calcularEconomiaContador();
-      trocarToqueContador();
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>

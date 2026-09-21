@@ -1,495 +1,85 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auditor de XML NF-e & Diagnóstico Fiscal — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: { brand: { azure: '#009fe3', hover: '#0284c7', dark: '#080c14', card: '#111827' } },
-          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { background-color: #080c14; color: #f1f5f9; }
-    .glass { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    @media print {
-      body { background-color: #fff !important; color: #000 !important; }
-      header, .no-print { display: none !important; }
-      .glass { background: #fff !important; border: 1px solid #ddd !important; box-shadow: none !important; color: #000 !important; }
-      #laudo-impresso { display: block !important; }
-    }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased flex flex-col">
-
-  <!-- HEADER -->
-  <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-40 no-print">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-2">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
-          ← Hub Central
-        </a>
-        <span class="text-slate-700">|</span>
-        <a href="radar_clientes.html" class="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition">
-          🛰️ Radar B2B (100km)
-        </a>
-        <span class="text-slate-700">|</span>
-        <a href="crm.html" class="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition">
-          💼 CRM Kanban
-        </a>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ler arquivo XML · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="xml">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
       </div>
-      <div class="flex items-center gap-2">
-        <span class="text-xs font-bold text-slate-300 font-display">Auditor Fiscal TruData</span>
-        <span class="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded border border-amber-500/30">
-          SEFAZ-RS & PIS/COFINS Compliance
-        </span>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-5xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
-    
-    <!-- BANNER DE APRESENTAÇÃO -->
-    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
-        <div class="flex items-center gap-3.5">
-          <div class="h-12 w-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl border border-amber-500/30 shrink-0">
-            🔍
-          </div>
-          <div>
-            <h1 class="text-2xl font-black font-display text-white">Auditor de XML NF-e & Diagnóstico de Bitributação</h1>
-            <p class="text-xs text-slate-400 mt-0.5">
-              Identifique ICMS-ST indevido, PIS/COFINS monofásico bitributado e gere um <strong>Laudo de Economia</strong> em 1 clique.
-            </p>
-          </div>
+    </header>
+    <main id="main">
+      <header class="tools-heading">
+        <div>
+          <a href="ferramentas.html">Todas as ferramentas</a>
+          <h1 id="work-title">Ler arquivo XML</h1>
+          <p id="work-desc"></p>
         </div>
-
-        <div class="flex items-center gap-2 flex-wrap">
-          <button onclick="carregarExemplo('refrigerante_st')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 rounded-lg transition font-medium">
-            Exemplo: Bebidas (ST)
-          </button>
-          <button onclick="carregarExemplo('farmacia_monofasico')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 rounded-lg transition font-medium">
-            Exemplo: Farmácia (PIS Monofásico)
-          </button>
-        </div>
-      </div>
-
-      <!-- ÁREA DE UPLOAD (DRAG & DROP REAL) -->
-      <div 
-        id="drop-zone"
-        onclick="document.getElementById('file-input').click()"
-        ondragover="handleDragOver(event)"
-        ondragleave="handleDragLeave(event)"
-        ondrop="handleDrop(event)"
-        class="border-2 border-dashed border-slate-700 hover:border-amber-500/80 rounded-2xl p-8 text-center cursor-pointer transition bg-slate-950/60 group space-y-2"
-      >
-        <input type="file" id="file-input" accept=".xml" class="hidden" onchange="handleFileSelect(event)">
-        <div class="text-4xl group-hover:scale-110 transition duration-200">📂</div>
-        <div class="text-sm font-bold text-white group-hover:text-amber-400 transition">
-          Arraste o arquivo .XML da NF-e aqui ou clique para selecionar
-        </div>
-        <p class="text-xs text-slate-400 max-w-md mx-auto">
-          Suporta notas fiscais eletrônicas (NF-e modelo 55 e NFC-e modelo 65) autorizadas pela SEFAZ-RS.
-        </p>
-      </div>
-
-      <!-- OU COLE O XML DIRETAMENTE -->
-      <div class="space-y-2">
-        <div class="flex items-center justify-between text-xs font-semibold text-slate-400">
-          <span>Ou cole o código XML da nota abaixo:</span>
-          <button onclick="limparXML()" class="text-cyan-400 hover:underline">Limpar</button>
-        </div>
-        <textarea 
-          id="xml-input" 
-          rows="5" 
-          placeholder="Cole aqui o XML completo da NF-e (ex: <nfeProc> ou <infNFe>)..." 
-          class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-xs font-mono text-slate-300 focus:outline-none focus:border-amber-500 leading-relaxed"
-        ></textarea>
-      </div>
-
-      <div class="flex items-center justify-end gap-3">
-        <button onclick="executarAuditoria()" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs rounded-xl transition shadow-lg shadow-amber-500/20 flex items-center gap-2 cursor-pointer">
-          <span>⚡</span> Executar Auditoria Fiscal TruData
-        </button>
-      </div>
-    </div>
-
-    <!-- PAINEL DE RESULTADOS & LAUDO -->
-    <div id="resultado-painel" class="hidden space-y-6">
-
-      <!-- CARDS DE RESUMO DA AUDITORIA -->
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <div class="glass p-4 rounded-2xl border border-slate-800">
-          <span class="text-[10px] uppercase font-bold text-slate-400 block font-mono">Status da Nota</span>
-          <span id="res-status" class="text-base font-extrabold text-white block mt-1">Auditada</span>
-          <span id="res-nfe-num" class="text-[11px] text-slate-400 mt-0.5 block">NF-e: 000000</span>
-        </div>
-        <div class="glass p-4 rounded-2xl border border-slate-800">
-          <span class="text-[10px] uppercase font-bold text-slate-400 block font-mono">Empresa Emitente</span>
-          <span id="res-emitente" class="text-xs font-bold text-white block mt-1 truncate">Lojista Parceiro</span>
-          <span id="res-cnpj" class="text-[11px] text-cyan-400 font-mono mt-0.5 block">00.000.000/0001-00</span>
-        </div>
-        <div class="glass p-4 rounded-2xl border border-slate-800">
-          <span class="text-[10px] uppercase font-bold text-slate-400 block font-mono">Divergências Fiscais</span>
-          <span id="res-erros-count" class="text-xl font-extrabold text-rose-400 block mt-1 font-mono">0</span>
-          <span class="text-[11px] text-slate-400 mt-0.5 block">Itens com bitributação</span>
-        </div>
-        <div class="glass p-4 rounded-2xl border border-slate-800">
-          <span class="text-[10px] uppercase font-bold text-slate-400 block font-mono">Economia Estimada</span>
-          <span id="res-economia" class="text-xl font-extrabold text-emerald-400 block mt-1 font-mono">R$ 0,00</span>
-          <span class="text-[11px] text-emerald-300/80 mt-0.5 block">Recuperável com TruData</span>
-        </div>
-      </div>
-
-      <!-- RELATÓRIO / LAUDO FORMAL PRONTO PARA IMPRESSÃO OU WHATSAPP -->
-      <div id="laudo-container" class="glass rounded-2xl p-6 sm:p-8 border border-slate-800 space-y-5">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase font-mono">
-                Laudo Técnico Oficial
-              </span>
-              <span class="text-xs text-slate-400" id="laudo-data">18/09/2026</span>
-            </div>
-            <h2 class="text-xl font-black text-white font-display mt-1">Diagnóstico de Conformidade & Mitigação Tributária</h2>
-            <p class="text-xs text-slate-400">Elaborado por: Hansen Software LTDA (TruData ERP) · Sarandi - RS</p>
-          </div>
-
-          <div class="flex items-center gap-2 no-print">
-            <button onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5">
-              🖨️ Imprimir Laudo
-            </button>
-            <button onclick="enviarLaudoWhatsApp()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-lg shadow-emerald-600/20">
-              📲 Disparar no WhatsApp
+      </header>
+      <p class="work-notice" id="work-notice"></p>
+      <div class="workspace">
+        <form id="work-form" class="work-form">
+          <h2>Prepare os dados</h2>
+          <div class="input-grid" id="fields"></div>
+          <p id="work-error" class="work-error" role="alert" hidden></p>
+          <div class="actions">
+            <button class="btn primary" id="generate" type="submit">
+              Atualizar resumo</button
+            ><button class="btn" id="save-draft" type="button">
+              Salvar rascunho</button
+            ><button class="btn" id="load-draft" type="button">
+              Recuperar rascunho
             </button>
           </div>
-        </div>
-
-        <!-- LISTA DE INCONSISTÊNCIAS ENCONTRADAS -->
-        <div id="lista-inconsistencias" class="space-y-3 text-xs">
-          <!-- Renderizado dinamicamente -->
-        </div>
-
-        <!-- CONCLUSÃO DO LAUDO -->
-        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs leading-relaxed space-y-2">
-          <strong class="text-white block font-display">Conclusão Técnica & Recomendação TruData ERP:</strong>
-          <p class="text-slate-300" id="laudo-conclusao">
-            O software de emissão atual utilizado pela empresa não trata adequadamente as regras tributárias específicas do Estado do Rio Grande do Sul e a segregação de produtos monofásicos no Simples Nacional / Lucro Presumido.
+          <p class="work-help">
+            Um rascunho por ferramenta neste navegador. Baixe o resumo para
+            guardar uma cópia.
           </p>
-          <p class="text-emerald-400 font-semibold">
-            ✓ A implantação do TruData ERP automatiza o saneamento cadastral de NCMs, aplica CST 60 e CFOP 5405 em itens com ST e segrega automaticamente os créditos tributários no SPED Fiscal da SEFAZ-RS.
+        </form>
+        <section class="work-output" aria-labelledby="output-title">
+          <h2 id="output-title">Seu resumo</h2>
+          <p class="placeholder" id="result-empty">
+            Preencha os dados e atualize o resumo para revisar o resultado.
           </p>
-        </div>
-      </div>
-
-    </div>
-
-  </main>
-
-  <script>
-    let DADOS_AUDITORIA = {
-      empresa: 'Empresa sob Auditoria',
-      cnpj: '00.000.000/0001-00',
-      nfe: '1023',
-      cidade: 'Região Norte - RS',
-      erros: [],
-      economiaTotal: 0
-    };
-
-    function handleDragOver(e) {
-      e.preventDefault();
-      document.getElementById('drop-zone').classList.add('border-amber-500', 'bg-amber-500/10');
-    }
-    function handleDragLeave(e) {
-      e.preventDefault();
-      document.getElementById('drop-zone').classList.remove('border-amber-500', 'bg-amber-500/10');
-    }
-    function handleDrop(e) {
-      e.preventDefault();
-      handleDragLeave(e);
-      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        lerArquivoXML(e.dataTransfer.files[0]);
-      }
-    }
-    function handleFileSelect(e) {
-      if (e.target.files && e.target.files[0]) {
-        lerArquivoXML(e.target.files[0]);
-      }
-    }
-
-    function lerArquivoXML(file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        document.getElementById('xml-input').value = e.target.result;
-        executarAuditoria();
-      };
-      reader.readAsText(file);
-    }
-
-    function limparXML() {
-      document.getElementById('xml-input').value = '';
-      document.getElementById('resultado-painel').classList.add('hidden');
-    }
-
-    function carregarExemplo(tipo) {
-      if (tipo === 'refrigerante_st') {
-        document.getElementById('xml-input').value = 
-`<?xml version="1.0" encoding="UTF-8"?>
-<nfeProc versao="4.00" xmlns="http://www.portalfiscal.inf.br/nfe">
-  <NFe>
-    <infNFe Id="NFe43260902784846000180550010000010231234567890" versao="4.00">
-      <ide><nNF>1023</nNF><dhEmi>2026-09-18T10:30:00-03:00</dhEmi><natOp>VENDA DE MERCADORIA</natOp></ide>
-      <emit><CNPJ>87842148000183</CNPJ><xNome>SUPERMERCADO REGIONAL SARANDI LTDA</xNome><xFant>Supermercado Modelo</xFant><enderEmit><xMun>Sarandi</xMun><UF>RS</UF></enderEmit></emit>
-      <det nItem="1">
-        <prod><cProd>001</cProd><xProd>REFRIGERANTE COCA COLA 2 LITROS</xProd><NCM>22021000</NCM><CFOP>5102</CFOP><vProd>12.50</vProd></prod>
-        <imposto>
-          <ICMS><ICMS00><orig>0</orig><CST>00</CST><vBC>12.50</vBC><pICMS>17.00</pICMS><vICMS>2.12</vICMS></ICMS00></ICMS>
-        </imposto>
-      </det>
-      <det nItem="2">
-        <prod><cProd>002</cProd><xProd>CERVEJA PURO MALTE 350ML</xProd><NCM>22030000</NCM><CFOP>5102</CFOP><vProd>4.80</vProd></prod>
-        <imposto>
-          <ICMS><ICMS00><orig>0</orig><CST>00</CST><vBC>4.80</vBC><pICMS>25.00</pICMS><vICMS>1.20</vICMS></ICMS00></ICMS>
-        </imposto>
-      </det>
-    </infNFe>
-  </NFe>
-</nfeProc>`;
-      } else {
-        document.getElementById('xml-input').value = 
-`<?xml version="1.0" encoding="UTF-8"?>
-<nfeProc versao="4.00" xmlns="http://www.portalfiscal.inf.br/nfe">
-  <NFe>
-    <infNFe Id="NFe43260902784846000180550010000020451234567890" versao="4.00">
-      <ide><nNF>2045</nNF><dhEmi>2026-09-18T11:15:00-03:00</dhEmi><natOp>VENDA DE MERCADORIA</natOp></ide>
-      <emit><CNPJ>91234567000189</CNPJ><xNome>FARMACIA E DROGARIA CENTRAL LTDA</xNome><xFant>Farmácia Central</xFant><enderEmit><xMun>Passo Fundo</xMun><UF>RS</UF></enderEmit></emit>
-      <det nItem="1">
-        <prod><cProd>101</cProd><xProd>DIPIRONA SODICA 500MG GTS 20ML</xProd><NCM>30049099</NCM><CFOP>5102</CFOP><vProd>9.50</vProd></prod>
-        <imposto>
-          <PIS><PISAliq><CST>01</CST><vBC>9.50</vBC><pPIS>0.65</pPIS><vPIS>0.06</vPIS></PISAliq></PIS>
-          <COFINS><COFINSAliq><CST>01</CST><vBC>9.50</vBC><pCOFINS>3.00</pCOFINS><vCOFINS>0.28</vCOFINS></COFINSAliq></COFINS>
-        </imposto>
-      </det>
-      <det nItem="2">
-        <prod><cProd>102</cProd><xProd>PROTETOR SOLAR FPS 50 120ML</xProd><NCM>33049990</NCM><CFOP>5102</CFOP><vProd>45.00</vProd></prod>
-        <imposto>
-          <PIS><PISAliq><CST>01</CST><vBC>45.00</vBC><pPIS>0.65</pPIS><vPIS>0.29</vPIS></PISAliq></PIS>
-          <COFINS><COFINSAliq><CST>01</CST><vBC>45.00</vBC><pCOFINS>3.00</pCOFINS><vCOFINS>1.35</vCOFINS></COFINSAliq></COFINS>
-        </imposto>
-      </det>
-    </infNFe>
-  </NFe>
-</nfeProc>`;
-      }
-      executarAuditoria();
-    }
-
-    function executarAuditoria() {
-      const xmlStr = document.getElementById('xml-input').value.trim();
-      if (!xmlStr) {
-        alert('Cole o XML da nota ou selecione um arquivo.');
-        return;
-      }
-
-      try {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlStr, "text/xml");
-
-        // Parse Emitente
-        const emit = xmlDoc.querySelector('emit');
-        let razao = emit ? (emit.querySelector('xNome')?.textContent || emit.querySelector('xFant')?.textContent) : 'Empresa sob Análise';
-        let cnpj = emit ? emit.querySelector('CNPJ')?.textContent : 'Não informado';
-        let cidade = emit ? emit.querySelector('enderEmit xMun')?.textContent : 'RS';
-
-        // Format CNPJ
-        if (cnpj && cnpj.length === 14) {
-          cnpj = cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
-        }
-
-        const ide = xmlDoc.querySelector('ide');
-        let nNF = ide ? ide.querySelector('nNF')?.textContent : 'S/N';
-
-        DADOS_AUDITORIA.empresa = razao || 'Empresa sob Análise';
-        DADOS_AUDITORIA.cnpj = cnpj || 'Sob Consulta';
-        DADOS_AUDITORIA.nfe = nNF;
-        DADOS_AUDITORIA.cidade = cidade ? `${cidade} - RS` : 'RS';
-        DADOS_AUDITORIA.erros = [];
-        DADOS_AUDITORIA.economiaTotal = 0;
-
-        // Parse Itens
-        const dets = xmlDoc.querySelectorAll('det');
-        
-        dets.forEach((det, idx) => {
-          const xProd = det.querySelector('prod xProd')?.textContent || `Item ${idx+1}`;
-          const ncm = (det.querySelector('prod NCM')?.textContent || '').replace(/\D/g, '');
-          const cfop = det.querySelector('prod CFOP')?.textContent || '';
-          const vProd = parseFloat(det.querySelector('prod vProd')?.textContent || '0');
-
-          // ICMS Check
-          const cstIcms = det.querySelector('imposto ICMS CST, imposto ICMS CSOSN')?.textContent || '';
-          const vIcms = parseFloat(det.querySelector('imposto ICMS vICMS')?.textContent || '0');
-
-          // PIS/COFINS Check
-          const cstPis = det.querySelector('imposto PIS CST')?.textContent || '';
-          const vPis = parseFloat(det.querySelector('imposto PIS vPIS')?.textContent || '0');
-          const vCofins = parseFloat(det.querySelector('imposto COFINS vCOFINS')?.textContent || '0');
-
-          // Regra 1: ST em Bebidas (2201, 2202, 2203)
-          if (ncm.startsWith('2201') || ncm.startsWith('2202') || ncm.startsWith('2203')) {
-            if (['00', '102', '5102'].includes(cstIcms) || cfop === '5102') {
-              const impostoIndevido = vIcms > 0 ? vIcms : (vProd * 0.17);
-              DADOS_AUDITORIA.erros.push({
-                item: xProd,
-                ncm: ncm,
-                problema: 'Bitributação de ICMS-ST no RS',
-                detalhe: `Produto com NCM ${ncm} sujeito a Substituição Tributária emitido com CFOP ${cfop} e CST/CSOSN ${cstIcms}. O imposto já foi retido na indústria, mas o sistema está recolhendo novamente na saída!`,
-                correcao: 'Deveria ser emitido com CFOP 5405 e CST 60 (ou CSOSN 500).',
-                impostoEstimado: impostoIndevido
-              });
-              DADOS_AUDITORIA.economiaTotal += impostoIndevido;
-            }
-          }
-
-          // Regra 2: Monofásico em Farmácia / Medicamentos (3003, 3004) e Cosméticos (3304, 3305)
-          if (ncm.startsWith('3003') || ncm.startsWith('3004') || ncm.startsWith('3304') || ncm.startsWith('3305')) {
-            if (['01', '02'].includes(cstPis)) {
-              const pisCofinsIndevido = (vPis + vCofins) > 0 ? (vPis + vCofins) : (vProd * 0.0365);
-              DADOS_AUDITORIA.erros.push({
-                item: xProd,
-                ncm: ncm,
-                problema: 'PIS/COFINS Monofásico Recolhido em Duplicidade',
-                detalhe: `Medicamento/Cosmético NCM ${ncm} possui tributação concentrada na indústria (alíquota zero no varejo). O XML utilizou CST ${cstPis} tributando normalmente na venda ao consumidor.`,
-                correcao: 'Deveria ser emitido com CST 04 (Operação Tributável Monofásica - Alíquota Zero).',
-                impostoEstimado: pisCofinsIndevido
-              });
-              DADOS_AUDITORIA.economiaTotal += pisCofinsIndevido;
-            }
-          }
-
-          // Regra 3: Autopeças (8708, 4011)
-          if (ncm.startsWith('8708') || ncm.startsWith('4011')) {
-            if (cfop === '5102' || ['00', '01'].includes(cstIcms)) {
-              const impostoIndevido = (vProd * 0.12);
-              DADOS_AUDITORIA.erros.push({
-                item: xProd,
-                ncm: ncm,
-                problema: 'Inconsistência em Autopeças (ICMS-ST)',
-                detalhe: `Peças automotivas NCM ${ncm} no Rio Grande do Sul devem ter saída com segregação de ST.`,
-                correcao: 'Parametrizar para CFOP 5405 e CSOSN 500 no TruData ERP.',
-                impostoEstimado: impostoIndevido
-              });
-              DADOS_AUDITORIA.economiaTotal += impostoIndevido;
-            }
-          }
-        });
-
-        renderizarResultadoAuditoria();
-      } catch (err) {
-        console.error(err);
-        alert('Erro ao processar estrutura do XML. Verifique se o conteúdo colado é uma nota fiscal válida.');
-      }
-    }
-
-    function renderizarResultadoAuditoria() {
-      document.getElementById('resultado-painel').classList.remove('hidden');
-
-      document.getElementById('res-status').innerText = DADOS_AUDITORIA.erros.length > 0 ? '⚠️ Alerta de Risco' : '✅ Regular';
-      document.getElementById('res-status').className = DADOS_AUDITORIA.erros.length > 0 ? 'text-base font-extrabold text-rose-400 block mt-1' : 'text-base font-extrabold text-emerald-400 block mt-1';
-      document.getElementById('res-nfe-num').innerText = `NF-e Nº: ${DADOS_AUDITORIA.nfe}`;
-      document.getElementById('res-emitente').innerText = DADOS_AUDITORIA.empresa;
-      document.getElementById('res-cnpj').innerText = DADOS_AUDITORIA.cnpj;
-      document.getElementById('res-erros-count').innerText = DADOS_AUDITORIA.erros.length;
-      document.getElementById('res-economia').innerText = `R$ ${DADOS_AUDITORIA.economiaTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-
-      document.getElementById('laudo-data').innerText = new Date().toLocaleDateString('pt-BR');
-
-      const container = document.getElementById('lista-inconsistencias');
-      container.innerHTML = '';
-
-      if (DADOS_AUDITORIA.erros.length === 0) {
-        container.innerHTML = `
-          <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-start gap-3">
-            <span class="text-2xl">✅</span>
-            <div>
-              <strong class="text-emerald-400 text-sm block">Conformidade Básica Aprovada</strong>
-              <p class="text-slate-300 mt-1">Nenhuma bitributação evidente de ICMS-ST ou PIS/COFINS monofásico encontrada nos itens desta nota fiscal.</p>
-            </div>
+          <pre id="result" hidden></pre>
+          <div id="output-special"></div>
+          <div class="actions">
+            <button class="btn" id="copy-result" data-output disabled>
+              Copiar resumo</button
+            ><button class="btn" id="download-result" data-output disabled>
+              Baixar texto</button
+            ><button class="btn" id="print-result" data-output disabled>
+              Imprimir / PDF
+            </button>
           </div>
-        `;
-        document.getElementById('laudo-conclusao').innerText = 
-          `A nota fiscal nº ${DADOS_AUDITORIA.nfe} emitida por ${DADOS_AUDITORIA.empresa} segue padrões razoáveis de parametrização. O TruData ERP continua sendo a solução ideal para garantir que essa conformidade seja mantida automaticamente sem depender de conferência manual.`;
-      } else {
-        DADOS_AUDITORIA.erros.forEach((err, idx) => {
-          container.innerHTML += `
-            <div class="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-rose-400 font-display">Item ${idx+1}: ${err.item} (NCM: ${err.ncm})</span>
-                <span class="text-xs bg-rose-500/20 text-rose-300 font-mono px-2 py-0.5 rounded font-bold">Perda Estimada: R$ ${err.impostoEstimado.toFixed(2)}</span>
-              </div>
-              <p class="text-slate-200"><strong>Divergência:</strong> ${err.detalhe}</p>
-              <p class="text-emerald-400 font-medium"><strong>Correção TruData:</strong> ${err.correcao}</p>
-            </div>
-          `;
-        });
-
-        const projecaoAnual = DADOS_AUDITORIA.economiaTotal * 250;
-        document.getElementById('laudo-conclusao').innerHTML = 
-          `Identificamos <strong>${DADOS_AUDITORIA.erros.length} inconsistência(s) fiscal(is) grave(s)</strong> na NF-e nº ${DADOS_AUDITORIA.nfe} de <strong>${DADOS_AUDITORIA.empresa}</strong>.<br>` +
-          `Apenas nesta única nota, o lojista recolheu indevidamente cerca de <strong>R$ ${DADOS_AUDITORIA.economiaTotal.toFixed(2)}</strong>. Projetando o volume médio mensal e anual do estabelecimento, o prejuízo acumulado pode ultrapassar <strong class="text-rose-400">R$ ${projecaoAnual.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}/ano</strong> em bitributação que não precisava ter sido paga!`;
-      }
-    }
-
-    async function enviarLaudoWhatsApp() {
-      const primeiroNome = DADOS_AUDITORIA.empresa.split(' ')[0] || 'Empresário';
-      const totalErros = DADOS_AUDITORIA.erros.length;
-      const valor = DADOS_AUDITORIA.economiaTotal.toFixed(2);
-      const projecaoAnual = (DADOS_AUDITORIA.economiaTotal * 250).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-
-      let fone = prompt("Digite o número do WhatsApp do empresário/contador (com DDD):", "");
-      let foneLimpo = fone ? fone.replace(/\D/g, '') : '';
-      if (foneLimpo && !foneLimpo.startsWith('55') && foneLimpo.length <= 11) {
-        foneLimpo = '55' + foneLimpo;
-      }
-
-      const textoMensagem = 
-        `Olá, ${primeiroNome}! Aqui é da equipe de conformidade fiscal da TruData ERP (Hansen Software) em Sarandi/RS. 🤝\n\n` +
-        `Realizamos uma auditoria preventiva no XML da NF-e nº *${DADOS_AUDITORIA.nfe}* da *${DADOS_AUDITORIA.empresa}* e detectamos *${totalErros} inconsistência(s) tributária(s)* no Rio Grande do Sul:\n` +
-        `- Bitributação de ICMS-ST (recolhimento indevido na saída)\n` +
-        `- PIS/COFINS Monofásico tributado em duplicidade no Simples Nacional\n\n` +
-        `💰 *Prejuízo detectado nesta nota:* R$ ${valor}\n` +
-        `📉 *Prejuízo anual projetado:* R$ ${projecaoAnual}/ano pagos a mais!\n\n` +
-        `O TruData ERP corrige essa parametrização de NCM e CFOP automaticamente no seu caixa. Podemos agendar 10 minutos para te mostrar como estancar essa sangria de impostos?`;
-
-      // Registra no Webhook do backend (n8n/Evolution/Baileys)
-      try {
-        await fetch('/api/disparar_whatsapp_webhook', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            telefone: foneLimpo,
-            mensagem: textoMensagem,
-            cliente: DADOS_AUDITORIA.empresa,
-            tipo: 'laudo_fiscal'
-          })
-        });
-      } catch (e) {
-        console.log("Registro webhook:", e);
-      }
-
-      const msgEncoded = encodeURIComponent(textoMensagem);
-      const urlFinal = foneLimpo ? `https://wa.me/${foneLimpo}?text=${msgEncoded}` : `https://wa.me/?text=${msgEncoded}`;
-      window.open(urlFinal, '_blank');
-    }
-  </script>
-</body>
+        </section>
+      </div>
+      <noscript>Ative o JavaScript para preencher e gerar o resumo.</noscript>
+    </main>
+    <div id="work-toast" class="toast" role="status" hidden></div>
+    <script src="/painel_aprovacao/oficina.js?v=20260921-3" defer></script>
+  </body>
 </html>

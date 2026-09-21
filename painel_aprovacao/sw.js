@@ -1,8 +1,22 @@
 // Service Worker — TruData ERP Cockpit (Modo Estrada Offline-First)
-const CACHE_NAME = 'trudata-cockpit-v2026-r3';
+const CACHE_NAME = 'trudata-editorial-v2026-r8';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
+  '/calendario.html',
+  '/radar_clientes.html',
+  '/ferramentas.html',
+  '/painel_aprovacao/ferramentas.css?v=20260921-3',
+  '/painel_aprovacao/ferramentas.js?v=20260921-3',
+  '/painel_aprovacao/oficina.js?v=20260921-3',
+  '/painel_aprovacao/radar.js',
+  '/painel_aprovacao/radar.css',
+  '/painel_aprovacao/radar-dados.js',
+  '/painel_aprovacao/design-system.css',
+  '/painel_aprovacao/editorial.js',
+  '/painel_aprovacao/posts-dados.js',
+  '/painel_aprovacao/calendario_dados.js',
+  '/painel_aprovacao/favicon.svg',
   '/checkup_loja.html',
   '/fechamento_rapido.html',
   '/prova_social_regional.html',
@@ -73,6 +87,18 @@ self.addEventListener('fetch', (event) => {
 
   // Não interceptar requisições para outros domínios ou websockets
   if (requestUrl.origin !== location.origin) {
+    return;
+  }
+
+  // As telas editoriais usam a versão atual ao reabrir; cache só se estiver offline.
+  if (event.request.method === 'GET' && (/\.html$/.test(requestUrl.pathname) || /\/(?:radar(?:_clientes\.html|\.js|\.css|-dados\.js)?|ferramentas\.(?:js|css)|oficina\.js|biblioteca(?:-dados)?\.js|index\.html|calendario(?:\.html)?|design-system\.css|editorial\.js|posts-dados\.js|calendario_dados\.js)?$/.test(requestUrl.pathname))) {
+    event.respondWith(fetch(event.request).then(response => {
+      if (response.ok) {
+        const copy = response.clone();
+        event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)));
+      }
+      return response;
+    }).catch(() => caches.match(event.request)));
     return;
   }
 

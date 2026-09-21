@@ -1,1216 +1,167 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calendário Editorial Visual 2026 — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              azure: '#009fe3',
-              cyan: '#169fdb',
-              dark: '#0a0f1d',
-              card: '#111827',
-              border: '#1f293d',
-              navy: '#0f172a',
-              soft: '#e0f2fe',
-              hover: '#0284c7'
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Plus Jakarta Sans', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #070b14;
-      color: #f1f5f9;
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: #0f172a;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 4px;
-    }
-    .calendar-cell {
-      min-height: 125px;
-      transition: all 0.15s ease-in-out;
-    }
-    .calendar-cell:hover {
-      background-color: #131d31;
-      border-color: #38bdf8;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px -5px rgba(0, 159, 227, 0.15);
-      z-index: 10;
-    }
-    .phone-mockup {
-      width: 250px;
-      min-height: 480px;
-      border-radius: 36px;
-      border: 8px solid #1e293b;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-      position: relative;
-    }
-    @media print {
-      header, .no-print { display: none !important; }
-      body { background: white !important; color: black !important; }
-      .calendar-cell { border-color: #ccc !important; min-height: 90px !important; color: black !important; }
-    }
-  </style>
-</head>
-<body class="min-h-screen bg-[#070b14] text-slate-100 antialiased selection:bg-brand-azure selection:text-white flex flex-col">
-
-  <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-slate-900 border border-brand-azure text-white px-5 py-3 rounded-xl shadow-2xl">
-    <span id="toast-icon">✅</span>
-    <span id="toast-msg" class="text-sm font-medium">Copiado com sucesso!</span>
-  </div>
-
-  <!-- HEADER -->
-  <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex flex-wrap items-center justify-between gap-4">
-      
-      <!-- Brand & Title -->
-      <div class="flex items-center gap-3.5">
-        <a href="index.html" class="h-11 w-11 rounded-2xl bg-gradient-to-tr from-brand-azure via-cyan-400 to-sky-300 flex items-center justify-center font-display font-black text-2xl text-slate-950 shadow-lg shadow-brand-azure/30 hover:scale-105 transition">
-          T
-        </a>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Calendário editorial · TruData</title>
+    <link rel="manifest" href="/painel_aprovacao/manifest.json" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/painel_aprovacao/favicon.svg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+  </head>
+  <body data-page="calendario">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="TruData, aprovação de conteúdo"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Estúdio de conteúdo</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html"><span data-icon="check"></span>Aprovação</a
+          ><a href="calendario.html" aria-current="page"
+            ><span data-icon="calendar"></span>Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a><a href="ferramentas.html"
+            ><span data-icon="grid"></span>Ferramentas</a
+          >
+        </nav>
+        <div class="team">
+          Hansen Software · Sarandi, RS<span class="avatar" aria-hidden="true"
+            >HS</span
+          >
+        </div>
+      </div>
+    </header>
+    <main id="main">
+      <div class="breadcrumb">Marketing / Planejamento 2026</div>
+      <div class="page-heading">
         <div>
-          <div class="flex items-center gap-2">
-            <span class="font-display font-black text-lg tracking-tight text-white">TruData ERP</span>
-            <span class="text-[10px] uppercase font-bold tracking-widest bg-brand-azure/20 text-brand-azure px-2 py-0.5 rounded-full border border-brand-azure/30">
-              Calendário 2026
-            </span>
-          </div>
-          <p class="text-xs text-slate-400">15 Setembro a 31 Dezembro · 108 Dias de Conteúdo Estruturado</p>
+          <h1>Calendário editorial</h1>
+          <p>Uma rotina de conteúdo para estar perto de quem empreende.</p>
         </div>
-      </div>
-
-      <!-- Quick Metrics Summary -->
-      <div class="hidden lg:flex items-center gap-4 bg-slate-900/90 border border-slate-800 px-4 py-2 rounded-xl text-xs">
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
-          <span class="text-slate-300 font-medium">Stories diários: <strong class="text-white">108 (324 telas)</strong></span>
-        </div>
-        <div class="h-4 w-px bg-slate-700"></div>
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
-          <span class="text-slate-300 font-medium">Feed/Reels: <strong class="text-white">17 pautas</strong></span>
-        </div>
-        <div class="h-4 w-px bg-slate-700"></div>
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-          <span class="text-slate-300 font-medium">Horário fixo: <strong class="text-white">08:00 BRT</strong></span>
-        </div>
-      </div>
-
-      <!-- Navigation & Actions -->
-      <div class="flex items-center gap-2">
-        <button onclick="abrirModalRedeLocal()" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20 transition">
-          📱 Rede Local / Celular
-        </button>
-        <button onclick="abrirModalFeedGrid()" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-lg shadow-rose-600/20 hover:brightness-110 transition">
-          📸 Feed 3x3
-        </button>
-        <button onclick="exportarCSV()" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition">
-          📊 Exportar CSV
-        </button>
-        <button onclick="exportarMarkdown()" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition">
-          📝 Notion/MD
-        </button>
-        <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition">
-          🖼️ Painel
-        </a>
-        <button onclick="window.print()" class="no-print inline-flex items-center gap-1.5 px-2.5 py-2 text-xs font-semibold rounded-xl bg-slate-900 text-slate-400 hover:text-white border border-slate-800 transition">
-          🖨️
+        <button class="btn" id="preview-feed">
+          <span data-icon="grid"></span>Prévia do Instagram
         </button>
       </div>
-
-    </div>
-  </header>
-
-  <!-- CONTROLS & SUBHEADER -->
-  <div class="bg-slate-950/40 border-b border-slate-800/80 sticky top-20 z-30 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        
-        <!-- Month Tabs -->
-        <div class="flex items-center p-1 bg-slate-900/90 rounded-2xl border border-slate-800 gap-1 overflow-x-auto custom-scrollbar">
-          <button onclick="mudarMes('09')" id="tab-09" class="month-tab px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-2">
-            <span>🍂 Setembro</span>
-            <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded-md text-slate-300">16 dias · 4 Feed</span>
-          </button>
-          <button onclick="mudarMes('10')" id="tab-10" class="month-tab px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-2">
-            <span>🌸 Outubro</span>
-            <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded-md text-slate-300">31 dias · 4 Feed</span>
-          </button>
-          <button onclick="mudarMes('11')" id="tab-11" class="month-tab px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-2">
-            <span>🔥 Novembro</span>
-            <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded-md text-slate-300">30 dias · 5 Feed</span>
-          </button>
-          <button onclick="mudarMes('12')" id="tab-12" class="month-tab px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-2">
-            <span>🎄 Dezembro</span>
-            <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded-md text-slate-300">31 dias · 4 Feed</span>
-          </button>
-          <button onclick="mudarMes('todos')" id="tab-todos" class="month-tab px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-2">
-            <span>📋 Lista (108 Dias)</span>
-          </button>
-        </div>
-
-        <!-- Filter and Search -->
-        <div class="flex flex-wrap items-center gap-2.5">
-          <!-- View Toggle -->
-          <div class="flex items-center bg-slate-900 border border-slate-800 rounded-xl p-0.5" id="view-mode-toggle">
-            <button onclick="setModoExibicao('grade')" id="btn-view-grade" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-brand-azure text-white">
-              📅 Grade
-            </button>
-            <button onclick="setModoExibicao('lista')" id="btn-view-lista" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">
-              📑 Lista
-            </button>
-          </div>
-
-          <!-- Type Filter -->
-          <select id="filtro-tipo" onchange="aplicarFiltros()" class="bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-brand-azure focus:border-transparent outline-none">
-            <option value="todos">Todos os Conteúdos</option>
-            <option value="feed">🎬 Apenas Feed & Reels (17)</option>
-            <option value="feriado">⭐ Datas Comemorativas & Feriados</option>
-            <option value="regional">🌾 Regional RS & Campanhas</option>
-            <option value="contabilidade">💼 Contabilidade & Escritório</option>
-            <option value="varejo">🛒 Varejo, Caixa & Estoque</option>
-            <option value="moda">👗 Confecções & Calçados</option>
-            <option value="farmacia">💊 Farmácias & Drogarias</option>
-            <option value="servicos">🔧 Serviços & Mecânicas</option>
-          </select>
-
-          <!-- Search Input with Ctrl+K shortcut -->
-          <div class="relative">
-            <input type="text" id="busca-calendario" oninput="aplicarFiltros()" placeholder="Buscar (Ctrl+K)..." class="bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 rounded-xl pl-8 pr-12 py-2 w-48 focus:w-64 focus:ring-2 focus:ring-brand-azure outline-none transition-all">
-            <span class="absolute left-2.5 top-2.5 text-slate-500 text-xs">🔍</span>
-            <span class="absolute right-2.5 top-2 text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded border border-slate-700 font-mono">⌘K</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- REGIONAL EVENTS & CAMPAIGNS RIBBON COM FILTROS DE NICHO -->
-  <div id="banner-campanhas" class="bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border-b border-slate-800/80 py-2.5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 overflow-x-auto custom-scrollbar text-xs">
-      <div class="flex items-center gap-2 shrink-0">
-        <span class="text-brand-azure font-bold uppercase tracking-wider text-[11px]">Nicho Rápido:</span>
-        <button onclick="filtrarPorNicho('todos')" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition">
-          Todos
-        </button>
-        <button onclick="filtrarPorNicho('moda')" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-pink-500/10 text-pink-300 hover:bg-pink-500/20 border border-pink-500/30 transition">
-          👗 Moda & Confecção
-        </button>
-        <button onclick="filtrarPorNicho('farmacia')" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 border border-emerald-500/30 transition">
-          💊 Farmácias & SNGPC
-        </button>
-        <button onclick="filtrarPorNicho('varejo')" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 border border-amber-500/30 transition">
-          🛒 PDV & Supermercados
-        </button>
-        <button onclick="filtrarPorNicho('contabilidade')" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 border border-indigo-500/30 transition">
-          💼 Modo Escritório / Contadores
-        </button>
-      </div>
-      <div id="tags-destaques-mes" class="flex items-center gap-2 shrink-0">
-        <!-- Injected via JS -->
-      </div>
-    </div>
-  </div>
-
-  <!-- MAIN CALENDAR CONTAINER -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
-
-    <!-- VIEW 1: MONTHLY GRID -->
-    <div id="view-grade" class="space-y-4">
-      
-      <!-- Weekday Headers -->
-      <div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-slate-400 uppercase tracking-wider pb-2 border-b border-slate-800/80">
-        <div class="text-rose-400">Domingo</div>
-        <div>Segunda</div>
-        <div>Terça</div>
-        <div>Quarta</div>
-        <div>Quinta</div>
-        <div>Sexta</div>
-        <div class="text-amber-400">Sábado</div>
-      </div>
-
-      <!-- Calendar Days Grid -->
-      <div id="grid-dias" class="grid grid-cols-7 gap-2">
-        <!-- Injected via JS -->
-      </div>
-    </div>
-
-    <!-- VIEW 2: LIST / TIMELINE -->
-    <div id="view-lista" class="hidden space-y-3">
-      <div id="lista-dias" class="space-y-3">
-        <!-- Injected via JS -->
-      </div>
-    </div>
-
-  </main>
-
-  
-  
-  <!-- MODAL DE ACESSO NA REDE LOCAL & CELULAR (QR CODE) -->
-  <div id="modal-rede-local" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-slate-900 border border-slate-700/80 rounded-3xl max-w-md w-full shadow-2xl overflow-hidden my-auto p-6 text-center space-y-5">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div class="flex items-center gap-2">
-          <span class="text-xl">📡</span>
-          <h3 class="text-base font-bold text-white font-display">Acesso na Rede Local</h3>
-        </div>
-        <button onclick="fecharModalRedeLocal()" class="h-8 w-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
-          ✕
-        </button>
-      </div>
-
-      <p class="text-xs text-slate-300 leading-relaxed">
-        Qualquer colega, notebook ou smartphone conectado ao mesmo Wi-Fi da empresa pode acessar o calendário diretamente:
-      </p>
-
-      <!-- QR Code Image -->
-      <div class="bg-white p-4 rounded-2xl inline-block shadow-xl border-4 border-emerald-500/30">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http%3A%2F%2F192.168.0.157%3A8080%2Fcalendario.html" alt="QR Code Calendário TruData" class="w-48 h-48 mx-auto" />
-      </div>
-
-      <div class="space-y-2 text-left bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-        <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold text-slate-400 uppercase">🔗 Link da Rede Local</span>
-          <button onclick="copiarTextoLinkRede()" class="text-xs font-bold text-brand-azure hover:underline">
-            Copiar Link
-          </button>
-        </div>
-        <input id="input-link-rede" type="text" readonly value="http://192.168.0.157:8080/calendario.html" class="w-full bg-slate-900 border border-slate-700 text-emerald-400 text-xs font-mono px-3 py-2 rounded-lg outline-none select-all" />
-      </div>
-
-      <p class="text-[11px] text-slate-500">
-        💡 Dica: Aponte a câmera do seu celular para o QR Code acima para abrir na hora.
-      </p>
-    </div>
-  </div>
-
-  <!-- MODAL DE SIMULAÇÃO DO FEED DO INSTAGRAM (GRID 3X3) -->
-  <div id="modal-feed-grid" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-slate-900 border border-slate-700/80 rounded-3xl max-w-2xl w-full shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
-      <div class="p-5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="h-10 w-10 rounded-full bg-gradient-to-tr from-pink-500 via-rose-500 to-amber-400 p-0.5">
-            <div class="h-full w-full bg-slate-950 rounded-full flex items-center justify-center font-bold text-white text-xs">
-              TD
-            </div>
-          </div>
-          <div>
-            <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
-              @trudata_ <span class="text-blue-400 text-xs">✓</span>
-            </h3>
-            <p class="text-[11px] text-slate-400">Simulador Estético do Feed (3x3 Colunas)</p>
-          </div>
-        </div>
-        <button onclick="fecharModalFeedGrid()" class="h-8 w-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
-          ✕
-        </button>
-      </div>
-
-      <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-4">
-        <div class="text-center pb-2 border-b border-slate-800/60">
-          <span class="text-xs text-slate-400">Prévia da distribuição estética das 17 pautas oficiais de Feed & Reels</span>
-        </div>
-        
-        <!-- Grid 3x3 -->
-        <div id="feed-grid-items" class="grid grid-cols-3 gap-2.5">
-          <!-- Injected via JS -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL DE DETALHES DO DIA (SUPER COMPLETO) -->
-  <div id="modal-dia" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-    <div class="bg-slate-900 border border-slate-700/80 rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
-      
-      <!-- Modal Header -->
-      <div class="p-6 bg-slate-950 border-b border-slate-800 flex items-start justify-between gap-4">
+      <div id="error" class="error-banner" role="alert" hidden></div>
+      <section class="editorial-strip" aria-label="Resumo do planejamento">
         <div>
-          <div class="flex flex-wrap items-center gap-2 mb-2" id="modal-dia-badges">
-            <!-- Badges injected -->
-          </div>
-          <h2 class="text-2xl font-black font-display text-white tracking-tight" id="modal-dia-data">
-            22 de Setembro de 2026 · Terça-feira
-          </h2>
-          <p class="text-sm text-slate-400 mt-0.5" id="modal-dia-tema">
-            Tema principal: Dia do Contador
-          </p>
+          <p class="lead">Do plano à publicação.</p>
+          <p class="muted small">15 de setembro a 31 de dezembro de 2026</p>
         </div>
-        <div class="flex items-center gap-2">
-          <!-- Status selector -->
-          <div class="flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5">
-            <span class="text-xs text-slate-400">Status:</span>
-            <select id="modal-dia-status-select" onchange="salvarStatusDia()" class="bg-transparent text-xs font-bold text-emerald-400 outline-none cursor-pointer">
-              <option value="planejado">⚪ A Planejar</option>
-              <option value="gravado">🔵 Gravado</option>
-              <option value="edicao">🟡 Em Edição</option>
-              <option value="aprovado">🟢 Aprovado</option>
-              <option value="agendado">🚀 Agendado</option>
-            </select>
-          </div>
-          <button onclick="fecharModalDia()" class="h-9 w-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
-            ✕
+        <div class="production">
+          <div><strong id="total-days">108</strong>dias de conteúdo</div>
+          <div><strong id="total-stories">324</strong>telas de Stories</div>
+          <div><strong id="total-feed">17</strong>pautas de feed</div>
+        </div>
+        <div class="progress-block">
+          <label for="plan-progress" id="progress-label"></label
+          ><progress id="plan-progress" max="108" value="0"></progress>
+        </div>
+      </section>
+      <div class="calendar-tools">
+        <div class="month-nav">
+          <button
+            class="btn icon-only"
+            id="previous-month"
+            aria-label="Mês anterior"
+          >
+            <span data-icon="left"></span></button
+          ><label class="field"
+            ><span class="small">Período</span
+            ><select id="month">
+              <option value="09">Setembro 2026</option>
+              <option value="10">Outubro 2026</option>
+              <option value="11">Novembro 2026</option>
+              <option value="12">Dezembro 2026</option>
+            </select></label
+          ><button
+            class="btn icon-only"
+            id="next-month"
+            aria-label="Próximo mês"
+          >
+            <span data-icon="right"></span>
           </button>
         </div>
-      </div>
-
-      <!-- Modal Content Body -->
-      <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-8">
-
-        <!-- SEÇÃO 1: FEED / REELS (SE HOUVER) -->
-        <div id="modal-secao-feed" class="hidden">
-          <div class="bg-gradient-to-br from-rose-950/40 via-slate-900 to-slate-900 border-2 border-rose-500/40 rounded-2xl p-6 shadow-xl space-y-5">
-            <div class="flex items-center justify-between border-b border-rose-500/20 pb-4">
-              <div class="flex items-center gap-3">
-                <span class="text-2xl">🎬</span>
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-xs uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30" id="modal-feed-formato">
-                      Reel 25-35s
-                    </span>
-                    <span class="text-xs text-slate-400">Publicação às 08:00</span>
-                  </div>
-                  <h3 class="text-lg font-bold text-white mt-1" id="modal-feed-ideia">
-                    Título da pauta de Feed
-                  </h3>
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <button onclick="enviarWhatsAppModal()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-emerald-600/20 transition flex items-center gap-1.5" title="Enviar diretamente via WhatsApp">
-                  💬 WhatsApp
-                </button>
-                <button onclick="copiarLegendaFeedModal()" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-rose-600/20 transition flex items-center gap-1.5">
-                  📋 Copiar Legenda
-                </button>
-              </div>
-            </div>
-
-            <!-- Produção & Roteiro -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800 space-y-2">
-                <span class="font-bold text-rose-300 uppercase tracking-wider text-[11px] block">🎥 Roteiro de Gravação / Produção</span>
-                <p class="text-slate-300 leading-relaxed" id="modal-feed-producao"></p>
-              </div>
-              <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800 space-y-2">
-                <span class="font-bold text-rose-300 uppercase tracking-wider text-[11px] block">⚠️ Diretrizes & Material</span>
-                <p class="text-slate-400 leading-relaxed" id="modal-feed-material"></p>
-                <div class="pt-2 border-t border-slate-800/80 flex items-center gap-1.5 text-slate-300">
-                  <span class="font-semibold text-rose-400">CTA:</span>
-                  <span id="modal-feed-chamada"></span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Legenda Pronta -->
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-slate-300 uppercase tracking-wider text-[11px]">📝 Legenda Oficial Sugerida</span>
-                <span class="text-[11px] text-slate-500">Pronta para copiar e colar no Instagram</span>
-              </div>
-              <p class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap font-sans bg-slate-900/60 p-3 rounded-lg border border-slate-800/60" id="modal-feed-legenda"></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- SEÇÃO 2: STORIES DIÁRIOS (3 TELAS SEQUENCIAIS) -->
-        <div class="space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <div class="flex items-center gap-3">
-              <div class="h-9 w-9 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-300 font-bold">
-                📱
-              </div>
-              <div>
-                <h3 class="text-base font-bold text-white font-display">Sequência Diária de Stories (8:00 AM)</h3>
-                <p class="text-xs text-slate-400">Indicação Visual: <span class="text-purple-300 font-medium" id="modal-stories-visual"></span></p>
-              </div>
-            </div>
-            <button onclick="copiarStoriesModal()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg text-xs font-semibold border border-slate-700 transition">
-              Copiar 3 Telas
-            </button>
-          </div>
-
-          <!-- Phone Simulator (3 Screens) -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-            
-            <!-- Tela 1: Gancho -->
-            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-purple-500/30 rounded-3xl p-5 shadow-xl flex flex-col justify-between min-h-[290px] relative overflow-hidden group hover:border-purple-400 transition">
-              <div class="absolute top-0 right-0 bg-purple-600/30 text-purple-300 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
-                Tela 1 · Abertura
-              </div>
-              <div>
-                <span class="text-xs font-bold text-purple-400 uppercase tracking-widest block mb-3">01 · Gancho</span>
-                <p class="text-sm font-semibold text-white leading-relaxed" id="modal-tela1-texto"></p>
-              </div>
-              <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500">
-                <span>⏱️ 7-12s</span>
-                <button onclick="copiarTextoIndividual('modal-tela1-texto')" class="text-purple-400 hover:underline">Copiar</button>
-              </div>
-            </div>
-
-            <!-- Tela 2: Conteúdo / Valor -->
-            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-brand-azure/30 rounded-3xl p-5 shadow-xl flex flex-col justify-between min-h-[290px] relative overflow-hidden group hover:border-brand-azure transition">
-              <div class="absolute top-0 right-0 bg-brand-azure/30 text-brand-azure text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
-                Tela 2 · Valor
-              </div>
-              <div>
-                <span class="text-xs font-bold text-brand-azure uppercase tracking-widest block mb-3">02 · Conteúdo</span>
-                <p class="text-sm font-semibold text-white leading-relaxed" id="modal-tela2-texto"></p>
-              </div>
-              <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500">
-                <span>💡 Explicação útil</span>
-                <button onclick="copiarTextoIndividual('modal-tela2-texto')" class="text-brand-azure hover:underline">Copiar</button>
-              </div>
-            </div>
-
-            <!-- Tela 3: Interação / CTA -->
-            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-emerald-500/30 rounded-3xl p-5 shadow-xl flex flex-col justify-between min-h-[290px] relative overflow-hidden group hover:border-emerald-400 transition">
-              <div class="absolute top-0 right-0 bg-emerald-600/30 text-emerald-300 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
-                Tela 3 · Interação
-              </div>
-              <div>
-                <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-3">03 · Chamada</span>
-                <p class="text-sm font-semibold text-white leading-relaxed" id="modal-tela3-texto"></p>
-
-                <!-- Sticker Simulator -->
-                <div id="modal-enquete-box" class="mt-4 hidden bg-slate-900/90 border border-emerald-500/40 rounded-2xl p-3 text-center space-y-2">
-                  <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block">📊 Enquete Sugerida no Story</span>
-                  <div id="modal-enquete-botoes" class="flex flex-col gap-1.5"></div>
-                </div>
-              </div>
-              <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500">
-                <span>💬 Resposta ou Clique</span>
-                <button onclick="copiarTextoIndividual('modal-tela3-texto')" class="text-emerald-400 hover:underline">Copiar</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Modal Footer (Navigation Between Days & Export Actions) -->
-      <div class="p-4 bg-slate-950 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-2">
-          <button onclick="navegarDia(-1)" id="btn-dia-ant" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold flex items-center gap-1 transition">
-            ← Anterior
-          </button>
-          <span class="text-xs text-slate-500" id="modal-contador-dia">Dia 1 de 108</span>
-          <button onclick="navegarDia(1)" id="btn-dia-prox" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold flex items-center gap-1 transition">
-            Próximo →
-          </button>
-        </div>
-        
-        <div class="flex items-center gap-2">
-          <button onclick="baixarPacoteDoDia()" class="px-3 py-1.5 bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 border border-indigo-500/30 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
-            📦 Baixar Pacote (.txt)
-          </button>
-          <button onclick="copiarHashtagsDoDia()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold border border-slate-700 transition">
-            # Copiar Hashtags
-          </button>
+        <div class="calendar-filters">
+          <label class="field"
+            >Pilar<select id="pillar">
+              <option value="">Todos os pilares</option>
+              <option>Gestão e estoque</option>
+              <option>Fiscal e contabilidade</option>
+              <option>Suporte e marca</option>
+              <option>Datas e comunidade</option>
+            </select></label
+          ><label class="field"
+            >Segmento<select id="segment">
+              <option value="">Todos os segmentos</option>
+              <option>Varejo</option>
+              <option>Moda</option>
+              <option>Farmácia</option>
+              <option>Serviços</option>
+              <option>Contabilidade</option>
+            </select></label
+          ><label class="field"
+            >Buscar pauta<input
+              id="search"
+              type="search"
+              placeholder="Tema ou palavra-chave"
+          /></label>
         </div>
       </div>
-
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-slate-950/60 py-6 text-center text-xs text-slate-500 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p>TruData ERP · Hansen Software LTDA (Sarandi - RS) · Calendário Editorial Instagram 2026</p>
-      <div class="flex items-center gap-4">
-        <a href="index.html" class="text-brand-azure hover:underline">🖼️ Ir para Galeria de Cards</a>
-        <a href="index.html#auditoria" class="text-slate-400 hover:underline">📊 Diagnóstico Redes</a>
+      <div class="section-line">
+        <p id="calendar-count" class="muted small" aria-live="polite"></p>
+        <button class="btn quiet" id="clear-filters">Limpar filtros</button>
       </div>
-    </div>
-  </footer>
-
-  <!-- SCRIPT DE DADOS E LÓGICA DO CALENDÁRIO -->
-  <script src="calendario_dados.js"></script>
-  <script>
-    // State
-    let mesAtual = '09'; // '09', '10', '11', '12', 'todos'
-    let modoExibicao = 'grade'; // 'grade' ou 'lista'
-    let diaModalAtualIndex = 0;
-    let dadosStories = [];
-    let dadosFeed = {};
-    let statusDias = {};
-
-    // Load persisted status
-    try {
-      const saved = localStorage.getItem('trudata_status_dias');
-      if (saved) statusDias = JSON.parse(saved);
-    } catch(e) {}
-
-    function init() {
-      if (typeof DADOS_CALENDARIO === 'undefined') {
-        console.error("DADOS_CALENDARIO not loaded");
-        return;
-      }
-      dadosStories = DADOS_CALENDARIO.stories_diarios;
-      dadosFeed = DADOS_CALENDARIO.feed_reels;
-      
-      mudarMes('09');
-    }
-
-    function mudarMes(mes) {
-      mesAtual = mes;
-
-      // Update tabs style
-      document.querySelectorAll('.month-tab').forEach(t => {
-        t.className = "month-tab px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-2 bg-slate-900 text-slate-400 hover:text-white";
-      });
-      const activeTab = document.getElementById('tab-' + mes);
-      if (activeTab) {
-        activeTab.className = "month-tab px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-2 bg-brand-azure text-white shadow-lg shadow-brand-azure/30";
-      }
-
-      atualizarDestaquesMes(mes);
-
-      if (mes === 'todos') {
-        setModoExibicao('lista');
-        document.getElementById('view-mode-toggle').classList.add('hidden');
-      } else {
-        document.getElementById('view-mode-toggle').classList.remove('hidden');
-        if (modoExibicao === 'grade') {
-          renderizarGrade(mes);
-        } else {
-          renderizarLista();
-        }
-      }
-    }
-
-    function setModoExibicao(modo) {
-      modoExibicao = modo;
-      const btnGrade = document.getElementById('btn-view-grade');
-      const btnLista = document.getElementById('btn-view-lista');
-      const viewGrade = document.getElementById('view-grade');
-      const viewLista = document.getElementById('view-lista');
-
-      if (modo === 'grade') {
-        btnGrade.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition bg-brand-azure text-white";
-        btnLista.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
-        viewGrade.classList.remove('hidden');
-        viewLista.classList.add('hidden');
-        renderizarGrade(mesAtual);
-      } else {
-        btnLista.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition bg-brand-azure text-white";
-        btnGrade.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
-        viewLista.classList.remove('hidden');
-        viewGrade.classList.add('hidden');
-        renderizarLista();
-      }
-    }
-
-    function atualizarDestaquesMes(mes) {
-      const container = document.getElementById('tags-destaques-mes');
-      let tags = [];
-
-      if (mes === '09') {
-        tags = [
-          { nome: '⭐ 15/09: Dia do Cliente (Reel)', cor: 'bg-rose-500/20 text-rose-300 border-rose-500/30' },
-          { nome: '🟢 20/09: Feriado Farroupilha (Reel Gaúcho)', cor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
-          { nome: '💼 22/09: Dia do Contador (Carrossel)', cor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' },
-          { nome: '💊 25/09: Farmacêutico (Reel)', cor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30' },
-          { nome: '🌾 Festejos Farroupilhas (15 a 20/09)', cor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' }
-        ];
-      } else if (mes === '10') {
-        tags = [
-          { nome: '🎀 Mês Outubro Rosa (Saúde da Mulher)', cor: 'bg-pink-500/20 text-pink-300 border-pink-500/30' },
-          { nome: '🏢 05/10: Micro e Peq. Empresa (Reel Easy)', cor: 'bg-brand-azure/20 text-brand-azure border-brand-azure/30' },
-          { nome: '🔴 12/10: Feriado Crianças & Padroeira', cor: 'bg-rose-500/20 text-rose-300 border-rose-500/30' },
-          { nome: '💡 19/10: Dia da Inovação & TI (Reel)', cor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30' },
-          { nome: '🏪 30/10: Comerciário (Reel)', cor: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
-          { nome: '🍺 Oktoberfest Sta Cruz (08-25) & Igrejinha (09-18)', cor: 'bg-amber-500/10 text-amber-400 border-amber-500/20' }
-        ];
-      } else if (mes === '11') {
-        tags = [
-          { nome: '💙 Mês Novembro Azul', cor: 'bg-blue-500/20 text-blue-300 border-blue-500/30' },
-          { nome: '🔴 02/11: Feriado Finados', cor: 'bg-slate-700/50 text-slate-300 border-slate-600' },
-          { nome: '🛒 12/11: Supermercado (Reel)', cor: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
-          { nome: '🔴 15/11: Feriado Proclamação', cor: 'bg-rose-500/20 text-rose-300 border-rose-500/30' },
-          { nome: '👩‍💼 19/11: Empreendedorismo Feminino (Reel)', cor: 'bg-purple-500/20 text-purple-300 border-purple-500/30' },
-          { nome: '✊ 20/11: Consciência Negra (Post)', cor: 'bg-orange-500/20 text-orange-300 border-orange-500/30' },
-          { nome: '🔥 27/11: BLACK FRIDAY 2026 (Reel)', cor: 'bg-rose-600 text-white font-black' },
-          { nome: '💻 30/11: Cyber Monday (Carrossel)', cor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' }
-        ];
-      } else if (mes === '12') {
-        tags = [
-          { nome: '♿ 03/12: Dia da Pessoa com Deficiência (Carrossel)', cor: 'bg-purple-500/20 text-purple-300 border-purple-500/30' },
-          { nome: '🌾 17/12: Dia do Bioma Pampa (RS)', cor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
-          { nome: '🔧 20/12: Dia do Mecânico (Reel OS)', cor: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
-          { nome: '🎄 24-25/12: Natal (Post Institucional)', cor: 'bg-red-500/20 text-red-300 border-red-500/30' },
-          { nome: '🥂 31/12: Réveillon (Reel Retrospectiva)', cor: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' },
-          { nome: '✨ Natal Luz de Gramado (Ativo)', cor: 'bg-rose-500/10 text-rose-400 border-rose-500/20' }
-        ];
-      } else {
-        tags = [
-          { nome: '108 Dias Planejados', cor: 'bg-brand-azure/20 text-brand-azure border-brand-azure/30' },
-          { nome: '17 Pautas de Feed / Reels', cor: 'bg-rose-500/20 text-rose-300 border-rose-500/30' },
-          { nome: '324 Telas de Stories às 8h', cor: 'bg-purple-500/20 text-purple-300 border-purple-500/30' }
-        ];
-      }
-
-      container.innerHTML = tags.map(t => `
-        <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold border ${t.cor} whitespace-nowrap">
-          ${t.nome}
-        </span>
-      `).join('');
-    }
-
-    function renderizarGrade(mes) {
-      const container = document.getElementById('grid-dias');
-      container.innerHTML = '';
-
-      // Month metadata in 2026
-      // Setembro 2026: Day 1 was Tuesday (index 2). 30 days. Plan starts on day 15.
-      // Outubro 2026: Day 1 is Thursday (index 4). 31 days.
-      // Novembro 2026: Day 1 is Sunday (index 0). 30 days.
-      // Dezembro 2026: Day 1 is Tuesday (index 2). 31 days.
-
-      const configMeses = {
-        '09': { nome: 'Setembro', primeiroDiaSemana: 2, totalDias: 30, diaInicioPlano: 15 },
-        '10': { nome: 'Outubro', primeiroDiaSemana: 4, totalDias: 31, diaInicioPlano: 1 },
-        '11': { nome: 'Novembro', primeiroDiaSemana: 0, totalDias: 30, diaInicioPlano: 1 },
-        '12': { nome: 'Dezembro', primeiroDiaSemana: 2, totalDias: 31, diaInicioPlano: 1 }
-      };
-
-      const cfg = configMeses[mes];
-      if (!cfg) return;
-
-      // 1. Empty padding cells for days before the 1st of month
-      for (let i = 0; i < cfg.primeiroDiaSemana; i++) {
-        container.innerHTML += `
-          <div class="calendar-cell bg-slate-950/20 border border-slate-900/60 rounded-2xl p-2 opacity-30 pointer-events-none"></div>
-        `;
-      }
-
-      // 2. Render each day of the month
-      for (let d = 1; d <= cfg.totalDias; d++) {
-        const diaFormatado = String(d).padStart(2, '0') + '/' + mes;
-        const indexStory = dadosStories.findIndex(s => s.data === diaFormatado);
-        const story = indexStory !== -1 ? dadosStories[indexStory] : null;
-        const feed = dadosFeed[diaFormatado] || null;
-
-        // Check if day is prior to plan start
-        if (d < cfg.diaInicioPlano) {
-          container.innerHTML += `
-            <div class="calendar-cell bg-slate-950/40 border border-slate-900 rounded-2xl p-2.5 flex flex-col justify-between opacity-40">
-              <span class="text-xs font-bold text-slate-600">${d}</span>
-              <span class="text-[10px] text-slate-600 italic">Pré-planejamento</span>
-            </div>
-          `;
-          continue;
-        }
-
-        if (!story) {
-          container.innerHTML += `
-            <div class="calendar-cell bg-slate-900/50 border border-slate-800 rounded-2xl p-2.5">
-              <span class="text-xs font-bold text-slate-500">${d}</span>
-            </div>
-          `;
-          continue;
-        }
-
-        // Card styling based on content
-        let bordaClasse = 'border-slate-800/80 bg-slate-900/90';
-        if (feed) {
-          bordaClasse = 'border-rose-500/50 bg-gradient-to-b from-rose-950/20 to-slate-900 shadow-md shadow-rose-950/30';
-        } else if (story.ocasiao && story.ocasiao.tipo.includes('feriado')) {
-          bordaClasse = 'border-amber-500/40 bg-gradient-to-b from-amber-950/20 to-slate-900';
-        }
-
-        const statusDia = statusDias[diaFormatado] || 'planejado';
-        let statusDot = 'bg-slate-600';
-        if (statusDia === 'aprovado') statusDot = 'bg-emerald-400';
-        if (statusDia === 'agendado') statusDot = 'bg-blue-400';
-        if (statusDia === 'gravado') statusDot = 'bg-purple-400';
-
-        container.innerHTML += `
-          <div onclick="abrirModalDiaPorIndex(${indexStory})" class="calendar-cell ${bordaClasse} border rounded-2xl p-3 flex flex-col justify-between cursor-pointer group">
-            
-            <!-- Top row: Day Number & Badges -->
-            <div class="flex items-start justify-between gap-1">
-              <span class="text-sm font-black font-display text-white group-hover:text-brand-azure transition">${d}</span>
-              <div class="flex items-center gap-1">
-                ${feed ? `<span class="text-[10px] bg-rose-600 text-white font-black px-1.5 py-0.5 rounded shadow">🎬 FEED</span>` : ''}
-                <span class="w-2 h-2 rounded-full ${statusDot}" title="Status: ${statusDia}"></span>
-              </div>
-            </div>
-
-            <!-- Middle: Story Hook preview -->
-            <div class="my-1.5 space-y-1">
-              ${story.ocasiao ? `
-                <div class="text-[9px] font-bold truncate text-amber-300">
-                  ${story.ocasiao.badge}
-                </div>
-              ` : ''}
-              <div class="text-[11px] font-medium text-slate-300 line-clamp-2 leading-tight group-hover:text-white transition">
-                <span class="text-purple-400 font-bold">8h:</span> ${story.tema || story.tela1}
-              </div>
-            </div>
-
-            <!-- Bottom: Visual cue & format -->
-            <div class="pt-1.5 border-t border-slate-800/60 flex items-center justify-between text-[10px] text-slate-500">
-              <span class="truncate max-w-[100px] text-slate-400">📹 ${story.visual.split(' ')[0]}</span>
-              <span class="text-brand-azure group-hover:translate-x-0.5 transition font-bold text-xs">→</span>
-            </div>
-
-          </div>
-        `;
-      }
-    }
-
-    function renderizarLista() {
-      const container = document.getElementById('lista-dias');
-      const tipoFiltro = document.getElementById('filtro-tipo').value;
-      const busca = document.getElementById('busca-calendario').value.toLowerCase().trim();
-
-      const diasFiltrados = dadosStories.filter((story, idx) => {
-        const feed = dadosFeed[story.data];
-        
-        // Month filter if not 'todos'
-        if (mesAtual !== 'todos') {
-          const mesStory = story.data.split('/')[1];
-          if (mesStory !== mesAtual) return false;
-        }
-
-        // Type filter
-        if (tipoFiltro === 'feed' && !feed) return false;
-        if (tipoFiltro === 'feriado' && (!story.ocasiao || !story.ocasiao.tipo.includes('feriado') && !story.ocasiao.tipo.includes('comemorativa'))) return false;
-        if (tipoFiltro === 'regional' && (!story.ocasiao || !story.ocasiao.tipo.includes('regional') && !story.ocasiao.tipo.includes('campanha'))) return false;
-
-        // Search
-        if (busca) {
-          const textoBusca = (story.data + ' ' + story.dia_semana + ' ' + story.tema + ' ' + story.tela1 + ' ' + story.tela2 + ' ' + story.tela3 + ' ' + (feed ? feed.ideia + ' ' + feed.legenda : '')).toLowerCase();
-          if (!textoBusca.includes(busca)) return false;
-        }
-
-        return true;
-      });
-
-      if (diasFiltrados.length === 0) {
-        container.innerHTML = `
-          <div class="p-12 text-center text-slate-500 bg-slate-900/40 rounded-2xl border border-slate-800">
-            Nenhum conteúdo encontrado para os filtros selecionados.
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = diasFiltrados.map((story) => {
-        const indexStory = dadosStories.findIndex(s => s.data === story.data);
-        const feed = dadosFeed[story.data];
-
-        return `
-          <div onclick="abrirModalDiaPorIndex(${indexStory})" class="bg-slate-900 border border-slate-800/80 hover:border-brand-azure/60 rounded-2xl p-4 sm:p-5 transition shadow-lg cursor-pointer flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            
-            <div class="flex items-start gap-4">
-              <div class="h-14 w-14 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col items-center justify-center shrink-0">
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">${story.dia_semana.substring(0, 3)}</span>
-                <span class="text-lg font-black font-display text-white">${story.data.split('/')[0]}</span>
-              </div>
-              
-              <div class="space-y-1">
-                <div class="flex flex-wrap items-center gap-2">
-                  <span class="text-xs font-bold text-slate-400">${story.data}/2026 · ${story.dia_semana}</span>
-                  ${feed ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-600 text-white uppercase">🎬 ${feed.tipo}</span>` : ''}
-                  ${story.ocasiao ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">${story.ocasiao.badge}</span>` : ''}
-                </div>
-                
-                <h4 class="text-base font-bold text-white font-display">${story.tema || story.tela1}</h4>
-                <p class="text-xs text-slate-400 line-clamp-1">📱 Stories 8h: "${story.tela1}"</p>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-3 shrink-0 self-end md:self-center">
-              <span class="text-xs text-slate-500">Visual: <strong class="text-slate-300">${story.visual}</strong></span>
-              <button class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-brand-azure text-xs font-bold text-white transition">
-                Ver Detalhes →
-              </button>
-            </div>
-
-          </div>
-        `;
-      }).join('');
-    }
-
-    function aplicarFiltros() {
-      if (modoExibicao === 'grade') {
-        renderizarGrade(mesAtual);
-      } else {
-        renderizarLista();
-      }
-    }
-
-    function abrirModalDiaPorIndex(index) {
-      if (index < 0 || index >= dadosStories.length) return;
-      diaModalAtualIndex = index;
-      const story = dadosStories[index];
-      const feed = dadosFeed[story.data];
-
-      // Badges
-      const badgesContainer = document.getElementById('modal-dia-badges');
-      let badges = [];
-      badges.push(`<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">📱 Stories às 08:00</span>`);
-      if (feed) {
-        badges.push(`<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-600 text-white uppercase tracking-wider">🎬 Feed / ${feed.tipo}</span>`);
-      }
-      if (story.ocasiao) {
-        badges.push(`<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">${story.ocasiao.badge}</span>`);
-      }
-      badgesContainer.innerHTML = badges.join('');
-
-      // Header
-      document.getElementById('modal-dia-data').textContent = `${story.data}/2026 · ${story.dia_semana}`;
-      document.getElementById('modal-dia-tema').textContent = story.tema ? `Tema: ${story.tema}` : `Abertura: ${story.tela1}`;
-
-      // Status selector
-      const statusSelect = document.getElementById('modal-dia-status-select');
-      statusSelect.value = statusDias[story.data] || 'planejado';
-
-      // Feed Section
-      const secaoFeed = document.getElementById('modal-secao-feed');
-      if (feed) {
-        secaoFeed.classList.remove('hidden');
-        document.getElementById('modal-feed-formato').textContent = feed.tipo;
-        document.getElementById('modal-feed-ideia').textContent = feed.ideia;
-        document.getElementById('modal-feed-producao').textContent = feed.producao;
-        document.getElementById('modal-feed-material').textContent = feed.material;
-        document.getElementById('modal-feed-chamada').textContent = feed.chamada;
-        document.getElementById('modal-feed-legenda').textContent = feed.legenda;
-      } else {
-        secaoFeed.classList.add('hidden');
-      }
-
-      // Stories Section
-      document.getElementById('modal-stories-visual').textContent = story.visual;
-      document.getElementById('modal-tela1-texto').textContent = story.tela1;
-      document.getElementById('modal-tela2-texto').textContent = story.tela2;
-      document.getElementById('modal-tela3-texto').textContent = story.tela3;
-
-      // Poll Stickers
-      const enqueteBox = document.getElementById('modal-enquete-box');
-      const enqueteBotoes = document.getElementById('modal-enquete-botoes');
-      if (story.opcoes_enquete && story.opcoes_enquete.length > 0) {
-        enqueteBox.classList.remove('hidden');
-        enqueteBotoes.innerHTML = story.opcoes_enquete.map(opt => `
-          <button class="w-full py-1.5 px-3 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-300 text-xs font-bold transition">
-            ${opt}
-          </button>
-        `).join('');
-      } else {
-        enqueteBox.classList.add('hidden');
-      }
-
-      // Counter & Nav
-      document.getElementById('modal-contador-dia').textContent = `Dia ${index + 1} de ${dadosStories.length}`;
-      document.getElementById('btn-dia-ant').disabled = (index === 0);
-      document.getElementById('btn-dia-prox').disabled = (index === dadosStories.length - 1);
-
-      document.getElementById('modal-dia').classList.remove('hidden');
-    }
-
-    function fecharModalDia() {
-      document.getElementById('modal-dia').classList.add('hidden');
-    }
-
-    function navegarDia(delta) {
-      abrirModalDiaPorIndex(diaModalAtualIndex + delta);
-    }
-
-    function salvarStatusDia() {
-      const story = dadosStories[diaModalAtualIndex];
-      const statusSelect = document.getElementById('modal-dia-status-select');
-      statusDias[story.data] = statusSelect.value;
-      try {
-        localStorage.setItem('trudata_status_dias', JSON.stringify(statusDias));
-      } catch(e) {}
-      mostrarToast(`Status de ${story.data} alterado para: ${statusSelect.value.toUpperCase()}`);
-      if (modoExibicao === 'grade') renderizarGrade(mesAtual);
-    }
-
-    function copiarTextoIndividual(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      navigator.clipboard.writeText(el.innerText || el.textContent).then(() => {
-        mostrarToast('Texto copiado com sucesso!');
-      });
-    }
-
-    function copiarStoriesModal() {
-      const story = dadosStories[diaModalAtualIndex];
-      const texto = `📱 SEQUÊNCIA DE STORIES — ${story.data}/2026 às 08:00
-Visual: ${story.visual}
-
-TELA 1:
-${story.tela1}
-
-TELA 2:
-${story.tela2}
-
-TELA 3:
-${story.tela3}`;
-
-      navigator.clipboard.writeText(texto).then(() => {
-        mostrarToast('Sequência completa de Stories copiada!');
-      });
-    }
-
-    function copiarLegendaFeedModal() {
-      const story = dadosStories[diaModalAtualIndex];
-      const feed = dadosFeed[story.data];
-      if (!feed) return;
-      
-      const texto = `${feed.legenda}
-
-CTA: ${feed.chamada}`;
-
-      navigator.clipboard.writeText(texto).then(() => {
-        mostrarToast('Legenda de Feed copiada para a área de transferência!');
-      });
-    }
-
-    function mostrarToast(msg) {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toast-msg');
-      toastMsg.textContent = msg;
-      toast.classList.remove('translate-y-20', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-20', 'opacity-0');
-      }, 3000);
-    }
-
-    // Keyboard navigation in modal (Esc, Left, Right)
-    document.addEventListener('keydown', (e) => {
-      const modal = document.getElementById('modal-dia');
-      if (modal.classList.contains('hidden')) return;
-      if (e.key === 'Escape') fecharModalDia();
-      if (e.key === 'ArrowLeft' && diaModalAtualIndex > 0) navegarDia(-1);
-      if (e.key === 'ArrowRight' && diaModalAtualIndex < dadosStories.length - 1) navegarDia(1);
-    });
-
-    
-    // -------------------------------------------------------------
-    // ATALHO DE TECLADO GLOBAL (Ctrl+K para Busca)
-    // -------------------------------------------------------------
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        const searchInput = document.getElementById('busca-calendario');
-        if (searchInput) {
-          searchInput.focus();
-          searchInput.select();
-        }
-      }
-    });
-
-    // -------------------------------------------------------------
-    // EXPORTAÇÃO CSV / EXCEL
-    // -------------------------------------------------------------
-    function exportarCSV() {
-      if (!dadosStories || dadosStories.length === 0) return;
-
-      const cabecalho = ["Data", "Dia da Semana", "Tema Principal", "Visual Story", "Tela 1 (Gancho)", "Tela 2 (Valor)", "Tela 3 (CTA/Enquete)", "Pauta Feed", "Formato Feed", "Legenda Feed"];
-      const linhas = [cabecalho];
-
-      dadosStories.forEach(s => {
-        const feed = dadosFeed[s.data] || {};
-        linhas.push([
-          `"${s.data}/2026"`,
-          `"${s.dia_semana}"`,
-          `"${(s.tema || '').replace(/"/g, '""')}"`,
-          `"${(s.visual || '').replace(/"/g, '""')}"`,
-          `"${(s.tela1 || '').replace(/"/g, '""')}"`,
-          `"${(s.tela2 || '').replace(/"/g, '""')}"`,
-          `"${(s.tela3 || '').replace(/"/g, '""')}"`,
-          `"${(feed.ideia || '').replace(/"/g, '""')}"`,
-          `"${(feed.tipo || '').replace(/"/g, '""')}"`,
-          `"${(feed.legenda || '').replace(/"/g, '""')}"`
-        ]);
-      });
-
-      const csvContent = "\uFEFF" + linhas.map(e => e.join(";")).join("\r\n");
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.setAttribute("href", url);
-      link.setAttribute("download", "trudata_calendario_editorial_2026.csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      mostrarToast("Planilha CSV exportada com sucesso! 📊");
-    }
-
-    // -------------------------------------------------------------
-    // EXPORTAÇÃO NOTION / MARKDOWN
-    // -------------------------------------------------------------
-    function exportarMarkdown() {
-      if (!dadosStories || dadosStories.length === 0) return;
-
-      let md = "# 📅 Calendário Editorial TruData ERP — 2026\n\n";
-      md += "| Data | Dia | Tema Principal | Stories 8h | Feed/Reels |\n";
-      md += "| :--- | :--- | :--- | :--- | :--- |\n";
-
-      dadosStories.forEach(s => {
-        const feed = dadosFeed[s.data];
-        const feedTxt = feed ? `**${feed.tipo}**: ${feed.ideia}` : "-";
-        md += `| ${s.data} | ${s.dia_semana} | ${s.tema || '-'} | ${s.tela1} | ${feedTxt} |\n`;
-      });
-
-      navigator.clipboard.writeText(md).then(() => {
-        mostrarToast("Tabela Markdown copiada! Cole direto no Notion ou Trello 📝");
-      });
-    }
-
-    // -------------------------------------------------------------
-    // SIMULADOR FEED DO INSTAGRAM 3X3
-    // -------------------------------------------------------------
-    function abrirModalFeedGrid() {
-      const modal = document.getElementById('modal-feed-grid');
-      const container = document.getElementById('feed-grid-items');
-      
-      const feedPosts = [];
-      Object.keys(dadosFeed).forEach(k => {
-        feedPosts.push(dadosFeed[k]);
-      });
-
-      container.innerHTML = feedPosts.map((p, idx) => {
-        let grad = 'from-slate-900 to-indigo-950';
-        if (p.tipo === 'Reels') grad = 'from-rose-950 via-slate-900 to-slate-950';
-        if (p.tipo === 'Carrossel') grad = 'from-indigo-950 via-slate-900 to-slate-950';
-
-        return `
-          <div class="aspect-square rounded-2xl bg-gradient-to-br ${grad} border border-slate-800 p-3 flex flex-col justify-between hover:border-brand-azure transition shadow-lg relative group cursor-pointer" onclick="fecharModalFeedGrid(); abrirDiaPorData('${p.data}')">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-black text-rose-400 bg-rose-500/20 border border-rose-500/30 px-1.5 py-0.5 rounded">
-                ${p.tipo === 'Reels' ? '🎬 REEL' : p.tipo === 'Carrossel' ? '📑 CARROSSEL' : '🖼️ POST'}
-              </span>
-              <span class="text-[10px] font-bold text-slate-400">${p.data}</span>
-            </div>
-            
-            <p class="text-xs font-bold text-white line-clamp-3 leading-tight group-hover:text-brand-azure transition">
-              ${p.ideia}
-            </p>
-
-            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-800/80">
-              <span>8:00 AM</span>
-              <span class="text-brand-azure">Ver roteiro →</span>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      modal.classList.remove('hidden');
-    }
-
-    function fecharModalFeedGrid() {
-      document.getElementById('modal-feed-grid').classList.add('hidden');
-    }
-
-    function abrirDiaPorData(dataStr) {
-      const idx = dadosStories.findIndex(s => s.data === dataStr);
-      if (idx !== -1) abrirModalDiaPorIndex(idx);
-    }
-
-    // -------------------------------------------------------------
-    // WHATSAPP DIRECT LINK & PACOTE DO DIA
-    // -------------------------------------------------------------
-    function enviarWhatsAppModal() {
-      const story = dadosStories[diaModalAtualIndex];
-      const feed = dadosFeed[story.data];
-      const textoMsg = feed ? `${feed.ideia}\n\n${feed.legenda}\n\n👉 ${feed.chamada}` : `${story.tema}\n\n${story.tela1}\n${story.tela2}\n${story.tela3}`;
-      const url = `https://wa.me/?text=${encodeURIComponent(textoMsg)}`;
-      window.open(url, '_blank');
-    }
-
-    function baixarPacoteDoDia() {
-      const story = dadosStories[diaModalAtualIndex];
-      const feed = dadosFeed[story.data];
-      
-      let conteudo = `=====================================================\n`;
-      conteudo += `TRUDATA ERP — PACOTE DE CONTEÚDO: ${story.data}/2026\n`;
-      conteudo += `Dia da Semana: ${story.dia_semana}\n`;
-      conteudo += `Tema: ${story.tema || 'Rotina Empresarial'}\n`;
-      conteudo += `=====================================================\n\n`;
-      
-      conteudo += `[1. STORIES ÀS 08:00 AM]\n`;
-      conteudo += `Indicação Visual: ${story.visual}\n`;
-      conteudo += `Tela 1 (Gancho): ${story.tela1}\n`;
-      conteudo += `Tela 2 (Valor): ${story.tela2}\n`;
-      conteudo += `Tela 3 (CTA/Enquete): ${story.tela3}\n\n`;
-
-      if (feed) {
-        conteudo += `[2. PUBLICAÇÃO DE FEED / ${feed.tipo.toUpperCase()}]\n`;
-        conteudo += `Pauta: ${feed.ideia}\n`;
-        conteudo += `Roteiro: ${feed.producao}\n`;
-        conteudo += `Material: ${feed.material}\n`;
-        conteudo += `CTA: ${feed.chamada}\n\n`;
-        conteudo += `LEGENDA OFICIAL:\n`;
-        conteudo += `${feed.legenda}\n`;
-      }
-
-      const blob = new Blob([conteudo], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `trudata_${story.data.replace('/', '_')}_pacote.txt`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      mostrarToast(`Pacote de ${story.data} baixado em .txt! 📦`);
-    }
-
-    function copiarHashtagsDoDia() {
-      const story = dadosStories[diaModalAtualIndex];
-      let tags = "#TrudataERP #HansenSoftware #SarandiRS #GestaoEmpresarial #ComercioGaucho";
-      if (story.tema.toLowerCase().includes("contador") || story.tema.toLowerCase().includes("fiscal")) {
-        tags = "#ContabilidadeRS #DiaDoContador #ModoEscritorio #ReformaTributaria #SPEDFiscal #TrudataERP";
-      } else if (story.tema.toLowerCase().includes("farmácia") || story.tema.toLowerCase().includes("drogaria")) {
-        tags = "#FarmaciaIndependente #GestaoDeFarmacia #SNGPC #Medicamentos #TrudataERP";
-      } else if (story.tema.toLowerCase().includes("moda") || story.tema.toLowerCase().includes("arara")) {
-        tags = "#GestaoDeModa #LojaDeRoupas #GradeDeCores #VarejoDeModa #TrudataERP";
-      }
-      navigator.clipboard.writeText(tags).then(() => {
-        mostrarToast("Hashtags copiadas para o 1º comentário! 🏷️");
-      });
-    }
-
-    function filtrarPorNicho(nicho) {
-      document.getElementById('filtro-tipo').value = nicho;
-      aplicarFiltros();
-      mostrarToast(`Filtrando nicho: ${nicho.toUpperCase()} 🎯`);
-    }
-
-    window.onload = init;
-  </script>
-</body>
+      <div class="calendar" aria-label="Calendário mensal">
+        <div class="weekdays">
+          <span>Domingo</span><span>Segunda</span><span>Terça</span
+          ><span>Quarta</span><span>Quinta</span><span>Sexta</span
+          ><span>Sábado</span>
+        </div>
+        <div class="month-grid" id="calendar-grid"></div>
+      </div>
+      <div id="calendar-empty" hidden></div>
+      <div class="calendar-bottom">
+        <span>Stories às 08:00 · Selecione um dia para revisar a pauta.</span
+        ><span>Faixa azul: publicação de feed ou Reels</span>
+      </div>
+      <div class="exportbar">
+        <span>Exportar seleção</span
+        ><button class="btn" data-export="csv">
+          <span data-icon="download"></span>CSV</button
+        ><button class="btn" data-export="xlsx">
+          <span data-icon="download"></span>Excel</button
+        ><button class="btn" data-export="notion">
+          <span data-icon="download"></span>Notion · CSV</button
+        ><button class="btn" data-export="md">
+          <span data-icon="download"></span>Markdown</button
+        ><span id="export-scope" class="small"></span>
+      </div>
+      <footer class="footer">
+        <span>TruData · Tecnologia próxima de quem empreende.</span
+        ><span id="storage-note">Alterações salvas neste navegador</span>
+      </footer>
+    </main>
+    <dialog id="detail" aria-labelledby="dialog-title"></dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <noscript
+      >Ative o JavaScript no navegador para revisar as publicações e abrir as
+      pautas.</noscript
+    >
+    <script src="/painel_aprovacao/posts-dados.js"></script>
+    <script src="/painel_aprovacao/calendario_dados.js"></script>
+    <script src="/painel_aprovacao/editorial.js"></script>
+  </body>
 </html>

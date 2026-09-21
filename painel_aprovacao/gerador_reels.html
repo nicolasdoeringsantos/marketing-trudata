@@ -1,347 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Estúdio de Vídeos Curtos & Reels — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              azure: '#009fe3',
-              dark: '#070b14',
-              surface: '#0f172a',
-              card: '#1e293b'
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Plus Jakarta Sans', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    .word-highlight {
-      background: linear-gradient(120deg, #009fe3 0%, #10b981 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transform: scale(1.1);
-      display: inline-block;
-      transition: all 0.15s ease;
-    }
-  </style>
-</head>
-<body class="bg-[#070b14] text-slate-100 min-h-screen antialiased selection:bg-brand-azure selection:text-white pb-16">
-
-  <!-- TOPO DE NAVEGAÇÃO -->
-  <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-3.5 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <a href="/" class="text-xs font-semibold text-slate-400 hover:text-brand-azure transition flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl">
-        <span>←</span>
-        <span>Cockpit</span>
-      </a>
-      <div class="h-4 w-[1px] bg-slate-800"></div>
-      <div class="flex items-center gap-2">
-        <span class="text-lg">🎬</span>
-        <h1 class="text-sm font-bold text-white font-display">Estúdio de Reels & Vídeos Curtos (9:16)</h1>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
       </div>
-    </div>
-
-    <div class="flex items-center gap-2">
-      <button onclick="copiarPacoteCompleto()" class="px-3.5 py-1.5 bg-brand-azure hover:bg-sky-500 text-white text-xs font-bold rounded-xl transition shadow-md shadow-sky-950 flex items-center gap-1.5">
-        <span>📋</span>
-        <span>Copiar Roteiro + Legenda</span>
-      </button>
-    </div>
-  </header>
-
-  <main class="max-w-6xl mx-auto p-4 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-    <!-- COLUNA DA ESQUERDA: CONTROLES DO ESTÚDIO & ROTEIROS (7 COLUNAS) -->
-    <div class="lg:col-span-7 space-y-6">
-      
-      <!-- Seletor de Roteiros -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-          <h2 class="text-sm font-bold text-white flex items-center gap-2">
-            <span>💡</span>
-            <span>Roteiros Comerciais de Alta Retenção (AIDA)</span>
-          </h2>
-          <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">Foco RS</span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="lista-roteiros">
-          <!-- Injetado via JS -->
-        </div>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Material preservado na biblioteca</h1>
+      <p style="margin-top: 24px">
+        Os textos das coleções anteriores estão na biblioteca de referência para
+        consulta e adaptação. A versão original completa também foi preservada,
+        sem publicação automática.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="biblioteca.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
       </div>
-
-      <!-- Configurações Visuais e de Áudio -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-4">
-        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider border-b border-slate-800 pb-3">
-          Ajustes de Produção & Estilo Visual
-        </h3>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">Tema Visual:</label>
-            <select id="sel-fundo" onchange="atualizarEstiloVisual()" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2 text-white focus:outline-none focus:border-brand-azure">
-              <option value="tech">Dark Tech Hansen (Azul/Esmeralda)</option>
-              <option value="farroupilha">Semana Farroupilha (Verde/Vermelho/Amarelo)</option>
-              <option value="balcao">Frente de Caixa Movimento</option>
-              <option value="minimal">Minimalista Executivo</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">Velocidade da Locução:</label>
-            <select id="sel-velocidade" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2 text-white focus:outline-none focus:border-brand-azure">
-              <option value="1.0">Normal (1.0x)</option>
-              <option value="1.15" selected>Dinâmica Reels (1.15x)</option>
-              <option value="1.25">Acelerada TikTok (1.25x)</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">Tom da Voz:</label>
-            <select id="sel-tom" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2 text-white focus:outline-none focus:border-brand-azure">
-              <option value="1.0">Voz Firme Regional</option>
-              <option value="0.9">Grave Autoritário</option>
-              <option value="1.1">Jovem & Energético</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Botões de Controle de Play/Pause -->
-        <div class="pt-2 flex items-center gap-3">
-          <button onclick="tocarLocucaoAnimada()" id="btn-play-locucao" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition shadow-lg shadow-emerald-950 flex items-center gap-2">
-            <span>▶️</span>
-            <span>Tocar Locução com Legenda</span>
-          </button>
-          <button onclick="pararLocucao()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl transition">
-            ⏹️ Parar
-          </button>
-        </div>
-      </div>
-
-      <!-- Texto Completo da Legenda para Postagem -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-3">
-        <div class="flex items-center justify-between">
-          <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Legenda Formatada para Redes</h3>
-          <button onclick="copiarLegendaPost()" class="text-xs text-brand-azure hover:underline font-bold">Copiar Apenas Legenda</button>
-        </div>
-        <textarea id="texto-legenda-post" rows="4" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3 text-xs text-slate-300 font-sans leading-relaxed focus:outline-none focus:border-brand-azure" readonly></textarea>
-      </div>
-
-    </div>
-
-    <!-- COLUNA DA DIREITA: SMARTPHONE 9:16 PREVIEW (5 COLUNAS) -->
-    <div class="lg:col-span-5 flex flex-col items-center">
-      
-      <!-- MOCKUP DE SMARTPHONE VERTICAL (9:16) -->
-      <div class="relative w-[300px] h-[580px] bg-slate-950 rounded-[44px] p-3 shadow-2xl border-4 border-slate-800 flex flex-col justify-between overflow-hidden group">
-        
-        <!-- Notch Superior -->
-        <div class="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-slate-900 rounded-full z-20 flex items-center justify-center">
-          <div class="w-2.5 h-2.5 rounded-full bg-slate-950"></div>
-        </div>
-
-        <!-- Tela do Vídeo (Container 9:16 Dinâmico) -->
-        <div id="reels-tela-video" class="relative w-full h-full rounded-[36px] overflow-hidden flex flex-col justify-between p-5 bg-gradient-to-b from-slate-950 via-[#0a192f] to-slate-950 transition-all duration-500">
-          
-          <!-- Topo do Vídeo -->
-          <div class="pt-6 flex items-center justify-between z-10">
-            <div class="flex items-center gap-2">
-              <div class="h-7 w-7 rounded-lg bg-brand-azure text-white flex items-center justify-center font-bold text-xs">T</div>
-              <span class="text-[11px] font-bold text-white drop-shadow">TruData ERP</span>
-            </div>
-            <span class="text-[9px] font-mono uppercase bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30">Sarandi/RS</span>
-          </div>
-
-          <!-- Centro: Legenda Dinâmica de Alto Impacto -->
-          <div class="my-auto text-center px-2 z-10 space-y-3">
-            <span class="text-[11px] font-black uppercase tracking-widest text-amber-400 font-display block" id="reels-gancho-tag">GANCHO DE 3 SEGUNDOS</span>
-            <h2 class="text-xl sm:text-2xl font-black text-white font-display leading-tight tracking-tight drop-shadow-md" id="reels-frase-dinamica">
-              Sua fila de caixa trava quando a internet oscila?
-            </h2>
-            <div class="h-1 w-12 bg-brand-azure mx-auto rounded-full"></div>
-          </div>
-
-          <!-- Rodapé do Vídeo: Selo e CTA -->
-          <div class="pb-2 text-center space-y-2 z-10">
-            <div class="p-2.5 bg-slate-950/80 backdrop-blur-md rounded-2xl border border-slate-800 text-[10px] text-slate-200 font-semibold shadow-lg">
-              🚀 Emissão em 3s · Suporte em Sarandi (SLA 2h)
-            </div>
-            <span class="text-[9px] text-slate-400 block font-mono">Hansen Software (+25 anos de tradição)</span>
-          </div>
-
-          <!-- Elementos Flutuantes de Fundo -->
-          <div class="absolute inset-0 opacity-15 pointer-events-none flex items-center justify-center">
-            <span class="text-[140px] font-black text-brand-azure select-none">TRU</span>
-          </div>
-
-        </div>
-
-      </div>
-
-      <span class="text-[11px] text-slate-500 mt-3 font-mono">Preview 9:16 (Instagram Reels & TikTok)</span>
-
-    </div>
-
-  </main>
-
-  <script>
-    const ROTEIROS_REELS = [
-      {
-        id: "contingencia",
-        titulo: "Emissão em 3s & Internet Caindo",
-        gancho: "NUNCA MAIS TRAVE A FILA",
-        frase_destaque: "Sua frente de caixa trava em dias de chuva no RS?",
-        roteiro_completo: "Você está com a loja cheia de clientes no sábado, cai uma chuva forte e a internet oscila. O que acontece? Com a maioria dos sistemas na nuvem, seu caixa para totalmente de emitir cupom. Com o TruData ERP da Hansen Software, a emissão da NFC-e leva 2.8 segundos com contingência offline nativa homologada na SEFAZ do Rio Grande do Sul. Sua loja nunca para de faturar. Teste 15 dias sem compromisso.",
-        legenda_post: "🌧️ Sábado de movimento, temporal lá fora e a internet oscilou. O seu sistema de caixa aguenta ou trava a fila?\n\nO TruData ERP foi construído para a realidade do comércio gaúcho: contingência offline nativa que emite o cupom em menos de 3 segundos, com TEF automático na maquininha.\n\n📲 Solicite uma demonstração gratuita de 15 minutos em Sarandi e região: (54) 99696-6175\n\n#TruDataERP #VarejoRS #SarandiRS #NFCe #ComercioGaucho #AutomacaoComercial"
-      },
-      {
-        id: "reforma_tributaria",
-        titulo: "Reforma Tributária Simples Nacional",
-        gancho: "ALERTA TRIBUTÁRIO 2026",
-        frase_destaque: "O IBS e a CBS vão mudar tudo na sua nota fiscal!",
-        roteiro_completo: "Atenção comerciante gaúcho: a Reforma Tributária já está em fase de teste e a partir de 2026 o IBS e a CBS vão substituir o ICMS e o PIS COFINS. Se o seu sistema não estiver atualizado, suas vendas podem ser bloqueadas pela SEFAZ. O TruData ERP já conta com matriz fiscal compatível e integração direta com o seu contador. Não deixe para a última hora.",
-        legenda_post: "⚖️ Você já conversou com o seu contador sobre o impacto da Reforma Tributária nas suas vendas?\n\nO novo imposto sobre valor agregado (IBS e CBS) exige que o seu sistema de caixa esteja 100% atualizado com a SEFAZ-RS.\n\nCom o TruData ERP, sua loja está protegida com atualizações automáticas e zero custo surpresa.\n\n#ReformaTributaria #IBS #CBS #SimplesNacional #ContabilidadeRS #TruData"
-      },
-      {
-        id: "farroupilha",
-        titulo: "Semana Farroupilha & Tradição",
-        gancho: "TRADIÇÃO DE 25 ANOS",
-        frase_destaque: "Orgulho de ser gaúcho e tecnologia que apoia quem produz.",
-        roteiro_completo: "Tradição e palavra empenhada são valores sagrados aqui no Rio Grande do Sul. Há mais de 25 anos, a Hansen Software caminha lado a lado com os comerciantes de Sarandi e do Norte Gaúcho. Enquanto empresas de longe atendem com robôs frios, nós atendemos você olho no olho com suporte presencial em até duas horas. Tecnologia feita por gaúchos para gaúchos.",
-        legenda_post: "🧉 Valorizar nossa terra é escolher parceiros que estão presentes quando você mais precisa.\n\nA Hansen Software nasceu em Sarandi em 1998 e atende mais de 300 comércios no RS com suporte 100% humano e tecnologia de ponta.\n\nOrgulho de estar presente no balcão do comércio gaúcho há mais de duas décadas!\n\n#SemanaFarroupilha #SarandiRS #TradicaoGaucha #HansenSoftware #TruDataERP"
-      },
-      {
-        id: "tef_integrado",
-        titulo: "TEF Direto sem Maquininha Avulsa",
-        gancho: "CHEGA DE ERROS NO CAIXA",
-        frase_destaque: "Quantos reais sua loja perde com digitação errada no cartão?",
-        roteiro_completo: "Se o seu operador ainda digita o valor da venda na maquininha avulsa de cartão, você está correndo três riscos graves: erro de digitação do valor, conciliação manual demorada e risco de golpe. Com o TEF integrado do TruData ERP, o valor vai automaticamente do sistema para o pinpad. Acabou a divergência de fechamento de caixa.",
-        legenda_post: "💳 Acabou a digitação manual de valores na maquininha!\n\nCom o TEF integrado do TruData ERP:\n1. O valor vai direto do sistema para o pinpad;\n2. Zero divergência no fechamento do caixa;\n3. Conciliação automática de todas as bandeiras.\n\nAgende um teste na sua loja hoje mesmo!\n\n#TEFIntegrado #FrenteDeCaixa #GestaoFinanceira #VarejoRS #TruDataERP"
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    ];
-
-    let roteiroAtual = ROTEIROS_REELS[0];
-    let synth = window.speechSynthesis;
-    let locucaoAtiva = null;
-
-    function renderizarListaRoteiros() {
-      const container = document.getElementById('lista-roteiros');
-      container.innerHTML = ROTEIROS_REELS.map(r => {
-        const ativo = r.id === roteiroAtual.id;
-        return `
-          <div onclick="selecionarRoteiro('${r.id}')" class="p-3 rounded-2xl border cursor-pointer transition ${ativo ? 'bg-brand-azure/10 border-brand-azure text-white shadow-lg' : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-700'}">
-            <div class="text-[10px] uppercase font-bold text-slate-500">${r.gancho}</div>
-            <div class="text-xs font-bold mt-0.5">${r.titulo}</div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function selecionarRoteiro(id) {
-      roteiroAtual = ROTEIROS_REELS.find(r => r.id === id) || ROTEIROS_REELS[0];
-      renderizarListaRoteiros();
-
-      document.getElementById('reels-gancho-tag').textContent = roteiroAtual.gancho;
-      document.getElementById('reels-frase-dinamica').textContent = roteiroAtual.frase_destaque;
-      document.getElementById('texto-legenda-post').value = roteiroAtual.legenda_post;
-      pararLocucao();
-    }
-
-    function atualizarEstiloVisual() {
-      const estilo = document.getElementById('sel-fundo').value;
-      const tela = document.getElementById('reels-tela-video');
-
-      if (estilo === 'farroupilha') {
-        tela.className = "relative w-full h-full rounded-[36px] overflow-hidden flex flex-col justify-between p-5 bg-gradient-to-b from-[#1b3d2f] via-[#5c1d1d] to-[#453c12] transition-all duration-500";
-      } else if (estilo === 'balcao') {
-        tela.className = "relative w-full h-full rounded-[36px] overflow-hidden flex flex-col justify-between p-5 bg-gradient-to-b from-slate-950 via-[#0c2438] to-slate-950 transition-all duration-500";
-      } else if (estilo === 'minimal') {
-        tela.className = "relative w-full h-full rounded-[36px] overflow-hidden flex flex-col justify-between p-5 bg-slate-950 border border-slate-800 transition-all duration-500";
-      } else {
-        tela.className = "relative w-full h-full rounded-[36px] overflow-hidden flex flex-col justify-between p-5 bg-gradient-to-b from-slate-950 via-[#0a192f] to-slate-950 transition-all duration-500";
-      }
-    }
-
-    function tocarLocucaoAnimada() {
-      pararLocucao();
-
-      if (!('speechSynthesis' in window)) {
-        alert('Navegador sem suporte a síntese de voz.');
-        return;
-      }
-
-      const vel = parseFloat(document.getElementById('sel-velocidade').value) || 1.15;
-      const tom = parseFloat(document.getElementById('sel-tom').value) || 1.0;
-
-      const utter = new SpeechSynthesisUtterance(roteiroAtual.roteiro_completo);
-      utter.lang = 'pt-BR';
-      utter.rate = vel;
-      utter.pitch = tom;
-
-      const btn = document.getElementById('btn-play-locucao');
-      btn.innerHTML = '<span>🔊</span><span>Falando...</span>';
-
-      // Animação de texto no mockup
-      const frases = [
-        roteiroAtual.frase_destaque,
-        "NFC-e Autorizada em 2.8s na SEFAZ-RS",
-        "Suporte Presencial em até 2 Horas",
-        "Hansen Software · Sarandi/RS"
-      ];
-      let fIndex = 0;
-      const intervalAnim = setInterval(() => {
-        fIndex = (fIndex + 1) % frases.length;
-        document.getElementById('reels-frase-dinamica').textContent = frases[fIndex];
-      }, 2800);
-
-      utter.onend = () => {
-        clearInterval(intervalAnim);
-        btn.innerHTML = '<span>▶️</span><span>Tocar Locução com Legenda</span>';
-        document.getElementById('reels-frase-dinamica').textContent = roteiroAtual.frase_destaque;
-      };
-
-      synth.speak(utter);
-      locucaoAtiva = utter;
-    }
-
-    function pararLocucao() {
-      if (synth.speaking) {
-        synth.cancel();
-      }
-      const btn = document.getElementById('btn-play-locucao');
-      if (btn) btn.innerHTML = '<span>▶️</span><span>Tocar Locução com Legenda</span>';
-    }
-
-    function copiarLegendaPost() {
-      const texto = document.getElementById('texto-legenda-post').value;
-      navigator.clipboard.writeText(texto).then(() => alert('Legenda e hashtags copiadas! Cole no Instagram Reels.'));
-    }
-
-    function copiarPacoteCompleto() {
-      const pacote = `🎬 *PACOTE DE GRAVAÇÃO DE REELS TRUDATA*\n\n` +
-        `📌 *Tema:* ${roteiroAtual.titulo}\n` +
-        `🎯 *Gancho:* ${roteiroAtual.gancho}\n\n` +
-        `🎙️ *Roteiro de Locução / Teleprompter:*\n"${roteiroAtual.roteiro_completo}"\n\n` +
-        `📝 *Legenda do Post:*\n${roteiroAtual.legenda_post}`;
-
-      navigator.clipboard.writeText(pacote).then(() => alert('Pacote completo copiado para a área de transferência!'));
-    }
-
-    // Inicialização
-    selecionarRoteiro('contingencia');
-  </script>
-</body>
+    </script>
+  </body>
 </html>

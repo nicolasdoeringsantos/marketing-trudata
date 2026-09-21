@@ -1,0 +1,344 @@
+[
+  {
+    "arquivo": "cadencia_omnichannel.html",
+    "decisao": "Reunida em Preparar uma conversa",
+    "destino": "cadencia_sdr.html",
+    "motivo": "Mensagens, objeções e roteiros foram reunidos em um editor. A nova versão não promete envio nem atualização automática do CRM."
+  },
+  {
+    "arquivo": "copiloto_audio.html",
+    "decisao": "Reunida em Preparar uma conversa",
+    "destino": "cadencia_sdr.html",
+    "motivo": "Mensagens, objeções e roteiros foram reunidos em um editor. A nova versão não promete envio nem atualização automática do CRM."
+  },
+  {
+    "arquivo": "copiloto_vendas.html",
+    "decisao": "Reunida em Preparar uma conversa",
+    "destino": "cadencia_sdr.html",
+    "motivo": "Mensagens, objeções e roteiros foram reunidos em um editor. A nova versão não promete envio nem atualização automática do CRM."
+  },
+  {
+    "arquivo": "objecoes.html",
+    "decisao": "Reunida em Preparar uma conversa",
+    "destino": "cadencia_sdr.html",
+    "motivo": "Mensagens, objeções e roteiros foram reunidos em um editor. A nova versão não promete envio nem atualização automática do CRM."
+  },
+  {
+    "arquivo": "script_coldcall.html",
+    "decisao": "Reunida em Preparar uma conversa",
+    "destino": "cadencia_sdr.html",
+    "motivo": "Mensagens, objeções e roteiros foram reunidos em um editor. A nova versão não promete envio nem atualização automática do CRM."
+  },
+  {
+    "arquivo": "disparador_whatsapp.html",
+    "decisao": "Reunida em Preparar uma conversa",
+    "destino": "cadencia_sdr.html",
+    "motivo": "Mensagens, objeções e roteiros foram reunidos em um editor. A nova versão não promete envio nem atualização automática do CRM."
+  },
+  {
+    "arquivo": "calculadora_troca.html",
+    "decisao": "Reunida em Comparar custos",
+    "destino": "tco_roi.html",
+    "motivo": "A comparação passa a usar valores informados, sem economia mínima forçada, taxas de perda presumidas ou preços atribuídos a concorrentes."
+  },
+  {
+    "arquivo": "calculadora_ruptura.html",
+    "decisao": "Reunida em Comparar custos",
+    "destino": "tco_roi.html",
+    "motivo": "A comparação passa a usar valores informados, sem economia mínima forçada, taxas de perda presumidas ou preços atribuídos a concorrentes."
+  },
+  {
+    "arquivo": "calculadora_tef.html",
+    "decisao": "Reunida em Comparar custos",
+    "destino": "tco_roi.html",
+    "motivo": "A comparação passa a usar valores informados, sem economia mínima forçada, taxas de perda presumidas ou preços atribuídos a concorrentes."
+  },
+  {
+    "arquivo": "simulador_tef_multibandeira.html",
+    "decisao": "Reunida em Comparar custos",
+    "destino": "tco_roi.html",
+    "motivo": "A comparação passa a usar valores informados, sem economia mínima forçada, taxas de perda presumidas ou preços atribuídos a concorrentes."
+  },
+  {
+    "arquivo": "payback_hardware.html",
+    "decisao": "Reunida em Comparar custos",
+    "destino": "tco_roi.html",
+    "motivo": "A comparação passa a usar valores informados, sem economia mínima forçada, taxas de perda presumidas ou preços atribuídos a concorrentes."
+  },
+  {
+    "arquivo": "perdas_caixa.html",
+    "decisao": "Reunida em Comparar custos",
+    "destino": "tco_roi.html",
+    "motivo": "A comparação passa a usar valores informados, sem economia mínima forçada, taxas de perda presumidas ou preços atribuídos a concorrentes."
+  },
+  {
+    "arquivo": "dossie_portabilidade.html",
+    "decisao": "Reunida em Comparar custos",
+    "destino": "tco_roi.html",
+    "motivo": "A comparação passa a usar valores informados, sem economia mínima forçada, taxas de perda presumidas ou preços atribuídos a concorrentes."
+  },
+  {
+    "arquivo": "dossie_contador.html",
+    "decisao": "Reunida em Comparar custos",
+    "destino": "tco_roi.html",
+    "motivo": "A comparação passa a usar valores informados, sem economia mínima forçada, taxas de perda presumidas ou preços atribuídos a concorrentes."
+  },
+  {
+    "arquivo": "hardware.html",
+    "decisao": "Reunida em Comparar custos",
+    "destino": "tco_roi.html",
+    "motivo": "A comparação passa a usar valores informados, sem economia mínima forçada, taxas de perda presumidas ou preços atribuídos a concorrentes."
+  },
+  {
+    "arquivo": "proposta_online.html",
+    "decisao": "Reunida em Preparar proposta",
+    "destino": "gerador_proposta.html",
+    "motivo": "A proposta agora descreve escopo e valores preenchidos. Não representa contrato assinado, pagamento confirmado ou rastreamento de leitura."
+  },
+  {
+    "arquivo": "proposta_rastreavel.html",
+    "decisao": "Reunida em Preparar proposta",
+    "destino": "gerador_proposta.html",
+    "motivo": "A proposta agora descreve escopo e valores preenchidos. Não representa contrato assinado, pagamento confirmado ou rastreamento de leitura."
+  },
+  {
+    "arquivo": "fechamento_rapido.html",
+    "decisao": "Reunida em Preparar proposta",
+    "destino": "gerador_proposta.html",
+    "motivo": "A proposta agora descreve escopo e valores preenchidos. Não representa contrato assinado, pagamento confirmado ou rastreamento de leitura."
+  },
+  {
+    "arquivo": "migracao_concorrentes.html",
+    "decisao": "Reunida em Planejar implantação",
+    "destino": "checklist_implantacao.html",
+    "motivo": "O planejamento registra conferências e pendências. Não promete prazo universal nem compatibilidade de equipamentos sem teste."
+  },
+  {
+    "arquivo": "mercados.html",
+    "decisao": "Reunida em Planejar implantação",
+    "destino": "checklist_implantacao.html",
+    "motivo": "O planejamento registra conferências e pendências. Não promete prazo universal nem compatibilidade de equipamentos sem teste."
+  },
+  {
+    "arquivo": "gps_campo.html",
+    "decisao": "Reunida no Radar de clientes",
+    "destino": "radar_clientes.html",
+    "motivo": "Use a base regional, os filtros e as rotas do radar. Estimativas de carteira e posição simulada deixaram de orientar a prospecção."
+  },
+  {
+    "arquivo": "contadores.html",
+    "decisao": "Reunida no Radar de contadores",
+    "destino": "radar_clientes.html?modo=contadores",
+    "motivo": "Consulte escritórios por região sem estimar automaticamente quantos clientes cada um possui."
+  },
+  {
+    "arquivo": "simulador_contingencia.html",
+    "decisao": "Reunida na Demonstração de caixa",
+    "destino": "demo_pdv.html",
+    "motivo": "A demonstração é didática e identificada como simulação. Não emite NFC-e nem envia comandos a equipamentos."
+  },
+  {
+    "arquivo": "emulador_cupom_termica.html",
+    "decisao": "Reunida na Demonstração de caixa",
+    "destino": "demo_pdv.html",
+    "motivo": "A demonstração é didática e identificada como simulação. Não emite NFC-e nem envia comandos a equipamentos."
+  },
+  {
+    "arquivo": "showroom_virtual.html",
+    "decisao": "Reunida na Demonstração de caixa",
+    "destino": "demo_pdv.html",
+    "motivo": "A demonstração é didática e identificada como simulação. Não emite NFC-e nem envia comandos a equipamentos."
+  },
+  {
+    "arquivo": "painel_telemetria_propostas.html",
+    "decisao": "Retirada: integração não implementada",
+    "destino": "crm.html",
+    "motivo": "A versão anterior mostrava resultados ou confirmava ações sem a integração necessária. Use o CRM para registrar o acompanhamento real."
+  },
+  {
+    "arquivo": "pesquisa_nps_ativa.html",
+    "decisao": "Retirada: integração não implementada",
+    "destino": "crm.html",
+    "motivo": "A versão anterior mostrava resultados ou confirmava ações sem a integração necessária. Use o CRM para registrar o acompanhamento real."
+  },
+  {
+    "arquivo": "termometro_churn.html",
+    "decisao": "Retirada: integração não implementada",
+    "destino": "crm.html",
+    "motivo": "A versão anterior mostrava resultados ou confirmava ações sem a integração necessária. Use o CRM para registrar o acompanhamento real."
+  },
+  {
+    "arquivo": "produtividade_comissoes.html",
+    "decisao": "Retirada: integração não implementada",
+    "destino": "crm.html",
+    "motivo": "A versão anterior mostrava resultados ou confirmava ações sem a integração necessária. Use o CRM para registrar o acompanhamento real."
+  },
+  {
+    "arquivo": "conector_bi_openapi.html",
+    "decisao": "Retirada: integração não implementada",
+    "destino": "crm.html",
+    "motivo": "A versão anterior mostrava resultados ou confirmava ações sem a integração necessária. Use o CRM para registrar o acompanhamento real."
+  },
+  {
+    "arquivo": "auditor_sped_efd.html",
+    "decisao": "Retirada: validação não implementada",
+    "destino": "auditor_xml.html",
+    "motivo": "A versão anterior não executava a auditoria ou o download anunciado. O leitor XML apenas apresenta o conteúdo de um arquivo fornecido, sem laudo fiscal."
+  },
+  {
+    "arquivo": "portal_contador_xml.html",
+    "decisao": "Retirada: validação não implementada",
+    "destino": "auditor_xml.html",
+    "motivo": "A versão anterior não executava a auditoria ou o download anunciado. O leitor XML apenas apresenta o conteúdo de um arquivo fornecido, sem laudo fiscal."
+  },
+  {
+    "arquivo": "calculadora_difal_st.html",
+    "decisao": "Retirada: requer validação fiscal",
+    "destino": "checklist_implantacao.html",
+    "motivo": "Os parâmetros desta versão não têm revisão fiscal documentada. Prepare as informações da operação e confira o enquadramento com o contador."
+  },
+  {
+    "arquivo": "simulador_simples.html",
+    "decisao": "Retirada: requer validação fiscal",
+    "destino": "checklist_implantacao.html",
+    "motivo": "Os parâmetros desta versão não têm revisão fiscal documentada. Prepare as informações da operação e confira o enquadramento com o contador."
+  },
+  {
+    "arquivo": "reforma-tributaria.html",
+    "decisao": "Retirada: requer validação fiscal",
+    "destino": "checklist_implantacao.html",
+    "motivo": "Os parâmetros desta versão não têm revisão fiscal documentada. Prepare as informações da operação e confira o enquadramento com o contador."
+  },
+  {
+    "arquivo": "simulador_tributario_2026.html",
+    "decisao": "Retirada: requer validação fiscal",
+    "destino": "checklist_implantacao.html",
+    "motivo": "Os parâmetros desta versão não têm revisão fiscal documentada. Prepare as informações da operação e confira o enquadramento com o contador."
+  },
+  {
+    "arquivo": "simulador_cesta_basica_rs.html",
+    "decisao": "Retirada: requer validação fiscal",
+    "destino": "checklist_implantacao.html",
+    "motivo": "Os parâmetros desta versão não têm revisão fiscal documentada. Prepare as informações da operação e confira o enquadramento com o contador."
+  },
+  {
+    "arquivo": "status_sefaz.html",
+    "decisao": "Retirada: status não consultado",
+    "destino": "ferramentas.html",
+    "motivo": "A tela anterior mostrava disponibilidade sem consultar um serviço de monitoramento. Ela não deve orientar decisões sobre disponibilidade da SEFAZ."
+  },
+  {
+    "arquivo": "homologador_balancas.html",
+    "decisao": "Retirada: equipamento não conectado",
+    "destino": "checklist_implantacao.html",
+    "motivo": "Os pesos exibidos eram gerados no navegador. Isso não testa conexão, precisão ou homologação de uma balança."
+  },
+  {
+    "arquivo": "contrato_digital.html",
+    "decisao": "Retirada: condições sem validação",
+    "destino": "gerador_proposta.html",
+    "motivo": "A versão anterior apresentava garantia, bônus ou formalização sem um fluxo validado. Registre na proposta apenas as condições combinadas com o responsável comercial."
+  },
+  {
+    "arquivo": "garantia_blindada.html",
+    "decisao": "Retirada: condições sem validação",
+    "destino": "gerador_proposta.html",
+    "motivo": "A versão anterior apresentava garantia, bônus ou formalização sem um fluxo validado. Registre na proposta apenas as condições combinadas com o responsável comercial."
+  },
+  {
+    "arquivo": "programa_indicacao.html",
+    "decisao": "Retirada: condições sem validação",
+    "destino": "gerador_proposta.html",
+    "motivo": "A versão anterior apresentava garantia, bônus ou formalização sem um fluxo validado. Registre na proposta apenas as condições combinadas com o responsável comercial."
+  },
+  {
+    "arquivo": "prova_social_regional.html",
+    "decisao": "Retirada: prova social sem comprovação",
+    "destino": "index.html",
+    "motivo": "Depoimentos e conversas precisam de origem verificável e autorização de uso. A versão anterior não demonstrava esses requisitos."
+  },
+  {
+    "arquivo": "simulador_print_whatsapp.html",
+    "decisao": "Retirada: prova social sem comprovação",
+    "destino": "index.html",
+    "motivo": "Depoimentos e conversas precisam de origem verificável e autorização de uso. A versão anterior não demonstrava esses requisitos."
+  },
+  {
+    "arquivo": "stories.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "carrosseis_feed.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "roteiros_reels.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "spots_radio.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "estudio_brolls.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "campanhas_ads.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "campanhas_trafego.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "figurinhas.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "gerador_reels.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "gerador_carrosseis_916.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "spots_radio_trilha.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "vitrine_comercios_rs.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  },
+  {
+    "arquivo": "pitch.html",
+    "decisao": "Material preservado na biblioteca",
+    "destino": "biblioteca.html",
+    "motivo": "Os textos das coleções anteriores estão na biblioteca de referência para consulta e adaptação. A versão original completa também foi preservada, sem publicação automática."
+  }
+]

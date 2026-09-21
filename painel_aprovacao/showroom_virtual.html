@@ -1,332 +1,59 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Showroom Virtual de PDV por Nicho RS | TruData Suite 2026</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            purple: '#a855f7',
-                            indigo: '#6366f1',
-                            dark: '#0f172a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .glass-panel {
-            background: rgba(17, 24, 39, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .isometric-card {
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .isometric-card:hover {
-            transform: translateY(-4px) scale(1.01);
-        }
-    </style>
-</head>
-<body class="bg-slate-950 text-slate-100 min-h-screen">
-    <!-- Header -->
-    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-40 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <a href="/" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse"></span>
-                    <span class="font-bold text-lg text-white">Tru<span class="text-purple-400">Showroom</span></span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-semibold border border-purple-500/30">Pilar 4: Experiência PDV</span>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <button onclick="copiarPropostaShowroom()" class="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-xs font-bold text-white flex items-center gap-1.5 shadow-lg shadow-purple-900/30 transition-all">
-                    <i class="fa-solid fa-file-invoice"></i> Gerar Orçamento PDV Completo
-                </button>
-            </div>
-        </div>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
     </header>
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <!-- Hero Header -->
-        <div class="mb-8">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 text-xs font-medium mb-3">
-                <i class="fa-solid fa-vr-cardboard"></i> Demonstração Imersiva de Equipamentos e Software Integrados
-            </div>
-            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-                Showroom Virtual de Ponto de Venda (PDV)
-            </h1>
-            <p class="text-slate-400 text-sm mt-1 max-w-3xl">
-                Explore a arquitetura completa do balcão moderno gaúcho: integração nativa de balanças Toledo, pinpads TEF Sicredi/Banrisul, leitores omnidirecionais e coletores de dados com retaguarda fiscal instantânea.
-            </p>
-        </div>
-
-        <!-- Seletor de Nicho Comercial -->
-        <div class="glass-panel p-4 rounded-2xl border border-slate-800 mb-8 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 text-xs">
-                <span class="text-slate-400 font-semibold uppercase text-[10px]">Segmento RS:</span>
-                <button onclick="selecionarNicho('mercado')" id="btnNichoMercado" class="px-3 py-1.5 rounded-lg bg-purple-600 text-white font-bold whitespace-nowrap">Supermercado &amp; Atacarejo</button>
-                <button onclick="selecionarNicho('acougue')" id="btnNichoAcougue" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 font-medium whitespace-nowrap">Casa de Carnes &amp; Frigorífico</button>
-                <button onclick="selecionarNicho('pet')" id="btnNichoPet" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 font-medium whitespace-nowrap">Agropecuária &amp; Pet</button>
-                <button onclick="selecionarNicho('auto')" id="btnNichoAuto" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 font-medium whitespace-nowrap">Autopeças &amp; Oficina</button>
-                <button onclick="selecionarNicho('materiais')" id="btnNichoMateriais" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 font-medium whitespace-nowrap">Materiais de Construção</button>
-            </div>
-            <div class="text-xs text-purple-300 font-mono">
-                <i class="fa-solid fa-check-double text-emerald-400"></i> Homologado SEFAZ-RS 2026
-            </div>
-        </div>
-
-        <!-- Grid das 5 Estações do Showroom -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="gridEstacoes">
-            <!-- Estação 1: Caixa Rápido -->
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 isometric-card space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center text-xl">
-                    <i class="fa-solid fa-cash-register"></i>
-                </div>
-                <div>
-                    <span class="text-[10px] font-mono text-purple-400 font-bold uppercase">ESTAÇÃO 01</span>
-                    <h3 class="text-lg font-bold text-white">Checkout de Alta Velocidade</h3>
-                    <p class="text-xs text-slate-400 mt-1">Tempo de passagem por item: <strong class="text-emerald-400">0.8 segundos</strong>. Modo contingência offline nativo.</p>
-                </div>
-                <div class="space-y-2 text-xs border-t border-slate-800 pt-3">
-                    <div class="flex justify-between text-slate-300">
-                        <span>Leitor de Código:</span>
-                        <span class="font-mono text-slate-400" id="hwLeitor">Honeywell Genesis 2D Fixo</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>Impressora Térmica:</span>
-                        <span class="font-mono text-slate-400" id="hwImpressora">Epson TM-T20X 80mm ESC/POS</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>TEF Multibandeira:</span>
-                        <span class="font-mono text-emerald-400 font-bold">SiTef + Banrisul / Sicredi</span>
-                    </div>
-                </div>
-                <button onclick="testarEstacao('checkout')" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-purple-300 rounded-lg text-xs font-bold border border-slate-800 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-play"></i> Simular Venda no Caixa
-                </button>
-            </div>
-
-            <!-- Estação 2: Balcão e Pesagem -->
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 isometric-card space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-xl">
-                    <i class="fa-solid fa-scale-balanced"></i>
-                </div>
-                <div>
-                    <span class="text-[10px] font-mono text-emerald-400 font-bold uppercase">ESTAÇÃO 02</span>
-                    <h3 class="text-lg font-bold text-white">Pesagem &amp; Balcão de Cortes</h3>
-                    <p class="text-xs text-slate-400 mt-1">Comunicação direta em rede TCP/IP com carga automática de preços e tara de embalagem.</p>
-                </div>
-                <div class="space-y-2 text-xs border-t border-slate-800 pt-3">
-                    <div class="flex justify-between text-slate-300">
-                        <span>Balança de Balcão:</span>
-                        <span class="font-mono text-slate-400" id="hwBalanca">Toledo Prix 5 Plus / 6</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>Etiqueta:</span>
-                        <span class="font-mono text-slate-400">40x40mm com EAN-13 e Nutricional</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>Sincronização:</span>
-                        <span class="font-mono text-emerald-400 font-bold">Tempo Real (&lt;1s)</span>
-                    </div>
-                </div>
-                <button onclick="testarEstacao('balanca')" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-emerald-300 rounded-lg text-xs font-bold border border-slate-800 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-scale-unbalanced-flip"></i> Testar Pesagem Direta
-                </button>
-            </div>
-
-            <!-- Estação 3: Estoque & Coleta Móvel -->
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 isometric-card space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center text-xl">
-                    <i class="fa-solid fa-barcode"></i>
-                </div>
-                <div>
-                    <span class="text-[10px] font-mono text-cyan-400 font-bold uppercase">ESTAÇÃO 03</span>
-                    <h3 class="text-lg font-bold text-white">Coleta Móvel &amp; Inventário</h3>
-                    <p class="text-xs text-slate-400 mt-1">Conferência cega de mercadoria na doca com confronto automático do XML da SEFAZ.</p>
-                </div>
-                <div class="space-y-2 text-xs border-t border-slate-800 pt-3">
-                    <div class="flex justify-between text-slate-300">
-                        <span>Hardware Coletor:</span>
-                        <span class="font-mono text-slate-400">Zebra TC21 / Datalogic Memor</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>Auditoria XML:</span>
-                        <span class="font-mono text-slate-400">Validação NCM, ST e Validades</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>Inventário Cego:</span>
-                        <span class="font-mono text-cyan-400 font-bold">Anti-Desvio de Estoque</span>
-                    </div>
-                </div>
-                <button onclick="testarEstacao('estoque')" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-cyan-300 rounded-lg text-xs font-bold border border-slate-800 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-boxes-stacked"></i> Simular Entrada de XML
-                </button>
-            </div>
-
-            <!-- Estação 4: Retaguarda Fiscal & DRE -->
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 isometric-card space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-xl">
-                    <i class="fa-solid fa-chart-pie"></i>
-                </div>
-                <div>
-                    <span class="text-[10px] font-mono text-amber-400 font-bold uppercase">ESTAÇÃO 04</span>
-                    <h3 class="text-lg font-bold text-white">Retaguarda &amp; Blindagem Fiscal</h3>
-                    <p class="text-xs text-slate-400 mt-1">Geração mensal automática do SPED EFD ICMS/IPI sem divergência nos blocos C e E.</p>
-                </div>
-                <div class="space-y-2 text-xs border-t border-slate-800 pt-3">
-                    <div class="flex justify-between text-slate-300">
-                        <span>Portal do Contador:</span>
-                        <span class="font-mono text-slate-400">Download ZIP de XMLs e Relatórios</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>Margem Líquida:</span>
-                        <span class="font-mono text-slate-400">DRE em Tempo Real por Loja</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>Compatibilidade:</span>
-                        <span class="font-mono text-amber-400 font-bold">Domínio, Questor &amp; SCI</span>
-                    </div>
-                </div>
-                <button onclick="testarEstacao('fiscal')" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-amber-300 rounded-lg text-xs font-bold border border-slate-800 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-file-contract"></i> Visualizar Painel Fiscal
-                </button>
-            </div>
-
-            <!-- Estação 5: Totem de Autoatendimento & Consulta -->
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 isometric-card space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center text-xl">
-                    <i class="fa-solid fa-tablet-screen-button"></i>
-                </div>
-                <div>
-                    <span class="text-[10px] font-mono text-rose-400 font-bold uppercase">ESTAÇÃO 05</span>
-                    <h3 class="text-lg font-bold text-white">Totem &amp; Consulta de Preço</h3>
-                    <p class="text-xs text-slate-400 mt-1">Terminal para o cliente final consultar preços no corredor e fazer pedidos autônomos.</p>
-                </div>
-                <div class="space-y-2 text-xs border-t border-slate-800 pt-3">
-                    <div class="flex justify-between text-slate-300">
-                        <span>Tela:</span>
-                        <span class="font-mono text-slate-400">Touchscreen 21.5" Full HD</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>Pagamento Autônomo:</span>
-                        <span class="font-mono text-slate-400">PIX &amp; Cartão por Aproximação</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>Redução de Filas:</span>
-                        <span class="font-mono text-rose-400 font-bold">-35% tempo de espera</span>
-                    </div>
-                </div>
-                <button onclick="testarEstacao('totem')" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-rose-300 rounded-lg text-xs font-bold border border-slate-800 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-qrcode"></i> Simular Autoatendimento
-                </button>
-            </div>
-
-            <!-- Card Resumo de Investimento e ROI -->
-            <div class="glass-panel p-6 rounded-2xl border border-purple-500/30 bg-purple-950/20 space-y-4 flex flex-col justify-between">
-                <div>
-                    <span class="text-[10px] font-mono text-purple-300 font-bold uppercase">PACOTE COMPLETO</span>
-                    <h3 class="text-lg font-bold text-white">Investimento e Payback</h3>
-                    <p class="text-xs text-slate-400 mt-1">Substitua até 3 sistemas desconectados por uma plataforma única com suporte local no RS.</p>
-                </div>
-                <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2 text-xs">
-                    <div class="flex justify-between">
-                        <span class="text-slate-400">Economia em Ruptura:</span>
-                        <span class="text-emerald-400 font-bold">+R$ 3.200/mês</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-slate-400">Redução de Multas SEFAZ:</span>
-                        <span class="text-emerald-400 font-bold">100% Blindado</span>
-                    </div>
-                    <div class="flex justify-between border-t border-slate-800 pt-1 font-bold">
-                        <span class="text-white">Payback Médio:</span>
-                        <span class="text-purple-400">42 dias</span>
-                    </div>
-                </div>
-                <button onclick="copiarPropostaShowroom()" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs font-extrabold shadow-lg shadow-purple-950/40">
-                    Solicitar Visita Técnica no Meu Comércio
-                </button>
-            </div>
-        </div>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Reunida na Demonstração de caixa</h1>
+      <p style="margin-top: 24px">
+        A demonstração é didática e identificada como simulação. Não emite NFC-e
+        nem envia comandos a equipamentos.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="demo_pdv.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
     </main>
-
     <script>
-        let nichoAtual = 'mercado';
-
-        function selecionarNicho(nicho) {
-            nichoAtual = nicho;
-            ['mercado', 'acougue', 'pet', 'auto', 'materiais'].forEach(n => {
-                const btn = document.getElementById('btnNicho' + (n.charAt(0).toUpperCase() + n.slice(1)));
-                if (n === nicho) {
-                    btn.className = 'px-3 py-1.5 rounded-lg bg-purple-600 text-white font-bold whitespace-nowrap';
-                } else {
-                    btn.className = 'px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 font-medium whitespace-nowrap';
-                }
-            });
-
-            if (nicho === 'acougue') {
-                document.getElementById('hwBalanca').innerText = 'Toledo Prix 6 Touch com Tara';
-                document.getElementById('hwLeitor').innerText = 'Datalogic Gryphon 2D Imager';
-            } else if (nicho === 'auto') {
-                document.getElementById('hwBalanca').innerText = 'Não se aplica / Dispensada';
-                document.getElementById('hwLeitor').innerText = 'Leitor Sem Fio Zebra DS2278';
-            } else if (nicho === 'mercado') {
-                document.getElementById('hwBalanca').innerText = 'Toledo Prix 5 Plus / 6';
-                document.getElementById('hwLeitor').innerText = 'Honeywell Genesis 2D Fixo';
-            } else if (nicho === 'pet') {
-                document.getElementById('hwBalanca').innerText = 'Balança Checkout Urano Pop-S';
-                document.getElementById('hwLeitor').innerText = 'Leitor Honeywell Voyager 1250g';
-            } else if (nicho === 'materiais') {
-                document.getElementById('hwBalanca').innerText = 'Balança Industrial de Plataforma';
-                document.getElementById('hwLeitor').innerText = 'Leitor Robusto Honeywell Granit';
-            }
-        }
-
-        function testarEstacao(estacao) {
-            if (estacao === 'checkout') {
-                alert('Iniciando emulação do TruData PDV... Passagem de 3 itens + Fechamento via PIX instantâneo: 2.4 segundos no total.');
-            } else if (estacao === 'balanca') {
-                alert('Lendo porta serial COM1... Peso detectado: 1.450 kg (Picanha Gaúcha). Código EAN-13 gerado com tara abatida.');
-            } else if (estacao === 'estoque') {
-                alert('Confrontando chave de acesso NF-e na SEFAZ-RS... 48 itens validados. Divergência: 0 itens faltantes.');
-            } else if (estacao === 'fiscal') {
-                alert('Abrindo demonstrativo do SPED Fiscal ICMS/IPI... Arquivo TXT pronto para envio à contabilidade.');
-            } else if (estacao === 'totem') {
-                alert('Iniciando modo Autoatendimento... Tela Touch pronta para seleção de produto e pagamento por aproximação.');
-            }
-        }
-
-        function copiarPropostaShowroom() {
-            const nicho = nichoAtual.toUpperCase();
-            const proposta = `*PROPOSTA COMERCIAL TRUDATA SHOWROOM 2026*\n\n` +
-                             `Segmento: ${nicho}\n` +
-                             `Módulos Ativos:\n` +
-                             `1. PDV Checkout de Alta Velocidade com Contingência Offline\n` +
-                             `2. Integração com Balanças Toledo/Filizola/Urano\n` +
-                             `3. Coleta Móvel para Conferência de XML e Estoque Cego\n` +
-                             `4. Retaguarda Fiscal com SPED e Portal do Contador\n` +
-                             `5. Suporte Técnico Regional no Rio Grande do Sul\n\n` +
-                             `Condição Especial: Implantação e migração de cadastros inclusas.\n` +
-                             `Agende demonstração presencial no WhatsApp: (54) 99968-0012`;
-
-            navigator.clipboard.writeText(proposta).then(() => {
-                alert('Orçamento e especificações do PDV copiados com sucesso!');
-            });
-        }
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
+      }
     </script>
-</body>
+  </body>
 </html>

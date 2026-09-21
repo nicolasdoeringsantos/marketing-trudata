@@ -1,269 +1,59 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fechador de Bolso Mobile — Fast-Close Balcão TruData</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: { azure: '#0070f3', dark: '#0b0f19', card: '#131b2e', emerald: '#10b981', rose: '#f43f5e' }
-          },
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          }
-        }
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Reunida em Preparar proposta</h1>
+      <p style="margin-top: 24px">
+        A proposta agora descreve escopo e valores preenchidos. Não representa
+        contrato assinado, pagamento confirmado ou rastreamento de leitura.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="gerador_proposta.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    }
-  </script>
-  <style>
-    body { background-color: #060911; color: #f1f5f9; }
-    .glass { background: rgba(19, 27, 46, 0.85); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased p-3 sm:p-5 flex flex-col justify-between max-w-lg mx-auto">
-
-  <!-- CABEÇALHO COMPACTO MOBILE -->
-  <header class="flex items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-800">
-    <div class="flex items-center gap-2">
-      <div class="h-8 w-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-base">
-        ⚡
-      </div>
-      <div>
-        <h1 class="text-sm font-black font-display text-white">Fechador de Bolso (Fast-Close)</h1>
-        <p class="text-[10px] text-slate-400">Hansen Software · Fechamento Presencial no Balcão</p>
-      </div>
-    </div>
-    <a href="index.html" class="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-      Hub
-    </a>
-  </header>
-
-  <main class="space-y-4 flex-1">
-
-    <!-- SELETOR RÁPIDO DO CLIENTE -->
-    <div class="glass rounded-2xl p-4 border border-slate-800 space-y-3">
-      <div class="flex items-center justify-between">
-        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">1. Dados do Estabelecimento</span>
-        <select id="selAlvoRapido" onchange="carregarAlvoRapido()" class="bg-slate-900 text-[10px] text-slate-200 border border-slate-700 rounded px-2 py-1 outline-none">
-          <option value="">-- Puxar Alvo Sarandi --</option>
-          <option value="Supermercado Sarandi LTDA|Sarandi|4|Mateus Hansen|02.483.991/0001-90">Supermercado Sarandi (4 PDVs)</option>
-          <option value="Casa das Tintas Sarandi|Sarandi|2|Carlos Eduardo|12.345.678/0001-99">Casa das Tintas (2 PDVs)</option>
-          <option value="Auto Peças Sarandiense|Sarandi|3|Rafael Silva|98.765.432/0001-11">Auto Peças Sarandiense (3 PDVs)</option>
-          <option value="Mercado Popular Constantina|Constantina|2|Valdir Zanin|44.555.666/0001-22">Mercado Constantina (2 PDVs)</option>
-        </select>
-      </div>
-
-      <div class="space-y-2 text-xs">
-        <input type="text" id="inNome" placeholder="Nome da Loja / Razão Social" value="Supermercado Sarandi LTDA" oninput="atualizarTotais()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
-        <div class="grid grid-cols-2 gap-2">
-          <input type="text" id="inCidade" placeholder="Cidade" value="Sarandi - RS" oninput="atualizarTotais()" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
-          <input type="text" id="inDecisor" placeholder="Nome do Dono" value="Mateus Hansen" oninput="atualizarTotais()" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
-        </div>
-      </div>
-    </div>
-
-    <!-- PLANO & CONDICIONAMENTO PRESENCIAL -->
-    <div class="glass rounded-2xl p-4 border border-slate-800 space-y-3">
-      <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">2. Configuração do Plano & Bônus de Visita</span>
-
-      <div class="grid grid-cols-2 gap-2 text-xs">
-        <div>
-          <label class="block text-[10px] text-slate-400 mb-1">Checkouts (PDVs):</label>
-          <input type="number" id="inQtdPDVs" value="4" min="1" max="20" oninput="atualizarTotais()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold text-center outline-none">
-        </div>
-        <div>
-          <label class="block text-[10px] text-slate-400 mb-1">Plano Base:</label>
-          <select id="selPlano" onchange="atualizarTotais()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-2 text-white font-bold outline-none">
-            <option value="280">Básico (R$ 280)</option>
-            <option value="380" selected>Pro (R$ 380)</option>
-            <option value="580">Enterprise (R$ 580)</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- BÔNUS DE FECHAMENTO NO BALCÃO -->
-      <div class="p-2.5 rounded-xl bg-emerald-950/30 border border-emerald-500/40 space-y-1 text-xs">
-        <span class="text-[10px] uppercase font-black text-emerald-400 block tracking-wider">
-          🎁 Condição Especial de Fechamento Presencial
-        </span>
-        <label class="flex items-center gap-2 cursor-pointer pt-1">
-          <input type="checkbox" id="chkBypassSetup" checked onchange="atualizarTotais()" class="h-4 w-4 rounded text-emerald-500 bg-slate-900 border-slate-700">
-          <span class="text-white font-bold text-[11px]">Taxa de Migração ISENTA (Economia R$ 1.800)</span>
-        </label>
-        <label class="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" id="chkDesconto1Mes" onchange="atualizarTotais()" class="h-4 w-4 rounded text-emerald-500 bg-slate-900 border-slate-700">
-          <span class="text-white font-bold text-[11px]">1º Mês com 50% de Desconto</span>
-        </label>
-      </div>
-
-      <!-- VALOR CONSOLIDADO -->
-      <div class="p-3 bg-slate-950 rounded-xl flex items-center justify-between border border-slate-800">
-        <div>
-          <span class="text-[10px] text-slate-400 block uppercase">Mensalidade Efetiva</span>
-          <span id="txtMensalidadeFinal" class="text-xl font-black text-emerald-400 font-display">R$ 647,00/mês</span>
-        </div>
-        <div class="text-right">
-          <span class="text-[10px] text-slate-400 block uppercase">Taxa de Setup</span>
-          <span id="txtSetupFinal" class="text-xs font-black text-emerald-400 uppercase">R$ 0,00 (Isento)</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- QR CODE PIX DE ENTRADA & ASSINATURA TOUCH -->
-    <div class="glass rounded-2xl p-4 border border-slate-800 space-y-3">
-      <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">3. Pagamento de Ativação (Pix Sicredi) & Assinatura</span>
-
-      <div class="flex items-center gap-3 bg-slate-950 p-3 rounded-xl border border-slate-800">
-        <img id="imgPixQr" src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=02483991000190" alt="QR Code Pix" class="w-20 h-20 rounded-lg border border-slate-700">
-        <div class="space-y-1 flex-1">
-          <span class="text-[10px] text-slate-400 block">Chave Pix CNPJ Hansen:</span>
-          <span class="text-xs font-mono font-bold text-emerald-400 block select-all">02.483.991/0001-90</span>
-          <span class="text-[10px] text-slate-400 block">Sicredi Sarandi - RS</span>
-          <button onclick="copiarPix()" class="text-[10px] px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-bold transition">
-            Copiar Chave
-          </button>
-        </div>
-      </div>
-
-      <!-- PAD DE ASSINATURA TOUCH -->
-      <div>
-        <div class="flex justify-between items-center mb-1">
-          <span class="text-[10px] text-slate-400">Assinatura do lojista no celular:</span>
-          <button onclick="limparCanvas()" class="text-[10px] text-rose-400 font-bold">Limpar</button>
-        </div>
-        <div class="border border-dashed border-slate-700 rounded-xl bg-slate-950 overflow-hidden relative">
-          <canvas id="cvFastAssinatura" width="340" height="90" class="w-full h-20 touch-none cursor-crosshair"></canvas>
-          <div id="txtPlaceholderSign" class="absolute inset-0 flex items-center justify-center text-slate-600 text-[11px] pointer-events-none">
-            Toque e assine aqui
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- BOTÃO GIGANTE DE FECHAMENTO -->
-    <div class="pt-1">
-      <a id="btnFecharWpp" href="#" target="_blank" class="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:brightness-110 text-white rounded-2xl font-black text-sm transition flex items-center justify-center gap-2 shadow-xl shadow-emerald-600/30 text-center">
-        🤝 FECHAR CONTRATO NO WHATSAPP
-      </a>
-    </div>
-
-  </main>
-
-  <script>
-    // Canvas touch sign
-    const canvas = document.getElementById('cvFastAssinatura');
-    const ctx = canvas.getContext('2d');
-    let desenhando = false;
-    ctx.strokeStyle = '#10b981';
-    ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-
-    function getPos(e) {
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      return {
-        x: (clientX - rect.left) * (canvas.width / rect.width),
-        y: (clientY - rect.top) * (canvas.height / rect.height)
-      };
-    }
-
-    function startSign(e) {
-      desenhando = true;
-      document.getElementById('txtPlaceholderSign').style.display = 'none';
-      const p = getPos(e);
-      ctx.beginPath();
-      ctx.moveTo(p.x, p.y);
-      e.preventDefault();
-    }
-
-    function moveSign(e) {
-      if (!desenhando) return;
-      const p = getPos(e);
-      ctx.lineTo(p.x, p.y);
-      ctx.stroke();
-      e.preventDefault();
-    }
-
-    function stopSign() {
-      desenhando = false;
-    }
-
-    canvas.addEventListener('mousedown', startSign);
-    canvas.addEventListener('mousemove', moveSign);
-    window.addEventListener('mouseup', stopSign);
-
-    canvas.addEventListener('touchstart', startSign, { passive: false });
-    canvas.addEventListener('touchmove', moveSign, { passive: false });
-    window.addEventListener('touchend', stopSign);
-
-    function limparCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      document.getElementById('txtPlaceholderSign').style.display = 'flex';
-    }
-
-    function formatMoeda(val) {
-      return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    }
-
-    function carregarAlvoRapido() {
-      const val = document.getElementById('selAlvoRapido').value;
-      if (!val) return;
-      const [nome, cidade, pdvs, decisor] = val.split('|');
-      document.getElementById('inNome').value = nome;
-      document.getElementById('inCidade').value = `${cidade} - RS`;
-      document.getElementById('inQtdPDVs').value = pdvs;
-      document.getElementById('inDecisor').value = decisor;
-      atualizarTotais();
-    }
-
-    function atualizarTotais() {
-      const pdvs = parseInt(document.getElementById('inQtdPDVs').value) || 1;
-      const base = parseFloat(document.getElementById('selPlano').value) || 380;
-      const extras = Math.max(0, pdvs - 1) * 89;
-      let mensal = base + extras;
-
-      const desc1Mes = document.getElementById('chkDesconto1Mes').checked;
-      const bypassSetup = document.getElementById('chkBypassSetup').checked;
-
-      document.getElementById('txtSetupFinal').innerText = bypassSetup ? 'R$ 0,00 (ISENTO NO BALCÃO)' : 'R$ 1.800,00';
-      document.getElementById('txtMensalidadeFinal').innerText = `${formatMoeda(mensal)}/mês`;
-
-      const nome = document.getElementById('inNome').value || 'Loja';
-      const cidade = document.getElementById('inCidade').value || 'Sarandi';
-      const decisor = document.getElementById('inDecisor').value || 'Lojista';
-
-      const msg = `*CONFIRMAÇÃO DE FECHAMENTO PRESENCIAL — TRUDATA ERP*%0A%0A` +
-        `✅ *Cliente:* ${nome}%0A` +
-        `📍 *Cidade:* ${cidade}%0A` +
-        `👤 *Responsável:* ${decisor}%0A` +
-        `🖥️ *Checkouts (PDVs):* ${pdvs} caixas%0A%0A` +
-        `💰 *Mensalidade Acordada:* ${formatMoeda(mensal)}/mês%0A` +
-        `🎁 *Condição Especial de Balcão:* Setup R$ 0,00 Isento + Migração em 48h%0A` +
-        `🛡️ *SLA Garantido:* Atendimento presencial Sarandi em até 2h%0A%0A` +
-        `🔑 *Chave Pix Sicredi para Ativação:* 02.483.991/0001-90%0A` +
-        `Favorecido: Hansen Software LTDA%0A%0A` +
-        `Contrato formalizado com sucesso! Seja bem-vindo à família TruData! 🚀`;
-
-      document.getElementById('btnFecharWpp').href = `https://wa.me/555433612650?text=${msg}`;
-    }
-
-    function copiarPix() {
-      navigator.clipboard.writeText('02.483.991/0001-90');
-      alert('Chave CNPJ copiada!');
-    }
-
-    atualizarTotais();
-  </script>
-</body>
+    </script>
+  </body>
 </html>

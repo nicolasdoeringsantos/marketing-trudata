@@ -1,116 +1,60 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pack Oficial de Figurinhas WhatsApp — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: { brand: { azure: '#0070f3', hover: '#005bb5', dark: '#0b0f19', card: '#131b2e' } },
-          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
-        }
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Material preservado na biblioteca</h1>
+      <p style="margin-top: 24px">
+        Os textos das coleções anteriores estão na biblioteca de referência para
+        consulta e adaptação. A versão original completa também foi preservada,
+        sem publicação automática.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="biblioteca.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    }
-  </script>
-  <style>
-    body { background-color: #080c14; color: #f1f5f9; }
-    .glass { background: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased flex flex-col">
-
-  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
-        ← Voltar ao Hub Central
-      </a>
-      <div class="flex items-center gap-2">
-        <span class="text-xs font-bold text-slate-300 font-display">Stickers Oficiais TruData</span>
-        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 font-bold px-2 py-0.5 rounded border border-emerald-500/30">WhatsApp Ready</span>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
-    <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
-      <div class="flex items-center gap-3">
-        <div class="h-10 w-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30">
-          💬
-        </div>
-        <div>
-          <h1 class="text-2xl font-black font-display text-white">Pack Oficial de Figurinhas Comerciais TruData</h1>
-          <p class="text-xs text-slate-400">Figurinhas de alta conversão para os consultores de vendas e suporte enviarem para lojistas no WhatsApp.</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="grid-figurinhas">
-        
-        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-center space-y-3 flex flex-col justify-between">
-          <div class="h-28 flex items-center justify-center bg-slate-900 rounded-xl border border-slate-800 p-2">
-            <span class="text-4xl">⚡</span>
-          </div>
-          <div>
-            <strong class="text-xs text-white block">"NFC-e em 3s!"</strong>
-            <span class="text-[10px] text-slate-400">P/ mandar no sábado de pico</span>
-          </div>
-          <button onclick="copiarSticker('⚡ NFC-e emitida em 3s no TruData ERP! Sem filas!')" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg transition">
-            Copiar Texto
-          </button>
-        </div>
-
-        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-center space-y-3 flex flex-col justify-between">
-          <div class="h-28 flex items-center justify-center bg-slate-900 rounded-xl border border-slate-800 p-2">
-            <span class="text-4xl">🤝</span>
-          </div>
-          <div>
-            <strong class="text-xs text-white block">"Suporte Humano!"</strong>
-            <span class="text-[10px] text-slate-400">Sem robô no WhatsApp</span>
-          </div>
-          <button onclick="copiarSticker('🤝 Aqui você fala com gente de verdade de Sarandi/RS!')" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg transition">
-            Copiar Texto
-          </button>
-        </div>
-
-        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-center space-y-3 flex flex-col justify-between">
-          <div class="h-28 flex items-center justify-center bg-slate-900 rounded-xl border border-slate-800 p-2">
-            <span class="text-4xl">📂</span>
-          </div>
-          <div>
-            <strong class="text-xs text-white block">"Contador Feliz!"</strong>
-            <span class="text-[10px] text-slate-400">SPED sem erro no PVA</span>
-          </div>
-          <button onclick="copiarSticker('📂 SPED Fiscal 100% validado sem erro no PVA!')" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg transition">
-            Copiar Texto
-          </button>
-        </div>
-
-        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-center space-y-3 flex flex-col justify-between">
-          <div class="h-28 flex items-center justify-center bg-slate-900 rounded-xl border border-slate-800 p-2">
-            <span class="text-4xl">🚀</span>
-          </div>
-          <div>
-            <strong class="text-xs text-white block">"Migração em 48h!"</strong>
-            <span class="text-[10px] text-slate-400">Troque sem trauma</span>
-          </div>
-          <button onclick="copiarSticker('🚀 Migração blindada em 48h sem travar seus caixas!')" class="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg transition">
-            Copiar Texto
-          </button>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <script>
-    function copiarSticker(texto) {
-      navigator.clipboard.writeText(texto).then(() => alert('Texto do Sticker copiado para envio no WhatsApp!'));
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>

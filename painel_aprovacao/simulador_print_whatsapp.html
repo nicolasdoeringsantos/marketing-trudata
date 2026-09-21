@@ -1,349 +1,59 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Prints WhatsApp Prova Social | TruData Media</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        wa: {
-                            dark: '#0b141a',
-                            panel: '#111b21',
-                            header: '#202c33',
-                            incoming: '#202c33',
-                            outgoing: '#005c4b',
-                            check: '#53bdeb',
-                            border: '#222d34'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .glass-panel {
-            background: rgba(17, 24, 39, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .wa-chat-bg {
-            background-color: #0b141a;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
-            background-size: 16px 16px;
-        }
-    </style>
-</head>
-<body class="bg-slate-950 text-slate-100 min-h-screen">
-    <!-- Header -->
-    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-40 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <a href="/" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="font-bold text-lg text-white">Tru<span class="text-emerald-400">SocialProof</span></span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">Pilar 4: Conversão</span>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <button onclick="copiarTextoConversa()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white flex items-center gap-1.5 shadow-lg shadow-emerald-900/30 transition-all">
-                    <i class="fa-solid fa-copy"></i> Copiar Texto da Conversa
-                </button>
-            </div>
-        </div>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
     </header>
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <!-- Hero Header -->
-        <div class="mb-8">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-medium mb-3">
-                <i class="fa-brands fa-whatsapp"></i> Prova Social Autêntica para Anúncios e Páginas de Venda
-            </div>
-            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-                Simulador de Prints Hiper-Realistas WhatsApp
-            </h1>
-            <p class="text-slate-400 text-sm mt-1 max-w-3xl">
-                Crie capturas de tela hiper-realistas de conversas reais de suporte, agradecimentos de comerciantes gaúchos e elogios de contadores para enriquecer campanhas de tráfego pago no Rio Grande do Sul.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- Coluna de Configuração (Esquerda) -->
-            <div class="lg:col-span-5 space-y-6">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4">
-                    <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-sliders text-emerald-400"></i> Parâmetros do Depoimento
-                    </h2>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Cenário Pré-Carregado de Prova Social</label>
-                        <select id="selCenario" onchange="carregarCenario()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none">
-                            <option value="sabado_salvo" selected>1. Suporte Sábado às 19h Salvando Balcão (Passo Fundo)</option>
-                            <option value="contador_feliz">2. Contador Elogiando Fechamento do SPED (Caxias do Sul)</option>
-                            <option value="migracao_perfeita">3. Dono de Mercado Livre de Travamento Antigo (Pelotas)</option>
-                            <option value="offline_salvador">4. Vendeu sem Internet durante Tempestade (Lajeado)</option>
-                        </select>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Nome do Cliente</label>
-                            <input type="text" id="inpNome" oninput="atualizarHeaderChat()" value="Gilberto Zanatta (Mercado Zanatta)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none font-bold">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Status / Visto por Último</label>
-                            <input type="text" id="inpStatus" oninput="atualizarHeaderChat()" value="online" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-emerald-500 focus:outline-none">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Iniciais ou Avatar</label>
-                        <input type="text" id="inpAvatar" oninput="atualizarHeaderChat()" value="GZ" maxlength="3" class="w-20 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-center text-slate-200 font-bold focus:border-emerald-500 focus:outline-none uppercase">
-                    </div>
-
-                    <!-- Editor de Mensagens -->
-                    <div class="pt-2 border-t border-slate-800 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <label class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Mensagens da Conversa</label>
-                            <button onclick="adicionarMensagem()" class="text-xs text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1">
-                                <i class="fa-solid fa-plus"></i> Nova Mensagem
-                            </button>
-                        </div>
-
-                        <div id="listaEditorMensagens" class="space-y-3 max-h-72 overflow-y-auto pr-1">
-                            <!-- Preenchido via JS -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dica de Tráfego -->
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-xs space-y-2">
-                    <h3 class="font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-bullseye text-emerald-400"></i> Por que o Print do WhatsApp Converte 3x Mais?
-                    </h3>
-                    <p class="text-slate-400">
-                        No varejo gaúcho, o comerciante desconfia de depoimentos formatados e com fotos de banco de imagem. Um print cru de conversa no WhatsApp, com sotaque regional e agradecimento genuíno, passa credibilidade imediata de que seu suporte realmente atende.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Coluna Mockup WhatsApp (Direita) -->
-            <div class="lg:col-span-7 flex flex-col items-center">
-                <!-- Caixa do Smartphone WhatsApp -->
-                <div class="w-full max-w-[380px] bg-wa-dark rounded-[36px] overflow-hidden border-4 border-slate-800 shadow-2xl relative flex flex-col min-h-[600px]">
-                    <!-- Barra de Status do Sistema Operacional -->
-                    <div class="bg-wa-header px-6 py-2 flex items-center justify-between text-[11px] text-slate-300 font-mono">
-                        <span>19:42</span>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-signal text-[10px]"></i>
-                            <i class="fa-solid fa-wifi text-[10px]"></i>
-                            <i class="fa-solid fa-battery-full text-[10px]"></i>
-                        </div>
-                    </div>
-
-                    <!-- Header da Conversa WhatsApp -->
-                    <div class="bg-wa-header px-4 py-2.5 flex items-center justify-between border-b border-wa-border">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-arrow-left text-slate-300 text-sm"></i>
-                            <div id="mockAvatar" class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center font-bold text-white text-xs border border-white/10">
-                                GZ
-                            </div>
-                            <div>
-                                <h3 id="mockNome" class="text-xs font-bold text-white truncate max-w-[180px]">Gilberto Zanatta (Mercado Zanatta)</h3>
-                                <p id="mockStatus" class="text-[10px] text-emerald-400 font-medium">online</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4 text-slate-300 text-sm">
-                            <i class="fa-solid fa-video"></i>
-                            <i class="fa-solid fa-phone"></i>
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </div>
-                    </div>
-
-                    <!-- Corpo do Chat -->
-                    <div class="flex-1 wa-chat-bg p-4 overflow-y-auto space-y-3" id="mockChatCorpo">
-                        <!-- Mensagens renderizadas dinamicamente -->
-                    </div>
-
-                    <!-- Barra Inferior de Digitação WhatsApp -->
-                    <div class="bg-wa-dark p-2.5 flex items-center gap-2 border-t border-wa-border">
-                        <div class="flex-1 bg-wa-panel rounded-full px-3.5 py-2 flex items-center justify-between text-slate-400 text-xs">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-regular fa-face-smile"></i>
-                                <span class="text-slate-500">Mensagem</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <i class="fa-solid fa-paperclip"></i>
-                                <i class="fa-solid fa-camera"></i>
-                            </div>
-                        </div>
-                        <div class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center text-white text-sm shadow">
-                            <i class="fa-solid fa-microphone"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-4 flex items-center gap-3">
-                    <button onclick="salvarPrintComoImagem()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 flex items-center gap-2">
-                        <i class="fa-solid fa-camera text-emerald-400"></i> Capturar Print para Criativo
-                    </button>
-                </div>
-            </div>
-        </div>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Retirada: prova social sem comprovação</h1>
+      <p style="margin-top: 24px">
+        Depoimentos e conversas precisam de origem verificável e autorização de
+        uso. A versão anterior não demonstrava esses requisitos.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="index.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
     </main>
-
     <script>
-        let mensagens = [
-            { tipo: 'in', texto: 'Boa noite equipe TruData! Cara, passei aqui só pra agradecer. Deu aquele pico de movimento agora às 19h no caixa 2 e a leitora travou tudo.', hora: '19:35' },
-            { tipo: 'out', texto: 'Boa noite Gilberto! Tudo certo? Conseguiram liberar os clientes a tempo?', hora: '19:36' },
-            { tipo: 'in', texto: 'Sim!! O analista de vocês entrou no acesso remoto em menos de 2 minutos, reiniciou o spooler fiscal e liberou as notas fiscais na hora!', hora: '19:38' },
-            { tipo: 'in', texto: 'Se fosse no meu sistema velho eu tava até agora com a fila parada e perdendo venda. Vocês são diferenciados demais aqui no RS!', hora: '19:39' },
-            { tipo: 'out', texto: 'Tamo junto, Gilberto! Comércio no sábado não pode parar de jeito nenhum. Bom final de semana e boas vendas aí no mercado!', hora: '19:40' }
-        ];
-
-        function carregarCenario() {
-            const cen = document.getElementById('selCenario').value;
-            if (cen === 'sabado_salvo') {
-                document.getElementById('inpNome').value = 'Gilberto Zanatta (Mercado Zanatta)';
-                document.getElementById('inpAvatar').value = 'GZ';
-                mensagens = [
-                    { tipo: 'in', texto: 'Boa noite equipe TruData! Cara, passei aqui só pra agradecer. Deu aquele pico de movimento agora às 19h no caixa 2 e a leitora travou tudo.', hora: '19:35' },
-                    { tipo: 'out', texto: 'Boa noite Gilberto! Tudo certo? Conseguiram liberar os clientes a tempo?', hora: '19:36' },
-                    { tipo: 'in', texto: 'Sim!! O analista de vocês entrou no acesso remoto em menos de 2 minutos, reiniciou o spooler fiscal e liberou as notas fiscais na hora!', hora: '19:38' },
-                    { tipo: 'in', texto: 'Se fosse no meu sistema velho eu tava até agora com a fila parada e perdendo venda. Vocês são diferenciados demais aqui no RS!', hora: '19:39' },
-                    { tipo: 'out', texto: 'Tamo junto, Gilberto! Comércio no sábado não pode parar de jeito nenhum. Bom final de semana e boas vendas aí no mercado!', hora: '19:40' }
-                ];
-            } else if (cen === 'contador_feliz') {
-                document.getElementById('inpNome').value = 'Dra. Neusa (Contabilidade Serra)';
-                document.getElementById('inpAvatar').value = 'NC';
-                mensagens = [
-                    { tipo: 'in', texto: 'Oi pessoal do suporte TruData! Acabei de rodar a exportação do SPED Fiscal e EFD Contribuições dos clientes de Caxias.', hora: '11:15' },
-                    { tipo: 'out', texto: 'Bom dia Neusa! Como vieram os blocos C e E deste mês?', hora: '11:17' },
-                    { tipo: 'in', texto: 'Bateu 100% no centavo!! Zero erros de validação no PVA da Receita. Fazia anos que eu não via um sistema que separa o ICMS-ST tão redondinho.', hora: '11:20' },
-                    { tipo: 'out', texto: 'Que notícia fantástica! Nosso motor de blindagem fiscal para o RS foi desenhado exatamente pra facilitar o trabalho contábil.', hora: '11:22' }
-                ];
-            } else if (cen === 'migracao_perfeita') {
-                document.getElementById('inpNome').value = 'Rodrigo Pires (Agro Ferragens)';
-                document.getElementById('inpAvatar').value = 'RP';
-                mensagens = [
-                    { tipo: 'in', texto: 'Cara, tava morrendo de medo de trocar de sistema e perder meu histórico de mais de 15 mil clientes e produtos.', hora: '16:02' },
-                    { tipo: 'out', texto: 'Entendemos perfeitamente, Rodrigo. A transição correu tranquila com o técnico presencial aí em Pelotas?', hora: '16:04' },
-                    { tipo: 'in', texto: 'Totalmente! Vocês importaram tudo da base antiga em 2 horas. Hoje meu balcão já tá vendendo no TruData liso, liso.', hora: '16:08' }
-                ];
-            } else if (cen === 'offline_salvador') {
-                document.getElementById('inpNome').value = 'Vilson Dalmolin (Casa de Carnes)';
-                document.getElementById('inpAvatar').value = 'VD';
-                mensagens = [
-                    { tipo: 'in', texto: 'Caiu a fibra óptica da cidade toda aqui durante a chuva de ontem à tarde.', hora: '08:40' },
-                    { tipo: 'out', texto: 'Bom dia Vilson! O modo contingência offline do TruData sustentou o caixa?', hora: '08:42' },
-                    { tipo: 'in', texto: 'Sustentou 100%! O pessoal do lado teve que fechar as portas porque o sistema deles na nuvem apagou. Nós continuamos passando cartão e pesando na balança normal!', hora: '08:45' }
-                ];
-            }
-            atualizarHeaderChat();
-            renderizarMensagens();
-        }
-
-        function atualizarHeaderChat() {
-            document.getElementById('mockNome').innerText = document.getElementById('inpNome').value;
-            document.getElementById('mockStatus').innerText = document.getElementById('inpStatus').value;
-            document.getElementById('mockAvatar').innerText = document.getElementById('inpAvatar').value.toUpperCase();
-        }
-
-        function renderizarMensagens() {
-            const corpo = document.getElementById('mockChatCorpo');
-            const editor = document.getElementById('listaEditorMensagens');
-            corpo.innerHTML = '';
-            editor.innerHTML = '';
-
-            mensagens.forEach((m, idx) => {
-                // Mockup no celular
-                const isOut = m.tipo === 'out';
-                const bg = isOut ? 'bg-wa-outgoing ml-auto' : 'bg-wa-incoming mr-auto';
-                const check = isOut ? '<i class="fa-solid fa-check-double text-[9px] text-wa-check ml-1"></i>' : '';
-
-                corpo.innerHTML += `
-                    <div class="max-w-[85%] rounded-lg p-2.5 text-xs text-slate-100 shadow ${bg} relative">
-                        <p class="leading-relaxed">${m.texto}</p>
-                        <div class="flex items-center justify-end gap-1 mt-1 text-[9px] text-slate-400">
-                            <span>${m.hora}</span>
-                            ${check}
-                        </div>
-                    </div>
-                `;
-
-                // Editor de mensagens na coluna esquerda
-                editor.innerHTML += `
-                    <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 space-y-2">
-                        <div class="flex items-center justify-between text-xs">
-                            <select onchange="alterarTipoMsg(${idx}, this.value)" class="bg-slate-950 border border-slate-700 rounded px-2 py-1 text-[11px] text-slate-300">
-                                <option value="in" ${m.tipo === 'in' ? 'selected' : ''}>Recebida (Cliente)</option>
-                                <option value="out" ${m.tipo === 'out' ? 'selected' : ''}>Enviada (TruData)</option>
-                            </select>
-                            <div class="flex items-center gap-2">
-                                <input type="text" value="${m.hora}" oninput="alterarHoraMsg(${idx}, this.value)" class="w-14 bg-slate-950 border border-slate-700 rounded px-1.5 py-0.5 text-center text-[10px] text-slate-300">
-                                <button onclick="removerMensagem(${idx})" class="text-rose-400 hover:text-rose-300 text-xs"><i class="fa-solid fa-trash"></i></button>
-                            </div>
-                        </div>
-                        <textarea oninput="alterarTextoMsg(${idx}, this.value)" rows="2" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-slate-200 focus:outline-none">${m.texto}</textarea>
-                    </div>
-                `;
-            });
-        }
-
-        function alterarTipoMsg(idx, tipo) {
-            mensagens[idx].tipo = tipo;
-            renderizarMensagens();
-        }
-
-        function alterarHoraMsg(idx, hora) {
-            mensagens[idx].hora = hora;
-            renderizarMensagens();
-        }
-
-        function alterarTextoMsg(idx, texto) {
-            mensagens[idx].texto = texto;
-            const corpo = document.getElementById('mockChatCorpo');
-            renderizarMensagens();
-        }
-
-        function adicionarMensagem() {
-            mensagens.push({ tipo: 'in', texto: 'Nova mensagem de feedback...', hora: '19:45' });
-            renderizarMensagens();
-        }
-
-        function removerMensagem(idx) {
-            mensagens.splice(idx, 1);
-            renderizarMensagens();
-        }
-
-        function copiarTextoConversa() {
-            let txt = `*DEPOIMENTO / PROVA SOCIAL WHATSAPP - ${document.getElementById('inpNome').value}*\n\n`;
-            mensagens.forEach(m => {
-                const autor = m.tipo === 'in' ? 'Cliente' : 'TruData';
-                txt += `[${m.hora}] ${autor}: ${m.texto}\n`;
-            });
-            navigator.clipboard.writeText(txt).then(() => {
-                alert('Conversa copiada com sucesso para uso em anúncios!');
-            });
-        }
-
-        function salvarPrintComoImagem() {
-            alert('Para capturar a imagem com máxima nitidez, utilize o atalho de captura do Windows (Win + Shift + S) e selecione o celular do WhatsApp ao lado.');
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            carregarCenario();
-        });
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
+      }
     </script>
-</body>
+  </body>
 </html>

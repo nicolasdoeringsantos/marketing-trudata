@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Preparar proposta · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="proposta">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main">
+      <header class="tools-heading">
+        <div>
+          <a href="ferramentas.html">Todas as ferramentas</a>
+          <h1 id="work-title">Preparar proposta</h1>
+          <p id="work-desc"></p>
+        </div>
+      </header>
+      <p class="work-notice" id="work-notice"></p>
+      <div class="workspace">
+        <form id="work-form" class="work-form">
+          <h2>Prepare os dados</h2>
+          <div class="input-grid" id="fields"></div>
+          <p id="work-error" class="work-error" role="alert" hidden></p>
+          <div class="actions">
+            <button class="btn primary" id="generate" type="submit">
+              Atualizar resumo</button
+            ><button class="btn" id="save-draft" type="button">
+              Salvar rascunho</button
+            ><button class="btn" id="load-draft" type="button">
+              Recuperar rascunho
+            </button>
+          </div>
+          <p class="work-help">
+            Um rascunho por ferramenta neste navegador. Baixe o resumo para
+            guardar uma cópia.
+          </p>
+        </form>
+        <section class="work-output" aria-labelledby="output-title">
+          <h2 id="output-title">Seu resumo</h2>
+          <p class="placeholder" id="result-empty">
+            Preencha os dados e atualize o resumo para revisar o resultado.
+          </p>
+          <pre id="result" hidden></pre>
+          <div id="output-special"></div>
+          <div class="actions">
+            <button class="btn" id="copy-result" data-output disabled>
+              Copiar resumo</button
+            ><button class="btn" id="download-result" data-output disabled>
+              Baixar texto</button
+            ><button class="btn" id="print-result" data-output disabled>
+              Imprimir / PDF
+            </button>
+          </div>
+        </section>
+      </div>
+      <noscript>Ative o JavaScript para preencher e gerar o resumo.</noscript>
+    </main>
+    <div id="work-toast" class="toast" role="status" hidden></div>
+    <script src="/painel_aprovacao/oficina.js?v=20260921-3" defer></script>
+  </body>
+</html>

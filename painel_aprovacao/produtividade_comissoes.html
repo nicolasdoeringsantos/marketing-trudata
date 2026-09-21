@@ -1,326 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Produtividade & Comissões de Campo — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #070b14; color: #f1f5f9; }
-    .mono { font-family: 'JetBrains Mono', monospace; }
-    @media print {
-      body { background: white !important; color: black !important; padding: 0 !important; }
-      .no-print { display: none !important; }
-      .print-box { border: 1px solid #ccc !important; box-shadow: none !important; color: black !important; }
-    }
-  </style>
-</head>
-<body class="min-h-screen p-4 sm:p-6 lg:p-8 flex flex-col justify-between">
-
-  <!-- TOPO -->
-  <div class="max-w-7xl mx-auto w-full mb-6 no-print">
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900/80 border border-slate-800 p-5 rounded-3xl backdrop-blur-md">
-      <div class="flex items-center gap-3.5">
-        <a href="index.html" class="h-10 w-10 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-lg transition" title="Voltar ao Cockpit">
-          ←
-        </a>
-        <div class="h-10 w-10 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-xl">
-          🏆
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-lg font-black text-white">Produtividade & Comissões Comerciais RS</h1>
-            <span class="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2.5 py-0.5 rounded-full border border-amber-500/30">Metas do Mês Ativo</span>
-          </div>
-          <p class="text-xs text-slate-400">Acompanhamento das visitas de campo, check-ups emitidos e cálculo de comissões da equipe de Sarandi e região.</p>
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
       </div>
-
-      <div class="flex items-center gap-2">
-        <button onclick="exportarCSV()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold rounded-xl transition flex items-center gap-1.5">
-          <span>📥</span>
-          <span>Exportar CSV</span>
-        </button>
-        <button onclick="window.print()" class="px-3.5 py-2 bg-amber-600 hover:bg-amber-500 text-slate-950 text-xs font-black rounded-xl transition flex items-center gap-1.5 shadow-lg shadow-amber-950">
-          <span>🖨️</span>
-          <span>Imprimir Relatório A4</span>
-        </button>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Retirada: integração não implementada</h1>
+      <p style="margin-top: 24px">
+        A versão anterior mostrava resultados ou confirmava ações sem a
+        integração necessária. Use o CRM para registrar o acompanhamento real.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="crm.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
       </div>
-    </div>
-  </div>
-
-  <main class="max-w-7xl mx-auto w-full space-y-6 flex-1 mb-8">
-    
-    <!-- 4 CARDS DE INDICADORES PRINCIPAIS DO MÊS -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-3xl shadow-xl">
-        <div class="flex items-center justify-between text-slate-400 text-xs">
-          <span>Contratos Fechados</span>
-          <span class="text-base">🤝</span>
-        </div>
-        <div class="text-2xl sm:text-3xl font-black text-white font-display mt-2" id="kpi-contratos">9</div>
-        <div class="text-[11px] text-emerald-400 font-bold mt-1">90% da meta mensal (10)</div>
-      </div>
-
-      <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-3xl shadow-xl">
-        <div class="flex items-center justify-between text-slate-400 text-xs">
-          <span>MRR Novo Adicionado</span>
-          <span class="text-base">📈</span>
-        </div>
-        <div class="text-2xl sm:text-3xl font-black text-sky-400 font-display mt-2" id="kpi-mrr">R$ 2.610</div>
-        <div class="text-[11px] text-slate-400 mt-1">Ticket médio: R$ 290/mês</div>
-      </div>
-
-      <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-3xl shadow-xl">
-        <div class="flex items-center justify-between text-slate-400 text-xs">
-          <span>Taxas de Setup Faturadas</span>
-          <span class="text-base">⚡</span>
-        </div>
-        <div class="text-2xl sm:text-3xl font-black text-emerald-400 font-display mt-2" id="kpi-setup">R$ 4.050</div>
-        <div class="text-[11px] text-slate-400 mt-1">Média de R$ 450 por virada</div>
-      </div>
-
-      <div class="bg-slate-900/90 border border-amber-500/30 p-5 rounded-3xl shadow-xl bg-gradient-to-br from-slate-900 to-amber-950/20">
-        <div class="flex items-center justify-between text-amber-300 text-xs">
-          <span>Comissões a Pagar</span>
-          <span class="text-base">💰</span>
-        </div>
-        <div class="text-2xl sm:text-3xl font-black text-amber-400 font-display mt-2" id="kpi-comissao">R$ 1.622</div>
-        <div class="text-[11px] text-amber-300/80 font-bold mt-1">Liberação via Pix no dia 05</div>
-      </div>
-    </div>
-
-    <!-- SECAO DUPLA: METAS DE CAMPO & CALCULADORA DINAMICA -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      
-      <!-- METAS DE CAMPO (7 COLUNAS) -->
-      <div class="lg:col-span-7 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-5">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-          <h3 class="text-sm font-bold text-white flex items-center gap-2">
-            <span>🎯</span>
-            <span>Funil & Metas Comerciais de Campo (Raio 100km)</span>
-          </h3>
-          <span class="text-[10px] text-slate-400">Atualizado hoje</span>
-        </div>
-
-        <div class="space-y-4">
-          <!-- Meta 1: Visitas -->
-          <div class="space-y-1.5">
-            <div class="flex justify-between text-xs">
-              <span class="font-bold text-slate-300">1. Visitas e Cafés no Balcão Realizados:</span>
-              <span class="font-bold text-white"><strong class="text-emerald-400">32</strong> / 40 visitas</span>
-            </div>
-            <div class="h-2.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
-              <div class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" style="width: 80%;"></div>
-            </div>
-          </div>
-
-          <!-- Meta 2: Checkups -->
-          <div class="space-y-1.5">
-            <div class="flex justify-between text-xs">
-              <span class="font-bold text-slate-300">2. Check-ups 15 Min (Laudo A4 Emitido):</span>
-              <span class="font-bold text-white"><strong class="text-sky-400">21</strong> / 25 laudos</span>
-            </div>
-            <div class="h-2.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
-              <div class="h-full bg-gradient-to-r from-sky-500 to-blue-400 rounded-full" style="width: 84%;"></div>
-            </div>
-          </div>
-
-          <!-- Meta 3: Propostas -->
-          <div class="space-y-1.5">
-            <div class="flex justify-between text-xs">
-              <span class="font-bold text-slate-300">3. Propostas Comerciais Apresentadas:</span>
-              <span class="font-bold text-white"><strong class="text-indigo-400">17</strong> / 20 propostas</span>
-            </div>
-            <div class="h-2.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
-              <div class="h-full bg-gradient-to-r from-indigo-500 to-purple-400 rounded-full" style="width: 85%;"></div>
-            </div>
-          </div>
-
-          <!-- Meta 4: Fechamentos -->
-          <div class="space-y-1.5">
-            <div class="flex justify-between text-xs">
-              <span class="font-bold text-slate-300">4. Contratos Fechados com Pix Sicredi:</span>
-              <span class="font-bold text-white"><strong class="text-amber-400">9</strong> / 10 contratos</span>
-            </div>
-            <div class="h-2.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
-              <div class="h-full bg-gradient-to-r from-amber-500 to-orange-400 rounded-full" style="width: 90%;"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800/80 flex items-center justify-between text-xs">
-          <div class="flex items-center gap-2 text-slate-300">
-            <span>🔥</span>
-            <span>Taxa de Conversão Visita → Contrato: <strong>28.1%</strong></span>
-          </div>
-          <span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Acima da Meta (25%)</span>
-        </div>
-      </div>
-
-      <!-- CALCULADORA DE COMISSOES DINAMICA (5 COLUNAS) -->
-      <div class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
-        <h3 class="text-sm font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-3">
-          <span>🧮</span>
-          <span>Simulador de Comissão do Consultor</span>
-        </h3>
-
-        <div class="space-y-3">
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1">Quantos contratos você vai fechar no mês?</label>
-            <input type="number" id="sim-qtd" oninput="calcularComissaoSimulada()" value="6" min="1" max="50" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white mono font-bold focus:outline-none focus:border-amber-500 transition" />
-          </div>
-
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="block text-[11px] font-bold text-slate-400 mb-1">Comissão no Setup (%):</label>
-              <input type="number" id="sim-pct-setup" oninput="calcularComissaoSimulada()" value="25" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white mono focus:outline-none focus:border-amber-500 transition" />
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-slate-400 mb-1">Comissão Recorrência (%):</label>
-              <input type="number" id="sim-pct-rec" oninput="calcularComissaoSimulada()" value="15" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white mono focus:outline-none focus:border-amber-500 transition" />
-            </div>
-          </div>
-
-          <!-- Resultado da Simulação -->
-          <div class="p-4 bg-gradient-to-br from-amber-500/10 via-slate-950 to-slate-950 border border-amber-500/30 rounded-2xl space-y-2">
-            <div class="text-[11px] text-amber-300 font-bold uppercase tracking-wider">Ganhos Estimados do Vendedor:</div>
-            <div class="text-2xl font-black text-amber-400 font-display" id="sim-total-ganhos">R$ 1.458,00</div>
-            <div class="text-[11px] text-slate-400 space-y-0.5 pt-1 border-t border-slate-800">
-              <div class="flex justify-between"><span>Na Virada (Setup):</span><strong class="text-white mono" id="sim-ganho-setup">R$ 675,00</strong></div>
-              <div class="flex justify-between"><span>Recorrente (6 meses MRR):</span><strong class="text-white mono" id="sim-ganho-rec">R$ 783,00</strong></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- TABELA DE RANKING & EXTRATO DE FECHAMENTOS RECENTES -->
-    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-4">
-        <div>
-          <h3 class="text-sm font-bold text-white flex items-center gap-2">
-            <span>📋</span>
-            <span>Extrato de Fechamentos & Distribuição de Comissões</span>
-          </h3>
-          <p class="text-xs text-slate-400">Contratos vigentes firmados no raio de 100km a partir de Sarandi - RS</p>
-        </div>
-        <span class="text-xs font-bold text-slate-400 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
-          9 Comércios Ativados
-        </span>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs">
-          <thead>
-            <tr class="border-b border-slate-800 text-slate-400">
-              <th class="pb-3 font-semibold">Data</th>
-              <th class="pb-3 font-semibold">Cliente / Comércio</th>
-              <th class="pb-3 font-semibold">Cidade Polo</th>
-              <th class="pb-3 font-semibold">Consultor</th>
-              <th class="pb-3 font-semibold">Setup</th>
-              <th class="pb-3 font-semibold">Mensalidade</th>
-              <th class="pb-3 font-semibold text-right">Comissão Consultor</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-800/60" id="tbody-fechamentos">
-            <tr class="hover:bg-slate-800/40 transition">
-              <td class="py-3 text-slate-400 mono">18/09</td>
-              <td class="py-3 font-bold text-white">Supermercado Bela Vista</td>
-              <td class="py-3 text-sky-400">Sarandi - RS</td>
-              <td class="py-3 text-slate-300">Mateus</td>
-              <td class="py-3 mono">R$ 450</td>
-              <td class="py-3 mono">R$ 290</td>
-              <td class="py-3 mono font-bold text-emerald-400 text-right">R$ 178,50</td>
-            </tr>
-            <tr class="hover:bg-slate-800/40 transition">
-              <td class="py-3 text-slate-400 mono">17/09</td>
-              <td class="py-3 font-bold text-white">Passo Fundo Auto Peças</td>
-              <td class="py-3 text-sky-400">Passo Fundo - RS</td>
-              <td class="py-3 text-slate-300">Juliana</td>
-              <td class="py-3 mono">R$ 550</td>
-              <td class="py-3 mono">R$ 340</td>
-              <td class="py-3 mono font-bold text-emerald-400 text-right">R$ 218,50</td>
-            </tr>
-            <tr class="hover:bg-slate-800/40 transition">
-              <td class="py-3 text-slate-400 mono">16/09</td>
-              <td class="py-3 font-bold text-white">Boutique Elegance</td>
-              <td class="py-3 text-sky-400">Marau - RS</td>
-              <td class="py-3 text-slate-300">Lucas</td>
-              <td class="py-3 mono">R$ 390</td>
-              <td class="py-3 mono">R$ 250</td>
-              <td class="py-3 mono font-bold text-emerald-400 text-right">R$ 155,00</td>
-            </tr>
-            <tr class="hover:bg-slate-800/40 transition">
-              <td class="py-3 text-slate-400 mono">15/09</td>
-              <td class="py-3 font-bold text-white">Agropecuária Norte RS</td>
-              <td class="py-3 text-sky-400">Carazinho - RS</td>
-              <td class="py-3 text-slate-300">Mateus</td>
-              <td class="py-3 mono">R$ 480</td>
-              <td class="py-3 mono">R$ 310</td>
-              <td class="py-3 mono font-bold text-emerald-400 text-right">R$ 190,50</td>
-            </tr>
-            <tr class="hover:bg-slate-800/40 transition">
-              <td class="py-3 text-slate-400 mono">14/09</td>
-              <td class="py-3 font-bold text-white">Farmácia Vida & Saúde</td>
-              <td class="py-3 text-sky-400">Ronda Alta - RS</td>
-              <td class="py-3 text-slate-300">Mateus</td>
-              <td class="py-3 mono">R$ 450</td>
-              <td class="py-3 mono">R$ 290</td>
-              <td class="py-3 mono font-bold text-emerald-400 text-right">R$ 178,50</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </main>
-
-  <script>
-    function calcularComissaoSimulada() {
-      const qtd = parseInt(document.getElementById('sim-qtd').value || 1);
-      const pctSetup = parseFloat(document.getElementById('sim-pct-setup').value || 25) / 100;
-      const pctRec = parseFloat(document.getElementById('sim-pct-rec').value || 15) / 100;
-
-      const valorSetupMedio = 450;
-      const valorMensalMedio = 290;
-      const mesesRecorrencia = 6;
-
-      const ganhoSetupTotal = qtd * valorSetupMedio * pctSetup;
-      const ganhoRecTotal = qtd * valorMensalMedio * pctRec * mesesRecorrencia;
-      const ganhoTotal = ganhoSetupTotal + ganhoRecTotal;
-
-      document.getElementById('sim-total-ganhos').textContent = `R$ ${ganhoTotal.toFixed(2).replace('.', ',')}`;
-      document.getElementById('sim-ganho-setup').textContent = `R$ ${ganhoSetupTotal.toFixed(2).replace('.', ',')}`;
-      document.getElementById('sim-ganho-rec').textContent = `R$ ${ganhoRecTotal.toFixed(2).replace('.', ',')}`;
-    }
-
-    function exportarCSV() {
-      const rows = [
-        ["Data", "Cliente", "Cidade", "Consultor", "Setup", "Mensalidade", "Comissao"],
-        ["18/09", "Supermercado Bela Vista", "Sarandi - RS", "Mateus", "450.00", "290.00", "178.50"],
-        ["17/09", "Passo Fundo Auto Pecas", "Passo Fundo - RS", "Juliana", "550.00", "340.00", "218.50"],
-        ["16/09", "Boutique Elegance", "Marau - RS", "Lucas", "390.00", "250.00", "155.00"],
-        ["15/09", "Agropecuaria Norte RS", "Carazinho - RS", "Mateus", "480.00", "310.00", "190.50"],
-        ["14/09", "Farmacia Vida & Saude", "Ronda Alta - RS", "Mateus", "450.00", "290.00", "178.50"]
-      ];
-
-      let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(";")).join("\n");
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "comissoes_trudata_setembro_2026.csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-    // Inicialização
-    calcularComissaoSimulada();
-  </script>
-</body>
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
+      }
+    </script>
+  </body>
 </html>

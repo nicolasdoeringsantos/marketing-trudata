@@ -14,6 +14,7 @@ Suporta execução em segundo plano sem janela (Headless / WindowStyle Hidden).
 """
 
 import http.server
+import comercial_api
 import socketserver
 import os
 import sys
@@ -66,6 +67,8 @@ class RobustMarketingHandler(http.server.SimpleHTTPRequestHandler):
 
     def do_POST(self):
         clean_path = self.path.split('?')[0].split('#')[0]
+        if comercial_api.handle(self, 'POST', clean_path):
+            return
 
         # API: Atualizar Status de Posts
         if clean_path == "/api/status":
@@ -995,6 +998,8 @@ class RobustMarketingHandler(http.server.SimpleHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         clean_path = parsed.path
         query_params = urllib.parse.parse_qs(parsed.query)
+        if comercial_api.handle(self, 'GET', clean_path):
+            return
 
         # Service Worker PWA Offline-First (Modo Estrada RS)
         if clean_path in ["/sw.js", "/painel_aprovacao/sw.js"]:

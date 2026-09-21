@@ -1,301 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proposta Comercial Oficial — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              azure: '#009fe3',
-              dark: '#070b14',
-              surface: '#0f172a',
-              card: '#1e293b'
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Plus Jakarta Sans', 'sans-serif']
-          }
-        }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Reunida em Preparar proposta</h1>
+      <p style="margin-top: 24px">
+        A proposta agora descreve escopo e valores preenchidos. Não representa
+        contrato assinado, pagamento confirmado ou rastreamento de leitura.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="gerador_proposta.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    }
-  </script>
-  <style>
-    @media print {
-      body { background: #ffffff !important; color: #000000 !important; }
-      .no-print { display: none !important; }
-      .print-border { border: 1px solid #cbd5e1 !important; }
-      .print-bg { background: #f8fafc !important; }
-      .print-text-dark { color: #0f172a !important; }
-    }
-  </style>
-</head>
-<body class="bg-[#070b14] text-slate-100 min-h-screen antialiased selection:bg-brand-azure selection:text-white">
-
-  <!-- BARRA SUPERIOR DE ALERTA RASTREADO -->
-  <header class="no-print border-b border-emerald-500/30 bg-emerald-950/40 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-2.5">
-      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-      <span class="text-xs font-bold text-emerald-300">Link Rastreável Ativo: Telemetria de Leitura Conectada</span>
-      <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30 hidden sm:inline" id="status-envio-alerta">Notificando consultor...</span>
-    </div>
-    <div class="flex items-center gap-2">
-      <button onclick="window.print()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition">
-        🖨️ Salvar PDF
-      </button>
-      <a id="btn-aceite-topo" href="/contrato-digital" class="px-4 py-1.5 bg-brand-azure hover:bg-sky-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-sky-950">
-        Aceitar Proposta ➔
-      </a>
-    </div>
-  </header>
-
-  <main class="max-w-4xl mx-auto p-4 sm:p-8 space-y-6">
-
-    <!-- CARTÃO PRINCIPAL DA PROPOSTA -->
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-6 print-border print-bg">
-      
-      <!-- CABEÇALHO EXECUTIVO -->
-      <div class="border-b border-slate-800 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <div class="h-12 w-12 rounded-2xl bg-brand-azure/10 border border-brand-azure/30 text-brand-azure flex items-center justify-center text-2xl font-bold">
-            T
-          </div>
-          <div>
-            <div class="text-[10px] font-mono uppercase text-brand-azure font-bold tracking-wider">HANSEN SOFTWARE · DESDE 1998 · SARANDI/RS</div>
-            <h1 class="text-xl font-black text-white font-display print-text-dark">Proposta Comercial de Licenciamento & Suporte</h1>
-            <p class="text-xs text-slate-400 mt-0.5 print-text-dark">TruData ERP · Solução Completa de Gestão Comercial e Automação de Frente de Caixa</p>
-          </div>
-        </div>
-
-        <div class="text-left sm:text-right border-t sm:border-t-0 border-slate-800 pt-3 sm:pt-0">
-          <span class="text-[10px] text-slate-500 block uppercase font-bold print-text-dark">PROPOSTA COMERCIAL Nº</span>
-          <span class="text-xs font-mono font-bold text-emerald-400" id="prop-numero">TRU-PROP-2026-RS</span>
-          <span class="text-[10px] text-slate-400 block mt-0.5 print-text-dark" id="prop-data">Válida até 30/09/2026</span>
-        </div>
-      </div>
-
-      <!-- DADOS DO CLIENTE DESTINATÁRIO -->
-      <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-        <div>
-          <span class="text-slate-500 text-[10px] uppercase font-bold block">Empresa / Cliente</span>
-          <strong class="text-white font-bold" id="prop-empresa">Supermercado Modelo RS</strong>
-        </div>
-        <div>
-          <span class="text-slate-500 text-[10px] uppercase font-bold block">Cidade</span>
-          <strong class="text-white font-bold" id="prop-cidade">Sarandi - RS</strong>
-        </div>
-        <div>
-          <span class="text-slate-500 text-[10px] uppercase font-bold block">Responsável / Decisor</span>
-          <strong class="text-emerald-400 font-bold" id="prop-decisor">Diretoria Comercial</strong>
-        </div>
-        <div>
-          <span class="text-slate-500 text-[10px] uppercase font-bold block">Consultor Responsável</span>
-          <strong class="text-brand-azure font-bold" id="prop-consultor">Mateus Silveira (Sarandi/RS)</strong>
-        </div>
-      </div>
-
-      <!-- DEMONSTRATIVO EM VÍDEO / INTERATIVO DO PDV VELOZ -->
-      <div class="bg-gradient-to-br from-slate-950 to-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="text-base">⚡</span>
-            <h3 class="text-xs font-bold text-white uppercase tracking-wider">Demonstração: Frente de Caixa em 3 Segundos</h3>
-          </div>
-          <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20">Homologado SEFAZ-RS</span>
-        </div>
-
-        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div class="space-y-1 text-xs">
-            <span class="text-white font-bold block">Teste a velocidade do caixa na prática:</span>
-            <p class="text-slate-400 text-[11px]">Bipe os itens, acione o TEF direto na maquininha e imprima o cupom fiscal sem digitar valores avulsos.</p>
-          </div>
-          <button onclick="simularEmissao3s()" id="btn-simular-pdv" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-emerald-950 flex items-center gap-2 shrink-0">
-            <span>▶️</span>
-            <span>Simular Venda em 3s</span>
-          </button>
-        </div>
-
-        <!-- Feedback da Simulação -->
-        <div id="pdv-feedback" class="hidden p-3 bg-emerald-950/30 border border-emerald-500/40 rounded-xl flex items-center justify-between text-xs">
-          <div class="flex items-center gap-2 text-emerald-300">
-            <span class="text-base">✅</span>
-            <span>NFC-e Autorizada pela SEFAZ-RS em <strong>2.8 segundos</strong>! Pinpad TEF acionado e sangria protegida.</span>
-          </div>
-          <span class="font-mono text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">R$ 142,50 PAGO</span>
-        </div>
-      </div>
-
-      <!-- ESCOPO DO PROJETO & PLANOS -->
-      <div class="space-y-3">
-        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">1. Escopo das Soluções Inclusas</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
-            <strong class="text-brand-azure block">✓ Frente de Caixa Veloz (PDV Offline)</strong>
-            <p class="text-slate-400 text-[11px]">Emissão fiscal contínua mesmo se a internet oscilar. Homologação completa NFC-e e SAT.</p>
-          </div>
-          <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
-            <strong class="text-brand-azure block">✓ TEF Totalmente Integrado no Caixa</strong>
-            <p class="text-slate-400 text-[11px]">Eliminação de maquininhas avulsas. Acionamento automático na maquininha sem redigitação de valores.</p>
-          </div>
-          <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
-            <strong class="text-brand-azure block">✓ Controle Total de Estoque, Grade & Curva ABC</strong>
-            <p class="text-slate-400 text-[11px]">Etiquetas com código de barras, inventário ágil e alerta de ruptura de mercadorias.</p>
-          </div>
-          <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
-            <strong class="text-brand-azure block">✓ Suporte Técnico Humano Local (SLA 2h)</strong>
-            <p class="text-slate-400 text-[11px]">Atendimento direto por WhatsApp e telefone de Sarandi com compromisso de atendimento presencial em até 2 horas.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- TABELA DE INVESTIMENTO TRANSPARENTE -->
-      <div class="space-y-3">
-        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">2. Demonstração de Investimento</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          
-          <!-- Box Implantação -->
-          <div class="p-5 bg-slate-950 rounded-2xl border border-slate-800 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-400 uppercase">Implantação & Migração 48h</span>
-              <span class="text-[10px] bg-brand-azure/10 text-brand-azure px-2 py-0.5 rounded font-bold">Taxa Única</span>
-            </div>
-            <div>
-              <span class="text-2xl font-black text-white font-mono" id="val-setup">R$ 450,00</span>
-              <span class="text-[11px] text-slate-400 block mt-0.5">Ou em até 3x de R$ 150 no Pix / Boleto Sicredi</span>
-            </div>
-            <ul class="text-[11px] text-slate-400 space-y-1 pt-1 border-t border-slate-800">
-              <li>• Migração completa de cadastros do sistema antigo em 48h</li>
-              <li>• Instalação e calibração de balanças, leitores e impressoras</li>
-              <li>• Treinamento presencial completo com a equipe da loja</li>
-            </ul>
-          </div>
-
-          <!-- Box Mensalidade -->
-          <div class="p-5 bg-emerald-950/20 rounded-2xl border border-emerald-500/40 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-emerald-400 uppercase">Licenciamento & Suporte Total</span>
-              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-bold">Mensalidade</span>
-            </div>
-            <div>
-              <span class="text-2xl font-black text-emerald-400 font-mono" id="val-mrr">R$ 240,00</span>
-              <span class="text-[11px] text-slate-400 block mt-0.5">Para 2 Caixas PDVs + Módulo Retaguarda Completo</span>
-            </div>
-            <ul class="text-[11px] text-slate-400 space-y-1 pt-1 border-t border-slate-800">
-              <li>• Suporte ilimitado por fone e WhatsApp direto de Sarandi</li>
-              <li>• Backup diário automático em nuvem criptografada</li>
-              <li>• Todas as atualizações tributárias SEFAZ-RS inclusas</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- GARANTIA BLINDADA 30 DIAS -->
-      <div class="p-4 bg-teal-950/30 border border-teal-500/30 rounded-2xl flex items-center gap-4 text-xs">
-        <span class="text-3xl shrink-0">🛡️</span>
-        <div>
-          <strong class="text-teal-300 font-bold block">Garantia Blindada de Risco Zero (30 Dias)</strong>
-          <span class="text-slate-300 text-[11px] leading-relaxed">
-            Se durante os primeiros 30 dias de uso a sua loja não se adaptar ao TruData ERP, devolvemos 100% da taxa de implantação e exportamos seus dados para onde desejar, sem multas ou pegadinhas contratuais.
-          </span>
-        </div>
-      </div>
-
-      <!-- BOTÃO DE ACEITE E ASSINATURA DIGITAL -->
-      <div class="no-print pt-4 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div class="text-xs text-slate-400">
-          <span>Tem alguma dúvida antes de formalizar?</span>
-          <a id="link-wa-consultor" href="https://wa.me/5554996966175?text=Ol%C3%A1%21%20Recebi%20a%20proposta%20comercial%20do%20TruData%20ERP%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida." target="_blank" class="text-brand-azure hover:underline font-bold ml-1">
-            Fale com o Consultor ➔
-          </a>
-        </div>
-        <div class="flex items-center gap-3">
-          <a id="btn-contrato-digital" href="/contrato-digital" class="w-full sm:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition shadow-xl shadow-emerald-950/60 flex items-center justify-center gap-2">
-            <span>✍️</span>
-            <span>Aceitar Proposta & Assinar Contrato</span>
-          </a>
-        </div>
-      </div>
-
-    </div>
-
-  </main>
-
-  <script>
-    // Leitura dos Parâmetros da Proposta na URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const cliente = urlParams.get('cliente') || urlParams.get('empresa') || 'Supermercado Modelo RS';
-    const cidade = urlParams.get('cidade') || 'Sarandi';
-    const decisor = urlParams.get('decisor') || 'Diretoria';
-    const consultor = urlParams.get('consultor') || 'Mateus Silveira (Sarandi/RS)';
-    const caixas = parseInt(urlParams.get('caixas')) || 2;
-
-    // Atualização da Tela
-    document.getElementById('prop-empresa').textContent = cliente;
-    document.getElementById('prop-cidade').textContent = cidade + ' - RS';
-    document.getElementById('prop-decisor').textContent = decisor;
-    document.getElementById('prop-consultor').textContent = consultor;
-
-    const setup = 450 + Math.max(0, caixas - 1) * 150;
-    const mrr = 180 + Math.max(0, caixas - 1) * 60;
-    document.getElementById('val-setup').textContent = 'R$ ' + setup.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-    document.getElementById('val-mrr').textContent = 'R$ ' + mrr.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-
-    const linkContrato = `/contrato-digital?empresa=${encodeURIComponent(cliente)}&cidade=${encodeURIComponent(cidade)}&decisor=${encodeURIComponent(decisor)}&caixas=${caixas}&setup=${setup}&mrr=${mrr}`;
-    document.getElementById('btn-aceite-topo').href = linkContrato;
-    document.getElementById('btn-contrato-digital').href = linkContrato;
-
-    // Simulação Interativa do PDV
-    function simularEmissao3s() {
-      const btn = document.getElementById('btn-simular-pdv');
-      const fb = document.getElementById('pdv-feedback');
-      btn.innerHTML = '<span>⏳</span><span>Emitindo NFC-e...</span>';
-      btn.disabled = true;
-
-      setTimeout(() => {
-        btn.innerHTML = '<span>✓</span><span>Emitido em 2.8s</span>';
-        btn.className = 'px-4 py-2.5 bg-slate-800 text-emerald-400 text-xs font-bold rounded-xl transition cursor-default';
-        fb.classList.remove('hidden');
-      }, 1200);
-    }
-
-    // TELEMETRIA DE ABERTURA: Notifica o vendedor na hora que o link for aberto
-    window.addEventListener('load', async () => {
-      try {
-        const payload = {
-          cliente,
-          cidade,
-          decisor,
-          consultor,
-          timestamp: new Date().toISOString(),
-          dispositivo: navigator.userAgent
-        };
-
-        const res = await fetch('/api/proposta/notificar_abertura', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const dados = await res.json();
-        if (dados && dados.sucesso) {
-          const el = document.getElementById('status-envio-alerta');
-          if (el) {
-            el.textContent = 'Alerta enviado ao consultor!';
-            el.className = 'text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40 hidden sm:inline';
-          }
-        }
-      } catch (err) {
-        console.warn('Telemetria proposta:', err);
-      }
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>

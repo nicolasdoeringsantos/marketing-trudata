@@ -1,517 +1,62 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Migração Blindada — Portabilidade Sem Parada de Vendas | TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            display: ['"Space Grotesk"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              azure: '#00A3FF',
-              dark: '#020B18',
-              card: '#0A192F',
-              emerald: '#10B981',
-              amber: '#F59E0B',
-              rose: '#F43F5E'
-            }
-          }
-        }
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Reunida em Planejar implantação</h1>
+      <p style="margin-top: 24px">
+        O planejamento registra conferências e pendências. Não promete prazo
+        universal nem compatibilidade de equipamentos sem teste.
+      </p>
+      <div class="actions">
+        <a
+          class="btn primary"
+          id="replacement"
+          href="checklist_implantacao.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    }
-  </script>
-  <style>
-    body { background-color: #020B18; color: #F8FAFC; }
-    .glass { background: rgba(10, 25, 47, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .tab-active { border-color: #00A3FF; background: rgba(0, 163, 255, 0.15); color: #FFFFFF; font-weight: 700; }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased flex flex-col justify-between selection:bg-brand-azure selection:text-white pb-12">
-
-  <!-- TOPO -->
-  <header class="border-b border-slate-800/80 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 group text-xs text-slate-400 hover:text-white transition">
-          <span class="p-1.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-brand-azure">←</span>
-          <span>Voltar ao Hub</span>
-        </a>
-        <div class="h-4 w-px bg-slate-800"></div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-white font-display">MIGRAÇÃO BLINDADA B2B</span>
-          <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-mono">Garantia 0 Dia Parado</span>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <a href="versus.html" class="text-xs text-slate-400 hover:text-slate-200 px-3 py-1.5 rounded-xl border border-slate-800 bg-slate-900/50">
-          Matriz Versus Tradicional
-        </a>
-        <button onclick="copiarPitchPortabilidade()" class="px-3.5 py-1.5 rounded-xl bg-brand-azure hover:bg-sky-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition">
-          <span>📋</span> Copiar Pitch do Concorrente
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- CONTEÚDO PRINCIPAL -->
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 w-full space-y-8">
-    
-    <!-- HERO DA MIGRAÇÃO -->
-    <div class="glass rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-2xl">
-      <div class="absolute -right-16 -top-16 w-80 h-80 bg-brand-azure/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-slate-800 pb-6 mb-6">
-        <div>
-          <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
-            Programa de Portabilidade Segura RS
-          </span>
-          <h1 class="text-2xl sm:text-4xl font-black font-display text-white mt-3">
-            Troque de Sistema Sem Travar o Caixa da Sua Loja
-          </h1>
-          <p class="text-sm text-slate-400 mt-2 max-w-2xl leading-relaxed">
-            Seu comércio sofre com lentidão, suporte por chatbot que não atende nos sábados ou reajustes abusivos? A <strong class="text-white">Hansen Software</strong> importa seus produtos, clientes e saldos de estoque com auditoria tributária completa em até 48 horas.
-          </p>
-        </div>
-
-        <!-- CERTIFICADO ZERO DIA PARADO -->
-        <div class="p-4 rounded-2xl bg-gradient-to-br from-emerald-950/40 to-slate-950 border border-emerald-500/30 text-center shrink-0 w-full lg:w-72">
-          <div class="text-3xl mb-1">🛡️</div>
-          <span class="text-xs font-black text-emerald-400 font-display block uppercase">Garantia 0 Dia Parado</span>
-          <p class="text-[11px] text-slate-400 mt-1 leading-normal">
-            Seu sistema anterior opera normalmente até que os novos terminais TruData estejam 100% testados e validados.
-          </p>
-          <span class="text-[10px] text-slate-500 font-mono block mt-2">SLA Presencial Sarandi: 2 Horas</span>
-        </div>
-      </div>
-
-      <!-- SELETOR DE CONCORRENTE -->
-      <div>
-        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
-          1. Qual sistema sua empresa utiliza atualmente?
-        </label>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5" id="botoes-concorrentes">
-          <button onclick="selecionarConcorrente('hiper')" class="tab-conc tab-active p-3 rounded-2xl border text-center transition flex flex-col items-center gap-1" data-id="hiper">
-            <span class="text-base">🏬</span>
-            <span class="text-xs font-bold block">Hiper (Linx)</span>
-            <span class="text-[10px] text-slate-400">Varejo & Moda</span>
-          </button>
-          
-          <button onclick="selecionarConcorrente('bling')" class="tab-conc p-3 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-slate-700 text-center transition flex flex-col items-center gap-1" data-id="bling">
-            <span class="text-base">📦</span>
-            <span class="text-xs font-bold text-slate-200 block">Bling (Locaweb)</span>
-            <span class="text-[10px] text-slate-400">Web / E-commerce</span>
-          </button>
-
-          <button onclick="selecionarConcorrente('linx')" class="tab-conc p-3 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-slate-700 text-center transition flex flex-col items-center gap-1" data-id="linx">
-            <span class="text-base">🏢</span>
-            <span class="text-xs font-bold text-slate-200 block">Linx Microvix</span>
-            <span class="text-[10px] text-slate-400">Grandes Redes</span>
-          </button>
-
-          <button onclick="selecionarConcorrente('totvs')" class="tab-conc p-3 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-slate-700 text-center transition flex flex-col items-center gap-1" data-id="totvs">
-            <span class="text-base">⚙️</span>
-            <span class="text-xs font-bold text-slate-200 block">Totvs Varejo</span>
-            <span class="text-[10px] text-slate-400">Corporativo</span>
-          </button>
-
-          <button onclick="selecionarConcorrente('syspdv')" class="tab-conc p-3 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-slate-700 text-center transition flex flex-col items-center gap-1" data-id="syspdv">
-            <span class="text-base">🛒</span>
-            <span class="text-xs font-bold text-slate-200 block">SysPDV</span>
-            <span class="text-[10px] text-slate-400">Supermercados</span>
-          </button>
-
-          <button onclick="selecionarConcorrente('digisat')" class="tab-conc p-3 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-slate-700 text-center transition flex flex-col items-center gap-1" data-id="digisat">
-            <span class="text-base">🛰️</span>
-            <span class="text-xs font-bold text-slate-200 block">DigiSat</span>
-            <span class="text-[10px] text-slate-400">Comércio Regional</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ANÁLISE COMPARATIVA DO CONCORRENTE SELECIONADO -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      <!-- COLUNA DA ESQUERDA: DORES DO CONCORRENTE (VERMELHO) -->
-      <div class="p-6 rounded-3xl bg-rose-950/20 border border-rose-500/30 space-y-4">
-        <div class="flex items-center gap-2 text-rose-400">
-          <span class="text-xl">⚠️</span>
-          <h3 class="text-sm font-bold uppercase tracking-wider font-display" id="titulo-dores-concorrente">Dores Comuns no Hiper (Linx)</h3>
-        </div>
-        <p class="text-xs text-slate-300 leading-relaxed" id="desc-dores-concorrente">
-          Lentidão crônica nos horários de pico, dependência de conexão web estável e suporte de fila 0800 que costuma demorar mais de 3 horas para resolver chamados fiscais urgentes.
-        </p>
-
-        <div class="space-y-2 pt-2" id="lista-dores-especificas">
-          <!-- Preenchido via JS -->
-        </div>
-      </div>
-
-      <!-- COLUNA DO MEIO: A SOLUÇÃO TRUDATA ERP (AZUL/VERDE) -->
-      <div class="p-6 rounded-3xl bg-slate-900/90 border border-brand-azure/40 space-y-4">
-        <div class="flex items-center gap-2 text-brand-azure">
-          <span class="text-xl">⚡</span>
-          <h3 class="text-sm font-bold uppercase tracking-wider font-display">Como a TruData Resolve</h3>
-        </div>
-        <p class="text-xs text-slate-300 leading-relaxed" id="desc-solucao-trudata">
-          Arquitetura híbrida local/nuvem. Se a internet cair no sábado, o caixa continua emitindo NFC-e normalmente e sincroniza sozinho quando a conexão voltar.
-        </p>
-
-        <div class="space-y-2 pt-2" id="lista-vantagens-trudata">
-          <!-- Preenchido via JS -->
-        </div>
-      </div>
-
-      <!-- COLUNA DA DIREITA: CALCULADORA DE ECONOMIA E RESGATE -->
-      <div class="p-6 rounded-3xl bg-slate-950/80 border border-slate-800 space-y-5 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="text-sm font-bold text-white font-display">Simulador de Economia Anual</h3>
-            <span class="text-[10px] font-bold text-emerald-400 font-mono">ROI Direto</span>
-          </div>
-
-          <div class="space-y-3 text-xs">
-            <div>
-              <label class="text-slate-400 block mb-1">Quanto você paga hoje por mês?</label>
-              <div class="flex items-center gap-2">
-                <span class="text-slate-500 font-mono">R$</span>
-                <input type="number" id="custo-concorrente-mensal" value="650" oninput="calcularEconomiaMigracao()" class="w-full bg-slate-900 border border-slate-700 text-white font-mono font-bold rounded-xl p-2 outline-none focus:border-brand-azure" />
-              </div>
-            </div>
-
-            <div>
-              <label class="text-slate-400 block mb-1">Qtd. de Terminais / Caixas:</label>
-              <select id="qtd-caixas-migracao" onchange="calcularEconomiaMigracao()" class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-2 outline-none focus:border-brand-azure">
-                <option value="1">1 Caixa / Balcão</option>
-                <option value="2" selected>2 Caixas (Padrão)</option>
-                <option value="3">3 Caixas</option>
-                <option value="5">5 Caixas (Supermercado)</option>
-              </select>
-            </div>
-
-            <div class="p-3.5 rounded-2xl bg-emerald-950/30 border border-emerald-500/20 text-center mt-4">
-              <span class="text-[11px] text-slate-400 block">Economia Anual Estimada com TruData:</span>
-              <span class="text-2xl font-black text-emerald-400 font-mono block mt-0.5" id="valor-economia-migracao">R$ 3.864,00</span>
-              <span class="text-[10px] text-slate-500 mt-1 block">Considerando ausência de taxa por usuário e suporte regional incluso.</span>
-            </div>
-          </div>
-        </div>
-
-        <button onclick="solicitarPlanoTransicaoWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center justify-center gap-2">
-          <span>📲</span> Solicitar Plano de Transição
-        </button>
-      </div>
-    </div>
-
-    <!-- PROTOCOLO DE TRANSIÇÃO EM 5 PASSOS (TIMELINE) -->
-    <div class="glass rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-        <div>
-          <h2 class="text-base font-bold text-white font-display">Protocolo de Portabilidade dos Dados em 48 Horas</h2>
-          <p class="text-xs text-slate-400">Entenda como seus cadastros e tributações são migrados com 100% de integridade fiscal</p>
-        </div>
-        <span class="text-xs font-mono font-bold text-brand-azure">Norma ISO/MPS.BR</span>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 text-xs">
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-2">
-          <div class="w-7 h-7 rounded-lg bg-brand-azure/10 text-brand-azure font-mono font-bold flex items-center justify-center border border-brand-azure/30">1</div>
-          <h4 class="font-bold text-white">Extração Segura</h4>
-          <p class="text-slate-400 text-[11px]">Nossa equipe extrai os cadastros de produtos, clientes, fornecedores e saldos do sistema atual.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-2">
-          <div class="w-7 h-7 rounded-lg bg-brand-azure/10 text-brand-azure font-mono font-bold flex items-center justify-center border border-brand-azure/30">2</div>
-          <h4 class="font-bold text-white">Saneamento Fiscal</h4>
-          <p class="text-slate-400 text-[11px]">Auditoria de NCM, CEST e CFOP para eliminar erros tributários antes da importação definitiva.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-2">
-          <div class="w-7 h-7 rounded-lg bg-brand-azure/10 text-brand-azure font-mono font-bold flex items-center justify-center border border-brand-azure/30">3</div>
-          <h4 class="font-bold text-white">Homologação Local</h4>
-          <p class="text-slate-400 text-[11px]">Instalação do TruData em ambiente de teste para validar balanças, impressoras e TEF.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 space-y-2">
-          <div class="w-7 h-7 rounded-lg bg-brand-azure/10 text-brand-azure font-mono font-bold flex items-center justify-center border border-brand-azure/30">4</div>
-          <h4 class="font-bold text-white">Treinamento Equipe</h4>
-          <p class="text-slate-400 text-[11px]">Treinamento de balcão e retaguarda de 4 horas focado nas rotinas práticas do seu negócio.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-emerald-950/30 border border-emerald-500/30 space-y-2">
-          <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 font-mono font-bold flex items-center justify-center border border-emerald-500/30">5</div>
-          <h4 class="font-bold text-emerald-300">Virada Oficial</h4>
-          <p class="text-slate-400 text-[11px]">Abertura do caixa 100% no TruData com acompanhamento presencial ou remoto dedicado.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- SIMULADOR DE IMPORTAÇÃO DE ARQUIVO DO CONCORRENTE -->
-    <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
-      <div class="flex items-center justify-between">
-        <div>
-          <h3 class="text-sm font-bold text-white font-display">Testador de Compatibilidade de Base de Dados</h3>
-          <p class="text-xs text-slate-400">Faça o upload fictício ou selecione o formato do seu backup para checar a taxa de conversão</p>
-        </div>
-        <span class="text-xs text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">Taxa de Sucesso: 99.8%</span>
-      </div>
-
-      <div class="p-6 rounded-2xl border-2 border-dashed border-slate-700 hover:border-brand-azure bg-slate-950/40 text-center cursor-pointer transition" onclick="simularImportacaoBackup()">
-        <div class="text-3xl mb-2">📁</div>
-        <span class="text-xs font-bold text-slate-200 block">Clique para Simular Análise de Arquivo (CSV, XML, XLS ou Backup SQL)</span>
-        <span class="text-[11px] text-slate-500 block mt-1">Compatível com bancos Firebird, PostgreSQL, MySQL e relatórios em Excel</span>
-      </div>
-
-      <div id="resultado-simulacao-import" class="hidden p-4 rounded-2xl bg-slate-900/90 border border-emerald-500/30 text-xs space-y-2">
-        <div class="flex items-center justify-between">
-          <span class="font-bold text-emerald-400 flex items-center gap-1.5">
-            <span>✅</span> Diagnóstico de Portabilidade Aprovado:
-          </span>
-          <span class="font-mono text-[11px] text-slate-400">Arquivo: backup_concorrente_export.csv (14.280 itens)</span>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-center pt-2">
-          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-            <span class="text-slate-400 block text-[10px]">Cadastros de Produtos</span>
-            <span class="text-base font-bold text-white font-mono">14.280</span>
-          </div>
-          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-            <span class="text-slate-400 block text-[10px]">Clientes com Saldo</span>
-            <span class="text-base font-bold text-white font-mono">1.840</span>
-          </div>
-          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-            <span class="text-slate-400 block text-[10px]">NCMs Validados</span>
-            <span class="text-base font-bold text-emerald-400 font-mono">100%</span>
-          </div>
-          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-            <span class="text-slate-400 block text-[10px]">Tempo Estimado de Carga</span>
-            <span class="text-base font-bold text-brand-azure font-mono">18 Minutos</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <script>
-    const concorrentesDB = {
-      hiper: {
-        nome: "Hiper (Linx / Stone)",
-        doresTitulo: "Dores Comuns no Hiper (Linx)",
-        doresDesc: "Lentidão crônica nos horários de pico, dependência de conexão web estável e suporte de fila 0800 que costuma demorar mais de 3 horas para resolver chamados fiscais urgentes.",
-        dores: [
-          "Queda de internet trava operações avançadas no balcão",
-          "Suporte via tickets robotizados sem telefone direto com técnico",
-          "Reajustes anuais elevados e cobrança extra por novos caixas",
-          "Dificuldade de integração com balanças pesadas e TEF dedicado"
-        ],
-        solucaoDesc: "Arquitetura híbrida com banco de dados local blindado. Se a internet cair em Sarandi, o caixa continua emitindo NFC-e e fecha o dia sem sustos.",
-        vantagens: [
-          "PDV funciona 100% offline com banco local em cada terminal",
-          "Suporte humano por telefone e WhatsApp com equipe de Sarandi-RS",
-          "Custo fixo transparente sem cobranças abusivas por usuário extra",
-          "Compatibilidade homologada com balanças Toledo Prix e Filizola"
-        ],
-        pitch: "Prezado gestor, muitos lojistas da nossa região nos procuraram relatando a lentidão e a falta de suporte telefônico do Hiper aos sábados. Na TruData ERP (Hansen Software de Sarandi), nosso PDV roda offline sem travar o caixa e nosso suporte responde em minutos. Podemos agendar uma demonstração sem compromisso de 15 minutos na sua loja?"
-      },
-      bling: {
-        nome: "Bling (Locaweb)",
-        doresTitulo: "Limitações do Bling no Comércio Físico",
-        doresDesc: "O Bling foi projetado para e-commerce e vendas online. No varejo físico e supermercados, sofre com a lentidão no leitor de código de barras e falta de emissão em contingência pesada.",
-        dores: [
-          "Ausência de PDV nativo offline para frente de caixa veloz",
-          "Não possui homologação nativa para balanças de checkout (Toledo)",
-          "Suporte exclusivamente por abertura de chamado via internet",
-          "Inviável para lojas com grande fluxo diário no balcão físico"
-        ],
-        solucaoDesc: "O TruData é especialista em varejo de balcão físico, supermercados e autopeças no interior gaúcho, com emissão de cupom fiscal em menos de 3 segundos.",
-        vantagens: [
-          "Checkout ultrarrápido com leitor de código de barras sem delay",
-          "Integração direta com balanças de checkout e etiquetadoras",
-          "Atendimento telefônico direto de Sarandi para sua equipe de caixa",
-          "Grade de cores/tamanhos e controle de lote/validade integrado"
-        ],
-        pitch: "Olá! Sabemos que o Bling é excelente para faturamento online, mas no balcão físico ele não suporta a velocidade e as balanças que o seu comércio exige. A TruData ERP foi feita para quem atende clientes no balcão físico com PDV em 3 segundos. Gostaria de ver como fica o seu caixa rodando 100% offline?"
-      },
-      linx: {
-        nome: "Linx Microvix",
-        doresTitulo: "Gargalos do Linx Microvix em PMEs",
-        doresDesc: "Custos proibitivos para empresas de médio porte, taxas escondidas de implantação e SLA distante das cidades do interior do Rio Grande do Sul.",
-        dores: [
-          "Mensalidades que superam R$ 1.200 a R$ 2.000 por mês",
-          "Multas contratuais pesadas e fidelidade abusiva",
-          "Equipe de consultoria remota que não conhece as particularidades do RS",
-          "Complexidade operacional exagerada para operadores de caixa"
-        ],
-        solucaoDesc: "A robustez que você precisa, com custo justo e proximidade geográfica da Hansen Software em Sarandi-RS.",
-        vantagens: [
-          "Economia média de 45% na mensalidade recorrente",
-          "Interface intuitiva: novo operador aprende a vender em 20 minutos",
-          "Conformidade total com a SEFAZ-RS e auditoria para o contador local",
-          "Treinamento presencial na sua loja e implantação em 48h"
-        ],
-        pitch: "Bom dia! Reduzir custos fixos com software sem perder recursos é a prioridade dos empresários do nosso estado. A TruData ERP entrega os mesmos relatórios do Linx com uma economia anual de mais de R$ 5.000 e atendimento com SLA de 2h na sua cidade. Que tal compararmos a sua fatura atual?"
-      },
-      totvs: {
-        nome: "Totvs Varejo / Moda",
-        doresTitulo: "Desafios com a Totvs no Interior do RS",
-        doresDesc: "Módulos excessivamente burocráticos, custo hora/homem de consultoria exorbitante e dependência constante de chamados corporativos.",
-        dores: [
-          "Tempo de implantação que frequentemente ultrapassa 4 meses",
-          "Qualquer customização ou relatório novo gera cobrança em dólares/horas",
-          "Interface pesada que exige computadores caros no caixa",
-          "Distância no atendimento às lojas do Norte do RS"
-        ],
-        solucaoDesc: "Agilidade gaúcha: um sistema poderoso, leve e desenhado para o ritmo real do comerciante que precisa vender sem burocracia.",
-        vantagens: [
-          "Implantação completa e dados migrados em até 48 horas",
-          "Sem cobranças ocultas de horas de desenvolvimento",
-          "Roda perfeitamente em computadores e PDVs padrão de mercado",
-          "Equipe técnica local que visita seu estabelecimento se necessário"
-        ],
-        pitch: "Olá! Muitos lojistas nos relatam a frustração de pagar fortunas por sistemas como Totvs e não conseguir suporte rápido quando o caixa trava. Na TruData ERP você tem tudo o que precisa por uma fração do valor e com telefone direto de quem resolve. Posso te apresentar nosso case de migração?"
-      },
-      syspdv: {
-        nome: "SysPDV",
-        doresTitulo: "Desafios com Sistemas Legados (SysPDV)",
-        doresDesc: "Interfaces antigas dos anos 90/2000, dificuldade para extrair relatórios gerenciais modernos e lentidão para atualizações fiscais da SEFAZ.",
-        dores: [
-          "Telas defasadas e fluxo de caixa confuso para a nova geração de gestores",
-          "Falta de acesso gerencial remoto seguro pelo celular ou tablet",
-          "Dificuldades com as regras da Reforma Tributária 2026 (CBS/IBS)",
-          "Pouca flexibilidade para regras de fidelização e crediário próprio"
-        ],
-        solucaoDesc: "Modernização visual total com cockpit web para a diretoria e PDV ultra veloz para o operador de frente de caixa.",
-        vantagens: [
-          "Painel gerencial moderno acessível de qualquer lugar pelo celular",
-          "Preparo nativo para os novos tributos CBS/IBS da Reforma Tributária",
-          "Controle rigoroso de crediário próprio com limite por cliente e WhatsApp",
-          "Atualizações automáticas em segundo plano sem travar a loja"
-        ],
-        pitch: "Olá! Seu comércio não precisa continuar preso a telas antigas e relatórios difíceis do SysPDV. Modernizamos toda a sua loja em 48h, preservando seu histórico de clientes e estoque, com relatórios no celular e PDV moderno. Vamos fazer um teste sem custo?"
-      },
-      digisat: {
-        nome: "DigiSat",
-        doresTitulo: "Gargalos Comuns no DigiSat",
-        doresDesc: "Suporte terceirizado através de revendas regionais desiguais e cobranças adicionais constantes por suporte técnico.",
-        dores: [
-          "Dependência da qualidade e do humor da revenda local da sua cidade",
-          "Atualizações de versão pagas à parte em muitos contratos",
-          "Lentidão na homologação de novas exigências tributárias do RS",
-          "Falta de canal direto com a fábrica do software"
-        ],
-        solucaoDesc: "Relação direta fabricante-cliente com a Hansen Software em Sarandi-RS, sem intermediários.",
-        vantagens: [
-          "Contato direto com os desenvolvedores e analistas da fábrica",
-          "Todas as atualizações legais e fiscais inclusas sem custo",
-          "Garantia de atendimento ágil para todas as cidades vizinhas",
-          "Migração 100% assistida da base do DigiSat para o TruData"
-        ],
-        pitch: "Olá! Cansado de depender de revendas terceirizadas para ter suporte no DigiSat? Na TruData ERP você fala direto com a matriz da Hansen Software em Sarandi-RS, com suporte humano em minutos e sem taxa extra de versão. Queremos te mostrar nossa portabilidade com 0 dias parados!"
-      }
-    };
-
-    let concorrenteAtual = 'hiper';
-
-    function selecionarConcorrente(id) {
-      concorrenteAtual = id;
-      
-      // Atualizar abas
-      document.querySelectorAll('.tab-conc').forEach(btn => {
-        if (btn.dataset.id === id) {
-          btn.className = "tab-conc tab-active p-3 rounded-2xl border text-center transition flex flex-col items-center gap-1";
-        } else {
-          btn.className = "tab-conc p-3 rounded-2xl border border-slate-800 bg-slate-950/60 hover:border-slate-700 text-center transition flex flex-col items-center gap-1";
-        }
-      });
-
-      const info = concorrentesDB[id];
-      if (!info) return;
-
-      document.getElementById('titulo-dores-concorrente').textContent = info.doresTitulo;
-      document.getElementById('desc-dores-concorrente').textContent = info.doresDesc;
-      
-      // Preencher dores
-      const divDores = document.getElementById('lista-dores-especificas');
-      divDores.innerHTML = info.dores.map(d => `
-        <div class="flex items-start gap-2 text-xs text-rose-300/90 bg-rose-950/40 p-2 rounded-xl border border-rose-900/40">
-          <span class="text-rose-500 font-bold shrink-0">✕</span>
-          <span>${d}</span>
-        </div>
-      `).join('');
-
-      // Preencher vantagens
-      document.getElementById('desc-solucao-trudata').textContent = info.solucaoDesc;
-      const divVantagens = document.getElementById('lista-vantagens-trudata');
-      divVantagens.innerHTML = info.vantagens.map(v => `
-        <div class="flex items-start gap-2 text-xs text-emerald-300/90 bg-emerald-950/30 p-2 rounded-xl border border-emerald-900/40">
-          <span class="text-emerald-400 font-bold shrink-0">✓</span>
-          <span>${v}</span>
-        </div>
-      `).join('');
-
-      calcularEconomiaMigracao();
-    }
-
-    function calcularEconomiaMigracao() {
-      const custoAtual = parseFloat(document.getElementById('custo-concorrente-mensal').value) || 600;
-      const caixas = parseInt(document.getElementById('qtd-caixas-migracao').value) || 2;
-      
-      // TruData base: R$ 249 + R$ 149 (estoque) + R$ 180 (financeiro) + (caixas - 1)*89
-      const trudataMensal = 578 + ((caixas - 1) * 89);
-      
-      const economiaMes = Math.max(0, custoAtual - trudataMensal) + 150; // +150 economia de suporte/tempo
-      const economiaAno = economiaMes * 12;
-
-      document.getElementById('valor-economia-migracao').textContent = 'R$ ' + economiaAno.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
-
-    function copiarPitchPortabilidade() {
-      const info = concorrentesDB[concorrenteAtual];
-      if (!info) return;
-
-      navigator.clipboard.writeText(info.pitch).then(() => {
-        alert(`Pitch de abordagem contra o ${info.nome} copiado!\n\nPronto para colar no WhatsApp ou no telefone do vendedor.`);
-      });
-    }
-
-    function solicitarPlanoTransicaoWhatsApp() {
-      const info = concorrentesDB[concorrenteAtual];
-      const custoAtual = document.getElementById('custo-concorrente-mensal').value;
-      const caixas = document.getElementById('qtd-caixas-migracao').value;
-      const eco = document.getElementById('valor-economia-migracao').textContent;
-
-      const msg = `Olá equipe técnica Hansen Software! Gostaria de receber o *Plano de Transição e Portabilidade Segura* do meu sistema atual (*${info.nome}*) para o *TruData ERP*.\n\n` +
-        `• *Sistema Atual:* ${info.nome}\n` +
-        `• *Custo Atual Médio:* R$ ${custoAtual}/mês\n` +
-        `• *Quantidade de Caixas:* ${caixas}\n` +
-        `• *Economia Estimada:* ${eco}/ano\n\n` +
-        `Quero entender como funciona a migração dos meus produtos sem fechar o caixa da minha loja!`;
-
-      window.open('https://wa.me/5554996966175?text=' + encodeURIComponent(msg), '_blank');
-    }
-
-    function simularImportacaoBackup() {
-      const box = document.getElementById('resultado-simulacao-import');
-      box.classList.remove('hidden');
-      box.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      selecionarConcorrente('hiper');
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>

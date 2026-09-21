@@ -1,425 +1,60 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estúdio Interativo de B-Rolls & Reels — TruData Mídia</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: { azure: '#0070f3', dark: '#0b0f19', card: '#131b2e', emerald: '#10b981', rose: '#f43f5e' }
-          },
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { background-color: #080c14; color: #f1f5f9; }
-    .glass { background: rgba(19, 27, 46, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .camera-frame {
-      aspect-ratio: 9/16;
-      max-height: 520px;
-      position: relative;
-      background: #000;
-      border-radius: 1.5rem;
-      overflow: hidden;
-      border: 2px solid rgba(255,255,255,0.15);
-    }
-    .grid-916 {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr;
-      pointer-events: none;
-    }
-    .grid-line-v { border-right: 1px dashed rgba(255, 255, 255, 0.2); }
-    .grid-line-h { border-bottom: 1px dashed rgba(255, 255, 255, 0.2); }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased p-4 sm:p-6 lg:p-8 flex flex-col">
-
-  <!-- TOPO DE NAVEGAÇÃO -->
-  <header class="max-w-6xl mx-auto w-full flex items-center justify-between gap-4 mb-6 flex-wrap">
-    <div class="flex items-center gap-3">
-      <div class="h-10 w-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xl border border-purple-500/30">
-        🎬
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
       </div>
-      <div>
-        <h1 class="text-xl font-black font-display text-white">Estúdio de B-Rolls & Reels em Campo</h1>
-        <p class="text-xs text-slate-400">Guia de Captação e Claquete Digital para Gravação dos 5 Takes Obrigatórios no RS</p>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Material preservado na biblioteca</h1>
+      <p style="margin-top: 24px">
+        Os textos das coleções anteriores estão na biblioteca de referência para
+        consulta e adaptação. A versão original completa também foi preservada,
+        sem publicação automática.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="biblioteca.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
       </div>
-    </div>
-    <div class="flex items-center gap-2">
-      <a href="index.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-        ← Hub Central
-      </a>
-      <a href="teleprompter.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-        🎤 Teleprompter
-      </a>
-      <a href="spots-radio" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-        📻 Spots Rádio
-      </a>
-    </div>
-  </header>
-
-  <main class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
-
-    <!-- COLUNA DA ESQUERDA: CLAQUETE E VISOR 9:16 (5 COLS) -->
-    <div class="lg:col-span-5 space-y-4">
-      <div class="glass rounded-3xl p-5 border border-slate-800 space-y-4 flex flex-col items-center">
-        
-        <!-- VISOR DA CÂMERA 9:16 -->
-        <div class="camera-frame w-full max-w-[280px] shadow-2xl flex flex-col justify-between p-4">
-          <!-- GRID 9:16 -->
-          <div class="grid-916">
-            <div class="grid-line-v grid-line-h"></div>
-            <div class="grid-line-v grid-line-h"></div>
-            <div class="grid-line-h"></div>
-            <div class="grid-line-v grid-line-h"></div>
-            <div class="grid-line-v grid-line-h"></div>
-            <div class="grid-line-h"></div>
-            <div class="grid-line-v"></div>
-            <div class="grid-line-v"></div>
-            <div></div>
-          </div>
-
-          <!-- TOPO DO VISOR -->
-          <div class="relative z-10 flex justify-between items-center text-[10px] font-mono text-white/80">
-            <span class="flex items-center gap-1.5">
-              <span id="dotGravando" class="h-2.5 w-2.5 rounded-full bg-slate-600"></span>
-              <span id="txtModoVisor">STANDBY</span>
-            </span>
-            <span id="txtTempoVisor" class="font-bold text-emerald-400">00:00</span>
-          </div>
-
-          <!-- CENTRO: NOME DA CENA & COUNTDOWN -->
-          <div class="relative z-10 text-center my-auto space-y-2">
-            <div id="boxCountdown" class="hidden text-5xl font-black font-display text-white animate-bounce">
-              3
-            </div>
-            <div id="txtCenaAtivaVisor" class="text-xs font-bold text-white uppercase tracking-wider bg-black/60 px-3 py-1.5 rounded-full backdrop-blur border border-white/20">
-              Take 1 · Suporte Ativo
-            </div>
-            <p id="txtInstrucaoVisor" class="text-[10px] text-slate-300 bg-black/40 px-2 py-1 rounded backdrop-blur max-w-[220px] mx-auto">
-              Close-up lateral focado no sorriso e no chimarrão ao fundo.
-            </p>
-          </div>
-
-          <!-- BASE DO VISOR -->
-          <div class="relative z-10 space-y-1.5">
-            <div class="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
-              <div id="barTempoGravacao" class="h-full bg-rose-500 w-0 transition-all duration-100"></div>
-            </div>
-            <div class="flex justify-between text-[9px] font-mono text-white/60">
-              <span>9:16 VERTICAL</span>
-              <span>4K 60FPS</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- CONTROLES DA CLAQUETE DIGITAL -->
-        <div class="w-full space-y-3">
-          <div class="flex gap-2">
-            <button id="btnIniciarTake" onclick="iniciarGravacaoComClaquete()" class="flex-1 py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-rose-600/30">
-              🎬 BATER CLAQUETE & GRAVAR
-            </button>
-            <button onclick="pararGravacao()" class="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition">
-              ⏹️ Parar
-            </button>
-          </div>
-          <p class="text-[11px] text-center text-slate-400">
-            Contagem de 3 segundos com sinal sonoro antes do início da contagem do take.
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- COLUNA DA DIREITA: OS 5 TAKES DETALHADOS E CHECKLIST DE PRODUÇÃO (7 COLS) -->
-    <div class="lg:col-span-7 space-y-4">
-      
-      <!-- SELETOR DE CENAS -->
-      <div class="glass rounded-3xl p-6 border border-slate-800 space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 flex-wrap gap-2">
-          <div>
-            <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <span>📹</span> Os 5 Takes Obrigatórios da TruData
-            </h2>
-            <p class="text-xs text-slate-400">Humanizam a marca e capturam a atenção nos primeiros 3 segundos do Reel.</p>
-          </div>
-          <span class="text-xs font-mono font-bold text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-lg border border-purple-500/20">
-            5 a 10s por Take
-          </span>
-        </div>
-
-        <!-- LISTA INTERATIVA DE TAKES -->
-        <div class="space-y-3" id="listaTakes">
-
-          <!-- TAKE 1 -->
-          <div onclick="selecionarTake(1)" id="cardTake1" class="p-4 rounded-2xl border border-purple-500/40 bg-purple-950/20 cursor-pointer hover:bg-purple-950/30 transition space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-white flex items-center gap-2">
-                <span class="h-6 w-6 rounded-lg bg-purple-500/30 text-purple-300 flex items-center justify-center text-xs">1</span>
-                🎧 Suporte Ativo & Empatia Humana (Sarandi - RS)
-              </span>
-              <input type="checkbox" id="chkTake1" onclick="event.stopPropagation()" class="h-4 w-4 rounded border-slate-700 text-emerald-500 bg-slate-900">
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed pl-8">
-              <strong>Cena:</strong> Consultor Hansen com headset atendendo ligação, sorrindo e digitando na tela com agilidade. Em segundo plano, cuia de chimarrão ou caneca térmica na mesa.
-            </p>
-            <div class="pl-8 text-[11px] text-slate-400 flex flex-wrap gap-3">
-              <span><strong>Ângulo:</strong> Close-up lateral + tela</span>
-              <span><strong>Mensagem:</strong> Atendimento com gente real, zero robôs frios</span>
-            </div>
-          </div>
-
-          <!-- TAKE 2 -->
-          <div onclick="selecionarTake(2)" id="cardTake2" class="p-4 rounded-2xl border border-slate-800 bg-slate-950/50 cursor-pointer hover:bg-slate-900 transition space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-white flex items-center gap-2">
-                <span class="h-6 w-6 rounded-lg bg-blue-500/20 text-blue-300 flex items-center justify-center text-xs">2</span>
-                ⚡ Impressão Veloz no PDV (Frente de Caixa)
-              </span>
-              <input type="checkbox" id="chkTake2" onclick="event.stopPropagation()" class="h-4 w-4 rounded border-slate-700 text-emerald-500 bg-slate-900">
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed pl-8">
-              <strong>Cena:</strong> Mão do operador escaneando um código de barras com leitor óptico (bip) e, no segundo seguinte, o cupom fiscal (NFC-e) sendo impresso na maquininha térmica sem engasgos.
-            </p>
-            <div class="pl-8 text-[11px] text-slate-400 flex flex-wrap gap-3">
-              <span><strong>Ângulo:</strong> Foco no leitor e saída do papel</span>
-              <span><strong>Mensagem:</strong> Agilidade extrema no rush de sábado</span>
-            </div>
-          </div>
-
-          <!-- TAKE 3 -->
-          <div onclick="selecionarTake(3)" id="cardTake3" class="p-4 rounded-2xl border border-slate-800 bg-slate-950/50 cursor-pointer hover:bg-slate-900 transition space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-white flex items-center gap-2">
-                <span class="h-6 w-6 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center text-xs">3</span>
-                📦 Conferência Móvel de Estoque no Depósito
-              </span>
-              <input type="checkbox" id="chkTake3" onclick="event.stopPropagation()" class="h-4 w-4 rounded border-slate-700 text-emerald-500 bg-slate-900">
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed pl-8">
-              <strong>Cena:</strong> Colaborador no depósito ou corredor da loja usando coletor de dados ou smartphone para bipar caixa de produtos e atualizando o saldo na hora.
-            </p>
-            <div class="pl-8 text-[11px] text-slate-400 flex flex-wrap gap-3">
-              <span><strong>Ângulo:</strong> Plano detalhe do leitor na caixa</span>
-              <span><strong>Mensagem:</strong> Fim do sumiço de mercadoria na loja</span>
-            </div>
-          </div>
-
-          <!-- TAKE 4 -->
-          <div onclick="selecionarTake(4)" id="cardTake4" class="p-4 rounded-2xl border border-slate-800 bg-slate-950/50 cursor-pointer hover:bg-slate-900 transition space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-white flex items-center gap-2">
-                <span class="h-6 w-6 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center text-xs">4</span>
-                📈 Decisão Estratégica do Lojista (Painel em Nuvem)
-              </span>
-              <input type="checkbox" id="chkTake4" onclick="event.stopPropagation()" class="h-4 w-4 rounded border-slate-700 text-emerald-500 bg-slate-900">
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed pl-8">
-              <strong>Cena:</strong> Dono da loja ou gerente tomando café em sua sala, olhando o painel gerencial do TruData no notebook ou tablet, vendo o faturamento diário consolidado.
-            </p>
-            <div class="pl-8 text-[11px] text-slate-400 flex flex-wrap gap-3">
-              <span><strong>Ângulo:</strong> Aproximação suave por trás do ombro</span>
-              <span><strong>Mensagem:</strong> Controle total do negócio na palma da mão</span>
-            </div>
-          </div>
-
-          <!-- TAKE 5 -->
-          <div onclick="selecionarTake(5)" id="cardTake5" class="p-4 rounded-2xl border border-slate-800 bg-slate-950/50 cursor-pointer hover:bg-slate-900 transition space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-white flex items-center gap-2">
-                <span class="h-6 w-6 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-xs">5</span>
-                🤝 Aperto de Mãos e Consultoria Local no Balcão
-              </span>
-              <input type="checkbox" id="chkTake5" onclick="event.stopPropagation()" class="h-4 w-4 rounded border-slate-700 text-emerald-500 bg-slate-900">
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed pl-8">
-              <strong>Cena:</strong> Consultor técnico da Hansen Software visitando o cliente na loja, cumprimentando o lojista com um aperto de mãos firme e conversando amigavelmente no balcão.
-            </p>
-            <div class="pl-8 text-[11px] text-slate-400 flex flex-wrap gap-3">
-              <span><strong>Ângulo:</strong> Plano médio mostrando a loja do RS</span>
-              <span><strong>Mensagem:</strong> Proximidade física e compromisso local</span>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- DICAS DE PRODUÇÃO -->
-        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800/80 space-y-2 text-xs">
-          <span class="font-bold text-amber-400 uppercase tracking-wider block text-[10px]">
-            💡 Diretrizes de Captação no Smartphone
-          </span>
-          <ul class="space-y-1 text-slate-300 list-disc list-inside text-[11px]">
-            <li><strong>Luz Natural:</strong> Sempre grave a favor da luz (evite ficar contra janelas ou sol forte).</li>
-            <li><strong>Estabilidade:</strong> Encoste os cotovelos nas costelas para travar o celular ou ative o modo "Super Estável".</li>
-            <li><strong>Duração:</strong> Deixe gravar por 10 a 15 segundos para termos folga de corte de 3 a 5 segundos na edição.</li>
-          </ul>
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
-
-  <script>
-    const takesData = {
-      1: {
-        titulo: 'Take 1 · Suporte Ativo',
-        instrucao: 'Close-up lateral focado no sorriso e chimarrão ao fundo.',
-        tempo: 10
-      },
-      2: {
-        titulo: 'Take 2 · Impressão Veloz PDV',
-        instrucao: 'Bip no código de barras e saída imediata do cupom fiscal.',
-        tempo: 8
-      },
-      3: {
-        titulo: 'Take 3 · Estoque Móvel',
-        instrucao: 'Plano detalhe bipando caixa no depósito com saldo em verde.',
-        tempo: 10
-      },
-      4: {
-        titulo: 'Take 4 · Decisão do Lojista',
-        instrucao: 'Café na mão e aprovação vendo o painel no notebook.',
-        tempo: 12
-      },
-      5: {
-        titulo: 'Take 5 · Aperto de Mãos Local',
-        instrucao: 'Cumprimento firme e sorriso no balcão da loja.',
-        tempo: 10
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    };
-
-    let takeAtual = 1;
-    let timerId = null;
-    let tempoRestante = 0;
-    let audioCtx = null;
-
-    function playBeep(freq, duracao) {
-      try {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.frequency.value = freq;
-        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duracao);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duracao);
-      } catch (e) {}
-    }
-
-    function selecionarTake(num) {
-      takeAtual = num;
-      for (let i = 1; i <= 5; i++) {
-        const card = document.getElementById(`cardTake${i}`);
-        if (i === num) {
-          card.className = 'p-4 rounded-2xl border border-purple-500/40 bg-purple-950/20 cursor-pointer hover:bg-purple-950/30 transition space-y-2';
-        } else {
-          card.className = 'p-4 rounded-2xl border border-slate-800 bg-slate-950/50 cursor-pointer hover:bg-slate-900 transition space-y-2';
-        }
-      }
-      const data = takesData[num];
-      document.getElementById('txtCenaAtivaVisor').innerText = data.titulo;
-      document.getElementById('txtInstrucaoVisor').innerText = data.instrucao;
-    }
-
-    function iniciarGravacaoComClaquete() {
-      pararGravacao();
-      const boxCount = document.getElementById('boxCountdown');
-      const modo = document.getElementById('txtModoVisor');
-      const dot = document.getElementById('dotGravando');
-      const bar = document.getElementById('barTempoGravacao');
-      const tempoVisor = document.getElementById('txtTempoVisor');
-
-      boxCount.classList.remove('hidden');
-      modo.innerText = 'PREPARAR...';
-      modo.className = 'text-amber-400 font-bold';
-      dot.className = 'h-2.5 w-2.5 rounded-full bg-amber-400 animate-pulse';
-
-      let contagem = 3;
-      boxCount.innerText = contagem;
-      playBeep(440, 0.2);
-
-      const intv = setInterval(() => {
-        contagem--;
-        if (contagem > 0) {
-          boxCount.innerText = contagem;
-          playBeep(440, 0.2);
-        } else {
-          clearInterval(intv);
-          boxCount.classList.add('hidden');
-          playBeep(880, 0.5); // Sinal agudo de gravando
-          executarGravacao();
-        }
-      }, 1000);
-    }
-
-    function executarGravacao() {
-      const modo = document.getElementById('txtModoVisor');
-      const dot = document.getElementById('dotGravando');
-      const bar = document.getElementById('barTempoGravacao');
-      const tempoVisor = document.getElementById('txtTempoVisor');
-
-      modo.innerText = 'GRAVANDO (REC)';
-      modo.className = 'text-rose-400 font-bold animate-pulse';
-      dot.className = 'h-2.5 w-2.5 rounded-full bg-rose-500 animate-ping';
-
-      const duracaoTotal = takesData[takeAtual].tempo;
-      let decorrido = 0;
-
-      timerId = setInterval(() => {
-        decorrido += 0.1;
-        const pct = Math.min(100, (decorrido / duracaoTotal) * 100);
-        bar.style.width = `${pct}%`;
-        tempoVisor.innerText = `00:${decorrido.toFixed(1).padStart(4, '0')}`;
-
-        if (decorrido >= duracaoTotal) {
-          pararGravacao();
-          playBeep(520, 0.4);
-          document.getElementById(`chkTake${takeAtual}`).checked = true;
-          alert(`✓ Take ${takeAtual} gravado com sucesso! Passe para a próxima cena.`);
-          if (takeAtual < 5) {
-            selecionarTake(takeAtual + 1);
-          }
-        }
-      }, 100);
-    }
-
-    function pararGravacao() {
-      if (timerId) {
-        clearInterval(timerId);
-        timerId = null;
-      }
-      document.getElementById('boxCountdown').classList.add('hidden');
-      document.getElementById('txtModoVisor').innerText = 'STANDBY';
-      document.getElementById('txtModoVisor').className = '';
-      document.getElementById('dotGravando').className = 'h-2.5 w-2.5 rounded-full bg-slate-600';
-      document.getElementById('barTempoGravacao').style.width = '0%';
-      document.getElementById('txtTempoVisor').innerText = '00:00';
-    }
-
-    selecionarTake(1);
-  </script>
-</body>
+    </script>
+  </body>
 </html>

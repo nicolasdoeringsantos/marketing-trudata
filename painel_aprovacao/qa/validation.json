@@ -1,0 +1,40 @@
+[
+  {
+    "browser": "chrome",
+    "widths": [
+      768,
+      1366,
+      1920
+    ],
+    "posts": 22,
+    "days": 108,
+    "exports": [
+      "csv",
+      "xlsx",
+      "notion",
+      "md",
+      "txt"
+    ],
+    "page_errors": [],
+    "result": "passed"
+  },
+  {
+    "browser": "msedge",
+    "widths": [
+      768,
+      1366,
+      1920
+    ],
+    "posts": 22,
+    "days": 108,
+    "exports": [
+      "csv",
+      "xlsx",
+      "notion",
+      "md",
+      "txt"
+    ],
+    "page_errors": [],
+    "result": "passed"
+  }
+]

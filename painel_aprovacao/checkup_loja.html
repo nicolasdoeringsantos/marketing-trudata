@@ -1,369 +1,85 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Check-up Gratuito de Frente de Caixa (15 Min) — TruData Auditoria</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: { azure: '#0070f3', dark: '#0b0f19', card: '#131b2e', emerald: '#10b981', rose: '#f43f5e' }
-          },
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { background-color: #080c14; color: #f1f5f9; }
-    .glass { background: rgba(19, 27, 46, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    @media print {
-      body { background-color: #fff !important; color: #000 !important; }
-      .no-print { display: none !important; }
-      .print-only { display: block !important; }
-      .glass { background: #fff !important; border: 1px solid #ccc !important; box-shadow: none !important; }
-    }
-    .print-only { display: none; }
-  </style>
-</head>
-<body class="min-h-screen font-sans antialiased p-4 sm:p-6 lg:p-8 flex flex-col">
-
-  <!-- TOPO DE NAVEGAÇÃO -->
-  <header class="max-w-5xl mx-auto w-full flex items-center justify-between gap-4 mb-6 no-print flex-wrap">
-    <div class="flex items-center gap-3">
-      <div class="h-10 w-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xl border border-amber-500/30">
-        🩺
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Diagnóstico da loja · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="diagnostico">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
       </div>
-      <div>
-        <h1 class="text-xl font-black font-display text-white">Check-up de Frente de Caixa (15 Minutos)</h1>
-        <p class="text-xs text-slate-400">Auditoria Técnica de Risco Fiscal, Balanças e Gargalo de Fila para Lojistas do RS</p>
-      </div>
-    </div>
-    <div class="flex items-center gap-2">
-      <a href="index.html" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-        ← Hub Central
-      </a>
-      <a href="radar" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-        📡 Radar B2B
-      </a>
-      <button onclick="window.print()" class="text-xs px-3 py-2 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 transition flex items-center gap-1">
-        🖨️ Imprimir Laudo A4
-      </button>
-    </div>
-  </header>
-
-  <!-- LAUDO CABEÇALHO PARA IMPRESSÃO -->
-  <div class="print-only mb-6 border-b pb-4 text-black max-w-5xl mx-auto w-full">
-    <div class="flex justify-between items-start">
-      <div>
-        <h1 class="text-2xl font-bold font-display">HANSEN SOFTWARE — TRUDATA AUDITORIA</h1>
-        <p class="text-xs text-gray-600">CNPJ: 02.483.991/0001-90 · Av. Expedicionário, Sarandi - RS · Tel: (54) 3361-2650</p>
-        <p class="text-xs font-semibold text-gray-800 mt-1">LAUDO TÉCNICO DE AUDITORIA DE FRENTE DE CAIXA E RISCO FISCAL</p>
-      </div>
-      <div class="text-right">
-        <span class="text-xs bg-amber-100 text-amber-900 px-2.5 py-1 rounded font-bold border border-amber-300">Auditoria Presencial</span>
-        <p class="text-[10px] text-gray-500 mt-1" id="printDataHoje"></p>
-      </div>
-    </div>
-  </div>
-
-  <main class="max-w-5xl mx-auto w-full space-y-6 flex-1">
-
-    <!-- IDENTIFICAÇÃO DO ESTABELECIMENTO -->
-    <div class="glass rounded-2xl p-5 border border-slate-800 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 flex-wrap gap-2">
-        <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-          <span>🏢</span> Dados do Estabelecimento Comercial Auditado
-        </span>
-        <div class="no-print">
-          <select id="selAlvo" onchange="carregarAlvo()" class="bg-slate-900 text-xs text-slate-200 border border-slate-700 rounded-lg px-2.5 py-1.5 focus:border-brand-azure outline-none">
-            <option value="">-- Carregar Alvo do Radar RS --</option>
-            <option value="Supermercado Sarandi LTDA|Sarandi|Supermercado|4|Mateus Hansen|Linx/Hiper">Supermercado Sarandi LTDA (Sarandi - 4 PDVs)</option>
-            <option value="Casa das Tintas Sarandi|Sarandi|Varejo Geral|2|Carlos Eduardo|Bling">Casa das Tintas Sarandi (Sarandi - 2 PDVs)</option>
-            <option value="Auto Peças Sarandiense|Sarandi|Autopeças|3|Rafael Silva|Totvs">Auto Peças Sarandiense (Sarandi - 3 PDVs)</option>
-            <option value="Mercado Popular Constantina|Constantina|Supermercado|2|Valdir Zanin|SysPDV">Mercado Popular Constantina (Constantina - 2 PDVs)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+    </header>
+    <main id="main">
+      <header class="tools-heading">
         <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nome da Loja</label>
-          <input type="text" id="inNomeLoja" value="Supermercado Sarandi LTDA" oninput="calcularCheckup()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white font-bold outline-none">
+          <a href="ferramentas.html">Todas as ferramentas</a>
+          <h1 id="work-title">Diagnóstico da loja</h1>
+          <p id="work-desc"></p>
         </div>
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Município - RS</label>
-          <input type="text" id="inCidade" value="Sarandi - RS" oninput="calcularCheckup()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white outline-none">
-        </div>
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Sistema Atual Instalado</label>
-          <input type="text" id="inSistemaAtual" value="Hiper / Linx Varejo" oninput="calcularCheckup()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-rose-400 font-bold outline-none">
-        </div>
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Qtd. de Checkouts</label>
-          <input type="number" id="inPDVs" value="4" min="1" max="25" oninput="calcularCheckup()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-white font-bold outline-none">
-        </div>
-      </div>
-    </div>
-
-    <!-- PAINEL DE NOTA DE VULNERABILIDADE & PREJUÍZO ESTIMADO -->
-    <div class="bg-gradient-to-r from-rose-950/60 via-slate-900 to-slate-950 border border-rose-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
-        <div class="space-y-2">
-          <span class="text-xs font-extrabold text-rose-400 tracking-wider uppercase bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
-            ⚠️ Diagnóstico de Risco e Perdas Operacionais
-          </span>
-          <h2 class="text-2xl sm:text-3xl font-black font-display text-white">
-            Prejuízo Anual Estimado: <span id="txtPrejuizoAnual" class="text-rose-400">R$ 18.720,00</span>
-          </h2>
-          <p class="text-xs text-slate-300 max-w-xl leading-relaxed">
-            Perdas acumuladas por lentidão na digitação de balança, desistência de clientes em filas de sábado e retrabalho na retificação de notas da SEFAZ-RS.
+      </header>
+      <p class="work-notice" id="work-notice"></p>
+      <div class="workspace">
+        <form id="work-form" class="work-form">
+          <h2>Prepare os dados</h2>
+          <div class="input-grid" id="fields"></div>
+          <p id="work-error" class="work-error" role="alert" hidden></p>
+          <div class="actions">
+            <button class="btn primary" id="generate" type="submit">
+              Atualizar resumo</button
+            ><button class="btn" id="save-draft" type="button">
+              Salvar rascunho</button
+            ><button class="btn" id="load-draft" type="button">
+              Recuperar rascunho
+            </button>
+          </div>
+          <p class="work-help">
+            Um rascunho por ferramenta neste navegador. Baixe o resumo para
+            guardar uma cópia.
           </p>
-        </div>
-
-        <div class="flex items-center gap-4 w-full lg:w-auto">
-          <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl text-center flex-1 lg:flex-initial">
-            <span class="text-[10px] text-slate-400 uppercase font-bold block">Índice de Vulnerabilidade</span>
-            <span id="txtNotaRisco" class="text-3xl font-black text-rose-500 font-display">7.8 / 10</span>
-            <span id="txtNivelRisco" class="text-[10px] text-rose-400 font-bold block uppercase mt-0.5">Risco Alto</span>
+        </form>
+        <section class="work-output" aria-labelledby="output-title">
+          <h2 id="output-title">Seu resumo</h2>
+          <p class="placeholder" id="result-empty">
+            Preencha os dados e atualize o resumo para revisar o resultado.
+          </p>
+          <pre id="result" hidden></pre>
+          <div id="output-special"></div>
+          <div class="actions">
+            <button class="btn" id="copy-result" data-output disabled>
+              Copiar resumo</button
+            ><button class="btn" id="download-result" data-output disabled>
+              Baixar texto</button
+            ><button class="btn" id="print-result" data-output disabled>
+              Imprimir / PDF
+            </button>
           </div>
-          <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl text-center flex-1 lg:flex-initial">
-            <span class="text-[10px] text-slate-400 uppercase font-bold block">Tempo Médio/Venda</span>
-            <span id="txtTempoVenda" class="text-3xl font-black text-amber-400 font-display">12.4s</span>
-            <span class="text-[10px] text-slate-400 block">TruData: 3.1s</span>
-          </div>
-        </div>
+        </section>
       </div>
-    </div>
-
-    <!-- 4 PILARES DO CHECK-UP PRESENCIAL (12 PONTOS DE AUDITORIA) -->
-    <div class="space-y-4">
-
-      <!-- PILAR 1: VELOCIDADE DE CAIXA E FILAS -->
-      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
-          <div class="flex items-center gap-2">
-            <span class="h-6 w-6 rounded-full bg-rose-500/20 text-rose-400 text-xs font-bold flex items-center justify-center">1</span>
-            <h3 class="text-sm font-bold text-white">Velocidade de Caixa, Leitores e Filas de Sábado</h3>
-          </div>
-          <span class="text-[11px] text-rose-400 font-bold">Gargalo de Atendimento</span>
-        </div>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="calcularCheckup()" class="chk-risco mt-0.5 h-4 w-4 rounded border-slate-700 text-rose-500 bg-slate-900" checked data-custo="400" data-pts="1.5">
-            <div>
-              <span class="font-bold text-slate-200">Impressão do cupom NFC-e demora mais de 6 segundos</span>
-              <p class="text-[11px] text-slate-400">O cliente fica parado olhando o operador enquanto a impressora processa o envio web.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="calcularCheckup()" class="chk-risco mt-0.5 h-4 w-4 rounded border-slate-700 text-rose-500 bg-slate-900" checked data-custo="650" data-pts="2.0">
-            <div>
-              <span class="font-bold text-slate-200">Queda de internet trava ou impede a finalização do cupom</span>
-              <p class="text-[11px] text-slate-400">Sistema 100% web não possui contingência offline autônoma. O caixa precisa esperar a conexão voltar.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="calcularCheckup()" class="chk-risco mt-0.5 h-4 w-4 rounded border-slate-700 text-rose-500 bg-slate-900" data-custo="300" data-pts="1.0">
-            <div>
-              <span class="font-bold text-slate-200">Operador digita códigos de barras manualmente por falha de leitor</span>
-              <p class="text-[11px] text-slate-400">Perda de tempo e risco de registrar produto com preço desatualizado.</p>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <!-- PILAR 2: BALANÇAS E PRODUTOS PESÁVEIS -->
-      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
-          <div class="flex items-center gap-2">
-            <span class="h-6 w-6 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center justify-center">2</span>
-            <h3 class="text-sm font-bold text-white">Integração com Balanças (Toledo Prix / Filizola)</h3>
-          </div>
-          <span class="text-[11px] text-amber-400 font-bold">Açougue, Padaria & Hortifrúti</span>
-        </div>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="calcularCheckup()" class="chk-risco mt-0.5 h-4 w-4 rounded border-slate-700 text-rose-500 bg-slate-900" checked data-custo="500" data-pts="1.8">
-            <div>
-              <span class="font-bold text-slate-200">Carga de preços manual nas balanças com pen-drive</span>
-              <p class="text-[11px] text-slate-400">Falta de integração automática via rede com Toledo MGV6 gera divergência de preço no caixa.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="calcularCheckup()" class="chk-risco mt-0.5 h-4 w-4 rounded border-slate-700 text-rose-500 bg-slate-900" data-custo="350" data-pts="1.2">
-            <div>
-              <span class="font-bold text-slate-200">Caixa não lê peso direto da balança serial de checkout</span>
-              <p class="text-[11px] text-slate-400">Operador precisa digitar o peso exibido no visor da balança, gerando lentidão e erros.</p>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <!-- PILAR 3: RISCO FISCAL, NCMS E SPED -->
-      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
-          <div class="flex items-center gap-2">
-            <span class="h-6 w-6 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center">3</span>
-            <h3 class="text-sm font-bold text-white">Conformidade Fiscal, NCMs e Reforma Tributária 2026</h3>
-          </div>
-          <span class="text-[11px] text-purple-400 font-bold">Blindagem SEFAZ-RS</span>
-        </div>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="calcularCheckup()" class="chk-risco mt-0.5 h-4 w-4 rounded border-slate-700 text-rose-500 bg-slate-900" checked data-custo="600" data-pts="2.0">
-            <div>
-              <span class="font-bold text-slate-200">Produtos monofásicos tributados indevidamente (pagamento duplicado de imposto)</span>
-              <p class="text-[11px] text-slate-400">Bebidas, autopeças e perfumaria sem segregação correta de PIS/COFINS e ICMS-ST.</p>
-            </div>
-          </label>
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="calcularCheckup()" class="chk-risco mt-0.5 h-4 w-4 rounded border-slate-700 text-rose-500 bg-slate-900" data-custo="400" data-pts="1.5">
-            <div>
-              <span class="font-bold text-slate-200">Rejeição de notas no fechamento mensal do SPED com a contabilidade</span>
-              <p class="text-[11px] text-slate-400">Horas gastas pelo escritório corrigindo cadastros para não gerar multa no Sintegra.</p>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <!-- PILAR 4: SUPORTE E SEGURANÇA -->
-      <div class="glass rounded-2xl p-5 border border-slate-800 space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
-          <div class="flex items-center gap-2">
-            <span class="h-6 w-6 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center">4</span>
-            <h3 class="text-sm font-bold text-white">Suporte Técnico & Proximidade Geográfica</h3>
-          </div>
-          <span class="text-[11px] text-blue-400 font-bold">Atendimento Humano</span>
-        </div>
-        <div class="space-y-2 text-xs">
-          <label class="flex items-start gap-3 p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 hover:bg-slate-900 transition cursor-pointer">
-            <input type="checkbox" onchange="calcularCheckup()" class="chk-risco mt-0.5 h-4 w-4 rounded border-slate-700 text-rose-500 bg-slate-900" checked data-custo="450" data-pts="1.5">
-            <div>
-              <span class="font-bold text-slate-200">Atendimento do suporte atual feito por robôs/chatbots sem urgência</span>
-              <p class="text-[11px] text-slate-400">Em caso de travamento crítico, a loja não tem a quem recorrer presencialmente.</p>
-            </div>
-          </label>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- PARECER TÉCNICO E RECOMENDAÇÃO TRUDATA -->
-    <div class="glass rounded-2xl p-6 border border-slate-800 space-y-4">
-      <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-        <span>📋</span> Parecer do Consultor Hansen Software
-      </h3>
-      <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 leading-relaxed space-y-2">
-        <p>
-          A auditoria identificou vulnerabilidades que comprometem a fluidez do caixa nos horários de pico e geram risco de recolhimento tributário incorreto.
-        </p>
-        <p>
-          <strong>Recomendação Técnica:</strong> Migração imediata para o <strong>TruData ERP</strong> com garantia de importação de cadastros em até 48 horas, homologação das balanças Toledo via MGV6 e contingência offline blindada.
-        </p>
-      </div>
-    </div>
-
-    <!-- BOTÕES DE AÇÃO -->
-    <div class="flex items-center justify-between gap-4 p-4 rounded-xl bg-slate-900/60 border border-slate-800 no-print flex-wrap">
-      <div class="text-xs text-slate-400">
-        Laudo concluído! Imprima para entregar ao proprietário ou dispare via WhatsApp.
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <button onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 border border-slate-700">
-          🖨️ Imprimir Laudo A4
-        </button>
-        <a id="btnWppLaudo" href="#" target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-black transition flex items-center gap-2 shadow-lg shadow-emerald-600/30">
-          📲 Enviar Laudo no WhatsApp do Lojista
-        </a>
-      </div>
-    </div>
-
-  </main>
-
-  <script>
-    function formatMoeda(val) {
-      return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    }
-
-    function carregarAlvo() {
-      const val = document.getElementById('selAlvo').value;
-      if (!val) return;
-      const [nome, cidade, seg, pdvs, contato, sistema] = val.split('|');
-      document.getElementById('inNomeLoja').value = nome;
-      document.getElementById('inCidade').value = `${cidade} - RS`;
-      document.getElementById('inPDVs').value = pdvs;
-      document.getElementById('inSistemaAtual').value = sistema;
-      calcularCheckup();
-    }
-
-    function calcularCheckup() {
-      const chks = document.querySelectorAll('.chk-risco');
-      let custoMensalTotal = 0;
-      let pontosRisco = 0;
-
-      chks.forEach(c => {
-        if (c.checked) {
-          custoMensalTotal += parseFloat(c.getAttribute('data-custo') || 0);
-          pontosRisco += parseFloat(c.getAttribute('data-pts') || 0);
-        }
-      });
-
-      const pdvs = parseInt(document.getElementById('inPDVs').value) || 1;
-      const custoAnual = custoMensalTotal * 12 * (1 + (pdvs - 1) * 0.2);
-      const notaFinal = Math.min(10, pontosRisco).toFixed(1);
-
-      document.getElementById('txtPrejuizoAnual').innerText = formatMoeda(custoAnual);
-      document.getElementById('txtNotaRisco').innerText = `${notaFinal} / 10`;
-
-      const txtNivel = document.getElementById('txtNivelRisco');
-      if (notaFinal >= 7) {
-        txtNivel.innerText = 'Risco Alto';
-        txtNivel.className = 'text-[10px] text-rose-400 font-bold block uppercase mt-0.5';
-      } else if (notaFinal >= 4) {
-        txtNivel.innerText = 'Risco Médio';
-        txtNivel.className = 'text-[10px] text-amber-400 font-bold block uppercase mt-0.5';
-      } else {
-        txtNivel.innerText = 'Risco Baixo';
-        txtNivel.className = 'text-[10px] text-emerald-400 font-bold block uppercase mt-0.5';
-      }
-
-      // Tempo de venda estimado
-      const tempoVenda = (3.1 + (notaFinal * 1.2)).toFixed(1);
-      document.getElementById('txtTempoVenda').innerText = `${tempoVenda}s`;
-
-      const loja = document.getElementById('inNomeLoja').value || 'Loja';
-      const cidade = document.getElementById('inCidade').value || 'Sarandi';
-      const sistema = document.getElementById('inSistemaAtual').value || 'Sistema Atual';
-
-      const msg = `*Laudo de Auditoria Técnica de Frente de Caixa — ${loja}*%0A` +
-        `Olá! Concluímos o check-up técnico presencial de 15 minutos em sua loja (${cidade}):%0A%0A` +
-        `⚠️ *Sistema Atual:* ${sistema}%0A` +
-        `📊 *Índice de Vulnerabilidade:* ${notaFinal}/10 (${txtNivel.innerText})%0A` +
-        `⏱️ *Tempo Médio por Venda no Caixa:* ${tempoVenda}s (TruData: 3.1s)%0A` +
-        `💸 *Prejuízo Anual Estimado em Filas e Retrabalho:* *${formatMoeda(custoAnual)}*%0A%0A` +
-        `Principais gargalos encontrados:%0A` +
-        `• Falta de contingência offline autônoma na queda de conexão;%0A` +
-        `• Risco de recolhimento indevido em produtos com tributação monofásica;%0A` +
-        `• Falta de suporte técnico presencial in loco em Sarandi e região.%0A%0A` +
-        `Gostaria de conhecer o plano de migração sem custo em 48 horas da Hansen Software?`;
-
-      document.getElementById('btnWppLaudo').href = `https://wa.me/555433612650?text=${msg}`;
-      document.getElementById('printDataHoje').innerText = `Data do Check-up: ${new Date().toLocaleDateString('pt-BR')}`;
-    }
-
-    calcularCheckup();
-  </script>
-</body>
+      <noscript>Ative o JavaScript para preencher e gerar o resumo.</noscript>
+    </main>
+    <div id="work-toast" class="toast" role="status" hidden></div>
+    <script src="/painel_aprovacao/oficina.js?v=20260921-3" defer></script>
+  </body>
 </html>

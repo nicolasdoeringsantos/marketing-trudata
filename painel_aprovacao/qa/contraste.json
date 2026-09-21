@@ -1,0 +1,50 @@
+[
+  {
+    "uso": "Texto",
+    "texto": "#0f172a",
+    "fundo": "#ffffff",
+    "contraste": 17.85
+  },
+  {
+    "uso": "Texto secundário",
+    "texto": "#475569",
+    "fundo": "#f1f5f9",
+    "contraste": 6.92
+  },
+  {
+    "uso": "Botão principal",
+    "texto": "#ffffff",
+    "fundo": "#075985",
+    "contraste": 7.56
+  },
+  {
+    "uso": "Sucesso",
+    "texto": "#166534",
+    "fundo": "#dcfce7",
+    "contraste": 6.49
+  },
+  {
+    "uso": "Pendente",
+    "texto": "#854d0e",
+    "fundo": "#fef9c3",
+    "contraste": 6.38
+  },
+  {
+    "uso": "Erro",
+    "texto": "#991b1b",
+    "fundo": "#fee2e2",
+    "contraste": 6.8
+  },
+  {
+    "uso": "Informação",
+    "texto": "#075985",
+    "fundo": "#e0f2fe",
+    "contraste": 6.59
+  },
+  {
+    "uso": "Marca",
+    "texto": "#0f172a",
+    "fundo": "#009fe3",
+    "contraste": 6.01
+  }
+]

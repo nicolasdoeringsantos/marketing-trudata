@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 """
 Script de montagem e injeção do Cockpit Executivo TruData (36 Ferramentas)
-em painel_aprovacao/index.html com garantia de 0 mojibake UTF-8.
+em painel_aprovacao/ferramentas.html com garantia de 0 mojibake UTF-8.
 """
 import re
 
-INDEX_PATH = "painel_aprovacao/index.html"
+INDEX_PATH = "painel_aprovacao/ferramentas.html"
 
 with open(INDEX_PATH, "r", encoding="utf-8") as f:
     html = f.read()
+
+if 'id="secao-cockpit"' not in html:
+    raise SystemExit("A central foi reformulada. Edite ferramentas.js; a injeção do cockpit antigo foi desativada.")
 
 # Construção do HTML do Cockpit
 COCKPIT_HTML = """    <!-- ============================================================ -->
@@ -1505,4 +1508,4 @@ novo_html = novo_html.replace(init_antigo, init_novo)
 with open(INDEX_PATH, "w", encoding="utf-8") as f:
     f.write(novo_html)
 
-print("OK: Cockpit Executivo injetado com sucesso em painel_aprovacao/index.html!")
+print("OK: Cockpit Executivo injetado com sucesso em painel_aprovacao/ferramentas.html!")

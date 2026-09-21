@@ -1,489 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proposta Comercial Interativa — TruData ERP | Hansen Software</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            display: ['"Space Grotesk"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              navy: '#020B18',
-              azure: '#00A3FF',
-              emerald: '#10B981',
-              amber: '#F59E0B',
-              indigo: '#6366F1'
-            }
-          }
-        }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
+      </div>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Reunida em Preparar proposta</h1>
+      <p style="margin-top: 24px">
+        A proposta agora descreve escopo e valores preenchidos. Não representa
+        contrato assinado, pagamento confirmado ou rastreamento de leitura.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="gerador_proposta.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
+      </div>
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    }
-  </script>
-  <style>
-    body { background-color: #020B18; color: #F8FAFC; }
-    .glass {
-      background: rgba(10, 25, 47, 0.75);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .glass-highlight {
-      background: linear-gradient(135deg, rgba(0, 163, 255, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
-      border: 1px solid rgba(0, 163, 255, 0.25);
-    }
-  </style>
-</head>
-<body class="font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-azure selection:text-white pb-12">
-
-  <!-- BARRA DE TOPO & COMPARTILHAMENTO -->
-  <header class="border-b border-slate-800/80 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 group text-xs text-slate-400 hover:text-white transition">
-          <span class="p-1.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-brand-azure">←</span>
-          <span>Voltar ao Painel</span>
-        </a>
-        <div class="h-4 w-px bg-slate-800"></div>
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-xs font-mono font-bold text-white tracking-wider">TRUDATA COMMERCIAL HUB</span>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <button onclick="copiarLinkParametrizado()" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200 flex items-center gap-1.5 transition" title="Gera URL com os parâmetros preenchidos">
-          <span>🔗</span> Copiar Link com Parâmetros
-        </button>
-        <button onclick="window.print()" class="px-3.5 py-1.5 rounded-xl bg-brand-azure/10 hover:bg-brand-azure/20 border border-brand-azure/30 text-xs font-bold text-brand-azure flex items-center gap-1.5 transition">
-          <span>🖨️</span> Imprimir / Salvar PDF
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- CONTEÚDO PRINCIPAL DA PROPOSTA -->
-  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 w-full space-y-8">
-    
-    <!-- BANNER DE CONTROLE DO VENDEDOR / SELETOR DE ALVO PILOTO -->
-    <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-brand-azure/10 border border-brand-azure/30 flex items-center justify-center text-lg">
-          🎯
-        </div>
-        <div>
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider">Carregamento Rápido — Top 20 Alvos Piloto</h4>
-          <p class="text-[11px] text-slate-400">Selecione uma empresa de Sarandi e região para preencher a proposta automaticamente</p>
-        </div>
-      </div>
-      <div class="w-full sm:w-72">
-        <select id="seletor-alvo-piloto" onchange="carregarAlvoSelecionado()" class="w-full bg-slate-950 border border-slate-700 text-xs text-white rounded-xl p-2.5 outline-none focus:border-brand-azure">
-          <option value="">-- Carregar Alvo do Piloto RS --</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- CABEÇALHO DO DOCUMENTO COMERCIAL -->
-    <div class="glass rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-2xl">
-      <div class="absolute -right-16 -top-16 w-64 h-64 bg-brand-azure/10 rounded-full blur-3xl pointer-events-none"></div>
-      
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-6">
-        <div>
-          <div class="flex items-center gap-2 mb-2">
-            <span class="text-[11px] font-bold text-brand-azure uppercase tracking-wider bg-brand-azure/10 px-3 py-1 rounded-full border border-brand-azure/20">
-              Proposta Comercial Exclusiva
-            </span>
-            <span id="prop-id-badge" class="text-[11px] font-mono text-slate-400 bg-slate-900 px-2.5 py-1 rounded-full border border-slate-800">
-              PROPOSTA #TRU-2026-084
-            </span>
-          </div>
-          <h1 class="text-2xl sm:text-3xl font-black font-display text-white">Modernização & Blindagem Fiscal Comercial</h1>
-          <p class="text-sm text-slate-400 mt-1">Elaborada com SLA regional de 2 horas por <strong class="text-white">Hansen Software LTDA (Sarandi - RS)</strong></p>
-        </div>
-        <div class="text-left sm:text-right bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 shrink-0">
-          <span class="text-[10px] text-slate-500 uppercase font-mono block">Validade da Condição</span>
-          <span class="text-sm font-bold text-emerald-400 font-mono">15 Dias a partir de Hoje</span>
-          <span class="text-[10px] text-slate-400 block mt-0.5" id="data-proposta-hoje"></span>
-        </div>
-      </div>
-
-      <!-- CAMPOS DO CLIENTE (INTERATIVOS) -->
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs">
-        <div class="p-3.5 bg-slate-950/60 rounded-xl border border-slate-800/80">
-          <span class="text-slate-500 block mb-1">Cliente Solicitante:</span>
-          <input type="text" id="prop-cliente" value="Hipermercado Wagner" oninput="atualizarTotais()" class="w-full bg-transparent font-bold text-white outline-none border-b border-dashed border-slate-700 focus:border-brand-azure" />
-        </div>
-        <div class="p-3.5 bg-slate-950/60 rounded-xl border border-slate-800/80">
-          <span class="text-slate-500 block mb-1">Decisor / Contato:</span>
-          <input type="text" id="prop-decisor" value="Adriana Re Wagner" oninput="atualizarTotais()" class="w-full bg-transparent font-bold text-white outline-none border-b border-dashed border-slate-700 focus:border-brand-azure" />
-        </div>
-        <div class="p-3.5 bg-slate-950/60 rounded-xl border border-slate-800/80">
-          <span class="text-slate-500 block mb-1">Cidade / Região:</span>
-          <input type="text" id="prop-cidade" value="Sarandi - RS" oninput="atualizarTotais()" class="w-full bg-transparent font-bold text-white outline-none border-b border-dashed border-slate-700 focus:border-brand-azure" />
-        </div>
-        <div class="p-3.5 bg-slate-950/60 rounded-xl border border-slate-800/80">
-          <span class="text-slate-500 block mb-1">Segmento de Atuação:</span>
-          <input type="text" id="prop-segmento" value="Supermercados & Mercearias" oninput="atualizarTotais()" class="w-full bg-transparent font-bold text-white outline-none border-b border-dashed border-slate-700 focus:border-brand-azure" />
-        </div>
-      </div>
-    </div>
-
-    <!-- ESCOPO TECNOLÓGICO, DIMENSIONAMENTO DE PDVS E CALCULADORA -->
-    <div class="glass rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-4">
-        <div>
-          <h2 class="text-lg font-bold text-white font-display">Escopo Tecnológico & Módulos ERP</h2>
-          <p class="text-xs text-slate-400">Personalize os módulos e quantidade de caixas PDV para recalcular em tempo real</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 font-mono">
-            SLA Sarandi: Resposta em 2 Horas
-          </span>
-        </div>
-      </div>
-
-      <!-- SELETOR DE PDVS & SETUP -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-2xl bg-slate-950/80 border border-slate-800">
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">
-            Quantidade de Caixas (PDVs): <span id="label-qtd-pdv" class="font-bold text-brand-azure font-mono">2 Caixas</span>
-          </label>
-          <input type="range" id="range-pdvs" min="1" max="10" value="2" oninput="atualizarTotais()" class="w-full accent-brand-azure cursor-pointer" />
-          <span class="text-[10px] text-slate-500 block mt-1">1º PDV incluso no plano base (+R$ 89/mês por PDV adicional)</span>
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">
-            Taxa de Implantação & Migração:
-          </label>
-          <select id="select-setup" onchange="atualizarTotais()" class="w-full bg-slate-900 border border-slate-700 text-xs text-white rounded-xl p-2 outline-none focus:border-brand-azure">
-            <option value="690">R$ 690,00 (Treinamento presencial 8h + Migração de Dados)</option>
-            <option value="490">R$ 490,00 (Treinamento Híbrido 4h + Migração)</option>
-            <option value="0">ISENTO R$ 0,00 (Campanha Portabilidade Concorrente RS)</option>
-          </select>
-          <span class="text-[10px] text-slate-500 block mt-1">Garantia de migração sem parada de vendas</span>
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">
-            Condição Especial de Desconto:
-          </label>
-          <select id="select-desconto" onchange="atualizarTotais()" class="w-full bg-slate-900 border border-slate-700 text-xs text-white rounded-xl p-2 outline-none focus:border-brand-azure">
-            <option value="0">Tabela Padrão (Sem Desconto)</option>
-            <option value="10">10% OFF no Plano Anual Garantido</option>
-            <option value="15">15% OFF Migração Imediata (Fechamento em 48h)</option>
-          </select>
-          <span class="text-[10px] text-slate-500 block mt-1">Reajuste travado pelo IPCA (sem surpresas de +25%)</span>
-        </div>
-      </div>
-
-      <!-- MÓDULOS DE SOFTWARE -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="lista-modulos-prop">
-        <label class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-brand-azure/50 cursor-pointer flex items-start gap-3 transition">
-          <input type="checkbox" checked onchange="atualizarTotais()" class="mt-1 mod-check accent-brand-azure" data-valor="249" data-nome="PDV Caixa Ultrarrápido & NFC-e Offline" />
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-bold text-white block">PDV Caixa Ultrarrápido + NFC-e (3s)</span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 font-mono">Essencial</span>
-            </div>
-            <span class="text-[11px] text-slate-400">Contingência offline blindada contra queda de internet em Sarandi e região.</span>
-            <span class="text-xs font-bold text-emerald-400 font-mono block mt-1">R$ 249,00 /mês (Base)</span>
-          </div>
-        </label>
-
-        <label class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-brand-azure/50 cursor-pointer flex items-start gap-3 transition">
-          <input type="checkbox" checked onchange="atualizarTotais()" class="mt-1 mod-check accent-brand-azure" data-valor="149" data-nome="Controle de Estoque Avançado & Grade" />
-          <div>
-            <span class="text-xs font-bold text-white block">Controle de Estoque & Grade (Cor x Tam / Lote)</span>
-            <span class="text-[11px] text-slate-400">Curva ABC, inventário por coletor, validade e ponto de pedido automático.</span>
-            <span class="text-xs font-bold text-emerald-400 font-mono block mt-1">R$ 149,00 /mês</span>
-          </div>
-        </label>
-
-        <label class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-brand-azure/50 cursor-pointer flex items-start gap-3 transition">
-          <input type="checkbox" checked onchange="atualizarTotais()" class="mt-1 mod-check accent-brand-azure" data-valor="180" data-nome="Financeiro Completo, DRE & Contas" />
-          <div>
-            <span class="text-xs font-bold text-white block">Financeiro Estratégico & DRE Gerencial</span>
-            <span class="text-[11px] text-slate-400">Fluxo de caixa diário, conciliação bancária OFX e contas a pagar/receber.</span>
-            <span class="text-xs font-bold text-emerald-400 font-mono block mt-1">R$ 180,00 /mês</span>
-          </div>
-        </label>
-
-        <label class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-brand-azure/50 cursor-pointer flex items-start gap-3 transition">
-          <input type="checkbox" checked onchange="atualizarTotais()" class="mt-1 mod-check accent-brand-azure" data-valor="120" data-nome="TEF Integrado Multi-Adquirente Direto no Caixa" />
-          <div>
-            <span class="text-xs font-bold text-white block">TEF Integrado Multi-Adquirente (Stone, Cielo, Rede, PagBank)</span>
-            <span class="text-[11px] text-slate-400">Elimina erros de digitação e fraudes no caixa com conciliação automática.</span>
-            <span class="text-xs font-bold text-emerald-400 font-mono block mt-1">R$ 120,00 /mês</span>
-          </div>
-        </label>
-
-        <label class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-brand-azure/50 cursor-pointer flex items-start gap-3 transition">
-          <input type="checkbox" checked onchange="atualizarTotais()" class="mt-1 mod-check accent-brand-azure" data-valor="90" data-nome="Módulo Fiscal SPED & Adequação Reforma 2026" />
-          <div>
-            <span class="text-xs font-bold text-white block">Modo Escritório & SPED Fiscal Limpo</span>
-            <span class="text-[11px] text-slate-400">Exportação automática para contadores de Sarandi e auditoria CBS/IBS 2026.</span>
-            <span class="text-xs font-bold text-emerald-400 font-mono block mt-1">R$ 90,00 /mês</span>
-          </div>
-        </label>
-
-        <label class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-brand-azure/50 cursor-pointer flex items-start gap-3 transition">
-          <input type="checkbox" onchange="atualizarTotais()" class="mt-1 mod-check accent-brand-azure" data-valor="150" data-nome="Força de Vendas Externa Mobile (App Pedidos)" />
-          <div>
-            <span class="text-xs font-bold text-white block">Força de Vendas Mobile (App Android/iOS)</span>
-            <span class="text-[11px] text-slate-400">Emissão de pedidos na rua por representantes com catálogo e preço por cliente.</span>
-            <span class="text-xs font-bold text-emerald-400 font-mono block mt-1">R$ 150,00 /mês (Opcional)</span>
-          </div>
-        </label>
-      </div>
-
-      <!-- CARD DE TOTALIZAÇÃO DINÂMICA & BOTÃO DE ACEITE -->
-      <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border border-brand-azure/40 p-6 rounded-2xl flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl">
-        <div class="space-y-1">
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Investimento Mensal Consolidado</span>
-            <span id="badge-desconto" class="hidden text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/30 font-mono">15% OFF</span>
-          </div>
-          
-          <div class="flex items-baseline gap-3">
-            <span class="text-3xl sm:text-4xl font-black text-white font-mono" id="valor-mensalidade">R$ 788,00</span>
-            <span class="text-xs text-slate-400">/mês recorrente</span>
-          </div>
-
-          <div class="flex flex-wrap items-center gap-3 text-xs text-slate-400 pt-1">
-            <span>Taxa Implantação: <strong id="valor-setup-badge" class="text-white font-mono">R$ 690,00</strong></span>
-            <span>•</span>
-            <span>Economia anual estimada: <strong id="valor-economia-anual" class="text-emerald-400 font-mono">R$ 3.840,00</strong></span>
-          </div>
-          <p class="text-[11px] text-slate-500 pt-1">✓ Inclui suporte técnico humano ilimitado em Sarandi-RS e atualizações da SEFAZ-RS sem custos adicionais.</p>
-        </div>
-
-        <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-          <button onclick="aprovarPropostaWhatsApp()" class="w-full sm:w-auto px-7 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2">
-            <span>✅</span> Aceitar Proposta no WhatsApp
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- CALCULADORA DE RETORNO SOBRE INVESTIMENTO (ROI) -->
-    <div class="glass rounded-3xl p-6 sm:p-8 space-y-4">
-      <h3 class="text-base font-bold text-white font-display flex items-center gap-2">
-        <span>📊</span> Por que migrar para a TruData ERP é lucrativo desde o primeiro mês?
-      </h3>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
-          <span class="text-amber-400 font-bold block mb-1">Zero Filas de Suporte de 3 Horas</span>
-          <p class="text-slate-400">Sua equipe fala direto com técnicos experientes no Rio Grande do Sul em minutos, sem robôs de triagem.</p>
-        </div>
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
-          <span class="text-emerald-400 font-bold block mb-1">Sem Parada de Caixa nos Finais de Semana</span>
-          <p class="text-slate-400">A contingência local inteligente emite NFC-e mesmo se o link de fibra da sua cidade romper no sábado à tarde.</p>
-        </div>
-        <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
-          <span class="text-blue-400 font-bold block mb-1">Previsibilidade Financeira Total</span>
-          <p class="text-slate-400">Sem reajustes surpresa de 25% impostos por multinacionais. Parceria de longo prazo fundada em Sarandi-RS.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- GARANTIA & ASSINATURA DIGITAL -->
-    <div class="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-400">
-      <div class="flex items-center gap-4">
-        <div class="text-3xl">🛡️</div>
-        <div>
-          <h4 class="font-bold text-white">Garantia Incondicional de Virada Sem Parada de Vendas</h4>
-          <p class="text-[11px] text-slate-400 mt-0.5">Seu sistema anterior roda em paralelo até que o primeiro cupom fiscal seja emitido no caixa com 100% de sucesso.</p>
-        </div>
-      </div>
-      <div class="text-right shrink-0">
-        <span class="text-[11px] font-mono text-slate-500 block">HANSEN SOFTWARE LTDA</span>
-        <span class="text-[10px] text-slate-400 block">CNPJ 01.380.207/0001-00 • Sarandi/RS</span>
-      </div>
-    </div>
-
-  </main>
-
-  <script>
-    // LISTA EMBUTIDA DOS ALVOS PILOTO RS PARA PREENCHIMENTO INSTANTÂNEO
-    let alvosPiloto = [];
-
-    async function inicializarAlvos() {
-      try {
-        const resp = await fetch('alvos_prioritarios_piloto.json');
-        if (resp.ok) {
-          alvosPiloto = await resp.json();
-          popularSelectAlvos(alvosPiloto);
-        }
-      } catch (err) {
-        console.log('Modo offline/standalone para alvos');
-      }
-      
-      // Ler parâmetros da URL
-      carregarParametrosURL();
-      atualizarTotais();
-      
-      const hoje = new Date().toLocaleDateString('pt-BR');
-      const elData = document.getElementById('data-proposta-hoje');
-      if (elData) elData.textContent = `Emitida em ${hoje}`;
-    }
-
-    function popularSelectAlvos(alvos) {
-      const select = document.getElementById('seletor-alvo-piloto');
-      if (!select) return;
-      
-      alvos.forEach((alvo, idx) => {
-        const opt = document.createElement('option');
-        opt.value = idx;
-        opt.textContent = `${alvo.nome} (${alvo.cidade} - RS) — ${alvo.segmento}`;
-        select.appendChild(opt);
-      });
-    }
-
-    function carregarAlvoSelecionado() {
-      const select = document.getElementById('seletor-alvo-piloto');
-      const idx = select.value;
-      if (idx === '' || !alvosPiloto[idx]) return;
-
-      const alvo = alvosPiloto[idx];
-      document.getElementById('prop-cliente').value = alvo.nome;
-      document.getElementById('prop-decisor').value = alvo.decisor || 'Diretoria';
-      document.getElementById('prop-cidade').value = `${alvo.cidade} - RS`;
-      document.getElementById('prop-segmento').value = alvo.segmento;
-
-      if (alvo.pdvs_estimados) {
-        document.getElementById('range-pdvs').value = Math.min(Math.max(alvo.pdvs_estimados, 1), 10);
-      }
-
-      // Gera ID baseado no CNPJ
-      const idSufixo = alvo.cnpj_limpo ? alvo.cnpj_limpo.slice(-4) : Math.floor(1000 + Math.random() * 9000);
-      document.getElementById('prop-id-badge').textContent = `PROPOSTA #TRU-2026-${idSufixo}`;
-
-      atualizarTotais();
-    }
-
-    function carregarParametrosURL() {
-      const params = new URLSearchParams(window.location.search);
-      
-      if (params.get('cliente')) document.getElementById('prop-cliente').value = params.get('cliente');
-      if (params.get('decisor')) document.getElementById('prop-decisor').value = params.get('decisor');
-      if (params.get('cidade')) document.getElementById('prop-cidade').value = params.get('cidade');
-      if (params.get('segmento')) document.getElementById('prop-segmento').value = params.get('segmento');
-      if (params.get('pdvs')) document.getElementById('range-pdvs').value = params.get('pdvs');
-      if (params.get('setup')) document.getElementById('select-setup').value = params.get('setup');
-      if (params.get('desconto')) document.getElementById('select-desconto').value = params.get('desconto');
-      if (params.get('ref')) document.getElementById('prop-id-badge').textContent = `PROPOSTA #${params.get('ref')}`;
-    }
-
-    function atualizarTotais() {
-      const pdvs = parseInt(document.getElementById('range-pdvs').value) || 1;
-      document.getElementById('label-qtd-pdv').textContent = `${pdvs} ${pdvs === 1 ? 'Caixa' : 'Caixas'}`;
-
-      let totalBase = 0;
-      document.querySelectorAll('.mod-check:checked').forEach(chk => {
-        totalBase += parseFloat(chk.dataset.valor || 0);
-      });
-
-      // Adicionais de PDV: 1º incluso, +R$ 89 por PDV extra
-      const custoExtraPDV = (pdvs - 1) * 89;
-      let subtotal = totalBase + custoExtraPDV;
-
-      // Desconto
-      const percDesconto = parseInt(document.getElementById('select-desconto').value) || 0;
-      const badgeDesc = document.getElementById('badge-desconto');
-      
-      if (percDesconto > 0) {
-        subtotal = subtotal * (1 - (percDesconto / 100));
-        badgeDesc.textContent = `${percDesconto}% OFF`;
-        badgeDesc.classList.remove('hidden');
-      } else {
-        badgeDesc.classList.add('hidden');
-      }
-
-      document.getElementById('valor-mensalidade').textContent = 'R$ ' + subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-      // Setup
-      const setupValor = parseFloat(document.getElementById('select-setup').value) || 0;
-      document.getElementById('valor-setup-badge').textContent = setupValor === 0 ? 'ISENTO (R$ 0,00)' : 'R$ ' + setupValor.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-
-      // Economia estimada anual (vs concorrentes inflacionados)
-      const economia = Math.max(3840, subtotal * 4.5);
-      document.getElementById('valor-economia-anual').textContent = 'R$ ' + economia.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
-
-    function aprovarPropostaWhatsApp() {
-      const cliente = document.getElementById('prop-cliente').value;
-      const decisor = document.getElementById('prop-decisor').value;
-      const cidade = document.getElementById('prop-cidade').value;
-      const total = document.getElementById('valor-mensalidade').textContent;
-      const setup = document.getElementById('valor-setup-badge').textContent;
-      const pdvs = document.getElementById('range-pdvs').value;
-      const ref = document.getElementById('prop-id-badge').textContent;
-      
-      const modulos = [];
-      document.querySelectorAll('.mod-check:checked').forEach(chk => {
-        modulos.push(chk.dataset.nome);
-      });
-
-      const msgTexto = `Olá equipe Hansen Software! Acabei de revisar e validar a proposta da *TruData ERP* para minha empresa:\n\n` +
-        `📋 *${ref}*\n` +
-        `🏢 *Empresa:* ${cliente}\n` +
-        `👤 *Responsável:* ${decisor}\n` +
-        `📍 *Cidade:* ${cidade}\n` +
-        `🖥️ *Caixas (PDVs):* ${pdvs}\n` +
-        `💰 *Mensalidade:* ${total}\n` +
-        `🛠️ *Taxa de Implantação:* ${setup}\n\n` +
-        `*Módulos Contratados:*\n` +
-        modulos.map(m => `• ${m}`).join('\n') +
-        `\n\n✅ *Aceite Formal:* Gostaria de agendar a data de implantação técnica e treinamento da equipe!`;
-
-      // Log para backend CRM se disponível
-      fetch('/api/aceitar_proposta', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          referencia: ref,
-          cliente,
-          decisor,
-          cidade,
-          mensalidade: total,
-          setup,
-          pdvs,
-          data: new Date().toISOString()
-        })
-      }).catch(() => {});
-
-      window.open('https://wa.me/5554996966175?text=' + encodeURIComponent(msgTexto), '_blank');
-    }
-
-    function copiarLinkParametrizado() {
-      const url = new URL(window.location.origin + window.location.pathname);
-      url.searchParams.set('cliente', document.getElementById('prop-cliente').value);
-      url.searchParams.set('decisor', document.getElementById('prop-decisor').value);
-      url.searchParams.set('cidade', document.getElementById('prop-cidade').value);
-      url.searchParams.set('segmento', document.getElementById('prop-segmento').value);
-      url.searchParams.set('pdvs', document.getElementById('range-pdvs').value);
-      url.searchParams.set('setup', document.getElementById('select-setup').value);
-      url.searchParams.set('desconto', document.getElementById('select-desconto').value);
-      
-      const refClean = document.getElementById('prop-id-badge').textContent.replace('PROPOSTA #', '');
-      url.searchParams.set('ref', refClean);
-
-      navigator.clipboard.writeText(url.toString()).then(() => {
-        alert(`Link personalizado gerado e copiado com sucesso!\n\n${url.toString()}\n\nVocê pode enviar diretamente no WhatsApp do cliente.`);
-      });
-    }
-
-    window.addEventListener('DOMContentLoaded', inicializarAlvos);
-  </script>
-</body>
+    </script>
+  </body>
 </html>

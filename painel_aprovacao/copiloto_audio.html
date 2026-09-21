@@ -1,339 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Copiloto de Áudio & Escuta Ativa IA — TruData ERP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #070b14; color: #f1f5f9; }
-    .pulse-ring {
-      animation: pulseRing 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-    }
-    @keyframes pulseRing {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(244, 63, 94, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
-    }
-  </style>
-</head>
-<body class="min-h-screen p-4 sm:p-6 lg:p-8 flex flex-col justify-between">
-
-  <!-- CABEÇALHO -->
-  <div class="max-w-5xl mx-auto w-full mb-6">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900/80 border border-slate-800 p-5 rounded-3xl backdrop-blur-md">
-      <div class="flex items-center gap-3.5">
-        <a href="index.html" class="h-10 w-10 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-lg transition" title="Voltar ao Cockpit">
-          ←
-        </a>
-        <div class="h-10 w-10 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center text-xl">
-          🎙️
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-lg font-black text-white">Copiloto de Áudio & Escuta Ativa IA</h1>
-            <span class="text-[10px] bg-rose-500/20 text-rose-300 font-bold px-2 py-0.5 rounded-full border border-rose-500/30">Análise de Objeções ao Vivo</span>
-          </div>
-          <p class="text-xs text-slate-400">Grave a resistência do comerciante ou digite a dúvida para receber a réplica persuasiva ideal em 3 segundos.</p>
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#009fe3" />
+    <title>Ferramenta revisada · TruData</title>
+    <link rel="icon" href="/painel_aprovacao/favicon.svg" />
+    <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <link
+      rel="stylesheet"
+      href="/painel_aprovacao/ferramentas.css?v=20260921-3"
+    />
+  </head>
+  <body class="tools-page" data-tool="">
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark">T</span
+          ><span class="brand-name"
+            >TruData<small>Relacionamento e crescimento</small></span
+          ></a
+        >
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="index.html">Aprovação</a
+          ><a href="calendario.html">Calendário</a
+          ><a href="radar_clientes.html">Radar de clientes</a
+          ><a href="ferramentas.html" aria-current="page">Ferramentas</a>
+        </nav>
+        <span class="small muted">Hansen Software · Sarandi, RS</span>
       </div>
-      <div class="flex items-center gap-2">
-        <a href="objecoes.html" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-bold rounded-xl transition flex items-center gap-1.5">
-          <span>⚔️</span>
-          <span>Oráculo 2.0</span>
-        </a>
+    </header>
+    <main id="main" class="retired">
+      <p class="small muted">Revisão das ferramentas</p>
+      <h1>Reunida em Preparar uma conversa</h1>
+      <p style="margin-top: 24px">
+        Mensagens, objeções e roteiros foram reunidos em um editor. A nova
+        versão não promete envio nem atualização automática do CRM.
+      </p>
+      <div class="actions">
+        <a class="btn primary" id="replacement" href="cadencia_sdr.html"
+          >Ver alternativa</a
+        ><a class="btn" href="ferramentas.html">Todas as ferramentas</a>
       </div>
-    </div>
-  </div>
-
-  <main class="max-w-5xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 mb-8">
-
-    <!-- COLUNA ESQUERDA: GRAVADOR & TRANSCRIÇÃO (5 COLUNAS) -->
-    <div class="lg:col-span-5 space-y-5">
-      <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-5 text-center">
-        
-        <h3 class="text-sm font-bold text-white flex items-center justify-center gap-2">
-          <span>🎤</span>
-          <span>Escuta da Objeção do Lojista</span>
-        </h3>
-
-        <!-- BOTÃO DE GRAVAÇÃO DO MICROFONE -->
-        <div class="py-6 flex flex-col items-center justify-center space-y-3">
-          <button id="btn-gravar" onclick="alternarGravacao()" class="h-24 w-24 rounded-full bg-gradient-to-tr from-rose-600 to-pink-500 text-white flex items-center justify-center text-3xl shadow-xl shadow-rose-950 transition cursor-pointer hover:scale-105">
-            🎙️
-          </button>
-          <div id="status-gravacao" class="text-xs font-bold text-slate-400">
-            Toque para gravar o áudio da conversa
-          </div>
-          <div class="text-[10px] text-slate-500 max-w-xs">
-            Suporta gravações discretas no balcão da loja via smartphone ou tablet.
-          </div>
-        </div>
-
-        <!-- SIMULADOR RÁPIDO DE OBJEÇÕES FREQUENTES -->
-        <div class="text-left space-y-2 pt-3 border-t border-slate-800">
-          <label class="block text-[11px] font-bold text-slate-400">Ou escolha uma objeção típica do RS:</label>
-          <div class="grid grid-cols-1 gap-1.5" id="lista-atalhos">
-            <button onclick="carregarObjecaoPredefinida('preco')" class="p-2.5 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-left text-xs transition flex items-center justify-between">
-              <span class="text-slate-300">"Tá muito caro o sistema de vocês..."</span>
-              <span class="text-[10px] text-rose-400 font-bold">Preço</span>
-            </button>
-            <button onclick="carregarObjecaoPredefinida('internet')" class="p-2.5 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-left text-xs transition flex items-center justify-between">
-              <span class="text-slate-300">"Aqui a internet vive caindo no sábado..."</span>
-              <span class="text-[10px] text-amber-400 font-bold">Conexão</span>
-            </button>
-            <button onclick="carregarObjecaoPredefinida('sistema_atual')" class="p-2.5 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-left text-xs transition flex items-center justify-between">
-              <span class="text-slate-300">"Já tenho sistema há 10 anos e não quero mexer..."</span>
-              <span class="text-[10px] text-sky-400 font-bold">Acomodação</span>
-            </button>
-            <button onclick="carregarObjecaoPredefinida('medo_virada')" class="p-2.5 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-left text-xs transition flex items-center justify-between">
-              <span class="text-slate-300">"Tenho medo de travar a loja no dia da troca..."</span>
-              <span class="text-[10px] text-emerald-400 font-bold">Risco</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- TRANSCRIÇÃO MANUAL / EDITÁVEL -->
-        <div class="text-left space-y-1.5 pt-2">
-          <label class="block text-xs font-bold text-slate-300">Texto Transcrito (ou digite aqui):</label>
-          <textarea id="txt-transcricao" rows="3" placeholder="O que o cliente disse exatamente?" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-rose-500 transition"></textarea>
-          <button onclick="analisarObjeçãoTexto()" class="w-full py-2.5 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold rounded-xl transition shadow">
-            Analisar com IA & Gerar Réplica ⚡
-          </button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- COLUNA DIREITA: RÉPLICA PERSUASIVA EM 3 SEGUNDOS (7 COLUNAS) -->
-    <div class="lg:col-span-7 space-y-5">
-      <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
-        
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-          <div class="flex items-center gap-2.5">
-            <span class="text-2xl">⚡</span>
-            <div>
-              <h3 class="text-base font-bold text-white font-display">Réplica de Combate Estruturada</h3>
-              <p class="text-xs text-slate-400">Argumentação de alto impacto calibrada para o varejo gaúcho</p>
-            </div>
-          </div>
-          <span id="badge-tipo-objecao" class="text-xs font-extrabold uppercase bg-rose-500/20 text-rose-300 border border-rose-500/30 px-3 py-1 rounded-full">
-            Aguardando Áudio
-          </span>
-        </div>
-
-        <!-- BLOCO DA RÉPLICA DIVIDIDA EM 3 PARTES -->
-        <div class="space-y-4" id="conteudo-replica">
-          
-          <!-- 1. Gancho de Empatia -->
-          <div class="bg-slate-950/70 border border-slate-800 p-4 rounded-2xl space-y-1">
-            <span class="text-[10px] font-black uppercase text-amber-400 tracking-wider">Passo 1: Validar & Conectar</span>
-            <p class="text-xs text-slate-200 leading-relaxed font-medium" id="rep-passo1">
-              "Compreendo perfeitamente, Seu Carlos. Quando o lojista olha apenas a mensalidade na ponta do lápis, parece que qualquer troca é um gasto a mais..."
-            </p>
-          </div>
-
-          <!-- 2. Prova de Fato & Contraste Regional -->
-          <div class="bg-slate-950/70 border border-slate-800 p-4 rounded-2xl space-y-1">
-            <span class="text-[10px] font-black uppercase text-sky-400 tracking-wider">Passo 2: O Custo Invisível vs Prova Real RS</span>
-            <p class="text-xs text-slate-200 leading-relaxed font-medium" id="rep-passo2">
-              "Mas a verdade é que o sistema atual já custa muito caro quando a internet oscila e o caixa fica travado por 20 minutos no sábado, ou quando ocorrem erros de digitação de NCM. Nossos clientes aqui de Sarandi e Passo Fundo economizam em média R$ 1.200 por mês só eliminando paradas de frente de caixa."
-            </p>
-          </div>
-
-          <!-- 3. Fechamento de Risco Zero -->
-          <div class="bg-slate-950/70 border border-slate-800 p-4 rounded-2xl space-y-1">
-            <span class="text-[10px] font-black uppercase text-emerald-400 tracking-wider">Passo 3: Chamada para Ação com Risco Zero</span>
-            <p class="text-xs text-slate-200 leading-relaxed font-medium" id="rep-passo3">
-              "Para você não ter dúvida alguma, assinamos um termo de garantia incondicional de 30 dias: se não gostar, devolvemos 100% do seu investimento e temos equipe própria a 15 minutos daqui com SLA de atendimento presencial em até 2 horas. Vamos rodar o teste na quinta-feira?"
-            </p>
-          </div>
-
-        </div>
-
-        <!-- BOTÕES DE APOIO AO CONSULTOR -->
-        <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center gap-3">
-          <button onclick="ouvirReplicaVoz()" id="btn-ouvir" class="py-3 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-indigo-950">
-            <span>🔊</span>
-            <span>Ouvir Réplica Falada</span>
-          </button>
-          <button onclick="copiarReplicaCompleta()" class="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition flex items-center gap-1.5 border border-slate-700">
-            <span>📋</span>
-            <span>Copiar Argumento</span>
-          </button>
-          <a href="fechamento_rapido.html" class="py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-black transition flex items-center gap-1.5 ml-auto shadow-lg shadow-emerald-950">
-            <span>⚡</span>
-            <span>Ir para o Fechador de Bolso</span>
-          </a>
-        </div>
-
-      </div>
-    </div>
-
-  </main>
-
-  <script>
-    let gravando = false;
-    let recognition = null;
-
-    // Inicializa Web Speech API se disponível no navegador
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SpeechRecognition();
-      recognition.lang = 'pt-BR';
-      recognition.continuous = false;
-      recognition.interimResults = false;
-
-      recognition.onresult = (event) => {
-        const transcricao = event.results[0][0].transcript;
-        document.getElementById('txt-transcricao').value = transcricao;
-        analisarObjeçãoTexto();
-      };
-
-      recognition.onerror = (e) => {
-        console.warn('Erro de reconhecimento:', e);
-        pararGravacao();
-      };
-
-      recognition.onend = () => {
-        pararGravacao();
-      };
-    }
-
-    function alternarGravacao() {
-      if (gravando) {
-        pararGravacao();
-      } else {
-        iniciarGravacao();
+    </main>
+    <script>
+      const q = location.search;
+      if (q) {
+        const a = document.getElementById("replacement"),
+          u = new URL(a.href);
+        for (const [k, v] of new URLSearchParams(q))
+          if (["cliente", "cidade", "decisor"].includes(k))
+            u.searchParams.set(k, v);
+        a.href = u.href;
       }
-    }
-
-    function iniciarGravacao() {
-      gravando = true;
-      const btn = document.getElementById('btn-gravar');
-      btn.classList.add('pulse-ring');
-      btn.innerHTML = '⏹️';
-      document.getElementById('status-gravacao').textContent = 'Ouvindo o lojista... Fale ou deixe falar.';
-      document.getElementById('status-gravacao').className = 'text-xs font-bold text-rose-400 animate-pulse';
-
-      if (recognition) {
-        try { recognition.start(); } catch(e) {}
-      } else {
-        // Fallback simulado se o microfone não tiver permissão
-        setTimeout(() => {
-          if (gravando) {
-            document.getElementById('txt-transcricao').value = "Tá caro a mensalidade de vocês, meu sistema atual é mais barato...";
-            pararGravacao();
-            analisarObjeçãoTexto();
-          }
-        }, 3500);
-      }
-    }
-
-    function pararGravacao() {
-      gravando = false;
-      const btn = document.getElementById('btn-gravar');
-      btn.classList.remove('pulse-ring');
-      btn.innerHTML = '🎙️';
-      document.getElementById('status-gravacao').textContent = 'Toque para gravar novo áudio';
-      document.getElementById('status-gravacao').className = 'text-xs font-bold text-slate-400';
-      if (recognition) {
-        try { recognition.stop(); } catch(e) {}
-      }
-    }
-
-    const BANCO_REPLICAS = {
-      preco: {
-        tipo: 'Objeção: Preço / Caro',
-        cor: 'rose',
-        p1: 'Compreendo perfeitamente, Seu Carlos. Olhando isoladamente, qualquer investimento adicional parece pesado em um mês difícil.',
-        p2: 'Mas o que sai caro de verdade é perder vendas em horários de pico, levar multas fiscais por erro de NCM ou pagar horas extras no fechamento de caixa. O sistema TruData se paga nos primeiros 30 dias pela agilidade que traz para a equipe.',
-        p3: 'Para provar isso na prática, oferecemos 30 dias de garantia incondicional com devolução integral se você não notar a diferença logo na primeira semana. Podemos assinar o teste sem compromisso?'
-      },
-      internet: {
-        tipo: 'Objeção: Conexão / Internet',
-        cor: 'amber',
-        p1: 'Essa é a maior dor dos comerciantes aqui da nossa região do Norte Gaúcho. A internet no interior oscila mesmo e isso não pode parar o comércio.',
-        p2: 'É exatamente por isso que a TruData ERP não depende da nuvem para vender. Nosso PDV é 100% offline nativo: se o provedor cair, o caixa continua bipando produtos e emitindo cupom em contingência sem nenhuma pausa.',
-        p3: 'Quando a conexão volta, tudo é sincronizado automaticamente sem você precisar fazer nada. Quer ver um teste ao vivo agora desligando o cabo de rede?'
-      },
-      sistema_atual: {
-        tipo: 'Objeção: Acomodação / Sistema Legado',
-        cor: 'sky',
-        p1: 'Trocar de sistema dá receio mesmo, principalmente quando a rotina já está instalada há anos.',
-        p2: 'O problema é que os sistemas antigos de grandes multinacionais não atendem pelo WhatsApp, cobram caro por cada ponto extra e demoram dias para resolver chamados. Na TruData você fala com nosso suporte próprio de Sarandi em até 2 minutos.',
-        p3: 'Nossa equipe faz toda a importação do seu cadastro e estoque sem você precisar redigitar uma única linha. Nós cuidamos de tudo na virada. Vamos agendar essa demonstração prática?'
-      },
-      medo_virada: {
-        tipo: 'Objeção: Risco / Parar a Loja',
-        cor: 'emerald',
-        p1: 'Seu medo é totalmente compreensível. Parar o atendimento de frente de caixa é prejuízo na certa.',
-        p2: 'Nosso processo de migração blindada é executado fora do horário de pico ou paralelamente. Mantemos o sistema antigo funcionando em contingência até que o primeiro cupom da TruData seja emitido com 100% de sucesso.',
-        p3: 'Além disso, um consultor técnico fica plantado dentro da sua loja durante toda a primeira manhã de operação. Risco zero para você. Podemos marcar para o próximo fechamento mensal?'
-      }
-    };
-
-    function carregarObjecaoPredefinida(tipo) {
-      const rep = BANCO_REPLICAS[tipo];
-      if (!rep) return;
-      document.getElementById('txt-transcricao').value = tipo === 'preco' ? 'Tá muito caro o valor da mensalidade...' : tipo === 'internet' ? 'Aqui na minha cidade a internet vive caindo...' : tipo === 'sistema_atual' ? 'Já tenho sistema há 10 anos e não quero mexer...' : 'Tenho medo de travar a loja no dia da troca...';
-      aplicarReplica(rep);
-    }
-
-    function analisarObjeçãoTexto() {
-      const t = (document.getElementById('txt-transcricao').value || '').toLowerCase();
-      let rep = BANCO_REPLICAS.preco;
-
-      if (t.includes('internet') || t.includes('cai') || t.includes('sinal') || t.includes('rede')) {
-        rep = BANCO_REPLICAS.internet;
-      } else if (t.includes('já tenho') || t.includes('outro') || t.includes('antigo') || t.includes('anos') || t.includes('linx') || t.includes('hiper')) {
-        rep = BANCO_REPLICAS.sistema_atual;
-      } else if (t.includes('medo') || t.includes('parar') || t.includes('travar') || t.includes('virada') || t.includes('dor')) {
-        rep = BANCO_REPLICAS.medo_virada;
-      }
-
-      aplicarReplica(rep);
-    }
-
-    function aplicarReplica(rep) {
-      document.getElementById('badge-tipo-objecao').textContent = rep.tipo;
-      document.getElementById('rep-passo1').textContent = `"${rep.p1}"`;
-      document.getElementById('rep-passo2').textContent = `"${rep.p2}"`;
-      document.getElementById('rep-passo3').textContent = `"${rep.p3}"`;
-    }
-
-    function ouvirReplicaVoz() {
-      const p1 = document.getElementById('rep-passo1').textContent;
-      const p2 = document.getElementById('rep-passo2').textContent;
-      const p3 = document.getElementById('rep-passo3').textContent;
-      const textoCompleto = `${p1} ${p2} ${p3}`.replace(/"/g, '');
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(textoCompleto);
-        utterance.lang = 'pt-BR';
-        utterance.rate = 1.05;
-        window.speechSynthesis.speak(utterance);
-      } else {
-        alert('Navegador sem suporte a síntese de voz.');
-      }
-    }
-
-    function copiarReplicaCompleta() {
-      const p1 = document.getElementById('rep-passo1').textContent;
-      const p2 = document.getElementById('rep-passo2').textContent;
-      const p3 = document.getElementById('rep-passo3').textContent;
-      const texto = `${p1}\n\n${p2}\n\n${p3}`.replace(/"/g, '');
-      navigator.clipboard.writeText(texto).then(() => {
-        alert('Argumentação copiada com sucesso! 📋');
-      });
-    }
-
-    // Inicialização
-    carregarObjecaoPredefinida('preco');
-  </script>
-</body>
+    </script>
+  </body>
 </html>
