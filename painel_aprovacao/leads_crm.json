@@ -1,5 +1,25 @@
 [
   {
+    "id": "lead-radar-1790014933-97",
+    "nome": "Telmo Perin",
+    "empresa": "Metalurgica Perin",
+    "cidade": "Sarandi - RS",
+    "segmento": "Prestação de Serviços & Varejo",
+    "telefone": "555499571667",
+    "email": "metalurgica.perin.sarandi@outlook.com",
+    "site": "Não possui site",
+    "tem_site": false,
+    "endereco": "RUA BORTOLO DE MARCO, 709, Centro - Sarandi - RS",
+    "cnpj": "09.592.280/0001-49",
+    "sintegra_status": "ATIVA / Regular no Sintegra-RS",
+    "cnae": "4292-8/01 - Montagem de estruturas metálicas",
+    "origem": "Radar (0km de Sarandi)",
+    "fase": "novo",
+    "caixas": "3",
+    "data": "21/09/2026",
+    "notas": "Empresa MICRO EMPRESA ativa no ramo de Prestação de Serviços & Varejo em Sarandi-RS. Decisor(a): Telmo Perin. Dados verificados na Receita Federal e Sintegra-RS."
+  },
+  {
     "id": "lead-radar-1789995160-96",
     "nome": "Cleonice Aparecida Zanin",
     "empresa": "Cleonice Aparecida Zanin",
