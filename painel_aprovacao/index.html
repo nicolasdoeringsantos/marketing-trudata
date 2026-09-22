@@ -4,114 +4,1761 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#009fe3" />
-    <title>Aprovação de conteúdo · TruData</title>
+    <title>Aprovação de Conteúdo & Votação · TruData</title>
     <link rel="manifest" href="/painel_aprovacao/manifest.json" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/painel_aprovacao/favicon.svg"
-    />
+    <link rel="icon" type="image/svg+xml" href="/painel_aprovacao/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+    <style>
+      /* Estilos exclusivos da nova dinâmica de Aprovação e Votação */
+      :root {
+        --color-gold: #f59e0b;
+        --color-gold-bg: #fef3c7;
+        --color-gold-border: #fde68a;
+      }
+      .page-actions-header {
+        display: flex;
+        gap: var(--space-2);
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .btn-primary-action {
+        background: var(--color-primary);
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: background 0.15s ease, transform 0.1s ease;
+      }
+      .btn-primary-action:hover {
+        background: var(--color-action);
+        transform: translateY(-1px);
+      }
+      .btn-gold-action {
+        background: #d97706;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      .btn-gold-action:hover {
+        background: #b45309;
+      }
+
+      /* Abas de Status Solicitadas */
+      .status-tab-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border: 1px solid var(--color-line);
+        background: var(--color-surface);
+        color: var(--color-ink);
+        border-radius: var(--radius);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .status-tab-btn:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+      }
+      .status-tab-btn.active {
+        background: var(--color-action);
+        color: #fff;
+        border-color: var(--color-action);
+        box-shadow: 0 2px 4px rgba(7, 89, 133, 0.2);
+      }
+      .status-tab-btn.active .tab-count {
+        background: rgba(255, 255, 255, 0.25);
+        color: #fff;
+      }
+      .tab-count {
+        background: var(--color-bg);
+        color: var(--color-muted);
+        padding: 2px 7px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+      .status-tab-btn.special-tab {
+        border-color: var(--color-gold);
+      }
+      .status-tab-btn.special-tab.active {
+        background: #d97706;
+        border-color: #d97706;
+        color: #fff;
+      }
+
+      /* Badges dos Cards */
+      .badge-custom {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+      .badge-pendente {
+        background: var(--color-warning-bg);
+        color: var(--color-warning);
+        border: 1px solid #fef08a;
+      }
+      .badge-aprovado {
+        background: var(--color-success-bg);
+        color: var(--color-success);
+        border: 1px solid #bbf7d0;
+      }
+      .badge-reprovado {
+        background: var(--color-error-bg);
+        color: var(--color-error);
+        border: 1px solid #fecaca;
+      }
+
+      /* Ações no Card */
+      .post-action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+        padding-top: 8px;
+        border-top: 1px solid var(--color-line);
+      }
+      .btn-approve {
+        background: #15803d;
+        color: #fff;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .btn-approve:hover { background: #166534; }
+      .btn-reject {
+        background: #dc2626;
+        color: #fff;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .btn-reject:hover { background: #991b1b; }
+      .btn-delete-rejected {
+        background: #7f1d1d;
+        color: #fee2e2;
+        border: 1px solid #b91c1c;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .btn-delete-rejected:hover {
+        background: #991b1b;
+        color: #fff;
+      }
+      .btn-secondary {
+        background: var(--color-bg);
+        color: var(--color-ink);
+        border: 1px solid var(--color-line);
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .btn-secondary:hover {
+        background: #e2e8f0;
+      }
+
+      /* Sistema de Batalha de Imagens / Votação */
+      .battle-container {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5);
+      }
+      .battle-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-line);
+        border-radius: var(--radius);
+        padding: var(--space-4);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+      .battle-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: var(--space-3);
+        margin-bottom: var(--space-4);
+        padding-bottom: var(--space-3);
+        border-bottom: 1px solid var(--color-line);
+      }
+      .battle-header h3 {
+        font-size: 1.25rem;
+        color: var(--color-ink);
+        margin-bottom: 4px;
+      }
+      .battle-header p {
+        color: var(--color-muted);
+        font-size: 0.875rem;
+      }
+      .battle-options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--space-4);
+        margin-bottom: var(--space-4);
+      }
+      .battle-option {
+        background: var(--color-bg);
+        border: 2px solid var(--color-line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      .battle-option.leader {
+        border-color: var(--color-gold);
+        background: #fffbeb;
+        box-shadow: 0 0 0 1px var(--color-gold), 0 8px 16px rgba(245, 158, 11, 0.12);
+      }
+      .battle-crown-badge {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        z-index: 2;
+      }
+      .battle-img-box {
+        position: relative;
+        aspect-ratio: 1;
+        background: #0f172a;
+        cursor: pointer;
+        overflow: hidden;
+      }
+      .battle-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.25s ease;
+      }
+      .battle-img-box:hover img {
+        transform: scale(1.03);
+      }
+      .battle-zoom-hint {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        pointer-events: none;
+      }
+      .battle-option-content {
+        padding: var(--space-3);
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-between;
+      }
+      .battle-option-name {
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+      }
+      .battle-vote-meter {
+        margin: 8px 0;
+      }
+      .battle-vote-count {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .progress-track {
+        height: 8px;
+        background: #e2e8f0;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        background: var(--color-primary);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+      .progress-fill.leader-fill {
+        background: linear-gradient(90deg, #f59e0b, #d97706);
+      }
+      .btn-vote {
+        background: #fff;
+        border: 2px solid var(--color-primary);
+        color: var(--color-primary);
+        padding: 8px 12px;
+        border-radius: var(--radius);
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.15s ease;
+        margin-top: 8px;
+      }
+      .btn-vote:hover {
+        background: var(--color-primary);
+        color: #fff;
+      }
+      .btn-vote.has-voted {
+        background: var(--color-action);
+        border-color: var(--color-action);
+        color: #fff;
+      }
+
+      /* Barra de Decisão do Gestor */
+      .battle-manager-bar {
+        background: #f8fafc;
+        border: 1px dashed var(--color-line);
+        border-radius: var(--radius);
+        padding: var(--space-3) var(--space-4);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--space-3);
+      }
+      .battle-winner-text {
+        font-size: 0.9rem;
+        color: var(--color-ink);
+      }
+      .btn-approve-winner {
+        background: #16a34a;
+        color: #fff;
+        border: none;
+        padding: 9px 18px;
+        border-radius: var(--radius);
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.15s ease;
+        box-shadow: 0 2px 6px rgba(22, 163, 74, 0.3);
+      }
+      .btn-approve-winner:hover {
+        background: #15803d;
+      }
+
+      /* Modal Customizado */
+      .custom-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 16px;
+      }
+      .custom-modal {
+        background: var(--color-surface);
+        border-radius: 8px;
+        max-width: 680px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+      }
+      .modal-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--color-line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .modal-header h2 {
+        font-size: 1.25rem;
+        margin: 0;
+      }
+      .modal-body {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .modal-footer {
+        padding: 14px 20px;
+        border-top: 1px solid var(--color-line);
+        background: #f8fafc;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .form-row label {
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: var(--color-ink);
+      }
+      .form-row input,
+      .form-row select,
+      .form-row textarea {
+        width: 100%;
+        padding: 9px 12px;
+        border: 1px solid var(--color-line);
+        border-radius: var(--radius);
+        font-family: inherit;
+        font-size: 0.9rem;
+      }
+      .form-row textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+      .upload-dropzone {
+        border: 2px dashed var(--color-line);
+        border-radius: var(--radius);
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        background: var(--color-bg);
+        transition: border-color 0.2s ease, background 0.2s ease;
+      }
+      .upload-dropzone:hover {
+        border-color: var(--color-primary);
+        background: var(--color-soft);
+      }
+      .preview-image-box {
+        margin-top: 10px;
+        max-height: 200px;
+        display: flex;
+        justify-content: center;
+        background: #0f172a;
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .preview-image-box img {
+        max-height: 200px;
+        object-fit: contain;
+      }
+      .image-options-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .image-option-item {
+        background: #f8fafc;
+        border: 1px solid var(--color-line);
+        border-radius: var(--radius);
+        padding: 12px;
+        display: grid;
+        grid-template-columns: 80px 1fr auto;
+        gap: 12px;
+        align-items: center;
+      }
+      .image-option-thumb {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 4px;
+        background: #0f172a;
+      }
+    </style>
   </head>
   <body data-page="index">
     <a class="skip" href="#main">Ir para o conteúdo</a>
     <header class="topbar">
       <div class="topbar-inner">
-        <a
-          class="brand"
-          href="index.html"
-          aria-label="TruData, aprovação de conteúdo"
-          ><span class="brand-mark">T</span
-          ><span class="brand-name"
-            >TruData<small>Estúdio de conteúdo</small></span
-          ></a
-        >
+        <a class="brand" href="index.html" aria-label="TruData, aprovação de conteúdo">
+          <span class="brand-mark">T</span>
+          <span class="brand-name">TruData<small>Estúdio de conteúdo</small></span>
+        </a>
         <nav class="topnav" aria-label="Navegação principal">
-          <a href="index.html" aria-current="page"
-            ><span data-icon="check"></span>Aprovação</a
-          ><a href="calendario.html"
-            ><span data-icon="calendar"></span>Calendário</a
-          ><a href="radar_clientes.html">Radar de clientes</a><a href="ferramentas.html"
-            ><span data-icon="grid"></span>Ferramentas</a
-          >
+          <a href="index.html" aria-current="page">Aprovação & Votação</a>
+          <a href="calendario.html">Calendário</a>
+          <a href="radar_clientes.html">Radar de clientes</a>
+          <a href="ferramentas.html">Ferramentas</a>
         </nav>
         <div class="team">
-          Hansen Software · Sarandi, RS<span class="avatar" aria-hidden="true"
-            >HS</span
-          >
+          Hansen Software · Sarandi, RS
+          <span class="avatar" aria-hidden="true">HS</span>
         </div>
       </div>
     </header>
+
     <main id="main">
-      <div class="breadcrumb">Marketing / Publicações</div>
+      <div class="breadcrumb">Marketing / Publicações & Aprovação</div>
+      
       <div class="page-heading">
         <div>
-          <h1>Aprovação de conteúdo</h1>
-          <p>Cada publicação, com a atenção que a sua marca merece.</p>
+          <h1>Aprovação de Conteúdo</h1>
+          <p>Gerencie a fila de postagens, realize testes A/B com votação de equipe e aprove a arte vencedora.</p>
         </div>
-        <div class="stats" id="stats" aria-live="polite"></div>
+        <div class="page-actions-header">
+          <button type="button" class="btn-primary-action" id="btn-add-post">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Adicionar Imagem
+          </button>
+          <button type="button" class="btn-gold-action" id="btn-add-battle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H7M14 14.66V17c0 .55.45 1 1 1h2M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+            Nova Votação (3+ Opções)
+          </button>
+        </div>
       </div>
-      <div id="error" class="error-banner" role="alert" hidden></div>
+
+      <!-- Estatísticas Rápidas -->
+      <div class="stats" id="stats-bar" style="margin-bottom: var(--space-4);">
+        <!-- Gerado via JS -->
+      </div>
+
+      <!-- Barra de Filtros e Abas Obrigatórias -->
       <div class="filterbar">
-        <div
-          class="tabs"
-          id="status-tabs"
-          role="group"
-          aria-label="Filtrar por status"
-        ></div>
-        <div class="actions">
-          <label class="field"
-            >Canal<select id="channel">
+        <div class="tabs" id="main-tabs" role="group" aria-label="Filtrar publicações">
+          <button type="button" class="status-tab-btn active" data-filter="pendente">
+            <span>⏳ Pendentes</span>
+            <span class="tab-count" id="count-pendente">0</span>
+          </button>
+          <button type="button" class="status-tab-btn" data-filter="aprovado">
+            <span>✅ Aprovadas</span>
+            <span class="tab-count" id="count-aprovado">0</span>
+          </button>
+          <button type="button" class="status-tab-btn" data-filter="reprovado">
+            <span>❌ Reprovadas</span>
+            <span class="tab-count" id="count-reprovado">0</span>
+          </button>
+          <button type="button" class="status-tab-btn" data-filter="todos">
+            <span>📂 Todas</span>
+            <span class="tab-count" id="count-todos">0</span>
+          </button>
+          <button type="button" class="status-tab-btn special-tab" data-filter="batalha">
+            <span>🏆 Votação de Criativos (3+ Opções)</span>
+            <span class="tab-count" id="count-batalha" style="background:#fef3c7; color:#b45309;">0</span>
+          </button>
+        </div>
+
+        <div class="actions" id="filter-inputs">
+          <label class="field">
+            Canal
+            <select id="channel-filter">
               <option value="">Todos os canais</option>
               <option>Instagram</option>
               <option>WhatsApp</option>
               <option>LinkedIn</option>
               <option>Facebook</option>
-            </select></label
-          ><label class="field"
-            >Buscar conteúdo<input
-              type="search"
-              id="search"
-              placeholder="Título, legenda ou pilar"
-          /></label>
+            </select>
+          </label>
+          <label class="field">
+            Buscar conteúdo
+            <input type="search" id="search-input" placeholder="Título, legenda ou pilar" />
+          </label>
         </div>
       </div>
+
+      <!-- Workspace Principal -->
       <div class="workspace">
-        <section aria-labelledby="queue-title">
+        <section style="flex: 1; min-width: 0;">
           <div class="section-line">
-            <h2 id="queue-title">Fila de publicações</h2>
-            <span
-              class="muted small"
-              id="result-count"
-              aria-live="polite"
-            ></span>
+            <h2 id="section-title">Fila de Publicações</h2>
+            <span class="muted small" id="result-count">Carregando...</span>
           </div>
-          <div class="post-grid" id="posts">
-            <div class="loading">
-              <span class="spinner"></span>Carregando publicações
-            </div>
+
+          <!-- Grade de Posts Normais -->
+          <div class="post-grid" id="posts-container">
+            <div class="loading">Carregando publicações...</div>
+          </div>
+
+          <!-- Seção de Batalha / Votação (Enquetes) -->
+          <div class="battle-container" id="battles-container" style="display: none;">
+            <!-- Renderizado via JS -->
           </div>
         </section>
-        <aside
-          class="rail"
-          id="diagnostic"
-          aria-label="Diagnóstico dos canais"
-        ></aside>
+
+        <!-- Painel Lateral de Diagnóstico -->
+        <aside class="rail" id="diagnostic-rail">
+          <header>
+            <h2>Gestão Editorial</h2>
+            <p class="small muted">Diretrizes da equipe TruData.</p>
+          </header>
+          <section class="channel">
+            <h3>Regras do Fluxo</h3>
+            <p style="margin-top: 6px;">1. <strong>Pendentes:</strong> revise texto e imagem antes de aprovar.</p>
+            <p style="margin-top: 4px;">2. <strong>Reprovadas:</strong> exclua permanentemente itens descartados com segurança.</p>
+            <p style="margin-top: 4px;">3. <strong>Votação Coletiva:</strong> submeta 3 ou mais opções para a equipe votar e aprove a mais votada com 1 clique.</p>
+          </section>
+          <section class="rail-note">
+            <h3>Proximidade e Precisão</h3>
+            <p>Cards com fotos reais da equipe ou telas reais do sistema geram 3x mais engajamento do que artes genéricas.</p>
+          </section>
+        </aside>
       </div>
+
       <footer class="footer">
-        <span>TruData · Tecnologia próxima de quem empreende.</span
-        ><span id="storage-note">Alterações salvas neste navegador</span>
+        <span>TruData · Hansen Software LTDA · Sarandi, RS</span>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <button type="button" class="btn-secondary" style="font-size:0.75rem; padding:4px 8px;" onclick="window.restaurarExemplosPadrao()">↺ Restaurar Exemplos do Acervo</button>
+          <span id="storage-status">Sincronizado no servidor com segurança</span>
+        </div>
       </footer>
     </main>
-    <dialog id="detail" aria-labelledby="dialog-title"></dialog>
-    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-    <noscript
-      >Ative o JavaScript no navegador para revisar as publicações e abrir as
-      pautas.</noscript
-    >
+
+    <!-- Modal: Detalhes da Publicação -->
+    <dialog id="detail-modal" style="padding:0; border:none; border-radius:8px; max-width:850px; width:95vw; background:#fff; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
+      <div id="detail-modal-content"></div>
+    </dialog>
+
+    <!-- Modal: Adicionar Nova Imagem / Publicação -->
+    <div id="modal-new-post" class="custom-modal-overlay" style="display: none;">
+      <div class="custom-modal">
+        <div class="modal-header">
+          <h2>Adicionar Nova Imagem à Fila</h2>
+          <button type="button" class="btn-secondary" onclick="fecharModalNewPost()">✕ Fechar</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <label>Fonte da Imagem</label>
+            <div class="upload-dropzone" id="post-dropzone" onclick="document.getElementById('post-file-input').click()">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto; display:block; color:var(--color-primary);"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <p style="margin-top:6px; font-weight:600;">Clique para carregar imagem do seu computador</p>
+              <p class="small muted">Ou selecione uma arte do acervo abaixo</p>
+            </div>
+            <input type="file" id="post-file-input" accept="image/*" style="display: none;" onchange="handlePostFileUpload(this)" />
+            
+            <div style="margin-top:8px;">
+              <span class="small muted">Ou escolha do acervo existente:</span>
+              <select id="post-acervo-select" onchange="handlePostAcervoSelect(this)" style="margin-top:4px;">
+                <option value="">Selecione uma imagem do acervo...</option>
+                <option value="card_contadores.jpg">Card Parceria Contadores</option>
+                <option value="card_contadores_opcao2.jpg">Card Parceria Contadores (Opção 2)</option>
+                <option value="card_devolucao_xml.jpg">Card Devolução Fiscal XML</option>
+                <option value="card_honorarios.jpg">Card Honorários no Automático</option>
+                <option value="card_suporte_humano.jpg">Card Suporte Humano vs Robôs</option>
+                <option value="card_reforma_tributaria.jpg">Card Reforma Tributária 2026</option>
+                <option value="card_tela_real_anonimizada.jpg">Card Tela Real Anonimizada</option>
+                <option value="card_tela_real_troca.jpg">Card Troca de Empresa</option>
+                <option value="trudata_suporte_sarandi_1789497393778.jpg">Foto Real Equipe Suporte Sarandi</option>
+                <option value="trudata_pdv_caixa_sarandi_1789497541970.jpg">Foto Real PDV Caixa Balcão</option>
+                <option value="trudata_contador_sarandi_1789497638360.jpg">Foto Real Escritório Contábil</option>
+              </select>
+            </div>
+
+            <div class="preview-image-box" id="post-preview-box" style="display: none;">
+              <img id="post-preview-img" src="" alt="Preview da imagem" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="post-titulo">Título da Publicação *</label>
+            <input type="text" id="post-titulo" placeholder="Ex: Devolução por XML em 2 cliques" required />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-row">
+              <label for="post-canal">Canal Principal</label>
+              <select id="post-canal">
+                <option value="Instagram">Instagram</option>
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="Facebook">Facebook</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="post-pilar">Pilar Estratégico</label>
+              <select id="post-pilar">
+                <option value="Autoridade Fiscal">Autoridade Fiscal</option>
+                <option value="Suporte Humano">Suporte Humano</option>
+                <option value="Parceria Contábil">Parceria Contábil</option>
+                <option value="Gestão Comercial">Gestão Comercial</option>
+                <option value="Demonstração Prática">Demonstração Prática</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="post-legenda">Legenda Completa (Copy)</label>
+            <textarea id="post-legenda" placeholder="Digite o texto do post, emojis e chamadas para ação (CTA)..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <label for="post-briefing">Orientação / Briefing de Produção</label>
+            <input type="text" id="post-briefing" placeholder="Ex: Destacar suporte humano e telefone de Sarandi no card" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="fecharModalNewPost()">Cancelar</button>
+          <button type="button" class="btn-primary-action" onclick="salvarNovoPost()">Salvar na Fila (Pendente)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Criar Batalha de Imagens (3+ Opções) -->
+    <div id="modal-new-battle" class="custom-modal-overlay" style="display: none;">
+      <div class="custom-modal">
+        <div class="modal-header">
+          <h2>Criar Nova Batalha de Imagens (Votação)</h2>
+          <button type="button" class="btn-secondary" onclick="fecharModalNewBattle()">✕ Fechar</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <label for="battle-titulo">Título da Votação / Campanha *</label>
+            <input type="text" id="battle-titulo" placeholder="Ex: Qual criativo para o feed da próxima semana?" required />
+          </div>
+
+          <div class="form-row">
+            <label for="battle-descricao">Descrição / Instruções para quem vai votar</label>
+            <input type="text" id="battle-descricao" placeholder="Ex: Escolha a arte que comunica melhor a velocidade do emissor fiscal." />
+          </div>
+
+          <div class="form-row">
+            <label style="display: flex; justify-content: space-between; align-items: center;">
+              <span>Opções de Imagens (Mínimo de 3 opções obrigatórias)</span>
+              <button type="button" class="btn-secondary" style="font-size:0.75rem; padding:3px 8px;" onclick="adicionarLinhaOpcaoBatalha()">+ Adicionar Mais Opções</button>
+            </label>
+            <div class="image-options-list" id="battle-options-list">
+              <!-- Renderizado dinamicamente com 3 opções padrão -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="fecharModalNewBattle()">Cancelar</button>
+          <button type="button" class="btn-gold-action" onclick="salvarNovaBatalha()">Iniciar Rodada de Votação</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Lightbox (Visualizar Imagem em Alta Resolução) -->
+    <div id="lightbox-modal" class="custom-modal-overlay" style="display: none;" onclick="fecharLightbox(event)">
+      <div style="max-width: 90vw; max-height: 90vh; position: relative; background: #0b2545; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; align-items: center;">
+        <button type="button" style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.7); color: #fff; border:none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; z-index: 10;" onclick="fecharLightbox()">✕ Fechar</button>
+        <img id="lightbox-img" src="" style="max-width: 100%; max-height: 85vh; object-fit: contain;" alt="Imagem ampliada" />
+        <div id="lightbox-caption" style="padding: 10px; color: #fff; font-size: 0.85rem; text-align: center;"></div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast-notify" role="status" aria-live="polite" hidden></div>
+
+    <!-- Script de Dados Padrão (preservado) -->
     <script src="/painel_aprovacao/posts-dados.js"></script>
-    <script src="/painel_aprovacao/editorial.js"></script>
+
+    <!-- Script Exclusivo da Nova Dinâmica de Aprovação e Votação -->
+    <script>
+      (function () {
+        "use strict";
+
+        // Chaves de armazenamento
+        const STORAGE_POSTS_KEY = "trudata_aprovacao_posts_v4";
+        const STORAGE_BATTLES_KEY = "trudata_batalhas_v2";
+
+        // Estado da Aplicação
+        let postsList = [];
+        let battlesList = [];
+        let currentFilter = "pendente"; // "pendente", "aprovado", "reprovado", "todos", "batalha"
+        let currentUploadedImageBase64 = "";
+
+        // Helper de Toast
+        let toastTimeout;
+        function showToast(message, isError = false) {
+          const t = document.getElementById("toast-notify");
+          t.textContent = message;
+          t.style.background = isError ? "var(--color-error)" : "var(--color-action)";
+          t.hidden = false;
+          clearTimeout(toastTimeout);
+          toastTimeout = setTimeout(() => {
+            t.hidden = true;
+          }, 4000);
+        }
+
+        // Resolução correta da imagem
+        function resolveImgSrc(img) {
+          if (!img) return "/painel_aprovacao/favicon.svg";
+          if (img.startsWith("data:") || img.startsWith("http://") || img.startsWith("https://") || img.startsWith("/")) {
+            return img;
+          }
+          return "/conteudo_pronto/" + encodeURIComponent(img);
+        }
+
+        // Inicializar Posts com persistência no servidor (disco) e fallback local
+        async function carregarPosts() {
+          let carregouServidor = false;
+          try {
+            const resp = await fetch("/painel_aprovacao/dados_posts.json?t=" + Date.now(), { cache: "no-store" });
+            if (resp.ok) {
+              const dados = await resp.json();
+              if (Array.isArray(dados)) {
+                // Se o usuário excluiu todas, dados é [] e respeitamos isso 100%!
+                postsList = dados;
+                carregouServidor = true;
+                localStorage.setItem(STORAGE_POSTS_KEY, JSON.stringify(postsList));
+                localStorage.setItem("trudata_posts_inicializados", "true");
+              }
+            }
+          } catch (e) {
+            console.warn("Não foi possível carregar do servidor, tentando localStorage:", e);
+          }
+
+          if (!carregouServidor) {
+            const stored = localStorage.getItem(STORAGE_POSTS_KEY);
+            const jaIniciou = localStorage.getItem("trudata_posts_inicializados");
+            if (stored !== null && jaIniciou === "true") {
+              try {
+                postsList = JSON.parse(stored) || [];
+              } catch (e) {
+                postsList = [];
+              }
+            } else {
+              // Somente na primeira vez absoluta:
+              const base = typeof POSTS_INICIAIS !== "undefined" ? POSTS_INICIAIS : [];
+              postsList = base.map((p, idx) => {
+                let st = p.status || "pendente";
+                if (st === "ajuste") st = "reprovado";
+                if (st !== "pendente" && st !== "aprovado" && st !== "reprovado") st = "pendente";
+                return {
+                  id: p.id || "post-" + (idx + 1),
+                  titulo: p.titulo || "Publicação Sem Título",
+                  canal: p.canal || "Instagram",
+                  data: p.data || "2026",
+                  pilar: p.pilar || "Institucional",
+                  status: st,
+                  imagem: p.imagem || "card_suporte_humano.jpg",
+                  legenda: p.legenda || "",
+                  briefing: p.briefing || "",
+                  comentarios: p.comentarios || ""
+                };
+              });
+              salvarPostsStorage();
+            }
+          }
+        }
+
+        // Inicializar Batalhas de Votação
+        async function carregarBattles() {
+          let carregouServidor = false;
+          try {
+            const resp = await fetch("/painel_aprovacao/dados_batalhas.json?t=" + Date.now(), { cache: "no-store" });
+            if (resp.ok) {
+              const dados = await resp.json();
+              if (Array.isArray(dados)) {
+                battlesList = dados;
+                carregouServidor = true;
+                localStorage.setItem(STORAGE_BATTLES_KEY, JSON.stringify(battlesList));
+                localStorage.setItem("trudata_batalhas_inicializadas", "true");
+              }
+            }
+          } catch (e) {
+            console.warn("Não foi possível carregar batalhas do servidor:", e);
+          }
+
+          if (!carregouServidor) {
+            const stored = localStorage.getItem(STORAGE_BATTLES_KEY);
+            const jaIniciou = localStorage.getItem("trudata_batalhas_inicializadas");
+            if (stored !== null && jaIniciou === "true") {
+              try {
+                battlesList = JSON.parse(stored) || [];
+              } catch (e) {
+                battlesList = [];
+              }
+            } else {
+              battlesList = [
+                {
+                  id: "batalha-demo-1",
+                  titulo: "Campanha: Emissor Fiscal e Troca de Clientes para Contadores",
+                  descricao: "Vote na arte que melhor representa o Trudata ERP para escritórios contábeis da região de Sarandi.",
+                  canal: "Instagram",
+                  dataCriacao: new Date().toLocaleDateString("pt-BR"),
+                  status: "ativa",
+                  opcoes: [
+                    {
+                      id: "opt-1",
+                      nome: "Opção 1: Interface Real Anonimizada",
+                      imagem: "card_tela_real_anonimizada.jpg",
+                      votos: 7
+                    },
+                    {
+                      id: "opt-2",
+                      nome: "Opção 2: Foco em Devolução por XML",
+                      imagem: "card_devolucao_xml.jpg",
+                      votos: 12
+                    },
+                    {
+                      id: "opt-3",
+                      nome: "Opção 3: Suporte Humano vs Robôs",
+                      imagem: "card_suporte_humano.jpg",
+                      votos: 9
+                    }
+                  ],
+                  vencedorAprovado: null
+                }
+              ];
+              salvarBattlesStorage();
+            }
+          }
+        }
+
+        function salvarPostsStorage() {
+          try {
+            localStorage.setItem(STORAGE_POSTS_KEY, JSON.stringify(postsList));
+            localStorage.setItem("trudata_posts_inicializados", "true");
+          } catch (e) {
+            console.error("Erro ao salvar posts no localStorage:", e);
+          }
+          // Salvar em disco no servidor físico:
+          fetch("/api/salvar_posts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(postsList)
+          }).catch(err => console.warn("Erro ao sincronizar posts no servidor:", err));
+        }
+
+        function salvarBattlesStorage() {
+          try {
+            localStorage.setItem(STORAGE_BATTLES_KEY, JSON.stringify(battlesList));
+            localStorage.setItem("trudata_batalhas_inicializadas", "true");
+          } catch (e) {
+            console.error("Erro ao salvar batalhas no localStorage:", e);
+          }
+          // Salvar em disco no servidor físico:
+          fetch("/api/salvar_batalhas", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(battlesList)
+          }).catch(err => console.warn("Erro ao sincronizar batalhas no servidor:", err));
+        }
+
+        // Atualizar Estatísticas e Badges do Topo
+        function updateStatsAndTabs() {
+          const pendentes = postsList.filter(p => p.status === "pendente").length;
+          const aprovadas = postsList.filter(p => p.status === "aprovado").length;
+          const reprovadas = postsList.filter(p => p.status === "reprovado").length;
+          const total = postsList.length;
+          const batalhasAtivas = battlesList.filter(b => b.status === "ativa").length;
+
+          document.getElementById("count-pendente").textContent = pendentes;
+          document.getElementById("count-aprovado").textContent = aprovadas;
+          document.getElementById("count-reprovado").textContent = reprovadas;
+          document.getElementById("count-todos").textContent = total;
+          document.getElementById("count-batalha").textContent = batalhasAtivas;
+
+          // Stats Bar
+          const statsBar = document.getElementById("stats-bar");
+          statsBar.innerHTML = `
+            <div class="stat">
+              <strong style="color:var(--color-warning);">${pendentes}</strong>
+              <span>⏳ Pendentes</span>
+            </div>
+            <div class="stat">
+              <strong style="color:var(--color-success);">${aprovadas}</strong>
+              <span>✅ Aprovadas</span>
+            </div>
+            <div class="stat">
+              <strong style="color:var(--color-error);">${reprovadas}</strong>
+              <span>❌ Reprovadas</span>
+            </div>
+            <div class="stat">
+              <strong style="color:#d97706;">${battlesList.length}</strong>
+              <span>🏆 Enquetes de Votação</span>
+            </div>
+          `;
+        }
+
+        // Renderizar Posts
+        function renderPosts() {
+          const container = document.getElementById("posts-container");
+          const battlesContainer = document.getElementById("battles-container");
+          const filterInputs = document.getElementById("filter-inputs");
+          const sectionTitle = document.getElementById("section-title");
+
+          if (currentFilter === "batalha") {
+            container.style.display = "none";
+            battlesContainer.style.display = "flex";
+            filterInputs.style.display = "none";
+            sectionTitle.textContent = "🏆 Batalha de Imagens & Testes A/B/C";
+            document.getElementById("result-count").textContent = `${battlesList.length} rodadas cadastradas`;
+            renderBattles();
+            return;
+          }
+
+          container.style.display = "grid";
+          battlesContainer.style.display = "none";
+          filterInputs.style.display = "flex";
+
+          const search = (document.getElementById("search-input").value || "").toLowerCase().trim();
+          const channel = document.getElementById("channel-filter").value;
+
+          let filtered = postsList.filter(p => {
+            if (currentFilter === "pendente" && p.status !== "pendente") return false;
+            if (currentFilter === "aprovado" && p.status !== "aprovado") return false;
+            if (currentFilter === "reprovado" && p.status !== "reprovado") return false;
+            if (channel && p.canal !== channel) return false;
+            if (search) {
+              const str = (p.titulo + " " + p.legenda + " " + p.pilar).toLowerCase();
+              if (!str.includes(search)) return false;
+            }
+            return true;
+          });
+
+          // Títulos de Seção
+          const titulos = {
+            pendente: "⏳ Publicações Pendentes de Aprovação",
+            aprovado: "✅ Publicações Aprovadas",
+            reprovado: "❌ Publicações Reprovadas (Permite Exclusão)",
+            todos: "📂 Todas as Publicações"
+          };
+          sectionTitle.textContent = titulos[currentFilter] || "Fila de Publicações";
+          document.getElementById("result-count").textContent = `${filtered.length} de ${postsList.length} publicações`;
+
+          if (filtered.length === 0) {
+            container.innerHTML = `
+              <div style="grid-column: 1 / -1; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius); padding: 40px; text-align: center;">
+                <h3 style="margin-bottom: 8px;">Nenhuma publicação encontrada</h3>
+                <p class="muted small" style="margin-bottom: 16px;">
+                  ${currentFilter === "pendente" ? "Todas as publicações já foram revisadas!" : "Tente ajustar a busca ou o canal selecionado."}
+                </p>
+                <button type="button" class="btn-primary-action" style="margin: 0 auto;" onclick="document.getElementById('btn-add-post').click()">
+                  + Adicionar Nova Imagem
+                </button>
+              </div>
+            `;
+            return;
+          }
+
+          container.innerHTML = filtered.map(p => {
+            const imgSrc = resolveImgSrc(p.imagem);
+            let actionButtonsHtml = "";
+
+            if (p.status === "pendente") {
+              actionButtonsHtml = `
+                <button type="button" class="btn-approve" onclick="window.aprovarPost('${p.id}')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  Aprovar
+                </button>
+                <button type="button" class="btn-reject" onclick="window.reprovarPost('${p.id}')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="6"/></svg>
+                  Reprovar
+                </button>
+              `;
+            } else if (p.status === "aprovado") {
+              actionButtonsHtml = `
+                <span style="font-size:0.75rem; color:var(--color-success); font-weight:600; display:inline-flex; align-items:center; gap:4px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  Pronto p/ Publicar
+                </span>
+                <button type="button" class="btn-secondary" onclick="window.moverPostPendente('${p.id}')" title="Reabrir">
+                  ↺ Mover p/ Pendente
+                </button>
+              `;
+            } else if (p.status === "reprovado") {
+              actionButtonsHtml = `
+                <button type="button" class="btn-delete-rejected" onclick="window.excluirPostReprovado('${p.id}')" title="Excluir do sistema">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                  Excluir Imagem
+                </button>
+                <button type="button" class="btn-secondary" onclick="window.moverPostPendente('${p.id}')" title="Reavaliar">
+                  ↺ Mover p/ Pendente
+                </button>
+              `;
+            }
+
+            return `
+              <article class="post" id="card-${p.id}">
+                <button type="button" class="image-button" onclick="window.abrirDetalhesPost('${p.id}')" aria-label="Ampliar imagem de ${p.titulo}">
+                  <img src="${imgSrc}" alt="${p.titulo}" loading="lazy" width="400" height="400" onerror="this.src='/painel_aprovacao/favicon.svg'">
+                  <span class="image-label">🔍 Ver Detalhes & Imagem Grande</span>
+                </button>
+                <div class="post-content">
+                  <div class="post-meta">
+                    <span style="font-weight:600; color:var(--color-primary);">${p.canal}</span>
+                    <span class="badge-custom badge-${p.status}">
+                      ${p.status === "pendente" ? "⏳ Pendente" : (p.status === "aprovado" ? "✅ Aprovada" : "❌ Reprovada")}
+                    </span>
+                  </div>
+                  <h3 style="font-size:0.95rem; margin-top:4px;">${p.titulo}</h3>
+                  <p class="excerpt" style="font-size:0.8rem; color:var(--color-muted); margin-top:4px;">${p.legenda || "Sem legenda cadastrada."}</p>
+                  <div style="font-size:0.75rem; color:#64748b; margin-top:6px;">Pilar: <strong>${p.pilar}</strong></div>
+                  <div class="post-action-buttons">
+                    ${actionButtonsHtml}
+                  </div>
+                </div>
+              </article>
+            `;
+          }).join("");
+        }
+
+        // Renderizar Batalhas de Votação (3+ Imagens)
+        function renderBattles() {
+          const container = document.getElementById("battles-container");
+          if (!battlesList.length) {
+            container.innerHTML = `
+              <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius); padding: 40px; text-align: center;">
+                <h3>Nenhuma rodada de votação ativa</h3>
+                <p class="muted small" style="margin-bottom: 16px;">Crie uma nova rodada com 3 ou mais opções de imagens para sua equipe ou clientes votarem.</p>
+                <button type="button" class="btn-gold-action" style="margin: 0 auto;" onclick="document.getElementById('btn-add-battle').click()">
+                  + Criar Nova Rodada de Votação
+                </button>
+              </div>
+            `;
+            return;
+          }
+
+          container.innerHTML = battlesList.map(b => {
+            const totalVotos = b.opcoes.reduce((acc, opt) => acc + (opt.votos || 0), 0);
+            const voterId = getVoterId();
+            const meuVotoOpcaoId = b.eleitores ? b.eleitores[voterId] : null;
+            
+            // Encontrar o líder de votos
+            let lider = b.opcoes[0];
+            b.opcoes.forEach(opt => {
+              if ((opt.votos || 0) > (lider.votos || 0)) {
+                lider = opt;
+              }
+            });
+            const temVotos = totalVotos > 0;
+
+            const optionsHtml = b.opcoes.map((opt, idx) => {
+              const isLeader = temVotos && opt.id === lider.id;
+              const percentual = totalVotos > 0 ? Math.round(((opt.votos || 0) / totalVotos) * 100) : 0;
+              const imgSrc = resolveImgSrc(opt.imagem);
+              const ehMeuVoto = meuVotoOpcaoId === opt.id;
+
+              let voteButtonHtml = "";
+              if (ehMeuVoto) {
+                voteButtonHtml = `
+                  <button type="button" class="btn-vote has-voted" style="background:#0284c7; color:#fff; border-color:#0284c7; cursor:default;" title="Seu voto único está registrado nesta opção">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    Seu Voto Registrado
+                  </button>
+                `;
+              } else if (meuVotoOpcaoId) {
+                voteButtonHtml = `
+                  <button type="button" class="btn-vote" style="border-style:dashed; color:#475569; font-size:0.8rem;" onclick="window.votarNaOpcao('${b.id}', '${opt.id}')" title="Clique para transferir seu voto para esta opção">
+                    ↺ Mudar meu voto p/ esta
+                  </button>
+                `;
+              } else {
+                voteButtonHtml = `
+                  <button type="button" class="btn-vote" onclick="window.votarNaOpcao('${b.id}', '${opt.id}')">
+                    ❤️ Votar nesta opção
+                  </button>
+                `;
+              }
+
+              return `
+                <div class="battle-option ${isLeader ? 'leader' : ''}" style="${ehMeuVoto ? 'border-color:#0284c7; box-shadow:0 0 0 2px #bae6fd;' : ''}">
+                  ${isLeader ? `<div class="battle-crown-badge">👑 MAIS VOTADA (${percentual}%)</div>` : ''}
+                  <div class="battle-img-box" onclick="window.abrirLightbox('${imgSrc}', '${opt.nome.replace(/'/g, "\\'")}')">
+                    <img src="${imgSrc}" alt="${opt.nome}" onerror="this.src='/painel_aprovacao/favicon.svg'">
+                    <span class="battle-zoom-hint">🔍 Clique p/ Ampliar</span>
+                  </div>
+                  <div class="battle-option-content">
+                    <div>
+                      <div class="battle-option-name" style="${ehMeuVoto ? 'color:#0369a1;' : ''}">${opt.nome}</div>
+                      <div class="battle-vote-meter">
+                        <div class="battle-vote-count">
+                          <span>${opt.votos || 0} votos</span>
+                          <span>${percentual}%</span>
+                        </div>
+                        <div class="progress-track">
+                          <div class="progress-fill ${isLeader ? 'leader-fill' : ''}" style="width: ${percentual}%;"></div>
+                        </div>
+                      </div>
+                    </div>
+                    ${voteButtonHtml}
+                  </div>
+                </div>
+              `;
+            }).join("");
+
+            // Barra de Gestor de Aprovação
+            const liderPercentual = totalVotos > 0 ? Math.round(((lider.votos || 0) / totalVotos) * 100) : 0;
+            const liderNome = lider ? lider.nome : "Opção Líder";
+
+            return `
+              <div class="battle-card" id="battle-${b.id}">
+                <div class="battle-header">
+                  <div>
+                    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:6px;">
+                      <span class="badge-custom ${b.status === 'aprovada' ? 'badge-aprovado' : 'badge-pendente'}">
+                        ${b.status === 'aprovada' ? '✨ Vencedor Oficialmente Aprovado' : '🔥 Votação Aberta'}
+                      </span>
+                      ${meuVotoOpcaoId 
+                        ? `<span style="background:#e0f2fe; color:#0369a1; padding:3px 8px; border-radius:4px; font-weight:600; font-size:0.75rem;">✓ Você já votou nesta rodada (Voto Único)</span>`
+                        : `<span style="background:#fef3c7; color:#92400e; padding:3px 8px; border-radius:4px; font-weight:600; font-size:0.75rem;">🔒 Regra: 1 voto por pessoa</span>`}
+                    </div>
+                    <h3>${b.titulo}</h3>
+                    <p>${b.descricao || "Analise as opções e vote no criativo que melhor atende aos objetivos da campanha."}</p>
+                    <div style="font-size:0.75rem; color:var(--color-muted); margin-top:4px;">
+                      Total de participantes: <strong>${totalVotos} votos computados</strong> · Criado em: ${b.dataCriacao || "Recente"}
+                    </div>
+                  </div>
+                  <div style="display:flex; gap:8px; align-items:center;">
+                    <button type="button" class="btn-secondary" style="font-size:0.8rem;" onclick="window.zerarVotosBatalha('${b.id}')" title="Resetar votos para todos">
+                      ↺ Zerar Votos
+                    </button>
+                    <button type="button" class="btn-secondary" style="font-size:0.8rem; color:var(--color-error);" onclick="window.excluirBatalha('${b.id}')" title="Remover esta votação">
+                      🗑️ Excluir
+                    </button>
+                  </div>
+                </div>
+
+                <div class="battle-options-grid">
+                  ${optionsHtml}
+                </div>
+
+                <!-- Painel do Gestor de Conteúdo -->
+                <div class="battle-manager-bar">
+                  <div class="battle-winner-text">
+                    ${temVotos 
+                      ? `🏆 Opção Mais Votada no momento: <strong>${liderNome}</strong> com <strong>${lider.votos} votos (${liderPercentual}%)</strong>.`
+                      : `Aguardando primeiros votos da equipe para definir a arte campeã.`}
+                  </div>
+                  <div>
+                    <button type="button" class="btn-approve-winner" onclick="window.aprovarMaisVotada('${b.id}')">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                      Aprovar a Mais Votada como Post Oficial
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join("");
+        }
+
+        // ==========================================
+        // AÇÕES GLOBAIS DE POSTS
+        // ==========================================
+        window.aprovarPost = function (id) {
+          const post = postsList.find(p => p.id === id);
+          if (post) {
+            post.status = "aprovado";
+            salvarPostsStorage();
+            updateStatsAndTabs();
+            renderPosts();
+            showToast(`✅ "${post.titulo}" foi aprovada com sucesso!`);
+          }
+        };
+
+        window.reprovarPost = function (id) {
+          const post = postsList.find(p => p.id === id);
+          if (post) {
+            post.status = "reprovado";
+            salvarPostsStorage();
+            updateStatsAndTabs();
+            renderPosts();
+            showToast(`❌ "${post.titulo}" foi reprovada. Você pode excluí-la na aba Reprovadas.`);
+          }
+        };
+
+        window.moverPostPendente = function (id) {
+          const post = postsList.find(p => p.id === id);
+          if (post) {
+            post.status = "pendente";
+            salvarPostsStorage();
+            updateStatsAndTabs();
+            renderPosts();
+            showToast(`⏳ "${post.titulo}" movida de volta para Pendentes.`);
+          }
+        };
+
+        window.excluirPostReprovado = function (id) {
+          const post = postsList.find(p => p.id === id);
+          if (!post) return;
+          if (confirm(`Tem certeza que deseja excluir permanentemente a imagem reprovada:\n"${post.titulo}"?`)) {
+            postsList = postsList.filter(p => p.id !== id);
+            salvarPostsStorage();
+            updateStatsAndTabs();
+            renderPosts();
+            showToast(`🗑️ Imagem reprovada excluída com sucesso!`);
+          }
+        };
+
+        window.abrirDetalhesPost = function (id) {
+          const p = postsList.find(x => x.id === id);
+          if (!p) return;
+          const imgSrc = resolveImgSrc(p.imagem);
+          const modal = document.getElementById("detail-modal");
+          const content = document.getElementById("detail-modal-content");
+
+          content.innerHTML = `
+            <div style="padding: 16px 20px; border-bottom: 1px solid var(--color-line); display:flex; justify-content:space-between; align-items:center;">
+              <h2 style="font-size:1.25rem; margin:0;">${p.titulo}</h2>
+              <button type="button" class="btn-secondary" onclick="document.getElementById('detail-modal').close()">✕ Fechar</button>
+            </div>
+            <div style="padding: 20px; display:grid; grid-template-columns: 1fr 1.2fr; gap:20px;">
+              <div>
+                <div style="background:#0f172a; border-radius:6px; overflow:hidden; cursor:pointer;" onclick="window.abrirLightbox('${imgSrc}', '${p.titulo.replace(/'/g, "\\'")}')">
+                  <img src="${imgSrc}" style="width:100%; height:auto; display:block;" alt="${p.titulo}">
+                </div>
+                <p class="small muted" style="margin-top:6px; text-align:center;">Clique na foto para ver em tela cheia.</p>
+                <div style="margin-top:14px; display:flex; gap:8px;">
+                  <a href="${imgSrc}" download="trudata_arte_${p.id}.jpg" class="btn-secondary" style="width:100%; text-align:center; justify-content:center; text-decoration:none;">
+                    ⬇️ Baixar Arte HD
+                  </a>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div>
+                  <span class="badge-custom badge-${p.status}">${p.status.toUpperCase()}</span>
+                  <span style="font-size:0.85rem; color:var(--color-muted); margin-left:8px;">${p.canal} · ${p.pilar}</span>
+                </div>
+                <div>
+                  <h4 style="margin:0 0 4px 0; font-size:0.9rem;">Legenda do Post:</h4>
+                  <div style="background:#f8fafc; border:1px solid var(--color-line); padding:12px; border-radius:6px; font-size:0.85rem; white-space:pre-wrap; max-height:200px; overflow-y:auto;">${p.legenda || "Sem legenda."}</div>
+                  <button type="button" class="btn-secondary" style="margin-top:6px; font-size:0.8rem;" onclick="navigator.clipboard.writeText(decodeURIComponent('${encodeURIComponent(p.legenda || "")}')); window.showToast('📋 Legenda copiada!');">
+                    📋 Copiar Legenda
+                  </button>
+                </div>
+                ${p.briefing ? `
+                  <div>
+                    <h4 style="margin:0 0 4px 0; font-size:0.9rem;">Briefing de Produção:</h4>
+                    <p style="font-size:0.85rem; color:var(--color-muted);">${p.briefing}</p>
+                  </div>
+                ` : ''}
+                <div style="margin-top:auto; padding-top:14px; border-top:1px solid var(--color-line); display:flex; gap:8px;">
+                  ${p.status !== "aprovado" ? `<button type="button" class="btn-approve" onclick="window.aprovarPost('${p.id}'); document.getElementById('detail-modal').close();">✅ Aprovar</button>` : ''}
+                  ${p.status !== "reprovado" ? `<button type="button" class="btn-reject" onclick="window.reprovarPost('${p.id}'); document.getElementById('detail-modal').close();">❌ Reprovar</button>` : ''}
+                  ${p.status === "reprovado" ? `<button type="button" class="btn-delete-rejected" onclick="window.excluirPostReprovado('${p.id}'); document.getElementById('detail-modal').close();">🗑️ Excluir Definitivamente</button>` : ''}
+                </div>
+              </div>
+            </div>
+          `;
+          modal.showModal();
+        };
+
+        // Identificador persistente e anônimo do eleitor (1 voto por pessoa/aparelho)
+        function getVoterId() {
+          let id = localStorage.getItem("trudata_voter_id");
+          if (!id) {
+            id = "eleitor_" + Date.now() + "_" + Math.random().toString(36).substring(2, 10);
+            localStorage.setItem("trudata_voter_id", id);
+          }
+          return id;
+        }
+
+        // ==========================================
+        // AÇÕES DO SISTEMA DE VOTAÇÃO (3+ IMAGENS COM VOTO ÚNICO)
+        // ==========================================
+        window.votarNaOpcao = function (batalhaId, opcaoId) {
+          const battle = battlesList.find(b => b.id === batalhaId);
+          if (!battle) return;
+          const opt = battle.opcoes.find(o => o.id === opcaoId);
+          if (!opt) return;
+
+          if (!battle.eleitores) {
+            battle.eleitores = {};
+          }
+
+          const voterId = getVoterId();
+          const votoAnterior = battle.eleitores[voterId];
+
+          // Se já votou exatamente na mesma opção
+          if (votoAnterior === opcaoId) {
+            showToast("Você já votou nesta opção!");
+            return;
+          }
+
+          // Se estiver trocando de voto: desconta 1 voto da opção anterior
+          if (votoAnterior) {
+            const optAntiga = battle.opcoes.find(o => o.id === votoAnterior);
+            if (optAntiga && (optAntiga.votos || 0) > 0) {
+              optAntiga.votos--;
+            }
+            opt.votos = (opt.votos || 0) + 1;
+            battle.eleitores[voterId] = opcaoId;
+            salvarBattlesStorage();
+            updateStatsAndTabs();
+            renderBattles();
+            showToast(`↺ Seu voto único foi alterado para "${opt.nome}"!`);
+          } else {
+            // Primeiro voto único
+            opt.votos = (opt.votos || 0) + 1;
+            battle.eleitores[voterId] = opcaoId;
+            salvarBattlesStorage();
+            updateStatsAndTabs();
+            renderBattles();
+            showToast(`✓ Seu voto único foi computado para "${opt.nome}"!`);
+          }
+        };
+
+        window.aprovarMaisVotada = function (batalhaId) {
+          const battle = battlesList.find(b => b.id === batalhaId);
+          if (!battle || !battle.opcoes.length) return;
+
+          // Encontrar mais votada
+          let lider = battle.opcoes[0];
+          battle.opcoes.forEach(opt => {
+            if ((opt.votos || 0) > (lider.votos || 0)) {
+              lider = opt;
+            }
+          });
+
+          // Criar post oficial aprovado
+          const novoPostAprovado = {
+            id: "post-eleito-" + Date.now(),
+            titulo: `${battle.titulo} (Vencedora da Votação)`,
+            canal: battle.canal || "Instagram",
+            data: new Date().toLocaleDateString("pt-BR"),
+            pilar: "Votação Criativa",
+            status: "aprovado",
+            imagem: lider.imagem,
+            legenda: `Arte eleita pela equipe com ${lider.votos} votos.\n\n${battle.descricao || ""}`,
+            briefing: `Criativo campeão: ${lider.nome}`
+          };
+
+          postsList.unshift(novoPostAprovado);
+          battle.status = "aprovada";
+          battle.vencedorAprovado = lider.id;
+
+          salvarPostsStorage();
+          salvarBattlesStorage();
+          updateStatsAndTabs();
+
+          showToast(`🏆 "${lider.nome}" foi APROVADA como publicação oficial!`);
+
+          // Mudar para a aba de Aprovadas para mostrar o resultado
+          setTimeout(() => {
+            document.querySelector('[data-filter="aprovado"]').click();
+          }, 1200);
+        };
+
+        window.zerarVotosBatalha = function (batalhaId) {
+          const battle = battlesList.find(b => b.id === batalhaId);
+          if (!battle) return;
+          if (confirm(`Deseja zerar os votos da enquete "${battle.titulo}"?\n(Isso permitirá que todos votem novamente do zero)`)) {
+            battle.opcoes.forEach(o => o.votos = 0);
+            battle.eleitores = {};
+            battle.status = "ativa";
+            battle.vencedorAprovado = null;
+            salvarBattlesStorage();
+            updateStatsAndTabs();
+            renderBattles();
+            showToast("Votos zerados. Todos podem votar novamente!");
+          }
+        };
+
+        window.excluirBatalha = function (batalhaId) {
+          const battle = battlesList.find(b => b.id === batalhaId);
+          if (!battle) return;
+          if (confirm(`Excluir a enquete de votação "${battle.titulo}"?`)) {
+            battlesList = battlesList.filter(b => b.id !== batalhaId);
+            salvarBattlesStorage();
+            updateStatsAndTabs();
+            renderBattles();
+            showToast("Rodada de votação removida.");
+          }
+        };
+
+        // ==========================================
+        // MODAIS E UPLOADS
+        // ==========================================
+        window.fecharModalNewPost = function () {
+          document.getElementById("modal-new-post").style.display = "none";
+          currentUploadedImageBase64 = "";
+          document.getElementById("post-preview-box").style.display = "none";
+          document.getElementById("post-titulo").value = "";
+          document.getElementById("post-legenda").value = "";
+          document.getElementById("post-briefing").value = "";
+          document.getElementById("post-file-input").value = "";
+          document.getElementById("post-acervo-select").value = "";
+        };
+
+        window.handlePostFileUpload = function (input) {
+          if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              currentUploadedImageBase64 = e.target.result;
+              const previewBox = document.getElementById("post-preview-box");
+              const previewImg = document.getElementById("post-preview-img");
+              previewImg.src = currentUploadedImageBase64;
+              previewBox.style.display = "flex";
+              document.getElementById("post-acervo-select").value = "";
+            };
+            reader.readAsDataURL(file);
+          }
+        };
+
+        window.handlePostAcervoSelect = function (select) {
+          const val = select.value;
+          if (val) {
+            currentUploadedImageBase64 = val;
+            const previewBox = document.getElementById("post-preview-box");
+            const previewImg = document.getElementById("post-preview-img");
+            previewImg.src = resolveImgSrc(val);
+            previewBox.style.display = "flex";
+          }
+        };
+
+        window.salvarNovoPost = function () {
+          const titulo = document.getElementById("post-titulo").value.trim();
+          if (!titulo) {
+            alert("Por favor, preencha o título da publicação.");
+            return;
+          }
+
+          const imagem = currentUploadedImageBase64 || "card_suporte_humano.jpg";
+          const canal = document.getElementById("post-canal").value;
+          const pilar = document.getElementById("post-pilar").value;
+          const legenda = document.getElementById("post-legenda").value.trim();
+          const briefing = document.getElementById("post-briefing").value.trim();
+
+          const novo = {
+            id: "post-usr-" + Date.now(),
+            titulo: titulo,
+            canal: canal,
+            data: new Date().toLocaleDateString("pt-BR"),
+            pilar: pilar,
+            status: "pendente",
+            imagem: imagem,
+            legenda: legenda,
+            briefing: briefing,
+            comentarios: "Adicionado manualmente pela equipe"
+          };
+
+          postsList.unshift(novo);
+          salvarPostsStorage();
+          fecharModalNewPost();
+          updateStatsAndTabs();
+          
+          // Abre na aba pendente
+          document.querySelector('[data-filter="pendente"]').click();
+          showToast(`🎉 Nova imagem "${titulo}" adicionada com sucesso em Pendentes!`);
+        };
+
+        // Modal de Batalha (3+ Opções)
+        let battleOptionsData = [
+          { nome: "Opção A: Foco em Agilidade Fiscal", imagem: "card_devolucao_xml.jpg" },
+          { nome: "Opção B: Foco em Suporte Humano", imagem: "trudata_suporte_sarandi_1789497393778.jpg" },
+          { nome: "Opção C: Interface Real do Sistema", imagem: "card_tela_real_anonimizada.jpg" }
+        ];
+
+        window.abrirModalNewBattle = function () {
+          document.getElementById("battle-titulo").value = "";
+          document.getElementById("battle-descricao").value = "";
+          battleOptionsData = [
+            { nome: "Opção A", imagem: "card_devolucao_xml.jpg" },
+            { nome: "Opção B", imagem: "trudata_suporte_sarandi_1789497393778.jpg" },
+            { nome: "Opção C", imagem: "card_tela_real_anonimizada.jpg" }
+          ];
+          renderBattleOptionsInputs();
+          document.getElementById("modal-new-battle").style.display = "flex";
+        };
+
+        window.fecharModalNewBattle = function () {
+          document.getElementById("modal-new-battle").style.display = "none";
+        };
+
+        function renderBattleOptionsInputs() {
+          const list = document.getElementById("battle-options-list");
+          list.innerHTML = battleOptionsData.map((opt, idx) => `
+            <div class="image-option-item">
+              <img class="image-option-thumb" id="opt-thumb-${idx}" src="${resolveImgSrc(opt.imagem)}" alt="Thumb">
+              <div>
+                <input type="text" placeholder="Nome da Opção (Ex: Opção ${String.fromCharCode(65 + idx)})" value="${opt.nome}" onchange="battleOptionsData[${idx}].nome = this.value" style="margin-bottom:6px; font-weight:600;">
+                <div style="display:flex; gap:6px; align-items:center;">
+                  <button type="button" class="btn-secondary" style="font-size:0.75rem; padding:3px 8px;" onclick="document.getElementById('opt-file-${idx}').click()">📁 Carregar Arquivo</button>
+                  <input type="file" accept="image/*" id="opt-file-${idx}" style="display:none;" onchange="handleBattleFileUpload(${idx}, this)">
+                  <select style="font-size:0.75rem; padding:3px 6px;" onchange="battleOptionsData[${idx}].imagem = this.value; document.getElementById('opt-thumb-${idx}').src = window.resolveImgSrc(this.value);">
+                    <option value="">Ou selecione do acervo...</option>
+                    <option value="card_contadores.jpg">Card Contadores</option>
+                    <option value="card_devolucao_xml.jpg">Card Devolução XML</option>
+                    <option value="card_honorarios.jpg">Card Honorários</option>
+                    <option value="card_suporte_humano.jpg">Card Suporte Humano</option>
+                    <option value="card_reforma_tributaria.jpg">Card Reforma Tributária</option>
+                    <option value="card_tela_real_anonimizada.jpg">Card Tela Real</option>
+                    <option value="trudata_suporte_sarandi_1789497393778.jpg">Foto Real Suporte</option>
+                    <option value="trudata_pdv_caixa_sarandi_1789497541970.jpg">Foto Real PDV</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                ${battleOptionsData.length > 3 ? `<button type="button" class="btn-secondary" style="color:var(--color-error); font-size:0.8rem;" onclick="removerOpcaoBatalha(${idx})">✕</button>` : `<span class="small muted">Mín. 3</span>`}
+              </div>
+            </div>
+          `).join("");
+        }
+
+        window.handleBattleFileUpload = function (idx, input) {
+          if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              battleOptionsData[idx].imagem = e.target.result;
+              document.getElementById(`opt-thumb-${idx}`).src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+          }
+        };
+
+        window.adicionarLinhaOpcaoBatalha = function () {
+          battleOptionsData.push({
+            nome: `Opção ${String.fromCharCode(65 + battleOptionsData.length)}`,
+            imagem: "card_suporte_humano.jpg"
+          });
+          renderBattleOptionsInputs();
+        };
+
+        window.removerOpcaoBatalha = function (idx) {
+          if (battleOptionsData.length <= 3) {
+            alert("A votação exige pelo menos 3 imagens para comparação.");
+            return;
+          }
+          battleOptionsData.splice(idx, 1);
+          renderBattleOptionsInputs();
+        };
+
+        window.salvarNovaBatalha = function () {
+          const titulo = document.getElementById("battle-titulo").value.trim();
+          if (!titulo) {
+            alert("Por favor, informe o título da votação.");
+            return;
+          }
+          if (battleOptionsData.length < 3) {
+            alert("É obrigatório cadastrar pelo menos 3 opções de imagens.");
+            return;
+          }
+
+          const novaBatalha = {
+            id: "batalha-" + Date.now(),
+            titulo: titulo,
+            descricao: document.getElementById("battle-descricao").value.trim(),
+            canal: "Instagram",
+            dataCriacao: new Date().toLocaleDateString("pt-BR"),
+            status: "ativa",
+            opcoes: battleOptionsData.map((opt, idx) => ({
+              id: "opt-" + (idx + 1),
+              nome: opt.nome || `Opção ${idx + 1}`,
+              imagem: opt.imagem,
+              votos: 0
+            }))
+          };
+
+          battlesList.unshift(novaBatalha);
+          salvarBattlesStorage();
+          fecharModalNewBattle();
+          updateStatsAndTabs();
+
+          // Alternar para a aba de batalha
+          document.querySelector('[data-filter="batalha"]').click();
+          showToast(`🔥 Rodada de votação "${titulo}" iniciada com ${novaBatalha.opcoes.length} opções!`);
+        };
+
+        // Lightbox
+        window.abrirLightbox = function (imgSrc, caption) {
+          document.getElementById("lightbox-img").src = imgSrc;
+          document.getElementById("lightbox-caption").textContent = caption || "";
+          document.getElementById("lightbox-modal").style.display = "flex";
+        };
+
+        window.fecharLightbox = function (e) {
+          if (!e || e.target.id === "lightbox-modal" || e.target.tagName === "BUTTON") {
+            document.getElementById("lightbox-modal").style.display = "none";
+          }
+        };
+
+        // ==========================================
+        // EVENTOS E INICIALIZAÇÃO
+        // ==========================================
+        window.restaurarExemplosPadrao = function () {
+          if (confirm("Deseja restaurar as publicações de exemplo padrão do acervo TruData?")) {
+            const base = typeof POSTS_INICIAIS !== "undefined" ? POSTS_INICIAIS : [];
+            postsList = base.map((p, idx) => ({
+              id: p.id || "post-" + (idx + 1),
+              titulo: p.titulo || "Publicação Sem Título",
+              canal: p.canal || "Instagram",
+              data: p.data || "2026",
+              pilar: p.pilar || "Institucional",
+              status: p.status === "ajuste" ? "reprovado" : (p.status || "pendente"),
+              imagem: p.imagem || "card_suporte_humano.jpg",
+              legenda: p.legenda || "",
+              briefing: p.briefing || "",
+              comentarios: p.comentarios || ""
+            }));
+            salvarPostsStorage();
+            updateStatsAndTabs();
+            renderPosts();
+            showToast("Publicações de exemplo restauradas com sucesso!");
+          }
+        };
+
+        document.addEventListener("DOMContentLoaded", async function () {
+          await carregarPosts();
+          await carregarBattles();
+          updateStatsAndTabs();
+          renderPosts();
+
+          // Botões de Topo
+          document.getElementById("btn-add-post").addEventListener("click", function () {
+            document.getElementById("modal-new-post").style.display = "flex";
+          });
+          document.getElementById("btn-add-battle").addEventListener("click", window.abrirModalNewBattle);
+
+          // Alternância de Abas
+          document.querySelectorAll(".status-tab-btn").forEach(btn => {
+            btn.addEventListener("click", function () {
+              document.querySelectorAll(".status-tab-btn").forEach(b => b.classList.remove("active"));
+              this.classList.add("active");
+              currentFilter = this.dataset.filter;
+              renderPosts();
+            });
+          });
+
+          // Filtros de Busca e Canal
+          document.getElementById("search-input").addEventListener("input", renderPosts);
+          document.getElementById("channel-filter").addEventListener("change", renderPosts);
+        });
+
+        // Exportar helpers para escopo window
+        window.showToast = showToast;
+        window.resolveImgSrc = resolveImgSrc;
+
+      })();
+    </script>
   </body>
 </html>

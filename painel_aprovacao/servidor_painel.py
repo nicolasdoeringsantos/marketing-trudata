@@ -35,6 +35,8 @@ METRICAS_FILE = os.path.join(PAINEL_DIR, "metricas_posts.json")
 WEBHOOKS_LOG = os.path.join(PAINEL_DIR, "webhooks_disparados.json")
 LEADS_FILE = os.path.join(PAINEL_DIR, "leads_crm.json")
 WEBHOOK_CONFIG_FILE = os.path.join(PAINEL_DIR, "config_webhook.json")
+POSTS_JSON_FILE = os.path.join(PAINEL_DIR, "dados_posts.json")
+BATALHAS_JSON_FILE = os.path.join(PAINEL_DIR, "dados_batalhas.json")
 
 # Previne crash de print() quando executado sem console (WindowStyle Hidden / Background)
 log_file = os.path.join(PROJECT_ROOT, "servidor.log")
@@ -69,6 +71,54 @@ class RobustMarketingHandler(http.server.SimpleHTTPRequestHandler):
         clean_path = self.path.split('?')[0].split('#')[0]
         if comercial_api.handle(self, 'POST', clean_path):
             return
+
+        # API: Salvar Fila Completa de Posts
+        if clean_path == "/api/salvar_posts":
+            try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                body = self.rfile.read(content_length)
+                payload = json.loads(body.decode('utf-8'))
+                with open(POSTS_JSON_FILE, "w", encoding="utf-8") as f:
+                    json.dump(payload, f, indent=2, ensure_ascii=False)
+                resp = json.dumps({"sucesso": True, "total": len(payload)}).encode('utf-8')
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(resp)))
+                self.end_headers()
+                self.wfile.write(resp)
+                return
+            except Exception as e:
+                err_resp = json.dumps({"sucesso": False, "erro": str(e)}).encode('utf-8')
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(err_resp)))
+                self.end_headers()
+                self.wfile.write(err_resp)
+                return
+
+        # API: Salvar Batalhas e Votações
+        if clean_path == "/api/salvar_batalhas":
+            try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                body = self.rfile.read(content_length)
+                payload = json.loads(body.decode('utf-8'))
+                with open(BATALHAS_JSON_FILE, "w", encoding="utf-8") as f:
+                    json.dump(payload, f, indent=2, ensure_ascii=False)
+                resp = json.dumps({"sucesso": True, "total": len(payload)}).encode('utf-8')
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(resp)))
+                self.end_headers()
+                self.wfile.write(resp)
+                return
+            except Exception as e:
+                err_resp = json.dumps({"sucesso": False, "erro": str(e)}).encode('utf-8')
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(err_resp)))
+                self.end_headers()
+                self.wfile.write(err_resp)
+                return
 
         # API: Atualizar Status de Posts
         if clean_path == "/api/status":

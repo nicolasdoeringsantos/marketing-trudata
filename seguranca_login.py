@@ -23,6 +23,16 @@ from datetime import datetime, timedelta
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_FILE = os.path.join(BASE_DIR, "usuarios.json")
 SESSOES_FILE = os.path.join(BASE_DIR, ".sessoes_ativas.json")
+LOGO_FILE = os.path.join(BASE_DIR, "brand", "logo_direta_b64.txt")
+
+def obter_logo_base64():
+    if os.path.exists(LOGO_FILE):
+        try:
+            with open(LOGO_FILE, "r", encoding="utf-8") as f:
+                return f.read().strip()
+        except Exception:
+            pass
+    return ""
 
 # Carrega configurações
 def carregar_config():
@@ -169,37 +179,40 @@ HTML_LOGIN_TEMPLATE = """<!DOCTYPE html>
       height: 3px;
       background: linear-gradient(90deg, #2563EB, #06B6D4, #3B82F6);
     }
-    .brand {
+    .trudata-brand-header {
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 12px;
       margin-bottom: 24px;
     }
-    .brand-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #1E40AF, #2563EB);
+    .trudata-logo-wrapper {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+      padding: 14px 28px 12px 28px;
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.5), 0 0 25px rgba(6, 182, 212, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
-    .brand-icon svg {
-      width: 24px;
-      height: 24px;
-      fill: #FFFFFF;
+    .trudata-main-logo {
+      height: 46px;
+      width: auto;
+      max-width: 250px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 14px rgba(6, 182, 212, 0.4));
+      display: block;
     }
-    .brand-text h1 {
-      font-size: 1.25rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #FFFFFF;
-    }
-    .brand-text p {
+    .trudata-subtag {
       font-size: 0.78rem;
-      color: #94A3B8;
-      font-weight: 500;
+      font-weight: 600;
+      color: #38BDF8;
+      margin-top: 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
     .header-sub {
       margin-bottom: 24px;
@@ -330,13 +343,10 @@ HTML_LOGIN_TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
   <div class="login-container">
-    <div class="brand">
-      <div class="brand-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.9c-2.5-1.07-4.52-3.15-5.46-5.83.65-.63 2.87-1.57 5.46-1.57s4.81.94 5.46 1.57c-.94 2.68-2.96 4.76-5.46 5.83z"/></svg>
-      </div>
-      <div class="brand-text">
-        <h1>TRUDATA ERP</h1>
-        <p>Hub Estratégico de Marketing</p>
+    <div class="trudata-brand-header">
+      <div class="trudata-logo-wrapper">
+        <img src="data:image/png;base64,{{LOGO_BASE64}}" alt="TruData" class="trudata-main-logo">
+        <div class="trudata-subtag">Estúdio de conteúdo</div>
       </div>
     </div>
 
@@ -431,6 +441,7 @@ class AuthProxyHandler(http.server.BaseHTTPRequestHandler):
         html = html.replace("{{ALERT_ERROR}}", alert)
         html = html.replace("{{VAL_USUARIO}}", usuario_previo or "")
         html = html.replace("{{REDIRECT_URL}}", urllib.parse.quote(redirect_target or "/"))
+        html = html.replace("{{LOGO_BASE64}}", obter_logo_base64())
 
         conteudo = html.encode("utf-8")
         self.send_response(200)
