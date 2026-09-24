@@ -163,32 +163,47 @@ button:active:not(:disabled) {
 }
 .brand {
   text-decoration: none;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--space-3);
   color: var(--color-ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
-.brand-mark {
-  width: 36px;
-  height: 36px;
-  background: var(--color-primary);
-  display: grid;
-  place-items: center;
-  font-size: var(--text-lg);
-  font-weight: 800;
-  border-radius: 0 12px 0 0;
+.brand:hover {
+  transform: translateY(-1px);
 }
-.brand-name {
-  font-size: var(--text-lg);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-}
-.brand small {
+.brand-logo-img {
+  height: 40px;
+  width: auto;
+  max-width: 210px;
+  object-fit: contain;
   display: block;
-  font-size: var(--text-xs);
-  color: var(--color-muted);
-  font-weight: 400;
-  letter-spacing: 0;
+  background: #0f172a;
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18), 0 0 16px rgba(6, 182, 212, 0.08);
+  transition: all 0.2s ease;
+}
+.brand:hover .brand-logo-img {
+  background: #1e293b;
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 4px 18px rgba(6, 182, 212, 0.22);
+}
+.brand:not(:has(.brand-logo-img))::before {
+  content: '';
+  display: block;
+  height: 40px;
+  width: 204px;
+  background: #0f172a url('/brand/logo_trudata_oficial_direta.png') no-repeat center center / contain;
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+}
+.brand:not(:has(.brand-logo-img)) .brand-mark,
+.brand:not(:has(.brand-logo-img)) .brand-name {
+  display: none !important;
 }
 .topnav {
   align-self: stretch;

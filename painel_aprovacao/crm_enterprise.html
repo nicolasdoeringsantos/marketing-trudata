@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TruData CRM Enterprise — Pipeline Comercial & Gestão 360°</title>
+  <link rel="icon" type="image/svg+xml" href="/painel_aprovacao/favicon.svg?v=20260923-t" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/painel_aprovacao/favicon-32x32.png?v=20260923-t" />
+    <link rel="shortcut icon" href="/painel_aprovacao/favicon.ico?v=20260923-t" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/painel_aprovacao/design-system.css?v=20260923-4">
+  <link rel="stylesheet" href="/painel_aprovacao/crm_enterprise.css?v=20260923-4">
+</head>
+<body class="crm-enterprise-app">
+
+  <!-- Topbar Padrão do Hub TruData -->
+  <header class="topbar" style="margin-bottom:1.5rem;">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="TruData ERP">
+          <img src="/brand/logo_trudata_oficial_direta.png" alt="TruData ERP" class="brand-logo-img" />
+        </a>
+      <nav class="topnav" aria-label="Navegação principal">
+        <a href="index.html">Aprovação & Votação</a>
+        <a href="calendario.html">Calendário</a>
+        <a href="radar_clientes.html">Radar de clientes</a>
+        <a href="crm_enterprise.html" aria-current="page" style="color:#009fe3; font-weight:700;">💼 CRM Enterprise</a>
+        <a href="ferramentas.html">Ferramentas</a>
+      </nav>
+      <div class="team">
+        Hansen Software · Sarandi, RS
+        <span class="avatar" aria-hidden="true">HS</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Cabeçalho do CRM & Seletor de Perfil -->
+  <div class="crm-header">
+    <div class="crm-header-info">
+      <h1>Tru<span>Data</span> CRM Enterprise · Pipeline 360°</h1>
+      <p>Gestão comercial unificada B2B, automações inteligentes, funis múltiplos e conformidade LGPD.</p>
+    </div>
+    <div class="crm-header-actions">
+      <div class="user-profile-badge">
+        <span>👤 Operando como:</span>
+        <select id="crm-user-sim">
+          <option value="usr-admin">Administrador TruData (Visão Total)</option>
+        </select>
+      </div>
+      <button onclick="abrirModalNovoLead()" class="btn-crm" style="background:linear-gradient(135deg, #10b981, #059669); color:#fff; font-weight:700; border:none; box-shadow:0 2px 8px rgba(16,185,129,0.3);">➕ Adicionar Lead</button>
+      <button onclick="trocarSubAba('atividades')" class="btn-crm" style="background:linear-gradient(135deg, #0284c7, #0369a1); color:#fff; font-weight:700; border:none; box-shadow:0 2px 8px rgba(2,132,199,0.3);" title="Abrir agenda visual de ações e agendamentos">📅 Ações & Agendamentos</button>
+      <a href="radar_clientes.html" class="btn-crm" style="background:linear-gradient(135deg, #009fe3, #2563eb);">🛰️ Radar de Clientes</a>
+      <a href="gerador_proposta.html" class="btn-crm" style="background:#0d9488; color:#fff; font-weight:700;">📄 Gerar Proposta</a>
+      <a href="ferramentas.html" class="btn-crm" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.18); font-weight:700;">🛠️ Central de Ferramentas</a>
+    </div>
+  </div>
+
+  <!-- Barra Rápida de Minhas Ferramentas -->
+  <div class="crm-tools-quickbar">
+    <span class="crm-tools-quickbar-label">🛠️ Minhas Ferramentas:</span>
+    <button type="button" onclick="trocarSubAba('atividades')" class="crm-tool-chip crm-tool-chip-highlight" style="background:rgba(2,132,199,0.25); border-color:#0284c7; color:#38bdf8; font-weight:700; cursor:pointer;">📅 Ações & Agendamentos</button>
+    <a href="radar_clientes.html" class="crm-tool-chip">🛰️ Radar de Clientes</a>
+    <a href="copiloto_vendas.html" class="crm-tool-chip">🧠 Copiloto Comercial</a>
+    <a href="gerador_proposta.html" class="crm-tool-chip">📄 Gerar Proposta</a>
+    <a href="contadores.html" class="crm-tool-chip">🏛️ Contadores (150km)</a>
+    <a href="planejar_visitas.html" class="crm-tool-chip">🚗 Visitas</a>
+    <a href="cadencia_sdr.html" class="crm-tool-chip">📞 Cadência SDR</a>
+    <a href="revisao_enderecos.html" class="crm-tool-chip">📍 Endereços</a>
+    <a href="checkup_loja.html" class="crm-tool-chip">📋 Diagnóstico Loja</a>
+    <a href="ferramentas.html" class="crm-tool-chip crm-tool-chip-highlight">⚡ Todas as Ferramentas ➔</a>
+  </div>
+
+  <!-- Navegação de Sub-Abas do CRM -->
+  <div class="crm-nav-tabs">
+    <button type="button" class="crm-tab-btn active" data-tab="dashboard">📊 Dashboard & Métricas</button>
+    <button type="button" class="crm-tab-btn" data-tab="kanban">🏷️ Pipeline Kanban</button>
+    <button type="button" class="crm-tab-btn" data-tab="contatos_empresas">🏢 Empresas & Contatos</button>
+    <button type="button" class="crm-tab-btn" data-tab="negociacoes">💼 Negociações & Deals</button>
+    <button type="button" class="crm-tab-btn" data-tab="onboarding">🚀 Onboarding Técnico (6 Etapas)</button>
+    <button type="button" class="crm-tab-btn" data-tab="metas">🎯 Metas & Comissões</button>
+    <button type="button" class="crm-tab-btn" data-tab="atividades">📅 Ações & Agendamentos</button>
+    <button type="button" class="crm-tab-btn" data-tab="automacoes">⚡ Automações Ativas</button>
+    <button type="button" class="crm-tab-btn" data-tab="usuarios">👥 Equipe & Permissões</button>
+    <button type="button" class="crm-tab-btn" data-tab="integracoes_api">🔌 Swagger REST & Modelo ER</button>
+  </div>
+
+  <!-- VIEWS / PAINEIS -->
+  <main>
+    <!-- 1. DASHBOARD -->
+    <div id="view-dashboard" class="crm-view-pane active">
+      <div style="text-align:center; padding:2rem; color:#94a3b8;">Carregando métricas do CRM...</div>
+    </div>
+
+    <!-- 2. KANBAN REDESENHADO -->
+    <div id="view-kanban" class="crm-view-pane">
+      
+      <!-- P2: BARRA DE FUNIL RESUMIDA (COLAPSÁVEL) -->
+      <div id="kanban-funnel-container" class="kanban-funnel-wrapper">
+        <div class="kanban-funnel-header" onclick="alternarVisibilidadeFunilResumo()">
+          <div style="display:flex; align-items:center; gap:0.6rem;">
+            <span style="font-size:1.1rem;">📊</span>
+            <strong style="font-size:0.88rem; color:#fff;">Inteligência do Funil B2B & Conversão Inter-Estágios</strong>
+            <span id="kanban-funnel-badge-summary" class="badge-ent" style="background:rgba(56,189,248,0.15); color:#38bdf8; font-size:0.72rem;">Calculando métricas...</span>
+          </div>
+          <button type="button" id="btn-toggle-funil" class="btn-crm" style="padding:0.2rem 0.5rem; font-size:0.75rem;" title="Recolher ou expandir resumo do funil">
+            <span id="funnel-toggle-icon">▲</span> Recolher
+          </button>
+        </div>
+        <div id="kanban-funnel-body" class="kanban-funnel-content">
+          <!-- Gerado dinamicamente via JS -->
+          <div style="padding:0.75rem; color:#94a3b8; font-size:0.8rem; text-align:center;">Carregando métricas de conversão...</div>
+        </div>
+      </div>
+
+      <!-- BARRA DE FERRAMENTAS & SELEÇÃO DE FUNIL -->
+      <div class="kanban-toolbar">
+        <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+          <label style="font-size:0.8rem; font-weight:700; color:#cbd5e1;">Funil Ativo:</label>
+          <select id="kanban-select-funil" class="crm-form-select" style="min-width:260px;"></select>
+          <button onclick="abrirModalNovoLead()" class="btn-crm" style="background:linear-gradient(135deg, #10b981, #059669); color:#fff; font-weight:700; border:none; box-shadow:0 2px 6px rgba(16,185,129,0.3);">➕ Adicionar Lead</button>
+          <button onclick="abrirModalNovaAtividade()" class="btn-crm" style="background:#0284c7; color:#fff; font-weight:700; border:none;">📅 Agendar Ação</button>
+          <button onclick="abrirModalNovoDeal()" class="btn-crm btn-crm-primary">+ Nova Oportunidade</button>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+          <div class="kanban-view-mode-switch">
+            <button type="button" id="btn-mode-expanded" class="kanban-mode-btn active" onclick="definirModoExibicaoCardsGlobal('expandido')" title="Modo Expandido: Exibe todos os dados (Telefone, Setup, Ações rápidas)">
+              ⊟ Expandido
+            </button>
+            <button type="button" id="btn-mode-compact" class="kanban-mode-btn" onclick="definirModoExibicaoCardsGlobal('compacto')" title="Modo Compacto: Exibe foco em Empresa, Contato, MRR e Temperatura (Ideal para colunas densas)">
+              ⊞ Compacto
+            </button>
+          </div>
+          <button type="button" onclick="abrirModalConfigKanban()" class="btn-crm" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); font-weight:600;" title="Configurar regras de WIP, tempo parado e temperatura do lead">
+            ⚙️ Regras & WIP
+          </button>
+        </div>
+      </div>
+
+      <!-- P1: BARRA DE BUSCA E FILTROS GLOBAIS DO BOARD -->
+      <div class="kanban-global-filters-bar">
+        <div class="kanban-filter-search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="kanban-filtro-global-busca" class="crm-form-input kanban-search-input" placeholder="Buscar por empresa, contato, telefone, cidade..." oninput="aoMudarFiltroGlobal('busca', this.value)">
+          <button type="button" id="btn-limpar-busca-global" class="btn-clear-search hidden" onclick="limparBuscaGlobalKanban()">✕</button>
+        </div>
+        
+        <div class="kanban-filters-row">
+          <div class="kanban-filter-item">
+            <label>Responsável:</label>
+            <select id="kanban-filtro-responsavel" class="crm-form-select kanban-filter-select" onchange="aoMudarFiltroGlobal('responsavel', this.value)">
+              <option value="todos">Todos os Responsáveis</option>
+            </select>
+          </div>
+
+          <div class="kanban-filter-item">
+            <label>Faixa MRR:</label>
+            <select id="kanban-filtro-mrr" class="crm-form-select kanban-filter-select" onchange="aoMudarFiltroGlobal('mrr', this.value)">
+              <option value="todos">Todos os Valores</option>
+              <option value="ate-200">Até R$ 200/mês</option>
+              <option value="200-500">R$ 200 a R$ 500/mês</option>
+              <option value="acima-500">Acima de R$ 500/mês</option>
+            </select>
+          </div>
+
+          <div class="kanban-filter-item">
+            <label>Cidade:</label>
+            <select id="kanban-filtro-cidade" class="crm-form-select kanban-filter-select" onchange="aoMudarFiltroGlobal('cidade', this.value)">
+              <option value="todas">Todas as Cidades</option>
+            </select>
+          </div>
+
+          <div class="kanban-filter-item">
+            <label>Segmento / Tag:</label>
+            <select id="kanban-filtro-segmento" class="crm-form-select kanban-filter-select" onchange="aoMudarFiltroGlobal('segmento', this.value)">
+              <option value="todos">Todos os Segmentos</option>
+            </select>
+          </div>
+
+          <div class="kanban-filter-item">
+            <label>Canal / Origem:</label>
+            <select id="kanban-filtro-origem" class="crm-form-select kanban-filter-select" onchange="aoMudarFiltroGlobal('origem', this.value)">
+              <option value="todas">Todos os Canais</option>
+              <option value="Radar">Radar Comercial</option>
+              <option value="Parceria Contábil">Parceria Contábil</option>
+              <option value="Visita">Visita Presencial</option>
+              <option value="Indicação">Indicação</option>
+            </select>
+          </div>
+
+          <button type="button" id="btn-limpar-todos-filtros" class="btn-crm btn-clear-filters" onclick="limparTodosFiltrosKanban()" title="Restaurar visualização completa sem filtros">
+            ✕ Limpar Filtros
+          </button>
+        </div>
+
+        <div id="kanban-active-filters-info" class="kanban-active-filters-info hidden">
+          <!-- Exibição de chips de filtros ativos -->
+        </div>
+      </div>
+
+      <!-- KANBAN BOARD CONTAINER -->
+      <div class="kanban-board-ent" id="kanban-board-container">
+        <!-- Gerado via JS -->
+      </div>
+    </div>
+
+    <!-- 3. EMPRESAS & CONTATOS -->
+    <div id="view-contatos_empresas" class="crm-view-pane">
+      <!-- Gerado via JS -->
+    </div>
+
+    <!-- 4. NEGOCIAÇÕES -->
+    <div id="view-negociacoes" class="crm-view-pane">
+      <!-- Gerado via JS -->
+    </div>
+
+    <!-- 5. ONBOARDING TÉCNICO (6 ETAPAS) -->
+    <div id="view-onboarding" class="crm-view-pane">
+      <!-- Gerado via JS -->
+    </div>
+
+    <!-- 6. METAS & COMISSÕES -->
+    <div id="view-metas" class="crm-view-pane">
+      <!-- Gerado via JS -->
+    </div>
+
+    <!-- 7. ATIVIDADES -->
+    <div id="view-atividades" class="crm-view-pane">
+      <!-- Gerado via JS -->
+    </div>
+
+    <!-- 8. AUTOMAÇÕES -->
+    <div id="view-automacoes" class="crm-view-pane">
+      <!-- Gerado via JS -->
+    </div>
+
+    <!-- 9. USUÁRIOS -->
+    <div id="view-usuarios" class="crm-view-pane">
+      <!-- Gerado via JS -->
+    </div>
+
+    <!-- 10. INTEGRAÇÕES / SWAGGER / ER -->
+    <div id="view-integracoes_api" class="crm-view-pane">
+      <!-- Gerado via JS -->
+    </div>
+  </main>
+
+  <!-- MODAL: NOVA EMPRESA -->
+  <div id="modal-empresa" class="crm-modal hidden">
+    <div class="crm-modal-box">
+      <h3 style="margin-bottom:1rem; font-size:1.2rem; color:#fff;">Cadastrar Nova Empresa (PF/PJ)</h3>
+      <div class="crm-form-group">
+        <label>Tipo de Pessoa</label>
+        <select id="emp-tipo" class="crm-form-select">
+          <option value="PJ">Pessoa Jurídica (PJ - CNPJ)</option>
+          <option value="PF">Pessoa Física (PF - CPF)</option>
+        </select>
+      </div>
+      <div class="crm-form-group">
+        <label>Razão Social / Nome Completo *</label>
+        <input type="text" id="emp-nome" class="crm-form-input" placeholder="Ex: Supermercado Triunfo Ltda" required>
+      </div>
+      <div class="crm-form-group">
+        <label>CNPJ / CPF</label>
+        <input type="text" id="emp-doc" class="crm-form-input" placeholder="00.000.000/0001-00">
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Telefone / WhatsApp</label>
+          <input type="text" id="emp-tel" class="crm-form-input" placeholder="54999999999">
+        </div>
+        <div class="crm-form-group">
+          <label>E-mail Comercial</label>
+          <input type="email" id="emp-email" class="crm-form-input" placeholder="contato@empresa.com.br">
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Cidade (RS)</label>
+          <input type="text" id="emp-cidade" class="crm-form-input" placeholder="Sarandi, Passo Fundo, Marau...">
+        </div>
+        <div class="crm-form-group">
+          <label>PDVs (Caixas)</label>
+          <input type="number" id="emp-pdvs" class="crm-form-input" value="1" min="1">
+        </div>
+      </div>
+      <div class="crm-form-group">
+        <label>Segmento de Atuação</label>
+        <select id="emp-segmento" class="crm-form-select">
+          <option value="Supermercados & Mercearias">Supermercados & Mercearias</option>
+          <option value="Lojas de Confecções & Moda">Lojas de Confecções & Moda</option>
+          <option value="Farmácias & Drogarias">Farmácias & Drogarias</option>
+          <option value="Autopeças & Serviços">Autopeças & Serviços</option>
+          <option value="Padarias & Gastronomia">Padarias & Gastronomia</option>
+          <option value="Escritórios de Contabilidade">Escritórios de Contabilidade</option>
+          <option value="Comércio Geral">Comércio Geral</option>
+        </select>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem;">
+        <button onclick="fecharModalEmpresa()" class="btn-crm">Cancelar</button>
+        <button onclick="salvarEmpresaForm()" class="btn-crm btn-crm-primary">💾 Salvar Cadastro</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: NOVO LEAD COMPLETO (PROSPECÇÃO DIRETA / MANUAL) -->
+  <div id="modal-novo-lead" class="crm-modal hidden">
+    <div class="crm-modal-box" style="max-width:680px; max-height:90vh; overflow-y:auto;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:0.75rem;">
+        <div>
+          <h3 style="font-size:1.25rem; color:#fff; display:flex; align-items:center; gap:0.5rem; margin:0;">
+            <span style="color:#10b981;">➕</span> Adicionar Novo Lead / Prospect
+          </h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin:0.25rem 0 0 0;">Cadastre o comércio, decisor e insira diretamente no Pipeline Comercial.</p>
+        </div>
+        <button type="button" onclick="fecharModalNovoLead()" class="btn-crm" style="padding:0.25rem 0.5rem; font-size:1rem; line-height:1;">✕</button>
+      </div>
+
+      <!-- SEÇÃO 1: DADOS DA EMPRESA -->
+      <div style="font-size:0.82rem; font-weight:700; color:#38bdf8; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.4rem;">
+        🏢 1. Dados do Estabelecimento Comercial
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Nome Fantasia / Empresa *</label>
+          <input type="text" id="nl-nome" class="crm-form-input" placeholder="Ex: Supermercado Triunfo" required>
+        </div>
+        <div class="crm-form-group">
+          <label>Razão Social (opcional)</label>
+          <input type="text" id="nl-razao" class="crm-form-input" placeholder="Ex: Triunfo Alimentos Ltda">
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Tipo de Documento</label>
+          <select id="nl-tipo-doc" class="crm-form-select">
+            <option value="PJ">Pessoa Jurídica (CNPJ)</option>
+            <option value="PF">Pessoa Física / Produtor (CPF)</option>
+          </select>
+        </div>
+        <div class="crm-form-group">
+          <label>CNPJ / CPF (opcional)</label>
+          <input type="text" id="nl-doc" class="crm-form-input" placeholder="00.000.000/0001-00">
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1.4fr 1.2fr 0.8fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Cidade (RS) *</label>
+          <input type="text" id="nl-cidade" list="lista-cidades-crm" class="crm-form-input" placeholder="Sarandi, Passo Fundo, Marau..." value="Sarandi - RS" required>
+          <datalist id="lista-cidades-crm">
+            <option value="Sarandi - RS"></option>
+            <option value="Ronda Alta - RS"></option>
+            <option value="Rondinha - RS"></option>
+            <option value="Barra Funda - RS"></option>
+            <option value="Constantina - RS"></option>
+            <option value="Chapada - RS"></option>
+            <option value="Nova Boa Vista - RS"></option>
+            <option value="Carazinho - RS"></option>
+            <option value="Passo Fundo - RS"></option>
+            <option value="Marau - RS"></option>
+            <option value="Tapejara - RS"></option>
+            <option value="Erechim - RS"></option>
+            <option value="Palmeira das Missões - RS"></option>
+            <option value="Três Palmeiras - RS"></option>
+            <option value="Pontão - RS"></option>
+          </datalist>
+        </div>
+        <div class="crm-form-group">
+          <label>Segmento *</label>
+          <select id="nl-segmento" class="crm-form-select">
+            <option value="Supermercados & Mercearias">Supermercados & Mercearias</option>
+            <option value="Lojas de Confecções & Moda">Lojas de Confecções & Moda</option>
+            <option value="Farmácias & Drogarias">Farmácias & Drogarias</option>
+            <option value="Autopeças & Oficinas">Autopeças & Oficinas</option>
+            <option value="Padarias & Gastronomia">Padarias & Gastronomia</option>
+            <option value="Materiais de Construção">Materiais de Construção</option>
+            <option value="Pet Shop & Agropecuária">Pet Shop & Agropecuária</option>
+            <option value="Escritórios de Contabilidade">Escritórios de Contabilidade</option>
+            <option value="Comércio Geral">Comércio Geral & Outros</option>
+          </select>
+        </div>
+        <div class="crm-form-group">
+          <label>PDVs (Caixas)</label>
+          <input type="number" id="nl-pdvs" class="crm-form-input" value="1" min="1" oninput="atualizarEstimativaNovoLead()">
+        </div>
+      </div>
+
+      <div class="crm-form-group">
+        <label>Endereço / Ponto de Referência (opcional)</label>
+        <input type="text" id="nl-endereco" class="crm-form-input" placeholder="Ex: Av. Expedicionário, 1200 - Centro">
+      </div>
+
+      <!-- SEÇÃO 2: CONTATO & DECISOR -->
+      <div style="font-size:0.82rem; font-weight:700; color:#34d399; text-transform:uppercase; letter-spacing:0.05em; margin:1.2rem 0 0.75rem; display:flex; align-items:center; gap:0.4rem;">
+        👤 2. Contato / Decisor Comercial
+      </div>
+      <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Nome do Responsável / Decisor *</label>
+          <input type="text" id="nl-contato-nome" class="crm-form-input" placeholder="Ex: João Silva" required>
+        </div>
+        <div class="crm-form-group">
+          <label>Cargo / Função</label>
+          <input type="text" id="nl-contato-cargo" class="crm-form-input" placeholder="Proprietário, Gerente..." value="Proprietário">
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Telefone / WhatsApp *</label>
+          <input type="text" id="nl-contato-tel" class="crm-form-input" placeholder="Ex: 54999887766" required>
+        </div>
+        <div class="crm-form-group">
+          <label>E-mail (opcional)</label>
+          <input type="email" id="nl-contato-email" class="crm-form-input" placeholder="contato@empresa.com.br">
+        </div>
+      </div>
+
+      <!-- SEÇÃO 3: OPORTUNIDADE NO PIPELINE -->
+      <div style="font-size:0.82rem; font-weight:700; color:#fbbf24; text-transform:uppercase; letter-spacing:0.05em; margin:1.2rem 0 0.75rem; display:flex; align-items:center; gap:0.4rem;">
+        💼 3. Oportunidade no Pipeline (Kanban)
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Funil de Vendas</label>
+          <select id="nl-funil-sel" class="crm-form-select">
+            <option value="funil-vendas-novas">Pipeline Principal: Vendas Novas B2B</option>
+            <option value="funil-upsell">Expansão & Upsell (PDVs / Módulos)</option>
+            <option value="funil-contadores">Parcerias Contábeis (B2B2B)</option>
+          </select>
+        </div>
+        <div class="crm-form-group">
+          <label>Etapa Inicial</label>
+          <select id="nl-etapa-sel" class="crm-form-select">
+            <option value="etapa-lead">1. Lead / Qualificação</option>
+            <option value="etapa-contato">2. Contato Feito / Diagnóstico</option>
+            <option value="etapa-demo">3. Demonstração / PDV Teste</option>
+            <option value="etapa-proposta">4. Proposta Enviada</option>
+            <option value="etapa-recontato">6. Recontato (6m - 1 ano)</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Mensalidade MRR (R$)</label>
+          <input type="number" id="nl-mrr" class="crm-form-input" value="180.00" step="10">
+        </div>
+        <div class="crm-form-group">
+          <label>Setup / Implantação (R$)</label>
+          <input type="number" id="nl-setup" class="crm-form-input" value="0.00" step="50">
+        </div>
+        <div class="crm-form-group">
+          <label>Previsão Fechamento</label>
+          <input type="date" id="nl-previsao" class="crm-form-input">
+        </div>
+      </div>
+
+      <div class="crm-form-group">
+        <label>Notas / Contexto da Prospecção (opcional)</label>
+        <textarea id="nl-notas" class="crm-form-input" rows="2" placeholder="Ex: Estabelecimento encontrado em visita presencial; lojista insatisfeito com sistema atual..."></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:1rem;">
+        <button type="button" onclick="fecharModalNovoLead()" class="btn-crm">Cancelar</button>
+        <button type="button" onclick="salvarNovoLeadForm()" class="btn-crm btn-crm-primary" style="background:linear-gradient(135deg, #10b981, #059669); font-weight:700;">💾 Salvar e Criar no Pipeline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: NOVO DEAL -->
+  <div id="modal-deal" class="crm-modal hidden">
+    <div class="crm-modal-box">
+      <h3 style="margin-bottom:1rem; font-size:1.2rem; color:#fff;">Nova Oportunidade Comercial</h3>
+      <div class="crm-form-group">
+        <label>Título da Negociação *</label>
+        <input type="text" id="deal-titulo" class="crm-form-input" placeholder="Ex: Implantação TruData ERP Web (2 PDVs)" required>
+      </div>
+      <div class="crm-form-group">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.25rem;">
+          <label style="margin:0;">Vincular à Empresa *</label>
+          <a href="javascript:void(0)" onclick="fecharModalDeal(); abrirModalNovoLead();" style="font-size:0.75rem; color:#10b981; font-weight:600; text-decoration:none;">➕ Cadastrar novo lead agora</a>
+        </div>
+        <select id="deal-empresa-sel" class="crm-form-select">
+          <!-- Populado via JS -->
+        </select>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Mensalidade MRR (R$/mês)</label>
+          <input type="number" id="deal-mrr" class="crm-form-input" placeholder="180.00" value="180.00" step="10">
+        </div>
+        <div class="crm-form-group">
+          <label>Setup / Implantação (R$)</label>
+          <input type="number" id="deal-setup" class="crm-form-input" placeholder="0.00" value="0.00" step="50">
+        </div>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem;">
+        <button onclick="fecharModalDeal()" class="btn-crm">Cancelar</button>
+        <button onclick="salvarDealForm()" class="btn-crm btn-crm-primary">Criar Oportunidade</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: AGENDAR AÇÃO / ATIVIDADE COMERCIAL -->
+  <div id="modal-atividade" class="crm-modal hidden">
+    <div class="crm-modal-box" style="max-width:620px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid var(--crm-border); padding-bottom:0.75rem;">
+        <div>
+          <h3 style="font-size:1.25rem; color:#fff; display:flex; align-items:center; gap:8px;">
+            <span>📅</span> Agendar Ação Comercial
+          </h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-top:2px;">Defina o tipo, data/hora e detalhes do próximo compromisso com o lojista.</p>
+        </div>
+        <button onclick="fecharModalAtividade()" class="btn-crm" style="font-size:0.9rem; padding:0.25rem 0.6rem;">✕</button>
+      </div>
+
+      <input type="hidden" id="ativ-deal-id" value="">
+
+      <!-- Sugestões rápidas de título -->
+      <div class="crm-form-group">
+        <label>Título da Ação *</label>
+        <input type="text" id="ativ-titulo" class="crm-form-input" placeholder="Ex: Ligação de follow-up, Demonstração PDV ou Visita presencial" required>
+        <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-top:0.4rem;">
+          <button type="button" class="btn-crm" style="padding:0.15rem 0.45rem; font-size:0.7rem;" onclick="preencherAcaoRapida('📞 Ligação de Follow-up', 'ligacao')">📞 Ligação</button>
+          <button type="button" class="btn-crm" style="padding:0.15rem 0.45rem; font-size:0.7rem;" onclick="preencherAcaoRapida('🤝 Demonstração do TruData ERP', 'reuniao')">🤝 Demonstração</button>
+          <button type="button" class="btn-crm" style="padding:0.15rem 0.45rem; font-size:0.7rem;" onclick="preencherAcaoRapida('🚗 Visita Presencial ao Lojista', 'visita')">🚗 Visita Loja</button>
+          <button type="button" class="btn-crm" style="padding:0.15rem 0.45rem; font-size:0.7rem;" onclick="preencherAcaoRapida('💬 Contato / Diagnóstico no WhatsApp', 'whatsapp')">💬 WhatsApp</button>
+          <button type="button" class="btn-crm" style="padding:0.15rem 0.45rem; font-size:0.7rem;" onclick="preencherAcaoRapida('✉️ Apresentação da Proposta Comercial', 'email')">✉️ Proposta</button>
+          <button type="button" class="btn-crm" style="padding:0.15rem 0.45rem; font-size:0.7rem;" onclick="preencherAcaoRapida('⏰ Recontato Comercial (Nutrição)', 'recontato')">⏰ Recontato (6m)</button>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Tipo de Ação</label>
+          <select id="ativ-tipo" class="crm-form-select">
+            <option value="whatsapp">💬 Contato WhatsApp</option>
+            <option value="ligacao">📞 Ligação Telefônica</option>
+            <option value="reuniao">🤝 Reunião / Demonstração</option>
+            <option value="visita">🚗 Visita Presencial</option>
+            <option value="email">✉️ Envio de E-mail</option>
+            <option value="recontato">⏰ Recontato Futuro</option>
+            <option value="follow_up">📋 Follow-up Geral</option>
+          </select>
+        </div>
+        <div class="crm-form-group">
+          <label>Data e Horário *</label>
+          <input type="datetime-local" id="ativ-dh" class="crm-form-input" required>
+        </div>
+        <div class="crm-form-group">
+          <label>Duração Estimada</label>
+          <select id="ativ-duracao" class="crm-form-select">
+            <option value="15">15 minutos</option>
+            <option value="30">30 minutos</option>
+            <option value="45">45 minutos</option>
+            <option value="60" selected>60 min (1 hora)</option>
+            <option value="90">90 min (1h 30m)</option>
+            <option value="120">120 min (2 horas)</option>
+          </select>
+        </div>
+      </div>
+      <!-- Atalhos de data -->
+      <div style="display:flex; gap:0.3rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+        <button type="button" class="btn-crm" style="padding:0.1rem 0.4rem; font-size:0.68rem;" onclick="definirHorarioAtividade(0, 15)">Hoje 15h</button>
+        <button type="button" class="btn-crm" style="padding:0.1rem 0.4rem; font-size:0.68rem;" onclick="definirHorarioAtividade(1, 9, 30)">Amanhã 09:30</button>
+        <button type="button" class="btn-crm" style="padding:0.1rem 0.4rem; font-size:0.68rem;" onclick="definirHorarioAtividade(3, 14)">Em 3 dias</button>
+        <button type="button" class="btn-crm" style="padding:0.1rem 0.4rem; font-size:0.68rem;" onclick="definirHorarioAtividade(7, 10)">Em 1 sem</button>
+        <button type="button" class="btn-crm" style="padding:0.1rem 0.4rem; font-size:0.68rem;" onclick="definirHorarioAtividade(180, 9)">Em 6 meses</button>
+      </div>
+
+      <div class="crm-form-group">
+        <label>Vincular à Empresa / Cliente *</label>
+        <select id="ativ-empresa-sel" class="crm-form-select">
+          <!-- Populado via JS -->
+        </select>
+      </div>
+
+      <div class="crm-form-group">
+        <label>Pauta / Observações da Ação (Opcional)</label>
+        <textarea id="ativ-notas" class="crm-form-input" rows="2" placeholder="Ex: Apresentar módulo de conciliação TEF, auditoria fiscal SPED e contingência offline."></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem; border-top:1px solid var(--crm-border); padding-top:1rem;">
+        <button onclick="fecharModalAtividade()" class="btn-crm">Cancelar</button>
+        <button onclick="salvarAtividadeForm()" class="btn-crm btn-crm-primary" style="font-weight:700; background:linear-gradient(135deg, #0284c7, #0369a1);">📅 Marcar na Agenda</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: DETALHES RÁPIDOS DA ATIVIDADE NA AGENDA -->
+  <div id="modal-detalhes-atividade" class="crm-modal hidden">
+    <div class="crm-modal-box crm-event-detail-box">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; border-bottom:1px solid var(--crm-border); padding-bottom:0.75rem;">
+        <div>
+          <span id="det-ativ-tipo-badge" class="badge-ent" style="margin-bottom:0.4rem;"></span>
+          <h3 id="det-ativ-titulo" style="font-size:1.15rem; color:#fff; margin:0;"></h3>
+        </div>
+        <button onclick="fecharModalDetalhesAtividade()" class="btn-crm" style="font-size:0.9rem; padding:0.25rem 0.6rem;">✕</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:0.85rem; font-size:0.85rem;">
+        <div style="display:flex; gap:0.75rem; align-items:center; background:rgba(255,255,255,0.03); padding:0.6rem 0.85rem; border-radius:8px; border:1px solid var(--crm-border);">
+          <div style="font-size:1.2rem;">🏢</div>
+          <div>
+            <div style="font-size:0.72rem; color:#94a3b8; text-transform:uppercase;">Empresa Vinculada</div>
+            <div id="det-ativ-empresa" style="font-weight:600; color:#f8fafc;"></div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div style="background:rgba(255,255,255,0.03); padding:0.6rem 0.85rem; border-radius:8px; border:1px solid var(--crm-border);">
+            <div style="font-size:0.72rem; color:#94a3b8; text-transform:uppercase;">Data e Horário</div>
+            <div id="det-ativ-dh" style="font-weight:600; color:#38bdf8; font-family:'JetBrains Mono', monospace;"></div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); padding:0.6rem 0.85rem; border-radius:8px; border:1px solid var(--crm-border);">
+            <div style="font-size:0.72rem; color:#94a3b8; text-transform:uppercase;">Responsável</div>
+            <div id="det-ativ-resp" style="font-weight:600; color:#e2e8f0;"></div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03); padding:0.6rem 0.85rem; border-radius:8px; border:1px solid var(--crm-border);">
+          <div style="font-size:0.72rem; color:#94a3b8; text-transform:uppercase;">Status Atual</div>
+          <div id="det-ativ-status" style="margin-top:0.25rem;"></div>
+        </div>
+
+        <div id="det-ativ-notas-wrap" style="background:rgba(0,0,0,0.25); padding:0.75rem 0.85rem; border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-size:0.72rem; color:#94a3b8; text-transform:uppercase; margin-bottom:0.25rem;">Pauta & Anotações</div>
+          <div id="det-ativ-notas" style="color:#cbd5e1; font-size:0.82rem; white-space:pre-wrap;"></div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.25rem; border-top:1px solid var(--crm-border); padding-top:1rem;">
+        <div id="det-ativ-acoes-left"></div>
+        <button onclick="fecharModalDetalhesAtividade()" class="btn-crm">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PROPOSTA COMERCIAL RASTREÁVEL GERADA -->
+  <div id="modal-proposta" class="crm-modal hidden">
+    <div class="crm-modal-box">
+      <h3 style="margin-bottom:0.5rem; font-size:1.25rem; color:#fff;">📄 Proposta Digital 1-Click Gerada!</h3>
+      <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:1.25rem;">
+        O link único abaixo possui beacon de rastreamento em tempo real e assinatura digital com validade jurídica integrada.
+      </p>
+
+      <div class="crm-form-group">
+        <label>Link Público Rastreável</label>
+        <div style="display:flex; gap:0.5rem;">
+          <input type="text" id="prop-link-input" class="crm-form-input" readonly style="color:#38bdf8; font-weight:600; font-family:'JetBrains Mono', monospace;">
+          <button onclick="copiarLinkProposta()" class="btn-crm btn-crm-primary" style="white-space:nowrap;">📋 Copiar</button>
+        </div>
+      </div>
+
+      <div style="background:rgba(0, 159, 227, 0.08); border:1px solid rgba(0, 159, 227, 0.3); border-radius:8px; padding:0.85rem; font-size:0.8rem; color:#cbd5e1; margin-bottom:1.25rem;">
+        <div>🔔 <strong>Alerta em Tempo Real:</strong> Assim que o cliente clicar no link, o CRM notificará a abertura na timeline com carimbo de data, hora e IP.</div>
+        <div style="margin-top:0.4rem;">✍️ <strong>Assinatura Digital:</strong> O cliente poderá assinar na hora pelo celular ou computador com autenticação criptográfica SHA-256.</div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+        <a id="prop-wpp-btn" href="#" target="_blank" class="btn-crm" style="background:#25d366; color:#fff; font-weight:700;">💬 Enviar no WhatsApp</a>
+        <div style="display:flex; gap:0.5rem;">
+          <a id="prop-open-btn" href="#" target="_blank" class="btn-crm">Visualizar Proposta</a>
+          <button onclick="fecharModalProposta()" class="btn-crm">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CONFIGURAR METAS COMERCIAIS -->
+  <div id="modal-config-metas" class="crm-modal hidden">
+    <div class="crm-modal-box">
+      <h3 style="margin-bottom:0.5rem; font-size:1.25rem; color:#fff;">🎯 Configuração de Metas & Comissões</h3>
+      <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:1.25rem;">
+        Defina os objetivos do mês para a equipe, metas de PDVs e percentuais de comissionamento.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div class="crm-form-group">
+          <label>Meta MRR da Empresa (R$/mês)</label>
+          <input type="number" id="meta-mrr-emp" class="crm-form-input" value="15000" step="500">
+        </div>
+        <div class="crm-form-group">
+          <label>Meta de PDVs Homologados</label>
+          <input type="number" id="meta-pdvs-emp" class="crm-form-input" value="50" step="5">
+        </div>
+      </div>
+
+      <div class="crm-form-group">
+        <label>Mês de Referência</label>
+        <input type="text" id="meta-mes-ref" class="crm-form-input" value="Setembro/2026">
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.25rem;">
+        <button onclick="fecharModalConfigMetas()" class="btn-crm">Cancelar</button>
+        <button onclick="salvarConfigMetasForm()" class="btn-crm btn-crm-primary">💾 Salvar Metas</button>
+      </div>
+    </div>
+  <!-- MODAL: REGISTRAR NEGÓCIO PERDIDO (OBRIGATÓRIO AO MOVER PARA PERDIDO) -->
+  <div id="modal-motivo-perda" class="crm-modal hidden">
+    <div class="crm-modal-box" style="max-width:540px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; border-bottom:1px solid rgba(239,68,68,0.25); padding-bottom:0.75rem;">
+        <div>
+          <h3 style="font-size:1.2rem; color:#f87171; display:flex; align-items:center; gap:0.5rem; margin:0;">
+            <span>❌</span> Registrar Perda de Negócio
+          </h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin:0.25rem 0 0 0;">
+            Obrigatório registrar o motivo para inteligência comercial e relatórios analíticos de conversão.
+          </p>
+        </div>
+        <button type="button" onclick="cancelarModalMotivoPerda()" class="btn-crm" style="padding:0.25rem 0.5rem; font-size:1rem; line-height:1;">✕</button>
+      </div>
+
+      <input type="hidden" id="perda-deal-id" value="">
+      <input type="hidden" id="perda-nova-etapa-id" value="etapa-perdido">
+
+      <!-- Resumo do Negócio -->
+      <div id="perda-deal-preview" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:0.65rem 0.85rem; margin-bottom:1.1rem; font-size:0.82rem;">
+        <div style="font-weight:700; color:#fff;" id="perda-deal-titulo">Negociação</div>
+        <div style="color:#94a3b8; font-size:0.75rem; margin-top:2px;" id="perda-deal-empresa">Empresa</div>
+      </div>
+
+      <!-- Motivo da Perda -->
+      <div class="crm-form-group">
+        <label style="color:#f87171; font-weight:700;">Motivo Principal da Perda *</label>
+        <select id="perda-motivo-select" class="crm-form-select" onchange="aoMudarMotivoPerdaSelect(this.value)">
+          <option value="">-- Selecione o motivo oficial --</option>
+          <option value="Preço / Condição Comercial">Preço / Condição Comercial</option>
+          <option value="Optou por Concorrente">Optou por Concorrente</option>
+          <option value="Timing / Momento Errado">Timing / Momento Errado</option>
+          <option value="Sem Orçamento / Verba">Sem Orçamento / Verba</option>
+          <option value="Sem Resposta / Sem Fit">Sem Resposta / Sem Fit</option>
+          <option value="Outro">Outro (especificar campo abaixo)</option>
+        </select>
+      </div>
+
+      <!-- Campo livre para "Outro" -->
+      <div id="perda-campo-outro-wrap" class="crm-form-group hidden">
+        <label>Descreva o Motivo Específico *</label>
+        <input type="text" id="perda-motivo-outro-input" class="crm-form-input" placeholder="Ex: Sócio desfez a sociedade, mudou de ramo...">
+      </div>
+
+      <!-- Observações adicionais -->
+      <div class="crm-form-group">
+        <label>Observações Comerciais Adicionais (opcional)</label>
+        <textarea id="perda-observacoes-input" class="crm-form-input" rows="3" placeholder="Ex: Lojista gostou do ERP, mas acabou de renovar o sistema legado por mais 1 ano. Reavaliar no próximo ciclo."></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:1rem;">
+        <button type="button" onclick="cancelarModalMotivoPerda()" class="btn-crm">
+          Cancelar (Manter no Estágio Atual)
+        </button>
+        <button type="button" onclick="confirmarSalvarPerdaDeal()" class="btn-crm" style="background:linear-gradient(135deg, #ef4444, #b91c1c); color:#fff; font-weight:700; border:none; box-shadow:0 2px 8px rgba(239,68,68,0.4);">
+          Confirmar Perda do Negócio
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CONFIGURAÇÃO DE REGRAS DO KANBAN (WIP, DIAS, TEMPERATURA) -->
+  <div id="modal-config-kanban" class="crm-modal hidden">
+    <div class="crm-modal-box" style="max-width:640px; max-height:90vh; overflow-y:auto;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:0.75rem;">
+        <div>
+          <h3 style="font-size:1.25rem; color:#fff; display:flex; align-items:center; gap:0.5rem; margin:0;">
+            <span>⚙️</span> Configurações Avançadas do Kanban
+          </h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin:0.25rem 0 0 0;">
+            Ajuste limites de WIP, regras de tempo parado e faixas de temperatura dos leads.
+          </p>
+        </div>
+        <button type="button" onclick="fecharModalConfigKanban()" class="btn-crm" style="padding:0.25rem 0.5rem; font-size:1rem; line-height:1;">✕</button>
+      </div>
+
+      <!-- SEÇÃO 1: LIMITES DE WIP -->
+      <div style="font-size:0.82rem; font-weight:700; color:#38bdf8; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.75rem;">
+        🚦 1. Limites de Capacidade WIP por Estágio (Work in Progress)
+      </div>
+      <p style="font-size:0.75rem; color:#94a3b8; margin-bottom:0.75rem;">
+        Quando o número de cards ultrapassar o limite, a coluna exibirá uma borda de alerta amarela ou vermelha no cabeçalho.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1.5rem;">
+        <div class="crm-form-group">
+          <label>1. Lead / Qualificação</label>
+          <input type="number" id="cfg-wip-lead" class="crm-form-input" min="1" max="500" value="60">
+        </div>
+        <div class="crm-form-group">
+          <label>2. Contato Feito / Diagnóstico</label>
+          <input type="number" id="cfg-wip-contato" class="crm-form-input" min="1" max="100" value="15">
+        </div>
+        <div class="crm-form-group">
+          <label>3. Demonstração / PDV Teste</label>
+          <input type="number" id="cfg-wip-demo" class="crm-form-input" min="1" max="100" value="10">
+        </div>
+        <div class="crm-form-group">
+          <label>4. Proposta Enviada</label>
+          <input type="number" id="cfg-wip-proposta" class="crm-form-input" min="1" max="100" value="15">
+        </div>
+        <div class="crm-form-group">
+          <label>5. Contrato Fechado (Ganho)</label>
+          <input type="number" id="cfg-wip-fechado" class="crm-form-input" min="1" max="1000" value="100">
+        </div>
+        <div class="crm-form-group">
+          <label>6. Recontato (6m - 1 ano)</label>
+          <input type="number" id="cfg-wip-recontato" class="crm-form-input" min="1" max="500" value="50">
+        </div>
+      </div>
+
+      <!-- SEÇÃO 2: TEMPO PARADO NO ESTÁGIO -->
+      <div style="font-size:0.82rem; font-weight:700; color:#facc15; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.75rem;">
+        🕐 2. Prazos de "Tempo Parado no Estágio" (Dias)
+      </div>
+      <p style="font-size:0.75rem; color:#94a3b8; margin-bottom:0.75rem;">
+        Define as cores progressivas do badge: Verde (Recente) ➔ Amarelo (Atenção) ➔ Vermelho (Estagnado).
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1.5rem;">
+        <div class="crm-form-group">
+          <label>Limite Verde (Recente): até X dias</label>
+          <input type="number" id="cfg-tempo-verde" class="crm-form-input" min="1" max="30" value="3">
+        </div>
+        <div class="crm-form-group">
+          <label>Limite Amarelo (Atenção): até Y dias</label>
+          <input type="number" id="cfg-tempo-amarelo" class="crm-form-input" min="2" max="60" value="10">
+          <small style="font-size:0.7rem; color:#94a3b8;">Vermelho será disparado a partir de Y + 1 dias.</small>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 3: TEMPERATURA DO LEAD -->
+      <div style="font-size:0.82rem; font-weight:700; color:#f97316; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.75rem;">
+        🔥 3. Critérios de Temperatura do Lead
+      </div>
+      <p style="font-size:0.75rem; color:#94a3b8; margin-bottom:0.75rem;">
+        Refletido na faixa lateral esquerda de cada card com base na última interação registrada.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1.5rem;">
+        <div class="crm-form-group">
+          <label>🔥 Quente: interação em até (dias)</label>
+          <input type="number" id="cfg-temp-quente" class="crm-form-input" min="1" max="15" value="3">
+        </div>
+        <div class="crm-form-group">
+          <label>☀️ Morno: interação entre (dias)</label>
+          <input type="number" id="cfg-temp-morno" class="crm-form-input" min="2" max="30" value="10">
+          <small style="font-size:0.7rem; color:#94a3b8;">❄️ Frio será aplicado a leads com 10+ dias sem interação.</small>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:1rem;">
+        <button type="button" onclick="restaurarConfiguracoesPadraoKanban()" class="btn-crm" style="color:#cbd5e1;">
+          ↺ Restaurar Padrões
+        </button>
+        <div style="display:flex; gap:0.5rem;">
+          <button type="button" onclick="fecharModalConfigKanban()" class="btn-crm">Cancelar</button>
+          <button type="button" onclick="salvarConfiguracoesKanbanForm()" class="btn-crm btn-crm-primary">
+            💾 Salvar Regras
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/painel_aprovacao/crm_enterprise.js?v=20260923-4"></script>
+  <script>
+    // Popular selects de modais quando abrir
+    function popularSelectsEmpresas() {
+      if (!CRM_STATE.dados) return;
+      const options = CRM_STATE.dados.empresas.map(e => `
+        <option value="${e.id}">${e.nome_fantasia || e.razao_social} (${e.cidade})</option>
+      `).join('');
+      const dealSel = document.getElementById('deal-empresa-sel');
+      if (dealSel) dealSel.innerHTML = options;
+      const ativSel = document.getElementById('ativ-empresa-sel');
+      if (ativSel) ativSel.innerHTML = options;
+    }
+
+    const origAbrirDeal = abrirModalNovoDeal;
+    abrirModalNovoDeal = function() {
+      popularSelectsEmpresas();
+      origAbrirDeal();
+    };
+
+    const origAbrirAtiv = abrirModalNovaAtividade;
+    abrirModalNovaAtividade = function() {
+      popularSelectsEmpresas();
+      origAbrirAtiv();
+    };
+  </script>
+</body>
+</html>

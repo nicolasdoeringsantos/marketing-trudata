@@ -1,6 +1,7 @@
 (() => {
   "use strict";
   const tools = [
+    ["crm_enterprise.html?tab=atividades", "Ações e agendamentos", "Comercial", "Agenda visual com calendário mensal, semanal, diário e agendamento de ações comerciais.", "CRM Enterprise"],
     ["revisao_enderecos.html", "Revisão de endereços", "Comercial", "Corrija endereços pendentes, consulte a API e confira os pontos antes de atualizar o radar.", "Integrado ao radar"],
     ["planejar_visitas.html", "Planejamento de visitas", "Comercial", "Monte a agenda, abra o trajeto e registre as visitas realizadas.", "Agenda compartilhada"],
     ["proximos_contatos.html", "Próximos contatos", "Comercial", "Veja retornos do CRM, registre conversas e combine a próxima ação.", "Acompanhamento diário"],

@@ -1,0 +1,1226 @@
+[
+  {
+    "id": "audit-54b64017",
+    "timestamp": "2026-09-24T10:35:47",
+    "usuario": "usr-admin",
+    "acao": "EXCLUIR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-ee17bd42",
+    "detalhe": "Atividade ativ-ee17bd42 removida"
+  },
+  {
+    "id": "audit-906122e4",
+    "timestamp": "2026-09-24T10:35:47",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-ee17bd42",
+    "detalhe": "Atividade __TESTE_EXCLUSAO__"
+  },
+  {
+    "id": "audit-7a4afe60",
+    "timestamp": "2026-09-24T10:27:12",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-633994",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Albino Calza Escritório Contábil"
+  },
+  {
+    "id": "audit-6f35b1e1",
+    "timestamp": "2026-09-24T10:27:12",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-5c971c",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para LC / LB Escritório Contábil"
+  },
+  {
+    "id": "audit-3b5a2414",
+    "timestamp": "2026-09-24T10:27:11",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-a16601",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Decio Signor & Cia"
+  },
+  {
+    "id": "audit-ae9925a9",
+    "timestamp": "2026-09-24T10:27:10",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-7c27e1",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório NS Prime Contabilidade Consultiva"
+  },
+  {
+    "id": "audit-b2db3aab",
+    "timestamp": "2026-09-24T10:27:10",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-a74ecf",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Tailan Tremea — Licitações Públicas"
+  },
+  {
+    "id": "audit-0d438678",
+    "timestamp": "2026-09-24T10:27:08",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-65d143",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para RENTARE Soluções Contábeis"
+  },
+  {
+    "id": "audit-570c224b",
+    "timestamp": "2026-09-24T10:27:08",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-c424ad",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Preusler & Filho"
+  },
+  {
+    "id": "audit-52292ffb",
+    "timestamp": "2026-09-24T10:27:07",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-00609b",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Osmar Luis Reolon Contabilidade"
+  },
+  {
+    "id": "audit-4786e7ae",
+    "timestamp": "2026-09-24T10:27:07",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-076a03",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório Navegantes"
+  },
+  {
+    "id": "audit-b47360c8",
+    "timestamp": "2026-09-24T10:27:05",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-2444d1",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório Contábil BBR / JB / CONTEC"
+  },
+  {
+    "id": "audit-4be00cc4",
+    "timestamp": "2026-09-24T10:27:05",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-579700",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Dimensão Serviços Contábeis"
+  },
+  {
+    "id": "audit-2ee1dd4b",
+    "timestamp": "2026-09-24T10:27:04",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-42d183",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Bonoldi Soluções em Gestão Pública"
+  },
+  {
+    "id": "audit-29cdf70f",
+    "timestamp": "2026-09-24T10:27:03",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pon-eee541",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Fortes Contabilidade"
+  },
+  {
+    "id": "audit-6eafab2c",
+    "timestamp": "2026-09-24T10:27:02",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pon-667484",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Sarandi Soluções Contábeis — filial Pontão"
+  },
+  {
+    "id": "audit-27bdb5a8",
+    "timestamp": "2026-09-24T10:27:01",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pon-915616",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para R & R Contabilidade / RDS Contabilidade e Consultoria"
+  },
+  {
+    "id": "audit-5b067605",
+    "timestamp": "2026-09-24T10:27:00",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-aceedb",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Probec Serviços Contábeis"
+  },
+  {
+    "id": "audit-1d2ee6c2",
+    "timestamp": "2026-09-24T10:26:59",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-f7ebd3",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Joypi"
+  },
+  {
+    "id": "audit-054c6390",
+    "timestamp": "2026-09-24T10:26:59",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-af3f7e",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório Contábil Eroni Cosmann"
+  },
+  {
+    "id": "audit-edf4e217",
+    "timestamp": "2026-09-24T10:26:58",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-e67f3b",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório Contábil Dilma Lanius"
+  },
+  {
+    "id": "audit-2241d3cf",
+    "timestamp": "2026-09-24T10:26:57",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-ad0208",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Ayres Serviços Contábeis"
+  },
+  {
+    "id": "audit-b969dffd",
+    "timestamp": "2026-09-24T10:26:56",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-284685",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Suzano & Suzano Cia"
+  },
+  {
+    "id": "audit-70996a2a",
+    "timestamp": "2026-09-24T10:26:55",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-fedf36",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para MDCon Assessoria Contábil — Diego Mafalda"
+  },
+  {
+    "id": "audit-1a1677b8",
+    "timestamp": "2026-09-24T10:26:54",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-27e062",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório Contábil Rizzardi"
+  },
+  {
+    "id": "audit-2b195132",
+    "timestamp": "2026-09-24T10:26:52",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-9a2966",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório Contábil Lorenzoni & Amaral"
+  },
+  {
+    "id": "audit-d6805a1c",
+    "timestamp": "2026-09-24T10:26:52",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-4d37c4",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para E M Soares Contabilidade"
+  },
+  {
+    "id": "audit-43c8fce6",
+    "timestamp": "2026-09-24T10:26:51",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-cf3cb7",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Digicon Contabilidade e Consultoria"
+  },
+  {
+    "id": "audit-800ab0c5",
+    "timestamp": "2026-09-24T10:26:50",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-54439d",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Control Soluções Contábeis"
+  },
+  {
+    "id": "audit-c65d19b0",
+    "timestamp": "2026-09-24T10:26:49",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-4ec909",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para ContabilBras"
+  },
+  {
+    "id": "audit-49283291",
+    "timestamp": "2026-09-24T10:26:48",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-0adfd3",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Valor Consultoria e Serviços Contábeis"
+  },
+  {
+    "id": "audit-7413a841",
+    "timestamp": "2026-09-24T10:26:47",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-01d961",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório Contábil Delta"
+  },
+  {
+    "id": "audit-f5316ee1",
+    "timestamp": "2026-09-24T10:26:46",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-pal-97e00e",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para D&J Damer Serviços de Contabilidade"
+  },
+  {
+    "id": "audit-c80e4254",
+    "timestamp": "2026-09-24T10:26:45",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-nov-a23266",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Atena Serviços Contábeis"
+  },
+  {
+    "id": "audit-2b34ff31",
+    "timestamp": "2026-09-24T10:26:44",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-nov-03fa86",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Contasso Serviços Contábeis"
+  },
+  {
+    "id": "audit-f1055926",
+    "timestamp": "2026-09-24T10:26:43",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-nov-0ae821",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Emacont Assessoria em Contabilidade e Projetos de Turismo"
+  },
+  {
+    "id": "audit-9f3c2220",
+    "timestamp": "2026-09-24T10:26:42",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-nov-6c1dca",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Pioneiro Assessoria em Contabilidade Empresarial"
+  },
+  {
+    "id": "audit-a3b7749c",
+    "timestamp": "2026-09-24T10:26:40",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-coq-f9e0ea",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Tuti Contabilidade e Assessoria"
+  },
+  {
+    "id": "audit-1c2dc8ef",
+    "timestamp": "2026-09-24T10:26:40",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-con-919ca0",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório União"
+  },
+  {
+    "id": "audit-0ea0d802",
+    "timestamp": "2026-09-24T10:26:39",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-con-fc9f9f",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Assessoria & Consultoria Contábil Zandona"
+  },
+  {
+    "id": "audit-62240617",
+    "timestamp": "2026-09-24T10:26:36",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-con-c863c5",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório Contábil Rugeri"
+  },
+  {
+    "id": "audit-efccf807",
+    "timestamp": "2026-09-24T10:26:35",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-con-5df817",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Castamann Contabilidade"
+  },
+  {
+    "id": "audit-fe98f356",
+    "timestamp": "2026-09-24T10:26:29",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-con-6dcfaa",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Escritório Contábil Líder"
+  },
+  {
+    "id": "audit-4ce49568",
+    "timestamp": "2026-09-24T10:26:27",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-con-39c3c7",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Diagrama Seguros e GF Contabilidade"
+  },
+  {
+    "id": "audit-cbf80a7e",
+    "timestamp": "2026-09-24T10:26:23",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-con-064b73",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Atena Serviços Contábeis"
+  },
+  {
+    "id": "audit-6f187eda",
+    "timestamp": "2026-09-23T16:10:50",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-cont-ron-60ea60",
+    "detalhe": "Atividade Apresentação da Parceria TruData ERP para Dallas Contabilidade"
+  },
+  {
+    "id": "audit-3f3e1744",
+    "timestamp": "2026-09-23T16:09:22",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-6c625ab4",
+    "detalhe": "Atividade __TESTE_AGENDA_CALENDARIO__"
+  },
+  {
+    "id": "audit-5a5c34fe",
+    "timestamp": "2026-09-23T16:09:22",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-6c625ab4",
+    "detalhe": "Atividade __TESTE_AGENDA_CALENDARIO__"
+  },
+  {
+    "id": "audit-0cd65fbe",
+    "timestamp": "2026-09-23T15:01:33",
+    "usuario": "usr-admin",
+    "acao": "EXCLUIR",
+    "entidade": "empresa",
+    "entidade_id": "emp-9159fda4",
+    "detalhe": "Exclusão da empresa 'Empresa Teste CRUD Atualizada'"
+  },
+  {
+    "id": "audit-55c79ffa",
+    "timestamp": "2026-09-23T15:01:33",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "empresa",
+    "entidade_id": "emp-9159fda4",
+    "detalhe": "Empresa Empresa Teste CRUD Atualizada"
+  },
+  {
+    "id": "audit-377c6cba",
+    "timestamp": "2026-09-23T15:01:33",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "empresa",
+    "entidade_id": "emp-9159fda4",
+    "detalhe": "Empresa Empresa Teste CRUD Ltda"
+  },
+  {
+    "id": "audit-3b56c1a9",
+    "timestamp": "2026-09-23T13:56:03.543155",
+    "usuario": "Administrador",
+    "acao": "IMPORTACAO_LOTE_CONTABILIDADES",
+    "entidade": "lote_contabilidades",
+    "entidade_id": "LOTE-54-CONTABILIDADES-REGIONAL",
+    "detalhe": "Importação de 54 novos escritórios contábeis da região de Sarandi (Constantina, Coqueiros do Sul, Novo Barreiro, Novo Xingu, Palmeira das Missões, Pontão, Ronda Alta, Rondinha, Três Palmeiras, Trindade do Sul, Sarandi). 22 registros ignorados por já constarem na base."
+  },
+  {
+    "id": "audit-23b6031a",
+    "timestamp": "2026-09-23T11:58:55",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-5062df66",
+    "detalhe": "Mudou para etapa etapa-fechado"
+  },
+  {
+    "id": "audit-d92971ca",
+    "timestamp": "2026-09-23T11:58:43",
+    "usuario": "usr-admin",
+    "acao": "CRIAR_LEAD_COMPLETO",
+    "entidade": "lead",
+    "entidade_id": "emp-412c1221",
+    "detalhe": "Lead completo criado: Escritório Tradição NBV"
+  },
+  {
+    "id": "audit-82161faa",
+    "timestamp": "2026-09-23T11:58:43",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-e918cb3a",
+    "detalhe": "Atividade Primeiro contato comercial com Escritório Tradição NBV"
+  },
+  {
+    "id": "audit-7524a26d",
+    "timestamp": "2026-09-23T11:58:43",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-5062df66",
+    "detalhe": "Negociação Implantação TruData ERP - Escritório Tradição NBV"
+  },
+  {
+    "id": "audit-8db1be06",
+    "timestamp": "2026-09-23T11:58:43",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "contato",
+    "entidade_id": "ctt-a8aabf5d",
+    "detalhe": "Contato Marcio"
+  },
+  {
+    "id": "audit-a746de90",
+    "timestamp": "2026-09-23T11:58:43",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "empresa",
+    "entidade_id": "emp-412c1221",
+    "detalhe": "Empresa Escritório Tradição NBV"
+  },
+  {
+    "id": "audit-cd6b6bce",
+    "timestamp": "2026-09-23T11:56:05",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-528c1467",
+    "detalhe": "Mudou para etapa etapa-fechado"
+  },
+  {
+    "id": "audit-1a7c9b1f",
+    "timestamp": "2026-09-23T11:55:55",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-37c08d81",
+    "detalhe": "Mudou para etapa etapa-recontato"
+  },
+  {
+    "id": "audit-835b7675",
+    "timestamp": "2026-09-23T11:55:48",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-ae94c8ed",
+    "detalhe": "Mudou para etapa etapa-proposta"
+  },
+  {
+    "id": "audit-24152220",
+    "timestamp": "2026-09-23T11:55:44",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-e3d47ea8",
+    "detalhe": "Mudou para etapa etapa-proposta"
+  },
+  {
+    "id": "audit-a67eafa7",
+    "timestamp": "2026-09-23T11:55:38",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-57afee81",
+    "detalhe": "Mudou para etapa etapa-proposta"
+  },
+  {
+    "id": "audit-fee11df3",
+    "timestamp": "2026-09-23T11:55:30",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-a5c6a9b1",
+    "detalhe": "Mudou para etapa etapa-recontato"
+  },
+  {
+    "id": "audit-7fe36628",
+    "timestamp": "2026-09-23T11:55:04",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-84fd1d99",
+    "detalhe": "Atividade 📞 Ligação de Follow-up"
+  },
+  {
+    "id": "audit-0db22be4",
+    "timestamp": "2026-09-23T11:54:24",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-af82fe35",
+    "detalhe": "Mudou para etapa etapa-demo"
+  },
+  {
+    "id": "audit-5be73ad9",
+    "timestamp": "2026-09-23T11:54:13",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-e2e52090",
+    "detalhe": "Mudou para etapa etapa-recontato"
+  },
+  {
+    "id": "audit-9fb616f8",
+    "timestamp": "2026-09-23T11:54:01",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-e2e52090",
+    "detalhe": "Mudou para etapa etapa-fechado"
+  },
+  {
+    "id": "audit-4d82f6eb",
+    "timestamp": "2026-09-23T11:53:42",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-4a648b4a",
+    "detalhe": "Atividade 🤝 Demonstração do TruData ERP"
+  },
+  {
+    "id": "audit-c1b836c6",
+    "timestamp": "2026-09-23T11:53:22",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-943554bb",
+    "detalhe": "Atividade demonstração"
+  },
+  {
+    "id": "audit-50101bfe",
+    "timestamp": "2026-09-23T11:52:45",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-4a648b4a",
+    "detalhe": "Atividade 🤝 Demonstração do TruData ERP"
+  },
+  {
+    "id": "audit-61ca0d1c",
+    "timestamp": "2026-09-23T11:52:29",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-84601f2d",
+    "detalhe": "Mudou para etapa etapa-demo"
+  },
+  {
+    "id": "audit-cba7414a",
+    "timestamp": "2026-09-23T11:52:21",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-c35760d3",
+    "detalhe": "Mudou para etapa etapa-fechado"
+  },
+  {
+    "id": "audit-7e298499",
+    "timestamp": "2026-09-23T11:42:19",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-2637c27b",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-02caf4b3",
+    "timestamp": "2026-09-23T11:42:17",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-c35760d3",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-554ab9c2",
+    "timestamp": "2026-09-23T11:42:16",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-84601f2d",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-68f3ab9a",
+    "timestamp": "2026-09-23T11:42:15",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-e2e52090",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-16f9e527",
+    "timestamp": "2026-09-23T11:39:42",
+    "usuario": "Administrador",
+    "acao": "CADASTRO_ENTIDADE_E_DEAL",
+    "entidade": "empresa_deal",
+    "entidade_id": "LS Contadores Associados",
+    "detalhe": "Escritório contábil LS Contadores Associados cadastrado e adicionado ao Kanban em 1. Lead / Qualificação."
+  },
+  {
+    "id": "audit-2967d56e",
+    "timestamp": "2026-09-23T11:39:42",
+    "usuario": "Administrador",
+    "acao": "CADASTRO_ENTIDADE_E_DEAL",
+    "entidade": "empresa_deal",
+    "entidade_id": "Ben Hur – Escritório Contábil",
+    "detalhe": "Escritório contábil Ben Hur – Escritório Contábil cadastrado e adicionado ao Kanban em 1. Lead / Qualificação."
+  },
+  {
+    "id": "audit-550d9977",
+    "timestamp": "2026-09-23T11:39:42",
+    "usuario": "Administrador",
+    "acao": "CADASTRO_ENTIDADE_E_DEAL",
+    "entidade": "empresa_deal",
+    "entidade_id": "Prodec",
+    "detalhe": "Escritório contábil Prodec cadastrado e adicionado ao Kanban em 1. Lead / Qualificação."
+  },
+  {
+    "id": "audit-94e67a7d",
+    "timestamp": "2026-09-23T11:39:42",
+    "usuario": "Administrador",
+    "acao": "CADASTRO_ENTIDADE_E_DEAL",
+    "entidade": "empresa_deal",
+    "entidade_id": "Absoluta Contabilidade",
+    "detalhe": "Escritório contábil Absoluta Contabilidade cadastrado e adicionado ao Kanban em 1. Lead / Qualificação."
+  },
+  {
+    "id": "audit-d5062a5e",
+    "timestamp": "2026-09-23T11:33:04",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-af82fe35",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-e86a4abb",
+    "timestamp": "2026-09-23T11:28:34",
+    "usuario": "Administrador",
+    "acao": "CADASTRO_ENTIDADE_E_DEAL",
+    "entidade": "empresa_deal",
+    "entidade_id": "Marlei — Escritório de Contabilidade",
+    "detalhe": "Escritório contábil Marlei cadastrado e adicionado ao Kanban em 1. Lead / Qualificação."
+  },
+  {
+    "id": "audit-ddef7313",
+    "timestamp": "2026-09-23T11:24:28",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-a5c6a9b1",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-435061eb",
+    "timestamp": "2026-09-23T11:21:42",
+    "usuario": "Administrador",
+    "acao": "CADASTRO_ENTIDADE_E_DEAL",
+    "entidade": "empresa_deal",
+    "entidade_id": "Belka Gestão Contábil Ltda",
+    "detalhe": "Escritório contábil de Carazinho cadastrado com sócios Maidi e Rafael, adicionado ao Kanban em 1. Lead / Qualificação."
+  },
+  {
+    "id": "audit-3d89238b",
+    "timestamp": "2026-09-23T10:46:00",
+    "usuario": "usr-admin",
+    "acao": "EXCLUIR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-c54dbd32",
+    "detalhe": "Negociação 'Parceria Contábil & Migração - Delmir Ganassini Assessoria Contábil' removida do Kanban"
+  },
+  {
+    "id": "audit-7840d149",
+    "timestamp": "2026-09-23T10:45:47",
+    "usuario": "usr-admin",
+    "acao": "EXCLUIR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-fa851d72",
+    "detalhe": "Negociação 'Parceria Contábil & Migração - Assiscon Assistência Contábil' removida do Kanban"
+  },
+  {
+    "id": "audit-0eca3524",
+    "timestamp": "2026-09-23T10:45:31",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-e3d47ea8",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-30cd19d9",
+    "timestamp": "2026-09-23T10:45:28",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-57afee81",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-566523e6",
+    "timestamp": "2026-09-23T10:43:23",
+    "usuario": "Administrador",
+    "acao": "CADASTRO_ENTIDADE_E_DEAL",
+    "entidade": "empresa_deal",
+    "entidade_id": "Delmir Ganassini Assessoria Contábil",
+    "detalhe": "Escritório contábil cadastrado e adicionado ao Kanban em '1. Lead / Qualificação'."
+  },
+  {
+    "id": "audit-24949d5a",
+    "timestamp": "2026-09-23T10:43:23",
+    "usuario": "Administrador",
+    "acao": "CADASTRO_ENTIDADE_E_DEAL",
+    "entidade": "empresa_deal",
+    "entidade_id": "Assiscon Assistência Contábil",
+    "detalhe": "Escritório contábil cadastrado e adicionado ao Kanban em '1. Lead / Qualificação'."
+  },
+  {
+    "id": "audit-059079cd",
+    "timestamp": "2026-09-23T10:36:56",
+    "usuario": "usr-admin",
+    "acao": "EXCLUIR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-bc484ab8",
+    "detalhe": "Negociação 'Implantação TruData ERP - Supermercado Central de Teste' removida do Kanban"
+  },
+  {
+    "id": "audit-398a1185",
+    "timestamp": "2026-09-23T10:36:53",
+    "usuario": "usr-admin",
+    "acao": "EXCLUIR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-047093fe",
+    "detalhe": "Negociação 'Implantação TruData ERP - Agro Sul Forte' removida do Kanban"
+  },
+  {
+    "id": "audit-d29387c4",
+    "timestamp": "2026-09-23T10:36:48",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-528c1467",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-274ad18f",
+    "timestamp": "2026-09-23T10:36:44",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-37c08d81",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-3efb050b",
+    "timestamp": "2026-09-23T10:36:43",
+    "usuario": "usr-admin",
+    "acao": "EXCLUIR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-c18ca39a",
+    "detalhe": "Negociação 'Implantação TruData ERP - Escritório Contábil Tesser' removida do Kanban"
+  },
+  {
+    "id": "audit-7ea49e58",
+    "timestamp": "2026-09-22T18:04:48",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-9f1dc88b",
+    "detalhe": "Atividade Demonstração TEF e Contingência Offline"
+  },
+  {
+    "id": "audit-90a30713",
+    "timestamp": "2026-09-22T18:00:31",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-dc688c55",
+    "detalhe": "Mudou para etapa etapa-recontato"
+  },
+  {
+    "id": "audit-96d875b9",
+    "timestamp": "2026-09-22T18:00:30",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-1364dbe4",
+    "detalhe": "Mudou para etapa etapa-recontato"
+  },
+  {
+    "id": "audit-66274261",
+    "timestamp": "2026-09-22T17:49:43",
+    "usuario": "usr-admin",
+    "acao": "EXCLUIR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-9ec0a993",
+    "detalhe": "Negociação 'Implantação TruData ERP - Supermercado Teste Kanban' removida do Kanban"
+  },
+  {
+    "id": "audit-b4aa6b2e",
+    "timestamp": "2026-09-22T17:49:41",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-ae94c8ed",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-7045f56d",
+    "timestamp": "2026-09-22T17:49:40",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-ae94c8ed",
+    "detalhe": "Mudou para etapa etapa-demo"
+  },
+  {
+    "id": "audit-84dd392e",
+    "timestamp": "2026-09-22T17:46:00",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-37c08d81",
+    "detalhe": "Mudou para etapa etapa-lead"
+  },
+  {
+    "id": "audit-20f62978",
+    "timestamp": "2026-09-22T17:45:54",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-ae94c8ed",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-4f73964f",
+    "timestamp": "2026-09-22T17:45:49",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-9ec0a993",
+    "detalhe": "Mudou para etapa etapa-fechado"
+  },
+  {
+    "id": "audit-8c44077a",
+    "timestamp": "2026-09-22T17:45:46",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-1364dbe4",
+    "detalhe": "Mudou para etapa etapa-fechado"
+  },
+  {
+    "id": "audit-cc2ae4b9",
+    "timestamp": "2026-09-22T17:45:43",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-dc688c55",
+    "detalhe": "Mudou para etapa etapa-fechado"
+  },
+  {
+    "id": "audit-c63c4d25",
+    "timestamp": "2026-09-22T17:45:33",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-dc688c55",
+    "detalhe": "Mudou para etapa etapa-fechado"
+  },
+  {
+    "id": "audit-a214cbbb",
+    "timestamp": "2026-09-22T17:38:44",
+    "usuario": "Sistema",
+    "acao": "CRIAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-9ec0a993",
+    "detalhe": "Lead Supermercado Teste Kanban importado ao pipeline"
+  },
+  {
+    "id": "audit-a08f3ca5",
+    "timestamp": "2026-09-22T17:33:45",
+    "usuario": "Sistema",
+    "acao": "CRIAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-1364dbe4",
+    "detalhe": "Lead None importado ao pipeline"
+  },
+  {
+    "id": "audit-da01af3c",
+    "timestamp": "2026-09-22T17:29:32",
+    "usuario": "Sistema",
+    "acao": "CRIAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-ae94c8ed",
+    "detalhe": "Lead None importado ao pipeline"
+  },
+  {
+    "id": "audit-e5dcd239",
+    "timestamp": "2026-09-22T17:29:26",
+    "usuario": "Sistema",
+    "acao": "CRIAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-37c08d81",
+    "detalhe": "Lead None importado ao pipeline"
+  },
+  {
+    "id": "audit-a7ad7f09",
+    "timestamp": "2026-09-22T17:29:16",
+    "usuario": "Sistema",
+    "acao": "CRIAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-528c1467",
+    "detalhe": "Lead None importado ao pipeline"
+  },
+  {
+    "id": "audit-c6328837",
+    "timestamp": "2026-09-22T17:26:30",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-c18ca39a",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-72661828",
+    "timestamp": "2026-09-22T17:26:24",
+    "usuario": "usr-admin",
+    "acao": "CRIAR_LEAD_COMPLETO",
+    "entidade": "lead",
+    "entidade_id": "emp-c9318dc2",
+    "detalhe": "Lead completo criado: Escritório Contábil Tesser"
+  },
+  {
+    "id": "audit-defa4cc9",
+    "timestamp": "2026-09-22T17:26:24",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-e2e57e0e",
+    "detalhe": "Atividade Primeiro contato comercial com Escritório Contábil Tesser"
+  },
+  {
+    "id": "audit-808ae3fd",
+    "timestamp": "2026-09-22T17:26:24",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-c18ca39a",
+    "detalhe": "Negociação Implantação TruData ERP - Escritório Contábil Tesser"
+  },
+  {
+    "id": "audit-26b61271",
+    "timestamp": "2026-09-22T17:26:24",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "contato",
+    "entidade_id": "ctt-59df721d",
+    "detalhe": "Contato augusto"
+  },
+  {
+    "id": "audit-cb0aec50",
+    "timestamp": "2026-09-22T17:26:24",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "empresa",
+    "entidade_id": "emp-c9318dc2",
+    "detalhe": "Empresa Escritório Contábil Tesser"
+  },
+  {
+    "id": "audit-e8e056fe",
+    "timestamp": "2026-09-22T16:55:37",
+    "usuario": "usr-admin",
+    "acao": "CRIAR_LEAD_COMPLETO",
+    "entidade": "lead",
+    "entidade_id": "emp-09b9a7ff",
+    "detalhe": "Lead completo criado: Agro Sul Forte"
+  },
+  {
+    "id": "audit-05508129",
+    "timestamp": "2026-09-22T16:55:37",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-63c3db31",
+    "detalhe": "Atividade Primeiro contato comercial com Agro Sul Forte"
+  },
+  {
+    "id": "audit-c928d6bb",
+    "timestamp": "2026-09-22T16:55:37",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-047093fe",
+    "detalhe": "Negociação Implantação TruData ERP - Agro Sul Forte"
+  },
+  {
+    "id": "audit-8733f004",
+    "timestamp": "2026-09-22T16:55:37",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "contato",
+    "entidade_id": "ctt-b94928c5",
+    "detalhe": "Contato Carlos Eduardo"
+  },
+  {
+    "id": "audit-92da28d9",
+    "timestamp": "2026-09-22T16:55:37",
+    "usuario": "usr-admin",
+    "acao": "CRIAR",
+    "entidade": "empresa",
+    "entidade_id": "emp-09b9a7ff",
+    "detalhe": "Empresa Agro Sul Forte"
+  },
+  {
+    "id": "audit-d7735c4e",
+    "timestamp": "2026-09-22T16:55:35",
+    "usuario": "Radar de Clientes",
+    "acao": "CRIAR_LEAD_COMPLETO",
+    "entidade": "lead",
+    "entidade_id": "emp-6f3d4334",
+    "detalhe": "Lead completo criado: Supermercado Central de Teste"
+  },
+  {
+    "id": "audit-4cc3e070",
+    "timestamp": "2026-09-22T16:55:35",
+    "usuario": "Radar de Clientes",
+    "acao": "CRIAR",
+    "entidade": "atividade",
+    "entidade_id": "ativ-b1708199",
+    "detalhe": "Atividade Primeiro contato comercial com Supermercado Central de Teste"
+  },
+  {
+    "id": "audit-52e1400c",
+    "timestamp": "2026-09-22T16:55:35",
+    "usuario": "Radar de Clientes",
+    "acao": "CRIAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-bc484ab8",
+    "detalhe": "Negociação Implantação TruData ERP - Supermercado Central de Teste"
+  },
+  {
+    "id": "audit-6a1980e9",
+    "timestamp": "2026-09-22T16:55:35",
+    "usuario": "Radar de Clientes",
+    "acao": "CRIAR",
+    "entidade": "contato",
+    "entidade_id": "ctt-8647dcab",
+    "detalhe": "Contato Antônio Silveira"
+  },
+  {
+    "id": "audit-a40ed5cb",
+    "timestamp": "2026-09-22T16:55:35",
+    "usuario": "Radar de Clientes",
+    "acao": "CRIAR",
+    "entidade": "empresa",
+    "entidade_id": "emp-6f3d4334",
+    "detalhe": "Empresa Supermercado Central de Teste"
+  },
+  {
+    "id": "audit-c5ca93a9",
+    "timestamp": "2026-09-22T15:30:34",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-dc688c55",
+    "detalhe": "Mudou para etapa etapa-lead"
+  },
+  {
+    "id": "audit-41cdc6a7",
+    "timestamp": "2026-09-22T15:30:31",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-dc688c55",
+    "detalhe": "Mudou para etapa etapa-proposta"
+  },
+  {
+    "id": "audit-42bdd563",
+    "timestamp": "2026-09-22T15:30:29",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-dc688c55",
+    "detalhe": "Mudou para etapa etapa-demo"
+  },
+  {
+    "id": "audit-0afe470a",
+    "timestamp": "2026-09-22T15:30:26",
+    "usuario": "usr-admin",
+    "acao": "MOVER_ETAPA",
+    "entidade": "negociacao",
+    "entidade_id": "deal-dc688c55",
+    "detalhe": "Mudou para etapa etapa-contato"
+  },
+  {
+    "id": "audit-404b635d",
+    "timestamp": "2026-09-22T15:30:12",
+    "usuario": "usr-admin",
+    "acao": "ATUALIZAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-dc688c55",
+    "detalhe": "Negociação Oportunidade - Cliente Regional"
+  },
+  {
+    "id": "audit-10c5cbc5",
+    "timestamp": "2026-09-22T15:30:00",
+    "usuario": "Sistema",
+    "acao": "CRIAR",
+    "entidade": "negociacao",
+    "entidade_id": "deal-dc688c55",
+    "detalhe": "Lead None importado ao pipeline"
+  },
+  {
+    "id": "audit-5860c563",
+    "timestamp": "2026-09-22T15:02:08",
+    "usuario": "Administrador TruData",
+    "acao": "RESET_BASE_DADOS",
+    "entidade": "crm_enterprise",
+    "entidade_id": "root",
+    "detalhe": "Base de dados do CRM Enterprise zerada para início em produção real."
+  }
+]

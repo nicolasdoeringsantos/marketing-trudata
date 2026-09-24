@@ -1,0 +1,881 @@
+{
+  "config": {
+    "versao": "2.0.0",
+    "nome_sistema": "TruData CRM Enterprise",
+    "criado_em": "2026-09-24T10:36:04.931666"
+  },
+  "usuarios": [
+    {
+      "id": "usr-admin",
+      "login": "admin",
+      "nome": "Administrador TruData",
+      "email": "comercial@trudata.com.br",
+      "perfil": "admin",
+      "equipe": "Diretoria",
+      "visibilidade": "todos",
+      "ativo": true
+    }
+  ],
+  "funis": [
+    {
+      "id": "funil-vendas-novas",
+      "nome": "Pipeline Principal: Vendas Novas B2B",
+      "descricao": "Prospecção e fechamento de clientes de varejo e pequenas empresas na região.",
+      "padrao": true,
+      "etapas": [
+        {
+          "id": "etapa-lead",
+          "nome": "1. Lead / Qualificação",
+          "ordem": 1,
+          "probabilidade": 20,
+          "cor": "#60a5fa"
+        },
+        {
+          "id": "etapa-contato",
+          "nome": "2. Contato Feito / Diagnóstico",
+          "ordem": 2,
+          "probabilidade": 40,
+          "cor": "#fbbf24"
+        },
+        {
+          "id": "etapa-demo",
+          "nome": "3. Demonstração / PDV Teste",
+          "ordem": 3,
+          "probabilidade": 60,
+          "cor": "#a855f7"
+        },
+        {
+          "id": "etapa-proposta",
+          "nome": "4. Proposta Enviada",
+          "ordem": 4,
+          "probabilidade": 80,
+          "cor": "#f97316"
+        },
+        {
+          "id": "etapa-fechado",
+          "nome": "5. Contrato Fechado (Ganho)",
+          "ordem": 5,
+          "probabilidade": 100,
+          "cor": "#10b981"
+        },
+        {
+          "id": "etapa-recontato",
+          "nome": "6. Recontato (6m - 1 ano)",
+          "ordem": 6,
+          "probabilidade": 15,
+          "cor": "#06b6d4"
+        },
+        {
+          "id": "etapa-perdido",
+          "nome": "7. Negócio Perdido",
+          "ordem": 7,
+          "probabilidade": 0,
+          "cor": "#ef4444"
+        }
+      ]
+    },
+    {
+      "id": "funil-upsell",
+      "nome": "Expansão & Upsell (PDVs Adicionais / Módulos)",
+      "descricao": "Venda de caixas extras, TEF Dedicado, conciliação e emissão móvel para clientes da base.",
+      "padrao": false,
+      "etapas": [
+        {
+          "id": "etapa-up-identificacao",
+          "nome": "1. Oportunidade Mapeada",
+          "ordem": 1,
+          "probabilidade": 30,
+          "cor": "#38bdf8"
+        },
+        {
+          "id": "etapa-up-apresentacao",
+          "nome": "2. Apresentação ao Lojista",
+          "ordem": 2,
+          "probabilidade": 65,
+          "cor": "#c084fc"
+        },
+        {
+          "id": "etapa-up-ativado",
+          "nome": "3. Módulo Adicionado (Ganho)",
+          "ordem": 3,
+          "probabilidade": 100,
+          "cor": "#10b981"
+        },
+        {
+          "id": "etapa-up-descarte",
+          "nome": "4. Sem Interesse no Momento",
+          "ordem": 4,
+          "probabilidade": 0,
+          "cor": "#64748b"
+        }
+      ]
+    },
+    {
+      "id": "funil-contadores",
+      "nome": "Parcerias Contábeis (B2B2B)",
+      "descricao": "Acordos de indicação com escritórios de contabilidade da região de Sarandi e raio de 100km.",
+      "padrao": false,
+      "etapas": [
+        {
+          "id": "etapa-ct-mapeado",
+          "nome": "1. Escritório Mapeado",
+          "ordem": 1,
+          "probabilidade": 25,
+          "cor": "#818cf8"
+        },
+        {
+          "id": "etapa-ct-reuniao",
+          "nome": "2. Reunião de Parceria",
+          "ordem": 2,
+          "probabilidade": 50,
+          "cor": "#e879f9"
+        },
+        {
+          "id": "etapa-ct-acordo",
+          "nome": "3. Termo de Parceria Assinado",
+          "ordem": 3,
+          "probabilidade": 100,
+          "cor": "#059669"
+        },
+        {
+          "id": "etapa-ct-recusa",
+          "nome": "4. Parceria Não Concretizada",
+          "ordem": 4,
+          "probabilidade": 0,
+          "cor": "#f43f5e"
+        }
+      ]
+    }
+  ],
+  "produtos": [
+    {
+      "id": "prod-erp-base",
+      "codigo": "ERP-01",
+      "nome": "TruData ERP Web (Plano Base 1 PDV)",
+      "categoria": "Software",
+      "preco_padrao": 180.0,
+      "tipo_cobranca": "mensal"
+    },
+    {
+      "id": "prod-pdv-extra",
+      "codigo": "PDV-ADD",
+      "nome": "PDV / Caixa Adicional em Rede",
+      "categoria": "Software",
+      "preco_padrao": 60.0,
+      "tipo_cobranca": "mensal"
+    },
+    {
+      "id": "prod-tef-dedicado",
+      "codigo": "TEF-01",
+      "nome": "Módulo TEF Dedicado Multibandeira",
+      "categoria": "Software",
+      "preco_padrao": 45.0,
+      "tipo_cobranca": "mensal"
+    },
+    {
+      "id": "prod-sped-fiscal",
+      "codigo": "SPED-01",
+      "nome": "Auditor Fiscal e Integrador SPED/EFD",
+      "categoria": "Fiscal",
+      "preco_padrao": 85.0,
+      "tipo_cobranca": "mensal"
+    },
+    {
+      "id": "prod-setup-implantacao",
+      "codigo": "SETUP-01",
+      "nome": "Taxa de Implantação, Parametrização e Treinamento",
+      "categoria": "Serviço",
+      "preco_padrao": 800.0,
+      "tipo_cobranca": "unico"
+    },
+    {
+      "id": "prod-migracao-banco",
+      "codigo": "MIG-01",
+      "nome": "Migração de Dados do Sistema Anterior",
+      "categoria": "Serviço",
+      "preco_padrao": 350.0,
+      "tipo_cobranca": "unico"
+    }
+  ],
+  "empresas": [
+    {
+      "id": "emp-83881ad3",
+      "criado_em": "24/09/2026",
+      "tipo": "PJ",
+      "razao_social": "Auto Posto Rota Norte Ltda",
+      "nome_fantasia": "Posto Rota Norte",
+      "documento": "11.222.333/0001-44",
+      "telefone": "5433615555",
+      "cidade": "Sarandi - RS",
+      "segmento": "Postos de Combustíveis & Conveniência",
+      "pdvs_estimados": 3,
+      "origem": "Prospecção Manual",
+      "consentimento_lgpd": {
+        "autorizado": true,
+        "data_consentimento": "2026-09-24T10:36:05.635686",
+        "base_legal": "Art. 7º V/IX da LGPD (Relação Comercial B2B)"
+      }
+    },
+    {
+      "id": "emp-b8fb0695",
+      "criado_em": "24/09/2026",
+      "tipo": "PJ",
+      "razao_social": "[ANONIMIZADO LGPD]",
+      "nome_fantasia": "[ANONIMIZADO LGPD]",
+      "documento": "00000000000",
+      "telefone": "000000000",
+      "email": "anonimizado@lgpd.local",
+      "consentimento_lgpd": {
+        "autorizado": false,
+        "data_revogacao": "2026-09-24T10:36:05.296294",
+        "motivo": "Direito de eliminação/revogação exercido pelo titular (Art. 18, VI LGPD)"
+      },
+      "whatsapp": "000000000",
+      "endereco": "[REMOVIDO]"
+    },
+    {
+      "id": "emp-a07c8be4",
+      "criado_em": "24/09/2026",
+      "tipo": "PJ",
+      "razao_social": "Padaria Alpha",
+      "nome_fantasia": "Padaria Alpha 1",
+      "documento": "44.555.666/0001-77",
+      "telefone": "5433618888",
+      "consentimento_lgpd": {
+        "autorizado": true,
+        "data_consentimento": "2026-09-24T10:36:05.129850",
+        "base_legal": "Art. 7º V/IX da LGPD (Relação Comercial B2B)"
+      }
+    },
+    {
+      "id": "emp-97442a91",
+      "criado_em": "24/09/2026",
+      "tipo": "PJ",
+      "razao_social": "Farmácia Vida & Saúde",
+      "nome_fantasia": "Farmácia Vida",
+      "documento": "98.765.432/0001-10",
+      "telefone": "5433611122",
+      "cidade": "Passo Fundo - RS",
+      "segmento": "Farmácias & Drogarias",
+      "pdvs_estimados": 2,
+      "consentimento_lgpd": {
+        "autorizado": true,
+        "data_consentimento": "2026-09-24T10:36:04.983965",
+        "base_legal": "Art. 7º V/IX da LGPD (Relação Comercial B2B)"
+      }
+    },
+    {
+      "id": "emp-e83ce1d4",
+      "criado_em": "24/09/2026",
+      "tipo": "PF",
+      "razao_social": "João Agricultor e Comércio",
+      "nome_fantasia": "João da Horta",
+      "documento": "123.456.789-00",
+      "telefone": "54999112233",
+      "cidade": "Rondinha - RS",
+      "segmento": "Comércio Geral",
+      "consentimento_lgpd": {
+        "autorizado": true,
+        "data_consentimento": "2026-09-24T10:36:04.964087",
+        "base_legal": "Art. 7º V/IX da LGPD (Relação Comercial B2B)"
+      }
+    },
+    {
+      "id": "emp-762da9d4",
+      "criado_em": "24/09/2026",
+      "tipo": "PJ",
+      "razao_social": "Supermercado Sul Ltda",
+      "nome_fantasia": "Supermercado Sul",
+      "documento": "12.345.678/0001-90",
+      "telefone": "5433619999",
+      "email": "contato@supersul.com.br",
+      "cidade": "Sarandi - RS",
+      "segmento": "Supermercados & Mercearias",
+      "pdvs_estimados": 4,
+      "consentimento_lgpd": {
+        "autorizado": true,
+        "data_consentimento": "2026-09-24T10:36:04.949619",
+        "base_legal": "Art. 7º V/IX da LGPD (Relação Comercial B2B)"
+      }
+    }
+  ],
+  "contatos": [
+    {
+      "id": "ctt-352effd4",
+      "empresa_id": "emp-83881ad3",
+      "nome": "Marcos Silveira",
+      "cargo": "Gerente Geral",
+      "telefone": "54999887766",
+      "whatsapp": "5433615555",
+      "email": "marcos@rotanorte.com.br",
+      "decisor": true
+    },
+    {
+      "id": "ctt-de892615",
+      "empresa_id": "emp-97442a91",
+      "nome": "Dr. Fernando",
+      "cargo": "Farmacêutico e Proprietário",
+      "telefone": "5499887766",
+      "email": "fernando@farmaciavida.com.br",
+      "decisor": true
+    }
+  ],
+  "negociacoes": [
+    {
+      "id": "deal-c5918100",
+      "criado_em": "2026-09-24T10:36:05.971756",
+      "status": "perdido",
+      "funil_id": "funil-vendas-novas",
+      "etapa_id": "etapa-perdido",
+      "titulo": "Deal Perdido para Concorrente",
+      "valor_mrr": 350.0,
+      "etapa_atualizada_em": "2026-09-24T10:36:06.006963",
+      "probabilidade": 0,
+      "motivo_perda": "Concorrente (Preço mais agressivo)",
+      "observacao_perda": "Cliente optou por solução concorrente local com desconto de 40%."
+    },
+    {
+      "id": "deal-40fba224",
+      "criado_em": "2026-09-24T10:36:05.884270",
+      "status": "recontato",
+      "funil_id": "funil-vendas-novas",
+      "etapa_id": "etapa-recontato",
+      "titulo": "Cliente Para Recontato 6 Meses",
+      "valor_mrr": 200.0,
+      "etapa_atualizada_em": "2026-09-24T10:36:05.925901",
+      "probabilidade": 15,
+      "data_prevista": "2027-03-23",
+      "motivo_perda": "6 meses - Contrato com concorrente vence no fim do semestre"
+    },
+    {
+      "id": "deal-028d4615",
+      "criado_em": "2026-09-24T10:36:05.703519",
+      "status": "aberto",
+      "funil_id": "funil-vendas-novas",
+      "etapa_id": "etapa-lead",
+      "empresa_id": "emp-83881ad3",
+      "contato_id": "ctt-352effd4",
+      "responsavel_id": "usr-admin",
+      "titulo": "Implantação TruData ERP + TEF (3 Caixas)",
+      "valor_mrr": 300.0,
+      "valor_setup_produtos": 500.0,
+      "probabilidade": 20,
+      "data_prevista": "2026-10-14"
+    },
+    {
+      "id": "deal-2514f410",
+      "criado_em": "2026-09-24T10:36:05.420024",
+      "status": "ganho",
+      "funil_id": "funil-vendas-novas",
+      "etapa_id": "etapa-fechado",
+      "titulo": "Deal Fechamento & Assinatura Digital",
+      "valor_mrr": 480.0,
+      "valor_setup_produtos": 1500.0,
+      "proposta_hash": "trudata-c1e46cf70c68",
+      "tem_proposta_rastreada": true,
+      "probabilidade": 100,
+      "contrato_id": "ct-4e5083e4",
+      "data_fechamento": "24/09/2026"
+    },
+    {
+      "id": "deal-ce800e1f",
+      "criado_em": "2026-09-24T10:36:05.329723",
+      "status": "aberto",
+      "funil_id": "funil-vendas-novas",
+      "etapa_id": "etapa-proposta",
+      "titulo": "Deal Proposta Rastreável Teste",
+      "valor_mrr": 350.0,
+      "valor_setup_produtos": 1200.0,
+      "proposta_hash": "trudata-1f6cd38a7151",
+      "tem_proposta_rastreada": true,
+      "ultima_visualizacao_proposta": "2026-09-24T10:36:05.390817"
+    },
+    {
+      "id": "deal-5d46e4c7",
+      "criado_em": "2026-09-24T10:36:05.081825",
+      "status": "perdido",
+      "funil_id": "funil-vendas-novas",
+      "etapa_id": "etapa-perdido",
+      "titulo": "Deal Concorrência Teste",
+      "valor_mrr": 180.0,
+      "etapa_atualizada_em": "2026-09-24T10:36:05.103446",
+      "probabilidade": 0,
+      "motivo_perda": "Optou por concorrente com preço menor"
+    },
+    {
+      "id": "deal-ed59ca8d",
+      "criado_em": "2026-09-24T10:36:05.033830",
+      "status": "aberto",
+      "funil_id": "funil-vendas-novas",
+      "etapa_id": "etapa-proposta",
+      "empresa_id": "emp-97442a91",
+      "contato_id": "ctt-de892615",
+      "responsavel_id": "usr-vend1",
+      "titulo": "Implantação ERP Farmácia Vida (2 PDVs)",
+      "valor_mrr": 240.0,
+      "valor_setup_produtos": 1000.0,
+      "probabilidade": 80,
+      "produtos": [
+        {
+          "produto_id": "prod-erp-base",
+          "quantidade": 1,
+          "valor_unitario": 180.0
+        },
+        {
+          "produto_id": "prod-pdv-extra",
+          "quantidade": 1,
+          "valor_unitario": 60.0
+        }
+      ],
+      "etapa_atualizada_em": "2026-09-24T10:36:05.057767"
+    }
+  ],
+  "atividades": [
+    {
+      "id": "ativ-2fa60592",
+      "tipo": "recontato",
+      "deal_id": "deal-40fba224",
+      "contato_id": null,
+      "empresa_id": null,
+      "responsavel_id": "Tester",
+      "titulo": "⏰ Recontatar Lead: Cliente Para Recontato 6 Meses",
+      "data_hora": "2027-03-23T09:00:00",
+      "status": "pendente",
+      "notas": "Agendamento automático de recontato (180 dias). Motivo/Pauta: 6 meses - Contrato com concorrente vence no fim do semestre."
+    },
+    {
+      "id": "ativ-ffad8b7e",
+      "status": "pendente",
+      "tipo": "ligacao",
+      "deal_id": "deal-028d4615",
+      "contato_id": "ctt-352effd4",
+      "empresa_id": "emp-83881ad3",
+      "responsavel_id": "usr-admin",
+      "titulo": "Primeiro contato comercial com Posto Rota Norte",
+      "data_hora": "2026-09-25T10:00:00",
+      "notas": "Apresentar soluções TruData ERP para Postos de Combustíveis & Conveniência."
+    },
+    {
+      "id": "ativ-f2b4cdad",
+      "status": "concluida",
+      "tipo": "ligacao",
+      "responsavel_id": "usr-vend1",
+      "titulo": "Ligar para agendar demonstração técnica",
+      "notas": "Falar sobre contingência offline."
+    },
+    {
+      "id": "ativ-f6bfc94b",
+      "tipo": "follow_up",
+      "deal_id": "deal-ed59ca8d",
+      "contato_id": "ctt-de892615",
+      "empresa_id": "emp-97442a91",
+      "responsavel_id": "usr-vend1",
+      "titulo": "Follow-up de Proposta Enviada (Verificar se há dúvidas)",
+      "data_hora": "2026-09-26T10:00:00",
+      "status": "pendente",
+      "notas": "Disparada automaticamente pela regra: Criar Follow-up ao Mover para Proposta"
+    }
+  ],
+  "historico_interacoes": [
+    {
+      "id": "hist-22b1497b",
+      "empresa_id": null,
+      "contato_id": null,
+      "deal_id": "deal-c5918100",
+      "responsavel_id": "Tester",
+      "tipo": "mudanca_etapa",
+      "data_hora": "2026-09-24T10:36:06.006963",
+      "canal": "Kanban",
+      "descricao": "Negociação movida da etapa 'etapa-proposta' para 'etapa-perdido' (Motivo: Concorrente (Preço mais agressivo) | Obs: Cliente optou por solução concorrente local com desconto de 40%.)."
+    },
+    {
+      "id": "hist-c0a5399a",
+      "empresa_id": null,
+      "contato_id": null,
+      "deal_id": "deal-40fba224",
+      "responsavel_id": "Tester",
+      "tipo": "mudanca_etapa",
+      "data_hora": "2026-09-24T10:36:05.925901",
+      "canal": "Kanban",
+      "descricao": "Negociação movida da etapa 'etapa-demo' para 'etapa-recontato' (Motivo: 6 meses - Contrato com concorrente vence no fim do semestre)."
+    },
+    {
+      "id": "hist-039ad6a5",
+      "empresa_id": "emp-83881ad3",
+      "contato_id": "ctt-352effd4",
+      "deal_id": "deal-028d4615",
+      "responsavel_id": "usr-admin",
+      "tipo": "agendamento",
+      "data_hora": "2026-09-24T10:36:05.755380",
+      "canal": "Agenda Comercial",
+      "descricao": "Ação agendada: 'Primeiro contato comercial com Posto Rota Norte' (LIGACAO) para 2026-09-25T10:00:00. Notas: Apresentar soluções TruData ERP para Postos de Combustíveis & Conveniência."
+    },
+    {
+      "id": "hist-e71f2add",
+      "empresa_id": "emp-83881ad3",
+      "contato_id": "ctt-352effd4",
+      "deal_id": "deal-028d4615",
+      "responsavel_id": "Tester",
+      "tipo": "nota",
+      "data_hora": "2026-09-24T10:36:05.735434",
+      "canal": "Prospecção Manual",
+      "descricao": "Cliente prospectado diretamente na rodovia RS-404."
+    },
+    {
+      "id": "hist-8cda3443",
+      "empresa_id": null,
+      "deal_id": "deal-2514f410",
+      "responsavel_id": "Implantação",
+      "tipo": "onboarding_etapa",
+      "data_hora": "2026-09-24T10:36:05.534149",
+      "canal": "Checklist de Onboarding",
+      "descricao": "Etapa '2. Instalação do Agente TruData & Conectores de Dados' alterada para CONCLUÍDA por Implantação. Progresso total: 33%."
+    },
+    {
+      "id": "hist-bd6f5d9c",
+      "empresa_id": null,
+      "deal_id": "deal-2514f410",
+      "responsavel_id": "SuporteN1",
+      "tipo": "onboarding_etapa",
+      "data_hora": "2026-09-24T10:36:05.503109",
+      "canal": "Checklist de Onboarding",
+      "descricao": "Etapa '1. Auditoria de Infraestrutura & Homologação de PDVs' alterada para CONCLUÍDA por SuporteN1. Progresso total: 17%."
+    },
+    {
+      "id": "hist-60089483",
+      "empresa_id": null,
+      "contato_id": null,
+      "deal_id": "deal-2514f410",
+      "responsavel_id": "Assinatura Digital",
+      "tipo": "contrato_assinado",
+      "data_hora": "2026-09-24T10:36:05.475669",
+      "canal": "Assinatura Eletrônica TruData",
+      "descricao": "🎉 CONTRATO ASSINADO DIGITALMENTE por Dr. Roberto Silva (CPF: 111.222.333-44). Hash SHA-256: e6e94aa56eb87251... Negócio GANHO! Checklist de Onboarding inicializado."
+    },
+    {
+      "id": "hist-fd41108b",
+      "empresa_id": null,
+      "contato_id": null,
+      "deal_id": "deal-2514f410",
+      "responsavel_id": "VendedorTest",
+      "tipo": "proposta_gerada",
+      "data_hora": "2026-09-24T10:36:05.447744",
+      "canal": "Proposta Digital 1-Click",
+      "descricao": "Proposta comercial rastreável gerada por VendedorTest. Link público: /proposta-digital?p=trudata-c1e46cf70c68"
+    },
+    {
+      "id": "hist-06b2ed7a",
+      "empresa_id": null,
+      "contato_id": null,
+      "deal_id": "deal-ce800e1f",
+      "responsavel_id": "Beacon de Rastreio TruData",
+      "tipo": "proposta_aberta",
+      "data_hora": "2026-09-24T10:36:05.390817",
+      "canal": "Rastreio em Tempo Real",
+      "descricao": "🚨 ALERTA: O cliente acabou de abrir a Proposta #trudata-1f6cd38a7151! (Acesso nº 1). IP: 189.100.20.10"
+    },
+    {
+      "id": "hist-9cfd8aa6",
+      "empresa_id": null,
+      "contato_id": null,
+      "deal_id": "deal-ce800e1f",
+      "responsavel_id": "ConsultorTest",
+      "tipo": "proposta_gerada",
+      "data_hora": "2026-09-24T10:36:05.359900",
+      "canal": "Proposta Digital 1-Click",
+      "descricao": "Proposta comercial rastreável gerada por ConsultorTest. Link público: /proposta-digital?p=trudata-1f6cd38a7151"
+    },
+    {
+      "id": "hist-da4e1536",
+      "empresa_id": null,
+      "contato_id": null,
+      "deal_id": null,
+      "responsavel_id": "usr-vend1",
+      "tipo": "ligacao",
+      "data_hora": "2026-09-24T10:36:05.241295",
+      "canal": "Atividade Concluída",
+      "descricao": "Atividade concluída: 'Ligar para agendar demonstração técnica'. Notas: Falar sobre contingência offline."
+    },
+    {
+      "id": "hist-2d163bc7",
+      "empresa_id": null,
+      "contato_id": null,
+      "deal_id": null,
+      "responsavel_id": "usr-vend1",
+      "tipo": "agendamento",
+      "data_hora": "2026-09-24T10:36:05.208871",
+      "canal": "Agenda Comercial",
+      "descricao": "Ação agendada: 'Ligar para agendar demonstração técnica' (LIGACAO) para None. Notas: Falar sobre contingência offline."
+    },
+    {
+      "id": "hist-40e6e119",
+      "empresa_id": null,
+      "contato_id": null,
+      "deal_id": "deal-5d46e4c7",
+      "responsavel_id": "Tester",
+      "tipo": "mudanca_etapa",
+      "data_hora": "2026-09-24T10:36:05.103446",
+      "canal": "Kanban",
+      "descricao": "Negociação movida da etapa 'etapa-demo' para 'etapa-perdido' (Motivo: Optou por concorrente com preço menor)."
+    },
+    {
+      "id": "hist-12ed6e3f",
+      "empresa_id": "emp-97442a91",
+      "contato_id": "ctt-de892615",
+      "deal_id": "deal-ed59ca8d",
+      "responsavel_id": "Tester",
+      "tipo": "mudanca_etapa",
+      "data_hora": "2026-09-24T10:36:05.057767",
+      "canal": "Kanban",
+      "descricao": "Negociação movida da etapa 'etapa-lead' para 'etapa-proposta'."
+    }
+  ],
+  "automacoes": [
+    {
+      "id": "auto-proposta-followup",
+      "nome": "Criar Follow-up ao Mover para Proposta",
+      "ativo": true,
+      "gatilho": "mudanca_etapa",
+      "etapa_gatilho": "etapa-proposta",
+      "acao": "criar_atividade",
+      "parametros": {
+        "tipo": "follow_up",
+        "dias_prazo": 2,
+        "titulo": "Follow-up de Proposta Enviada (Verificar se há dúvidas)"
+      }
+    },
+    {
+      "id": "auto-round-robin",
+      "nome": "Atribuição Automática de Leads (Round-Robin)",
+      "ativo": true,
+      "gatilho": "novo_lead",
+      "acao": "atribuir_vendedor_round_robin",
+      "parametros": {
+        "vendedores": [
+          "usr-admin"
+        ]
+      }
+    },
+    {
+      "id": "auto-email-boas-vindas",
+      "nome": "Disparar E-mail de Boas-Vindas e Apresentação Institucional",
+      "ativo": true,
+      "gatilho": "novo_lead",
+      "acao": "simular_envio_email",
+      "parametros": {
+        "assunto": "Apresentação de Soluções TruData ERP — Hansen Software"
+      }
+    }
+  ],
+  "campos_customizados_config": [
+    {
+      "id": "cc-sistema-anterior",
+      "entidade": "empresa",
+      "rotulo": "Sistema de Gestão Atual",
+      "tipo": "texto"
+    },
+    {
+      "id": "cc-contador-responsavel",
+      "entidade": "empresa",
+      "rotulo": "Escritório Contábil",
+      "tipo": "texto"
+    },
+    {
+      "id": "cc-motivo-perda",
+      "entidade": "negociacao",
+      "rotulo": "Motivo de Perda Detalhado",
+      "tipo": "selecao",
+      "opcoes": [
+        "Preço/Condição",
+        "Optou por concorrente",
+        "Sem verba no momento",
+        "Falta de recurso específico",
+        "Outro"
+      ]
+    }
+  ],
+  "propostas_rastreadas": [
+    {
+      "hash": "trudata-c1e46cf70c68",
+      "deal_id": "deal-2514f410",
+      "deal_titulo": "Deal Fechamento & Assinatura Digital",
+      "empresa_id": null,
+      "empresa_nome": "Cliente",
+      "empresa_doc": "",
+      "contato_id": null,
+      "contato_nome": "Responsável",
+      "contato_email": "",
+      "contato_telefone": "",
+      "cidade": "Sarandi - RS",
+      "pdvs_estimados": 1,
+      "valor_mrr": 480.0,
+      "valor_setup": 1500.0,
+      "desconto_aplicado": 0.0,
+      "produtos": [
+        {
+          "produto_id": "prod-erp-base",
+          "nome": "TruData Gestão & Retaguarda Fiscal",
+          "quantidade": 1,
+          "valor_unitario": 180.0
+        }
+      ],
+      "status": "assinada",
+      "data_criacao": "2026-09-24T10:36:05.447744",
+      "validade_dias": 10,
+      "total_visualizacoes": 0,
+      "historico_acessos": [],
+      "url_publica": "/proposta-digital?p=trudata-c1e46cf70c68",
+      "gerado_por": "VendedorTest",
+      "data_assinatura": "2026-09-24T10:36:05.475669",
+      "hash_sha256": "e6e94aa56eb87251fd467f1991a68110c38d017568aa2aa6984d69fcab30ca5b"
+    },
+    {
+      "hash": "trudata-1f6cd38a7151",
+      "deal_id": "deal-ce800e1f",
+      "deal_titulo": "Deal Proposta Rastreável Teste",
+      "empresa_id": null,
+      "empresa_nome": "Cliente",
+      "empresa_doc": "",
+      "contato_id": null,
+      "contato_nome": "Responsável",
+      "contato_email": "",
+      "contato_telefone": "",
+      "cidade": "Sarandi - RS",
+      "pdvs_estimados": 1,
+      "valor_mrr": 350.0,
+      "valor_setup": 1200.0,
+      "desconto_aplicado": 0.0,
+      "produtos": [
+        {
+          "produto_id": "prod-erp-base",
+          "nome": "TruData Gestão & Retaguarda Fiscal",
+          "quantidade": 1,
+          "valor_unitario": 180.0
+        }
+      ],
+      "status": "visualizada",
+      "data_criacao": "2026-09-24T10:36:05.359900",
+      "validade_dias": 10,
+      "total_visualizacoes": 1,
+      "historico_acessos": [
+        {
+          "data_hora": "2026-09-24T10:36:05.390817",
+          "ip": "189.100.20.10",
+          "user_agent": "Mozilla/5.0 Safari"
+        }
+      ],
+      "url_publica": "/proposta-digital?p=trudata-1f6cd38a7151",
+      "gerado_por": "ConsultorTest"
+    }
+  ],
+  "contratos_assinados": [
+    {
+      "id": "ct-4e5083e4",
+      "hash_proposta": "trudata-c1e46cf70c68",
+      "deal_id": "deal-2514f410",
+      "empresa_id": null,
+      "empresa_nome": "Cliente",
+      "signatario_nome": "Dr. Roberto Silva",
+      "signatario_cpf": "111.222.333-44",
+      "signatario_email": "roberto@farmacia.com.br",
+      "ip_assinatura": "201.80.15.2",
+      "data_assinatura": "2026-09-24T10:36:05.475669",
+      "hash_sha256": "e6e94aa56eb87251fd467f1991a68110c38d017568aa2aa6984d69fcab30ca5b",
+      "status": "vigente",
+      "valor_mrr": 480.0,
+      "valor_setup": 1500.0,
+      "termos_aceitos": true,
+      "amparo_legal": "Medida Provisória nº 2.200-2/2001 e Art. 107 do Código Civil Brasileiro"
+    }
+  ],
+  "onboarding_checklists": [
+    {
+      "id": "onb-fabfb755",
+      "deal_id": "deal-2514f410",
+      "empresa_id": null,
+      "empresa_nome": "Deal Fechamento & Assinatura Digital",
+      "data_inicio": "2026-09-24T10:36:05.475669",
+      "prazo_final_estimado": "01/10/2026",
+      "status": "em_andamento",
+      "progresso_pct": 33,
+      "etapas": [
+        {
+          "id": "etapa-1",
+          "nome": "1. Auditoria de Infraestrutura & Homologação de PDVs",
+          "descricao": "Checagem de portas, rede local, SO (Windows/Linux) e comunicação com a impressora fiscal / SAT / NFC-e.",
+          "responsavel": "Suporte Técnico N1",
+          "prazo_dias": 2,
+          "concluida": true,
+          "data_conclusao": "2026-09-24T10:36:05.503109",
+          "notas": "PDVs validados com SAT",
+          "concluido_por": "SuporteN1"
+        },
+        {
+          "id": "etapa-2",
+          "nome": "2. Instalação do Agente TruData & Conectores de Dados",
+          "descricao": "Deploy do executável do coletor em segundo plano e teste de leitura das tabelas de frente de caixa.",
+          "responsavel": "Implantação & Infra",
+          "prazo_dias": 3,
+          "concluida": true,
+          "data_conclusao": "2026-09-24T10:36:05.534149",
+          "notas": "Agente TruData rodando",
+          "concluido_por": "Implantação"
+        },
+        {
+          "id": "etapa-3",
+          "nome": "3. Validação de Cargas & Telemetria em Tempo Real",
+          "descricao": "Certificação do envio contínuo das transações, contingência offline ativada e latência inferior a 150ms.",
+          "responsavel": "Engenharia de Dados",
+          "prazo_dias": 4,
+          "concluida": false,
+          "data_conclusao": null,
+          "notas": ""
+        },
+        {
+          "id": "etapa-4",
+          "nome": "4. Treinamento Operacional dos Fiscais e Gestão",
+          "descricao": "Sessão remota via Google Meet/Teams com a gerência sobre uso do painel analítico TruData.",
+          "responsavel": "Customer Success (CS)",
+          "prazo_dias": 5,
+          "concluida": false,
+          "data_conclusao": null,
+          "notas": ""
+        },
+        {
+          "id": "etapa-5",
+          "nome": "5. Parametrização de Regras Antifraude e Alertas",
+          "descricao": "Definição de regras de alerta (cancelamento de item, sangria fora de hora, cupom alto) e canal de notificação.",
+          "responsavel": "Customer Success (CS)",
+          "prazo_dias": 6,
+          "concluida": false,
+          "data_conclusao": null,
+          "notas": ""
+        },
+        {
+          "id": "etapa-6",
+          "nome": "6. Go-Live Oficial & Monitoramento de 48 Horas",
+          "descricao": "Virada de chave oficial para produção assistida com plantão dedicado nas primeiras 48h.",
+          "responsavel": "Líder de Operações",
+          "prazo_dias": 7,
+          "concluida": false,
+          "data_conclusao": null,
+          "notas": ""
+        }
+      ],
+      "criado_por": "Assinatura Eletrônica"
+    }
+  ],
+  "metas_comerciais": {
+    "mes_referencia": "Novembro/2026",
+    "meta_mrr_empresa": 25000.0,
+    "meta_pdvs_empresa": 60,
+    "comissao_padrao_pct": 10.0,
+    "metas_vendedores": {
+      "usr-admin": {
+        "meta_mrr": 0.0,
+        "meta_pdvs": 0,
+        "comissao_pct": 10.0
+      }
+    }
+  }
+}

@@ -57,8 +57,8 @@ def carregar_config():
     }
 
 config = carregar_config()
-PORTA_PROXY = config.get("configuracoes", {}).get("porta_proxy", 8081)
-PORTA_ORIGINAL = config.get("configuracoes", {}).get("porta_servidor_original", 8080)
+PORTA_PROXY = int(os.environ.get("PORT", config.get("configuracoes", {}).get("porta_proxy", 8081)))
+PORTA_ORIGINAL = int(os.environ.get("INTERNAL_PORT", config.get("configuracoes", {}).get("porta_servidor_original", 8080)))
 URL_DESTINO = f"http://127.0.0.1:{PORTA_ORIGINAL}"
 
 # Gerenciamento de Sessões

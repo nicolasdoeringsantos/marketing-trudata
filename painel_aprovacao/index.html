@@ -6,7 +6,9 @@
     <meta name="theme-color" content="#009fe3" />
     <title>Aprovação de Conteúdo & Votação · TruData</title>
     <link rel="manifest" href="/painel_aprovacao/manifest.json" />
-    <link rel="icon" type="image/svg+xml" href="/painel_aprovacao/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/painel_aprovacao/favicon.svg?v=20260923-t" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/painel_aprovacao/favicon-32x32.png?v=20260923-t" />
+    <link rel="shortcut icon" href="/painel_aprovacao/favicon.ico?v=20260923-t" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
@@ -518,12 +520,12 @@
     <a class="skip" href="#main">Ir para o conteúdo</a>
     <header class="topbar">
       <div class="topbar-inner">
-        <a class="brand" href="index.html" aria-label="TruData, aprovação de conteúdo">
-          <span class="brand-mark">T</span>
-          <span class="brand-name">TruData<small>Estúdio de conteúdo</small></span>
+        <a class="brand" href="index.html" aria-label="TruData ERP">
+          <img src="/brand/logo_trudata_oficial_direta.png" alt="TruData ERP" class="brand-logo-img" />
         </a>
         <nav class="topnav" aria-label="Navegação principal">
           <a href="index.html" aria-current="page">Aprovação & Votação</a>
+          <a href="crm_enterprise.html" style="color:#009fe3; font-weight:700;">💼 CRM Enterprise</a>
           <a href="calendario.html">Calendário</a>
           <a href="radar_clientes.html">Radar de clientes</a>
           <a href="ferramentas.html">Ferramentas</a>
@@ -554,6 +556,31 @@
           </button>
         </div>
       </div>
+
+      <!-- Banner de Acesso Rápido ao CRM Enterprise -->
+      <section style="background: linear-gradient(135deg, #0b1324, #15213b); border: 1px solid rgba(0, 159, 227, 0.35); border-radius: var(--radius); padding: 1.1rem 1.35rem; margin-bottom: var(--space-4); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);">
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <div style="width:44px; height:44px; border-radius:10px; background:linear-gradient(135deg, #0284c7, #009fe3); display:flex; align-items:center; justify-content:center; font-size:1.45rem; box-shadow:0 3px 10px rgba(0,159,227,0.4);">💼</div>
+          <div>
+            <div style="font-weight:800; font-size:1.05rem; color:#fff; display:flex; align-items:center; gap:8px;">
+              TruData CRM Enterprise · Pipeline & Vendas B2B
+              <span style="font-size:0.7rem; font-weight:700; background:rgba(16,185,129,0.2); color:#34d399; border:1px solid rgba(16,185,129,0.3); padding:2px 7px; border-radius:4px;">Ativo</span>
+            </div>
+            <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Gerencie funis comerciais, prospecção no norte do RS, agenda de ações e metas em tempo real.</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.65rem; flex-wrap:wrap;">
+          <a href="crm_enterprise.html" class="btn-primary-action" style="background:#0284c7; text-decoration:none; font-size:0.85rem; padding:8px 14px; font-weight:700;">
+            🚀 Abrir CRM Enterprise
+          </a>
+          <a href="crm_enterprise.html?tab=kanban" class="btn-secondary" style="text-decoration:none; font-size:0.85rem; padding:7px 12px; background:#1e293b; color:#38bdf8; border-color:rgba(56,189,248,0.3); font-weight:600;">
+            🏷️ Pipeline Kanban
+          </a>
+          <a href="crm_enterprise.html?tab=atividades" class="btn-secondary" style="text-decoration:none; font-size:0.85rem; padding:7px 12px; background:#1e293b; color:#fbbf24; border-color:rgba(245,158,11,0.3); font-weight:600;">
+            📅 Ações & Agendamentos
+          </a>
+        </div>
+      </section>
 
       <!-- Estatísticas Rápidas -->
       <div class="stats" id="stats-bar" style="margin-bottom: var(--space-4);">

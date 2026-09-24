@@ -1,0 +1,337 @@
+{
+  "config": {
+    "versao": "2.0.0",
+    "nome_sistema": "TruData CRM Enterprise",
+    "criado_em": "2026-09-24T10:36:04.931666"
+  },
+  "usuarios": [
+    {
+      "id": "usr-admin",
+      "login": "admin",
+      "nome": "Administrador TruData",
+      "email": "comercial@trudata.com.br",
+      "perfil": "admin",
+      "equipe": "Diretoria",
+      "visibilidade": "todos",
+      "ativo": true
+    }
+  ],
+  "funis": [
+    {
+      "id": "funil-vendas-novas",
+      "nome": "Pipeline Principal: Vendas Novas B2B",
+      "descricao": "Prospecção e fechamento de clientes de varejo e pequenas empresas na região.",
+      "padrao": true,
+      "etapas": [
+        {
+          "id": "etapa-lead",
+          "nome": "1. Lead / Qualificação",
+          "ordem": 1,
+          "probabilidade": 20,
+          "cor": "#60a5fa"
+        },
+        {
+          "id": "etapa-contato",
+          "nome": "2. Contato Feito / Diagnóstico",
+          "ordem": 2,
+          "probabilidade": 40,
+          "cor": "#fbbf24"
+        },
+        {
+          "id": "etapa-demo",
+          "nome": "3. Demonstração / PDV Teste",
+          "ordem": 3,
+          "probabilidade": 60,
+          "cor": "#a855f7"
+        },
+        {
+          "id": "etapa-proposta",
+          "nome": "4. Proposta Enviada",
+          "ordem": 4,
+          "probabilidade": 80,
+          "cor": "#f97316"
+        },
+        {
+          "id": "etapa-fechado",
+          "nome": "5. Contrato Fechado (Ganho)",
+          "ordem": 5,
+          "probabilidade": 100,
+          "cor": "#10b981"
+        },
+        {
+          "id": "etapa-recontato",
+          "nome": "6. Recontato (6m - 1 ano)",
+          "ordem": 6,
+          "probabilidade": 15,
+          "cor": "#06b6d4"
+        },
+        {
+          "id": "etapa-perdido",
+          "nome": "7. Negócio Perdido",
+          "ordem": 7,
+          "probabilidade": 0,
+          "cor": "#ef4444"
+        }
+      ]
+    },
+    {
+      "id": "funil-upsell",
+      "nome": "Expansão & Upsell (PDVs Adicionais / Módulos)",
+      "descricao": "Venda de caixas extras, TEF Dedicado, conciliação e emissão móvel para clientes da base.",
+      "padrao": false,
+      "etapas": [
+        {
+          "id": "etapa-up-identificacao",
+          "nome": "1. Oportunidade Mapeada",
+          "ordem": 1,
+          "probabilidade": 30,
+          "cor": "#38bdf8"
+        },
+        {
+          "id": "etapa-up-apresentacao",
+          "nome": "2. Apresentação ao Lojista",
+          "ordem": 2,
+          "probabilidade": 65,
+          "cor": "#c084fc"
+        },
+        {
+          "id": "etapa-up-ativado",
+          "nome": "3. Módulo Adicionado (Ganho)",
+          "ordem": 3,
+          "probabilidade": 100,
+          "cor": "#10b981"
+        },
+        {
+          "id": "etapa-up-descarte",
+          "nome": "4. Sem Interesse no Momento",
+          "ordem": 4,
+          "probabilidade": 0,
+          "cor": "#64748b"
+        }
+      ]
+    },
+    {
+      "id": "funil-contadores",
+      "nome": "Parcerias Contábeis (B2B2B)",
+      "descricao": "Acordos de indicação com escritórios de contabilidade da região de Sarandi e raio de 100km.",
+      "padrao": false,
+      "etapas": [
+        {
+          "id": "etapa-ct-mapeado",
+          "nome": "1. Escritório Mapeado",
+          "ordem": 1,
+          "probabilidade": 25,
+          "cor": "#818cf8"
+        },
+        {
+          "id": "etapa-ct-reuniao",
+          "nome": "2. Reunião de Parceria",
+          "ordem": 2,
+          "probabilidade": 50,
+          "cor": "#e879f9"
+        },
+        {
+          "id": "etapa-ct-acordo",
+          "nome": "3. Termo de Parceria Assinado",
+          "ordem": 3,
+          "probabilidade": 100,
+          "cor": "#059669"
+        },
+        {
+          "id": "etapa-ct-recusa",
+          "nome": "4. Parceria Não Concretizada",
+          "ordem": 4,
+          "probabilidade": 0,
+          "cor": "#f43f5e"
+        }
+      ]
+    }
+  ],
+  "produtos": [
+    {
+      "id": "prod-erp-base",
+      "codigo": "ERP-01",
+      "nome": "TruData ERP Web (Plano Base 1 PDV)",
+      "categoria": "Software",
+      "preco_padrao": 180.0,
+      "tipo_cobranca": "mensal"
+    },
+    {
+      "id": "prod-pdv-extra",
+      "codigo": "PDV-ADD",
+      "nome": "PDV / Caixa Adicional em Rede",
+      "categoria": "Software",
+      "preco_padrao": 60.0,
+      "tipo_cobranca": "mensal"
+    },
+    {
+      "id": "prod-tef-dedicado",
+      "codigo": "TEF-01",
+      "nome": "Módulo TEF Dedicado Multibandeira",
+      "categoria": "Software",
+      "preco_padrao": 45.0,
+      "tipo_cobranca": "mensal"
+    },
+    {
+      "id": "prod-sped-fiscal",
+      "codigo": "SPED-01",
+      "nome": "Auditor Fiscal e Integrador SPED/EFD",
+      "categoria": "Fiscal",
+      "preco_padrao": 85.0,
+      "tipo_cobranca": "mensal"
+    },
+    {
+      "id": "prod-setup-implantacao",
+      "codigo": "SETUP-01",
+      "nome": "Taxa de Implantação, Parametrização e Treinamento",
+      "categoria": "Serviço",
+      "preco_padrao": 800.0,
+      "tipo_cobranca": "unico"
+    },
+    {
+      "id": "prod-migracao-banco",
+      "codigo": "MIG-01",
+      "nome": "Migração de Dados do Sistema Anterior",
+      "categoria": "Serviço",
+      "preco_padrao": 350.0,
+      "tipo_cobranca": "unico"
+    }
+  ],
+  "empresas": [
+    {
+      "id": "emp-97442a91",
+      "criado_em": "24/09/2026",
+      "tipo": "PJ",
+      "razao_social": "Farmácia Vida & Saúde",
+      "nome_fantasia": "Farmácia Vida",
+      "documento": "98.765.432/0001-10",
+      "telefone": "5433611122",
+      "cidade": "Passo Fundo - RS",
+      "segmento": "Farmácias & Drogarias",
+      "pdvs_estimados": 2,
+      "consentimento_lgpd": {
+        "autorizado": true,
+        "data_consentimento": "2026-09-24T10:36:04.983965",
+        "base_legal": "Art. 7º V/IX da LGPD (Relação Comercial B2B)"
+      }
+    },
+    {
+      "id": "emp-e83ce1d4",
+      "criado_em": "24/09/2026",
+      "tipo": "PF",
+      "razao_social": "João Agricultor e Comércio",
+      "nome_fantasia": "João da Horta",
+      "documento": "123.456.789-00",
+      "telefone": "54999112233",
+      "cidade": "Rondinha - RS",
+      "segmento": "Comércio Geral",
+      "consentimento_lgpd": {
+        "autorizado": true,
+        "data_consentimento": "2026-09-24T10:36:04.964087",
+        "base_legal": "Art. 7º V/IX da LGPD (Relação Comercial B2B)"
+      }
+    },
+    {
+      "id": "emp-762da9d4",
+      "criado_em": "24/09/2026",
+      "tipo": "PJ",
+      "razao_social": "Supermercado Sul Ltda",
+      "nome_fantasia": "Supermercado Sul",
+      "documento": "12.345.678/0001-90",
+      "telefone": "5433619999",
+      "email": "contato@supersul.com.br",
+      "cidade": "Sarandi - RS",
+      "segmento": "Supermercados & Mercearias",
+      "pdvs_estimados": 4,
+      "consentimento_lgpd": {
+        "autorizado": true,
+        "data_consentimento": "2026-09-24T10:36:04.949619",
+        "base_legal": "Art. 7º V/IX da LGPD (Relação Comercial B2B)"
+      }
+    }
+  ],
+  "contatos": [],
+  "negociacoes": [],
+  "atividades": [],
+  "historico_interacoes": [],
+  "automacoes": [
+    {
+      "id": "auto-proposta-followup",
+      "nome": "Criar Follow-up ao Mover para Proposta",
+      "ativo": true,
+      "gatilho": "mudanca_etapa",
+      "etapa_gatilho": "etapa-proposta",
+      "acao": "criar_atividade",
+      "parametros": {
+        "tipo": "follow_up",
+        "dias_prazo": 2,
+        "titulo": "Follow-up de Proposta Enviada (Verificar se há dúvidas)"
+      }
+    },
+    {
+      "id": "auto-round-robin",
+      "nome": "Atribuição Automática de Leads (Round-Robin)",
+      "ativo": true,
+      "gatilho": "novo_lead",
+      "acao": "atribuir_vendedor_round_robin",
+      "parametros": {
+        "vendedores": [
+          "usr-admin"
+        ]
+      }
+    },
+    {
+      "id": "auto-email-boas-vindas",
+      "nome": "Disparar E-mail de Boas-Vindas e Apresentação Institucional",
+      "ativo": true,
+      "gatilho": "novo_lead",
+      "acao": "simular_envio_email",
+      "parametros": {
+        "assunto": "Apresentação de Soluções TruData ERP — Hansen Software"
+      }
+    }
+  ],
+  "campos_customizados_config": [
+    {
+      "id": "cc-sistema-anterior",
+      "entidade": "empresa",
+      "rotulo": "Sistema de Gestão Atual",
+      "tipo": "texto"
+    },
+    {
+      "id": "cc-contador-responsavel",
+      "entidade": "empresa",
+      "rotulo": "Escritório Contábil",
+      "tipo": "texto"
+    },
+    {
+      "id": "cc-motivo-perda",
+      "entidade": "negociacao",
+      "rotulo": "Motivo de Perda Detalhado",
+      "tipo": "selecao",
+      "opcoes": [
+        "Preço/Condição",
+        "Optou por concorrente",
+        "Sem verba no momento",
+        "Falta de recurso específico",
+        "Outro"
+      ]
+    }
+  ],
+  "propostas_rastreadas": [],
+  "contratos_assinados": [],
+  "onboarding_checklists": [],
+  "metas_comerciais": {
+    "mes_referencia": "Setembro/2026",
+    "meta_mrr_empresa": 0.0,
+    "meta_pdvs_empresa": 0,
+    "comissao_padrao_pct": 10.0,
+    "metas_vendedores": {
+      "usr-admin": {
+        "meta_mrr": 0.0,
+        "meta_pdvs": 0,
+        "comissao_pct": 10.0
+      }
+    }
+  }
+}

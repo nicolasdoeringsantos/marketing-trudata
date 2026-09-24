@@ -507,7 +507,7 @@
         "Prévia do Instagram",
         '<span class="small muted">Composição 3 × 3 · mês e filtros selecionados</span>',
       ) +
-        `<div class="dialog-body feed-preview"><div class="feed-profile"><span class="brand-mark">T</span><div><h3>@trudata_</h3><p class="small muted">TruData ERP · Hansen Software</p></div></div><div class="feed-mosaic">${Array.from(
+        `<div class="dialog-body feed-preview"><div class="feed-profile"><img src="/brand/icon_oficial_direta.png" alt="TruData" style="width:36px;height:36px;border-radius:50%;object-fit:contain;background:#0f172a;border:1px solid rgba(56,189,248,0.4);padding:2px;"><div><h3>@trudata_</h3><p class="small muted">TruData ERP · Hansen Software</p></div></div><div class="feed-mosaic">${Array.from(
           { length: 9 },
           (_, i) => {
             const s = feedDays[i];

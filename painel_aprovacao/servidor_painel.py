@@ -15,6 +15,7 @@ Suporta execução em segundo plano sem janela (Headless / WindowStyle Hidden).
 
 import http.server
 import comercial_api
+import crm_enterprise_api
 import socketserver
 import os
 import sys
@@ -26,7 +27,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime
 
-PORT = 8080
+PORT = int(os.environ.get("INTERNAL_PORT", os.environ.get("PORT", 8080)))
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 PAINEL_DIR = os.path.join(PROJECT_ROOT, "painel_aprovacao")
 CONTEUDO_DIR = os.path.join(PROJECT_ROOT, "conteudo_pronto")
@@ -69,6 +70,8 @@ class RobustMarketingHandler(http.server.SimpleHTTPRequestHandler):
 
     def do_POST(self):
         clean_path = self.path.split('?')[0].split('#')[0]
+        if crm_enterprise_api.handle_crm_v2(self, 'POST', self.path):
+            return
         if comercial_api.handle(self, 'POST', clean_path):
             return
 
@@ -412,13 +415,22 @@ class RobustMarketingHandler(http.server.SimpleHTTPRequestHandler):
                 if isinstance(payload, list):
                     total_adicionados = 0
                     for item in payload:
-                        sucesso, _ = prospector_clientes.enviar_para_crm_json(item, LEADS_FILE)
-                        if sucesso:
-                            total_adicionados += 1
+                        prospector_clientes.enviar_para_crm_json(item, LEADS_FILE)
+                        try:
+                            crm_res = crm_enterprise_api.crm_service.sincronizar_com_legado(item)
+                            if crm_res and crm_res.get("sucesso"):
+                                total_adicionados += 1
+                        except Exception as e_sync:
+                            print(f"[CRM SYNC ERROR] {e_sync}")
                     resp = json.dumps({"sucesso": True, "total_adicionados": total_adicionados}).encode('utf-8')
                 else:
-                    sucesso, msg_or_id = prospector_clientes.enviar_para_crm_json(payload, LEADS_FILE)
-                    resp = json.dumps({"sucesso": sucesso, "resultado": msg_or_id}).encode('utf-8')
+                    _, msg_or_id = prospector_clientes.enviar_para_crm_json(payload, LEADS_FILE)
+                    crm_res = crm_enterprise_api.crm_service.sincronizar_com_legado(payload)
+                    resp = json.dumps({
+                        "sucesso": True,
+                        "resultado": msg_or_id or "Adicionado ao CRM com sucesso",
+                        "crm": crm_res
+                    }).encode('utf-8')
 
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
@@ -430,6 +442,138 @@ class RobustMarketingHandler(http.server.SimpleHTTPRequestHandler):
                 err_resp = json.dumps({"sucesso": False, "erro": str(e)}).encode('utf-8')
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(err_resp)
+                return
+
+        # API: Adicionar Lead / Prospect Manualmente ao Radar e ao CRM
+        if clean_path == "/api/radar/adicionar_lead_manual":
+            try:
+                import uuid
+                content_length = int(self.headers.get('Content-Length', 0))
+                body = self.rfile.read(content_length)
+                payload = json.loads(body.decode('utf-8'))
+
+                nome = payload.get("nome", "").strip()
+                if not nome:
+                    raise ValueError("Nome ou Razão Social da empresa é obrigatório.")
+
+                cidade = payload.get("cidade", "Sarandi").strip()
+                segmento = payload.get("segmento", "Comércio Geral").strip()
+                telefone = payload.get("telefone", "").strip()
+                whatsapp = payload.get("whatsapp", telefone).strip()
+                email = payload.get("email", "").strip()
+                decisor = payload.get("decisor", "").strip()
+                cnpj = payload.get("cnpj", "").strip()
+                endereco = payload.get("endereco", "").strip()
+                caixas = int(payload.get("caixas", 1) or 1)
+                notas = payload.get("notas", "").strip()
+                enviar_crm = payload.get("enviar_crm", True)
+
+                # Calcular coordenadas aproximadas da cidade polo
+                sys.path.append(os.path.join(PROJECT_ROOT, "agente"))
+                import prospector_clientes
+                cid_norm = prospector_clientes.normalizar_texto(cidade)
+                ponto = prospector_clientes.CIDADES_POLO.get(cid_norm, prospector_clientes.COORD_SARANDI_RS)
+                lat = ponto["lat"]
+                lon = ponto["lon"]
+                dist = ponto.get("dist_sarandi", 0)
+
+                novo_prospect = {
+                    "id": f"manual-{uuid.uuid4().hex[:8]}",
+                    "nome": nome,
+                    "razao_social": payload.get("razao_social", nome),
+                    "cnpj": cnpj,
+                    "sintegra_status": "CADASTRADO MANUALMENTE (Prospecção Direta)",
+                    "segmento": segmento,
+                    "cnae_codigo": "",
+                    "cnae_descricao": segmento,
+                    "cidade": cidade,
+                    "uf": "RS",
+                    "endereco": endereco or f"Centro - {cidade} - RS",
+                    "bairro": "Centro",
+                    "cep": "",
+                    "lat": lat,
+                    "lon": lon,
+                    "distancia_km": dist,
+                    "telefone": telefone,
+                    "whatsapp": whatsapp,
+                    "email": email,
+                    "tem_site": bool(payload.get("site")),
+                    "site": payload.get("site", "Não possui site"),
+                    "porte": "ME",
+                    "pdvs_estimados": caixas,
+                    "decisor": decisor or "Proprietário / Gerente",
+                    "origem": "Prospecção Manual"
+                }
+
+                # 1. Salvar na base regional do radar se existir
+                base_json = os.path.join(PROJECT_ROOT, "agente", "base_clientes_regional.json")
+                if os.path.exists(base_json):
+                    try:
+                        with open(base_json, "r", encoding="utf-8") as f:
+                            base_radar = json.load(f)
+                        base_radar.insert(0, novo_prospect)
+                        with open(base_json, "w", encoding="utf-8") as f:
+                            json.dump(base_radar, f, indent=2, ensure_ascii=False)
+                    except Exception as err_b:
+                        print(f"[RADAR BASE SAVE ERROR] {err_b}")
+
+                # 2. Sincronizar diretamente com o CRM Enterprise
+                crm_res = None
+                if enviar_crm:
+                    crm_payload = {
+                        "empresa": {
+                            "tipo": "PJ" if cnpj else "PF",
+                            "razao_social": novo_prospect["razao_social"],
+                            "nome_fantasia": novo_prospect["nome"],
+                            "documento": cnpj,
+                            "telefone": telefone,
+                            "whatsapp": whatsapp,
+                            "email": email,
+                            "cidade": cidade,
+                            "uf": "RS",
+                            "endereco": novo_prospect["endereco"],
+                            "segmento": segmento,
+                            "pdvs_estimados": caixas,
+                            "origem": "Prospecção Manual"
+                        },
+                        "contato": {
+                            "nome": decisor or "Decisor Principal",
+                            "cargo": "Sócio / Administrador",
+                            "telefone": telefone,
+                            "whatsapp": whatsapp,
+                            "email": email
+                        },
+                        "negociacao": {
+                            "titulo": f"Implantação TruData ERP - {nome}",
+                            "funil_id": "funil-vendas-novas",
+                            "etapa_id": "etapa-lead",
+                            "valor_mrr": 180.0 + max(0, caixas - 1) * 60.0,
+                            "valor_setup_produtos": 0.0
+                        },
+                        "notas": notas
+                    }
+                    crm_res = crm_enterprise_api.crm_service.salvar_novo_lead_completo(crm_payload, usuario="Radar de Clientes")
+
+                resp = json.dumps({
+                    "sucesso": True,
+                    "mensagem": f"Lead '{nome}' adicionado com sucesso!",
+                    "prospect": novo_prospect,
+                    "crm": crm_res
+                }, ensure_ascii=False).encode('utf-8')
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(resp)))
+                self.end_headers()
+                self.wfile.write(resp)
+                return
+            except Exception as e:
+                err_resp = json.dumps({"sucesso": False, "erro": str(e)}).encode('utf-8')
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(err_resp)))
                 self.end_headers()
                 self.wfile.write(err_resp)
                 return
@@ -487,6 +631,12 @@ class RobustMarketingHandler(http.server.SimpleHTTPRequestHandler):
 
                 with open(LEADS_FILE, "w", encoding="utf-8") as f:
                     json.dump(leads, f, indent=2, ensure_ascii=False)
+
+                # Sincronizar também com o CRM Enterprise
+                try:
+                    crm_enterprise_api.crm_service.sincronizar_com_legado(payload)
+                except Exception as e_crm:
+                    print(f"[CRM STATUS SYNC ERROR] {e_crm}")
 
                 resp = json.dumps({"sucesso": True, "fase": fase, "total_leads": len(leads)}).encode('utf-8')
                 self.send_response(200)
@@ -1048,6 +1198,8 @@ class RobustMarketingHandler(http.server.SimpleHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         clean_path = parsed.path
         query_params = urllib.parse.parse_qs(parsed.query)
+        if crm_enterprise_api.handle_crm_v2(self, 'GET', self.path):
+            return
         if comercial_api.handle(self, 'GET', clean_path):
             return
 
@@ -1836,8 +1988,17 @@ class RobustMarketingHandler(http.server.SimpleHTTPRequestHandler):
             self.path = "/painel_aprovacao/radar_clientes.html"
         elif clean_path in ["/calendario", "/calendario.html"]:
             self.path = "/painel_aprovacao/calendario.html"
-        elif clean_path in ["/crm", "/crm.html"]:
+        elif clean_path in ["/crm-legado", "/crm_legado", "/crm_legado.html", "/crm-classico"]:
             self.path = "/painel_aprovacao/crm.html"
+        elif clean_path in ["/agenda", "/agendamento", "/agendamentos", "/acoes", "/agenda-crm", "/acoes-agendamentos"]:
+            self.send_response(302)
+            self.send_header("Location", "/painel_aprovacao/crm_enterprise.html?tab=atividades")
+            self.end_headers()
+            return
+        elif clean_path in ["/crm", "/crm.html", "/crm-enterprise", "/crm_enterprise", "/crm_enterprise.html", "/crm-360"]:
+            self.path = "/painel_aprovacao/crm_enterprise.html"
+        elif clean_path in ["/proposta-digital", "/proposta_digital", "/proposta_digital.html"]:
+            self.path = "/painel_aprovacao/proposta_digital.html"
         elif clean_path in ["/estudio", "/estudio.html"]:
             self.path = "/painel_aprovacao/estudio.html"
         elif clean_path in ["/tutoriais", "/tutoriais.html"]:
@@ -2044,9 +2205,9 @@ class RobustMarketingHandler(http.server.SimpleHTTPRequestHandler):
             self.path = "/painel_aprovacao/termo_parceria_contabil.html"
         elif (clean_path.startswith("/card_") or clean_path.startswith("/post_") or clean_path.startswith("/trudata_") or clean_path.startswith("/tela_")) and (clean_path.endswith(".jpg") or clean_path.endswith(".png")):
             self.path = "/conteudo_pronto" + clean_path
-        elif clean_path.endswith(".html") and not clean_path.startswith("/painel_aprovacao/"):
+        elif not clean_path.startswith("/painel_aprovacao/"):
             arquivo_cand = os.path.join(PAINEL_DIR, clean_path.lstrip("/"))
-            if os.path.exists(arquivo_cand):
+            if os.path.isfile(arquivo_cand):
                 self.path = "/painel_aprovacao/" + clean_path.lstrip("/")
 
         return super().do_GET()

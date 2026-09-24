@@ -59,6 +59,7 @@
     email_enviado: ["E-mail enviado", "progress", "mail"],
     demo_agendada: ["Demonstração agendada", "scheduled", "clock"],
     fechado: ["Cliente conquistado", "won", "check"],
+    recontato: ["Recontato (6m - 1 ano)", "scheduled", "clock"],
     perdido: ["Sem interesse", "lost", "close"],
   };
   const state = {
@@ -80,10 +81,10 @@
   const dialog = $("radar-detail"),
     toastNode = $("radar-toast");
   function toast(message) {
-    toastNode.textContent = message;
+    toastNode.innerHTML = message;
     toastNode.hidden = false;
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => (toastNode.hidden = true), 4500);
+    toastTimer = setTimeout(() => (toastNode.hidden = true), 5500);
   }
   function error(message) {
     if (dialog.open) {
@@ -609,7 +610,7 @@
         .join(
           "",
         )}</select></label><button class="btn primary" id="save-phase">Salvar etapa</button><p class="small muted">Salvar uma etapa também adiciona a empresa ao CRM.</p></aside></div><div class="company-notes"><h3>Localização e cadastro</h3><div class="actions">${locationInfo(p)}<a class="btn" href="${esc(toolURL(located(p) ? "planejar_visitas.html" : "revisao_enderecos.html", p))}">${located(p) ? "Planejar visita" : "Revisar endereço"}</a>${external(located(p) ? "https://www.google.com/maps/search/?api=1&query=" + p.lat + "," + p.lon : p.link_maps, located(p) ? "Abrir ponto no Google Maps" : "Pesquisar endereço no Google Maps", "pin")}<button class="btn" id="copy-cnpj">${icon("copy")}Copiar CNPJ</button>${external(p.link_sintegra, "Consultar cadastro")}</div></div>`,
-      `${external(toolURL("crm.html", p), "Abrir CRM") || '<a class="btn" href="crm.html">Abrir CRM</a>'}<button class="btn" data-close>Fechar</button>`,
+      `<a class="btn primary" href="crm_enterprise.html?tab=kanban" target="_blank" style="background:linear-gradient(135deg, #10b981, #059669); border-color:#10b981; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">🏷️ Abrir no Kanban do CRM</a><button class="btn" data-close>Fechar</button>`,
       `${p.segmento} · ${p.cidade} · ${Number(p.distancia_km).toLocaleString("pt-BR")} km${located(p) ? " em linha reta" : " estimados · localização pendente"}`,
     );
     $("save-phase").addEventListener("click", (e) =>
@@ -649,8 +650,8 @@
     if (dialog.open && state.company) openCompany(state.company.id);
     toast(
       candidates.length === 1
-        ? "Adicionado ao CRM"
-        : `${result.total_adicionados ?? 0} empresas adicionadas ao CRM`,
+        ? '✓ Adicionado ao CRM! <a href="crm_enterprise.html?tab=kanban" target="_blank" style="color:#38bdf8; font-weight:700; text-decoration:underline; margin-left:6px;">Abrir no Kanban ➔</a>'
+        : `✓ ${result.total_adicionados ?? 0} empresas adicionadas! <a href="crm_enterprise.html?tab=kanban" target="_blank" style="color:#38bdf8; font-weight:700; text-decoration:underline; margin-left:6px;">Abrir no Kanban ➔</a>`,
     );
   }
   async function savePhase(p, fase) {
@@ -675,7 +676,7 @@
     addLocalCRM(p, fase);
     applyFilters();
     openCompany(p.id);
-    toast("Etapa salva");
+    toast('✓ Etapa salva! <a href="crm_enterprise.html?tab=kanban" target="_blank" style="color:#38bdf8; font-weight:700; text-decoration:underline; margin-left:6px;">Abrir no Kanban ➔</a>');
   }
   function downloadCSV() {
     const selected = state.filtered.filter((p) => state.selected.has(p.id));
@@ -908,6 +909,166 @@
       );
     }
   }
+
+  function openManualLeadModal() {
+    const segmentosOptions = [
+      "Supermercados & Mercearias",
+      "Lojas de Confecções & Moda",
+      "Farmácias & Drogarias",
+      "Autopeças & Oficinas",
+      "Padarias & Gastronomia",
+      "Materiais de Construção",
+      "Pet Shop & Agropecuária",
+      "Escritórios de Contabilidade",
+      "Postos de Combustíveis & Conveniência",
+      "Comércio Geral & Outros"
+    ].map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
+
+    const cidadesOptions = [
+      "Sarandi - RS",
+      "Ronda Alta - RS",
+      "Rondinha - RS",
+      "Barra Funda - RS",
+      "Constantina - RS",
+      "Chapada - RS",
+      "Nova Boa Vista - RS",
+      "Carazinho - RS",
+      "Passo Fundo - RS",
+      "Marau - RS",
+      "Tapejara - RS",
+      "Erechim - RS",
+      "Palmeira das Missões - RS",
+      "Três Palmeiras - RS",
+      "Pontão - RS"
+    ].map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+
+    const bodyHtml = `
+      <p class="form-intro">Cadastre estabelecimentos ou contatos encontrados fora do mapeamento automático para integrá-los ao Radar e ao Pipeline Comercial.</p>
+      <form id="form-manual-lead" onsubmit="return false;">
+        <div class="form-grid">
+          <label class="field full">Nome Fantasia / Empresa *
+            <input type="text" id="ml-nome" required placeholder="Ex: Mercado Bela Vista">
+          </label>
+          <label class="field">Razão Social (opcional)
+            <input type="text" id="ml-razao" placeholder="Ex: Bela Vista Alimentos Ltda">
+          </label>
+          <label class="field">CNPJ / CPF (opcional)
+            <input type="text" id="ml-cnpj" placeholder="00.000.000/0001-00">
+          </label>
+          <label class="field">Cidade (RS) *
+            <select id="ml-cidade">${cidadesOptions}</select>
+          </label>
+          <label class="field">Segmento *
+            <select id="ml-segmento">${segmentosOptions}</select>
+          </label>
+          <label class="field">PDVs / Caixas
+            <input type="number" id="ml-caixas" value="1" min="1" max="50">
+          </label>
+          <label class="field full">Endereço / Bairro
+            <input type="text" id="ml-endereco" placeholder="Ex: Av. Expedicionário, 850 - Centro">
+          </label>
+          <label class="field">Nome do Decisor / Responsável *
+            <input type="text" id="ml-decisor" required placeholder="Ex: Clóvis Silveira" value="Proprietário">
+          </label>
+          <label class="field">Telefone / WhatsApp *
+            <input type="text" id="ml-telefone" required placeholder="Ex: 54999887766">
+          </label>
+          <label class="field">E-mail (opcional)
+            <input type="email" id="ml-email" placeholder="contato@empresa.com.br">
+          </label>
+          <label class="field">Site / Instagram (opcional)
+            <input type="text" id="ml-site" placeholder="https://instagram.com/empresa">
+          </label>
+          <label class="field full">Observações Comerciais
+            <textarea id="ml-notas" rows="2" placeholder="Ex: Visita presencial; cliente demonstrou interesse em trocar o sistema atual..."></textarea>
+          </label>
+          <label class="check-field full" style="margin-top:0.5rem; color:#10b981; font-weight:600;">
+            <input type="checkbox" id="ml-enviar-crm" checked> Inserir automaticamente no Pipeline (Kanban) do CRM Enterprise
+          </label>
+        </div>
+      </form>
+    `;
+
+    const footerHtml = `
+      <button class="btn" data-close>Cancelar</button>
+      <button class="btn primary" id="btn-salvar-manual" style="background:linear-gradient(135deg, #10b981, #059669); border-color:#10b981; font-weight:700;">
+        💾 Salvar e Integrar Lead
+      </button>
+    `;
+
+    showDialog(
+      "➕ Adicionar Novo Lead ao Radar",
+      bodyHtml,
+      footerHtml,
+      "Prospecção Ativa B2B Regional"
+    );
+
+    const btnSalvar = $("btn-salvar-manual");
+    if (btnSalvar) {
+      btnSalvar.addEventListener("click", async () => {
+        const nome = ($("ml-nome")?.value || "").trim();
+        const decisor = ($("ml-decisor")?.value || "").trim();
+        const telefone = ($("ml-telefone")?.value || "").trim();
+
+        if (!nome) {
+          error("Informe o Nome da Empresa / Fantasia.");
+          $("ml-nome")?.focus();
+          return;
+        }
+        if (!decisor) {
+          error("Informe o Nome do Decisor / Responsável.");
+          $("ml-decisor")?.focus();
+          return;
+        }
+        if (!telefone) {
+          error("Informe o Telefone ou WhatsApp de contato.");
+          $("ml-telefone")?.focus();
+          return;
+        }
+
+        const payload = {
+          nome,
+          razao_social: ($("ml-razao")?.value || "").trim() || nome,
+          cnpj: ($("ml-cnpj")?.value || "").trim(),
+          cidade: $("ml-cidade")?.value || "Sarandi - RS",
+          segmento: $("ml-segmento")?.value || "Comércio Geral",
+          caixas: parseInt($("ml-caixas")?.value) || 1,
+          endereco: ($("ml-endereco")?.value || "").trim(),
+          decisor,
+          telefone,
+          whatsapp: telefone,
+          email: ($("ml-email")?.value || "").trim(),
+          site: ($("ml-site")?.value || "").trim(),
+          notas: ($("ml-notas")?.value || "").trim(),
+          enviar_crm: $("ml-enviar-crm")?.checked ?? true
+        };
+
+        busy(btnSalvar, async () => {
+          try {
+            const res = await api("/api/radar/adicionar_lead_manual", payload);
+            if (!res.sucesso) {
+              throw new Error(res.erro || "Falha ao adicionar lead.");
+            }
+
+            if (res.prospect) {
+              state.all.unshift(res.prospect);
+              addLocalCRM(res.prospect, "novo");
+            }
+
+            dialog.close();
+            applyFilters();
+            toast(`✓ Lead "${nome}" cadastrado com sucesso no Radar e CRM!`);
+            if (res.prospect?.id) {
+              openCompany(res.prospect.id);
+            }
+          } catch (err) {
+            error(err.message || "Erro de conexão ao salvar lead manual.");
+          }
+        }, "Salvando Lead");
+      });
+    }
+  }
+
   document.addEventListener("click", (e) => {
     const b = e.target.closest("button");
     if (!b) return;
@@ -1025,6 +1186,8 @@
   $("rng-raio").addEventListener("change", search);
   $("email-settings").addEventListener("click", openSettings);
   $("email-history").addEventListener("click", openHistory);
+  const btnLeadManual = $("btn-novo-lead-manual");
+  if (btnLeadManual) btnLeadManual.addEventListener("click", openManualLeadModal);
   async function init() {
     try {
       await syncCRM();

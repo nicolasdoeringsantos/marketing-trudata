@@ -46,5 +46,23 @@
     "nome": "Administrador TruData",
     "criado_em": 1790079079.9304843,
     "expira": 1790683879.9304843
+  },
+  "e5fb53166ac297caf2c1f65997dd0451e110e15c99b47182cf923a830ae29f88": {
+    "usuario": "admin",
+    "nome": "Administrador TruData",
+    "criado_em": 1790080429.7671804,
+    "expira": 1790685229.7671804
+  },
+  "250c6e424eb0c91991461791c1f5bb3e164cf09c5e586fb3f8b13a3c072d616f": {
+    "usuario": "admin",
+    "nome": "Administrador TruData",
+    "criado_em": 1790080603.6966178,
+    "expira": 1790685403.6966178
+  },
+  "6ba90a52586d87a2e81a2fa7c6b85ff01b7807b31261033c7b36f408099c6261": {
+    "usuario": "admin",
+    "nome": "Administrador TruData",
+    "criado_em": 1790084775.9825335,
+    "expira": 1790689575.9825335
   }
 }

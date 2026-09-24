@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proposta Comercial Oficial · TruData Enterprise</title>
+  <link rel="icon" type="image/svg+xml" href="/painel_aprovacao/favicon.svg?v=20260923-t" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/painel_aprovacao/favicon-32x32.png?v=20260923-t" />
+    <link rel="shortcut icon" href="/painel_aprovacao/favicon.ico?v=20260923-t" />
+  <link rel="stylesheet" href="/painel_aprovacao/design-system.css" />
+  <style>
+    :root {
+      --primary: #009fe3;
+      --primary-hover: #0084be;
+      --primary-light: rgba(0, 159, 227, 0.15);
+      --bg-dark: #080f1d;
+      --card-bg: #101a2e;
+      --card-border: #1e2c4a;
+      --text-main: #f0f4fc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --success-light: rgba(16, 185, 129, 0.15);
+      --gold: #f59e0b;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .proposal-container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px 80px;
+    }
+
+    .proposal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #101a2e 0%, #15233d 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px 36px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      background: rgba(15, 23, 42, 0.6) url('/brand/simbolo_t_oficial.png') no-repeat center center / 36px 36px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 159, 227, 0.25);
+    }
+
+    .brand-titles h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-titles p {
+      margin: 2px 0 0;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(0, 159, 227, 0.3);
+    }
+
+    .status-badge.signed {
+      background: var(--success-light);
+      color: var(--success);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .status-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .signed-certificate-banner {
+      display: none;
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .signed-certificate-banner.visible {
+      display: flex;
+    }
+
+    .signed-icon {
+      font-size: 32px;
+    }
+
+    .signed-info h4 {
+      margin: 0 0 4px;
+      color: var(--success);
+      font-size: 15px;
+    }
+
+    .signed-info p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: monospace;
+      word-break: break-all;
+    }
+
+    .proposal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+    }
+
+    .proposal-card h2 {
+      margin: 0 0 20px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 12px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .info-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .products-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .products-table th, .products-table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 14px;
+    }
+
+    .products-table th {
+      color: var(--text-muted);
+      font-weight: 600;
+      background: rgba(255,255,255,0.02);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .investment-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      background: rgba(0, 159, 227, 0.05);
+      border: 1px solid rgba(0, 159, 227, 0.2);
+      border-radius: 12px;
+      padding: 22px;
+      margin-top: 15px;
+    }
+
+    .investment-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .investment-title {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .investment-amount {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .investment-amount.mrr {
+      color: var(--primary);
+    }
+
+    .investment-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .sla-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .sla-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: #cbd5e1;
+    }
+
+    .sla-icon {
+      color: var(--primary);
+      font-size: 16px;
+    }
+
+    .actions-bar {
+      position: sticky;
+      bottom: 20px;
+      background: rgba(16, 26, 46, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 100;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-sign {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-sign:hover {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      transform: translateY(-1px);
+    }
+
+    .btn-wpp {
+      background: #25d366;
+      color: #fff;
+    }
+
+    .btn-wpp:hover {
+      background: #20bd5a;
+    }
+
+    .btn-print {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .btn-print:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Modal de Assinatura */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #111a2e;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      max-width: 520px;
+      width: 100%;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    .modal-box h3 {
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 19px;
+    }
+
+    .modal-box p {
+      margin: 0 0 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      box-sizing: border-box;
+      background: #0b1324;
+      border: 1px solid #1e2c4a;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .terms-check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .terms-check input {
+      margin-top: 3px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .security-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 24px;
+      justify-content: center;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        color: #111;
+      }
+      .actions-bar, .modal-overlay {
+        display: none !important;
+      }
+      .proposal-card, .proposal-header {
+        background: #fff;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        color: #111;
+      }
+      .brand-titles h1, .proposal-card h2, .investment-amount {
+        color: #111 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="proposal-container">
+    <!-- Header -->
+    <header class="proposal-header">
+      <div class="brand-group">
+        <div class="brand-logo" title="TruData ERP"></div>
+        <div class="brand-titles">
+          <h1>TruData Gestão & Inteligência</h1>
+          <p>Proposta Comercial Oficial · Hansen Software</p>
+        </div>
+      </div>
+      <div id="statusBadge" class="status-badge">
+        <span class="dot"></span>
+        <span id="statusText">Aguardando Visualização</span>
+      </div>
+    </header>
+
+    <!-- Banner de Assinatura Digital (se assinado) -->
+    <div id="signedBanner" class="signed-certificate-banner">
+      <div class="signed-icon">🛡️</div>
+      <div class="signed-info">
+        <h4>Contrato Assinado Digitalmente com Validade Jurídica</h4>
+        <p id="signedDetails">Signatário: Carregando... | Hash SHA-256: ...</p>
+      </div>
+    </div>
+
+    <!-- Dados do Cliente & Emissão -->
+    <section class="proposal-card">
+      <h2>🏢 Destinatário & Dados da Proposta</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">Empresa / Razão Social</span>
+          <span class="info-value" id="cliNome">Carregando...</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">CNPJ / CPF</span>
+          <span class="info-value" id="cliDoc">-</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Contato Responsável</span>
+          <span class="info-value" id="cliContato">-</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Município</span>
+          <span class="info-value" id="cliCidade">Sarandi - RS</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Nº da Proposta</span>
+          <span class="info-value" id="propHash">-</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Data de Emissão / Validade</span>
+          <span class="info-value" id="propValidade">10 Dias</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Escopo Técnico & Itens -->
+    <section class="proposal-card">
+      <h2>📦 Escopo Técnico & Módulos Inclusos</h2>
+      <div class="table-responsive">
+        <table class="products-table">
+          <thead>
+            <tr>
+              <th>Item / Descrição da Solução</th>
+              <th>Qtd / PDVs</th>
+              <th>Investimento Mensal (MRR)</th>
+              <th>Total Item</th>
+            </tr>
+          </thead>
+          <tbody id="produtosTableBody">
+            <tr>
+              <td colspan="4" style="text-align: center; color: var(--text-muted);">Carregando composição do projeto...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Resumo do Investimento -->
+      <div class="investment-box">
+        <div class="investment-col">
+          <span class="investment-title">Setup / Implantação Técnica Homologada</span>
+          <span class="investment-amount" id="valSetup">R$ 0,00</span>
+          <span class="investment-sub">Inclui instalação remota, conversão de dados e auditoria fiscal de PDVs</span>
+        </div>
+        <div class="investment-col">
+          <span class="investment-title">Mensalidade Recorrente Contratada (MRR)</span>
+          <span class="investment-amount mrr" id="valMrr">R$ 0,00</span>
+          <span class="investment-sub">Sem fidelidade abusiva · Atualizações fiscais e suporte ilimitado inclusos</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLA, Garantia e Diferenciais -->
+    <section class="proposal-card">
+      <h2>🛡️ Garantia Blindada & Nível de Serviço (SLA)</h2>
+      <ul class="sla-list">
+        <li class="sla-item">
+          <span class="sla-icon">✓</span>
+          <div><strong>Contingência Offline Garantida:</strong> Seus caixas operam normalmente mesmo se a internet cair.</div>
+        </li>
+        <li class="sla-item">
+          <span class="sla-icon">✓</span>
+          <div><strong>Auditoria Sped & NFC-e em Tempo Real:</strong> Validação automática de tributação e NCM.</div>
+        </li>
+        <li class="sla-item">
+          <span class="sla-icon">✓</span>
+          <div><strong>SLA de Atendimento N1 < 15 minutos:</strong> Plantão de suporte telefônico e WhatsApp.</div>
+        </li>
+        <li class="sla-item">
+          <span class="sla-icon">✓</span>
+          <div><strong>Onboarding Guiado em 6 Etapas:</strong> Acompanhamento técnico dedicado até a virada de chave.</div>
+        </li>
+      </ul>
+    </section>
+
+    <div class="security-badge">
+      <span>🔒 Documento criptografado ponta-a-ponta · Conforme LGPD e MP 2.200-2/2001</span>
+    </div>
+
+    <!-- Barra Inferior de Ação -->
+    <div class="actions-bar">
+      <div>
+        <span style="font-size: 13px; color: var(--text-muted);">Total Recorrente:</span>
+        <div style="font-size: 20px; font-weight: 700; color: var(--primary);" id="barTotalMrr">R$ 0,00 /mês</div>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button type="button" class="btn-action btn-print" onclick="window.print()">🖨️ Imprimir / PDF</button>
+        <a id="btnWpp" href="#" target="_blank" class="btn-action btn-wpp">💬 Consultor WhatsApp</a>
+        <button type="button" id="btnAssinarModal" class="btn-action btn-sign" onclick="abrirModalAssinatura()">✍️ Aceitar e Assinar Digitalmente</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Assinatura Eletrônica -->
+  <div id="modalAssinatura" class="modal-overlay">
+    <div class="modal-box">
+      <h3>✍️ Assinatura Eletrônica Digital</h3>
+      <p>Preencha os dados do signatário autorizado para registrar o contrato com autenticação criptográfica SHA-256.</p>
+      
+      <form id="formAssinatura" onsubmit="confirmarAssinatura(event)">
+        <div class="form-group">
+          <label>Nome Completo do Responsável Legal / Sócio *</label>
+          <input type="text" id="signNome" required placeholder="Ex: João da Silva" />
+        </div>
+        <div class="form-group">
+          <label>CPF do Signatário *</label>
+          <input type="text" id="signCpf" required placeholder="000.000.000-00" />
+        </div>
+        <div class="form-group">
+          <label>E-mail Corporativo</label>
+          <input type="email" id="signEmail" placeholder="joao@empresa.com.br" />
+        </div>
+        <div class="terms-check">
+          <input type="checkbox" id="checkTermos" required />
+          <label for="checkTermos">
+            Declaro a veracidade dos dados informados e aceito os termos de contratação e prestação de serviços com amparo no Art. 107 do Código Civil Brasileiro e Medida Provisória nº 2.200-2/2001.
+          </label>
+        </div>
+        <div class="modal-buttons">
+          <button type="button" class="btn-action btn-print" onclick="fecharModalAssinatura()">Cancelar</button>
+          <button type="submit" id="btnSubmeterAssinatura" class="btn-action btn-sign">Confirmar Assinatura (SHA-256)</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let propostaData = null;
+    const urlParams = new URLSearchParams(window.location.search);
+    const hashProposta = urlParams.get('p') || urlParams.get('hash') || '';
+
+    function formatMoeda(val) {
+      return (Number(val) || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    async function carregarProposta() {
+      if (!hashProposta) {
+        document.getElementById('cliNome').textContent = "Erro: Hash da proposta não fornecido na URL (?p=...)";
+        return;
+      }
+
+      try {
+        // Beacon de Rastreamento em Tempo Real (Item 1)
+        fetch('/api/crm/v2/proposta/rastrear', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ hash: hashProposta })
+        }).catch(() => {});
+
+        // Carregar dados da proposta
+        const res = await fetch(`/api/crm/v2/proposta/obter?hash=${encodeURIComponent(hashProposta)}`);
+        const json = await res.json();
+
+        if (!json.sucesso) {
+          document.getElementById('cliNome').textContent = json.erro || "Proposta não localizada.";
+          return;
+        }
+
+        propostaData = json.proposta;
+        const empresa = json.empresa || {};
+        const contrato = json.contrato;
+
+        // Preencher cabeçalho e destinatário
+        document.getElementById('cliNome').textContent = propostaData.empresa_nome || "Cliente";
+        document.getElementById('cliDoc').textContent = propostaData.empresa_doc || empresa.documento || "-";
+        document.getElementById('cliContato').textContent = propostaData.contato_nome || "-";
+        document.getElementById('cliCidade').textContent = propostaData.cidade || "Sarandi - RS";
+        document.getElementById('propHash').textContent = `#${propostaData.hash}`;
+        
+        const criacao = new Date(propostaData.data_criacao);
+        const validade = new Date(criacao.getTime() + (propostaData.validade_dias || 10) * 86400000);
+        document.getElementById('propValidade').textContent = `${criacao.toLocaleDateString('pt-BR')} (Válida até ${validade.toLocaleDateString('pt-BR')})`;
+
+        // Tabela de Produtos
+        const tbody = document.getElementById('produtosTableBody');
+        tbody.innerHTML = '';
+        const produtos = propostaData.produtos || [];
+
+        if (produtos.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td><strong>TruData Gestão & Retaguarda Fiscal</strong><br><small style="color:#94a3b8">ERP em nuvem, controle de estoque, NFe/NFCe e financeiro</small></td>
+              <td>1</td>
+              <td>${formatMoeda(propostaData.valor_mrr)}</td>
+              <td>${formatMoeda(propostaData.valor_mrr)}</td>
+            </tr>
+          `;
+        } else {
+          produtos.forEach(p => {
+            const tr = document.createElement('tr');
+            const qtd = p.quantidade || 1;
+            const unit = p.valor_unitario || 0;
+            const sub = qtd * unit;
+            tr.innerHTML = `
+              <td><strong>${p.nome || p.produto_id || 'Módulo TruData'}</strong></td>
+              <td>${qtd}</td>
+              <td>${formatMoeda(unit)}</td>
+              <td>${formatMoeda(sub)}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+
+        // Totais
+        document.getElementById('valSetup').textContent = formatMoeda(propostaData.valor_setup);
+        document.getElementById('valMrr').textContent = formatMoeda(propostaData.valor_mrr) + ' /mês';
+        document.getElementById('barTotalMrr').textContent = formatMoeda(propostaData.valor_mrr) + ' /mês';
+
+        // Link de WhatsApp com Consultor
+        const foneWpp = (empresa.telefone || "54999887766").replace(/\D/g, '');
+        const msgWpp = encodeURIComponent(`Olá! Estou visualizando a proposta comercial TruData #${propostaData.hash} para a empresa ${propostaData.empresa_nome}. Gostaria de tirar uma dúvida.`);
+        document.getElementById('btnWpp').href = `https://wa.me/5554999887766?text=${msgWpp}`;
+
+        // Status e Certificado
+        atualizarStatusUI(propostaData.status, contrato);
+
+      } catch (err) {
+        console.error("Erro ao carregar proposta:", err);
+      }
+    }
+
+    function atualizarStatusUI(status, contrato) {
+      const badge = document.getElementById('statusBadge');
+      const text = document.getElementById('statusText');
+      const banner = document.getElementById('signedBanner');
+      const btnAssinar = document.getElementById('btnAssinarModal');
+
+      if (status === 'assinada') {
+        badge.className = "status-badge signed";
+        text.textContent = "✓ Contrato Assinado Digitalmente";
+        banner.classList.add('visible');
+        if (contrato) {
+          document.getElementById('signedDetails').textContent = 
+            `Signatário: ${contrato.signatario_nome} (${contrato.signatario_cpf}) | Data: ${new Date(contrato.data_assinatura).toLocaleString('pt-BR')} | Hash SHA-256: ${contrato.hash_sha256}`;
+        }
+        btnAssinar.textContent = "✓ Já Assinado";
+        btnAssinar.disabled = true;
+        btnAssinar.style.opacity = "0.7";
+        btnAssinar.style.cursor = "default";
+      } else {
+        badge.className = "status-badge";
+        text.textContent = status === 'visualizada' ? "👁️ Visualizada pelo Cliente" : "Aguardando Leitura";
+        banner.classList.remove('visible');
+      }
+    }
+
+    function abrirModalAssinatura() {
+      if (propostaData && propostaData.status === 'assinada') return;
+      if (propostaData && propostaData.contato_nome) {
+        document.getElementById('signNome').value = propostaData.contato_nome;
+      }
+      if (propostaData && propostaData.contato_email) {
+        document.getElementById('signEmail').value = propostaData.contato_email;
+      }
+      document.getElementById('modalAssinatura').classList.add('open');
+    }
+
+    function fecharModalAssinatura() {
+      document.getElementById('modalAssinatura').classList.remove('open');
+    }
+
+    async function confirmarAssinatura(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmeterAssinatura');
+      btn.disabled = true;
+      btn.textContent = "Criptografando & Registrando...";
+
+      const payload = {
+        hash_proposta: hashProposta,
+        signatario_nome: document.getElementById('signNome').value,
+        signatario_cpf: document.getElementById('signCpf').value,
+        signatario_email: document.getElementById('signEmail').value
+      };
+
+      try {
+        const res = await fetch('/api/crm/v2/contrato/assinar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (data.sucesso) {
+          fecharModalAssinatura();
+          atualizarStatusUI('assinada', data.contrato);
+          alert("🎉 Parabéns! Proposta e Contrato assinados com sucesso com validação criptográfica SHA-256!\n\nA equipe técnica da TruData já iniciou o seu Checklist de Onboarding e entrará em contato para agendar a homologação dos PDVs.");
+        } else {
+          alert("Erro na assinatura: " + (data.erro || "Falha ao registrar"));
+        }
+      } catch (err) {
+        alert("Erro na comunicação com o servidor: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Confirmar Assinatura (SHA-256)";
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', carregarProposta);
+  </style>
+</head>
+<body>
+</body>
+</html>

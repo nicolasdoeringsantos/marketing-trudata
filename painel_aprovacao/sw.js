@@ -1,5 +1,5 @@
 // Service Worker — TruData ERP Cockpit (Modo Estrada Offline-First)
-const CACHE_NAME = 'trudata-editorial-v2026-r8';
+const CACHE_NAME = 'trudata-editorial-v2026-r9';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',

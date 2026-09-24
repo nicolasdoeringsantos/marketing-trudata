@@ -270,7 +270,17 @@ def buscar_clientes_raio(
     resultados = []
 
     for est in ESTABELECIMENTOS_BASE:
-        distancia = calcular_distancia_km(lat_origem, lon_origem, est["lat"], est["lon"])
+        lat_est = est.get("lat")
+        lon_est = est.get("lon")
+        if lat_est is None or lon_est is None:
+            cid_chave = normalizar_texto(est.get("cidade", "Sarandi"))
+            ponto_cid = CIDADES_POLO.get(cid_chave, COORD_SARANDI_RS)
+            lat_est = ponto_cid.get("lat", -27.9439)
+            lon_est = ponto_cid.get("lon", -52.9247)
+            est["lat"] = lat_est
+            est["lon"] = lon_est
+
+        distancia = calcular_distancia_km(lat_origem, lon_origem, lat_est, lon_est)
 
         # Filtro de raio geográfico em KM
         if distancia > raio_km:
@@ -279,7 +289,7 @@ def buscar_clientes_raio(
         # Filtro de cidade específica
         if cidade_alvo and cidade_alvo.lower() not in ["todas", "all", ""]:
             cid_filtro = normalizar_texto(cidade_alvo)
-            cid_empresa = normalizar_texto(est["cidade"])
+            cid_empresa = normalizar_texto(est.get("cidade", ""))
             if cid_filtro not in cid_empresa:
                 continue
 
@@ -395,14 +405,14 @@ def buscar_clientes_raio(
         
         corpo_email = (
             f"Olá {primeiro_nome_decisor},\n\n"
-            f"Apresentamos as soluções de gestão fiscal e contingência offline da TruData ERP para a {est['nome']} em {est['cidade']}-RS.\n\n"
+            f"Apresentamos as soluções de gestão fiscal e contingência offline da TruData ERP para a {est.get('nome', '')} em {est.get('cidade', '')}-RS.\n\n"
             f"Atenciosamente,\n"
             f"Equipe Comercial TruData ERP (Hansen Software)\n"
             f"Sarandi - RS | Fone: (54) 3361-2650"
         )
-        assunto_email = f"Apresentação TruData ERP — {est['nome']}"
+        assunto_email = f"Apresentação TruData ERP — {est.get('nome', '')}"
         item["link_email"] = f"mailto:{est.get('email', '')}?subject={urllib.parse.quote(assunto_email)}&body={urllib.parse.quote(corpo_email)}"
-        item["link_maps"] = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(est['nome'] + ' ' + est['endereco'] + ' ' + est['cidade'] + ' RS')}"
+        item["link_maps"] = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(str(est.get('nome', '')) + ' ' + str(est.get('endereco', '')) + ' ' + str(est.get('cidade', '')) + ' RS')}"
         item["lead_score"] = calcular_lead_score(est, distancia)
         resultados.append(item)
 

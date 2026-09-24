@@ -1,0 +1,2 @@
+# TruData Marketing & CRM Enterprise utiliza exclusivamente a biblioteca padrão do Python 3.
+# Nenhuma dependência externa necessária.

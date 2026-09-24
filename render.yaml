@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: trudata-crm
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python start.py
